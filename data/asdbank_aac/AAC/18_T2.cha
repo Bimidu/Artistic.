@@ -1,0 +1,292 @@
+@UTF8
+@PID:	11312/a-00082338-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI||male|7;00.||Target_Child|||
+@Media:	18_T2, video, missing
+*COD:	C . 1_176020
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	YouTube . 840_1910
+%mor:	propn|YouTube .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	YOUTUBE . 3580_5300
+%mor:	propn|Youtuae .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yep <there you go>  [/] there you go CHILDNAME , there you go . 5770_12830
+%mor:	intj|yep adv|there pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 propn|CHILDNAME-Acc cm|cm adv|there pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|4|DISCOURSE 2|4|ADVMOD 3|4|NSUBJ 4|9|ROOT 5|4|OBJ 6|7|PUNCT 7|4|ADVMOD 8|9|NSUBJ 9|4|PARATAXIS 10|4|PUNCT
+*MOT:	<what are you watching>  [/] what are you watching , CHILDNAME ? 16870_21610
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|watch-Part-Pres-S cm|cm intj|childname ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|PUNCT 6|4|DISCOURSE 7|4|PUNCT
+*MOT:	are you happy ? 22700_24380
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	are you happy ? 25450_26290
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*AAC:	HAPPY . 28270_30760
+%mor:	adj|happy-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	happy@si you're happy . 30490_33740
+%mor:	x|happy pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 .
+%gra:	1|4|FLAT 2|4|NSUBJ 3|4|COP 4|1|PARATAXIS 5|1|PUNCT
+*MOT:	you're watching YouTube . 35150_36400
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|watch-Part-Pres-S propn|YouTube-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*AAC:	YOUTUBE . 36620_38540
+%mor:	propn|Youtuae .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yes <YouTube@si>  [/] YouTube@si that's what you're watching . 36910_41490
+%mor:	intj|yes x|YouTube pron|that-Dem~aux|be-Fin-Ind-Pres-S3 pron|what-Rel-S1 pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|watch-Part-Pres-S .
+%gra:	1|5|DISCOURSE 2|5|FLAT 3|5|NSUBJ 4|5|COP 5|8|ROOT 6|8|NSUBJ 7|8|AUX 8|5|ACL-RELCL 9|5|PUNCT
+*MOT:	what's this CHILDNAME ? 48180_49670
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|childname ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	are you watching some +... 51160_52470
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|watch-Part-Pres-S det|some-Def-Ind +...
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	++ music ? 53130_53940
+%mor:	noun|music ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	music ? 54380_55020
+%mor:	noun|music ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	MUSIC . 56110_57640
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	music@si , you want another mu , <you wanna change>  [/] you wanna change ? 57680_62550
+%mor:	x|music cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|another-Def-Ind noun|mu-Acc cm|cm pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|change-Inf-S ?
+%gra:	1|4|FLAT 2|1|PUNCT 3|4|NSUBJ 4|10|ROOT 5|6|DET 6|4|OBJ 7|10|PUNCT 8|10|NSUBJ 9|10|AUX 10|4|PARATAXIS 11|4|PUNCT
+*MOT:	oh okay , you wanted another music . 62630_65350
+%mor:	intj|oh intj|okay cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Past-S2 det|another-Def-Ind noun|music-Acc .
+%gra:	1|5|DISCOURSE 2|5|DISCOURSE 3|2|PUNCT 4|5|NSUBJ 5|7|ROOT 6|7|DET 7|5|OBJ 8|5|PUNCT
+*MOT:	it's having fun . 74430_76020
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|have-Part-Pres-S noun|fun-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	you just wanna sit here and watch music CHILDNAME ? 78370_81200
+%mor:	pron|you-Prs-Nom-S2 adv|just aux|wanna-Fin-S verb|sit-Fin-Ind-Pres-S2 adv|here cconj|and verb|watch-Fin-Ind-Pres-S1 noun|music-Acc propn|CHILDNAME-Acc ?
+%gra:	1|4|NSUBJ 2|4|ADVMOD 3|4|AUX 4|9|ROOT 5|4|ADVMOD 6|7|CC 7|4|CONJ 8|7|OBJ 9|7|OBJ 10|4|PUNCT
+*MOT:	you just wanna watch +... 81410_82570
+%mor:	pron|you-Prs-Nom-S2 adv|just aux|wanna-Fin-S verb|watch-Inf-S +...
+%gra:	1|4|NSUBJ 2|4|ADVMOD 3|4|AUX 4|4|ROOT 5|4|PUNCT
+*MOT:	++ music ? 82610_83170
+%mor:	noun|music ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	right , you wanna see more You +... 86160_88920
+%mor:	adj|right-S1 cm|cm pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|see-Inf-S adj|more-Cmp-S1 pron|you-Prs-Acc-S2 +...
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|AUX 5|7|ROOT 6|7|AMOD 7|5|OBJ 8|5|PUNCT
+*AAC:	NO . 87490_89400
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	no  [/] no , you don't want that , no ? 89750_93090
+%mor:	intj|no cm|cm pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|want-Inf-S pron|that-Dem cm|cm intj|no ?
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|AUX 5|6|ADVMOD 6|9|ROOT 7|6|OBJ 8|9|PUNCT 9|6|DISCOURSE 10|6|PUNCT
+*MOT:	no music ? 93370_94570
+%mor:	det|no-Def-Neg noun|music ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	okay , then no music . 94710_96970
+%mor:	intj|okay cm|cm adv|then det|no-Def-Neg noun|music .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|ADVMOD 4|5|DET 5|5|ROOT 6|5|PUNCT
+*MOT:	no music ? 97720_98690
+%mor:	det|no-Def-Neg noun|music ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	or you wanna , do you +..? 99010_100710
+%mor:	cconj|or pron|you-Prs-Nom-S2 verb|wanna-Fin-Ind-Pres-S2 cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 +..?
+%gra:	1|5|CC 2|3|NSUBJ 3|5|PARATAXIS 4|3|PUNCT 5|6|ROOT 6|5|NSUBJ 7|5|PUNCT
+*AAC:	OATMEAL . 99990_102890
+%mor:	noun|oatmeal .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*MOT:	you want , uh you want food CHILDNAME ? 101720_104750
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 cm|cm intj|uh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|food noun|childname-Acc ?
+%gra:	1|2|NSUBJ 2|8|ROOT 3|6|PUNCT 4|6|DISCOURSE 5|6|NSUBJ 6|2|PARATAXIS 7|8|COMPOUND 8|6|OBJ 9|2|PUNCT
+*MOT:	that's silly . 105800_107440
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|silly-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	I think you want +... 107870_109350
+%mor:	pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Pres-S1 pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 +...
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|NSUBJ 4|2|CCOMP 5|2|PUNCT
+*MOT:	++ music and you want YouTube music xxx . 109370_112480
+%mor:	noun|music cconj|and pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 propn|YouTube noun|music-Acc .
+%gra:	1|6|ROOT 2|4|CC 3|4|NSUBJ 4|1|CONJ 5|6|COMPOUND 6|4|OBJ 7|1|PUNCT
+*AAC:	YOUTUBE . 111220_112970
+%mor:	propn|Youtuae .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	get re , okay there you go . 112850_115510
+%mor:	verb|get-Fin-Imp-S adp|re cm|cm intj|okay adv|there pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|7|ROOT 2|1|OBL 3|2|PUNCT 4|5|DISCOURSE 5|1|ADVMOD 6|7|NSUBJ 7|1|PARATAXIS 8|1|PUNCT
+*MOT:	there we go . 117310_118240
+%mor:	pron|there-Int-S1 pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	do you wanna look at that sheet ? 125570_128110
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 intj|wanna verb|look-Inf-S adp|at det|that-Def-Dem-Sing noun|sheet ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|DISCOURSE 4|7|ROOT 5|7|CASE 6|7|DET 7|4|OBL 8|4|PUNCT
+*MOT:	do you wanna , CHILDNAME , do you wanna touch ? 128910_132700
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|wanna-Inf-S cm|cm intj|childname cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|wanna-Inf-S verb|touch-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|10|ROOT 4|5|PUNCT 5|3|DISCOURSE 6|5|PUNCT 7|9|AUX 8|9|NSUBJ 9|3|PARATAXIS 10|9|XCOMP 11|3|PUNCT
+*AAC:	TOUCH . 133570_135540
+%mor:	noun|touch .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	do you wanna touch this ? 133960_135720
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|touch-Inf-S pron|this-Dem-S1 ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	touch  [/] touch  [/] touch  [/] touch . 136590_143370
+%mor:	noun|touch .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	would you like to feel ? 143390_145150
+%mor:	aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S part|to verb|feel-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|MARK 5|3|XCOMP 6|3|PUNCT
+*MOT:	like that , touch . 145720_147290
+%mor:	adp|like pron|that-Dem cm|cm verb|touch-Fin-Imp-S .
+%gra:	1|2|CASE 2|4|ROOT 3|4|PUNCT 4|2|PARATAXIS 5|2|PUNCT
+*MOT:	touch  [/] touch  [/] touch  [/] touch  [/] touch  [/] touch . 147680_151330
+%mor:	noun|touch .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<xxx the bed>  [/] xxx the bed . 156050_158300
+%mor:	det|the-Def-Art noun|bed .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	&=grunts . 158370_159180
+*MOT:	look at this . 160340_161530
+%mor:	verb|look-Fin-Imp-S adp|at pron|this-Dem-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	xxx watch a little bit . 166630_168770
+%mor:	verb|watch-Fin-Imp-S det|a-Ind-Art adj|little-S1 noun|bit-Acc .
+%gra:	1|4|ROOT 2|4|DET 3|4|AMOD 4|1|OBJ 5|1|PUNCT
+*MOT:	can dad have a turn soon ? 169520_171470
+%mor:	aux|can-Fin-S noun|dad verb|have-Inf-S det|a-Ind-Art noun|turn-Acc adv|soon ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|5|DET 5|3|OBJ 6|3|ADVMOD 7|3|PUNCT
+*MOT:	can Daddy have a turn ? 172360_174220
+%mor:	aux|can-Fin-S propn|Daddy verb|have-Inf-S det|a-Ind-Art noun|turn-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	oh , okay . 174710_176760
+%mor:	intj|oh cm|cm intj|okay .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*COD:	U . 176020_220560
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 220560_348680
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 223350_225160
+*MOT:	CHILDNAME  [/] CHILDNAME . 228770_229960
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you wanted bread ? 233040_233670
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Past-S2 noun|bread-Acc ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*AAC:	BREAD . 233990_236060
+%mor:	noun|bread .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	bread yeah  [/] yeah take one . 236520_238540
+%mor:	noun|bread intj|yeah verb|take-Fin-Imp-S num|one .
+%gra:	1|3|NSUBJ 2|3|DISCOURSE 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=hums . 238660_239900
+*MOT:	xxx . 254400_256170
+*MOT:	you're just having fun CHILDNAME . 257250_259350
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|just verb|have-Part-Pres-S noun|fun noun|childname-Acc .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|6|ROOT 5|6|COMPOUND 6|4|OBJ 7|4|PUNCT
+*CHI:	doo ooma . 261120_263450
+%mor:	verb|doo-Fin-Imp-S noun|ooma-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME . 268810_269540
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME@si . 274740_276070
+%mor:	x|CHILDNAME .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	bloop . 276690_277530
+%mor:	noun|bloop .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	q@l . 284530_285830
+%mor:	propn|q .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	like the bread . 286700_288770
+%mor:	adp|like det|the-Def-Art noun|bread .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	&=hums . 288970_290430
+*AAC:	DAD . 289500_291250
+%mor:	noun|dad .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	Daddy ? 289760_290570
+%mor:	propn|Daddy ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Daddy , Daddy's here . 291390_293430
+%mor:	propn|Daddy cm|cm propn|Daddy~part|s adv|here .
+%gra:	1|5|ROOT 2|5|PUNCT 3|5|NMOD-POSS 4|3|CASE 5|1|PARATAXIS 6|1|PUNCT
+*MOT:	Daddy@si , get the Daddy hug , cause you asked for Daddy . 294150_297980
+%mor:	x|Daddy cm|cm verb|get-Fin-Imp-S det|the-Def-Art propn|Daddy noun|hug-Acc cm|cm sconj|cause pron|you-Prs-Nom-S2 verb|ask-Fin-Ind-Past-S2 adp|for propn|Daddy .
+%gra:	1|3|FLAT 2|1|PUNCT 3|12|ROOT 4|6|DET 5|6|COMPOUND 6|3|OBJ 7|10|PUNCT 8|10|MARK 9|10|NSUBJ 10|3|ADVCL 11|12|CASE 12|10|OBL 13|3|PUNCT
+*MOT:	that's Daddy , that's dada . 298540_302040
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 propn|Daddy cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 noun|dada .
+%gra:	1|3|NSUBJ 2|3|COP 3|7|ROOT 4|7|PUNCT 5|7|NSUBJ 6|7|COP 7|3|PARATAXIS 8|3|PUNCT
+*AAC:	DAD . 301410_303420
+%mor:	noun|dad .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	you want another Daddy hug , okay , another Daddy hug . 302440_305660
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|another-Def-Ind propn|Daddy noun|hug-Acc cm|cm intj|okay cm|cm det|another-Def-Ind propn|Daddy noun|hug .
+%gra:	1|2|NSUBJ 2|11|ROOT 3|5|DET 4|5|COMPOUND 5|2|OBJ 6|7|PUNCT 7|11|DISCOURSE 8|7|PUNCT 9|11|DET 10|11|COMPOUND 11|5|APPOS 12|2|PUNCT
+*MOT:	Daddy@si . 307860_309070
+%mor:	x|Daddy .
+%gra:	1|1|FLAT 2|1|PUNCT
+*CHI:	&=hums . 309400_311260
+*MOT:	↫w↫what are we gonna ask ? 310960_312680
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 part|go verb|ask-Inf-S ?
+%gra:	1|5|OBJ 2|5|AUX 3|5|NSUBJ 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*AAC:	DAD . 314230_317030
+%mor:	noun|dad .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	again ? 314960_315910
+%mor:	adv|again ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you sure ? 316160_317120
+%mor:	pron|you-Prs-Nom-S2 adj|sure-S1 ?
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	okay Daddy hug . 317170_318910
+%mor:	intj|okay propn|Daddy noun|hug .
+%gra:	1|3|DISCOURSE 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*CHI:	&=hums . 317350_318210
+*MOT:	a hug . 320790_322020
+%mor:	det|a-Ind-Art noun|hug .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	right , what else did you wanna sit , CHILDNAME ? 323730_326240
+%mor:	adj|right-S1 cm|cm pron|what-Int-S1 adv|else aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 intj|wanna verb|sit-Inf-S cm|cm propn|CHILDNAME ?
+%gra:	1|8|DISCOURSE 2|1|PUNCT 3|8|OBJ 4|3|ADVMOD 5|8|AUX 6|8|NSUBJ 7|8|DISCOURSE 8|10|ROOT 9|10|PUNCT 10|8|VOCATIVE 11|8|PUNCT
+*MOT:	oh , you wanted +... 333360_335060
+%mor:	intj|oh cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Past-S2 +...
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	++ bread . 335890_336680
+%mor:	noun|bread .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	o mm ah . 337020_338410
+%mor:	intj|o intj|mm intj|ah .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+%xDN:	CHI-Speech-ND
+*AAC:	DAD . 337620_339140
+%mor:	noun|dad .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	oh &=laughs wait <give it>  [/] <give it>  [/] give it . 339320_343520
+%mor:	intj|oh verb|wait-Fin-Imp-S verb|give-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|XCOMP 4|3|OBJ 5|2|PUNCT
+*MOT:	kidding . 344200_345260
+%mor:	verb|kid-Part-Pres-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

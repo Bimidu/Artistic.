@@ -1,0 +1,652 @@
+@UTF8
+@PID:	11312/a-00082303-0
+@Begin
+@Languages:	eng
+@Participants:	MOT Mother, CHI Target_Child, COD Media, AAC Media
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|8;00.|male|||Target_Child|||
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	11_T1_1, video
+*MOT:	it's right here darling . 150_2620
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adv|right adv|here noun|darling-Ger .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|5|ROOT 5|4|OBL-UNMARKED 6|4|PUNCT
+*CHI:	&=hums . 1970_2700
+*COD:	C . 2000_312360
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	NO OBSERVED CHILD AAC USE . 2020_4040
+%mor:	det|no-Def-Neg verb|observe-Fin-Ind-Past-S noun|child noun|aac noun|use .
+%gra:	1|5|DET 2|3|AMOD 3|5|COMPOUND 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+*MOT:	wow so let's play , come on sit , sit down . 2800_5130
+%mor:	intj|wow adv|so verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|play-Inf-S cm|cm verb|come-Inf-S adp|on verb|sit-Inf-S cm|cm verb|sit-Fin-Imp-S adp|down .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|12|ROOT 4|3|OBJ 5|3|XCOMP 6|7|PUNCT 7|3|PARATAXIS 8|7|COMPOUND-PRT 9|7|XCOMP 10|11|PUNCT 11|7|PARATAXIS 12|11|COMPOUND-PRT 13|3|PUNCT
+*MOT:	not lie down . 5780_6700
+%mor:	part|not verb|lie-Fin-Imp-S adv|down .
+%gra:	1|2|ADVMOD 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	ready one two three . 7090_9420
+%mor:	adj|ready-S1 num|one num|two num|three .
+%gra:	1|4|ROOT 2|1|OBL-UNMARKED 3|4|NUMMOD 4|1|OBL-UNMARKED 5|1|PUNCT
+*MOT:	up &=laughs . 9520_10690
+%mor:	adv|up .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=groans . 11570_14040
+*MOT:	come on . 13800_14480
+%mor:	verb|come-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	up Mama . 15000_15730
+%mor:	adp|up noun|mama .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=laughs . 15930_18530
+*MOT:	good+job . 16040_17150
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay let's play . 17210_18650
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|play-Inf-S .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|OBJ 4|2|XCOMP 5|2|PUNCT
+*MOT:	okay help Mama ha what's this b@g ? 19140_21450
+%mor:	intj|okay verb|help-Fin-Imp-S noun|mama-Acc intj|ha pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 noun|benefit ?
+%gra:	1|2|DISCOURSE 2|8|ROOT 3|2|OBJ 4|2|DISCOURSE 5|7|NSUBJ 6|7|COP 7|2|PARATAXIS 8|2|PUNCT 9|2|PUNCT
+*CHI:	&=hums . 19260_21290
+*MOT:	what's this ? 21800_22740
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	apple . 24000_24820
+%mor:	noun|apple .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 24210_25260
+*MOT:	what do you say ? 25300_26030
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|say-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	apple . 26090_26790
+%mor:	noun|apple .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ebi . 26940_27500
+%mor:	propn|ebi .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child's word for apple .
+*MOT:	apple . 27870_28600
+%mor:	noun|apple .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look at it , apple . 29050_30430
+%mor:	verb|look-Fin-Imp-S adp|at pron|it-Prs-Acc-S3 cm|cm noun|apple .
+%gra:	1|5|ROOT 2|3|CASE 3|1|OBL 4|5|PUNCT 5|1|PARATAXIS 6|1|PUNCT
+*CHI:	ebi . 30470_30980
+%mor:	propn|ebi .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	where do you place the apple right here xxx &=pointing . 31420_33520
+%mor:	adv|where aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|place-Inf-S det|the-Def-Art noun|apple-Acc adv|right adv|here .
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|8|ROOT 5|6|DET 6|4|OBJ 7|8|ADVMOD 8|4|ADVMOD 9|4|PUNCT
+%xPCO:	parent points to where child is supposed to place card .
+*MOT:	just right here , get it . 34200_35350
+%mor:	adv|just adv|right adv|here cm|cm verb|get-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|3|ADVMOD 2|3|ADVMOD 3|5|ADVMOD 4|5|PUNCT 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	just get this one . 36000_37160
+%mor:	adv|just verb|get-Fin-Imp-S det|this-Def-Dem-Sing noun|one-Acc .
+%gra:	1|2|ADVMOD 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	get . 37290_38260
+%mor:	verb|get-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	get . 38320_39290
+%mor:	verb|get-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	here place your apple right here &=taps . 38360_39670
+%mor:	adv|here verb|place-Fin-Imp-S pron|your-Prs-Gen-S2 noun|apple-Acc adv|right adv|here .
+%gra:	1|2|ADVMOD 2|6|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|6|ADVMOD 6|2|ADVMOD 7|2|PUNCT
+%xPCO:	parent taps where child is to put the card .
+*MOT:	good+job . 40400_42270
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 41300_44940
+*MOT:	what's this ? 42810_43800
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	oh darling sit down properly . 44080_46320
+%mor:	intj|oh noun|darling-Ger verb|sit-Fin-Imp-S adp|down adv|properly .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|3|COMPOUND-PRT 5|3|ADVMOD 6|3|PUNCT
+*CHI:	&=hums . 45940_51230
+*MOT:	<what's this>  [/] what's this this is a comb . 46530_49640
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|comb .
+%gra:	1|7|ROOT 2|1|COP 3|1|NSUBJ 4|7|NSUBJ 5|7|COP 6|7|DET 7|3|ACL-RELCL 8|1|PUNCT
+*MOT:	what's this ? 50140_51370
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	comb . 52670_53460
+%mor:	noun|comb .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	dai . 53230_54520
+%mor:	propn|dai .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child attempts comb .
+*MOT:	comb . 54760_55660
+%mor:	noun|comb .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	a . 56690_57480
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child attempts comb .
+*MOT:	good+job , oh you place that right here beside the apple , right here . 57560_62010
+%mor:	intj|goodjob cm|cm intj|oh pron|you-Prs-Nom-S2 verb|place-Fin-Ind-Pres-S2 pron|that-Dem adv|right adv|here adp|beside det|the-Def-Art noun|apple cm|cm adv|right adv|here .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|DISCOURSE 4|5|NSUBJ 5|14|ROOT 6|5|OBJ 7|8|ADVMOD 8|5|ADVMOD 9|11|CASE 10|11|DET 11|5|OBL 12|14|PUNCT 13|14|ADVMOD 14|5|ADVMOD 15|5|PUNCT
+*CHI:	&=other . 58260_58950
+%xgco:	Child high fives his mother .
+%xIS:	CHI-Gesture-I
+*MOT:	good . 62550_63640
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	next  [/] next  [/] next . 63720_65380
+%mor:	adv|next .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 64660_65440
+%xgco:	Child hugs his mother and gives her a kiss on the cheek .
+%xIS:	CHI-Gesture-S
+*MOT:	muah I love you too . 65450_67250
+%mor:	intj|muah pron|I-Prs-Nom-S1 verb|love-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 adv|too .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+*CHI:	&=laughs . 66010_68660
+*MOT:	what's this this is a +... 67490_70110
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art +...
+%gra:	1|3|NSUBJ 2|3|COP 3|6|ROOT 4|5|NSUBJ 5|3|ACL-RELCL 6|3|PUNCT 7|3|PUNCT
+*CHI:	++ tei . 70570_71140
+%mor:	propn|tei .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child attempts star .
+*MOT:	+, star . 70570_71370
+%mor:	noun|star .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	star . 71650_72310
+%mor:	noun|star .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=reaching . 71990_73450
+%xIS:	CHI-Gesture-S
+*MOT:	good what's this again ? 72310_74050
+%mor:	adj|good-S1 pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 adv|again ?
+%gra:	1|5|ROOT 2|1|NSUBJ 3|4|COP 4|1|NSUBJ 5|1|ADVMOD 6|1|PUNCT
+*CHI:	tei  [/] tei . 74350_75870
+%mor:	propn|tei .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	star good . 74580_75350
+%mor:	noun|star adj|good-S1 .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	so you place that here . 76150_77350
+%mor:	adv|so pron|you-Prs-Nom-S2 verb|place-Fin-Ind-Pres-S2 pron|that-Dem adv|here .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+*MOT:	good . 77990_78650
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	give Mama apple . 79050_80420
+%mor:	verb|give-Fin-Imp-S noun|mama noun|apple-Acc .
+%gra:	1|3|ROOT 2|3|COMPOUND 3|1|OBJ 4|1|PUNCT
+*MOT:	where's apple ? 80420_81440
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 noun|apple ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=reaching . 80470_81460
+%xgco:	Child is reaching towards his mother for a hug .
+%xIS:	CHI-Gesture-S
+*CHI:	ap .
+%mor:	noun|ap .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	where's apple you bring Mama apple . 81830_83910
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 noun|apple pron|you-Prs-Nom-S2 verb|bring-Fin-Ind-Pres-S2 noun|mama noun|apple-Acc .
+%gra:	1|5|ADVMOD 2|5|COP 3|5|NSUBJ 4|5|NSUBJ 5|7|ROOT 6|7|COMPOUND 7|5|OBJ 8|5|PUNCT
+*MOT:	where's the apple ? 83970_84680
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|apple ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	give Mama apple . 84730_85870
+%mor:	verb|give-Fin-Imp-S noun|mama noun|apple-Acc .
+%gra:	1|3|ROOT 2|3|COMPOUND 3|1|OBJ 4|1|PUNCT
+*MOT:	that's a star where's apple ? 86770_88360
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|star adv|where~aux|be-Fin-Ind-Pres-S3 noun|apple ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|7|ROOT 5|7|ADVMOD 6|7|COP 7|4|ACL-RELCL 8|4|PUNCT
+*MOT:	apple  [/] apple see the apple ? 89560_92490
+%mor:	noun|apple verb|see-Fin-Imp-S det|the-Def-Art noun|apple-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*CHI:	&=other . 91510_92960
+%xgco:	Child puts his head in his mother's lap, seeming to request hugs and/or tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	oh come on , oh see  [/] see  [/] see  [/] see right here baby . 92570_96150
+%mor:	intj|oh verb|come-Fin-Imp-S adp|on cm|cm intj|oh verb|see-Fin-Imp-S adv|right adv|here noun|baby-Acc .
+%gra:	1|2|DISCOURSE 2|9|ROOT 3|2|COMPOUND-PRT 4|6|PUNCT 5|6|DISCOURSE 6|2|PARATAXIS 7|8|ADVMOD 8|6|ADVMOD 9|6|OBJ 10|2|PUNCT
+*MOT:	here , where's the apple xxx . 96210_98010
+%mor:	adv|here cm|cm adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|apple .
+%gra:	1|6|ROOT 2|1|PUNCT 3|1|PARATAXIS 4|3|COP 5|6|DET 6|3|NSUBJ 7|1|PUNCT
+*MOT:	there you choose . 99500_101070
+%mor:	pron|there-Int-S1 pron|you-Prs-Nom-S2 verb|choose-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	where's the apple give Mama apple . 101220_103400
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|apple verb|give-Inf-S noun|mama noun|apple-Acc .
+%gra:	1|5|ADVMOD 2|5|AUX 3|4|DET 4|5|NSUBJ 5|7|ROOT 6|7|COMPOUND 7|5|OBJ 8|5|PUNCT
+*CHI:	&=other . 104850_106390
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	oh &=laughs ei . 105430_108010
+%mor:	intj|oh intj|ei .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=laughs . 107330_108680
+*MOT:	where's the apple b@g ? 109420_110740
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|apple noun|benefit ?
+%gra:	1|5|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT 6|1|PUNCT
+*CHI:	&=other . 110570_112330
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	you know where the apple is ? 111060_112640
+%mor:	pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 adv|where det|the-Def-Art noun|apple aux|be-Fin-Ind-Pres-S3 ?
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|CCOMP 4|5|DET 5|6|NSUBJ 6|3|COP 7|2|PUNCT
+*MOT:	eh &=laughs . 114350_115600
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs . 114880_115700
+*MOT:	is this an apple ? 115910_117060
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 det|a-Ind-Art noun|apple ?
+%gra:	1|4|COP 2|4|NSUBJ 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	apple no ? 117530_118460
+%mor:	noun|apple intj|no ?
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*CHI:	&=other . 118060_119910
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	oh &=laughs . 119910_121550
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs . 120500_121600
+*MOT:	is this an apple or no ? 121610_122860
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 det|a-Ind-Art noun|apple cconj|or intj|no ?
+%gra:	1|4|COP 2|4|NSUBJ 3|4|DET 4|6|ROOT 5|6|CC 6|4|DISCOURSE 7|4|PUNCT
+*MOT:	apple ? 123820_124630
+%mor:	noun|apple ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	www CHILDNAMEi come here . 124780_127580
+%mor:	propn|CHILDNAMEi verb|come-Fin-Ind-Pres-S adv|here .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*CHI:	&=other . 125810_126810
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	apple ? 127650_128220
+%mor:	noun|apple ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ebi . 128090_128950
+%mor:	propn|ebi .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates apple .
+*MOT:	apple . 129050_130250
+%mor:	noun|apple .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ebi . 130280_130770
+%mor:	propn|ebi .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	&=hums really give it to Mommy b@g . 130840_133490
+%mor:	adv|really verb|give-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to propn|Mommy noun|benefit .
+%gra:	1|2|ADVMOD 2|6|ROOT 3|2|OBJ 4|5|CASE 5|2|OBL 6|2|PUNCT 7|2|PUNCT
+*MOT:	where's the apple b ? 133570_134630
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|apple noun|benefit ?
+%gra:	1|5|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT 6|1|PUNCT
+*MOT:	you grab the apple . 134670_135810
+%mor:	pron|you-Prs-Nom-S2 verb|grab-Fin-Ind-Pres-S2 det|the-Def-Art noun|apple-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*CHI:	e ebi &=pointing . 134830_136510
+%mor:	propn|e propn|ebi .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	give Mama . 136290_137260
+%mor:	verb|give-Fin-Imp-S noun|mama-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	&=other . 137620_138970
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	xxx Mama . 138090_139580
+%mor:	noun|mama .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	sit down properly . 139660_140610
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly .
+%gra:	1|3|ROOT 2|1|COMPOUND-PRT 3|1|ADVMOD 4|1|PUNCT
+*MOT:	give apple Mama . 140680_142290
+%mor:	verb|give-Fin-Imp-S noun|apple noun|mama-Acc .
+%gra:	1|3|ROOT 2|3|COMPOUND 3|1|OBJ 4|1|PUNCT
+*CHI:	ebi . 142420_143070
+%mor:	propn|ebi .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	good+job . 142660_144260
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where's the star ? 144370_145440
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|star ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*CHI:	i e . 145150_146510
+%mor:	pron|I-Prs-Nom-S1 aux|e-Fin-Ind-Pres-S1 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	give Mama star . 145550_146660
+%mor:	verb|give-Fin-Imp-S noun|mama noun|star-Acc .
+%gra:	1|3|ROOT 2|3|COMPOUND 3|1|OBJ 4|1|PUNCT
+*CHI:	da . 146750_147760
+%mor:	propn|da .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates star .
+*MOT:	star where's the star ? 147800_149100
+%mor:	noun|star adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|star ?
+%gra:	1|5|ROOT 2|1|PARATAXIS 3|5|COP 4|5|DET 5|1|APPOS 6|1|PUNCT
+*MOT:	good+job high+five . 149170_151900
+%mor:	noun|goodjob noun|highfive .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=other . 151970_152760
+%xgco:	Child gives his mother a high five after he requests one .
+%xIS:	CHI-Gesture-I
+*MOT:	where's the comb ? 152220_153720
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|comb ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*CHI:	he . 153820_154600
+%mor:	pron|he-Prs-Nom-S3 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	ehey <good+job>  [/] good+job . 154730_159450
+%mor:	propn|ehey noun|goodjob .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=other . 157250_157910
+%xgco:	Child gives his mother a high five after she requests one .
+%xIS:	CHI-Gesture-I
+*CHI:	&=other . 158530_159810
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	<sit down properly>  [/] sit down properly . 159560_162970
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly .
+%gra:	1|3|ROOT 2|1|COMPOUND-PRT 3|1|ADVMOD 4|1|PUNCT
+*MOT:	good . 163060_163900
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay let's try to see these are your +... 165070_167720
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|try-Inf-S part|to verb|see-Inf-S pron|this-Dem-P1 aux|be-Fin-Ind-Pres-P3 pron|your-Prs-Gen-S2 +...
+%gra:	1|2|DISCOURSE 2|9|ROOT 3|2|OBJ 4|2|XCOMP 5|6|MARK 6|4|XCOMP 7|9|NSUBJ 8|9|COP 9|6|CCOMP 10|2|PUNCT
+*MOT:	+, papers . 168360_169490
+%mor:	noun|paper-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this come on . 170250_172170
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 verb|come-Part-S adp|on .
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|COMPOUND-PRT 6|4|PUNCT
+*CHI:	&=other . 171140_172350
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	what's this ? 172200_173060
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=whines . 172710_174350
+*MOT:	<sit down properly>  [/] sit down properly b@g it's fine come on . 173160_177270
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly noun|benefit pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|fine-S1 verb|come-Inf-S adp|on .
+%gra:	1|9|ROOT 2|1|COMPOUND-PRT 3|1|ADVMOD 4|7|DISCOURSE 5|7|NSUBJ 6|7|COP 7|1|PARATAXIS 8|1|PARATAXIS 9|8|COMPOUND-PRT 10|1|PUNCT
+*CHI:	&=other . 175170_176270
+%xgco:	Child puts his head in his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	you want to sit down properly ? 178120_180820
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|sit-Inf-S adp|down adv|properly ?
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|MARK 4|2|XCOMP 5|4|COMPOUND-PRT 6|4|ADVMOD 7|2|PUNCT
+*MOT:	hmm ? 181880_182690
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	let's try this one . 184270_185990
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|try-Inf-S det|this-Def-Dem-Sing noun|one-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+*MOT:	let's do matching . 187300_188870
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S noun|matching-Acc-Ger .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|1|PUNCT
+*MOT:	let's do your match . 189910_191780
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S pron|your-Prs-Gen-S2 noun|match-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|NMOD-POSS 5|3|OBJ 6|1|PUNCT
+*MOT:	briya . 192690_193700
+%mor:	propn|briya .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	help Mama find the matching colour . 194930_198340
+%mor:	verb|help-Fin-Imp-S noun|mama-Acc verb|find-Inf-S det|the-Def-Art noun|matching-Ger noun|colour-Acc .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|6|DET 5|6|COMPOUND 6|3|OBJ 7|1|PUNCT
+*MOT:	here . 199830_200560
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	so you have your peach . 200670_203540
+%mor:	adv|so pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 pron|your-Prs-Gen-S2 noun|peach-Acc .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|5|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|3|PUNCT
+*MOT:	peach is it grey &=pointing ? 203630_205690
+%mor:	noun|peach aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 adj|grey-S1 ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	pink &=pointing ? 205830_206770
+%mor:	adj|pink-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ing . 207460_208190
+%mor:	noun|ing-Ger .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child approximates pink .
+*MOT:	white &=pointing red &=pointing and blue &=pointing . 207900_210540
+%mor:	adj|white-S1 adj|red-S1 cconj|and adj|blue-S1 .
+%gra:	1|2|AMOD 2|4|ROOT 3|4|CC 4|2|CONJ 5|2|PUNCT
+*CHI:	red . 208800_209430
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	red . 210050_210610
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay here . 210630_211790
+%mor:	intj|okay adv|here .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	where's the pink ? 212380_213400
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|pink-S1 ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	where's the pink one ? 213470_214900
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|pink-S1 noun|one ?
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|AMOD 5|1|NSUBJ 6|1|PUNCT
+*MOT:	good+job that's the pink one . 215150_217710
+%mor:	intj|goodjob pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|pink-S1 noun|one .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|DET 5|6|AMOD 6|6|ROOT 7|6|PUNCT
+*MOT:	yeah right there &=pointing . 217970_219580
+%mor:	intj|yeah adv|right adv|there .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what about this one ? 219790_221560
+%mor:	pron|what-Int-S1 adp|about det|this-Def-Dem-Sing noun|one ?
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|NMOD 5|1|PUNCT
+*MOT:	good+job . 223000_224440
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 224760_225900
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	red . 226200_226720
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	red . 226780_227300
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	where's the red one ? 227360_228310
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|red-S1 noun|one ?
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|AMOD 5|1|NSUBJ 6|1|PUNCT
+*MOT:	good . 229310_230210
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 230270_230820
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	white . 230820_231460
+%mor:	adj|white-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	way . 231550_232340
+%mor:	noun|way .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates white .
+*MOT:	where does it go ? 232400_233620
+%mor:	adv|where aux|do-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 verb|go-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	good and how about this ? 233760_236040
+%mor:	adj|good-S1 cconj|and adv|how adp|about pron|this-Dem-S1 ?
+%gra:	1|5|ROOT 2|3|CC 3|1|CONJ 4|5|CASE 5|3|OBL 6|1|PUNCT
+*CHI:	ray . 236130_236770
+%mor:	noun|ray .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child approximates grey .
+*MOT:	grey . 236610_237260
+%mor:	noun|grey .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ray . 237380_237980
+%mor:	noun|ray .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	good+job . 238070_239260
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and what's this ? 239760_241280
+%mor:	cconj|and pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|CC 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+*CHI:	red , bur . 241380_242540
+%mor:	adj|red-S1 cm|cm noun|bur .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	blue  [/] blue . 242340_243850
+%mor:	adj|blue-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	bur . 243940_244530
+%mor:	noun|bur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	&=hums good+job high+five b@g . 244470_246710
+%mor:	noun|goodjob noun|highfive noun|benefit .
+%gra:	1|2|COMPOUND 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+*CHI:	&=other . 246170_246890
+%xgco:	Child high fives his mom after she requests one .
+%xIS:	CHI-Gesture-S
+*MOT:	yay . 246880_248250
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=giving . 248110_249420
+%xIS:	CHI-Gesture-S
+*MOT:	okay let's switch up . 248400_249690
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|switch-Inf-S adp|up .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|OBJ 4|2|XCOMP 5|4|COMPOUND-PRT 6|2|PUNCT
+*MOT:	let's switch up . 250420_251460
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|switch-Inf-S adp|up .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|COMPOUND-PRT 5|1|PUNCT
+*CHI:	&=other . 251500_252690
+%xgco:	Child puts his back against his mother's lap to request tickles .
+%xIS:	CHI-Gesture-S
+*MOT:	sit down properly bebe . 251760_253140
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly noun|bebe .
+%gra:	1|4|ROOT 2|1|COMPOUND-PRT 3|4|ADVMOD 4|1|OBL-UNMARKED 5|1|PUNCT
+*MOT:	sit down properly . 253530_254580
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly .
+%gra:	1|3|ROOT 2|1|COMPOUND-PRT 3|1|ADVMOD 4|1|PUNCT
+*CHI:	&=moving . 254210_255130
+%xIS:	CHI-Gesture-S
+*MOT:	are you want hug ? 254680_255960
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-Pres-S noun|hug-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	you want Mama hug ? 256060_257030
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|mama noun|hug-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|COMPOUND 4|2|OBJ 5|2|PUNCT
+*CHI:	e . 257090_257490
+%mor:	propn|e .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	hug  [/] hug  [/] hug  [/] hug  [/] hug  [/] hug  [/] hug  [/] hug &=hums . 257520_265670
+%mor:	verb|hug-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(o)kay <come on>  [/] come on sit down now . 265790_268240
+%mor:	intj|okay verb|come-Fin-Imp-S adp|on verb|sit-Inf-S adp|down adv|now .
+%gra:	1|2|DISCOURSE 2|6|ROOT 3|2|COMPOUND-PRT 4|2|XCOMP 5|4|COMPOUND-PRT 6|4|ADVMOD 7|2|PUNCT
+*CHI:	&=moving . 268070_269400
+%xIS:	CHI-Gesture-S
+*MOT:	we're all good xxx . 268310_269980
+%mor:	pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 adv|all adj|good-S1 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	finish la huggy xxx . 270030_272570
+%mor:	verb|finish-Fin-Imp-S propn|la-Acc propn|huggy-Acc .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	sit down la bebe . 272640_273910
+%mor:	verb|sit-Fin-Imp-S adp|down propn|la noun|bebe .
+%gra:	1|4|ROOT 2|1|COMPOUND-PRT 3|1|OBL 4|1|OBL 5|1|PUNCT
+*MOT:	sit down properly . 274000_274720
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly .
+%gra:	1|3|ROOT 2|1|COMPOUND-PRT 3|1|ADVMOD 4|1|PUNCT
+*MOT:	ready one two three . 274820_277880
+%mor:	adj|ready-S1 num|one num|two num|three .
+%gra:	1|4|ROOT 2|1|OBL-UNMARKED 3|4|NUMMOD 4|1|OBL-UNMARKED 5|1|PUNCT
+*MOT:	up www come on . 278010_280060
+%mor:	adv|up verb|come-Fin-Imp-S adp|on .
+%gra:	1|2|ADVMOD 2|3|ROOT 3|2|COMPOUND-PRT 4|2|PUNCT
+*MOT:	oi not there oi you have to find your own seat right here . 281930_284830
+%mor:	intj|oi part|not adv|there sconj|oi pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 part|to verb|find-Inf-S pron|your-Prs-Gen-S2 adj|own-S1 noun|seat-Acc adv|right adv|here .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|13|ROOT 4|6|MARK 5|6|NSUBJ 6|3|ADVCL 7|8|MARK 8|6|XCOMP 9|11|NMOD-POSS 10|11|AMOD 11|8|OBJ 12|13|ADVMOD 13|8|ADVMOD 14|3|PUNCT
+*MOT:	sit down here . 284980_285710
+%mor:	verb|sit-Fin-Imp-S adp|down adv|here .
+%gra:	1|3|ROOT 2|1|COMPOUND-PRT 3|1|ADVMOD 4|1|PUNCT
+*MOT:	go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go good . 285800_288210
+%mor:	verb|go-Fin-Imp-S adj|good-S1 .
+%gra:	1|2|ROOT 2|1|XCOMP 3|1|PUNCT
+*MOT:	sit down properly bebe . 288400_290890
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly noun|bebe .
+%gra:	1|4|ROOT 2|1|COMPOUND-PRT 3|4|ADVMOD 4|1|OBL-UNMARKED 5|1|PUNCT
+*MOT:	sit down properly . 291770_293150
+%mor:	verb|sit-Fin-Imp-S adp|down adv|properly .
+%gra:	1|3|ROOT 2|1|COMPOUND-PRT 3|1|ADVMOD 4|1|PUNCT
+*MOT:	(o)kay there . 293820_295130
+%mor:	intj|okay adv|there .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	yeah cross your legs like that . 295340_297410
+%mor:	intj|yeah verb|cross-Fin-Imp-S pron|your-Prs-Gen-S2 noun|leg-Plur-Acc adp|like pron|that-Dem .
+%gra:	1|2|DISCOURSE 2|6|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|6|CASE 6|2|OBL 7|2|PUNCT
+*MOT:	xxx okay . 297480_298410
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	next . 298860_299550
+%mor:	adv|next .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	let's do the bees . 300150_301830
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S det|the-Def-Art noun|bee-Plur-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+*MOT:	(o)kay where does the bee go ? 302020_304160
+%mor:	intj|okay adv|where aux|do-Fin-Ind-Pres-S3 det|the-Def-Art noun|bee verb|go-Inf-S ?
+%gra:	1|6|DISCOURSE 2|6|ADVMOD 3|6|AUX 4|5|DET 5|6|NSUBJ 6|6|ROOT 7|6|PUNCT
+*MOT:	let's match the colour . 304420_306880
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|match-Inf-S det|the-Def-Art noun|colour-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+*MOT:	(o)kay let's see . 308670_311310
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|OBJ 4|2|XCOMP 5|2|PUNCT
+@End

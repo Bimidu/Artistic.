@@ -1,0 +1,397 @@
+@UTF8
+@PID:	11312/a-00082266-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media, SIB Sibling
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|9;10.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|SIB|||||Sibling|||
+@Media:	02_T3_1, video
+*COD:	C . 20_342240
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(o)kay CHILDNAME . 740_2310
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=sighs . 4240_4890
+%xVCO:	child sighs while selecting picture from AAC device .
+*AAC:	READ BOOK . 4400_9090
+%mor:	verb|read-Fin-Imp-S noun|book-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xPS:	S
+*MOT:	what's that ? 5610_6650
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	can I see ? 8160_8730
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|see-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	oh . 8810_9350
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	read book . 11560_12330
+%mor:	verb|read-Fin-Imp-S noun|book-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	there you go so who's going to read the book ? 12400_15450
+%mor:	adv|there pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 adv|so pron|who-Int~aux|be-Fin-Ind-Pres-S3 verb|go-Part-Pres-S part|to verb|read-Inf-S det|the-Def-Art noun|book-Acc ?
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|11|ROOT 4|7|ADVMOD 5|7|NSUBJ 6|7|AUX 7|3|PARATAXIS 8|9|MARK 9|7|XCOMP 10|11|DET 11|9|OBJ 12|3|PUNCT
+*MOT:	who's going to read the book ? 16910_18380
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 verb|go-Part-Pres-S part|to verb|read-Inf-S det|the-Def-Art noun|book-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|3|PUNCT
+*AAC:	CHILDNAME . 21290_25620
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	oh CHILDNAME's going to read the book . 26420_28250
+%mor:	intj|oh propn|CHILDNAME~aux|be-Fin-Ind-Pres-S3 verb|go-Part-Pres-S part|to verb|read-Inf-S det|the-Def-Art noun|book-Acc .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|8|ROOT 5|6|MARK 6|4|XCOMP 7|8|DET 8|6|OBJ 9|4|PUNCT
+*CHI:	+" this is George .  [+ bkr] 28340_29510
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 propn|George .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he has a good little monkey and always very curious .  [+ bkr] 29550_35020
+%mor:	pron|he-Prs-Nom-S3 verb|have-Fin-Ind-Pres-S3 det|a-Ind-Art adj|good-S1 adj|little-S1 noun|monkey-Acc cconj|and adv|always adv|very adj|curious-S1 .
+%gra:	1|2|NSUBJ 2|10|ROOT 3|6|DET 4|6|AMOD 5|6|AMOD 6|2|OBJ 7|10|CC 8|10|ADVMOD 9|10|ADVMOD 10|2|CONJ 11|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	today George and his friend ma man with the yellow hat were at the wibrary .  [+ bkr] 35620_42250
+%mor:	noun|today propn|George cconj|and pron|his-Prs-Gen-S3 noun|friend noun|ma noun|man adp|with det|the-Def-Art adj|yellow-S1 noun|hat aux|be-Fin-Ind-Past-P3-irr adp|at det|the-Def-Art noun|wibrary .
+%gra:	1|15|OBL-UNMARKED 2|15|NSUBJ 3|5|CC 4|5|NMOD-POSS 5|2|CONJ 6|7|COMPOUND 7|2|CONJ 8|11|CASE 9|11|DET 10|11|AMOD 11|7|NMOD 12|15|COP 13|15|CASE 14|15|DET 15|15|ROOT 16|15|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" George had never between mm to &~ba &=burps &~befu a library before .  [+ bkr] 42440_51200
+%mor:	propn|George aux|have-Fin-Ind-Past-S3-irr adv|never adp|between noun|mm adp|to det|a-Ind-Art noun|library adv|before .
+%gra:	1|5|NSUBJ 2|5|AUX 3|5|ADVMOD 4|5|CASE 5|9|ROOT 6|8|CASE 7|8|DET 8|5|NMOD 9|8|ADVMOD 10|5|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he had never seen so many books before either .  [+ bkr] 51400_58440
+%mor:	pron|he-Prs-Nom-S3 aux|have-Fin-Ind-Past-S3-irr adv|never verb|see-Part-Past-S-irr adv|so adj|many-S1 noun|book-Plur-Acc adp|before det|either-Def-Tot .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|9|ROOT 5|6|ADVMOD 6|7|AMOD 7|4|OBJ 8|9|CASE 9|4|OBL 10|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay so it's SIBNAMEs turn to +... 58500_62560
+%mor:	intj|okay adv|so pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|sibname-Plur verb|turn-Inf-S adp|to +...
+%gra:	1|6|DISCOURSE 2|6|ADVMOD 3|6|NSUBJ 4|6|COP 5|6|NSUBJ 6|7|ROOT 7|6|OBL 8|6|PUNCT
+*MOT:	let's see , read , CHILDNAME look SIBNAME's turn . 62650_68510
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S cm|cm verb|read-Fin-Imp-S cm|cm intj|childname verb|look-Fin-Imp-S propn|SIBNAME~part|s noun|turn-Acc .
+%gra:	1|11|ROOT 2|1|OBJ 3|1|XCOMP 4|5|PUNCT 5|3|CONJ 6|8|PUNCT 7|8|DISCOURSE 8|1|PARATAXIS 9|11|NMOD-POSS 10|9|CASE 11|8|OBJ 12|1|PUNCT
+*MOT:	give the book to SIBNAME . 68550_70090
+%mor:	verb|give-Fin-Imp-S det|the-Def-Art noun|book-Acc adp|to propn|SIBNAME .
+%gra:	1|5|ROOT 2|3|DET 3|1|OBJ 4|5|CASE 5|1|OBL 6|1|PUNCT
+*SIB:	+" everywhere he looked people were reading .  [+ bkr] 72290_75740
+%mor:	adv|everywhere pron|he-Prs-Nom-S3 verb|look-Fin-Ind-Past-S3 noun|person-Plur aux|be-Fin-Ind-Past-P3-irr verb|read-Part-Pres-S .
+%gra:	1|6|ADVMOD 2|3|NSUBJ 3|1|ADVCL-RELCL 4|6|NSUBJ 5|6|AUX 6|6|ROOT 7|6|PUNCT
+*SIB:	+" some people read quietly to themselves .  [+ bkr] 75820_79070
+%mor:	det|some-Def-Ind noun|person-Plur verb|read-Fin-Ind-Pres-P3 adv|quietly adp|to pron|themselves-Prs-Acc-P3 .
+%gra:	1|2|DET 2|3|NSUBJ 3|6|ROOT 4|3|ADVMOD 5|6|CASE 6|3|OBL 7|3|PUNCT
+*SIB:	+" but the , but in the children's room the librarian was reading out loud .  [+ bkr] 79070_84950
+%mor:	cconj|but det|the-Def-Art cm|cm cconj|but adp|in det|the-Def-Art noun|child-Plur~part|s noun|room det|the-Def-Art noun|librarian aux|be-Fin-Ind-Past-S3-irr verb|read-Part-Pres-S adp|out adv|loud .
+%gra:	1|13|CC 2|13|REPARANDUM 3|13|PUNCT 4|13|CC 5|9|CASE 6|7|DET 7|9|NMOD-POSS 8|7|CASE 9|13|OBL 10|11|DET 11|13|NSUBJ 12|13|AUX 13|15|ROOT 14|13|COMPOUND-PRT 15|13|ADVMOD 16|13|PUNCT
+*SIB:	+" it was a story hour .  [+ bkr] 85050_87500
+%mor:	pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Past-S3-irr det|a-Ind-Art noun|story noun|hour .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+*SIB:	+" George loved stories .  [+ bkr] 87550_88880
+%mor:	propn|George verb|love-Fin-Ind-Past-S3 noun|story-Plur-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*SIB:	+" he sat down with a group of children to listen .  [+ bkr] 88960_92690
+%mor:	pron|he-Prs-Nom-S3 verb|sit-Fin-Ind-Past-S3-irr adp|down adp|with det|a-Ind-Art noun|group adp|of noun|child-Plur part|to verb|listen-Inf-S .
+%gra:	1|2|NSUBJ 2|10|ROOT 3|2|COMPOUND-PRT 4|6|CASE 5|6|DET 6|2|OBL 7|8|CASE 8|6|NMOD 9|10|MARK 10|2|ADVCL 11|2|PUNCT
+*MOT:	okay whose turn now ? 93800_94780
+%mor:	intj|okay pron|whose-Rel-S1 noun|turn adv|now ?
+%gra:	1|3|DISCOURSE 2|3|NMOD-POSS 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*SIB:	CHILDNAME's . 94590_95370
+%mor:	propn|CHILDNAME~part|s .
+%gra:	1|2|ROOT 2|1|CASE 3|1|PUNCT
+*MOT:	who's going to read next ? 95410_97010
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 verb|go-Part-Pres-S part|to verb|read-Inf-S adv|next ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|5|MARK 5|3|XCOMP 6|5|ADVMOD 7|3|PUNCT
+*SIB:	CHILDNAME . 98380_98960
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	CHILDNAME . 99290_100200
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*AAC:	CHILDNAME . 106000_107280
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	(o)kay CHILDNAME it's turn to read . 107600_108950
+%mor:	intj|okay intj|childname pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|turn-Part-Past-S adp|to noun|read .
+%gra:	1|5|DISCOURSE 2|5|DISCOURSE 3|5|NSUBJ 4|5|AUX 5|7|ROOT 6|7|CASE 7|5|OBL 8|5|PUNCT
+*CHI:	+" was reading out loud .  [+ bkr] 110020_111440
+%mor:	aux|be-Fin-Ind-Past-S3-irr verb|read-Part-Pres-S adp|out adv|loud .
+%gra:	1|2|AUX 2|4|ROOT 3|2|COMPOUND-PRT 4|2|ADVMOD 5|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" it was sowi hour .  [+ bkr] 111660_114400
+%mor:	pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Past-S3-irr adj|sowi-S1 noun|hour .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" George loves stories .  [+ bkr] 114470_116600
+%mor:	propn|George verb|love-Fin-Ind-Pres-S3 noun|story-Plur-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he sat down with a ↫g↫group of children to listen .  [+ bkr] 116740_122600
+%mor:	pron|he-Prs-Nom-S3 verb|sit-Fin-Ind-Past-S3-irr adp|down adp|with det|a-Ind-Art noun|group adp|of noun|child-Plur part|to verb|listen-Inf-S .
+%gra:	1|2|NSUBJ 2|10|ROOT 3|2|COMPOUND-PRT 4|6|CASE 5|6|DET 6|2|OBL 7|8|CASE 8|6|NMOD 9|10|MARK 10|2|ADVCL 11|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	(o)kay SIBNAME's turn to read . 128460_129600
+%mor:	intj|okay propn|SIBNAME~part|s noun|turn part|to verb|read-Inf-S .
+%gra:	1|4|DISCOURSE 2|4|NMOD-POSS 3|2|CASE 4|6|ROOT 5|6|MARK 6|4|ACL 7|4|PUNCT
+*MOT:	SIBNAME's turn . 130190_131050
+%mor:	propn|SIBNAME~part|s noun|turn .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|3|ROOT 4|3|PUNCT
+*SIB:	+" the librarian was reading a book about the bunny .  [+ bkr] 131000_134550
+%mor:	det|the-Def-Art noun|librarian aux|be-Fin-Ind-Past-S3-irr verb|read-Part-Pres-S det|a-Ind-Art noun|book-Acc adp|about det|the-Def-Art noun|bunny .
+%gra:	1|2|DET 2|4|NSUBJ 3|4|AUX 4|9|ROOT 5|6|DET 6|4|OBJ 7|9|CASE 8|9|DET 9|6|NMOD 10|4|PUNCT
+*SIB:	+" George liked bunnies .  [+ bkr] 134660_136290
+%mor:	propn|George verb|like-Fin-Ind-Past-S3 noun|bunny-Plur-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*SIB:	+" behind the librarian was a book about a dinosaur .  [+ bkr] 136400_140460
+%mor:	adp|behind det|the-Def-Art noun|librarian aux|be-Fin-Ind-Past-S3-irr det|a-Ind-Art noun|book adp|about det|a-Ind-Art noun|dinosaur .
+%gra:	1|3|CASE 2|3|DET 3|6|NMOD 4|6|COP 5|6|DET 6|9|ROOT 7|9|CASE 8|9|DET 9|6|NMOD 10|6|PUNCT
+*SIB:	+" George liked dinosaurs even more .  [+ bkr] 140620_143060
+%mor:	propn|George verb|like-Fin-Ind-Past-S3 noun|dinosaur-Plur-Acc adv|even adj|more-Cmp-S1 .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|ADVMOD 5|2|ADVMOD 6|2|PUNCT
+*SIB:	+" he hoped he would read it next .  [+ bkr] 143130_145100
+%mor:	pron|he-Prs-Nom-S3 verb|hope-Fin-Ind-Past-S3 pron|he-Prs-Nom-S3 aux|would-Fin-S verb|read-Inf-S pron|it-Prs-Acc-S3 adv|next .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|5|NSUBJ 4|5|AUX 5|2|CCOMP 6|5|OBJ 7|5|ADVMOD 8|2|PUNCT
+*SIB:	+" but the librarian um read a book about a tree .  [+ bkr] 145180_148990
+%mor:	cconj|but det|the-Def-Art noun|librarian intj|um verb|read-Fin-Ind-Past-S3-irr det|a-Ind-Art noun|book-Acc adp|about det|a-Ind-Art noun|tree .
+%gra:	1|5|CC 2|3|DET 3|5|NSUBJ 4|5|DISCOURSE 5|10|ROOT 6|7|DET 7|5|OBJ 8|10|CASE 9|10|DET 10|7|NMOD 11|5|PUNCT
+*SIB:	+" George ti ↫g↫George tired to sit quietly and wait for the dinosaur book to be read .  [+ bkr] 149130_159220
+%mor:	propn|George propn|it propn|George adj|tired-S1 part|to verb|sit-Inf-S adv|quietly cconj|and verb|wait-Inf-S sconj|for det|the-Def-Art noun|dinosaur noun|book part|to aux|be-Inf-S verb|read-Part-Past-S-irr .
+%gra:	1|4|NSUBJ 2|1|FLAT 3|1|FLAT 4|16|ROOT 5|6|MARK 6|4|XCOMP 7|6|ADVMOD 8|9|CC 9|6|CONJ 10|16|MARK 11|13|DET 12|13|COMPOUND 13|16|NSUBJ-PASS 14|16|MARK 15|16|AUX-PASS 16|9|ADVCL 17|4|PUNCT
+*SIB:	+" but sometimes it was hard for a monkey to be patient .  [+ bkr] 159310_162680
+%mor:	cconj|but adv|sometimes pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Past-S3-irr adj|hard-S1 sconj|for det|a-Ind-Art noun|monkey part|to aux|be-Inf-S adj|patient-S1 .
+%gra:	1|5|CC 2|5|ADVMOD 3|5|EXPL 4|5|COP 5|11|ROOT 6|11|MARK 7|8|DET 8|11|NSUBJ 9|11|MARK 10|11|COP 11|5|CSUBJ 12|5|PUNCT
+*MOT:	now it's , whose turn next ? 167970_169830
+%mor:	adv|now pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 cm|cm pron|whose-Rel-S1 noun|turn adv|next ?
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|7|ROOT 4|3|PUNCT 5|6|NMOD-POSS 6|7|NSUBJ 7|3|ADVMOD 8|3|PUNCT
+*MOT:	whose turn ? 171190_172180
+%mor:	pron|whose-Rel-S1 noun|turn ?
+%gra:	1|2|NMOD-POSS 2|2|ROOT 3|2|PUNCT
+*AAC:	CHILDNAME . 173420_175800
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	(o)kay it's CHILDNAME's turn to read . 175520_177920
+%mor:	intj|okay pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 propn|CHILDNAME~part|s noun|turn part|to verb|read-Inf-S .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|NMOD-POSS 5|4|CASE 6|8|ROOT 7|8|MARK 8|6|ACL 9|6|PUNCT
+*CHI:	+" when the wibrary start his story about jungle anino George could not wait any wonger .  [+ bkr] 177950_188180
+%mor:	adv|when det|the-Def-Art noun|wibrary verb|start-Fin-Ind-Pres-S3 pron|his-Prs-Gen-S3 noun|story-Acc adp|about noun|jungle propn|anino propn|George aux|could-Fin-S part|not verb|wait-Inf-S det|any-Def-Ind noun|wonger-Acc .
+%gra:	1|4|ADVMOD 2|3|DET 3|4|NSUBJ 4|13|ADVCL 5|6|NMOD-POSS 6|4|OBJ 7|9|CASE 8|9|COMPOUND 9|6|NMOD 10|13|NSUBJ 11|13|AUX 12|13|ADVMOD 13|15|ROOT 14|15|DET 15|13|OBJ 16|13|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he had to see the dinosaur book .  [+ bkr] 188400_191680
+%mor:	pron|he-Prs-Nom-S3 verb|have-Fin-Ind-Past-S3-irr part|to verb|see-Inf-S det|the-Def-Art noun|dinosaur noun|book-Acc .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|MARK 4|2|XCOMP 5|7|DET 6|7|COMPOUND 7|4|OBJ 8|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he tiptoed closer .  [+ bkr] 191900_193460
+%mor:	pron|he-Prs-Nom-S3 verb|tiptoe-Fin-Ind-Past-S3 adj|close-Cmp-S1 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" look a monkey . 193830_195780
+%mor:	verb|look-Fin-Imp-S det|a-Ind-Art noun|monkey-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	shout a girl +". 195880_197480
+%mor:	verb|shout-Fin-Imp-S det|a-Ind-Art noun|girl-Acc +".
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" the librarian put the finger to her wips .  [+ bkr] 197550_202140
+%mor:	det|the-Def-Art noun|librarian verb|put-Fin-Ind-Past-S3-irr det|the-Def-Art noun|finger-Acc adp|to pron|her-Prs-Gen-S3 noun|wip-Plur .
+%gra:	1|2|DET 2|3|NSUBJ 3|8|ROOT 4|5|DET 5|3|OBJ 6|8|CASE 7|8|NMOD-POSS 8|3|OBL 9|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" we must be quiet so everyone can hear . 202350_208120
+%mor:	pron|we-Prs-Nom-P1 aux|must-Fin-S aux|be-Inf-S adj|quiet-S1 sconj|so pron|everyone-Tot-S1 aux|can-Fin-S verb|hear-Inf-S .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|COP 4|8|ROOT 5|8|MARK 6|8|NSUBJ 7|8|AUX 8|4|ADVCL 9|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	she said nicely +". 208380_210170
+%mor:	pron|she-Prs-Nom-S3 verb|say-Fin-Ind-Past-S3-irr adv|nicely +".
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" but it's the monkey . 210240_211930
+%mor:	cconj|but pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|monkey .
+%gra:	1|5|CC 2|5|NSUBJ 3|5|COP 4|5|DET 5|5|ROOT 6|5|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	said the boy +". 212020_212940
+%mor:	verb|say-Fin-Ind-Past-S3-irr det|the-Def-Art noun|boy-Acc +".
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" the library nod and smell .  [+ bkr] 213000_214990
+%mor:	det|the-Def-Art noun|library noun|nod cconj|and verb|smell-Fin-Ind-Pres-S .
+%gra:	1|3|DET 2|3|COMPOUND 3|5|ROOT 4|5|CC 5|3|CONJ 6|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" mm mm . 215280_216240
+%mor:	intj|mm intj|mm .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	she agreed +". 216420_217280
+%mor:	pron|she-Prs-Nom-S3 verb|agree-Fin-Ind-Past-S3 +".
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	(o)kay whose turn next ? 217420_219030
+%mor:	intj|okay pron|whose-Rel-S1 noun|turn adv|next ?
+%gra:	1|3|DISCOURSE 2|3|NMOD-POSS 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	&=hums . 219160_223250
+%xVCO:	child hums while deciding which picture to choose from device .
+*MOT:	whose turn ? 220160_221540
+%mor:	pron|whose-Rel-S1 noun|turn ?
+%gra:	1|2|NMOD-POSS 2|2|ROOT 3|2|PUNCT
+*SIB:	I just finished reading the jungle's xxx . 220160_223250
+%mor:	pron|I-Prs-Nom-S1 adv|just verb|finish-Fin-Ind-Past-S1 verb|read-Ger-S det|the-Def-Art noun|jungle-Acc~part|s .
+%gra:	1|3|NSUBJ 2|3|ADVMOD 3|7|ROOT 4|3|XCOMP 5|6|DET 6|4|OBJ 7|6|CASE 8|3|PUNCT
+*AAC:	SIBNAME . 222840_225900
+%mor:	propn|SIBNAME .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	oh it's SIBNAME's turn . 222950_224790
+%mor:	intj|oh pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 propn|SIBNAME~part|s noun|turn .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|NMOD-POSS 5|4|CASE 6|6|ROOT 7|6|PUNCT
+*SIB:	+" when she finished reading the jungle story the librarian reached for the dinosaur book .  [+ bkr] 224690_230790
+%mor:	adv|when pron|she-Prs-Nom-S3 verb|finish-Fin-Ind-Past-S3 verb|read-Ger-S det|the-Def-Art noun|jungle noun|story-Acc det|the-Def-Art noun|librarian verb|reach-Fin-Ind-Past-S3 adp|for det|the-Def-Art noun|dinosaur noun|book .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|10|ADVCL 4|3|XCOMP 5|7|DET 6|7|COMPOUND 7|4|OBJ 8|9|DET 9|10|NSUBJ 10|14|ROOT 11|14|CASE 12|14|DET 13|14|COMPOUND 14|10|OBL 15|10|PUNCT
+*SIB:	+" where did it go and where was George ? 230860_232690
+%mor:	adv|where aux|do-Fin-Ind-Past-S3-irr pron|it-Prs-Nom-S3 verb|go-Inf-S cconj|and adv|where aux|be-Fin-Ind-Past-S3-irr propn|George ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|8|ROOT 5|8|CC 6|4|CONJ 7|8|COP 8|4|CONJ 9|4|PUNCT
+*SIB:	+" George was re George was all ready to take the dinosaur book home and read it with his friend when another book caught his eye .  [+ bkr] 234510_245120
+%mor:	propn|George aux|be-Fin-Ind-Past-S3-irr adp|re propn|George aux|be-Fin-Ind-Past-S3-irr adv|all adj|ready-S1 part|to verb|take-Inf-S det|the-Def-Art noun|dinosaur noun|book-Acc adv|home cconj|and verb|read-Inf-S pron|it-Prs-Acc-S3 adp|with pron|his-Prs-Gen-S3 noun|friend adv|when det|another-Def-Ind noun|book verb|catch-Fin-Ind-Past-S3-irr pron|his-Prs-Gen-S3 noun|eye-Acc .
+%gra:	1|7|NSUBJ 2|7|COP 3|4|CASE 4|7|NSUBJ 5|7|COP 6|7|ADVMOD 7|25|ROOT 8|9|MARK 9|7|XCOMP 10|12|DET 11|12|COMPOUND 12|9|OBJ 13|9|ADVMOD 14|15|CC 15|9|CONJ 16|15|OBJ 17|19|CASE 18|19|NMOD-POSS 19|15|OBL 20|23|ADVMOD 21|22|DET 22|23|NSUBJ 23|15|ADVCL 24|25|NMOD-POSS 25|23|OBJ 26|7|PUNCT
+*SIB:	+" the book was about trucks .  [+ bkr] 246980_248670
+%mor:	det|the-Def-Art noun|book aux|be-Fin-Ind-Past-S3-irr adp|about noun|truck-Plur .
+%gra:	1|2|DET 2|5|NSUBJ 3|5|COP 4|5|CASE 5|5|ROOT 6|5|PUNCT
+*SIB:	+" George wanted to take it home too .  [+ bkr] 248760_251270
+%mor:	propn|George verb|want-Fin-Ind-Past-S3 part|to verb|take-Inf-S pron|it-Prs-Acc-S3 adv|home adv|too .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|MARK 4|2|XCOMP 5|4|OBJ 6|4|ADVMOD 7|4|ADVMOD 8|2|PUNCT
+*MOT:	okay who's the next reader CHILDNAME ? 253470_256380
+%mor:	intj|okay pron|who-Int~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|next-S1 noun|reader propn|CHILDNAME ?
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|DET 5|6|AMOD 6|7|ROOT 7|6|APPOS 8|6|PUNCT
+*MOT:	CHILDNAME . 256610_257490
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you need to choose who will read next . 257680_260560
+%mor:	pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 part|to verb|choose-Inf-S pron|who-Int aux|will-Fin-S verb|read-Inf-S adv|next .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|4|MARK 4|2|XCOMP 5|7|NSUBJ 6|7|AUX 7|4|CCOMP 8|7|ADVMOD 9|2|PUNCT
+*AAC:	CHILDNAME . 260740_263340
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	(o)kay CHILDNAME's turn . 262930_264490
+%mor:	intj|okay propn|CHILDNAME~part|s noun|turn .
+%gra:	1|4|DISCOURSE 2|4|NMOD-POSS 3|2|CASE 4|4|ROOT 5|4|PUNCT
+*CHI:	+" and here was the book about elephants .  [+ bkr] 269140_272830
+%mor:	cconj|and adv|here aux|be-Fin-Ind-Past-S3-irr det|the-Def-Art noun|book adp|about noun|elephant-Plur .
+%gra:	1|2|CC 2|7|ROOT 3|2|COP 4|5|DET 5|2|NSUBJ 6|7|CASE 7|5|NMOD 8|2|PUNCT
+%xDN:	CHI-Speech-ND
+%xPS:	CHI-Speech-S
+*CHI:	+" George loved elephants .  [+ bkr] 273000_275180
+%mor:	propn|George verb|love-Fin-Ind-Past-S3 noun|elephant-Plur-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he added to a his piles .  [+ bkr] 275310_278540
+%mor:	pron|he-Prs-Nom-S3 verb|add-Fin-Ind-Past-S3 adp|to det|a-Ind-Art pron|his-Prs-Gen-S3 noun|pile-Plur .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|6|CASE 4|6|DET 5|6|NMOD-POSS 6|2|OBL 7|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" George found so many good books .  [+ bkr] 278690_280950
+%mor:	propn|George verb|find-Fin-Ind-Past-S3-irr adv|so adj|many-S1 adj|good-S1 noun|book-Plur-Acc .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|ADVMOD 4|6|AMOD 5|6|AMOD 6|2|OBJ 7|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he saw uh more uh could carry .  [+ bkr] 281060_285530
+%mor:	pron|he-Prs-Nom-S3 verb|see-Fin-Ind-Past-S3-irr intj|uh adv|more intj|uh aux|could-Fin-S verb|carry-Inf-S .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|2|DISCOURSE 4|7|ADVMOD 5|7|DISCOURSE 6|7|AUX 7|2|PARATAXIS 8|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" he wuun ↫ag↫against a shelf to rest .  [+ bkr] 285600_291900
+%mor:	pron|he-Prs-Nom-S3 verb|wuun-Fin-Ind-Pres-S3 adp|against det|a-Ind-Art noun|shelf part|to verb|rest-Inf-S .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|5|CASE 4|5|DET 5|2|OBL 6|7|MARK 7|2|ADVCL 8|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" squeak went the shelf .  [+ bkr] 291970_294310
+%mor:	noun|squeak verb|go-Fin-Ind-Past-S3-irr det|the-Def-Art noun|shelf-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" sh . 294390_294980
+%mor:	noun|sh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	said a man +". 295080_296210
+%mor:	verb|say-Fin-Ind-Past-S3-irr det|a-Ind-Art noun|man-Acc +".
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" squeak xxx again .  [+ bkr] 296290_299010
+%mor:	verb|squeak-Fin-Imp-S adv|again .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" and it moved .  [+ bkr] 299080_300380
+%mor:	cconj|and pron|it-Prs-Nom-S3 verb|move-Fin-Ind-Past-S3 .
+%gra:	1|3|CC 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" xxx after all .  [+ bkr] 300440_303620
+%mor:	adp|after det|all-Def-Tot .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" George had found a special cart for carry books .  [+ bkr] 304990_310560
+%mor:	propn|George aux|have-Fin-Ind-Past-S3-irr verb|find-Part-Past-S-irr det|a-Ind-Art adj|special-S1 noun|cart-Acc adp|for verb|carry-Inf-S noun|book-Plur .
+%gra:	1|3|NSUBJ 2|3|AUX 3|9|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|9|CASE 8|9|AMOD 9|3|OBL 10|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	+" xxx now George could carry all the books he wanted .  [+ bkr] 312590_319260
+%mor:	adv|now propn|George aux|could-Fin-S verb|carry-Inf-S det|all-Def-Tot det|the-Def-Art noun|book-Plur-Acc pron|he-Prs-Nom-S3 verb|want-Fin-Ind-Past-S3 .
+%gra:	1|4|ADVMOD 2|4|NSUBJ 3|4|AUX 4|9|ROOT 5|7|DET-PREDET 6|7|DET 7|4|OBJ 8|9|NSUBJ 9|7|ACL-RELCL 10|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	(o)kay that's good . 321080_322520
+%mor:	intj|okay pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|good-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	so we're done reading books . 322580_324850
+%mor:	adv|so pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 verb|do-Part-Past-S-irr verb|read-Part-Pres-S noun|book-Plur-Acc .
+%gra:	1|4|ADVMOD 2|4|NSUBJ-PASS 3|4|AUX-PASS 4|6|ROOT 5|4|XCOMP 6|5|OBJ 7|4|PUNCT
+*MOT:	what do you want to do next ? 325490_327140
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|do-Inf-S adv|next ?
+%gra:	1|6|OBJ 2|4|AUX 3|4|NSUBJ 4|7|ROOT 5|6|MARK 6|4|XCOMP 7|6|ADVMOD 8|4|PUNCT
+*MOT:	we're done reading books . 328020_329420
+%mor:	pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 verb|do-Part-Past-S-irr verb|read-Part-Pres-S noun|book-Plur-Acc .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|5|ROOT 4|3|XCOMP 5|4|OBJ 6|3|PUNCT
+*SIB:	don't rip it apart . 333240_334960
+%mor:	aux|do-Fin-Imp-S~part|not verb|rip-Fin-Imp-S pron|it-Prs-Acc-S3 adv|apart .
+%gra:	1|3|AUX 2|3|ADVMOD 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+*AAC:	SIBNAME . 334570_339570
+%mor:	propn|SIBNAME .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	oh you want to do , SIBNAME to read ? 335960_339740
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|do-Inf-S cm|cm intj|sibname part|to verb|read-Inf-S ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|9|ROOT 4|5|MARK 5|3|XCOMP 6|7|PUNCT 7|3|DISCOURSE 8|9|MARK 9|5|ADVCL 10|3|PUNCT
+*MOT:	okay . 339880_340550
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

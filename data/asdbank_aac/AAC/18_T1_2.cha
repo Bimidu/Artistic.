@@ -1,0 +1,182 @@
+@UTF8
+@PID:	11312/a-00082337-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|7;00.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	18_T1_2, video, missing
+*COD:	U . 1_16110
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 16110_235985
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	gonna try book xxx . 16150_18740
+%mor:	adv|gonna verb|try-Fin-Imp-S noun|book-Acc .
+%gra:	1|2|ADVMOD 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	&=hums . 16390_17410
+*CHI:	&=hums . 19100_21680
+*CHI:	&=hums . 22580_24320
+*MOT:	what are you reading CHILDNAME ? 22840_24160
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|read-Part-Pres-S propn|CHILDNAME-Acc ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	CHILDNAME what are you reading ? 24380_25710
+%mor:	intj|childname pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|read-Part-Pres-S ?
+%gra:	1|5|DISCOURSE 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*MOT:	what are you reading ? 27830_28970
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|read-Part-Pres-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	&=hums . 31510_32280
+*MOT:	what are you reading ? 33980_35320
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|read-Part-Pres-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	&=hums . 34770_35710
+*MOT:	www . 39650_44150
+%xPCO:	parent speaking to researcher .
+*MOT:	I think you have the xxx . 47160_50980
+%mor:	pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Pres-S1 pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 det|the-Def-Art .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|NSUBJ 4|2|CCOMP 5|4|OBJ 6|2|PUNCT
+*MOT:	here you go . 51420_52280
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|1|PUNCT
+*MOT:	oh I should've +... 52380_54100
+%mor:	intj|oh pron|I-Prs-Nom-S1 aux|should-Fin-S~aux|have-Inf-S +...
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|4|ROOT 5|4|PUNCT
+*MOT:	do you like the pizza CHILDNAME ? 57660_59530
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S det|the-Def-Art noun|pizza propn|CHILDNAME-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|6|DET 5|6|COMPOUND 6|3|OBJ 7|3|PUNCT
+*CHI:	&=groans . 69260_72850
+*CHI:	&=hums . 73920_75260
+*MOT:	xxx ? 76310_77990
+*MOT:	you want anything else CHILDNAME ? 82640_84660
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|anything-Ind-S1 adj|else-S1 noun|childname-Acc ?
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|AMOD 5|2|OBJ 6|2|PUNCT
+*MOT:	you want more of the pizza ? 84780_86200
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 adp|of det|the-Def-Art noun|pizza ?
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|OBJ 4|6|CASE 5|6|DET 6|3|OBL 7|2|PUNCT
+*CHI:	&=hums . 85920_86720
+*MOT:	hey do you want more ? 88150_89840
+%mor:	intj|hey aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|more-Cmp-S1 ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	&=hums . 89540_90740
+*MOT:	you want more ? 90560_91620
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	xxx he's like obsessed with it &=laughs . 93900_100680
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 intj|like adj|obsessed-S1 adp|with pron|it-Prs-Acc-S3 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DISCOURSE 4|6|ROOT 5|6|CASE 6|4|OBL 7|4|PUNCT
+*MOT:	finish xxx to let you finish that , that slice ? 105040_109380
+%mor:	verb|finish-Fin-Imp-S part|to verb|let-Inf-S pron|you-Prs-Acc-S2 verb|finish-Inf-S pron|that-Dem cm|cm det|that-Def-Dem-Sing noun|slice-Acc ?
+%gra:	1|9|ROOT 2|3|MARK 3|1|XCOMP 4|3|OBJ 5|3|XCOMP 6|5|OBJ 7|9|PUNCT 8|9|DET 9|5|OBJ 10|1|PUNCT
+*MOT:	yum  [/] yum  [/] yum  [/] yum yummy . 115380_117860
+%mor:	intj|yum adj|yummy-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	yummy yum yum yummy . 118350_120180
+%mor:	adj|yummy-S1 noun|yum noun|yum adj|yummy-S1 .
+%gra:	1|2|AMOD 2|4|ROOT 3|4|COMPOUND 4|2|PARATAXIS 5|2|PUNCT
+*MOT:	<what's your favorite>  [/] what's your favorite ? 120290_123470
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 adj|favorite-S1 ?
+%gra:	1|4|ROOT 2|4|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*CHI:	&=hums . 124780_125820
+*AAC:	BRIOCHE . 125820_126730
+%mor:	noun|brioche .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yeah brioche is right here . 126860_128650
+%mor:	intj|yeah noun|brioche aux|be-Fin-Ind-Pres-S3 adv|right adv|here .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*AAC:	xxx . 128350_129160
+%xPS:	CHI-AAC-S
+*MOT:	what else do you like ? 129100_130570
+%mor:	pron|what-Int-S1 adv|else aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S ?
+%gra:	1|5|OBJ 2|1|ADVMOD 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*MOT:	&=hums . 132330_133360
+*AAC:	FRENCH FRY . 133080_133760
+%mor:	adj|French-S1 noun|fry .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%xPS:	CHI-AAC-S
+*AAC:	xxx . 134020_134950
+%xPS:	CHI-AAC-S
+*AAC:	BRIOCHE . 135170_135870
+%mor:	noun|brioche .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*MOT:	you want the brioche ? 135880_137550
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|brioche-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	ding  [/] ding  [/] ding . 138660_140620
+%mor:	noun|ding-Ger .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	brioche . 141310_142020
+%mor:	noun|brioche .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 142270_143320
+%xgco:	Child pushes dad's hand away .
+%xIS:	CHI-Gesture-S
+*MOT:	no ? 144050_144600
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 144860_145770
+%xgco:	Child pushes dad's hand away .
+%xIS:	CHI-Gesture-S
+*MOT:	no ? 145450_145960
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 145450_145960
+*MOT:	no . 147660_148260
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	so not brioche . 150000_152090
+%mor:	adv|so part|not noun|brioche .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|3|ROOT 4|3|PUNCT
+*AAC:	BRIOCHE . 152760_153650
+%mor:	noun|brioche .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	I offered you brioche , that's the , this is the +... 154010_158130
+%mor:	pron|I-Prs-Nom-S1 verb|offer-Fin-Ind-Past-S1 pron|you-Prs-Gen-S2 noun|brioche-Acc cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art +...
+%gra:	1|2|NSUBJ 2|12|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|8|PUNCT 6|8|NSUBJ 7|8|COP 8|2|PARATAXIS 9|8|PUNCT 10|12|NSUBJ 11|12|COP 12|2|PARATAXIS 13|2|PUNCT
+*AAC:	xxx . 154730_155510
+%xPS:	CHI-AAC-S
+*CHI:	&=hums . 156710_158060
+*MOT:	brioche CHILDNAME . 158170_158900
+%mor:	noun|brioche noun|childname .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	did you you want the pizza ? 162580_164630
+%mor:	aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|the-Def-Art noun|pizza-Acc ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*MOT:	did you want the pizza CHILDNAME ? 166240_168480
+%mor:	aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 verb|want-Inf-S det|the-Def-Art noun|pizza noun|childname-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|6|DET 5|6|COMPOUND 6|3|OBJ 7|3|PUNCT
+*MOT:	you're almost finished you're gonna have to ask for more if you want more . 175880_179640
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|almost verb|finish-Part-Past-S pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 part|go verb|have-Inf-S part|to verb|ask-Inf-S adp|for adj|more-Cmp-S1 sconj|if pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 .
+%gra:	1|4|NSUBJ-PASS 2|4|AUX-PASS 3|4|ADVMOD 4|16|ROOT 5|8|NSUBJ 6|8|AUX 7|8|ADVMOD 8|4|CCOMP 9|10|MARK 10|8|XCOMP 11|12|CASE 12|10|OBL 13|15|MARK 14|15|NSUBJ 15|10|ADVCL 16|15|OBJ 17|4|PUNCT
+*MOT:	you want more ? 180360_181450
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	you want more CHILDNAME , more pizza ? 184370_186160
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 noun|childname-Acc cm|cm adj|more-Cmp-S1 noun|pizza ?
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|AMOD 4|2|OBJ 5|7|PUNCT 6|7|AMOD 7|4|APPOS 8|2|PUNCT
+*CHI:	&=hums . 200140_202660
+*MOT:	do you want water ? 209020_210670
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|water-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	water . 212860_213620
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	thank+you . 225120_226720
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 226920_227860
+*CHI:	&=hums . 227370_228570
+*MOT:	oh &=laughs . 230680_232500
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 235985_332320
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

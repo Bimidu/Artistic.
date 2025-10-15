@@ -1,0 +1,282 @@
+@UTF8
+@PID:	11312/a-00082323-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|5;04.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	15_T2, video
+*COD:	C . 1_12020
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh , there you go , you get a cracker . 1040_4180
+%mor:	intj|oh cm|cm adv|there pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 cm|cm pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Pres-S2 det|a-Ind-Art noun|cracker-Acc .
+%gra:	1|8|DISCOURSE 2|1|PUNCT 3|8|ADVMOD 4|5|NSUBJ 5|8|PARATAXIS 6|3|PUNCT 7|8|NSUBJ 8|10|ROOT 9|10|DET 10|8|OBJ 11|8|PUNCT
+*MOT:	yeah you get a cracker . 8490_10530
+%mor:	intj|yeah pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Pres-S2 det|a-Ind-Art noun|cracker-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*COD:	U . 12020_32640
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 32640_347000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	want to eat . 32650_33390
+%mor:	verb|want-Fin-Ind-Pres-S part|to verb|eat-Inf-S .
+%gra:	1|3|ROOT 2|3|MARK 3|1|XCOMP 4|1|PUNCT
+*MOT:	please sit down . 37350_38670
+%mor:	intj|please verb|sit-Fin-Imp-S adp|down .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|COMPOUND-PRT 4|2|PUNCT
+*MOT:	down . 39870_41410
+%mor:	adv|down .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	sit down . 43010_44470
+%mor:	verb|sit-Fin-Imp-S adp|down .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*MOT:	good+job . 44840_45920
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 49310_50510
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you don't have any bumps , you're okay . 50700_53520
+%mor:	pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|have-Inf-S det|any-Def-Ind noun|bump-Plur-Acc cm|cm pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|okay-S1 .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|10|ROOT 5|6|DET 6|4|OBJ 7|10|PUNCT 8|10|NSUBJ 9|10|COP 10|4|PARATAXIS 11|4|PUNCT
+*MOT:	you're just fine . 54480_55830
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|just adj|fine-S1 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	CHILDNAME . 58720_59930
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you have a cracker in your bowl . 60780_64500
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 det|a-Ind-Art noun|cracker-Acc adp|in pron|your-Prs-Gen-S2 noun|bowl .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|DET 4|2|OBJ 5|7|CASE 6|7|NMOD-POSS 7|4|NMOD 8|2|PUNCT
+*MOT:	and some juice to drink . 65410_67910
+%mor:	cconj|and det|some-Def-Ind noun|juice part|to verb|drink-Inf-S .
+%gra:	1|3|CC 2|3|DET 3|5|ROOT 4|5|MARK 5|3|ACL 6|3|PUNCT
+*CHI:	&=moving . 72340_74590
+%xgco:	Child grabs moms hand and puts it to his head so that she can scratch it .
+%xIS:	CHI-Gesture-S
+*MOT:	which one ? 72460_73550
+%mor:	det|which-Def-Int noun|one ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	oh okay . 73790_75070
+%mor:	intj|oh intj|okay .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	wuh .
+%mor:	intj|wuh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah there's no bumps there . 75150_77060
+%mor:	intj|yeah pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|no-Def-Neg noun|bump-Plur adv|there .
+%gra:	1|3|DISCOURSE 2|3|EXPL 3|6|ROOT 4|5|DET 5|3|NSUBJ 6|3|ADVMOD 7|3|PUNCT
+*MOT:	there's a little scratch , that's all it is , there's no bumps . 77670_82640
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|little-S1 noun|scratch cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|all-Def-Tot pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Pres-S3 cm|cm pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|no-Def-Neg noun|bump-Plur .
+%gra:	1|2|EXPL 2|16|ROOT 3|5|DET 4|5|AMOD 5|2|NSUBJ 6|9|PUNCT 7|9|NSUBJ 8|9|COP 9|2|PARATAXIS 10|11|NSUBJ 11|9|ACL-RELCL 12|14|PUNCT 13|14|EXPL 14|2|PARATAXIS 15|16|DET 16|14|NSUBJ 17|2|PUNCT
+*CHI:	&=hums a bump . 78190_81030
+%mor:	det|a-Ind-Art noun|bump .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no bumps . 84200_85540
+%mor:	det|no-Def-Neg noun|bump-Plur .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	are you going to drink the juice ? 89780_93320
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|go-Part-Pres-S part|to verb|drink-Inf-S det|the-Def-Art noun|juice-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|3|PUNCT
+*MOT:	drink . 94250_94820
+%mor:	verb|drink-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	we also have a cracker . 97310_100620
+%mor:	pron|we-Prs-Nom-P1 adv|also verb|have-Fin-Ind-Pres-P1 det|a-Ind-Art noun|cracker-Acc .
+%gra:	1|3|NSUBJ 2|3|ADVMOD 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*CHI:	&=reaching . 102050_104050
+%xIS:	CHI-Gesture-S
+*MOT:	oh  [/] oh can you give me the cracker thing again ? 103800_106910
+%mor:	intj|oh aux|can-Fin-S pron|you-Prs-Nom-S2 verb|give-Inf-S pron|I-Prs-Acc-S1 det|the-Def-Art noun|cracker noun|thing-Acc-Ger adv|again ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|NSUBJ 4|9|ROOT 5|4|IOBJ 6|8|DET 7|8|COMPOUND 8|4|OBJ 9|4|ADVMOD 10|4|PUNCT
+*CHI:	he . 106980_108090
+%mor:	pron|he-Prs-Nom-S3 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	give that one to me . 108790_110200
+%mor:	verb|give-Fin-Imp-S det|that-Def-Dem-Sing noun|one-Acc adp|to pron|I-Prs-Acc-S1 .
+%gra:	1|5|ROOT 2|3|DET 3|1|OBJ 4|5|CASE 5|1|OBL 6|1|PUNCT
+*AAC:	BEDROOM . 109360_111120
+%mor:	noun|bedroom .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	yeah that's bedroom , that's not the right one . 110440_113250
+%mor:	intj|yeah pron|that-Dem~aux|be-Fin-Ind-Pres-S3 noun|bedroom cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 part|not det|the-Def-Art adj|right-S1 noun|one .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|11|ROOT 5|11|PUNCT 6|11|NSUBJ 7|11|COP 8|11|ADVMOD 9|11|DET 10|11|AMOD 11|4|PARATAXIS 12|4|PUNCT
+*MOT:	this one , woop  [/] woop . 113750_115870
+%mor:	det|this-Def-Dem-Sing noun|one cm|cm noun|woop .
+%gra:	1|2|DET 2|4|ROOT 3|4|PUNCT 4|2|APPOS 5|2|PUNCT
+*CHI:	&=reaching . 113860_115120
+%xIS:	CHI-Gesture-S
+*MOT:	can you give me cracker , look . 115950_117900
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|give-Inf-S pron|I-Prs-Acc-S1 noun|cracker-Acc cm|cm verb|look-Inf-S .
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|IOBJ 5|3|OBJ 6|7|PUNCT 7|3|PARATAXIS 8|3|PUNCT
+*MOT:	cracker . 118670_119660
+%mor:	noun|cracker .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	this one , right here . 119710_121260
+%mor:	det|this-Def-Dem-Sing noun|one cm|cm adv|right adv|here .
+%gra:	1|2|DET 2|5|ROOT 3|5|PUNCT 4|5|ADVMOD 5|2|PARATAXIS 6|2|PUNCT
+*CHI:	&=reaching . 120940_122550
+%xIS:	CHI-Gesture-S
+*CHI:	no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	look . 123300_124010
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	cracker , take it off give it to Mommy . 124600_128510
+%mor:	noun|cracker cm|cm verb|take-Fin-Imp-S2 pron|it-Prs-Acc-S3 adp|off verb|give-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to propn|Mommy .
+%gra:	1|9|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|OBJ 5|3|COMPOUND-PRT 6|3|XCOMP 7|6|OBJ 8|9|CASE 9|6|OBL 10|1|PUNCT
+*AAC:	CRACKER . 127140_129190
+%mor:	noun|cracker .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	good+job and now you get the other one . 128880_131890
+%mor:	noun|goodjob cconj|and adv|now pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Pres-S2 det|the-Def-Art adj|other-S1 noun|one-Acc .
+%gra:	1|8|ROOT 2|5|CC 3|5|ADVMOD 4|5|NSUBJ 5|1|CONJ 6|8|DET 7|8|AMOD 8|5|OBJ 9|1|PUNCT
+*CHI:	&=hums . 129090_129880
+*MOT:	yeah you knew that that one was broken in half , didn't you ? 132730_136150
+%mor:	intj|yeah pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Past-S2-irr sconj|that sconj|that noun|one aux|be-Fin-Ind-Past-S3-irr verb|break-Part-Past-S-irr adp|in noun|half cm|cm aux|do-Fin-Ind-Past-S3-irr~part|not pron|you-Prs-Nom-S2 ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|14|ROOT 4|8|MARK 5|8|MARK 6|8|NSUBJ-PASS 7|8|AUX-PASS 8|3|CCOMP 9|10|CASE 10|8|OBL 11|12|PUNCT 12|3|PARATAXIS 13|12|ADVMOD 14|12|NSUBJ 15|3|PUNCT
+*MOT:	you wanted the whole thing . 137290_138780
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Past-S2 det|the-Def-Art adj|whole-S1 noun|thing-Acc-Ger .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|DET 4|5|AMOD 5|2|OBJ 6|2|PUNCT
+*MOT:	okay . 147980_149200
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh we could put a cracker on Isabella , look at that . 149380_154230
+%mor:	intj|oh pron|we-Prs-Nom-P1 aux|could-Fin-S verb|put-Inf-S det|a-Ind-Art noun|cracker-Acc adp|on propn|Isabella cm|cm verb|look-Inf-S adp|at pron|that-Dem .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|12|ROOT 5|6|DET 6|4|OBJ 7|8|CASE 8|4|OBL 9|10|PUNCT 10|4|PARATAXIS 11|12|CASE 12|10|OBL 13|4|PUNCT
+*MOT:	crackers . 154360_155460
+%mor:	noun|cracker-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look at that , we put crackers on the train . 155740_158690
+%mor:	verb|look-Fin-Imp-S adp|at pron|that-Dem cm|cm pron|we-Prs-Nom-P1 verb|put-Fin-Ind-Past-P1-irr noun|cracker-Plur-Acc adp|on det|the-Def-Art noun|train .
+%gra:	1|10|ROOT 2|3|CASE 3|1|OBL 4|6|PUNCT 5|6|NSUBJ 6|1|PARATAXIS 7|6|OBJ 8|10|CASE 9|10|DET 10|6|OBL 11|1|PUNCT
+*MOT:	that's funny , you don't like that like that ? 159400_162160
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|funny-S1 cm|cm pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|like-Inf-S pron|that-Dem adp|like pron|that-Dem ?
+%gra:	1|3|NSUBJ 2|3|COP 3|11|ROOT 4|8|PUNCT 5|8|NSUBJ 6|8|AUX 7|8|ADVMOD 8|3|PARATAXIS 9|8|OBJ 10|11|CASE 11|8|OBL 12|3|PUNCT
+*MOT:	okay . 162210_163090
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs . 164520_166190
+*CHI:	&=hums . 170930_171830
+*CHI:	ah . 184700_186010
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	uh . 187960_188920
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ah . 190160_191510
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	are you eating a cracker ? 191700_194880
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|eat-Part-Pres-S det|a-Ind-Art noun|cracker-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	oh you're having a drink of juice . 209790_212840
+%mor:	intj|oh pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|have-Part-Pres-S det|a-Ind-Art noun|drink-Acc adp|of noun|juice .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|8|ROOT 5|6|DET 6|4|OBJ 7|8|CASE 8|6|NMOD 9|4|PUNCT
+*CHI:	&=breathes . 222680_224320
+*MOT:	oh well , that's Isabella_The_Truck . 230160_233310
+%mor:	intj|oh intj|well cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 propn|IsabellaTheTruck .
+%gra:	1|6|DISCOURSE 2|6|DISCOURSE 3|2|PUNCT 4|6|NSUBJ 5|6|COP 6|6|ROOT 7|6|PUNCT
+*MOT:	can Isabella go +... 234380_236370
+%mor:	aux|can-Fin-S propn|Isabella verb|go-Inf-S +...
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	ready set +... 237800_241150
+%mor:	adj|ready-S1 noun|set +...
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	&=breathes . 241800_242970
+*MOT:	go . 243640_245100
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	wow . 245620_246550
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ready set go . 247390_249300
+%mor:	adj|ready-S1 noun|set verb|go-Fin-Imp-S .
+%gra:	1|2|AMOD 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*MOT:	go , good+job you said go . 251310_254130
+%mor:	verb|go-Fin-Imp-S cm|cm noun|goodjob pron|you-Prs-Nom-S2 verb|say-Fin-Ind-Past-S2-irr verb|go-Inf-S .
+%gra:	1|6|ROOT 2|3|PUNCT 3|1|VOCATIVE 4|5|NSUBJ 5|1|PARATAXIS 6|5|CCOMP 7|1|PUNCT
+*MOT:	you see Isabella right there on the screen , see look . 260260_263770
+%mor:	pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Pres-S2 propn|Isabella-Acc adv|right adv|there adp|on det|the-Def-Art noun|screen cm|cm verb|see-Fin-Imp-S noun|look-Acc .
+%gra:	1|2|NSUBJ 2|11|ROOT 3|2|OBJ 4|5|ADVMOD 5|2|ADVMOD 6|8|CASE 7|8|DET 8|2|OBL 9|10|PUNCT 10|2|PARATAXIS 11|10|OBJ 12|2|PUNCT
+*CHI:	huh . 264390_265390
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	that's pretty cool . 264830_266270
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adv|pretty adj|cool-S1 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	you want Mommy to put it on ? 266890_270100
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 propn|Mommy-Acc part|to verb|put-Inf-S pron|it-Prs-Acc-S3 adp|on ?
+%gra:	1|2|NSUBJ 2|7|ROOT 3|2|OBJ 4|5|MARK 5|2|XCOMP 6|5|OBJ 7|5|COMPOUND-PRT 8|2|PUNCT
+*MOT:	oh , it came off , you want it on ? 270820_275380
+%mor:	intj|oh cm|cm pron|it-Prs-Nom-S3 verb|come-Fin-Ind-Past-S3-irr adp|off cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 adp|on ?
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|NSUBJ 4|10|ROOT 5|4|COMPOUND-PRT 6|8|PUNCT 7|8|NSUBJ 8|4|PARATAXIS 9|8|OBJ 10|8|COMPOUND-PRT 11|4|PUNCT
+*MOT:	say yes . 275790_276900
+%mor:	verb|say-Fin-Imp-S intj|yes .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	say . 280450_281530
+%mor:	verb|say-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	YES . 280540_282940
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yes Mommy I want you to help me thank+you . 282510_285810
+%mor:	intj|yes propn|Mommy pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 part|to verb|help-Inf-S pron|I-Prs-Acc-S1 intj|thankyou .
+%gra:	1|4|DISCOURSE 2|4|VOCATIVE 3|4|NSUBJ 4|9|ROOT 5|4|OBJ 6|7|MARK 7|4|XCOMP 8|7|OBJ 9|7|DISCOURSE 10|4|PUNCT
+*MOT:	want you to help me . 286000_287810
+%mor:	verb|want-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 part|to verb|help-Inf-S pron|I-Prs-Acc-S1 .
+%gra:	1|5|ROOT 2|1|OBJ 3|4|MARK 4|1|XCOMP 5|4|OBJ 6|1|PUNCT
+*MOT:	there we go . 291080_292460
+%mor:	pron|there-Int-S1 pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	look , we have the go , look . 302770_305350
+%mor:	verb|look-Fin-Imp-S cm|cm pron|we-Prs-Nom-P1 verb|have-Fin-Ind-Pres-P1 det|the-Def-Art noun|go-Acc cm|cm verb|look-Fin-S .
+%gra:	1|8|ROOT 2|4|PUNCT 3|4|NSUBJ 4|1|PARATAXIS 5|6|DET 6|4|OBJ 7|8|PUNCT 8|4|PARATAXIS 9|1|PUNCT
+*MOT:	let's do this . 305970_307130
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S pron|this-Dem-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|1|PUNCT
+*MOT:	ready set , can you get go ? 307760_311540
+%mor:	adj|ready-S1 noun|set cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|get-Inf-S verb|go-Inf-S ?
+%gra:	1|2|AMOD 2|7|ROOT 3|6|PUNCT 4|6|AUX 5|6|NSUBJ 6|2|PARATAXIS 7|6|XCOMP 8|2|PUNCT
+*CHI:	&=reaching . 309510_311320
+%xIS:	CHI-Gesture-S
+*AAC:	GO . 314480_316650
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	we say go , good+job . 315980_321050
+%mor:	pron|we-Prs-Nom-P1 verb|say-Fin-Ind-Pres-P1 verb|go-Fin-S cm|cm noun|goodjob .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|XCOMP 4|5|PUNCT 5|3|PARATAXIS 6|2|PUNCT
+*MOT:	are you itchy ? 328600_329960
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|itchy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	okay . 330400_331740
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	www . 332410_333940
+%xPCO:	parent speaks to someone off camera .
+*MOT:	www . 339990_343910
+%xPCO:	parent speaks to someone off camera .
+@End

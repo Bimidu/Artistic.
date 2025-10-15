@@ -1,0 +1,458 @@
+@UTF8
+@PID:	11312/a-00082270-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, CHI Target_Child, MOT Mother, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|CHI|5;05.|female|||Target_Child|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	03_T2, video, missing
+*COD:	C . 10_41000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	uh . 680_1410
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	train . 1380_2300
+%mor:	noun|train .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	not bus it's a train . 2700_4720
+%mor:	part|not noun|bus pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|train .
+%gra:	1|2|ADVMOD 2|6|ROOT 3|6|NSUBJ 4|6|COP 5|6|DET 6|2|PARATAXIS 7|2|PUNCT
+*AAC:	TRAIN . 4930_6150
+%mor:	noun|train .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	bus . 4990_6100
+%mor:	noun|bus .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	choochoo@o . 5710_7000
+%mor:	x|choochoo .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	choochoo@o  [/] choochoo@o . 6760_11200
+%mor:	x|choochoo .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	you see , hey don't &=breathes CHILDNAME don't go . 13490_18230
+%mor:	pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Pres-S2 cm|cm intj|hey aux|do-Fin-Imp-S~part|not adv|childname aux|do-Fin-Imp-S~part|not verb|go-Fin-Imp-S .
+%gra:	1|2|NSUBJ 2|10|ROOT 3|10|PUNCT 4|10|DISCOURSE 5|10|AUX 6|10|ADVMOD 7|10|ADVMOD 8|10|AUX 9|10|ADVMOD 10|2|PARATAXIS 11|2|PUNCT
+*MOT:	open it for you . 18860_20830
+%mor:	verb|open-Fin-Imp-S pron|it-Prs-Acc-S3 adp|for pron|you-Prs-Acc-S2 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|PUNCT
+*MOT:	no xxx no T_V . 28110_31100
+%mor:	det|no-Def-Neg det|no-Def-Neg noun|TV .
+%gra:	1|3|DET 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	&=laughs . 30630_31560
+*MOT:	now ho ho xxx . 31430_34970
+%mor:	adv|now intj|ho intj|ho .
+%gra:	1|2|ADVMOD 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*COD:	U . 41010_57000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 57000_359240
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want put it on your ear ? 58930_64650
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 verb|put-Inf-S pron|it-Prs-Acc-S3 adp|on pron|your-Prs-Gen-S2 noun|ear ?
+%gra:	1|2|NSUBJ 2|7|ROOT 3|2|XCOMP 4|3|OBJ 5|7|CASE 6|7|NMOD-POSS 7|3|OBL 8|2|PUNCT
+*CHI:	&=pointing . 61310_61770
+%xgco:	Target child points at blank square on AAC board
+%xIS:	CHI-Gesture-S
+*CHI:	ear . 64500_65220
+%mor:	noun|ear .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	ear give me the ear . 65710_67630
+%mor:	noun|ear verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 det|the-Def-Art noun|ear-Acc .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|IOBJ 4|5|DET 5|2|OBJ 6|2|PUNCT
+*MOT:	ear . 67940_68700
+%mor:	noun|ear .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	eyes . 68500_69330
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	eyes ? 69790_70570
+%mor:	noun|eye-Plur ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	EYES . 69980_71580
+%mor:	noun|eyes-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	on the eyes ? 70620_71600
+%mor:	adp|on det|the-Def-Art noun|eye-Plur ?
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	really this xxx ? 71630_73640
+%mor:	adv|really pron|this-Dem-S1 ?
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	okay . 74060_75830
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	the eyes . 75920_77080
+%mor:	det|the-Def-Art noun|eye-Plur .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	or on the hand . 83490_85220
+%mor:	cconj|or adp|on det|the-Def-Art noun|hand .
+%gra:	1|4|CC 2|4|CASE 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	let's see . 85780_86890
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+*MOT:	xxx . 94900_96150
+*MOT:	hand , yes hand . 97220_99130
+%mor:	noun|hand cm|cm intj|yes noun|hand .
+%gra:	1|4|ROOT 2|4|PUNCT 3|4|DISCOURSE 4|1|APPOS 5|1|PUNCT
+*CHI:	bow . 99020_99830
+%mor:	noun|bow .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	<give me hand>  [/] give me hand . 99680_102160
+%mor:	verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 noun|hand-Acc .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	not this , this one . 102470_104040
+%mor:	part|not pron|this-Dem-S1 cm|cm det|this-Def-Dem-Sing noun|one .
+%gra:	1|2|ADVMOD 2|5|ROOT 3|5|PUNCT 4|5|DET 5|2|PARATAXIS 6|2|PUNCT
+*AAC:	HAND . 103900_105070
+%mor:	noun|hand .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*CHI:	haw . 104810_106050
+%mor:	intj|haw .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating hand .
+*MOT:	hand . 105260_106250
+%mor:	noun|hand .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx it's on your hand . 107080_109490
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|on pron|your-Prs-Gen-S2 noun|hand .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|CASE 4|5|NMOD-POSS 5|5|ROOT 6|5|PUNCT
+*MOT:	xxx . 113450_114960
+*CHI:	ha . 114800_116090
+%mor:	intj|ha .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	aha . 116200_117080
+%mor:	intj|aha .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 116920_121580
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	another one . 118160_119540
+%mor:	det|another-Def-Ind noun|one .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 122690_123540
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	&=laughs eyes . 123970_126810
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	show me the eyes . 128050_130050
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 det|the-Def-Art noun|eye-Plur-Acc .
+%gra:	1|4|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|1|PUNCT
+*MOT:	yes the eyes . 130340_132380
+%mor:	intj|yes det|the-Def-Art noun|eye-Plur .
+%gra:	1|3|DISCOURSE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*AAC:	EYES . 130880_132300
+%mor:	noun|eyes-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*CHI:	ee . 131580_132520
+%mor:	propn|ee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	hello . 132710_133620
+%mor:	intj|hello .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eyes . 135290_136220
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	oh  [/] oh . 137350_138880
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	ho ho . 137810_138580
+%mor:	intj|ho intj|ho .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	a star . 141400_142570
+%mor:	det|a-Ind-Art noun|star .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	da . 143130_143920
+%mor:	propn|da .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes a star . 144080_145950
+%mor:	intj|yes det|a-Ind-Art noun|star .
+%gra:	1|3|DISCOURSE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	<on your face>  [/] on your face , your face . 146790_151190
+%mor:	adp|on pron|your-Prs-Gen-S2 noun|face cm|cm pron|your-Prs-Gen-S2 noun|face .
+%gra:	1|3|CASE 2|3|NMOD-POSS 3|6|ROOT 4|6|PUNCT 5|6|NMOD-POSS 6|3|APPOS 7|3|PUNCT
+*CHI:	&=hums . 151270_154390
+*MOT:	&=hums . 152450_154470
+*CHI:	ah . 155030_156100
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no ah you can't eat it . 157660_160610
+%mor:	intj|no intj|ah pron|you-Prs-Nom-S2 aux|can-Fin-S~part|not verb|eat-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|6|DISCOURSE 2|6|DISCOURSE 3|6|NSUBJ 4|6|AUX 5|6|ADVMOD 6|7|ROOT 7|6|OBJ 8|6|PUNCT
+*MOT:	&=laughs . 160790_161830
+*MOT:	okay . 162740_163910
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME . 168110_169000
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	one more ? 170610_171570
+%mor:	num|one adj|more-Cmp-S1 ?
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	more . 171740_172530
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	more okay more . 172410_174540
+%mor:	adv|more adj|okay-S1 adj|more-Cmp-S1 .
+%gra:	1|2|ADVMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	give me more  [/] more . 174820_177570
+%mor:	verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 adj|more-Cmp-S1 .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*CHI:	&=breathes . 175680_176220
+*CHI:	&=hums . 177430_178330
+*MOT:	the more that's the toys . 178980_181530
+%mor:	det|the-Def-Art adj|more-Cmp-S1 pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|toy-Plur .
+%gra:	1|2|DET 2|6|NSUBJ 3|6|NSUBJ 4|6|COP 5|6|DET 6|6|ROOT 7|6|PUNCT
+*AAC:	X . 179550_180530
+%mor:	noun|x .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+%xSSE:	SSE
+*MOT:	the more . 182300_183190
+%mor:	det|the-Def-Art adj|more-Cmp-S1 .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	bae nee . 183370_184490
+%mor:	propn|bae propn|nee .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	here  [/] here . 184520_186120
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	the more . 187680_188550
+%mor:	det|the-Def-Art adj|more-Cmp-S1 .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*AAC:	MORE . 190270_192020
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	okay <good girl>  [/] good girl . 190830_194090
+%mor:	intj|okay adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	bae uh . 194130_196200
+%mor:	intj|bae intj|uh .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	more stickers . 196360_197900
+%mor:	adj|more-Cmp-S1 noun|sticker-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	which one ? 200750_201820
+%mor:	det|which-Def-Int noun|one ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	star ? 206120_206960
+%mor:	noun|star ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	oh . 207290_208130
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	a sun okay . 208620_209880
+%mor:	det|a-Ind-Art noun|sun intj|okay .
+%gra:	1|2|DET 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*MOT:	sun , oh a sun . 210750_213350
+%mor:	noun|sun cm|cm intj|oh det|a-Ind-Art noun|sun .
+%gra:	1|5|ROOT 2|5|PUNCT 3|5|DISCOURSE 4|5|DET 5|1|PARATAXIS 6|1|PUNCT
+*CHI:	xxx . 215540_216560
+%xDN:	CHI-Speech-ND
+*MOT:	where I should , oh foot . 216640_219270
+%mor:	adv|where pron|I-Prs-Nom-S1 aux|should-Fin-S cm|cm intj|oh noun|foot .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|6|ROOT 4|6|PUNCT 5|6|DISCOURSE 6|3|PARATAXIS 7|3|PUNCT
+*MOT:	give me the foot . 220230_221970
+%mor:	verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 det|the-Def-Art noun|foot-Acc .
+%gra:	1|4|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|1|PUNCT
+*CHI:	hello . 222750_223830
+%mor:	intj|hello .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	uh where ? 224730_225870
+%mor:	intj|uh adv|where ?
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	the toes the legs . 226290_228380
+%mor:	det|the-Def-Art noun|toe-Plur det|the-Def-Art noun|leg-Plur .
+%gra:	1|2|DET 2|4|ROOT 3|4|DET 4|2|NMOD-UNMARKED 5|2|PUNCT
+*MOT:	where ? 229640_230700
+%mor:	adv|where ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no  [/] no  [/] no  [/] no  [/] no  [/] no  [/] no  [/] no  [/] no . 230920_233570
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<stand up>  [/] <stand up>  [/] <stand up>  [/] stand up . 234950_238080
+%mor:	verb|stand-Fin-Imp-S adp|up .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*MOT:	oh hoo . 240080_241410
+%mor:	intj|oh intj|hoo .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	Eri . 244960_246020
+%mor:	propn|Eri .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx the choochoo@o . 252320_254960
+%mor:	det|the-Def-Art x|choochoo .
+%gra:	1|2|DET 2|2|FLAT 3|2|PUNCT
+*CHI:	choo@o . 255490_256860
+%mor:	x|choo .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	dui@s:zho the choochoo@o . 256890_259400
+%mor:	x|dui det|the-Def-Art x|choochoo .
+%gra:	1|3|FLAT 2|3|DET 3|1|FLAT 4|1|PUNCT
+*CHI:	ah . 259870_261090
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	what's this ? 261390_262870
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	feiji@s:zho . 264580_265810
+%mor:	x|feiji .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes feiji@s:zho airplane . 265740_268300
+%mor:	intj|yes x|feiji noun|airplane .
+%gra:	1|3|DISCOURSE 2|3|FLAT 3|3|ROOT 4|3|PUNCT
+*MOT:	say give . 268800_270270
+%mor:	verb|say-Fin-Imp-S verb|give-Fin-S .
+%gra:	1|2|ROOT 2|1|XCOMP 3|1|PUNCT
+*CHI:	give . 270650_271700
+%mor:	verb|give-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	here ? 271780_272590
+%mor:	adv|here ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	here . 273220_273990
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*AAC:	GIVE . 273760_274770
+%mor:	verb|give-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	yeah  [/] yeah you want it here ? 274200_276690
+%mor:	intj|yeah pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 adv|here ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+*MOT:	&=laughs . 282110_283160
+*CHI:	hoo . 283040_283750
+%mor:	intj|hoo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	hoo . 283800_284440
+%mor:	intj|hoo .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	choochoo@o . 288210_289540
+%mor:	x|choochoo .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	voom@o  [/] voom@o . 290450_295020
+%mor:	x|voom .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	at . 295530_296620
+%mor:	adp|at .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ap . 297160_297980
+%mor:	noun|ap .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx show me the ap . 298040_300360
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 det|the-Def-Art noun|ap-Acc .
+%gra:	1|4|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|1|PUNCT
+*MOT:	the ap . 301360_301990
+%mor:	det|the-Def-Art noun|ap .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*AAC:	SCARED . 301960_302790
+%mor:	adj|scared-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	S
+%xSSE:	SSE
+*MOT:	not this . 302670_303810
+%mor:	part|not pron|this-Dem-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	that , that's not scared . 304800_306510
+%mor:	pron|that-Dem cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 part|not adj|scared-S1 .
+%gra:	1|6|DISLOCATED 2|1|PUNCT 3|6|NSUBJ 4|6|COP 5|6|ADVMOD 6|6|ROOT 7|6|PUNCT
+*CHI:	ah . 306530_307180
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	up CHILDNAME up look  [/] look up . 306830_309900
+%mor:	adp|up noun|childname adp|up verb|look-Fin-Imp-S adp|up .
+%gra:	1|2|COMPOUND 2|4|NSUBJ 3|4|ADVMOD 4|5|ROOT 5|4|COMPOUND-PRT 6|4|PUNCT
+*MOT:	give me up . 310000_311510
+%mor:	verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 adp|up .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+*AAC:	UP . 312060_313840
+%mor:	propn|UP .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	yes up . 312200_314340
+%mor:	intj|yes adv|up .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	xxx . 312550_314430
+%xDN:	CHI-Speech-ND
+*MOT:	voom@o . 314470_316330
+%mor:	x|voom .
+%gra:	1|1|FLAT 2|1|PUNCT
+*CHI:	eh . 316770_317840
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	xxx . 319390_320860
+*MOT:	up &=breathes . 322320_324860
+%mor:	adv|up .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent making noise to indicate up
+*MOT:	and the down . 326930_328610
+%mor:	cconj|and det|the-Def-Art noun|down .
+%gra:	1|3|CC 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	down ? 330130_331220
+%mor:	adv|down ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME your foot . 333030_334550
+%mor:	verb|child-Fin-Imp-S pron|your-Prs-Gen-S2 noun|foot-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+*MOT:	<don't do this>  [/] don't do this don't do , don't do this . 334670_338750
+%mor:	aux|do-Fin-Imp-S~part|not verb|do-Fin-Imp-S pron|this-Dem-S1 aux|do-Inf-S~part|not verb|do-Inf-S cm|cm aux|do-Fin-Imp-S~part|not verb|do-Fin-Imp-S pron|this-Dem-S1 .
+%gra:	1|3|AUX 2|3|ADVMOD 3|12|ROOT 4|3|OBJ 5|7|AUX 6|7|ADVMOD 7|3|XCOMP 8|11|PUNCT 9|11|AUX 10|11|ADVMOD 11|3|PARATAXIS 12|11|OBJ 13|3|PUNCT
+*MOT:	no I say no  [/] no . 339650_344100
+%mor:	intj|no pron|I-Prs-Nom-S1 verb|say-Fin-Ind-Pres-S1 intj|no .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|DISCOURSE 5|3|PUNCT
+*MOT:	&=hums no . 346490_348380
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	eh . 357910_359160
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+@End

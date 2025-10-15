@@ -1,0 +1,145 @@
+@UTF8
+@PID:	11312/a-00082299-0
+@Begin
+@Languages:	eng
+@Participants:	AAC Media, COD Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|4;11.|male|||Target_Child|||
+@Media:	10_T1_2, video
+*AAC:	No observed child AAC use . 990_4020
+%mor:	det|no-Def-Neg verb|observe-Fin-Ind-Past-S3 noun|child noun|aac noun|use .
+%gra:	1|5|DET 2|5|AMOD 3|5|COMPOUND 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+*COD:	C . 1000_330800
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good+job . 2360_3990
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	playdoh . 4460_5910
+%mor:	noun|playdoh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you're playing with playdoh ? 5940_7800
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|play-Part-Pres-S adp|with noun|playdoh ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|CASE 5|3|OBL 6|3|PUNCT
+*MOT:	I know you want her to come back but she's gonna come back in a bit . 15160_19000
+%mor:	pron|I-Prs-Nom-S1 verb|know-Fin-Ind-Pres-S1 pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|her-Prs-Acc-S3 part|to verb|come-Inf-S adv|back cconj|but pron|she-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 part|go verb|come-Inf-S adv|back adp|in det|a-Ind-Art noun|bit .
+%gra:	1|2|NSUBJ 2|17|ROOT 3|4|NSUBJ 4|2|CCOMP 5|4|OBJ 6|7|MARK 7|4|XCOMP 8|7|ADVMOD 9|13|CC 10|13|NSUBJ 11|13|AUX 12|13|ADVMOD 13|2|CONJ 14|13|ADVMOD 15|17|CASE 16|17|DET 17|13|OBL 18|2|PUNCT
+*MOT:	honey look there's the dinosaur too . 30120_33300
+%mor:	noun|honey verb|look-Fin-Imp-S pron|there-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|dinosaur adv|too .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|2|EXPL 4|2|CCOMP 5|6|DET 6|2|CCOMP 7|2|ADVMOD 8|2|PUNCT
+*CHI:	sawr . 33910_35050
+%mor:	intj|sawr .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating dinosaur .
+*CHI:	a dinesawr . 35770_37270
+%mor:	det|a-Ind-Art noun|dinesawr .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating dinosaur .
+*MOT:	&=laughs . 44030_45050
+*MOT:	what are you doing ? 59490_60900
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|do-Part-Pres-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	oh no . 63850_65180
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what happened here ? 65360_66880
+%mor:	pron|what-Int-S1 verb|happen-Fin-Ind-Past-S3 adv|here ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	you wanted to mix everything ? 72140_74560
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Past-S2 part|to verb|mix-Inf-S pron|everything-Tot-S1 ?
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|MARK 4|2|XCOMP 5|4|OBJ 6|2|PUNCT
+*CHI:	xxx . 73070_73720
+%xDN:	CHI-Speech-ND
+*CHI:	okay . 76720_77510
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay . 77530_78310
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	owa . 78030_78760
+%mor:	noun|owa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	woah . 79090_79950
+%mor:	intj|woah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	xxx . 84950_85870
+%xDN:	CHI-Speech-ND
+*CHI:	wewa . 123520_124960
+%mor:	propn|wewa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=laughs . 124820_127360
+*MOT:	pink dinosaur ? 137850_140130
+%mor:	adj|pink-S1 noun|dinosaur ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	blue dinosaur . 142370_143980
+%mor:	adj|blue-S1 noun|dinosaur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	good+job . 143740_145260
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	is that a yellow car ? 147260_149230
+%mor:	aux|be-Fin-Ind-Pres-S3 sconj|that det|a-Ind-Art adj|yellow-S1 noun|car ?
+%gra:	1|5|COP 2|5|MARK 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*CHI:	car . 149930_150660
+%mor:	noun|car .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	and a green car ? 150190_151640
+%mor:	cconj|and det|a-Ind-Art adj|green-S1 noun|car ?
+%gra:	1|4|CC 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*CHI:	green car . 151640_153390
+%mor:	adj|green-S1 noun|car .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	oh . 188110_188860
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	doth ? 209350_210720
+%mor:	aux|doth-Fin-Ind-Pres-S3 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah here . 211220_213210
+%mor:	intj|yeah adv|here .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	you might actually have to pick it up kiddo I can't pick it up with my nails here . 219270_223460
+%mor:	pron|you-Prs-Nom-S2 aux|might-Fin-S adv|actually verb|have-Inf-S part|to verb|pick-Inf-S pron|it-Prs-Acc-S3 adp|up noun|kiddo-Acc pron|I-Prs-Nom-S1 aux|can-Fin-S~part|not verb|pick-Inf-S pron|it-Prs-Acc-S3 adp|up adp|with pron|my-Prs-Gen-S1 noun|nail-Plur adv|here .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|19|ROOT 5|6|MARK 6|4|XCOMP 7|6|OBJ 8|6|COMPOUND-PRT 9|6|OBJ 10|13|NSUBJ 11|13|AUX 12|13|ADVMOD 13|4|PARATAXIS 14|13|OBJ 15|13|COMPOUND-PRT 16|18|CASE 17|18|NMOD-POSS 18|13|OBL 19|13|ADVMOD 20|4|PUNCT
+*MOT:	good+job . 223690_225230
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yeah you don't like it up there &=laughs ? 240890_244390
+%mor:	intj|yeah pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|like-Inf-S pron|it-Prs-Acc-S3 adp|up adv|there ?
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|8|ROOT 6|5|OBJ 7|5|COMPOUND-PRT 8|5|ADVMOD 9|5|PUNCT
+*MOT:	xxx . 246750_247610
+*MOT:	what are you doing ? 280870_282710
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|do-Part-Pres-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	disawr . 319260_320900
+%mor:	intj|disawr .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating dinosaur .
+*MOT:	is that the pink dinosaur ? 322180_324210
+%mor:	aux|be-Fin-Ind-Pres-S3 sconj|that det|the-Def-Art adj|pink-S1 noun|dinosaur ?
+%gra:	1|5|COP 2|5|MARK 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+@End

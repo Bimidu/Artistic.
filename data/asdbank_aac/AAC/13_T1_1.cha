@@ -1,0 +1,253 @@
+@UTF8
+@PID:	11312/a-00082311-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|3;01.|female|||Target_Child|||
+@Media:	13_T1_1, video
+*COD:	C . 1_324720
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No AAC use , no AAC system . 10_1230
+%mor:	det|no-Def-Neg propn|AAC noun|use cm|cm det|no-Def-Neg noun|aac noun|system .
+%gra:	1|3|DET 2|3|COMPOUND 3|7|ROOT 4|7|PUNCT 5|7|DET 6|7|COMPOUND 7|3|APPOS 8|3|PUNCT
+*MOT:	e@l f@l g@l h@l i@l j@l k@l l@l m@l n@l o@l p@l &=sings . 320_13620
+%mor:	x|e x|for x|gram x|h x|I x|j x|thousand x|l x|million x|and x|of noun|p .
+%gra:	1|12|ROOT 2|1|FLAT 3|1|FLAT 4|1|FLAT 5|1|FLAT 6|1|FLAT 7|1|FLAT 8|1|FLAT 9|1|FLAT 10|1|FLAT 11|1|FLAT 12|1|FLAT 13|1|PUNCT
+%xPCO:	parent is singing the alphabet song while touching piano keys .
+*MOT:	try it . 13770_14530
+%mor:	verb|try-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	&=gasps ding@o . 16020_17510
+%mor:	x|ding .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xPCO:	parent is imitating a bell .
+*MOT:	that's right CHILDNAME . 20670_22320
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 noun|childname .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	look at you good+job . 27310_29850
+%mor:	verb|look-Fin-Imp-S adp|at pron|you-Prs-Gen-S2 noun|goodjob .
+%gra:	1|4|ROOT 2|4|CASE 3|1|OBL 4|1|OBL 5|1|PUNCT
+*MOT:	would you like to play with your puzzle ? 35110_38520
+%mor:	aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S part|to verb|play-Inf-S adp|with pron|your-Prs-Gen-S2 noun|puzzle ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|MARK 5|3|XCOMP 6|8|CASE 7|8|NMOD-POSS 8|5|OBL 9|3|PUNCT
+*MOT:	come here CHILDNAME . 38610_40380
+%mor:	verb|come-Fin-Imp-S adv|here propn|CHILDNAME .
+%gra:	1|3|ROOT 2|1|ADVMOD 3|1|VOCATIVE 4|1|PUNCT
+*MOT:	xxx <come here>  [/] come here . 42130_44380
+%mor:	verb|come-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	<come play with me>  [/] come play with me please . 44790_48380
+%mor:	verb|come-Fin-Imp-S noun|play-Acc adp|with pron|I-Prs-Acc-S1 intj|please .
+%gra:	1|5|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|DISCOURSE 6|1|PUNCT
+*MOT:	good+job . 51490_52770
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good+job . 55480_56740
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	which one do you wanna put away first ? 57290_59310
+%mor:	det|which-Def-Int noun|one-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|wanna-Inf-S verb|put-Inf-S adv|away adv|first ?
+%gra:	1|2|DET 2|6|OBJ 3|6|AUX 4|5|NSUBJ 5|8|ROOT 6|5|XCOMP 7|6|ADVMOD 8|6|ADVMOD 9|5|PUNCT
+*MOT:	the green one the blue , &=taps blue goes here red goes there that's right . 61000_67010
+%mor:	det|the-Def-Art adj|green-S1 noun|one det|the-Def-Art adj|blue-S1 cm|cm adj|blue-S1 verb|go-Fin-Ind-Pres-S3 adv|here adj|red-S1 verb|go-Fin-Ind-Pres-S3 adv|there pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|3|DET 2|3|AMOD 3|11|NSUBJ 4|5|DET 5|3|AMOD 6|8|PUNCT 7|8|NSUBJ 8|3|PARATAXIS 9|8|ADVMOD 10|8|ADVMOD 11|15|ROOT 12|11|ADVMOD 13|15|NSUBJ 14|15|COP 15|11|ADVCL-RELCL 16|11|PUNCT
+%xPCO:	parent taps on the puzzle .
+*MOT:	<that's right>  [/] that's right . 68010_70400
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	&=taps blue goes here  [/] here . 70810_73290
+%mor:	noun|blue verb|go-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+%xPCO:	parent taps on the puzzle .
+*MOT:	no  [/] no look . 74750_76000
+%mor:	det|no-Def-Neg noun|look .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	look <green goes here>  [/] <green goes here>  [/] green goes here . 77310_83170
+%mor:	verb|look-Fin-Imp-S noun|green verb|go-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|4|ROOT 2|3|NSUBJ 3|1|CCOMP 4|3|ADVMOD 5|1|PUNCT
+*MOT:	&=taps blue goes here . 84940_86180
+%mor:	noun|blue verb|go-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	&=taps blue goes here . 88050_89220
+%mor:	noun|blue verb|go-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	yeah you got red . 89750_90880
+%mor:	intj|yeah pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Past-S2-irr adj|red-S1 .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|XCOMP 5|3|PUNCT
+*CHI:	&=grunts . 90600_91760
+*MOT:	yeah you did it don't worry . 91450_93100
+%mor:	intj|yeah pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Past-S2-irr pron|it-Prs-Nom-S3 aux|do-Inf-S~part|not verb|worry-Inf-S .
+%gra:	1|7|DISCOURSE 2|7|NSUBJ 3|7|AUX 4|7|NSUBJ 5|7|AUX 6|7|ADVMOD 7|7|ROOT 8|7|PUNCT
+*MOT:	you're doing good come back . 93280_94950
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|do-Part-Pres-S adj|good-S1 verb|come-Inf-S adv|back .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|3|XCOMP 5|3|XCOMP 6|5|ADVMOD 7|3|PUNCT
+*MOT:	look CHILDNAME . 95470_97300
+%mor:	verb|look-Fin-Imp-S propn|CHILDNAME-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	&=taps <green goes here>  [/] green goes here . 100720_103850
+%mor:	noun|green verb|go-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	green goes +... 104440_105890
+%mor:	adj|green-S1 verb|go-Fin-Ind-Pres-S3 +...
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	yeah good+job . 106610_107990
+%mor:	intj|yeah noun|goodjob .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	purple goes there . 108400_110170
+%mor:	noun|purple verb|go-Fin-Ind-Pres-S3 adv|there .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	good+job . 110920_112240
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=taps blue goes here . 113350_115460
+%mor:	noun|blue verb|go-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	good+job . 121520_123510
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 123370_124560
+*MOT:	oh don't pull on my hair to stand . 125250_127370
+%mor:	intj|oh aux|do-Fin-Imp-S~part|not verb|pull-Fin-Imp-S adp|on pron|my-Prs-Gen-S1 noun|hair-Acc part|to verb|stand-Inf-S .
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|ADVMOD 4|9|ROOT 5|4|COMPOUND-PRT 6|7|NMOD-POSS 7|4|OBJ 8|9|MARK 9|4|ADVCL 10|4|PUNCT
+*CHI:	&=groans no . 125670_127650
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=laughs . 127970_129360
+*MOT:	where are you going ? 130950_132470
+%mor:	adv|where aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|go-Part-Pres-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	&=moving . 131090_133160
+%xgco:	Child leads parent to food but then walks away before taking any, so function is put as OTHER
+%xIS:	CHI-Gesture-S
+*MOT:	to eat ? 132960_133700
+%mor:	part|to verb|eat-Inf-S ?
+%gra:	1|2|MARK 2|2|ROOT 3|2|PUNCT
+*MOT:	are you grounding ? 142920_144660
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|ground-Part-Pres-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	are you grounding ? 147590_148910
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|ground-Part-Pres-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	&=hums . 148450_149740
+*MOT:	what are you playing over there ? 149700_151400
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|play-Part-Pres-S adp|over adv|there ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|CASE 6|4|OBL 7|4|PUNCT
+*CHI:	&=hums oh . 150310_153960
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	are you playing , I don't know xxx . 152930_157060
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|play-Part-Pres-S cm|cm pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|know-Inf-S .
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|8|PUNCT 5|8|NSUBJ 6|8|AUX 7|8|ADVMOD 8|3|PARATAXIS 9|3|PUNCT
+*CHI:	xxx . 155670_156550
+%xDN:	CHI-Speech-ND
+*CHI:	&=grunts . 157720_158360
+*MOT:	come here . 158970_160000
+%mor:	verb|come-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*CHI:	&=grunts . 160320_161060
+*MOT:	xxx . 160470_161650
+*CHI:	&=hums . 164860_167480
+*MOT:	&=laughs CHILDNAME . 165000_168180
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ooye . 168670_169700
+%mor:	intj|ooye .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	www . 170510_179550
+%xPCO:	parent speaks to other parent .
+*MOT:	come here kiddo &=taps . 182040_184390
+%mor:	verb|come-Fin-Imp-S adv|here noun|kiddo-Acc .
+%gra:	1|3|ROOT 2|1|ADVMOD 3|1|OBJ 4|1|PUNCT
+*MOT:	CHILDNAME come here , woah careful . 186290_188130
+%mor:	propn|CHILDNAME verb|come-Fin-Imp-S adv|here cm|cm intj|woah adj|careful-S1 .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|ADVMOD 4|6|PUNCT 5|6|DISCOURSE 6|2|PARATAXIS 7|2|PUNCT
+*CHI:	ah eh . 190640_192020
+%mor:	intj|ah intj|eh .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	<your daddy has>  [/] your daddy has a thing for you , look what I have . 191740_198100
+%mor:	pron|your-Prs-Gen-S2 noun|daddy verb|have-Fin-Ind-Pres-S3 det|a-Ind-Art noun|thing-Acc-Ger adp|for pron|you-Prs-Acc-S2 cm|cm verb|look-Fin-Imp-S pron|what-Rel-S1 pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 .
+%gra:	1|2|NMOD-POSS 2|3|NSUBJ 3|12|ROOT 4|5|DET 5|3|OBJ 6|7|CASE 7|3|OBL 8|9|PUNCT 9|3|PARATAXIS 10|9|OBJ 11|12|NSUBJ 12|10|ACL-RELCL 13|3|PUNCT
+*CHI:	ah . 193820_196630
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=laughs . 200630_201430
+*MOT:	look what I have . 201280_202790
+%mor:	verb|look-Fin-Imp-S pron|what-Rel-S1 pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|NSUBJ 4|2|ACL-RELCL 5|1|PUNCT
+*MOT:	CHILDNAME . 205510_206570
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	uh . 207710_208550
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look what I have . 209690_210780
+%mor:	verb|look-Fin-Imp-S pron|what-Rel-S1 pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|NSUBJ 4|2|ACL-RELCL 5|1|PUNCT
+*MOT:	du . 214360_215370
+%mor:	propn|du .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	wow . 215930_216990
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	woah &=laughs . 219610_221140
+%mor:	intj|woah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you wanna use the hammer ? 224500_226090
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|use-Fin-Pres-S det|the-Def-Art noun|hammer-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	good+job though . 227370_229100
+%mor:	intj|goodjob adv|though .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	&=gasps . 236150_236740
+*MOT:	that's right . 237590_238660
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	you push them all down you get them all . 240330_242680
+%mor:	pron|you-Prs-Nom-S2 verb|push-Fin-Ind-Pres-S2 pron|they-Prs-Acc-P3 det|all-Def-Tot adp|down pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Pres-S2 pron|they-Prs-Acc-P3 det|all-Def-Tot .
+%gra:	1|2|NSUBJ 2|9|ROOT 3|2|OBJ 4|5|DET 5|2|COMPOUND-PRT 6|7|NSUBJ 7|2|PARATAXIS 8|7|OBJ 9|7|ADVMOD 10|2|PUNCT
+*MOT:	&=laughs . 243860_245530
+*MOT:	you want the hammer ? 251110_252540
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|hammer-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	no ? 254470_255190
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	get (th)em . 269100_270150
+%mor:	verb|get-Fin-Imp-S pron|they-Prs-Acc-P3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	push  [/] push  [/] push . 271940_277040
+%mor:	verb|push-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	wow . 278510_279580
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	push  [/] push  [/] push  [/] push . 279800_284750
+%mor:	verb|push-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good point though . 289840_291170
+%mor:	adj|good-S1 noun|point adv|though .
+%gra:	1|2|AMOD 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	push  [/] push that one you got it . 294070_296290
+%mor:	verb|push-Fin-Imp-S det|that-Def-Dem-Sing noun|one-Acc pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Past-S2-irr pron|it-Prs-Acc-S3 .
+%gra:	1|6|ROOT 2|3|DET 3|1|OBJ 4|5|NSUBJ 5|3|ACL-RELCL 6|5|OBJ 7|1|PUNCT
+*MOT:	you push . 297200_298450
+%mor:	pron|you-Prs-Nom-S2 verb|push-Fin-Ind-Pres-S2 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	you push you got (th)em . 300110_302050
+%mor:	pron|you-Prs-Nom-S2 verb|push-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Past-S2-irr pron|they-Prs-Acc-P3 .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|NSUBJ 4|2|PARATAXIS 5|4|OBJ 6|2|PUNCT
+*MOT:	www . 320000_323640
+%xPCO:	parent speaks to other parent .
+@End

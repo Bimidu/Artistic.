@@ -1,0 +1,205 @@
+@UTF8
+@PID:	11312/a-00082295-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|5;10.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	09_T2, video
+*COD:	C . 1_302040
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 1770_2570
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here . 4590_5380
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay can you , CHILDNAME can you , um , what do you want to put on first ? 7790_11990
+%mor:	intj|okay aux|can-Fin-S pron|you-Prs-Nom-S2 cm|cm intj|childname aux|can-Fin-S pron|you-Prs-Nom-S2 cm|cm intj|um cm|cm pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|put-Inf-S adp|on adj|first-S1 ?
+%gra:	1|14|DISCOURSE 2|14|REPARANDUM 3|14|REPARANDUM 4|3|PUNCT 5|14|DISCOURSE 6|14|REPARANDUM 7|14|REPARANDUM 8|7|PUNCT 9|14|DISCOURSE 10|9|PUNCT 11|16|OBJ 12|14|AUX 13|14|NSUBJ 14|18|ROOT 15|16|MARK 16|14|XCOMP 17|11|CASE 18|16|ADVMOD 19|14|PUNCT
+*MOT:	look  [/] look what do we have , what do you want to put on first ? 13020_15310
+%mor:	verb|look-Fin-Imp-S pron|what-Int-S1 aux|do-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 verb|have-Inf-S cm|cm pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|put-Inf-S adp|on adj|first-S1 ?
+%gra:	1|14|ROOT 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|1|CCOMP 6|10|PUNCT 7|12|OBJ 8|10|AUX 9|10|NSUBJ 10|1|PARATAXIS 11|12|MARK 12|10|XCOMP 13|7|CASE 14|12|ADVMOD 15|1|PUNCT
+*MOT:	okay . 18000_18610
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	alright . 31720_32560
+%mor:	intj|alright .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	very good . 34050_34880
+%mor:	adv|very adj|good-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	okay what's next ? 35070_36200
+%mor:	intj|okay pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adj|next-S1 ?
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	&=pointing . 38680_41220
+%xIS:	CHI-Gesture-S
+*CHI:	T+shirt . 41480_42270
+%mor:	noun|tshirt .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	t+shirt awesome . 42410_43990
+%mor:	noun|tshirt adj|awesome-S1 .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	okay put on your t+shirt . 44830_46330
+%mor:	intj|okay verb|put-Fin-Imp-S adp|on pron|your-Prs-Gen-S2 noun|tshirt .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|5|CASE 4|5|NMOD-POSS 5|2|OBL 6|2|PUNCT
+*MOT:	&=laughs . 63290_64850
+*MOT:	www . 65510_67010
+%xPCO:	parent speaks to someone off camera .
+*MOT:	very good , oh I like the dinosaur riding a bike on your t+shirt . 69860_73790
+%mor:	adv|very adj|good-S1 cm|cm intj|oh pron|I-Prs-Nom-S1 verb|like-Fin-Ind-Pres-S1 det|the-Def-Art noun|dinosaur-Acc verb|ride-Ger-S det|a-Ind-Art noun|bike-Acc adp|on pron|your-Prs-Gen-S2 noun|tshirt .
+%gra:	1|2|ADVMOD 2|14|ROOT 3|6|PUNCT 4|6|DISCOURSE 5|6|NSUBJ 6|2|PARATAXIS 7|8|DET 8|6|OBJ 9|6|XCOMP 10|11|DET 11|9|OBJ 12|14|CASE 13|14|NMOD-POSS 14|9|OBL 15|2|PUNCT
+*MOT:	(o)kay what's next ? 74270_75270
+%mor:	intj|okay pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adj|next-S1 ?
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	next ? 78530_79170
+%mor:	adv|next ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=pointing . 80100_81130
+%xIS:	CHI-Gesture-S
+*CHI:	socks . 80840_81350
+%mor:	noun|sock-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	socks okay . 81280_82990
+%mor:	noun|sock-Plur intj|okay .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	put on your socks . 83290_84120
+%mor:	verb|put-Fin-Imp-S adp|on pron|your-Prs-Gen-S2 noun|sock-Plur-Acc .
+%gra:	1|4|ROOT 2|1|COMPOUND-PRT 3|4|NMOD-POSS 4|1|OBJ 5|1|PUNCT
+*MOT:	wow great work . 107980_110480
+%mor:	intj|wow adj|great-S1 noun|work .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*AAC:	HELP . 130690_133170
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	I need help . 134560_135240
+%mor:	pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	I need help . 135260_135940
+%mor:	pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	(o)kay let Mommy help you . 137520_139350
+%mor:	intj|okay verb|let-Fin-Imp-S propn|Mommy-Acc verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|OBJ 4|2|XCOMP 5|4|OBJ 6|2|PUNCT
+*MOT:	good job asking for help come here . 139870_141380
+%mor:	adj|good-S1 noun|job verb|ask-Ger-S adp|for noun|help verb|come-Inf-S adv|here .
+%gra:	1|2|AMOD 2|7|ROOT 3|2|ACL 4|5|CASE 5|3|OBL 6|2|ACL 7|6|ADVMOD 8|2|PUNCT
+*MOT:	(o)kay come over here . 141880_142770
+%mor:	intj|okay verb|come-Fin-Imp-S adp|over adv|here .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+*MOT:	there we go . 144230_144950
+%mor:	pron|there-Int-S1 pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	okay now can you zip it up ? 149490_151250
+%mor:	intj|okay adv|now aux|can-Fin-S pron|you-Prs-Nom-S2 verb|zip-Inf-S pron|it-Prs-Acc-S3 adp|up ?
+%gra:	1|5|DISCOURSE 2|5|ADVMOD 3|5|AUX 4|5|NSUBJ 5|7|ROOT 6|5|OBJ 7|5|COMPOUND-PRT 8|5|PUNCT
+*CHI:	a meed help . 159710_160930
+%mor:	det|a-Ind-Art noun|meed noun|help .
+%gra:	1|3|DET 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child approximates "I need help"
+*MOT:	&=laughs I need help . 160800_162540
+%mor:	pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	I need help . 162760_163640
+%mor:	pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	(o)kay here CHILDNAME . 163900_165830
+%mor:	intj|okay adv|here propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|VOCATIVE 4|2|PUNCT
+*AAC:	HELP . 165900_167810
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	great come here . 168210_169550
+%mor:	adj|great-S1 verb|come-Fin-S adv|here .
+%gra:	1|2|AMOD 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	great job asking for help . 172010_173780
+%mor:	adj|great-S1 noun|job verb|ask-Ger-S adp|for noun|help .
+%gra:	1|2|AMOD 2|5|ROOT 3|2|ACL 4|5|CASE 5|3|OBL 6|2|PUNCT
+*MOT:	(o)kay . 174390_175240
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	FINISHED . 188620_191280
+%mor:	verb|finihhe-Part-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	I'm finished . 191550_192550
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|finish-Part-Past-S .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|3|ROOT 4|3|PUNCT
+*CHI:	I'm finished . 192500_193390
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|finish-Part-Past-S .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	good work . 193620_194450
+%mor:	adj|good-S1 noun|work .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	what should we do now ? 201010_202210
+%mor:	pron|what-Int-S1 aux|should-Fin-S pron|we-Prs-Nom-P1 verb|do-Inf-S adv|now ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|ADVMOD 6|4|PUNCT
+*MOT:	what's that sweetie ? 210540_211490
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing noun|sweetie ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*CHI:	call Angela . 210620_212270
+%mor:	verb|call-Fin-Imp-S propn|Angela-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	call Angela &=laughs . 212500_215010
+%mor:	verb|call-Fin-Imp-S propn|Angela-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	&=breathes . 218090_219130
+*MOT:	yes that's +... 222690_223810
+%mor:	intj|yes pron|that-Dem~aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	Angela's taking a break . 226290_227770
+%mor:	propn|Angela~part|s verb|take-Part-Pres-S det|a-Ind-Art noun|break-Acc .
+%gra:	1|3|NSUBJ 2|1|CASE 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	what does CHILDNAME want ? 230390_231810
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S3 pron|childname-Prs-Nom-S3 verb|want-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	xxx . 237200_238220
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	me , can you say it again sweetie ? 238880_241150
+%mor:	pron|I-Prs-Acc-S1 cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|say-Inf-S pron|it-Prs-Acc-S3 adv|again noun|sweetie ?
+%gra:	1|5|VOCATIVE 2|1|PUNCT 3|5|AUX 4|5|NSUBJ 5|8|ROOT 6|5|OBJ 7|8|ADVMOD 8|5|OBL-UNMARKED 9|5|PUNCT
+*MOT:	say it again ? 244950_245890
+%mor:	verb|say-Fin-Imp-S pron|it-Prs-Acc-S3 adv|again ?
+%gra:	1|3|ROOT 2|1|OBJ 3|1|ADVMOD 4|1|PUNCT
+*CHI:	call Angela . 246700_247570
+%mor:	verb|call-Fin-Imp-S propn|Angela-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=laughs call Angela I know . 247460_249730
+%mor:	verb|call-Inf-S propn|Angela-Acc pron|I-Prs-Nom-S1 verb|know-Fin-Ind-Pres-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|NSUBJ 4|1|PARATAXIS 5|1|PUNCT
+*MOT:	um , is there something else you wanna do right now while we wait , Angela is coming back in a minute , do you wanna , what can we do while we wait ? 250240_256840
+%mor:	intj|um cm|cm verb|be-Fin-Ind-Pres-S3 pron|there-Int-S1 pron|something-Ind-S1 adj|else-S1 pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|do-Inf-S adv|right adv|now sconj|while pron|we-Prs-Nom-P1 verb|wait-Fin-Ind-Pres-P1 cm|cm propn|Angela aux|be-Fin-Ind-Pres-S3 verb|come-Part-Pres-S adv|back adp|in det|a-Ind-Art noun|minute cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|wanna-Inf-S cm|cm pron|what-Int-S1 aux|can-Fin-S pron|we-Prs-Nom-P1 verb|do-Inf-S sconj|while pron|we-Prs-Nom-P1 verb|wait-Fin-Ind-Pres-P1 ?
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|34|ROOT 4|3|EXPL 5|3|NSUBJ 6|5|AMOD 7|9|NSUBJ 8|9|AUX 9|5|ACL-RELCL 10|11|ADVMOD 11|9|ADVMOD 12|14|MARK 13|14|NSUBJ 14|3|ADVCL 15|18|PUNCT 16|18|NSUBJ 17|18|AUX 18|3|PARATAXIS 19|18|ADVMOD 20|22|CASE 21|22|DET 22|18|OBL 23|26|PUNCT 24|26|AUX 25|26|NSUBJ 26|18|PARATAXIS 27|31|PUNCT 28|34|OBJ 29|31|AUX 30|31|NSUBJ 31|3|PARATAXIS 32|34|MARK 33|34|NSUBJ 34|31|ADVCL 35|3|PUNCT
+*MOT:	&=laughs yes . 259320_260100
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=laughs oops . 276570_278790
+%mor:	intj|oop .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	www . 282570_288680
+%xPCO:	parent speaks to camera .
+*MOT:	www . 289560_294190
+%xPCO:	parent speaks to camera .
+@End

@@ -1,0 +1,299 @@
+@UTF8
+@PID:	11312/a-00082333-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@Media:	17_T2, video
+*COD:	C . 1_328120
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No observed child AAC use . 30_1460
+%mor:	det|no-Def-Neg verb|observe-Fin-Ind-Past-S3 noun|child noun|aac noun|use .
+%gra:	1|5|DET 2|5|AMOD 3|5|COMPOUND 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+*MOT:	CHILDNAME want , CHILDNAME needs help . 1020_4610
+%mor:	propn|CHILDNAME verb|want-Fin-Ind-Pres-S3 cm|cm propn|CHILDNAME verb|need-Fin-Ind-Pres-S3 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|5|PUNCT 4|5|NSUBJ 5|2|PARATAXIS 6|5|OBJ 7|2|PUNCT
+*MOT:	ah you see CHILDNAME needs help . 5040_7770
+%mor:	intj|ah pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Pres-S2 propn|CHILDNAME noun|need-Plur noun|help-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|6|COMPOUND 5|6|COMPOUND 6|3|OBJ 7|3|PUNCT
+*MOT:	oh banana okay let me , give it to me CHILDNAME . 8230_11550
+%mor:	intj|oh intj|banana intj|okay verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 cm|cm verb|give-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 propn|CHILDNAME .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|DISCOURSE 4|11|ROOT 5|4|OBJ 6|7|PUNCT 7|4|PARATAXIS 8|7|OBJ 9|10|CASE 10|7|OBL 11|7|OBL 12|4|PUNCT
+*MOT:	give me . 13080_13950
+%mor:	verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 .
+%gra:	1|2|ROOT 2|1|IOBJ 3|1|PUNCT
+*MOT:	okay yeah opening banana . 16000_18890
+%mor:	intj|okay intj|yeah noun|opening-Ger noun|banana .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|COMPOUND 4|4|ROOT 5|4|PUNCT
+*MOT:	because CHILDNAME want to eat banana . 18970_23070
+%mor:	sconj|because propn|CHILDNAME verb|want-Fin-Ind-Pres-S3 part|to verb|eat-Inf-S noun|banana-Acc .
+%gra:	1|3|MARK 2|3|NSUBJ 3|6|ROOT 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|3|PUNCT
+*MOT:	yes . 26130_26940
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	want to eat bananas also . 27750_30380
+%mor:	verb|want-Fin-Ind-Pres-S1 part|to verb|eat-Inf-S noun|banana-Plur-Acc adv|also .
+%gra:	1|5|ROOT 2|3|MARK 3|1|XCOMP 4|3|OBJ 5|3|ADVMOD 6|1|PUNCT
+*MOT:	Hilary also want to eat the banana , . 31530_36430
+%mor:	propn|Hilary adv|also verb|want-Fin-Ind-Pres-P3 part|to verb|eat-Inf-S det|the-Def-Art noun|banana-Acc cm|cm .
+%gra:	1|3|NSUBJ 2|3|ADVMOD 3|8|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|3|PUNCT 9|3|PUNCT
+*MOT:	okay . 37700_38820
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 39450_40160
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	now we continue to work with xxx CHILDNAME . 40930_44170
+%mor:	adv|now pron|we-Prs-Nom-P1 verb|continue-Fin-Ind-Pres-P1 part|to verb|work-Inf-S adp|with propn|CHILDNAME .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|CASE 7|5|OBL 8|3|PUNCT
+*MOT:	do you coming ? 46340_47600
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|come-Part-Pres-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	www . 50870_52960
+%xPCO:	parent speaks to other child .
+*MOT:	CHILDNAME come here make up xxx . 53210_55880
+%mor:	propn|CHILDNAME verb|come-Fin-Imp-S adv|here verb|make-Fin-Imp-S adp|up .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|ADVMOD 4|2|XCOMP 5|4|COMPOUND-PRT 6|2|PUNCT
+*MOT:	CHILDNAME can you come please ? 57010_58900
+%mor:	propn|CHILDNAME aux|can-Fin-S pron|you-Prs-Nom-S2 verb|come-Inf-S intj|please ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|DISCOURSE 6|4|PUNCT
+*MOT:	we are meant to pull that for one two three . 58970_63030
+%mor:	pron|we-Prs-Nom-P1 aux|be-Fin-Ind-Pres-P1 verb|mean-Part-Past-S-irr part|to verb|pull-Inf-S pron|that-Dem adp|for num|one num|two num|three .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|10|ROOT 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|10|CASE 8|10|NUMMOD 9|10|NUMMOD 10|5|OBL 11|3|PUNCT
+*MOT:	and then , CHILDNAME ka ? 63240_64960
+%mor:	cconj|and adv|then cm|cm intj|childname noun|ka ?
+%gra:	1|5|CC 2|5|ROOT 3|2|PUNCT 4|5|DISCOURSE 5|2|PARATAXIS 6|2|PUNCT
+*MOT:	www . 66160_68830
+%xPCO:	parent speaks to other child .
+*MOT:	this is the number . 69000_70490
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|number .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	we are going to make a puzzle number okay ? 71080_75660
+%mor:	pron|we-Prs-Nom-P1 aux|be-Fin-Ind-Pres-P1 verb|go-Part-Pres-S part|to verb|make-Inf-S det|a-Ind-Art noun|puzzle noun|number-Acc adj|okay-S1 ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|9|ROOT 4|5|MARK 5|3|XCOMP 6|8|DET 7|8|COMPOUND 8|5|OBJ 9|5|XCOMP 10|3|PUNCT
+*MOT:	www . 76050_97960
+%xPCO:	parent speaks to other child .
+*MOT:	www . 100630_104460
+%xPCO:	parent is speaking with other child .
+*MOT:	CHILDNAME come  [/] come . 104570_107200
+%mor:	propn|CHILDNAME verb|come-Fin-Imp-S .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	www . 107250_112910
+%xPCO:	parent speaks to other child .
+*MOT:	come . 115570_116270
+%mor:	verb|come-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	come . 117760_118260
+%mor:	verb|come-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay come okay . 119990_121920
+%mor:	intj|okay verb|come-Fin-Imp-S intj|okay .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*MOT:	Miss Angela is here , we can , we're going to build a puzzle . 122200_126440
+%mor:	propn|Miss propn|Angela aux|be-Fin-Ind-Pres-S3 adv|here cm|cm pron|we-Prs-Nom-P1 aux|can-Fin-S cm|cm pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 verb|go-Part-Pres-S part|to verb|build-Inf-S det|a-Ind-Art noun|puzzle-Acc .
+%gra:	1|4|NSUBJ 2|1|FLAT 3|4|COP 4|15|ROOT 5|7|PUNCT 6|7|NSUBJ 7|4|PARATAXIS 8|7|PUNCT 9|11|NSUBJ 10|11|AUX 11|4|PARATAXIS 12|13|MARK 13|11|XCOMP 14|15|DET 15|13|OBJ 16|4|PUNCT
+*MOT:	this is the , okay show me number one . 126550_130490
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art cm|cm intj|okay verb|show-Inf-Imp-S pron|I-Prs-Acc-S1 noun|number-Acc noun|one .
+%gra:	1|6|NSUBJ-OUTER 2|6|COP 3|6|REPARANDUM 4|3|PUNCT 5|6|DISCOURSE 6|9|ROOT 7|6|IOBJ 8|6|OBJ 9|6|OBL-UNMARKED 10|6|PUNCT
+*MOT:	where's one ? 130590_131900
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 num|one ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	CHILDNAME one . 133080_134300
+%mor:	propn|CHILDNAME num|one .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+*MOT:	tell me one . 134350_135350
+%mor:	verb|tell-Fin-Imp-S pron|I-Prs-Acc-S1 num|one .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	pick the one , look it here , pick one . 136550_139190
+%mor:	verb|pick-Fin-Imp-S det|the-Def-Art noun|one-Acc cm|cm verb|look-Fin-Imp-S2 pron|it-Prs-Acc-S3 adv|here cm|cm verb|pick-Fin-Imp-S num|one .
+%gra:	1|10|ROOT 2|3|DET 3|1|OBJ 4|5|PUNCT 5|1|PARATAXIS 6|5|OBJ 7|5|ADVMOD 8|9|PUNCT 9|1|PARATAXIS 10|9|OBJ 11|1|PUNCT
+*MOT:	good+job . 140820_142220
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay you can put it . 143000_145160
+%mor:	intj|okay pron|you-Prs-Nom-S2 aux|can-Fin-S verb|put-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	good where's two ? 145860_147590
+%mor:	adj|good-S1 adv|where~aux|be-Fin-Ind-Pres-S3 num|two ?
+%gra:	1|4|ROOT 2|1|ADVMOD 3|4|COP 4|1|ADVCL 5|1|PUNCT
+*MOT:	how (a)bout two ? 148020_149400
+%mor:	adv|how adp|about num|two ?
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	oo okay put it . 152810_154430
+%mor:	aux|oo-Fin-Ind-S intj|okay verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|3|AUX 2|3|DISCOURSE 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	put it , good . 156370_158190
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 cm|cm adj|good-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|PUNCT 4|1|PARATAXIS 5|1|PUNCT
+*MOT:	okay try to push . 158220_159730
+%mor:	intj|okay verb|try-Fin-Imp-S part|to verb|push-Inf-S .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|MARK 4|2|XCOMP 5|2|PUNCT
+*MOT:	number three . 160020_161630
+%mor:	noun|number num|three .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+*MOT:	show me three . 162490_163830
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 num|three .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	number three . 164370_165310
+%mor:	noun|number num|three .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+*MOT:	where's three Mama@g ? 165880_167350
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 num|three noun|mama ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NUMMOD 4|1|NSUBJ 5|1|PUNCT
+*MOT:	three , look at very well da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da . 168950_173900
+%mor:	num|three cm|cm verb|look-Fin-Imp-S adp|at adv|very adv|well noun|da .
+%gra:	1|7|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|7|CASE 5|6|ADVMOD 6|7|AMOD 7|3|OBL 8|1|PUNCT
+*MOT:	xxx . 174360_175710
+*MOT:	this goes in this spot . 177610_180220
+%mor:	pron|this-Dem-S1 verb|go-Fin-Ind-Pres-S3 adp|in det|this-Def-Dem-Sing noun|spot .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|CASE 4|5|DET 5|2|OBL 6|2|PUNCT
+*MOT:	CHILDNAME show me four . 180310_181550
+%mor:	propn|CHILDNAME verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 num|four .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|IOBJ 4|2|OBJ 5|2|PUNCT
+*MOT:	CHILDNAME show me four . 182090_184230
+%mor:	propn|CHILDNAME verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 num|four .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|IOBJ 4|2|OBJ 5|2|PUNCT
+*MOT:	look at here , where's number four . 184670_187030
+%mor:	verb|look-Fin-Imp-S adp|at adv|here cm|cm adv|where~aux|be-Fin-Ind-Pres-S3 noun|number num|four .
+%gra:	1|8|ROOT 2|3|CASE 3|1|OBL 4|7|PUNCT 5|1|PARATAXIS 6|7|COP 7|1|PARATAXIS 8|7|NUMMOD 9|1|PUNCT
+*MOT:	good+job . 188180_189560
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	number four we are xxx . 190010_194140
+%mor:	noun|number num|four pron|we-Prs-Nom-P1 aux|be-Fin-Ind-Pres-P1 .
+%gra:	1|4|ROOT 2|1|NUMMOD 3|4|NSUBJ 4|1|ACL-RELCL 5|1|PUNCT
+*MOT:	www . 194340_196310
+%xPCO:	parent speaks to other child .
+*MOT:	show me number five . 196480_198440
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 noun|number-Acc num|five .
+%gra:	1|4|ROOT 2|1|IOBJ 3|1|OBJ 4|3|NUMMOD 5|1|PUNCT
+*MOT:	xxx why show me number five ? 199580_202580
+%mor:	adv|why verb|show-Inf-S pron|I-Prs-Acc-S1 noun|number-Acc num|five ?
+%gra:	1|2|ADVMOD 2|5|ROOT 3|2|IOBJ 4|2|OBJ 5|4|NUMMOD 6|2|PUNCT
+*MOT:	number five . 203000_203940
+%mor:	noun|number num|five .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+*MOT:	look here . 204970_206130
+%mor:	verb|look-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	show me number five here . 206470_207870
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 noun|number-Acc num|five adv|here .
+%gra:	1|5|ROOT 2|1|IOBJ 3|1|OBJ 4|3|NUMMOD 5|1|ADVMOD 6|1|PUNCT
+*MOT:	www . 208220_213910
+%xPCO:	parent speaks to other children .
+*MOT:	look show me number five . 213910_215000
+%mor:	verb|look-Fin-Imp-S verb|show-Inf-S pron|I-Prs-Acc-S1 noun|number-Acc num|five .
+%gra:	1|5|ROOT 2|1|XCOMP 3|2|IOBJ 4|2|OBJ 5|4|NUMMOD 6|1|PUNCT
+*MOT:	number five . 215910_217320
+%mor:	noun|number num|five .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+*MOT:	CHILDNAME da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da  [/] da ah . 219060_223940
+%mor:	propn|CHILDNAME x|da intj|ah .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|DISCOURSE 4|1|PUNCT
+*MOT:	good+job where are you going to put in five ? 224590_227080
+%mor:	noun|goodjob adv|where aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|go-Part-Pres-S part|to verb|put-Inf-S adp|in num|five ?
+%gra:	1|9|ROOT 2|7|ADVMOD 3|5|AUX 4|5|NSUBJ 5|1|APPOS 6|7|MARK 7|5|XCOMP 8|9|CASE 9|7|OBL 10|1|PUNCT
+*MOT:	you are put it +... 227630_229130
+%mor:	pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 verb|put-Part-Past-S-irr pron|it-Prs-Acc-S3 +...
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	good+job show me number six . 231950_234970
+%mor:	noun|goodjob verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 noun|number-Acc num|six .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|IOBJ 4|2|OBJ 5|4|NUMMOD 6|2|PUNCT
+*MOT:	number six , uh , that is nine . 235550_239040
+%mor:	noun|number num|six cm|cm intj|uh cm|cm pron|that-Dem aux|be-Fin-Ind-Pres-S3 num|nine .
+%gra:	1|8|ROOT 2|1|DEP 3|4|PUNCT 4|8|DISCOURSE 5|4|PUNCT 6|8|NSUBJ 7|8|COP 8|1|APPOS 9|1|PUNCT
+*MOT:	this is nine . 239140_240530
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 num|nine .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	show me six . 241070_242600
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 num|six .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	come show me six . 244150_246150
+%mor:	verb|come-Fin-Imp-S verb|show-Inf-S pron|I-Prs-Acc-S1 num|six .
+%gra:	1|4|ROOT 2|1|XCOMP 3|2|IOBJ 4|2|OBJ 5|1|PUNCT
+*MOT:	CHILDNAME show me six . 246560_248080
+%mor:	propn|CHILDNAME verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 num|six .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|IOBJ 4|2|OBJ 5|2|PUNCT
+*MOT:	look . 248500_249130
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	see ? 249990_250580
+%mor:	verb|see-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	show me six . 254700_255850
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 num|six .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	where is six CHILDNAME ? 256140_257590
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 num|six propn|CHILDNAME ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NUMMOD 4|1|NSUBJ 5|1|PUNCT
+*MOT:	number six tell me <number six>  [/] number six . 258480_262430
+%mor:	noun|number num|six verb|tell-Fin-S pron|I-Prs-Acc-S1 noun|number-Acc num|six .
+%gra:	1|3|NSUBJ 2|1|DEP 3|6|ROOT 4|3|IOBJ 5|3|OBJ 6|5|NUMMOD 7|3|PUNCT
+*MOT:	Mama@g  [/] Mama@g show me six , look at six here . 262490_265950
+%mor:	noun|mama verb|show-Fin-S pron|I-Prs-Acc-S1 num|six cm|cm verb|look-Fin-Imp-S adp|at num|six adv|here .
+%gra:	1|2|NSUBJ 2|9|ROOT 3|2|IOBJ 4|2|OBJ 5|6|PUNCT 6|2|PARATAXIS 7|8|CASE 8|6|OBL 9|6|ADVMOD 10|2|PUNCT
+*MOT:	www . 266390_270610
+%xPCO:	parent speaks to other child .
+*MOT:	show me number six . 270760_271780
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 noun|number-Acc num|six .
+%gra:	1|4|ROOT 2|1|IOBJ 3|1|OBJ 4|3|NUMMOD 5|1|PUNCT
+*MOT:	here , number six , look here . 271810_275140
+%mor:	adv|here cm|cm noun|number num|six cm|cm verb|look-Fin-Imp-S adv|here .
+%gra:	1|6|ADVMOD 2|3|PUNCT 3|1|APPOS 4|3|NUMMOD 5|1|PUNCT 6|7|ROOT 7|6|ADVMOD 8|6|PUNCT
+%xPCO:	parent speaks to other child .
+*MOT:	www . 275140_276800
+%xPCO:	parent speaks to other child .
+*MOT:	CHILDNAME show me number six look . 277370_280180
+%mor:	propn|CHILDNAME verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 noun|number-Acc num|six noun|look .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|IOBJ 4|2|OBJ 5|6|NUMMOD 6|2|OBL-UNMARKED 7|2|PUNCT
+*MOT:	pass me them . 281450_282690
+%mor:	verb|pass-Fin-Imp-S pron|I-Prs-Acc-S1 pron|they-Prs-Acc-P3 .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	oh I don't know . 283000_284310
+%mor:	intj|oh pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|know-Inf-S .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	show me number six good+job CHILDNAME xxx you did it . 284400_290100
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 noun|number num|six noun|goodjob noun|childname-Acc pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Past-S2-irr pron|it-Prs-Acc-S3 .
+%gra:	1|9|ROOT 2|1|IOBJ 3|6|COMPOUND 4|3|NUMMOD 5|6|COMPOUND 6|1|OBJ 7|8|NSUBJ 8|6|ACL-RELCL 9|8|OBJ 10|1|PUNCT
+*MOT:	oh it's like this ? 290570_292770
+%mor:	intj|oh pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|like pron|this-Dem-S1 ?
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|CASE 5|5|ROOT 6|5|PUNCT
+*MOT:	no . 293890_294850
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no  [/] no  [/] no . 296120_297870
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh it's like the this , I see . 298770_302750
+%mor:	intj|oh pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|like det|the-Def-Art pron|this-Dem-S1 cm|cm pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|CASE 5|6|DET 6|9|ROOT 7|9|PUNCT 8|9|NSUBJ 9|6|PARATAXIS 10|6|PUNCT
+*MOT:	age thirty . 304710_306010
+%mor:	noun|age num|thirty .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+*MOT:	CHILDNAME no come on come  [/] come . 309040_310560
+%mor:	intj|childname intj|no verb|come-Fin-Imp-S adp|on verb|come-Inf-S .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|5|ROOT 4|5|CASE 5|3|OBL 6|3|PUNCT
+*MOT:	come . 312020_312980
+%mor:	verb|come-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Miss Angela is here . 314250_315600
+%mor:	propn|Miss propn|Angela aux|be-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|4|NSUBJ 2|1|FLAT 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	come on xxx . 315700_317060
+%mor:	verb|come-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	www . 317610_320320
+%xPCO:	parent speaks to other child .
+*MOT:	yes , look number six . 320490_323270
+%mor:	intj|yes cm|cm verb|look-Fin-Imp-S noun|number-Acc num|six .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|5|ROOT 4|3|OBJ 5|3|OBL-UNMARKED 6|3|PUNCT
+*MOT:	alright number six put it . 323320_325710
+%mor:	intj|alright noun|number num|six verb|put-Fin-Ind-Past-S3-irr pron|it-Prs-Acc-S3 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|2|NUMMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	put  [/] put number . 326680_328120
+%mor:	verb|put-Fin-Imp-S noun|number-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+@End

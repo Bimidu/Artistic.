@@ -1,0 +1,405 @@
+@UTF8
+@PID:	11312/a-00082263-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|9;10.|male|||Target_Child|||
+@Media:	02_T1_1, video
+*COD:	C . 1_293960
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No CHI AAC observed . 1_1000
+%mor:	det|no-Def-Neg propn|CHI propn|AAC verb|observe-Fin-Ind-Past-S3 .
+%gra:	1|3|DET 2|3|COMPOUND 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	come here . 50_710
+%mor:	verb|come-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	watch outside . 810_1550
+%mor:	verb|watch-Fin-Imp-S adv|outside .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	watch  [/] watch , come with me . 1740_3100
+%mor:	verb|watch-Fin-Imp-S cm|cm verb|come-Fin-Imp-S adp|with pron|I-Prs-Acc-S1 .
+%gra:	1|5|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|5|CASE 5|3|OBL 6|1|PUNCT
+*MOT:	<watch outside>  [/] watch outside , see what they're doing the neighbour , <come here>  [/] come here . 3150_6930
+%mor:	verb|watch-Fin-Imp-S adv|outside cm|cm verb|see-Fin-Imp-S pron|what-Rel-S1 pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|do-Part-Pres-S det|the-Def-Art noun|neighbour-Acc cm|cm verb|come-Fin-Imp-S adv|here .
+%gra:	1|13|ROOT 2|1|ADVMOD 3|4|PUNCT 4|1|PARATAXIS 5|8|OBJ 6|8|NSUBJ 7|8|AUX 8|4|CCOMP 9|10|DET 10|8|OBJ 11|12|PUNCT 12|1|PARATAXIS 13|12|ADVMOD 14|1|PUNCT
+*MOT:	here  [/] here  [/] here watch . 7090_8760
+%mor:	adv|here verb|watch-Fin-Imp-S .
+%gra:	1|2|ROOT 2|1|ACL 3|1|PUNCT
+*MOT:	what they're doing ? 9050_10340
+%mor:	pron|what-Int-S1 pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|do-Part-Pres-S ?
+%gra:	1|4|ROOT 2|4|NSUBJ 3|4|AUX 4|1|ACL-RELCL 5|1|PUNCT
+*MOT:	they're cutting the trees , watch . 10450_12210
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|cut-Part-Pres-S det|the-Def-Art noun|tree-Plur-Acc cm|cm verb|watch-Fin-Imp-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|5|DET 5|3|OBJ 6|7|PUNCT 7|3|PARATAXIS 8|3|PUNCT
+*CHI:	xxx . 12420_13260
+*MOT:	you see ? 13430_13770
+%mor:	pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Pres-S2 ?
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	what they're going to build over there ? 14540_15960
+%mor:	pron|what-Int-S1 pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|go-Part-Pres-S part|to verb|build-Inf-S adp|over adv|there ?
+%gra:	1|8|ROOT 2|4|NSUBJ 3|4|AUX 4|1|ACL-RELCL 5|6|MARK 6|4|XCOMP 7|8|CASE 8|6|OBL 9|1|PUNCT
+*MOT:	what do you think ? 17040_17860
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	I think . 18360_19030
+%mor:	pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Pres-S1 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	what do you think CHILDNAME ? 19420_20610
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S propn|CHILDNAME-Acc ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	CHILDNAME . 21140_21460
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you think what they're going to build over there ? 21510_23720
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S pron|what-Rel-S1 pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|go-Part-Pres-S part|to verb|build-Inf-S adp|over adv|there ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|11|ROOT 4|9|OBJ 5|7|NSUBJ 6|7|AUX 7|3|CCOMP 8|9|MARK 9|7|XCOMP 10|11|CASE 11|9|OBL 12|3|PUNCT
+*CHI:	xxx build over there ? 22130_24200
+%mor:	verb|build-Fin-Imp-S adp|over adv|there ?
+%gra:	1|3|ROOT 2|1|ADVMOD 3|1|ADVMOD 4|1|PUNCT
+*MOT:	they are going to build a house . 24340_26080
+%mor:	pron|they-Prs-Nom-P3 aux|be-Fin-Ind-Pres-P3 verb|go-Part-Pres-S part|to verb|build-Inf-S det|a-Ind-Art noun|house-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|3|PUNCT
+*CHI:	build a house . 26440_27590
+%mor:	verb|build-Fin-Imp-S det|a-Ind-Art noun|house-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*MOT:	house . 27480_28370
+%mor:	noun|house .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	house .  [+ per] 28300_28870
+%mor:	noun|house .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	house . 29350_29990
+%mor:	noun|house .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	house .  [+ per] 29910_30390
+%mor:	noun|house .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	they uh , they're going to build a house . 30410_32340
+%mor:	pron|they-Prs-Nom-P3 intj|uh cm|cm pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|go-Part-Pres-S part|to verb|build-Inf-S det|a-Ind-Art noun|house-Acc .
+%gra:	1|6|VOCATIVE 2|6|DISCOURSE 3|2|PUNCT 4|6|NSUBJ 5|6|AUX 6|10|ROOT 7|8|MARK 8|6|XCOMP 9|10|DET 10|8|OBJ 11|6|PUNCT
+*MOT:	they're cutting the trees to build the house over there so you will have a new neighbour . 32510_37980
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|cut-Part-Pres-S det|the-Def-Art noun|tree-Plur-Acc part|to verb|build-Inf-S det|the-Def-Art noun|house-Acc adp|over adv|there sconj|so pron|you-Prs-Nom-S2 aux|will-Fin-S verb|have-Inf-S det|a-Ind-Art adj|new-S1 noun|neighbour-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|18|ROOT 4|5|DET 5|3|OBJ 6|7|MARK 7|3|ADVCL 8|9|DET 9|7|OBJ 10|11|CASE 11|7|OBL 12|15|MARK 13|15|NSUBJ 14|15|AUX 15|3|ADVCL 16|18|DET 17|18|AMOD 18|15|OBJ 19|3|PUNCT
+*MOT:	watch  [/] watch . 38710_40990
+%mor:	verb|watch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what is the guy is driving ? 42980_44530
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|guy aux|be-Fin-Ind-Pres-S3 verb|drive-Part-Pres-S ?
+%gra:	1|6|OBJ 2|1|COP 3|4|DET 4|6|NSUBJ 5|6|AUX 6|6|ROOT 7|6|PUNCT
+*CHI:	the guy xxx .  [+ per] 44310_45090
+%mor:	det|the-Def-Art noun|guy .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	what he's driving ? 45270_46440
+%mor:	pron|what-Int-S1 pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|drive-Part-Pres-S ?
+%gra:	1|4|ROOT 2|4|NSUBJ 3|4|AUX 4|1|ACL-RELCL 5|1|PUNCT
+*CHI:	he's driving .  [+ per] 46110_46750
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|drive-Part-Pres-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+*MOT:	tractor . 47090_47820
+%mor:	noun|tractor .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	tractor . 48040_48620
+%mor:	noun|tractor .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<look at me>  [/] <look at me>  [/] look at me . 51200_53760
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	you see ? 55770_56250
+%mor:	pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Pres-S2 ?
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	they're going to build . 58460_59410
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|go-Part-Pres-S part|to verb|build-Inf-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|MARK 5|3|XCOMP 6|3|PUNCT
+*MOT:	&~sh , come and show me your toy here . 59450_61630
+%mor:	cm|cm verb|come-Fin-Imp-S cconj|and verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 pron|your-Prs-Gen-S2 noun|toy-Acc adv|here .
+%gra:	1|2|PUNCT 2|8|ROOT 3|4|CC 4|2|CONJ 5|4|IOBJ 6|7|NMOD-POSS 7|4|OBJ 8|4|ADVMOD 9|2|PUNCT
+*MOT:	<sit here>  [/] sit here for a second . 61730_63740
+%mor:	verb|sit-Fin-Imp-S adv|here adp|for det|a-Ind-Art noun|second .
+%gra:	1|5|ROOT 2|1|ADVMOD 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+*MOT:	sit here . 64030_64390
+%mor:	verb|sit-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	tell me what is this one you built . 66220_68480
+%mor:	verb|tell-Fin-Imp-S pron|I-Prs-Acc-S1 pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|one pron|you-Prs-Nom-S2 verb|build-Fin-Ind-Past-S2-irr .
+%gra:	1|8|ROOT 2|1|IOBJ 3|6|NSUBJ 4|6|COP 5|6|DET 6|1|CCOMP 7|8|NSUBJ 8|6|ACL-RELCL 9|1|PUNCT
+*MOT:	what's the name ? 70010_70950
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|name ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	what is the , sit sit sit CHILDNAME sit  [/] sit . 71680_73790
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art cm|cm verb|sit-Inf-Imp-S verb|sit-Inf-S verb|sit-Fin-Imp-S propn|CHILDNAME verb|sit-Fin-Imp-S .
+%gra:	1|9|ROOT 2|1|COP 3|5|DET 4|3|PUNCT 5|7|COMPOUND 6|7|COMPOUND 7|9|COMPOUND 8|9|COMPOUND 9|1|NSUBJ 10|1|PUNCT
+*CHI:	ei . 72370_73200
+%mor:	intj|ei .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what is the name of this , I can give this one to you . 74050_76300
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|name adp|of pron|this-Dem-S1 cm|cm pron|I-Prs-Nom-S1 aux|can-Fin-S verb|give-Inf-S det|this-Def-Dem-Sing noun|one-Acc adp|to pron|you-Prs-Acc-S2 .
+%gra:	1|14|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|6|CASE 6|4|NMOD 7|10|PUNCT 8|10|NSUBJ 9|10|AUX 10|1|PARATAXIS 11|12|DET 12|10|OBJ 13|14|CASE 14|10|OBL 15|1|PUNCT
+*MOT:	what is the name of this one , what is the , this one ? 76800_79630
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|name adp|of det|this-Def-Dem-Sing noun|one cm|cm pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art cm|cm det|this-Def-Dem-Sing noun|one ?
+%gra:	1|14|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|7|CASE 6|7|DET 7|4|NMOD 8|9|PUNCT 9|1|NSUBJ 10|11|COP 11|9|NSUBJ 12|11|PUNCT 13|14|DET 14|9|NSUBJ 15|1|PUNCT
+*CHI:	is this one ?  [+ per] 79250_79900
+%mor:	aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|one ?
+%gra:	1|3|COP 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	is it crab ? 80470_81130
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 noun|crab ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	xxx is it crab ?  [+ per] 80540_82070
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 noun|crab ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	what is this ? 82210_83310
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=screeches what is this ?  [+ per] 83500_85030
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	sit  [/] sit  [/] sit  [/] sit  [/] sit I'm going to talk to you look at me . 84280_87360
+%mor:	verb|sit-Fin-Imp-S pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|go-Part-Pres-S part|to verb|talk-Inf-S adp|to pron|you-Prs-Acc-S2 verb|look-Fin-Ind-Pres-S2 adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|11|ROOT 2|4|NSUBJ 3|4|AUX 4|1|CCOMP 5|6|MARK 6|4|XCOMP 7|8|CASE 8|6|OBL 9|6|XCOMP 10|11|CASE 11|9|OBL 12|1|PUNCT
+*CHI:	to talk to you .  [+ per] 86680_87780
+%mor:	part|to verb|talk-Inf-S adp|to pron|you-Prs-Acc-S2 .
+%gra:	1|2|MARK 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+*MOT:	okay how was your school ? 87980_89350
+%mor:	intj|okay adv|how aux|be-Fin-Ind-Past-S3-irr pron|your-Prs-Gen-S2 noun|school ?
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|COP 4|5|NMOD-POSS 5|2|NSUBJ 6|2|PUNCT
+*CHI:	how  [* s:per] good . 88810_90280
+%mor:	adv|how adj|good-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	who is your teacher ? 91290_92470
+%mor:	pron|who-Int aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|teacher ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NMOD-POSS 4|4|ROOT 5|4|PUNCT
+*CHI:	Mister Chad . 92320_93470
+%mor:	propn|Mister propn|Chad .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	what did you learn in the school ? 93610_95160
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 verb|learn-Inf-S adp|in det|the-Def-Art noun|school ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|7|ROOT 5|7|CASE 6|7|DET 7|4|OBL 8|4|PUNCT
+*CHI:	French . 95410_95870
+%mor:	adj|French-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you like French ? 96300_97180
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S propn|French-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=hums . 98050_98490
+*MOT:	do you like to learn French ? 98750_99680
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S part|to verb|learn-Inf-S propn|French-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|3|PUNCT
+*MOT:	look at me . 100160_100850
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*CHI:	good  [/] good . 101730_103620
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you like to learn French in the school ? 103820_105710
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S part|to verb|learn-Inf-S propn|French-Acc adp|in det|the-Def-Art noun|school ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|9|ROOT 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|9|CASE 8|9|DET 9|5|OBL 10|3|PUNCT
+*CHI:	good . 106330_107000
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes ? 107070_107460
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yes . 107520_108110
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay <sit there>  [/] sit there sit here <sit here for a second>  [/] sit here for a second . 108200_112310
+%mor:	intj|okay verb|sit-Fin-Imp-S adv|there verb|sit-Fin-Imp-S adv|here verb|sit-Fin-Imp-S adv|here adp|for det|a-Ind-Art noun|second .
+%gra:	1|2|DISCOURSE 2|10|ROOT 3|2|ADVMOD 4|2|XCOMP 5|4|ADVMOD 6|2|PARATAXIS 7|6|ADVMOD 8|10|CASE 9|10|DET 10|6|OBL 11|2|PUNCT
+*CHI:	&=squeals . 108200_112310
+*MOT:	show me your game , <show me your game what is inside>  [/] show me your game what is inside . 112400_116600
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 pron|your-Prs-Gen-S2 noun|game-Acc cm|cm verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 pron|your-Prs-Gen-S2 noun|game-Acc pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 adv|inside .
+%gra:	1|12|ROOT 2|1|IOBJ 3|4|NMOD-POSS 4|1|OBJ 5|6|PUNCT 6|1|PARATAXIS 7|6|IOBJ 8|9|NMOD-POSS 9|6|OBJ 10|12|NSUBJ 11|12|COP 12|6|CCOMP 13|1|PUNCT
+*MOT:	show it to me . 117900_119050
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|PUNCT
+*CHI:	&=moans . 120640_122220
+*MOT:	what is the game ? 121150_122120
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|game ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*CHI:	xxx . 122700_123430
+*MOT:	xxx . 125120_127430
+*MOT:	let me xxx , okay ? 131133_134093
+%mor:	verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 cm|cm intj|okay ?
+%gra:	1|4|ROOT 2|1|OBJ 3|4|PUNCT 4|1|DISCOURSE 5|1|PUNCT
+*MOT:	what is this , what are these ? 137746_139360
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 cm|cm pron|what-Int-S1 aux|be-Fin-Ind-Pres-P3 pron|this-Dem-P1 ?
+%gra:	1|7|ROOT 2|3|COP 3|1|NSUBJ 4|5|PUNCT 5|1|NSUBJ 6|7|COP 7|5|NSUBJ 8|1|PUNCT
+*CHI:	um &=hums . 139640_142266
+%mor:	intj|um .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what is this ? 141626_142640
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	is it a board game , oops . 142760_144440
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 det|a-Ind-Art noun|board noun|game cm|cm adv|oops .
+%gra:	1|5|COP 2|5|NSUBJ 3|5|DET 4|5|COMPOUND 5|7|ROOT 6|7|PUNCT 7|5|ADVMOD 8|5|PUNCT
+*MOT:	oops I didn't know . 146226_147866
+%mor:	intj|oop pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Past-S1-irr~part|not verb|know-Inf-S .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	show it to me how to play . 149506_150906
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 adv|how part|to verb|play-Inf-S .
+%gra:	1|7|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|OBJ 6|7|MARK 7|5|ACL 8|1|PUNCT
+*MOT:	show it to me how to play , <show it to me>  [/] show it to me . 153080_156573
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 adv|how part|to verb|play-Inf-S cm|cm verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 .
+%gra:	1|12|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|OBJ 6|7|MARK 7|5|ACL 8|9|PUNCT 9|1|PARATAXIS 10|9|OBJ 11|12|CASE 12|9|OBL 13|1|PUNCT
+*MOT:	how to play ? 156840_157666
+%mor:	adv|how part|to verb|play-Inf-S ?
+%gra:	1|3|ROOT 2|3|MARK 3|1|ACL 4|1|PUNCT
+*CHI:	&=mumbles . 158186_159906
+*MOT:	okay . 160333_160933
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	pick one up then , <pick one>  [/] pick one , pick one up then . 161280_165173
+%mor:	verb|pick-Fin-Imp-S num|one adp|up adv|then cm|cm verb|pick-Fin-Imp-S num|one cm|cm verb|pick-Fin-Imp-S num|one adp|up adv|then .
+%gra:	1|12|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|ADVMOD 5|6|PUNCT 6|1|PARATAXIS 7|6|OBJ 8|9|PUNCT 9|1|PARATAXIS 10|9|OBJ 11|9|COMPOUND-PRT 12|9|ADVMOD 13|1|PUNCT
+*CHI:	pick one . 163653_164506
+%mor:	verb|pick-Fin-Imp-S num|one .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	okay &=squeals . 165133_168520
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx open  [/] open  [/] open sit here , open  [/] open . 167546_171533
+%mor:	adj|open-S1 verb|sit-Inf-S adv|here cm|cm verb|open-Fin-Imp-S2 .
+%gra:	1|2|ADVMOD 2|5|ROOT 3|2|ADVMOD 4|5|PUNCT 5|2|PARATAXIS 6|2|PUNCT
+*MOT:	show me . 173360_173986
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 .
+%gra:	1|2|ROOT 2|1|IOBJ 3|1|PUNCT
+*MOT:	okay , take this one . 174080_176053
+%mor:	intj|okay cm|cm verb|take-Fin-Imp-S det|this-Def-Dem-Sing noun|one-Acc .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	let me see oh  [/] oh  [/] oh sit  [/] sit &=laughs . 176453_178773
+%mor:	verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 verb|see-Inf-S intj|oh verb|sit-Fin-Imp-S .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DISCOURSE 5|3|XCOMP 6|1|PUNCT
+*MOT:	sit &=laughs sit  [/] sit CHILDNAME . 179480_182426
+%mor:	verb|sit-Fin-Imp-S verb|sit-Inf-S propn|CHILDNAME-Acc .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	<find the cartoon for me>  [/] find the cartoon for me . 182786_185386
+%mor:	verb|find-Fin-Imp-S det|the-Def-Art noun|cartoon-Acc adp|for pron|I-Prs-Acc-S1 .
+%gra:	1|5|ROOT 2|3|DET 3|1|OBJ 4|5|CASE 5|1|OBL 6|1|PUNCT
+*MOT:	come here , no I don't want it . 185693_187893
+%mor:	verb|come-Fin-Imp-S adv|here cm|cm intj|no pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|9|ROOT 2|1|ADVMOD 3|8|PUNCT 4|8|DISCOURSE 5|8|NSUBJ 6|8|AUX 7|8|ADVMOD 8|1|PARATAXIS 9|8|OBJ 10|1|PUNCT
+*MOT:	watch , <what do you want to watch>  [/] what do you want to watch CHILDNAME ? 188120_191666
+%mor:	verb|watch-Fin-Imp-S cm|cm pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|watch-Inf-S propn|CHILDNAME-Acc ?
+%gra:	1|9|ROOT 2|6|PUNCT 3|8|OBJ 4|6|AUX 5|6|NSUBJ 6|1|PARATAXIS 7|8|MARK 8|6|XCOMP 9|8|OBJ 10|1|PUNCT
+*CHI:	&=whines . 190040_193826
+*MOT:	CHILDNAME come on watch a cartoon . 194933_196893
+%mor:	propn|CHILDNAME verb|come-Fin-Imp-S adp|on verb|watch-Inf-S det|a-Ind-Art noun|cartoon-Acc .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|MARK 4|2|ADVCL 5|6|DET 6|4|OBJ 7|2|PUNCT
+*MOT:	<come with me>  [/] come with me , let's watch a cartoon , come . 197786_200160
+%mor:	verb|come-Fin-Imp-S adp|with pron|I-Prs-Acc-S1 cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|watch-Inf-S det|a-Ind-Art noun|cartoon-Acc cm|cm verb|come-Fin-Imp-S .
+%gra:	1|11|ROOT 2|3|CASE 3|1|OBL 4|5|PUNCT 5|1|PARATAXIS 6|5|OBJ 7|5|XCOMP 8|9|DET 9|7|OBJ 10|11|PUNCT 11|1|PARATAXIS 12|1|PUNCT
+*MOT:	let's go watch a cartoon , watch . 200266_201866
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S verb|watch-Inf-S det|a-Ind-Art noun|cartoon-Acc cm|cm verb|watch-Fin-Imp-S .
+%gra:	1|8|ROOT 2|1|OBJ 3|1|XCOMP 4|3|XCOMP 5|6|DET 6|4|OBJ 7|8|PUNCT 8|1|PARATAXIS 9|1|PUNCT
+*MOT:	watch cartoon , come . 202840_204226
+%mor:	verb|watch-Fin-Imp-S noun|cartoon-Acc cm|cm verb|come-Fin-Imp-S .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|PUNCT 4|1|PARATAXIS 5|1|PUNCT
+*CHI:	watch cartoon . 204306_205546
+%mor:	verb|watch-Fin-Imp-S noun|cartoon-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	yeah , get the remote control . 205173_207266
+%mor:	intj|yeah cm|cm verb|get-Fin-Imp-S det|the-Def-Art adj|remote-S1 noun|control-Acc .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|6|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|3|PUNCT
+*MOT:	okay find something , no  [/] no I don't want it , you  [/] you find something . 209653_212573
+%mor:	intj|okay verb|find-Fin-Imp-S pron|something-Ind-S1 cm|cm intj|no pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S pron|it-Prs-Acc-S3 cm|cm pron|you-Prs-Nom-S2 verb|find-Fin-Ind-Pres-S2 pron|something-Ind-S1 .
+%gra:	1|2|DISCOURSE 2|14|ROOT 3|2|OBJ 4|9|PUNCT 5|9|DISCOURSE 6|9|NSUBJ 7|9|AUX 8|9|ADVMOD 9|2|PARATAXIS 10|9|OBJ 11|13|PUNCT 12|13|NSUBJ 13|2|PARATAXIS 14|13|OBJ 15|2|PUNCT
+*CHI:	you find something . 212320_213840
+%mor:	pron|you-Prs-Nom-S2 verb|find-Fin-Ind-Pres-S2 pron|something-Ind-S1 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	um . 214106_215453
+%mor:	intj|um .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	uh find xxx something about the Windows_Ten . 216866_219480
+%mor:	intj|uh verb|find-Fin-Imp-S pron|something-Ind-S1 adp|about det|the-Def-Art propn|WindowsTen .
+%gra:	1|2|DISCOURSE 2|6|ROOT 3|2|OBJ 4|6|CASE 5|6|DET 6|3|NMOD 7|2|PUNCT
+*CHI:	&=grunts . 220160_220893
+*MOT:	no  [/] no you find it  [/] it . 220800_222333
+%mor:	intj|no pron|you-Prs-Nom-S2 verb|find-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	you find it . 222013_222640
+%mor:	pron|you-Prs-Nom-S2 verb|find-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	I don't want to watch CHILDNAME , you , for you . 222426_224813
+%mor:	pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S part|to verb|watch-Inf-S propn|CHILDNAME-Acc cm|cm pron|you-Prs-Acc-S2 cm|cm adp|for pron|you-Prs-Acc-S2 .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|12|ROOT 5|6|MARK 6|4|XCOMP 7|6|OBJ 8|9|PUNCT 9|7|CONJ 10|12|PUNCT 11|12|CASE 12|6|OBL 13|4|PUNCT
+*MOT:	for you not for me . 225306_226680
+%mor:	adp|for pron|you-Prs-Acc-S2 part|not adp|for pron|I-Prs-Acc-S1 .
+%gra:	1|2|CASE 2|5|ROOT 3|5|ADVMOD 4|5|CASE 5|2|NMOD 6|2|PUNCT
+*MOT:	Windows , maybe Windows , go to Windows . 227160_230066
+%mor:	noun|window-Plur cm|cm adv|maybe noun|window-Plur cm|cm verb|go-Fin-Imp-S adp|to noun|window-Plur .
+%gra:	1|6|NSUBJ 2|4|PUNCT 3|4|ADVMOD 4|1|APPOS 5|1|PUNCT 6|8|ROOT 7|8|CASE 8|6|OBL 9|6|PUNCT
+*MOT:	uh Windows_Ten . 230946_232426
+%mor:	intj|uh propn|WindowsTen .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	Windows_Ten . 233973_234906
+%mor:	propn|WindowsTen .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yeah . 236920_237386
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	so which one do you like , oh . 238026_239880
+%mor:	adv|so det|which-Def-Int noun|one-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S cm|cm intj|oh .
+%gra:	1|6|ADVMOD 2|3|DET 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|8|ROOT 7|8|PUNCT 8|6|DISCOURSE 9|6|PUNCT
+*MOT:	go to Windows_Ten . 241226_243173
+%mor:	verb|go-Fin-Imp-S adp|to propn|WindowsTen .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	maybe this one . 244506_246333
+%mor:	adv|maybe det|this-Def-Dem-Sing noun|one .
+%gra:	1|3|ADVMOD 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	oh . 248640_249253
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no I don't want to watch , for you CHILDNAME you like it . 249960_252600
+%mor:	intj|no pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S part|to verb|watch-Inf-S cm|cm adp|for pron|you-Prs-Acc-S2 noun|childname pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|14|ROOT 6|7|MARK 7|5|XCOMP 8|11|PUNCT 9|11|CASE 10|11|NMOD-POSS 11|13|OBL 12|13|NSUBJ 13|5|PARATAXIS 14|13|OBJ 15|5|PUNCT
+*MOT:	what is talking about ? 260280_261760
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 verb|talk-Part-Pres-S adp|about ?
+%gra:	1|3|OBJ 2|3|AUX 3|4|ROOT 4|3|OBL 5|3|PUNCT
+*MOT:	what is about CHILDNAME ? 262986_264240
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 adp|about propn|CHILDNAME ?
+%gra:	1|4|ROOT 2|1|COP 3|4|CASE 4|1|OBL 5|1|PUNCT
+*MOT:	what is talking about ? 265413_267040
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 verb|talk-Part-Pres-S adp|about ?
+%gra:	1|3|OBJ 2|3|AUX 3|4|ROOT 4|3|OBL 5|3|PUNCT
+*CHI:	Windows . 266960_267693
+%mor:	noun|window-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Windows ? 268520_269146
+%mor:	noun|window-Plur ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	Windows ?  [+ per] 269213_269773
+%mor:	noun|window-Plur ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	which Windows ? 270880_271733
+%mor:	det|which-Def-Int noun|window-Plur ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	which Windows ?  [+ per] 271920_272666
+%mor:	det|which-Def-Int noun|window-Plur ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	Windows_Ten ? 272626_273920
+%mor:	propn|WindowsTen ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	Windows_Ten ?  [+ per] 273986_275186
+%mor:	propn|WindowsTen ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=laughs I'm asking you . 275346_278266
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|ask-Part-Pres-S pron|you-Prs-Acc-S2 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|IOBJ 5|3|PUNCT
+*CHI:	I'm asking you .  [+ per] 278400_280146
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|ask-Part-Pres-S pron|you-Prs-Acc-S2 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|IOBJ 5|3|PUNCT
+*MOT:	www . 280226_283075
+%xPCO:	parent explains when child utterances are echolalic vs . spontaneous .
+*MOT:	how was your school ? 283075_284173
+%mor:	adv|how aux|be-Fin-Ind-Past-S3-irr pron|your-Prs-Gen-S2 noun|school ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*CHI:	good . 284013_284746
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	www . 284800_289706
+%xPCO:	parent continues to explain child's response patterns .
+@End

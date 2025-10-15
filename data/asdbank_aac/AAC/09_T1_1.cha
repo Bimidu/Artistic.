@@ -1,0 +1,470 @@
+@UTF8
+@PID:	11312/a-00082293-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI||male|5;10.||Target_Child|||
+@Media:	09_T1_1, video
+*COD:	C . 1_156000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No AAC use , no AAC device present . 30_1030
+%mor:	det|no-Def-Neg noun|aac noun|use cm|cm det|no-Def-Neg noun|aac noun|device adj|present-S1 .
+%gra:	1|3|DET 2|3|COMPOUND 3|8|ROOT 4|8|PUNCT 5|7|DET 6|7|COMPOUND 7|8|NSUBJ 8|3|PARATAXIS 9|3|PUNCT
+*MOT:	xxx . 250_1290
+*MOT:	let's see do you know any of these dinosaurs ? 2210_5100
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|know-Inf-S det|any-Def-Ind adp|of det|this-Def-Dem-Plur noun|dinosaur-Plur ?
+%gra:	1|10|ROOT 2|1|OBJ 3|1|XCOMP 4|6|AUX 5|6|NSUBJ 6|3|CCOMP 7|6|OBJ 8|10|CASE 9|10|DET 10|7|NMOD 11|1|PUNCT
+*CHI:	xxx . 5070_5480
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes ? 5790_6480
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what do we see let's look I don't recognize most of these names but let's see (un)til we recognize a name . 7820_12460
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 verb|see-Inf-S verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|look-Inf-S pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|recognize-Inf-S adj|most-Sup-S1 adp|of det|this-Def-Dem-Plur noun|name-Plur cconj|but verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S sconj|until pron|we-Prs-Nom-P1 verb|recognize-Fin-Ind-Pres-P1 det|a-Ind-Art noun|name-Acc .
+%gra:	1|5|OBJ 2|4|AUX 3|4|NSUBJ 4|24|ROOT 5|4|XCOMP 6|5|OBJ 7|5|XCOMP 8|11|NSUBJ 9|11|AUX 10|11|ADVMOD 11|7|CCOMP 12|11|OBJ 13|15|CASE 14|15|DET 15|12|NMOD 16|17|CC 17|4|CONJ 18|17|OBJ 19|17|XCOMP 20|22|MARK 21|22|NSUBJ 22|19|ADVCL 23|24|DET 24|22|OBJ 25|4|PUNCT
+*CHI:	gigantosaurus . 13260_15200
+%mor:	propn|gigantosaurus .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	gigantosaurus that's right . 15440_17600
+%mor:	noun|gigantosaurus pron|that-Rel~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|4|ROOT 2|4|NSUBJ 3|4|COP 4|1|ACL-RELCL 5|1|PUNCT
+*MOT:	and who's this ? 20390_21520
+%mor:	cconj|and pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|4|CC 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	jurassic giant killers . 21540_23930
+%mor:	adj|jurassic-S1 adj|giant-S1 noun|killer-Plur .
+%gra:	1|3|AMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	Jurassic_World . 25340_27000
+%mor:	propn|JurassicWorld .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	Jurassic_World yeah hey who's this ? 27590_30190
+%mor:	propn|JurassicWorld intj|yeah intj|hey pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|6|ROOT 2|1|DISCOURSE 3|6|DISCOURSE 4|6|NSUBJ 5|6|COP 6|1|PARATAXIS 7|1|PUNCT
+*MOT:	what's that one ? 30600_31610
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing noun|one ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	this is a +... 32650_33780
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art +...
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+*CHI:	artemis allosaur . 34080_35630
+%mor:	noun|artemis noun|allosaur .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	artemis+allosaur . 35810_37590
+%mor:	propn|artemisallosaur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that's an allosaurus . 39150_40950
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|allosaurus .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	were you gonna read that book from school ? 41790_43900
+%mor:	aux|be-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 adv|gonna verb|read-Inf-S det|that-Def-Dem-Sing noun|book-Acc adp|from noun|school ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|8|ROOT 5|6|DET 6|4|OBJ 7|8|CASE 8|4|OBL 9|4|PUNCT
+*CHI:	&=hums . 46210_46770
+*MOT:	do you wanna read that book from school ? 46760_48670
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|read-Inf-S det|that-Def-Dem-Sing noun|book-Acc adp|from noun|school ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|8|ROOT 5|6|DET 6|4|OBJ 7|8|CASE 8|4|OBL 9|4|PUNCT
+*CHI:	yes . 48700_49230
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	(o)kay can you read it to me ? 49390_50740
+%mor:	intj|okay aux|can-Fin-S pron|you-Prs-Nom-S2 verb|read-Inf-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|NSUBJ 4|7|ROOT 5|4|OBJ 6|7|CASE 7|4|OBL 8|4|PUNCT
+*MOT:	you're so good at reading would you read that book to me ? 51590_53430
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|so adj|good-S1 sconj|at verb|read-Part-Pres-S aux|would-Fin-S pron|you-Prs-Nom-S2 verb|read-Inf-S det|that-Def-Dem-Sing noun|book-Acc adp|to pron|I-Prs-Acc-S1 ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|13|ROOT 5|6|MARK 6|4|ADVCL 7|9|AUX 8|9|NSUBJ 9|4|ADVCL 10|11|DET 11|9|OBJ 12|13|CASE 13|9|OBL 14|4|PUNCT
+*MOT:	would you read it to Mommy please ? 54900_56270
+%mor:	aux|would-Fin-S pron|you-Prs-Nom-S2 verb|read-Inf-S pron|it-Prs-Acc-S3 adp|to propn|Mommy intj|please ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|OBJ 5|6|CASE 6|3|OBL 7|3|DISCOURSE 8|3|PUNCT
+*MOT:	okay you read it to Mommy . 58040_59530
+%mor:	intj|okay pron|you-Prs-Nom-S2 verb|read-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 adp|to propn|Mommy .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|CASE 6|3|OBL 7|3|PUNCT
+*MOT:	okay let's <go from>  [/] go from the start . 64500_65980
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S adp|from det|the-Def-Art noun|start .
+%gra:	1|2|DISCOURSE 2|7|ROOT 3|2|OBJ 4|2|XCOMP 5|7|CASE 6|7|DET 7|4|OBL 8|2|PUNCT
+*MOT:	what's it called ? 65980_66890
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 verb|call-Part-Past-S ?
+%gra:	1|4|NSUBJ-PASS 2|4|AUX-PASS 3|4|NSUBJ-PASS 4|4|ROOT 5|4|PUNCT
+*CHI:	Hide_And_Seek . 67840_69070
+%mor:	propn|HideAndSeek .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=hums . 69060_69630
+*MOT:	okay where does it go read it . 73300_75220
+%mor:	intj|okay adv|where aux|do-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 verb|go-Inf-S verb|read-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|5|DISCOURSE 2|5|ADVMOD 3|5|AUX 4|5|NSUBJ 5|7|ROOT 6|5|XCOMP 7|6|OBJ 8|5|PUNCT
+*CHI:	where can I hide ?  [+ bkr] 80010_82670
+%mor:	adv|where aux|can-Fin-S pron|I-Prs-Nom-S1 verb|hide-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading a book .
+*CHI:	I hide behind a chair .  [+ bkr] 84460_87990
+%mor:	pron|I-Prs-Nom-S1 verb|hide-Fin-Ind-Pres-S1 adp|behind det|a-Ind-Art noun|chair .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|CASE 4|5|DET 5|2|OBL 6|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading a book .
+*MOT:	&=hums . 88320_89290
+*MOT:	go ahead . 91860_92700
+%mor:	verb|go-Fin-Imp-S adv|ahead .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	do you wanna keep reading ? 94050_95640
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|keep-Inf-S noun|reading-Acc-Ger ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	don't touch &~mo , no  [/] no don't touch no  [/] no  [/] no don't touch Mommy's computer please . 96880_99930
+%mor:	aux|do-Fin-Imp-S~part|not verb|touch-Fin-Imp-S cm|cm intj|no aux|do-Fin-Imp-S~part|not verb|touch-Fin-Imp-S adv|no aux|do-Fin-Imp-S~part|not verb|touch-Fin-Imp-S propn|Mommy~part|s noun|computer-Acc intj|please .
+%gra:	1|3|AUX 2|3|ADVMOD 3|16|ROOT 4|8|PUNCT 5|8|DISCOURSE 6|8|AUX 7|8|ADVMOD 8|3|PARATAXIS 9|12|ADVMOD 10|12|AUX 11|12|ADVMOD 12|8|PARATAXIS 13|15|NMOD-POSS 14|13|CASE 15|12|OBJ 16|3|DISCOURSE 17|3|PUNCT
+*CHI:	McGill . 99860_101030
+%mor:	propn|McGill .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah McGill that's right . 101650_103300
+%mor:	intj|yeah propn|McGill pron|that-Rel~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|5|NSUBJ 4|5|COP 5|2|ACL-RELCL 6|2|PUNCT
+*MOT:	(o)kay . 104070_104830
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 104490_105880
+%xDN:	CHI-Speech-ND
+*CHI:	er wahim . 106830_108100
+%mor:	intj|er noun|wahim .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	we can play on Mommy's computer after . 109560_111230
+%mor:	pron|we-Prs-Nom-P1 aux|can-Fin-S verb|play-Inf-S adp|on propn|Mommy~part|s noun|computer adv|after .
+%gra:	1|3|NSUBJ 2|3|AUX 3|8|ROOT 4|7|CASE 5|7|NMOD-POSS 6|5|CASE 7|3|OBL 8|3|ADVMOD 9|3|PUNCT
+*CHI:	huh . 110150_110720
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	do you wanna read this book or no ? 112580_114010
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|read-Inf-S det|this-Def-Dem-Sing noun|book-Acc cconj|or intj|no ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|8|ROOT 5|6|DET 6|4|OBJ 7|8|CC 8|4|DISCOURSE 9|4|PUNCT
+*CHI:	↫km↫Mommy's computer . 113310_115670
+%mor:	propn|Mommy~part|s noun|computer .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	Mommy's computer later we'll play on Mommy's computer later . 115560_118150
+%mor:	propn|Mommy~part|s noun|computer adv|late pron|we-Prs-Nom-P1~aux|will-Fin-S verb|play-Inf-S adp|on propn|Mommy~part|s noun|computer adv|late .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|7|NSUBJ 4|7|ADVMOD 5|7|NSUBJ 6|7|AUX 7|12|ROOT 8|11|CASE 9|11|NMOD-POSS 10|9|CASE 11|7|OBL 12|7|ADVMOD 13|7|PUNCT
+*MOT:	here why don't you keep reading ? 119320_120740
+%mor:	adv|here adv|why aux|do-Fin-Ind-Pres-S2~part|not pron|you-Prs-Nom-S2 verb|keep-Inf-S verb|read-Ger-S ?
+%gra:	1|6|ADVMOD 2|6|ADVMOD 3|6|AUX 4|6|ADVMOD 5|6|NSUBJ 6|7|ROOT 7|6|XCOMP 8|6|PUNCT
+*CHI:	uh . 119820_120440
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	yeah hide . 121050_121730
+%mor:	intj|yeah verb|hide-Fin-Imp-S .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	I can hide behind my hair .  [+ bkr] 122020_123050
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S verb|hide-Inf-S adp|behind pron|my-Prs-Gen-S1 noun|hair .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|NMOD-POSS 6|3|OBL 7|3|PUNCT
+%xPCO:	parent is reading a book .
+*CHI:	I can hide tru .  [+ bkr] 123900_126590
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S verb|hide-Inf-S noun|tru-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading a book .
+*MOT:	yes . 126770_127470
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	I can hide in the .  [+ bkr] 130410_132080
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S verb|hide-Inf-S adp|in det|the-Def-Art .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|CASE 5|3|OBL 6|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading a book .
+*MOT:	I can hide in the mess .  [+ bkr] 132540_133770
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S verb|hide-Inf-S adp|in det|the-Def-Art noun|mess .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%xPCO:	parent is reading a book .
+*CHI:	I can hide under the rug .  [+ bkr] 134560_138170
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S verb|hide-Inf-S adp|under det|the-Def-Art noun|rug .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading a book .
+*MOT:	&=hums . 138410_139270
+*CHI:	I can hide a hug .  [+ bkr] 140720_142390
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S verb|hide-Inf-S det|a-Ind-Art noun|hug-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading a book .
+*MOT:	I can hide in a hug &=kisses good+job . 142430_145660
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S verb|hide-Inf-S adp|in det|a-Ind-Art noun|hug noun|goodjob .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|7|CASE 5|7|DET 6|7|COMPOUND 7|3|OBL 8|3|PUNCT
+%xPCO:	parent is reading a book .
+*MOT:	hey don't touch Mommy's computer what are we gonna do now ? 146670_149160
+%mor:	intj|hey aux|do-Fin-Imp-S~part|not verb|touch-Fin-Imp-S propn|Mommy~part|s noun|computer-Acc pron|what-Int-S1 aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 part|go verb|do-Inf-S adv|now ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|ADVMOD 4|13|ROOT 5|7|NMOD-POSS 6|5|CASE 7|4|OBJ 8|12|OBJ 9|12|AUX 10|12|NSUBJ 11|12|ADVMOD 12|4|PARATAXIS 13|12|ADVMOD 14|4|PUNCT
+*CHI:	&=hums . 147220_147880
+*MOT:	what should we do next &=gasps ↫d↫do you wanna look at your big space book and look at all the planets ? 149650_153590
+%mor:	pron|what-Int-S1 aux|should-Fin-S pron|we-Prs-Nom-P1 verb|do-Inf-S adv|next aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adv|wanna verb|look-Inf-S adp|at pron|your-Prs-Gen-S2 adj|big-S1 noun|space noun|book cconj|and verb|look-Inf-S adp|at det|all-Def-Tot det|the-Def-Art noun|planet-Plur ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|9|PARATAXIS 5|4|ADVMOD 6|9|AUX 7|9|NSUBJ 8|9|ADVMOD 9|20|ROOT 10|14|CASE 11|14|NMOD-POSS 12|14|AMOD 13|14|COMPOUND 14|9|OBL 15|16|CC 16|9|CONJ 17|20|CASE 18|20|DET-PREDET 19|20|DET 20|16|OBL 21|9|PUNCT
+*CHI:	yes . 150530_151270
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=hums . 153840_154570
+*MOT:	we love the planets right ? 154940_156390
+%mor:	pron|we-Prs-Nom-P1 verb|love-Fin-Ind-Pres-P1 det|the-Def-Art noun|planet-Plur-Acc adv|right ?
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|DET 4|2|OBJ 5|2|ADVMOD 6|2|PUNCT
+*COD:	U . 156000_196000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 196000_327910
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	cool  [/] cool race+car . 196060_197290
+%mor:	adj|cool-S1 noun|racecar .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	(o)kay let me get more pieces for you . 198910_200600
+%mor:	intj|okay verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 verb|get-Inf-S adj|more-Cmp-S1 noun|piece-Plur-Acc adp|for pron|you-Prs-Acc-S2 .
+%gra:	1|2|DISCOURSE 2|8|ROOT 3|2|OBJ 4|2|XCOMP 5|6|AMOD 6|4|OBJ 7|8|CASE 8|6|NMOD 9|2|PUNCT
+*CHI:	&=hums . 207140_209130
+*MOT:	here . 210510_210910
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	which colour would you like ? 211340_212560
+%mor:	det|which-Def-Int noun|colour-Acc aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S ?
+%gra:	1|2|DET 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*MOT:	what colour would you like ? 213590_214390
+%mor:	det|what-Def-Int noun|colour-Acc aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S ?
+%gra:	1|2|DET 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*CHI:	yes . 214360_215090
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	tell Mommy what colour . 214990_216340
+%mor:	verb|tell-Fin-Imp-S propn|Mommy det|what-Def-Int noun|colour-Acc .
+%gra:	1|4|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|1|PUNCT
+*CHI:	yes . 216700_217080
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	I want +... 217210_218010
+%mor:	pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	I want +... 219650_220600
+%mor:	pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*CHI:	yes . 221670_222310
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=pointing . 222920_224260
+%xIS:	CHI-Gesture-S
+*MOT:	do you want yellow blue ? 222920_224610
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|yellow-S1 adj|blue-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*CHI:	blue . 225070_225730
+%mor:	adj|blue-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	(o)kay which blue light blue or dark blue ? 225930_228100
+%mor:	intj|okay det|which-Def-Int adj|blue-S1 noun|light adj|blue-S1 cconj|or adj|dark-S1 noun|blue ?
+%gra:	1|8|DISCOURSE 2|8|DET 3|5|AMOD 4|5|COMPOUND 5|8|AMOD 6|7|CC 7|5|CONJ 8|8|ROOT 9|8|PUNCT
+*CHI:	dark blue . 229230_230070
+%mor:	adj|dark-S1 adj|blue-S1 .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	great here you go . 230050_231260
+%mor:	adj|great-S1 adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|2|AMOD 2|4|ROOT 3|4|NSUBJ 4|2|ADVCL-RELCL 5|2|PUNCT
+*CHI:	blue's cool . 233530_234610
+%mor:	noun|blue~part|s adj|cool-S1 .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	blue's cool . 234630_235550
+%mor:	noun|blue~part|s adj|cool-S1 .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|3|ROOT 4|3|PUNCT
+*MOT:	(o)kay what colour do you want now ? 235990_237220
+%mor:	intj|okay det|what-Def-Int noun|colour-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adv|now ?
+%gra:	1|6|DISCOURSE 2|3|DET 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|7|ROOT 7|6|ADVMOD 8|6|PUNCT
+*MOT:	tell Mommy what colour would you like again . 238010_239900
+%mor:	verb|tell-Fin-Imp-S propn|Mommy det|what-Def-Int noun|colour-Acc aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S adv|again .
+%gra:	1|8|ROOT 2|1|IOBJ 3|4|DET 4|7|OBJ 5|7|AUX 6|7|NSUBJ 7|1|CCOMP 8|7|ADVMOD 9|1|PUNCT
+*MOT:	no tell Mommy . 239930_241250
+%mor:	intj|no verb|tell-Fin-Imp-S propn|Mommy .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|IOBJ 4|2|PUNCT
+*MOT:	I want +... 241650_242630
+%mor:	pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*CHI:	se . 242400_242910
+%mor:	x|se .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	I want +... 244420_245030
+%mor:	pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	what colour is that ? 246750_247940
+%mor:	det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	that . 248150_248790
+%mor:	pron|that-Dem .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	you want that . 249190_250120
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|that-Dem .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	red . 250140_250800
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	red good . 250830_252490
+%mor:	adj|red-S1 adj|good-S1 .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	ra . 251340_251970
+%mor:	noun|ra .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=hums . 252990_253970
+*MOT:	awesome oh that's a cool front of your car . 255610_258100
+%mor:	adj|awesome-S1 intj|oh pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|cool-S1 noun|front adp|of pron|your-Prs-Gen-S2 noun|car .
+%gra:	1|7|DISCOURSE 2|7|DISCOURSE 3|7|NSUBJ 4|7|COP 5|7|DET 6|7|AMOD 7|10|ROOT 8|10|CASE 9|10|NMOD-POSS 10|7|NMOD 11|7|PUNCT
+*CHI:	xxx . 257370_259000
+%xDN:	CHI-Speech-ND
+*MOT:	orange . 258740_259970
+%mor:	adj|orange-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay what else ? 260200_260720
+%mor:	intj|okay pron|what-Int-S1 adj|else-S1 ?
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|AMOD 4|2|PUNCT
+*CHI:	green . 260720_261080
+%mor:	adj|green-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	green . 261030_261920
+%mor:	adj|green-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 263900_264430
+*MOT:	yellow . 265740_266550
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yellow . 267250_268430
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	(o)kay now <you pick>  [/] you pick what's next . 270030_272100
+%mor:	intj|okay adv|now pron|you-Prs-Nom-S2 verb|pick-Fin-Ind-Pres-S2 pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adj|next-S1 .
+%gra:	1|4|DISCOURSE 2|4|ADVMOD 3|4|NSUBJ 4|7|ROOT 5|4|OBJ 6|7|COP 7|4|CCOMP 8|4|PUNCT
+*MOT:	what's that ? 276490_277220
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	this is the colour +... 279580_280670
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|colour +...
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*CHI:	violet . 283870_284900
+%mor:	noun|violet .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	violet very nice . 285070_286960
+%mor:	noun|violet adv|very adj|nice-S1 .
+%gra:	1|3|ROOT 2|3|ADVMOD 3|1|PARATAXIS 4|1|PUNCT
+*CHI:	purple . 286930_287720
+%mor:	adj|purple-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	purple . 287820_288840
+%mor:	adj|purple-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	purple . 290370_291220
+%mor:	adj|purple-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	I like your cool  [/] cool car . 291860_293770
+%mor:	pron|I-Prs-Nom-S1 verb|like-Fin-Ind-Pres-S1 pron|your-Prs-Gen-S2 adj|cool-S1 noun|car-Acc .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|NMOD-POSS 4|5|AMOD 5|2|OBJ 6|2|PUNCT
+*CHI:	&=hums . 292680_294160
+*CHI:	&=hums . 294620_296430
+*MOT:	cool  [/] cool race+car . 294720_295930
+%mor:	adj|cool-S1 noun|racecar .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 299260_300300
+*MOT:	hey where'd you put your chomp ? 300940_302430
+%mor:	intj|hey adv|where~aux|would-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S pron|your-Prs-Gen-S2 noun|chomp-Acc ?
+%gra:	1|5|DISCOURSE 2|5|ADVMOD 3|5|AUX 4|5|NSUBJ 5|7|ROOT 6|7|NMOD-POSS 7|5|OBJ 8|5|PUNCT
+*CHI:	&=hums . 301210_303020
+*MOT:	can you put your chomp back on please ? 303750_305430
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S pron|your-Prs-Gen-S2 noun|chomp-Acc adv|back adp|on intj|please ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|3|ADVMOD 7|3|ADVMOD 8|3|DISCOURSE 9|3|PUNCT
+*CHI:	&=hums yes . 305160_306450
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	(o)kay good boy thank+you . 306920_308600
+%mor:	intj|okay adj|good-S1 noun|boy intj|thankyou .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|4|ROOT 4|3|DISCOURSE 5|3|PUNCT
+*CHI:	&=hums thank . 308250_309370
+%mor:	verb|thank-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	let's see if we have a friend to put on our car , oh we do . 311280_314670
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S sconj|if pron|we-Prs-Nom-P1 verb|have-Fin-Ind-Pres-P1 det|a-Ind-Art noun|friend-Acc part|to verb|put-Inf-S adp|on pron|our-Prs-Gen-P1 noun|car cm|cm intj|oh pron|we-Prs-Nom-P1 aux|do-Fin-Ind-Pres-P1 .
+%gra:	1|17|ROOT 2|1|OBJ 3|1|XCOMP 4|6|MARK 5|6|NSUBJ 6|3|CCOMP 7|8|DET 8|6|OBJ 9|10|MARK 10|8|ACL 11|13|CASE 12|13|NMOD-POSS 13|10|OBL 14|17|PUNCT 15|17|DISCOURSE 16|17|NSUBJ 17|1|PARATAXIS 18|1|PUNCT
+*MOT:	can we put our friend in our car ? 314750_316280
+%mor:	aux|can-Fin-S pron|we-Prs-Nom-P1 verb|put-Inf-S pron|our-Prs-Gen-P1 noun|friend-Acc adp|in pron|our-Prs-Gen-P1 noun|car ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|8|CASE 7|8|NMOD-POSS 8|3|OBL 9|3|PUNCT
+*CHI:	oh yeah . 316590_317590
+%mor:	intj|oh intj|yeah .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	wow &=laughs . 317980_319580
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 319380_320050
+*MOT:	can she go in the car yes or no ? 320230_323120
+%mor:	aux|can-Fin-S pron|she-Prs-Nom-S3 verb|go-Inf-S adp|in det|the-Def-Art noun|car intj|yes cconj|or intj|no ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|9|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|DISCOURSE 8|9|CC 9|3|DISCOURSE 10|3|PUNCT
+*CHI:	wow . 320880_322040
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	yes . 324040_324730
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	can you put her on ? 324710_325660
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S pron|her-Prs-Acc-S3 adp|on ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|COMPOUND-PRT 6|3|PUNCT
+@End

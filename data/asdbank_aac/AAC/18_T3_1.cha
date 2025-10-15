@@ -1,0 +1,314 @@
+@UTF8
+@PID:	11312/a-00082339-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|7;00.|male|||Target_Child|||
+@Media:	18_T3_1, video, missing
+*COD:	C . 1_228410
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	TICKLE . 1100_2450
+%mor:	noun|tickle .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-X
+*MOT:	tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle . 2730_7780
+%mor:	verb|tickle-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no . 8630_9440
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	jump . 10760_11900
+%mor:	verb|jump-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	JUMP . 12550_15040
+%mor:	noun|jump .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	jump  [/] jump  [/] jump  [/] jump  [/] jump  [/] jump  [/] jump  [/] jump . 15460_23280
+%mor:	verb|jump-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	bao . 22010_23720
+%mor:	propn|bao .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=other .
+%xgco:	Child pulls hands away from dad .
+%xIS:	CHI-Gesture-S
+*MOT:	no , aw . 23580_25480
+%mor:	intj|no cm|cm intj|aw .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|DISCOURSE 4|1|PUNCT
+*MOT:	xxx something else . 26100_27650
+%mor:	pron|something-Ind-S1 adj|else-S1 .
+%gra:	1|2|ROOT 2|1|AMOD 3|1|PUNCT
+*MOT:	CHILDNAME xxx wait  [/] wait  [/] wait . 28210_31230
+%mor:	propn|CHILDNAME verb|wait-Fin-Imp-S .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	you better ask for xxx . 31740_32760
+%mor:	pron|you-Prs-Nom-S2 adv|well verb|ask-Inf-S adp|for .
+%gra:	1|3|NSUBJ 2|3|ADVMOD 3|4|ROOT 4|3|OBL 5|3|PUNCT
+*CHI:	&=hums . 31740_32760
+*MOT:	how do you ask for it ? 32920_34100
+%mor:	adv|how aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|ask-Inf-S adp|for pron|it-Prs-Acc-S3 ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|CASE 6|4|OBL 7|4|PUNCT
+*MOT:	drink . 34800_36180
+%mor:	verb|drink-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	water . 37180_38090
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	WATER . 37940_39070
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	there thank+you . 39110_41480
+%mor:	pron|there-Dem-S1 intj|thankyou .
+%gra:	1|2|EXPL 2|2|ROOT 3|2|PUNCT
+*MOT:	there . 42460_43190
+%mor:	adv|there .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here CHILDNAME . 46450_47510
+%mor:	adv|here propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	water . 48890_50040
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(o)kay ? 55950_56660
+%mor:	intj|okay ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want something else ? 59350_61240
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|something-Ind-S1 adj|else-S1 ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|OBJ 4|3|AMOD 5|2|PUNCT
+*MOT:	oh you're still hungry . 62020_63820
+%mor:	intj|oh pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|still adj|hungry-S1 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	bread ? 66320_66800
+%mor:	noun|bread ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	BREAD . 68290_70290
+%mor:	noun|bread .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	detwe  [/] detwe  [/] detwe . 68840_72130
+%mor:	verb|detwe-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	yeah here CHILDNAME  [/] CHILDNAME <is this what you want>  [/] is this what you want ? 72180_79380
+%mor:	intj|yeah adv|here propn|CHILDNAME aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 pron|what-Rel-S1 pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 ?
+%gra:	1|2|DISCOURSE 2|8|ROOT 3|2|NSUBJ 4|6|COP 5|6|NSUBJ 6|2|NSUBJ 7|8|NSUBJ 8|6|ACL-RELCL 9|2|PUNCT
+*CHI:	&=squeals . 78940_81340
+*MOT:	just wanna make sure . 81260_82830
+%mor:	adv|just part|wana verb|make-Fin-Imp-S adj|sure-S1 .
+%gra:	1|3|ADVMOD 2|3|ADVMOD 3|4|ROOT 4|3|XCOMP 5|3|PUNCT
+*CHI:	&=pointing . 81650_82460
+%xIS:	CHI-Gesture-I
+*MOT:	okay so you want the bread . 82910_84110
+%mor:	intj|okay adv|so pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|bread-Acc .
+%gra:	1|4|DISCOURSE 2|4|ADVMOD 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*CHI:	&=pointing . 83560_84610
+%xIS:	CHI-Gesture-S
+*MOT:	can you show me you want the bread ? 94250_95850
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|show-Inf-S pron|I-Prs-Acc-S1 pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|bread-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|3|IOBJ 5|6|NSUBJ 6|3|CCOMP 7|8|DET 8|6|OBJ 9|3|PUNCT
+*MOT:	no  [/] no that's not the bread CHILDNAME I think you mean this . 96010_102020
+%mor:	intj|no pron|that-Dem~aux|be-Fin-Ind-Pres-S3 part|not det|the-Def-Art noun|bread noun|childname pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Pres-S1 pron|you-Prs-Nom-S2 verb|mean-Fin-Ind-Pres-S2 pron|this-Dem-S1 .
+%gra:	1|7|DISCOURSE 2|7|NSUBJ 3|7|COP 4|7|ADVMOD 5|7|DET 6|7|COMPOUND 7|12|ROOT 8|9|NSUBJ 9|7|ACL-RELCL 10|11|NSUBJ 11|9|CCOMP 12|11|OBJ 13|7|PUNCT
+*AAC:	xxx . 97210_98850
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*CHI:	keiwa kei . 104520_105330
+%mor:	propn|keiwa propn|kei .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	it's <this one>  [/] this one . 104540_106600
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|one .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*AAC:	BREAD . 106930_108680
+%mor:	noun|bread .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	thank+you xxx . 108040_111100
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	wait . 111600_112300
+%mor:	verb|wait-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 114070_115390
+%xDN:	CHI-Speech-ND
+*CHI:	&=other . 116110_117040
+%xgco:	Child takes object from dad's hand and puts it down .
+%xIS:	CHI-Gesture-S
+*MOT:	no  [/] no ? 116580_119050
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	dude you changed your mind , CHILDNAME you changed your mind &=laughs . 119330_123490
+%mor:	verb|dude-Fin-Imp-S pron|you-Prs-Nom-S2 verb|change-Fin-Ind-Past-S2 pron|your-Prs-Gen-S2 noun|mind-Acc cm|cm intj|childname pron|you-Prs-Nom-S2 verb|change-Fin-Ind-Past-S2 pron|your-Prs-Gen-S2 noun|mind-Acc .
+%gra:	1|11|ROOT 2|3|NSUBJ 3|1|XCOMP 4|5|NMOD-POSS 5|3|OBJ 6|9|PUNCT 7|9|DISCOURSE 8|9|NSUBJ 9|1|PARATAXIS 10|11|NMOD-POSS 11|9|OBJ 12|1|PUNCT
+*CHI:	xxx . 120020_121650
+%xDN:	CHI-Speech-ND
+*MOT:	okay xxx oh . 123690_126040
+%mor:	intj|okay intj|oh .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	what are we gonna do CHILDNAME ? 130580_132370
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 part|go verb|do-Inf-S propn|CHILDNAME-Acc ?
+%gra:	1|5|OBJ 2|5|AUX 3|5|NSUBJ 4|5|ADVMOD 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	xxx . 134420_136170
+*MOT:	CHILDNAME . 137130_138020
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME . 139550_140110
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx you've changed . 141180_144530
+%mor:	pron|you-Prs-Nom-S2~aux|have-Fin-Ind-Pres-S2 verb|change-Part-Past-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+*MOT:	xxx . 145320_146160
+*CHI:	oh . 146570_147040
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=grunts . 148800_150220
+*MOT:	nap . 150420_151310
+%mor:	noun|nap .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 152510_154300
+*MOT:	CHILDNAME . 155000_156120
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	jeez &=laughs . 157530_159190
+%mor:	intj|jeez .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=squeals . 165450_167590
+*MOT:	CHILDNAME , anything you want ? 168200_170560
+%mor:	intj|childname cm|cm pron|anything-Ind-S1 pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 ?
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|5|ROOT 4|5|NSUBJ 5|3|ACL-RELCL 6|3|PUNCT
+*MOT:	again ? 175780_177470
+%mor:	adv|again ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=squeals . 176630_178690
+*MOT:	again  [/] again  [/] again ? 180500_182080
+%mor:	adv|again ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=moans . 187430_189610
+*CHI:	&=groans . 192250_193950
+*MOT:	come on , you want Daddy to xxx . 193690_197050
+%mor:	verb|come-Fin-Imp-S adp|on cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 propn|Daddy-Acc part|to .
+%gra:	1|7|ROOT 2|1|COMPOUND-PRT 3|5|PUNCT 4|5|NSUBJ 5|1|PARATAXIS 6|5|OBJ 7|5|XCOMP 8|1|PUNCT
+*MOT:	jumpy jump  [/] jump  [/] jump  [/] jump  [/] jump . 199600_203120
+%mor:	adj|jumpy-S1 noun|jump .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 199910_201410
+*MOT:	again . 203190_203760
+%mor:	adv|again .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	jumpy jump  [/] jump  [/] jump  [/] jump . 204930_208980
+%mor:	adj|jumpy-S1 noun|jump .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	again . 209840_210790
+%mor:	adv|again .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=squeals . 209840_210790
+*AAC:	DAD . 211950_213670
+%mor:	noun|dad .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	Daddy ? 212580_213690
+%mor:	propn|Daddy ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Daddy  [/] Daddy &=sings . 213860_216680
+%mor:	propn|Daddy .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what you want xxx ? 217170_219330
+%mor:	pron|what-Int-S1 pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 ?
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ACL-RELCL 4|1|PUNCT
+*CHI:	hey  [/] hey  [/] hey . 220500_223180
+%mor:	intj|hey .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=hums . 225310_227110
+*COD:	U . 228410_263897
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 263610_264440
+*COD:	C . 263897_318080
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh . 265060_265750
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh CHILDNAME both hands . 267130_270780
+%mor:	intj|oh intj|childname det|both-Def-Tot noun|hand-Plur .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|DET 4|4|ROOT 5|4|PUNCT
+*CHI:	doo  [/] doo  [/] doo  [/] doo . 270080_271590
+%mor:	noun|doo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	again . 273270_274070
+%mor:	adv|again .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 273960_275120
+*MOT:	CHILDNAME . 280130_281250
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	degur niawan . 281070_283300
+%mor:	noun|degur propn|niawan .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	both . 284800_285640
+%mor:	det|both-Def-Tot .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	two , CHILDNAME both hands . 286650_288500
+%mor:	num|two cm|cm intj|childname det|both-Def-Tot noun|hand-Plur .
+%gra:	1|5|ROOT 2|5|PUNCT 3|5|DISCOURSE 4|5|DET 5|1|PARATAXIS 6|1|PUNCT
+*MOT:	here , yeah throw it here . 291210_293650
+%mor:	adv|here cm|cm intj|yeah verb|throw-Fin-Imp-S pron|it-Prs-Acc-S3 adv|here .
+%gra:	1|4|ADVMOD 2|1|PUNCT 3|4|DISCOURSE 4|6|ROOT 5|4|OBJ 6|4|ADVMOD 7|4|PUNCT
+*MOT:	right here . 293830_294670
+%mor:	adv|right adv|here .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	throw , throw it here . 295080_296580
+%mor:	verb|throw-Fin-Imp-S cm|cm verb|throw-Fin-Imp-S pron|it-Prs-Acc-S3 adv|here .
+%gra:	1|5|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|OBJ 5|3|ADVMOD 6|1|PUNCT
+*MOT:	throw . 297140_297740
+%mor:	verb|throw-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want the ball CHILDNAME ? 300470_301550
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|ball noun|childname-Acc ?
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|DET 4|5|COMPOUND 5|2|OBJ 6|2|PUNCT
+*MOT:	CHILDNAME  [/] CHILDNAME . 301630_302530
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 303090_303690
+*MOT:	you want the ball ? 303760_304140
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|ball-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*CHI:	&=groans . 304200_305900
+*MOT:	the ball . 306450_306700
+%mor:	det|the-Def-Art noun|ball .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	ar . 306520_308450
+%mor:	propn|be .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	the ball . 307160_307480
+%mor:	det|the-Def-Art noun|ball .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	no  [/] no  [/] no  [/] no xxx &=laughs . 308580_311320
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	eeth . 309190_309940
+%mor:	intj|eeth .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+@End

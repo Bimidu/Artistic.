@@ -1,0 +1,291 @@
+@UTF8
+@PID:	11312/c-00004158-1
+@Begin
+@Languages:	eng
+@Participants:	MOT Mother
+@ID:	eng|QuigleyMcNally|MOT|41;07.||||Mother|||
+@Types:	long, toyplay, ASD
+*MOT:	goose .
+%mor:	noun|goose .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child sitting in pram in front of and facing mother who is seated on chair in front of him .  mother is putting socks on child .
+*MOT:	(wi)ll we put it on this  [!] foot ?
+%mor:	aux|will-Fin-S pron|we-Prs-Nom-P1 verb|put-Inf-S pron|it-Prs-Acc-S3 adp|on det|this-Def-Dem-Sing noun|foot ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|PUNCT
+*MOT:	ta-ta@f .
+%mor:	x|tata .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	<silly silly>  [/] silly .
+%mor:	adj|silly-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	now will y(ou) clap handies@f  [: hands] ?
+%mor:	adv|now aux|will-Fin-S pron|you-Prs-Nom-S2 verb|clap-Inf-S noun|hand-Plur-Acc ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	(hoo)ray !
+%mor:	intj|hooray !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no , y(ou) wanna take them off .
+%mor:	intj|no cm|cm pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|take-Inf-S pron|they-Prs-Acc-P3 adp|off .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|AUX 5|7|ROOT 6|5|OBJ 7|5|COMPOUND-PRT 8|5|PUNCT
+*MOT:	are y(ou) takin(g) them off ?
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|take-Part-Pres-S pron|they-Prs-Acc-P3 adp|off ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|COMPOUND-PRT 6|3|PUNCT
+*MOT:	what are we gonna do about shoes  [!] Mister .
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 part|go verb|do-Inf-S adp|about noun|shoe-Plur propn|Mister .
+%gra:	1|5|OBJ 2|5|AUX 3|5|NSUBJ 4|5|ADVMOD 5|8|ROOT 6|7|CASE 7|5|OBL 8|5|OBL 9|5|PUNCT
+*MOT:	you're never gonna wear shoes .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|never part|go verb|wear-Inf-S noun|shoe-Plur-Acc .
+%gra:	1|5|NSUBJ 2|5|AUX 3|5|ADVMOD 4|5|ADVMOD 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	thank_you .
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child has taken off one sock and handed it to mother .  now is trying to take off other sock and is gettign frustrated and shouts .
+*MOT:	did it not come off ?
+%mor:	aux|do-Fin-Ind-Past-S3-irr pron|it-Prs-Nom-S3 part|not verb|come-Inf-S adp|off ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|5|ROOT 5|4|COMPOUND-PRT 6|4|PUNCT
+*MOT:	good  [!] boy .
+%mor:	adj|good-S1 noun|boy .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	twinkle  [/] , twinkle little star how I wonder what you are !
+%mor:	cm|cm noun|twinkle adj|little-S1 noun|star adv|how pron|I-Prs-Nom-S1 verb|wonder-Fin-Ind-Pres-S1 pron|what-Rel-S1 pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 !
+%gra:	1|4|PUNCT 2|4|COMPOUND 3|4|AMOD 4|10|ROOT 5|7|ADVMOD 6|7|NSUBJ 7|4|ACL-RELCL 8|7|OBJ 9|10|NSUBJ 10|8|ACL-RELCL 11|4|PUNCT
+*MOT:	(hoo)ray !
+%mor:	intj|hooray !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh you want them back ?
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|they-Prs-Acc-P3 adv|back ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+*MOT:	no ?
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	will y(ou) clap handies@f  [: hands] ?
+%mor:	aux|will-Fin-S pron|you-Prs-Nom-S2 verb|clap-Inf-S noun|hand-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	(hoo)ray !
+%mor:	intj|hooray !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother starts to play peekaboo, advancing towards child with hands over face .
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you do it .
+%mor:	pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	Ard do it .
+%mor:	intj|ard verb|do-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	you do it .
+%mor:	pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%com:	mother is holding child's hands over his face .
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do it to mammy .
+%mor:	verb|do-Fin-Imp-S pron|it-Prs-Acc-S3 part|to verb|mammy-Inf-S .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|MARK 4|1|ADVCL 5|1|PUNCT
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can you do it ?
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|do-Inf-S pron|it-Prs-Acc-S3 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	come_on Ard .
+%mor:	noun|comeon propn|Ard .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(hoo)ray !
+%mor:	intj|hooray !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother is elongating time before appearing until child reaches to uncover her face himself .
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	haha .
+%mor:	intj|haha .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	clap handies@f  [: hands] .
+%mor:	verb|clap-Fin-Imp-S noun|hand-Plur-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	can you clap handies@f  [: hands] ?
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|clap-Inf-S noun|hand-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	no ?
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child squeals and grabs her hands to make her do peekaboo again . mother starts but then stops and starts to clap and sing .
+*MOT:	<if you're happy and y(ou) know it clap your hands>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Nom-S3 verb|clap-Fin-Ind-S pron|your-Prs-Gen-S2 noun|hand-Plur-Acc .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|11|ROOT 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|9|NSUBJ 9|7|CCOMP 10|11|NMOD-POSS 11|9|OBJ 12|4|PUNCT
+*MOT:	<if you're happy and y(ou) know it clap your hands>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Nom-S3 verb|clap-Fin-Ind-S pron|your-Prs-Gen-S2 noun|hand-Plur-Acc .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|11|ROOT 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|9|NSUBJ 9|7|CCOMP 10|11|NMOD-POSS 11|9|OBJ 12|4|PUNCT
+*MOT:	<if you're happy and y(ou) know it and you really wanna show it>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 cconj|and pron|you-Prs-Nom-S2 adv|really aux|wanna-Fin-S verb|show-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|13|ADVCL 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|7|OBJ 9|13|CC 10|13|NSUBJ 11|13|ADVMOD 12|13|AUX 13|14|ROOT 14|13|OBJ 15|13|PUNCT
+*MOT:	<if you're happy and y(ou) know it clap your hands>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Nom-S3 verb|clap-Fin-Ind-S pron|your-Prs-Gen-S2 noun|hand-Plur-Acc .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|11|ROOT 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|9|NSUBJ 9|7|CCOMP 10|11|NMOD-POSS 11|9|OBJ 12|4|PUNCT
+*MOT:	clap  [/] clap .
+%mor:	noun|clap .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child slumps back and shouts unhappily .  mother sings again .
+*MOT:	<if you're happy and y(ou) know it stamp your feet>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Nom-S3 verb|stamp-Fin-S pron|your-Prs-Gen-S2 noun|foot-Plur-Acc .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|11|ROOT 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|9|NSUBJ 9|7|CCOMP 10|11|NMOD-POSS 11|9|OBJ 12|4|PUNCT
+*MOT:	<if you're happy and y(ou) know it stamp your feet>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Nom-S3 verb|stamp-Fin-S pron|your-Prs-Gen-S2 noun|foot-Plur-Acc .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|11|ROOT 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|9|NSUBJ 9|7|CCOMP 10|11|NMOD-POSS 11|9|OBJ 12|4|PUNCT
+*MOT:	<if you're happy and y(ou) know it and you really wanna show it>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 cconj|and pron|you-Prs-Nom-S2 adv|really aux|wanna-Fin-S verb|show-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|13|ADVCL 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|7|OBJ 9|13|CC 10|13|NSUBJ 11|13|ADVMOD 12|13|AUX 13|14|ROOT 14|13|OBJ 15|13|PUNCT
+*MOT:	<if you're happy and y(ou) know it stamp your feet>  [=! singing] .
+%mor:	sconj|if pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|happy-S1 cconj|and pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|it-Prs-Nom-S3 verb|stamp-Fin-S pron|your-Prs-Gen-S2 noun|foot-Plur-Acc .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|COP 4|11|ROOT 5|7|CC 6|7|NSUBJ 7|4|CONJ 8|9|NSUBJ 9|7|CCOMP 10|11|NMOD-POSS 11|9|OBJ 12|4|PUNCT
+*MOT:	clkclk@wp .
+%mor:	x|clkclk .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	ah boo !
+%mor:	intj|ah intj|boo !
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	have y(ou) tickles ?
+%mor:	aux|have-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 noun|tickle-Plur ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	&~ee: tickle lickle@n  [/] lickle@n .
+%mor:	verb|tickle-Fin-Imp-S noun|lickle-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	&~ee: tickle lickle@n  [/] lickle@n .
+%mor:	verb|tickle-Fin-Imp-S noun|lickle-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	0we do it again ?
+%mor:	verb|do-Fin-Imp-S pron|it-Prs-Acc-S3 adv|again ?
+%gra:	1|3|ROOT 2|1|OBJ 3|1|ADVMOD 4|1|PUNCT
+*MOT:	&~ee: tickle lickle@n  [/] lickle@n .
+%mor:	verb|tickle-Fin-Imp-S noun|lickle-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	&~ee: tickle lickle@n  [/] lickle@n .
+%mor:	verb|tickle-Fin-Imp-S noun|lickle-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%com:	child laughs at first then tries to grab mother's hands to lever out of pram .
+*MOT:	clap handies@f  [: hands] .
+%mor:	verb|clap-Fin-Imp-S noun|hand-Plur-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	clap handies@f  [: hands] .
+%mor:	verb|clap-Fin-Imp-S noun|hand-Plur-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%com:	child starts to squeal unhappily and strain forwards, mother pulls pram towards herself .
+*MOT:	oh what ?
+%mor:	intj|oh pron|what-Int-S1 ?
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what ?
+%mor:	pron|what-Int-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what ?
+%mor:	pron|what-Int-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ah boo !
+%mor:	intj|ah intj|boo !
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	come back to me .
+%mor:	verb|come-Fin-Imp-S adv|back adp|to pron|I-Prs-Acc-S1 .
+%gra:	1|4|ROOT 2|1|ADVMOD 3|4|CASE 4|1|OBL 5|1|PUNCT
+%com:	mother has pushed pram backwards away from her .
+*MOT:	ah boo !
+%mor:	intj|ah intj|boo !
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	look  [/] , look .
+%mor:	cm|cm verb|look-Fin-Imp-S .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	mother singing accompanied by actions .
+*MOT:	<twinkle  [/] twinkle little star how I wonder what you are>  [=! singing] .
+%mor:	noun|twinkle adj|little-S1 noun|star adv|how pron|I-Prs-Nom-S1 verb|wonder-Fin-Ind-Pres-S1 pron|what-Rel-S1 pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 .
+%gra:	1|3|COMPOUND 2|3|AMOD 3|9|ROOT 4|6|ADVMOD 5|6|NSUBJ 6|3|ACL-RELCL 7|6|OBJ 8|9|NSUBJ 9|7|ACL-RELCL 10|3|PUNCT
+*MOT:	<twinkle  [/] twinkle little star how I wonder what you are>  [=! singing] .
+%mor:	noun|twinkle adj|little-S1 noun|star adv|how pron|I-Prs-Nom-S1 verb|wonder-Fin-Ind-Pres-S1 pron|what-Rel-S1 pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 .
+%gra:	1|3|COMPOUND 2|3|AMOD 3|9|ROOT 4|6|ADVMOD 5|6|NSUBJ 6|3|ACL-RELCL 7|6|OBJ 8|9|NSUBJ 9|7|ACL-RELCL 10|3|PUNCT
+*MOT:	can you do it ?
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|do-Inf-S pron|it-Prs-Acc-S3 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	look , do twinkle .
+%mor:	verb|look-Fin-Imp-S cm|cm verb|do-Fin-Imp-S noun|twinkle-Acc .
+%gra:	1|4|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|OBJ 5|1|PUNCT
+*MOT:	look , Ard do it .
+%mor:	verb|look-Fin-Imp-S cm|cm noun|ard verb|do-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|5|ROOT 2|4|PUNCT 3|4|NSUBJ 4|1|PARATAXIS 5|4|OBJ 6|1|PUNCT
+*MOT:	twinkle  [/] , twinkle little star .
+%mor:	cm|cm noun|twinkle adj|little-S1 noun|star .
+%gra:	1|4|PUNCT 2|4|COMPOUND 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	wave your handies@f  [: hands] .
+%mor:	verb|wave-Fin-Imp-S pron|your-Prs-Gen-S2 noun|hand-Plur-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+*MOT:	wave them , diddlydiddlydee@wp .
+%mor:	verb|wave-Inf-Imp-S pron|they-Prs-Acc-P3 cm|cm x|diddlydiddlydee .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|PUNCT 4|1|FLAT 5|1|PUNCT
+*MOT:	come  [!] on .
+%mor:	verb|come-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	do them .
+%mor:	verb|do-Fin-Imp-S pron|they-Prs-Acc-P3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	diddlydiddlydee@wp .
+%mor:	x|diddlydiddlydee .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	<twinkle  [/] twinkle little star how I wonder what you are>  [=! singing] .
+%mor:	noun|twinkle adj|little-S1 noun|star adv|how pron|I-Prs-Nom-S1 verb|wonder-Fin-Ind-Pres-S1 pron|what-Rel-S1 pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 .
+%gra:	1|3|COMPOUND 2|3|AMOD 3|9|ROOT 4|6|ADVMOD 5|6|NSUBJ 6|3|ACL-RELCL 7|6|OBJ 8|9|NSUBJ 9|7|ACL-RELCL 10|3|PUNCT
+*MOT:	diddlydiddly@wp .
+%mor:	x|diddlydiddly .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	can you do it ?
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|do-Inf-S pron|it-Prs-Acc-S3 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	<twinkle  [/] twinkle little star how I wonder what you are>  [=! singing] .
+%mor:	noun|twinkle adj|little-S1 noun|star adv|how pron|I-Prs-Nom-S1 verb|wonder-Fin-Ind-Pres-S1 pron|what-Rel-S1 pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 .
+%gra:	1|3|COMPOUND 2|3|AMOD 3|9|ROOT 4|6|ADVMOD 5|6|NSUBJ 6|3|ACL-RELCL 7|6|OBJ 8|9|NSUBJ 9|7|ACL-RELCL 10|3|PUNCT
+*MOT:	hah !
+%mor:	intj|hah !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child begins to squeal and strain to get out .
+*MOT:	look  [/] , look .
+%mor:	cm|cm verb|look-Fin-Imp-S .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	mother starts to take off necklace to give child then remembers sunglasses and hands them to him .
+*MOT:	oh , what are they ?
+%mor:	intj|oh cm|cm pron|what-Int-S1 aux|be-Fin-Ind-Pres-P3 pron|they-Prs-Nom-P3 ?
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|5|ROOT 4|3|COP 5|3|NSUBJ 6|3|PUNCT
+*MOT:	are y(ou) puttin(g) them on ?
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|put-Part-Pres-S pron|they-Prs-Acc-P3 adp|on ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|COMPOUND-PRT 6|3|PUNCT
+*MOT:	here , hold it .
+%mor:	adv|here cm|cm verb|hold-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|3|ADVMOD 2|1|PUNCT 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	hold the glasses .
+%mor:	verb|hold-Fin-Imp-S det|the-Def-Art noun|glasses-Ptan-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*MOT:	do y(ou) wanna put them on ?
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|put-Inf-S pron|they-Prs-Acc-P3 adp|on ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|6|ROOT 5|4|OBJ 6|4|COMPOUND-PRT 7|4|PUNCT
+*MOT:	put them on Ard .
+%mor:	verb|put-Fin-Imp-S pron|they-Prs-Acc-P3 adp|on propn|Ard .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|PUNCT
+*MOT:	nice .
+%mor:	adj|nice-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	are they nice ?
+%mor:	aux|be-Fin-Ind-Pres-P3 pron|they-Prs-Nom-P3 adj|nice-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+@End

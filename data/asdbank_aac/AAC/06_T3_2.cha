@@ -1,0 +1,435 @@
+@UTF8
+@PID:	11312/a-00082285-0
+@Begin
+@Languages:	eng
+@Participants:	AAC Media, COD Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|4;07.|male|||Target_Child|||
+@Media:	06_T3_2, video, missing
+*AAC:	MARKERS . 1_2000
+%mor:	noun|maroer-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*COD:	C . 1000_337258
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	get this one xxx . 2900_4710
+%mor:	verb|get-Fin-Imp-S det|this-Def-Dem-Sing noun|one-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*CHI:	&=hums . 3940_5540
+*MOT:	say thank+you . 6680_7630
+%mor:	verb|say-Fin-Imp-S intj|thankyou .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*CHI:	&=hums . 9650_11050
+*CHI:	&=hums . 15510_17370
+*CHI:	&=hums . 18150_21340
+*MOT:	you ask for it . 22760_24150
+%mor:	pron|you-Prs-Nom-S2 verb|ask-Fin-Ind-Pres-S2 adp|for pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+*CHI:	yasty . 23420_24100
+%mor:	intj|yasty .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	COKE . 24000_27000
+%mor:	noun|coke .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	ker . 24730_25710
+%mor:	propn|ker .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	alright I'll give you some coke . 27440_30060
+%mor:	intj|alright pron|I-Prs-Nom-S1~aux|will-Fin-S verb|give-Inf-S pron|you-Prs-Acc-S2 det|some-Def-Ind noun|coke-Acc .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|7|ROOT 5|4|IOBJ 6|7|DET 7|4|OBJ 8|4|PUNCT
+*CHI:	&=laughs . 28640_30820
+*CHI:	&=sighs . 32040_32430
+*CHI:	si ga  [/] ga  [/] ga si ga . 39850_45110
+%mor:	x|si propn|ga x|si propn|ga .
+%gra:	1|4|ROOT 2|1|FLAT 3|1|FLAT 4|1|LIST 5|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=giving .
+%xgco:	Child slides drink across table and puts it in front of parent .
+%xIS:	CHI-Gesture-S
+*AAC:	COKE . 42000_47000
+%mor:	noun|coke .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	&=moans . 46020_47100
+*MOT:	here's your coke . 46050_47630
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|coke .
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*CHI:	&=hums . 47450_48360
+*AAC:	COKE . 50000_54000
+%mor:	noun|coke .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	&=groans . 51130_52410
+*MOT:	how do you ask to open ? 52760_54370
+%mor:	adv|how aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|ask-Inf-S part|to verb|open-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|MARK 6|4|XCOMP 7|4|PUNCT
+*CHI:	open . 54290_56320
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	okay and do you remember ? 54970_58000
+%mor:	intj|okay cconj|and aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|remember-Inf-S ?
+%gra:	1|5|DISCOURSE 2|5|CC 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*CHI:	&=squeals . 56730_60580
+*AAC:	OPEN . 58000_60000
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	what do you say ? 59840_61030
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|say-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	&=hums . 61140_63050
+*MOT:	can you say open ? 63200_64110
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|say-Inf-S adj|open-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|XCOMP 5|3|PUNCT
+*CHI:	open . 64080_65650
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	alright , open it . 65660_67450
+%mor:	intj|alright cm|cm adj|open-S1 pron|it-Prs-Acc-S3 .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|4|ROOT 4|3|PUNCT 5|3|PUNCT
+*CHI:	&=hums . 70300_72580
+*CHI:	&=hums . 74110_74760
+*CHI:	&=moans mus yerf . 76230_79280
+%mor:	intj|mus noun|yerf .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=hums . 82400_83620
+*MOT:	that's enough . 87170_88180
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|enough-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*CHI:	agenuh . 88600_89920
+%mor:	intj|agenuh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	thank+you . 92990_93830
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	WATER . 99000_106000
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	what is that , water ? 106450_108160
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Dem cm|cm noun|water ?
+%gra:	1|5|ROOT 2|1|COP 3|1|NSUBJ 4|5|PUNCT 5|3|APPOS 6|1|PUNCT
+*CHI:	&=hums . 107220_109640
+*MOT:	okay here's the water . 108190_109850
+%mor:	intj|okay adv|here~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|water .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|COP 4|5|DET 5|2|NSUBJ 6|2|PUNCT
+*CHI:	&=hums . 114930_115960
+*AAC:	COKE . 115000_118000
+%mor:	noun|coke .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	thank+you . 116480_117630
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what is that , coke ? 119440_120880
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Dem cm|cm noun|coke ?
+%gra:	1|5|ROOT 2|1|COP 3|1|NSUBJ 4|5|PUNCT 5|3|APPOS 6|1|PUNCT
+*MOT:	here's coke . 122350_123330
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 noun|coke .
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=hums . 124770_126010
+*MOT:	thank+you . 127890_128950
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	WATER . 129000_133000
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	&=hums . 131730_133270
+*MOT:	water ? 133750_134570
+%mor:	noun|water ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 134930_135660
+*MOT:	here's water . 136310_137500
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 noun|water .
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=hums . 137520_138520
+*CHI:	&=hums . 142640_145640
+*AAC:	COKE . 144000_148000
+%mor:	noun|coke .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	xxx . 150670_151930
+*MOT:	thank+you . 153650_154590
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	COKE . 155000_166000
+%mor:	noun|coke .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	we're finished now . 155600_157010
+%mor:	pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 verb|finish-Part-Past-S adv|now .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|4|ROOT 4|3|ADVMOD 5|3|PUNCT
+*MOT:	you started with it but that's it . 157070_158480
+%mor:	pron|you-Prs-Nom-S2 verb|start-Fin-Ind-Past-S2 adp|with pron|it-Prs-Acc-S3 cconj|but pron|that-Dem~aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|4|CASE 4|2|OBL 5|8|CC 6|8|NSUBJ 7|8|COP 8|2|CONJ 9|2|PUNCT
+*CHI:	&=hums . 158540_161220
+*MOT:	<no more coke>  [/] no more coke finished . 158560_160520
+%mor:	det|no-Def-Neg adj|more-Cmp-S1 noun|coke verb|finish-Fin-Ind-Past-S3 .
+%gra:	1|3|DET 2|3|AMOD 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	finished . 161090_162090
+%mor:	verb|finish-Fin-Ind-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	it's finished now . 162190_162990
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|finish-Part-Past-S adv|now .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|4|ROOT 4|3|ADVMOD 5|3|PUNCT
+*MOT:	finished . 163454_164818
+%mor:	verb|finish-Fin-Ind-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that's enough . 165200_166160
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|enough-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*CHI:	&=whines . 166250_168220
+*MOT:	you can have Nutella or you can have chocolate . 168660_171500
+%mor:	pron|you-Prs-Nom-S2 aux|can-Fin-S verb|have-Inf-S propn|Nutella-Acc cconj|or pron|you-Prs-Nom-S2 aux|can-Fin-S verb|have-Inf-S noun|chocolate-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|9|ROOT 4|3|OBJ 5|8|CC 6|8|NSUBJ 7|8|AUX 8|3|CONJ 9|8|OBJ 10|3|PUNCT
+*CHI:	&=groans verger . 168890_173000
+%mor:	noun|verger .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	ika . 175600_177310
+%mor:	propn|ika .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	I have chocolate , I have Nutella and I have spoon . 176560_180940
+%mor:	pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 noun|chocolate-Acc cm|cm pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 propn|Nutella-Acc cconj|and pron|I-Prs-Nom-S1 aux|have-Fin-Ind-Pres-S1 verb|spoon-Part-Past-S .
+%gra:	1|2|NSUBJ 2|11|ROOT 3|2|OBJ 4|6|PUNCT 5|6|NSUBJ 6|2|PARATAXIS 7|6|OBJ 8|11|CC 9|11|NSUBJ 10|11|AUX 11|6|CONJ 12|2|PUNCT
+*CHI:	tena . 177770_179220
+%mor:	propn|tena .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	oon hena . 179640_181060
+%mor:	intj|oon noun|hena .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	and you can load up yourself . 181480_183090
+%mor:	cconj|and pron|you-Prs-Nom-S2 aux|can-Fin-S verb|load-Inf-S adp|up pron|yourself-Prs-Acc-S2 .
+%gra:	1|4|CC 2|4|NSUBJ 3|4|AUX 4|6|ROOT 5|4|COMPOUND-PRT 6|4|OBJ 7|4|PUNCT
+*MOT:	try this . 185540_186420
+%mor:	verb|try-Fin-Imp-S pron|this-Dem-S1 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	&=laughs . 186080_186740
+*CHI:	deen . 189000_189690
+%mor:	noun|deen .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=hums . 190770_191600
+*CHI:	geh . 192830_193690
+%mor:	intj|geh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	I don't have it . 193820_194640
+%mor:	pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|have-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	&=whines . 194750_195610
+*MOT:	finished . 195990_196750
+%mor:	verb|finish-Fin-Ind-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=whines . 197500_201150
+*MOT:	it's finished . 198600_199220
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|finish-Part-Past-S .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|3|ROOT 4|3|PUNCT
+*CHI:	&=hums . 201520_202990
+*MOT:	I have Nutella and chocolate though . 204540_206260
+%mor:	pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 propn|Nutella-Acc cconj|and noun|chocolate adv|though .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|OBJ 4|5|CC 5|3|CONJ 6|2|ADVMOD 7|2|PUNCT
+*CHI:	uh chocu . 206390_208280
+%mor:	intj|uh noun|chocu .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	chocolate ? 208500_209180
+%mor:	noun|chocolate ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs umdula . 210610_213590
+%mor:	intj|umdula .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=laughs . 214000_214770
+*CHI:	&=hums . 216680_217360
+*CHI:	&=hums . 218850_219890
+*AAC:	NUTELLA . 224909_228545
+%mor:	propn|NUTELLA .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	usegawo athink gesege . 225270_229499
+%mor:	propn|usegawo propn|athink noun|gesege .
+%gra:	1|3|COMPOUND 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-X
+*MOT:	Nutella , here's your Nutella . 229180_231170
+%mor:	propn|Nutella cm|cm adv|here~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 propn|Nutella .
+%gra:	1|3|VOCATIVE 2|1|PUNCT 3|6|ROOT 4|3|COP 5|6|NMOD-POSS 6|3|NSUBJ 7|3|PUNCT
+*CHI:	ud gurm &=hums . 230480_233625
+%mor:	intj|ud noun|gurm .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ju  [/] ju shdoodoodui . 235230_240400
+%mor:	propn|ju propn|shdoodoodui .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	&=gasps thank+you . 244620_246980
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=breathes ick . 248050_249180
+%mor:	intj|ick .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=grunts . 249630_250080
+*CHI:	gese . 252500_253420
+%mor:	noun|gese .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=breathes e . 254360_256140
+%mor:	propn|e .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	uda . 256900_258080
+%mor:	noun|uda .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ou . 259430_259870
+%mor:	x|ou .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	oo da . 261320_262620
+%mor:	intj|oo propn|da .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*AAC:	SPOON . 261999_265454
+%mor:	noun|spoon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	xxx . 264330_266800
+*CHI:	&=hums . 266240_267060
+*CHI:	si . 270710_271280
+%mor:	noun|si .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=hums . 272340_275990
+*CHI:	&=showing . 276330_277810
+%xgco:	Child is holding out spoon in front of parent - appears to be requesting food .
+%xIS:	CHI-Gesture-S
+*MOT:	you ask for it again . 277363_278636
+%mor:	pron|you-Prs-Nom-S2 verb|ask-Fin-Ind-Pres-S2 adp|for pron|it-Prs-Acc-S3 adv|again .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|CASE 4|2|OBL 5|2|ADVMOD 6|2|PUNCT
+*CHI:	&=hums ni . 277840_280020
+%mor:	intj|ni .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	SPOON . 279545_281727
+%mor:	noun|spoon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	you have the spoon now . 280290_281620
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 det|the-Def-Art noun|spoon-Acc adv|now .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|DET 4|2|OBJ 5|2|ADVMOD 6|2|PUNCT
+*MOT:	yes . 282720_283450
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	su . 286070_286810
+%mor:	propn|su .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*AAC:	SPOON . 289272_292818
+%mor:	noun|spoon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	ga &=hums . 289370_293010
+%mor:	propn|ga .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	here you want this one ? 292580_293520
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|this-Def-Dem-Sing noun|one-Acc ?
+%gra:	1|5|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|5|DET 5|3|OBJ 6|1|PUNCT
+*MOT:	here . 293600_293980
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	this one ? 295810_296600
+%mor:	det|this-Def-Dem-Sing noun|one ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 301480_302500
+*MOT:	you have to ask for it . 302600_303974
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 part|to verb|ask-Inf-S adp|for pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|MARK 4|2|XCOMP 5|6|CASE 6|4|OBL 7|2|PUNCT
+*CHI:	yaga . 306280_308710
+%mor:	noun|yaga .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*AAC:	SPOON . 307454_309818
+%mor:	noun|spoon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	you have the spoon CHILDNAME you have spoon . 309410_311540
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 det|the-Def-Art noun|spoon noun|childname-Acc pron|you-Prs-Nom-S2 aux|have-Fin-Ind-Pres-S2 verb|spoon-Part-Past-S .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|5|DET 4|5|COMPOUND 5|2|OBJ 6|8|NSUBJ 7|8|AUX 8|5|ACL-RELCL 9|2|PUNCT
+*CHI:	soon . 312400_313420
+%mor:	adv|soon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates spoon .
+*MOT:	yes . 313580_314250
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=grunts &=whines . 314440_316440
+*MOT:	I have the Nutella now . 315820_317410
+%mor:	pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 det|the-Def-Art propn|Nutella-Acc adv|now .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|DET 4|2|OBJ 5|2|ADVMOD 6|2|PUNCT
+*CHI:	resik . 318410_319370
+%mor:	noun|resik .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	huda . 320210_322610
+%mor:	propn|huda .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=whines . 323440_327320
+*CHI:	&=reaching .
+%xgco:	Child extends arm towards nutella .
+%xIS:	CHI-Gesture-S
+*MOT:	you ask for Nutella . 325590_326909
+%mor:	pron|you-Prs-Nom-S2 verb|ask-Fin-Ind-Pres-S2 adp|for propn|Nutella .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+*MOT:	Nutella is that one . 328210_329910
+%mor:	propn|Nutella aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing noun|one .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*AAC:	NUTELLA . 329454_331454
+%mor:	propn|NUTELLA .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	&=whines open . 330030_333210
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	it's open now . 331330_332390
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|open-S1 adv|now .
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|ADVMOD 5|3|PUNCT
+*MOT:	here . 332770_333260
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	www . 334640_336470
+@End

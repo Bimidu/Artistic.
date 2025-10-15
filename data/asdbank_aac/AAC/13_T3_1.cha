@@ -1,0 +1,244 @@
+@UTF8
+@PID:	11312/a-00082314-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|3;01.|female|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	13_T3_1, video
+*COD:	C . 1_110000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Daddy_Pig Mommy_Pig . 3300_7400
+%mor:	propn|DaddyPig propn|MommyPig .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*CHI:	&=moving . 5410_7430
+%xIS:	CHI-Gesture-S
+*CHI:	&=reaching . 8460_9890
+%xIS:	CHI-Gesture-S
+*CHI:	ba  [/] ba  [/] ba . 9780_11010
+%mor:	noun|ba .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you want some Cheerios , let's do that one then (o)kay . 10460_14300
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|some-Def-Ind propn|Cheerios-Plur-Acc cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S det|that-Def-Dem-Sing num|one adv|then intj|okay .
+%gra:	1|2|NSUBJ 2|12|ROOT 3|4|DET 4|2|OBJ 5|6|PUNCT 6|2|PARATAXIS 7|6|OBJ 8|6|XCOMP 9|10|DET 10|8|OBJ 11|8|ADVMOD 12|2|DISCOURSE 13|2|PUNCT
+*MOT:	cereal . 14390_15720
+%mor:	noun|cereal .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want cereal ? 17550_19350
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|cereal-Acc ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	go on then . 20160_21010
+%mor:	verb|go-Fin-Imp-S adp|on adv|then .
+%gra:	1|3|ROOT 2|1|ADVMOD 3|1|ADVMOD 4|1|PUNCT
+*AAC:	CEREAL . 22830_23910
+%mor:	noun|cereal .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	ni . 23410_24250
+%mor:	intj|ni .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	www . 34960_39570
+%xPCO:	parent and person off camera speak to each other .
+*MOT:	Andy_Cat . 39680_41160
+%mor:	propn|AndyCat .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Mommy_Cat . 41530_42960
+%mor:	propn|MommyCat .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes Daddy_Pig . 45000_47380
+%mor:	intj|yes propn|DaddyPig .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=moving . 46140_48710
+%xIS:	CHI-Gesture-S
+*MOT:	Mommy_Pig . 48720_50100
+%mor:	propn|MommyPig .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	George . 50700_52010
+%mor:	propn|George .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Peppa_Pig &=snorts . 52770_55030
+%mor:	propn|PeppaPig .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent is imitating a pig .
+*CHI:	&=pointing . 55430_56540
+%xIS:	CHI-Gesture-I
+*MOT:	red xxx . 56610_58370
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you wanna label with Mommy ? 70750_72190
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 noun|label adp|with propn|Mommy ?
+%gra:	1|3|NSUBJ 2|3|AMOD 3|5|ROOT 4|5|CASE 5|3|NMOD 6|3|PUNCT
+*MOT:	want Mommy to say ? 72680_74270
+%mor:	verb|want-Fin-Ind-Pres-S1 propn|Mommy-Acc part|to verb|say-Inf-S ?
+%gra:	1|4|ROOT 2|1|OBJ 3|4|MARK 4|1|XCOMP 5|1|PUNCT
+*MOT:	would you like Mommy to say ? 76430_78370
+%mor:	aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S propn|Mommy-Acc part|to verb|say-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|3|PUNCT
+*CHI:	&=coughs . 76700_77640
+*MOT:	Mommy to say red car . 79920_82740
+%mor:	propn|Mommy part|to verb|say-Inf-S adj|red-S1 noun|car-Acc .
+%gra:	1|5|ROOT 2|3|MARK 3|1|ACL 4|5|AMOD 5|3|OBJ 6|1|PUNCT
+*CHI:	&=moving . 84890_85710
+%xIS:	CHI-Gesture-S
+*MOT:	red car . 85320_86310
+%mor:	adj|red-S1 noun|car .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	&=moving . 86381_87190
+%xIS:	CHI-Gesture-S
+*MOT:	Peppa_Pig George Mommy_Pig Daddy_Pig . 87190_90890
+%mor:	propn|PeppaPig propn|George propn|MommyPig propn|DaddyPig .
+%gra:	1|4|ROOT 2|1|FLAT 3|1|FLAT 4|1|FLAT 5|1|PUNCT
+*CHI:	&=moving . 87680_88460
+%xIS:	CHI-Gesture-S
+*CHI:	&=moving . 88510_89250
+%xIS:	CHI-Gesture-S
+*CHI:	&=moving . 89550_90460
+%xIS:	CHI-Gesture-S
+*MOT:	there . 93730_94770
+%mor:	adv|there .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	want me to say ? 101830_103590
+%mor:	verb|want-Fin-Imp-Pres-S pron|I-Prs-Acc-S1 part|to verb|say-Inf-S ?
+%gra:	1|4|ROOT 2|1|OBJ 3|4|MARK 4|1|XCOMP 5|1|PUNCT
+*MOT:	no okay &=hums . 104920_107520
+%mor:	intj|no intj|okay .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	come here xxx . 109180_110680
+%mor:	verb|come-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*COD:	U . 110000_161000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 161000_232000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 161260_162470
+*MOT:	gimme , give , gimme  [/] gimme  [/] gimme  [/] gimme . 168020_173630
+%mor:	intj|gimme cm|cm verb|give-Fin-Imp-S cm|cm intj|gimme .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|5|ROOT 4|5|PUNCT 5|3|DISCOURSE 6|3|PUNCT
+*CHI:	xxx . 168210_170650
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=hums . 171410_172550
+*MOT:	If you want xxx . 175490_177520
+%mor:	sconj|if pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 .
+%gra:	1|3|MARK 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	gilly  [/] gilly . 178400_179530
+%mor:	propn|gilly .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's the matter bug , are you okay ? 184110_186330
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|matter noun|bug cm|cm aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|okay-S1 ?
+%gra:	1|9|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|9|PUNCT 7|9|COP 8|9|NSUBJ 9|5|PARATAXIS 10|1|PUNCT
+*MOT:	don't scratch your eye xxx . 186860_190640
+%mor:	aux|do-Fin-Imp-S~part|not verb|scratch-Fin-Imp-S pron|your-Prs-Gen-S2 noun|eye-Acc .
+%gra:	1|3|AUX 2|3|ADVMOD 3|5|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|3|PUNCT
+*MOT:	xxx . 191330_192260
+*CHI:	ah uh . 191470_192550
+%mor:	intj|ah intj|uh .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ah . 193610_195250
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	you want tickles ? 196950_198550
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|tickle-Plur-Acc ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	&=hums . 197480_199120
+*CHI:	ama . 200130_201030
+%mor:	propn|ama .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	do you want anything ? 200580_202400
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|anything-Ind-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	tell me . 204050_204960
+%mor:	verb|tell-Fin-Imp-S pron|I-Prs-Acc-S1 .
+%gra:	1|2|ROOT 2|1|IOBJ 3|1|PUNCT
+*MOT:	gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly . 205510_207410
+%mor:	propn|gilly .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 206140_207300
+*MOT:	gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly . 207780_210290
+%mor:	propn|gilly .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that's right gilly , five four three two one gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly . 210550_219170
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 noun|gilly cm|cm num|five num|four num|three num|two num|one noun|gilly .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|11|ROOT 5|11|PUNCT 6|8|COMPOUND 7|8|COMPOUND 8|11|NUMMOD 9|11|NUMMOD 10|11|NUMMOD 11|4|PARATAXIS 12|4|PUNCT
+*MOT:	gilly  [/] gilly  [/] gilly  [/] gilly  [/] gilly . 220030_222020
+%mor:	propn|gilly .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums ah . 221810_223720
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	ah . 224550_225950
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ah . 226830_228550
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*COD:	U . 232000_242000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	++ happy about ? 241980_243110
+%mor:	adj|happy-S1 adp|about ?
+%gra:	1|2|ROOT 2|1|PUNCT 3|1|PUNCT
+*COD:	C . 242000_253000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want gilly ? 247090_248480
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|gilly-Acc ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	yeah myee . 248640_250780
+%mor:	intj|yeah intj|myee .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	CHILDNAME . 249320_250340
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	gilly . 251100_252320
+%mor:	propn|gilly .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 252310_253370
+*COD:	U . 253000_297000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	maraca . 296990_298130
+%mor:	propn|maraca .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 297000_317760
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=reaching . 297020_297650
+%xIS:	CHI-Gesture-S
+*MOT:	that's right . 298620_300570
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*CHI:	&=reaching . 300090_301010
+%xIS:	CHI-Gesture-S
+*MOT:	shake . 304820_305950
+%mor:	verb|shake-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you like that ? 306230_307540
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S pron|that-Dem ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	shake . 308800_310410
+%mor:	verb|shake-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	come here . 313980_315630
+%mor:	verb|come-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+@End

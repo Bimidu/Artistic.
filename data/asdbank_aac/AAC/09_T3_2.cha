@@ -1,0 +1,223 @@
+@UTF8
+@PID:	11312/a-00082297-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|5;10.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	09_T3_2, video
+*COD:	C . 1_318000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay , have here . 3570_5670
+%mor:	intj|okay cm|cm verb|have-Fin-Imp-S adv|here .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|4|ROOT 4|3|ADVMOD 5|3|PUNCT
+*MOT:	CHILDNAME check it out . 22220_23290
+%mor:	intj|childname verb|check-Fin-Imp-S pron|it-Prs-Acc-S3 adp|out .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|OBJ 4|2|COMPOUND-PRT 5|2|PUNCT
+*CHI:	my made two . 25720_26790
+%mor:	pron|my-Prs-Gen-S1 verb|make-Fin-Ind-Past-S3-irr num|two .
+%gra:	1|2|NMOD-POSS 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah Mommy made two . 26780_28330
+%mor:	intj|yeah propn|Mommy verb|make-Fin-Ind-Past-S3-irr num|two .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	&=hums . 30560_31280
+*MOT:	what is CHILDNAME making ? 43640_45050
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 adj|childname-S1 verb|make-Part-Pres-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	you're making egg . 52260_53760
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|make-Part-Pres-S noun|egg-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	ee . 57190_58790
+%mor:	propn|ee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME do you wanna do a race with your cars ? 62940_65460
+%mor:	noun|childname aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adv|wanna verb|do-Inf-S det|a-Ind-Art noun|race-Acc adp|with pron|your-Prs-Gen-S2 noun|car-Plur ?
+%gra:	1|5|OBL-UNMARKED 2|5|AUX 3|5|NSUBJ 4|5|ADVMOD 5|10|ROOT 6|7|DET 7|5|OBJ 8|10|CASE 9|10|NMOD-POSS 10|5|OBL 11|5|PUNCT
+*CHI:	no . 65860_66580
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh okay we won't then . 66590_68470
+%mor:	intj|oh intj|okay pron|we-Prs-Nom-P1 aux|will-Fin-S~part|not adv|then .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|NSUBJ 4|6|ROOT 5|4|ADVMOD 6|4|ADVMOD 7|4|PUNCT
+*MOT:	we'll keep playing blocks . 68940_70400
+%mor:	pron|we-Prs-Nom-P1~aux|will-Fin-S verb|keep-Inf-S verb|play-Ger-S noun|block-Plur-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|XCOMP 5|4|OBJ 6|3|PUNCT
+*MOT:	oh what's this ? 78550_79990
+%mor:	intj|oh pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+*CHI:	ree . 82030_82940
+%mor:	intj|ree .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	it's three . 82990_83930
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 num|three .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	look CHILDNAME . 100220_100850
+%mor:	verb|look-Fin-Imp-S propn|CHILDNAME-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	hiyo . 102570_103420
+%mor:	intj|hiyo .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	I make green . 105730_106900
+%mor:	pron|I-Prs-Nom-S1 verb|make-Fin-Ind-Pres-S1 noun|green-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	I make green , look . 106900_108700
+%mor:	pron|I-Prs-Nom-S1 verb|make-Fin-Ind-Pres-S1 adj|green-S1 cm|cm verb|look-Fin-Ind-Pres-S1 .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|PUNCT 5|2|PARATAXIS 6|2|PUNCT
+*AAC:	ON . 109560_110530
+%mor:	adv|on .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	on , <put it on>  [/] put it on . 110460_114320
+%mor:	adv|on cm|cm verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|on .
+%gra:	1|3|ADVMOD 2|1|PUNCT 3|5|ROOT 4|3|OBJ 5|3|COMPOUND-PRT 6|3|PUNCT
+*MOT:	Enzo what's Enzo , oh what did you make there ? 121080_124420
+%mor:	propn|Enzo pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 propn|Enzo cm|cm intj|oh pron|what-Int-S1 aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 verb|make-Inf-S adv|there ?
+%gra:	1|10|VOCATIVE 2|4|NSUBJ 3|4|COP 4|1|PARATAXIS 5|10|PUNCT 6|10|DISCOURSE 7|10|OBJ 8|10|AUX 9|10|NSUBJ 10|11|ROOT 11|10|ADVMOD 12|10|PUNCT
+*CHI:	Helicopter_Enzo . 123810_125460
+%mor:	propn|HelicopterEnzo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	xxx . 125610_127750
+%xDN:	CHI-Speech-ND
+*MOT:	Helicopter_Enzo ? 125650_127340
+%mor:	propn|HelicopterEnzo ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	who's this CHILDNAME ? 131830_133050
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|childname ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	what's this ? 136610_137450
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	xxx . 138780_141530
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	where's Enzo ? 142430_143810
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 propn|Enzo ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	I don't know where Enzo is . 144690_145990
+%mor:	pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|know-Inf-S adv|where propn|Enzo aux|be-Fin-Ind-Pres-S3 .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|7|ROOT 5|4|CCOMP 6|7|NSUBJ 7|5|COP 8|4|PUNCT
+*MOT:	who's that blue car ? 146030_146940
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing adj|blue-S1 noun|car ?
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*CHI:	&=hums . 147820_148770
+*CHI:	en  [/] en . 154010_155610
+%mor:	propn|en .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ay  [/] ay  [/] ay  [/] ay  [/] ay ah . 158620_162680
+%mor:	intj|ay intj|ah .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	check it out CHILDNAME . 165930_167000
+%mor:	verb|check-Fin-Imp-S pron|it-Prs-Acc-S3 adp|out propn|CHILDNAME .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|VOCATIVE 5|1|PUNCT
+*MOT:	hold on . 172980_173930
+%mor:	verb|hold-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*MOT:	oh . 174480_174930
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	ON . 175660_176730
+%mor:	adv|on .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	on , I put it on . 177080_179350
+%mor:	adv|on cm|cm pron|I-Prs-Nom-S1 verb|put-Fin-Ind-Past-S1-irr pron|it-Prs-Acc-S3 adp|on .
+%gra:	1|4|ADVMOD 2|1|PUNCT 3|4|NSUBJ 4|6|ROOT 5|4|OBJ 6|4|COMPOUND-PRT 7|4|PUNCT
+*CHI:	an . 179280_179900
+%mor:	det|a-Ind-Art .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=hums . 181130_182270
+*MOT:	I put it on . 181590_182600
+%mor:	pron|I-Prs-Nom-S1 verb|put-Fin-Ind-Past-S1-irr pron|it-Prs-Acc-S3 adp|on .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|OBJ 4|2|COMPOUND-PRT 5|2|PUNCT
+*CHI:	go . 186660_187350
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	can Mommy do a race ? 189480_191030
+%mor:	aux|can-Fin-S propn|Mommy verb|do-Inf-S det|a-Ind-Art noun|race-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*CHI:	no . 191570_192120
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no only wanna play blocks ay ? 192420_195910
+%mor:	det|no-Def-Neg adv|only intj|wanna verb|play-Inf-S noun|block-Plur-Acc adv|ay ?
+%gra:	1|4|DET 2|4|ADVMOD 3|4|DISCOURSE 4|6|ROOT 5|4|OBJ 6|4|ADVMOD 7|4|PUNCT
+*CHI:	&=hums . 197190_198610
+*CHI:	ah . 243040_245320
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	MORE . 245280_246780
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	more please . 247080_248220
+%mor:	adj|more-Cmp-S1 intj|please .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*CHI:	more please . 248270_249240
+%mor:	adj|more-Cmp-S1 intj|please .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	xxx . 256510_258120
+%xDN:	CHI-Speech-ND
+*MOT:	what are you making now ? 260430_261820
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|make-Part-Pres-S adv|now ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|ADVMOD 6|4|PUNCT
+*MOT:	I'm making +... 265480_266580
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|make-Part-Pres-S +...
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+*CHI:	oh . 270250_271100
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=groans . 276690_277700
+*CHI:	I'm making six . 285730_287700
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|make-Part-Pres-S num|six .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you're making six okay . 288010_289880
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|make-Part-Pres-S num|six intj|okay .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|OBJ 5|3|DISCOURSE 6|3|PUNCT
+*MOT:	what colour is this ? 291500_292770
+%mor:	det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	a . 295410_296110
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	six is purple ? 296800_298390
+%mor:	num|six aux|be-Fin-Ind-Pres-S3 adj|purple-S1 ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*CHI:	xxx . 305930_306600
+%xDN:	CHI-Speech-ND
+*CHI:	&=groans . 307750_308970
+*CHI:	a . 310920_311870
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+@End

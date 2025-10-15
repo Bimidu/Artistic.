@@ -1,0 +1,182 @@
+@UTF8
+@PID:	11312/a-00082265-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|9;10.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	02_T2, video
+*COD:	C . 20_337780
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you like Allan Walker CHILDNAME ? 270_3590
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S propn|Allan-Acc propn|Walker propn|CHILDNAME ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|4|FLAT 6|4|FLAT 7|3|PUNCT
+*MOT:	CHILDNAME . 5160_5800
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	CHILDNAME .  [+ per] 5750_6380
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look . 7500_7950
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	look .  [+ per] 7900_8740
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	you want to play another one CHILDNAME ? 9050_11200
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|play-Inf-S det|another-Def-Ind noun|one-Acc propn|CHILDNAME-Acc ?
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|MARK 4|2|XCOMP 5|6|DET 6|4|OBJ 7|4|OBJ 8|2|PUNCT
+*CHI:	you want to play another one CHILDNAME ?  [+ per] 10460_13040
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|play-Inf-S det|another-Def-Ind noun|one-Acc propn|CHILDNAME-Acc ?
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|MARK 4|2|XCOMP 5|6|DET 6|4|OBJ 7|4|OBJ 8|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yeah Allan Walker , let's play Allan Walker . 13460_17840
+%mor:	intj|yeah propn|Allan propn|Walker cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|play-Inf-S propn|Allan-Acc propn|Walker .
+%gra:	1|5|DISCOURSE 2|5|VOCATIVE 3|2|FLAT 4|2|PUNCT 5|9|ROOT 6|5|OBJ 7|5|XCOMP 8|7|OBJ 9|8|FLAT 10|5|PUNCT
+*AAC:	ALAN WALKER . 13770_15890
+%mor:	propn|ALAN propn|WALKER .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%xPS:	P
+*CHI:	yeah . 15360_16320
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	oh there's no sound . 22820_24850
+%mor:	intj|oh pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|no-Def-Neg noun|sound .
+%gra:	1|3|DISCOURSE 2|3|EXPL 3|5|ROOT 4|5|DET 5|3|NSUBJ 6|3|PUNCT
+*MOT:	oh excuse me . 27140_28480
+%mor:	intj|oh verb|excuse-Fin-Imp-S pron|I-Prs-Acc-S1 .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	oh . 70300_70890
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want more ? 72490_73700
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|more-Cmp-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	do you want more ?  [+ per] 73870_75370
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|more-Cmp-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*AAC:	MORE . 75530_78260
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	more . 77370_78120
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay more Allan Walker . 79330_81080
+%mor:	intj|okay adj|more-Cmp-S1 propn|Allan propn|Walker .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|4|ROOT 4|3|FLAT 5|3|PUNCT
+*CHI:	&=hums . 109520_111090
+*AAC:	MORE . 112130_113980
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	more ? 112890_113480
+%mor:	adj|more-Cmp-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	more ?  [+ per] 113670_114340
+%mor:	adj|more-Cmp-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	okay more . 114410_115460
+%mor:	intj|okay adj|more-Cmp-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*AAC:	MORE . 146870_147740
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	you want more ? 147400_148600
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	okay . 149440_150110
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	MORE . 179710_182240
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	more . 182160_182860
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	all done . 214900_215810
+%mor:	det|all-Def-Tot verb|do-Part-Past-S-irr .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*AAC:	MORE . 217380_221310
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	S
+*CHI:	no . 219160_220910
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	more ? 220860_221520
+%mor:	adj|more-Cmp-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(o)kay more . 222270_223060
+%mor:	intj|okay adj|more-Cmp-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	finished  [/] finished . 246760_249190
+%mor:	verb|finish-Fin-Ind-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want more ? 250850_252240
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|more-Cmp-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	CHILDNAME do you want to listen about universe ? 252630_256890
+%mor:	propn|CHILDNAME aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|listen-Inf-S adp|about noun|universe ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|8|ROOT 5|6|MARK 6|4|XCOMP 7|8|CASE 8|6|OBL 9|4|PUNCT
+*MOT:	let's search universe . 257420_258970
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|search-Inf-S noun|universe-Acc .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|1|PUNCT
+*MOT:	okay . 259710_260440
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh look at that . 263480_265030
+%mor:	intj|oh verb|look-Fin-Imp-S adp|at pron|that-Dem .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+*AAC:	MORE . 291970_294090
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	you want more ? 292830_293940
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	you know , want to know the universe ? 294010_296080
+%mor:	pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 cm|cm verb|want-Fin-Ind-Pres-S2 part|to verb|know-Inf-S det|the-Def-Art noun|universe-Acc ?
+%gra:	1|2|NSUBJ 2|4|PARATAXIS 3|2|PUNCT 4|8|ROOT 5|6|MARK 6|4|XCOMP 7|8|DET 8|6|OBJ 9|4|PUNCT
+*MOT:	(o)kay . 297590_298380
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	all done . 318490_319280
+%mor:	det|all-Def-Tot verb|do-Part-Past-S-irr .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	all done .  [+ per] 319700_320440
+%mor:	det|all-Def-Tot verb|do-Part-Past-S-irr .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*AAC:	FINISHED . 325440_328730
+%mor:	verb|finihhe-Part-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*CHI:	xxx . 326530_328780
+*MOT:	finished ? 328870_329550
+%mor:	verb|finish-Fin-Ind-Past-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	all done ? 331610_332600
+%mor:	det|all-Def-Tot verb|do-Part-Past-S-irr ?
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	okay . 333710_334680
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=moans . 335450_336440
+@End

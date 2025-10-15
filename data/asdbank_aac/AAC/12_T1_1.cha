@@ -1,0 +1,510 @@
+@UTF8
+@PID:	11312/a-00082308-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|4;09.|male|||Target_Child|||
+@Media:	12_T1_1, video
+*COD:	C . 1_350080
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No CHI-ACC observed . 1_350080
+%mor:	det|no-Def-Neg noun|chiacc verb|observe-Fin-Ind-Past-S3 .
+%gra:	1|2|DET 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	good okay . 2480_6580
+%mor:	adj|good-S1 intj|okay .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*CHI:	&=reaching . 12000_12900
+%xgco:	Child reaches out for object
+%xIS:	CHI-Gesture-S
+*MOT:	can I have um red color ? 12870_15760
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S intj|um adj|red-S1 noun|color-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|6|DISCOURSE 5|6|AMOD 6|3|OBJ 7|3|PUNCT
+*CHI:	&=reaching . 14270_15150
+%xgco:	Child reaches out for object
+%xIS:	CHI-Gesture-S
+*CHI:	red color , red . 16400_18210
+%mor:	adj|red-S1 noun|color cm|cm adj|red-S1 .
+%gra:	1|2|AMOD 2|4|ROOT 3|4|PUNCT 4|2|PARATAXIS 5|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	red yes I want red , give me red . 17530_20000
+%mor:	intj|red intj|yes pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 adj|red-S1 cm|cm verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 adj|red-S1 .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|NSUBJ 4|9|ROOT 5|4|XCOMP 6|7|PUNCT 7|4|PARATAXIS 8|7|IOBJ 9|7|OBJ 10|4|PUNCT
+*CHI:	xxx . 20440_21720
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no  [/] no that's blue , I want red . 21270_23840
+%mor:	intj|no pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|blue-S1 cm|cm pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 adj|red-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|8|ROOT 5|7|PUNCT 6|7|NSUBJ 7|4|PARATAXIS 8|7|XCOMP 9|4|PUNCT
+*MOT:	<give me red>  [/] give me red red color . 24360_27010
+%mor:	verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 adj|red-S1 adj|red-S1 noun|color-Acc .
+%gra:	1|5|ROOT 2|1|IOBJ 3|5|AMOD 4|5|AMOD 5|1|OBJ 6|1|PUNCT
+*MOT:	red , yes good , this is red &=pointing . 28110_31270
+%mor:	adj|red-S1 cm|cm intj|yes adj|good-S1 cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|red-S1 .
+%gra:	1|8|ROOT 2|4|PUNCT 3|4|DISCOURSE 4|1|PARATAXIS 5|8|PUNCT 6|8|NSUBJ 7|8|COP 8|1|PARATAXIS 9|1|PUNCT
+*MOT:	uh , give me yellow . 33250_36270
+%mor:	intj|uh cm|cm verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 adj|yellow-S1 .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|5|ROOT 4|3|IOBJ 5|3|XCOMP 6|3|PUNCT
+*MOT:	no  [/] no  [/] no  [/] no that's not yellow that's blue , give me yellow . 37860_42060
+%mor:	intj|no pron|that-Dem~aux|be-Fin-Ind-Pres-S3 part|not adj|yellow-S1 pron|that-Rel~aux|be-Fin-Ind-Pres-S3 adj|blue-S1 cm|cm verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 adj|yellow-S1 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|12|ROOT 6|8|NSUBJ 7|8|COP 8|5|ADVCL-RELCL 9|10|PUNCT 10|5|PARATAXIS 11|10|IOBJ 12|10|XCOMP 13|5|PUNCT
+*CHI:	oh . 42120_42800
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	that's blue . 43880_45050
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|blue-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	okay what color is this ? 47930_49850
+%mor:	intj|okay det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|5|DISCOURSE 2|3|DET 3|5|NSUBJ 4|5|COP 5|5|ROOT 6|5|PUNCT
+*MOT:	<what color is this>  [/] what color is this ? 51420_55230
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	&=reaching . 53190_54840
+%xgco:	Child reaches out to try and grab object
+%xIS:	CHI-Gesture-S
+*CHI:	unon . 55060_56000
+%mor:	intj|unon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yellow okay good . 56540_58420
+%mor:	adj|yellow-S1 intj|okay adj|good-S1 .
+%gra:	1|3|ROOT 2|3|DISCOURSE 3|1|PARATAXIS 4|1|PUNCT
+*MOT:	okay . 58910_59750
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what color is this ? 60340_61830
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	&=reaching . 61720_62980
+%xgco:	Child reaches out to try and grab object
+%xIS:	CHI-Gesture-S
+*CHI:	xxx .
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	eh ? 62790_63940
+%mor:	intj|eh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=reaching . 63720_65700
+%xgco:	Child reaches out to try and grab object
+%xIS:	CHI-Gesture-S
+*MOT:	what color is this ? 64370_65400
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	blue ? 66770_67490
+%mor:	adj|blue-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	blue that's blue . 67870_69520
+%mor:	adj|blue-S1 pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|blue-S1 .
+%gra:	1|4|ROOT 2|4|NSUBJ 3|4|COP 4|1|ADVCL-RELCL 5|1|PUNCT
+*MOT:	what color is this ? 70660_72120
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	&=reaching . 72090_72890
+%xgco:	Target child reaches out for object
+%xIS:	CHI-Gesture-S
+*MOT:	green , good boy good+job . 73190_75340
+%mor:	adj|green-S1 cm|cm adj|good-S1 noun|boy noun|goodjob .
+%gra:	1|5|AMOD 2|1|PUNCT 3|5|AMOD 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+*MOT:	okay . 76400_77080
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME what color is this ? 79060_80540
+%mor:	propn|CHILDNAME det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|5|ROOT 2|3|DET 3|5|NSUBJ 4|5|COP 5|1|PARATAXIS 6|1|PUNCT
+*MOT:	blue  [/] blue this is not purple this is blue . 82020_84120
+%mor:	adj|blue-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 part|not adj|purple-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|blue-S1 .
+%gra:	1|5|ADVMOD 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|8|ROOT 6|8|NSUBJ 7|8|COP 8|5|PARATAXIS 9|5|PUNCT
+*MOT:	what color is this ? 86300_87650
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	red . 87040_87660
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=reaching . 87270_87860
+%xgco:	Child reaches out for object
+%xIS:	CHI-Gesture-S
+*MOT:	red good+job clap yourself . 87930_90760
+%mor:	adj|red-S1 noun|goodjob verb|clap-Fin-Imp-S pron|yourself-Prs-Acc-S2 .
+%gra:	1|2|AMOD 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	xxx . 92170_93620
+*MOT:	what color is this ? 94060_95220
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	bing &=pointing . 95560_96370
+%mor:	propn|bing .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	pink good good+job . 96320_99630
+%mor:	adj|pink-S1 adj|good-S1 noun|goodjob .
+%gra:	1|3|AMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what color is this ? 100320_101830
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	&=reaching . 101780_103350
+%xgco:	Child reaches out to try and grab object
+%xIS:	CHI-Gesture-S
+*CHI:	white . 102970_103710
+%mor:	adj|white-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh white , good good+job , white . 103960_105880
+%mor:	intj|oh adj|white-S1 cm|cm adj|good-S1 noun|goodjob cm|cm adj|white-S1 .
+%gra:	1|2|DISCOURSE 2|7|ROOT 3|5|PUNCT 4|5|AMOD 5|2|CONJ 6|7|PUNCT 7|5|CONJ 8|2|PUNCT
+*MOT:	this is +... 107800_108910
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*CHI:	++ green . 109010_109690
+%mor:	adj|green-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	green good good+job <clap yourself>  [/] clap yourself . 109810_116870
+%mor:	adj|green-S1 adj|good-S1 noun|goodjob verb|clap-Fin-Imp-S pron|yourself-Prs-Acc-S2 .
+%gra:	1|3|AMOD 2|3|AMOD 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	&=hums . 112070_115300
+*MOT:	okay this ? 117220_118980
+%mor:	intj|okay pron|this-Dem-S1 ?
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=reaching . 119170_120170
+%xgco:	Target child reaches out to grab object
+%xIS:	CHI-Gesture-S
+*MOT:	green okay that's green . 119840_122420
+%mor:	adj|green-S1 intj|okay pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|green-S1 .
+%gra:	1|5|ROOT 2|5|DISCOURSE 3|5|NSUBJ 4|5|COP 5|1|PARATAXIS 6|1|PUNCT
+*MOT:	red  [/] red good+job . 125100_130220
+%mor:	adj|red-S1 noun|goodjob .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	red . 126530_127580
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	this is tall <this is too tall>  [/] this is too tall we're gonna build another one , what color is this ? 130490_135840
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|tall-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adv|too adj|tall-S1 pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 part|go verb|build-Inf-S det|another-Def-Ind noun|one-Acc cm|cm det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|NSUBJ 2|3|COP 3|18|ROOT 4|7|NSUBJ 5|7|COP 6|7|ADVMOD 7|3|CCOMP 8|11|NSUBJ 9|11|AUX 10|11|ADVMOD 11|7|PARATAXIS 12|13|DET 13|11|OBJ 14|18|PUNCT 15|16|DET 16|18|NSUBJ 17|18|COP 18|11|PARATAXIS 19|3|PUNCT
+*CHI:	white . 136090_136830
+%mor:	adj|white-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	white , is this white ? 136720_138890
+%mor:	adj|white-S1 cm|cm aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing adj|white-S1 ?
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|COP 4|5|DET 5|5|ROOT 6|5|PUNCT
+*CHI:	wa  [/] wa . 137760_139300
+%mor:	propn|wa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	this is cream , cream color . 139100_141040
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 noun|cream cm|cm noun|cream noun|color .
+%gra:	1|3|NSUBJ 2|3|COP 3|6|ROOT 4|6|PUNCT 5|6|COMPOUND 6|3|APPOS 7|3|PUNCT
+*CHI:	wai . 140480_141700
+%mor:	noun|wai .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay we're gonna build another one , this is too tall okay , let's build another one . 141430_145750
+%mor:	intj|okay pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 part|go verb|build-Inf-S det|another-Def-Ind noun|one-Acc cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adv|too adj|tall-S1 adj|okay-S1 cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|build-Inf-S det|another-Def-Ind noun|one-Acc .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|19|ROOT 6|7|DET 7|5|OBJ 8|13|PUNCT 9|13|NSUBJ 10|13|COP 11|12|ADVMOD 12|13|ADVMOD 13|5|PARATAXIS 14|15|PUNCT 15|5|PARATAXIS 16|15|OBJ 17|15|XCOMP 18|19|DET 19|17|OBJ 20|5|PUNCT
+*MOT:	this is too tall it's gonna fall . 146050_148510
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adv|too adj|tall-S1 pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 part|go verb|fall-Inf-S .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|8|ROOT 5|8|NSUBJ 6|8|AUX 7|8|ADVMOD 8|4|PARATAXIS 9|4|PUNCT
+*MOT:	okay so let's build another one . 149160_151290
+%mor:	intj|okay adv|so verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|build-Inf-S det|another-Def-Ind noun|one-Acc .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|7|ROOT 4|3|OBJ 5|3|XCOMP 6|7|DET 7|5|OBJ 8|3|PUNCT
+*MOT:	okay CHILDNAME , what is thi(s) , what color is this ? 151800_155190
+%mor:	intj|okay intj|childname cm|cm pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 cm|cm det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|6|DISCOURSE 2|6|DISCOURSE 3|2|PUNCT 4|6|NSUBJ 5|6|COP 6|11|ROOT 7|11|PUNCT 8|9|DET 9|11|NSUBJ 10|11|COP 11|6|PARATAXIS 12|6|PUNCT
+*CHI:	blue . 155140_155920
+%mor:	adj|blue-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	blue  [/] blue blue color . 156080_159090
+%mor:	adj|blue-S1 adj|blue-S1 noun|color .
+%gra:	1|3|AMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	you're doing a great job , what color is this ? 159830_164020
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|do-Part-Pres-S det|a-Ind-Art adj|great-S1 noun|job-Acc cm|cm det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|11|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|11|PUNCT 8|9|DET 9|11|NSUBJ 10|11|COP 11|3|PARATAXIS 12|3|PUNCT
+*CHI:	yellow . 165240_166110
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yellow  [/] yellow . 166200_168400
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yellow no  [/] no  [/] no don't build it that way . 169180_171540
+%mor:	adj|yellow-S1 adv|no aux|do-Fin-Imp-S~part|not verb|build-Fin-Imp-S pron|it-Prs-Acc-S3 det|that-Def-Dem-Sing noun|way .
+%gra:	1|5|NSUBJ 2|5|ADVMOD 3|5|AUX 4|5|ADVMOD 5|8|ROOT 6|5|OBJ 7|8|DET 8|5|OBL-UNMARKED 9|5|PUNCT
+*MOT:	put it this way , if not it's gonna fall . 172390_175200
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 det|this-Def-Dem-Sing noun|way cm|cm sconj|if part|not pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 part|go verb|fall-Inf-S .
+%gra:	1|11|ROOT 2|1|OBJ 3|4|DET 4|1|OBL-UNMARKED 5|11|PUNCT 6|7|MARK 7|11|ADVMOD 8|11|NSUBJ 9|11|AUX 10|11|ADVMOD 11|1|ADVCL 12|1|PUNCT
+*MOT:	this ? 176000_176690
+%mor:	pron|this-Dem-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=reaching . 176130_177120
+%xgco:	Target child reaches out for object
+%xIS:	CHI-Gesture-S
+*CHI:	yellow . 176770_177380
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yellow . 177540_178590
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	this is +... 181160_182060
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	what color is this ? 183250_184520
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	pink , great job , good , oh no , oh CHILDNAME , oh no . 186770_194720
+%mor:	adj|pink-S1 cm|cm adj|great-S1 noun|job cm|cm adj|good-S1 cm|cm intj|oh intj|no cm|cm intj|oh intj|childname cm|cm intj|oh intj|no .
+%gra:	1|15|ROOT 2|4|PUNCT 3|4|AMOD 4|1|CONJ 5|6|PUNCT 6|4|CONJ 7|9|PUNCT 8|9|DISCOURSE 9|1|CONJ 10|9|PUNCT 11|12|DISCOURSE 12|4|DISCOURSE 13|14|PUNCT 14|15|DISCOURSE 15|1|DISCOURSE 16|1|PUNCT
+*MOT:	pink  [/] pink , this ? 195580_197650
+%mor:	adj|pink-S1 cm|cm pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+*CHI:	ping . 198270_199060
+%mor:	noun|ping-Ger .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates pink .
+*MOT:	yes ? 199350_200010
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 200230_201180
+*CHI:	&=reaching .
+%xgco:	Target child reaches out to grab object
+%xIS:	CHI-Gesture-S
+*MOT:	white , this is wh , white and blue , this is blue , this is white &=pointing . 201360_206070
+%mor:	adj|white-S1 cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|wh-S1 cm|cm adj|white-S1 cconj|and adj|blue-S1 cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|blue-S1 cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|white-S1 .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|COP 5|17|ROOT 6|7|PUNCT 7|5|CONJ 8|9|CC 9|5|CONJ 10|13|PUNCT 11|13|NSUBJ 12|13|COP 13|5|PARATAXIS 14|17|PUNCT 15|17|NSUBJ 16|17|COP 17|13|PARATAXIS 18|5|PUNCT
+*CHI:	wa . 202310_202820
+%mor:	propn|wa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates white .
+*MOT:	white . 207120_208160
+%mor:	adj|white-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	this is +... 209220_210810
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	yellow , yellow and uh , green . 211340_215120
+%mor:	adj|yellow-S1 cm|cm adj|yellow-S1 cconj|and intj|uh cm|cm adj|green-S1 .
+%gra:	1|7|ROOT 2|3|PUNCT 3|1|CONJ 4|7|CC 5|7|DISCOURSE 6|5|PUNCT 7|1|CONJ 8|1|PUNCT
+*CHI:	green . 214850_215670
+%mor:	adj|green-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	okay another green . 216180_217950
+%mor:	intj|okay det|another-Def-Ind noun|green .
+%gra:	1|3|DISCOURSE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	so +... 218250_219210
+%mor:	adv|so +...
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 218980_219940
+%xDN:	CHI-Speech-ND
+*CHI:	&=reaching . 222310_223500
+%xgco:	Child reaches out to try and grab object
+%xIS:	CHI-Gesture-S
+*MOT:	yellow and a +... 223730_226620
+%mor:	adj|yellow-S1 cconj|and det|a-Ind-Art +...
+%gra:	1|3|ROOT 2|3|CC 3|1|CONJ 4|1|PUNCT
+*CHI:	++ pink . 226180_226900
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	pink oh good  [/] good yellow and pink . 226990_232740
+%mor:	adj|pink-S1 intj|oh adj|good-S1 adj|yellow-S1 cconj|and adj|pink-S1 .
+%gra:	1|4|AMOD 2|4|DISCOURSE 3|4|AMOD 4|6|ROOT 5|6|CC 6|4|CONJ 7|4|PUNCT
+*MOT:	okay oh pink . 234190_238710
+%mor:	intj|okay intj|oh adj|pink-S1 .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|3|ROOT 4|3|PUNCT
+*MOT:	that's not right <put it back>  [/] put it back . 240100_244250
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 part|not adv|right verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adv|back .
+%gra:	1|5|NSUBJ 2|5|AUX 3|5|ADVMOD 4|5|ADVMOD 5|7|ROOT 6|5|OBJ 7|5|ADVMOD 8|5|PUNCT
+*MOT:	this ? 249890_250600
+%mor:	pron|this-Dem-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME what color is this ? 250730_252520
+%mor:	propn|CHILDNAME det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|5|ROOT 2|3|DET 3|5|NSUBJ 4|5|COP 5|1|PARATAXIS 6|1|PUNCT
+*CHI:	pink  [/] pink . 254830_257430
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	pink yeah pink . 255270_257460
+%mor:	adj|pink-S1 intj|yeah adj|pink-S1 .
+%gra:	1|3|ROOT 2|3|DISCOURSE 3|1|PARATAXIS 4|1|PUNCT
+*CHI:	&=reaching .
+%xgco:	Child reaches out to grab ojbect
+%xIS:	CHI-Gesture-S
+*MOT:	pink . 258550_259580
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay , oh CHILDNAME wow let's give you that . 260460_270180
+%mor:	intj|okay cm|cm intj|oh intj|childname intj|wow verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|give-Inf-S pron|you-Prs-Acc-S2 pron|that-Dem .
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|DISCOURSE 4|6|DISCOURSE 5|6|DISCOURSE 6|10|ROOT 7|6|OBJ 8|6|XCOMP 9|8|IOBJ 10|8|OBJ 11|6|PUNCT
+*CHI:	xxx . 270740_271460
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what ? 271560_272740
+%mor:	pron|what-Int-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 272420_273400
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	CHILDNAME did you fall it down ? 273080_275710
+%mor:	propn|CHILDNAME aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 verb|fall-Inf-S pron|it-Prs-Acc-S3 adp|down ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|4|OBJ 6|4|COMPOUND-PRT 7|4|PUNCT
+*CHI:	&=grunts . 274140_275080
+*MOT:	this ? 277100_278020
+%mor:	pron|this-Dem-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	jits , orange . 278120_280250
+%mor:	noun|jit-Plur cm|cm adj|orange-S1 .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=reaching . 279950_281210
+%xgco:	Child reaches out to try and grab object
+%xIS:	CHI-Gesture-S
+*MOT:	orange is this orange ? 280160_281930
+%mor:	noun|orange aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|orange ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*CHI:	orange . 282380_283580
+%mor:	adj|orange-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	this is not orange <this is yellow>  [/] this is yellow . 282970_288090
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 part|not adj|orange-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|yellow-S1 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|7|ROOT 5|7|NSUBJ 6|7|COP 7|4|CCOMP 8|4|PUNCT
+*MOT:	that's not orange . 288430_289950
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 part|not adj|orange-S1 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	this is +... 292260_293860
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*CHI:	++ red . 293610_294500
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	red yes red . 294290_295880
+%mor:	adj|red-S1 intj|yes adj|red-S1 .
+%gra:	1|3|ROOT 2|3|DISCOURSE 3|1|PARATAXIS 4|1|PUNCT
+*MOT:	xxx . 297060_298290
+*CHI:	ooj . 297880_298840
+%mor:	intj|ooj .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child approximates orange .
+*CHI:	&=reaching .
+%xgco:	Child reaches out for block
+%xIS:	CHI-Gesture-S
+*MOT:	orange , no . 298900_300790
+%mor:	adj|orange-S1 cm|cm intj|no .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|DISCOURSE 4|1|PUNCT
+*MOT:	yeah orange oh <good+job>  [/] good+job . 300950_304330
+%mor:	intj|yeah adj|orange-S1 intj|oh intj|goodjob .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|DISCOURSE 4|2|DISCOURSE 5|2|PUNCT
+*MOT:	clap yourself <that's orange>  [/] that's orange . 304930_308640
+%mor:	verb|clap-Fin-Imp-S pron|yourself-Prs-Acc-S2 pron|that-Rel~aux|be-Fin-Ind-Pres-S3 adj|orange-S1 .
+%gra:	1|5|ROOT 2|1|OBJ 3|5|NSUBJ 4|5|COP 5|1|ADVCL-RELCL 6|1|PUNCT
+*MOT:	this ? 314330_315140
+%mor:	pron|this-Dem-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=reaching . 315150_317820
+%xgco:	Child reaches out for block
+%xIS:	CHI-Gesture-S
+*MOT:	pink and and what ? 315940_318450
+%mor:	adj|pink-S1 cconj|and cconj|and pron|what-Int-S1 ?
+%gra:	1|4|ROOT 2|4|CC 3|4|CC 4|1|CONJ 5|1|PUNCT
+*CHI:	a . 318010_319090
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=reaching .
+%xgco:	Child reaches out for block
+%xIS:	CHI-Gesture-S
+*MOT:	and what color ? 319030_320570
+%mor:	cconj|and det|what-Def-Int noun|color ?
+%gra:	1|3|CC 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	<this is pink>  [/] this is pink ↫wha↫what color is ↫thi↫this ? 321240_326910
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|pink-S1 det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|NSUBJ 2|3|COP 3|7|ROOT 4|5|DET 5|7|NSUBJ 6|7|COP 7|3|CCOMP 8|3|PUNCT
+*CHI:	pink . 326960_327940
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=reaching . 327440_328640
+%xgco:	Child reaches out for block
+%xIS:	CHI-Gesture-S
+*MOT:	no  [/] no this is not pink , this is pink &=pointing . 327640_330600
+%mor:	intj|no pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 part|not adj|pink-S1 cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|pink-S1 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|9|ROOT 6|9|PUNCT 7|9|NSUBJ 8|9|COP 9|5|PARATAXIS 10|5|PUNCT
+*CHI:	&=hums . 330150_330890
+*MOT:	okay so what color is this ? 330770_332360
+%mor:	intj|okay adv|so det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|6|DISCOURSE 2|6|DISCOURSE 3|4|DET 4|6|NSUBJ 5|6|COP 6|6|ROOT 7|6|PUNCT
+*CHI:	pink . 332310_332890
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no  [/] no  [/] no what color is this &=pointing ? 332800_334690
+%mor:	intj|no det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|5|DISCOURSE 2|3|DET 3|5|NSUBJ 4|5|COP 5|5|ROOT 6|5|PUNCT
+*CHI:	pink . 334620_335140
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no this is not pink . 335160_336580
+%mor:	intj|no pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 part|not adj|pink-S1 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	what color is this ? 336740_338640
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	&=reaching . 338460_339890
+%xgco:	Child reaches out for block
+%xIS:	CHI-Gesture-S
+*CHI:	pink &=pointing .
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no this is , this is red . 339250_343370
+%mor:	intj|no pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|red-S1 .
+%gra:	1|7|DISCOURSE 2|3|NSUBJ 3|7|REPARANDUM 4|3|PUNCT 5|7|NSUBJ 6|7|COP 7|7|ROOT 8|7|PUNCT
+*MOT:	look this is red , this is pink &=pointing . 344120_348290
+%mor:	verb|look-Fin-Imp-S pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|red-S1 cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|pink-S1 .
+%gra:	1|8|ROOT 2|4|NSUBJ 3|4|COP 4|1|CCOMP 5|8|PUNCT 6|8|NSUBJ 7|8|COP 8|1|PARATAXIS 9|1|PUNCT
+*MOT:	and uh CHILDNAME . 348380_350080
+%mor:	cconj|and intj|uh propn|CHILDNAME .
+%gra:	1|3|CC 2|3|DISCOURSE 3|3|ROOT 4|3|PUNCT
+@End

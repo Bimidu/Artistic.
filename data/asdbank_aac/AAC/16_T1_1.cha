@@ -1,0 +1,247 @@
+@UTF8
+@PID:	11312/a-00082326-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|8;03.|male|||Target_Child|||
+@Media:	16_T1_1, video
+*COD:	C . 1_167970
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No AAC use , no AAC system present . 10_1170
+%mor:	det|no-Def-Neg noun|aac noun|use cm|cm det|no-Def-Neg noun|aac noun|system adj|present-S1 .
+%gra:	1|3|DET 2|3|COMPOUND 3|8|ROOT 4|8|PUNCT 5|7|DET 6|7|COMPOUND 7|8|NSUBJ 8|3|PARATAXIS 9|3|PUNCT
+*MOT:	CHILDNAME ? 1150_2150
+%mor:	noun|childname ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	oowa . 1410_2680
+%mor:	intj|oowa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	boot . 3800_4530
+%mor:	noun|boot .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	those are CHILDNAME's . 4710_6400
+%mor:	pron|that-Dem-P1 aux|be-Fin-Ind-Pres-P3 propn|CHILDNAME~part|s .
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|CASE 5|3|PUNCT
+*CHI:	ah ↫s↫stop right . 5900_9590
+%mor:	intj|ah verb|stop-Fin-Imp-S adv|right .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME put your socks on please . 8850_11640
+%mor:	noun|childname verb|put-Fin-Imp-S pron|your-Prs-Gen-S2 noun|sock-Plur-Acc adp|on intj|please .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|2|COMPOUND-PRT 6|2|DISCOURSE 7|2|PUNCT
+*CHI:	no aiya . 9920_13820
+%mor:	det|no-Def-Neg noun|aiya .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	uwa . 16690_17890
+%mor:	intj|uwa .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here you go . 18010_18930
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|1|PUNCT
+*CHI:	&=moans . 18810_21310
+*MOT:	CHILDNAME , don't you wanna have xxx . 21340_25140
+%mor:	propn|CHILDNAME cm|cm aux|do-Fin-Ind-Pres-S2~part|not pron|you-Prs-Nom-S2 intj|wanna verb|have-Inf-S .
+%gra:	1|7|VOCATIVE 2|1|PUNCT 3|7|AUX 4|7|ADVMOD 5|7|NSUBJ 6|7|DISCOURSE 7|7|ROOT 8|7|PUNCT
+*CHI:	&=moans . 21980_25140
+*CHI:	&=breathes ma . 25230_29640
+%mor:	noun|ma .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	very good . 30980_32050
+%mor:	adv|very adj|good-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	&=moans . 31120_33280
+*MOT:	CHILDNAME no . 32660_33730
+%mor:	propn|CHILDNAME intj|no .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	put your pants . 33810_34980
+%mor:	verb|put-Fin-Imp-S pron|your-Prs-Gen-S2 noun|pants-Ptan-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+*CHI:	he na &=breathes . 35330_38360
+%mor:	pron|he-Prs-Nom-S3 part|to .
+%gra:	1|2|ROOT 2|1|CASE 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=moans . 43550_44810
+*MOT:	put your pants on . 44990_46800
+%mor:	verb|put-Fin-Imp-S pron|your-Prs-Gen-S2 noun|pants-Ptan-Acc adp|on .
+%gra:	1|4|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|COMPOUND-PRT 5|1|PUNCT
+*CHI:	yes I saw Hugh . 48280_51310
+%mor:	intj|yes pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Past-S1-irr propn|Hugh-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	xxx . 52410_53920
+*MOT:	try again xxx . 54500_56970
+%mor:	verb|try-Fin-Imp-S adv|again .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	and your other leg . 61910_64100
+%mor:	cconj|and pron|your-Prs-Gen-S2 adj|other-S1 noun|leg .
+%gra:	1|4|CC 2|4|NMOD-POSS 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	CHILDNAME . 66620_67450
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes . 71300_73290
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	very good . 75970_77530
+%mor:	adv|very adj|good-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	put your pants on . 85290_86880
+%mor:	verb|put-Fin-Imp-S pron|your-Prs-Gen-S2 noun|pants-Ptan-Acc adp|on .
+%gra:	1|4|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|COMPOUND-PRT 5|1|PUNCT
+*MOT:	xxx . 91000_92510
+*MOT:	good+job . 96590_97830
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	good . 97840_98360
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	CHILDNAME . 98260_98900
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	huh ? 99220_99830
+%mor:	intj|huh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	now . 101190_102180
+%mor:	adv|now .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 103340_105730
+*MOT:	please . 106850_107610
+%mor:	intj|please .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	put your shirt on . 112280_113820
+%mor:	verb|put-Fin-Imp-S pron|your-Prs-Gen-S2 noun|shirt-Acc adp|on .
+%gra:	1|4|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|COMPOUND-PRT 5|1|PUNCT
+*CHI:	&=hums . 114040_115180
+*MOT:	xxx . 118210_119840
+*CHI:	&=hums . 119470_120400
+*MOT:	xxx . 120470_121510
+*MOT:	this one . 122400_123230
+%mor:	det|this-Def-Dem-Sing noun|one .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	from this side xxx . 123860_125250
+%mor:	adp|from det|this-Def-Dem-Sing noun|side .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	xxx . 124660_126600
+%xDN:	CHI-Speech-ND
+*CHI:	enfos . 129210_131220
+%mor:	intj|enfos .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	wow . 132320_133740
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=grunts . 133550_135250
+*MOT:	look at that . 135380_136950
+%mor:	verb|look-Fin-Imp-S adp|at pron|that-Dem .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*CHI:	e a hehuh . 135910_137630
+%mor:	x|e det|a-Ind-Art noun|hehuh .
+%gra:	1|3|DISCOURSE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	you're doing great . 139720_141040
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|do-Part-Pres-S adj|great-S1 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|XCOMP 5|3|PUNCT
+*CHI:	&=hums posa . 142980_145500
+%mor:	propn|posa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	wow . 146470_147520
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME do you want water ? 148150_149850
+%mor:	propn|CHILDNAME aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|water-Acc ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	CHILDNAME do you want water ? 153980_155930
+%mor:	propn|CHILDNAME aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|water-Acc ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	stop bringing xxx . 156000_157720
+%mor:	verb|stop-Fin-Imp-S verb|bring-Ger-S .
+%gra:	1|2|ROOT 2|1|XCOMP 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	do you want water CHILDNAME ? 157500_159460
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|water propn|CHILDNAME-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|COMPOUND 5|3|OBJ 6|3|PUNCT
+*CHI:	&=hums I'm tired . 160000_162690
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 adj|tired-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME . 160540_161350
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want water ? 163210_164190
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|water-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	water . 164190_165530
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	xxx . 165200_166540
+*CHI:	a water break . 166710_168150
+%mor:	det|a-Ind-Art noun|water noun|break .
+%gra:	1|3|DET 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*COD:	U . 167980_177990
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 178000_252888
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=moans . 182890_184510
+*CHI:	stop right here &=moans . 189430_194850
+%mor:	verb|stop-Fin-Imp-S adv|right adv|here .
+%gra:	1|3|ROOT 2|3|ADVMOD 3|1|ADVMOD 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	CHILDNAME calm down . 191940_193540
+%mor:	noun|childname adj|calm-S1 adv|down .
+%gra:	1|3|ROOT 2|1|AMOD 3|2|ADVMOD 4|1|PUNCT
+*CHI:	&=hums . 197230_198300
+*CHI:	&=moans . 204730_206030
+*CHI:	&=moans . 212490_214540
+*MOT:	calm down will you ? 213210_214470
+%mor:	verb|calm-Fin-Imp-S adp|down aux|will-Fin-S pron|you-Prs-Nom-S2 ?
+%gra:	1|4|ROOT 2|1|COMPOUND-PRT 3|1|PARATAXIS 4|1|PARATAXIS 5|1|PUNCT
+*CHI:	&=moans . 216080_217580
+*MOT:	okay CHILDNAME xxx . 242050_245020
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=moans . 245470_248690
+*MOT:	CHILDNAME do you want to pick a book ? 246030_248090
+%mor:	propn|CHILDNAME aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|pick-Inf-S det|a-Ind-Art noun|book-Acc ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|8|ROOT 5|6|MARK 6|4|XCOMP 7|8|DET 8|6|OBJ 9|4|PUNCT
+*MOT:	CHILDNAME pick a book . 250790_253490
+%mor:	propn|CHILDNAME verb|pick-Fin-Imp-S det|a-Ind-Art noun|book-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*COD:	U . 253000_271990
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 271990_272850
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 272860_302870
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	book . 302570_303340
+%mor:	noun|book .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*COD:	C . 302870_316600
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	book yes . 304140_305490
+%mor:	verb|book-Inf-Imp-S intj|yes .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+@End

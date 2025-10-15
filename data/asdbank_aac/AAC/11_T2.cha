@@ -1,0 +1,399 @@
+@UTF8
+@PID:	11312/a-00082305-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|8;00.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	11_T2, video
+*COD:	C . 2000_330760
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ju . 5880_6700
+%mor:	propn|ju .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=whines . 11520_12400
+*MOT:	oh wow you like that ? 12290_16320
+%mor:	intj|oh intj|wow pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 pron|that-Dem ?
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	you like to play ? 16470_18450
+%mor:	pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 part|to verb|play-Inf-S ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|MARK 4|2|XCOMP 5|2|PUNCT
+*MOT:	you want some more ? 22970_24840
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|some-Def-Ind adj|more-Cmp-S1 ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	wow . 25300_26490
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here mommy xxx again . 26510_27970
+%mor:	adv|here noun|mommy adv|again .
+%gra:	1|3|ROOT 2|1|NSUBJ 3|1|ADVMOD 4|1|PUNCT
+*MOT:	xxx . 28270_31820
+*CHI:	&=hums . 38760_39760
+*AAC:	PLAY . 42020_44360
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	play . 44820_45610
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	play ? 45660_46300
+%mor:	verb|play-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	play CHILDNAME . 46880_48030
+%mor:	verb|play-Fin-Imp-S propn|CHILDNAME-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	good+job . 51120_53110
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=hums . 59160_60570
+*MOT:	Mama's gonna get that okay ? 67610_70450
+%mor:	noun|mama~aux|be-Fin-Ind-Pres-S3 adv|gonna verb|get-Inf-S pron|that-Dem adj|okay-S1 ?
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|6|ROOT 5|4|OBJ 6|4|XCOMP 7|4|PUNCT
+*MOT:	let's try this again . 71670_73430
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|try-Inf-S pron|this-Dem-S1 adv|again .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|ADVMOD 6|1|PUNCT
+*MOT:	good . 73910_75050
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 76870_78380
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	PLAY . 77610_79060
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	wait  [/] wait if you wanna play . 79030_81470
+%mor:	verb|wait-Fin-Imp-S sconj|if pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|play-Inf-S .
+%gra:	1|5|ROOT 2|5|MARK 3|5|NSUBJ 4|5|AUX 5|1|ADVCL 6|1|PUNCT
+*MOT:	play . 82400_84000
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	play . 84170_84900
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	play . 84980_85760
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx let's play . 92080_93430
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|play-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+*MOT:	here . 93430_94240
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	stack . 95090_96470
+%mor:	noun|stack .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(o)kay do that , here . 99000_101060
+%mor:	intj|okay verb|do-Fin-Imp-S pron|that-Dem cm|cm adv|here .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|OBJ 4|5|PUNCT 5|2|ADVMOD 6|2|PUNCT
+*MOT:	you go next . 102070_103020
+%mor:	pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 adv|next .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	good+job . 103690_105160
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	next . 105420_106250
+%mor:	adv|next .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	uwee . 106610_108150
+%mor:	noun|uwee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child makes noise of excitement .
+*MOT:	right . 108570_109720
+%mor:	adj|right-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	pink . 109910_110570
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	green . 111930_112770
+%mor:	adj|green-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	blue . 114490_115440
+%mor:	adj|blue-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and oops red good+job . 115940_118640
+%mor:	cconj|and verb|oop-Fin-Ind-Pres-S3 adj|red-S1 noun|goodjob-Acc .
+%gra:	1|2|CC 2|4|ROOT 3|4|AMOD 4|2|OBJ 5|2|PUNCT
+*MOT:	here . 118750_119400
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	place it back , right here . 119740_121790
+%mor:	verb|place-Fin-Imp-S pron|it-Prs-Acc-S3 adv|back cm|cm adv|right adv|here .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|ADVMOD 4|6|PUNCT 5|6|ADVMOD 6|1|ADVMOD 7|1|PUNCT
+*MOT:	here . 122110_122760
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx more . 124130_125780
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	done . 128880_129620
+%mor:	verb|do-Part-Past-S-irr .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	(o)kay good+job . 132660_134440
+%mor:	intj|okay noun|goodjob .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 136930_138570
+*MOT:	hold on . 137860_139140
+%mor:	verb|hold-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*AAC:	PLAY . 141860_144070
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	play . 144700_145350
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx it here . 145690_147810
+%mor:	pron|it-Prs-Nom-S3 adv|here .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	play . 147900_148990
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	like that . 151410_152470
+%mor:	adp|like pron|that-Dem .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+*MOT:	okay . 157320_158440
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=hums . 171740_173290
+*MOT:	here Mama's gonna get that okay ? 176740_178910
+%mor:	adv|here propn|Mama~aux|be-Fin-Ind-Pres-S3 part|go verb|get-Inf-S pron|that-Dem adj|okay-S1 ?
+%gra:	1|5|ADVMOD 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|7|ROOT 6|5|OBJ 7|5|XCOMP 8|5|PUNCT
+*MOT:	hold on . 179270_180110
+%mor:	verb|hold-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*MOT:	come on . 183220_184290
+%mor:	verb|come-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	oops . 189340_190070
+%mor:	intj|oop .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	PLAY . 194200_195560
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	play . 195540_196230
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ple . 196150_196700
+%mor:	intj|ple .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates play .
+*MOT:	play . 196940_197570
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	this one . 201500_202530
+%mor:	det|this-Def-Dem-Sing noun|one .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	Mama's gonna get this . 212320_213840
+%mor:	noun|mama~aux|be-Fin-Ind-Pres-S3 adv|gonna verb|get-Inf-S pron|this-Dem-S1 .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	play here . 214090_215620
+%mor:	verb|play-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*AAC:	CATCH . 224340_225940
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*CHI:	xxx . 227060_227830
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	catch  [/] catch . 227460_229150
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ca . 228430_228940
+%mor:	aux|can-Fin-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child imitates catch .
+*MOT:	hold on . 229940_230830
+%mor:	verb|hold-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*CHI:	yeeyu . 231480_232940
+%mor:	intj|yeeyu .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child makes noise of excitement .
+*MOT:	catch . 233070_233800
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yee &=laughs . 233950_235380
+%mor:	intj|yee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh okay here  [/] here . 236350_238350
+%mor:	intj|oh intj|okay adv|here .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|3|ROOT 4|3|PUNCT
+*AAC:	PLAY . 240010_241980
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	play  [/] play . 241130_243250
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	play &=hums . 241750_243500
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	play . 244180_244680
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	just one more okay ? 247600_249310
+%mor:	adv|just num|one adv|more adj|okay-S1 ?
+%gra:	1|4|ADVMOD 2|4|NUMMOD 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	good+job . 264490_266560
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	gonna get that okay ? 266590_268220
+%mor:	adv|gonna verb|get-Fin-S pron|that-Dem adj|okay-S1 ?
+%gra:	1|2|ADVMOD 2|4|ROOT 3|2|OBJ 4|2|XCOMP 5|2|PUNCT
+*MOT:	xxx . 272110_273830
+*MOT:	no more play . 275150_276230
+%mor:	det|no-Def-Neg adj|more-Cmp-S1 noun|play .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*AAC:	PLAY . 275490_277040
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	woops no more la . 278000_279770
+%mor:	noun|woop-Plur adv|no adv|more propn|la .
+%gra:	1|4|ROOT 2|3|ADVMOD 3|4|ADVMOD 4|1|APPOS 5|1|PUNCT
+*CHI:	wa wanadigidigidigidada ee . 279970_283460
+%mor:	propn|wa propn|wanadigidigidigidada x|ee .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|GOESWITH 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	CHILDNAME play +... 284180_287660
+%mor:	noun|childname noun|play +...
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	digi  [/] digi  [/] digi dana anegawa . 285570_288350
+%mor:	noun|digi propn|dana propn|anegawa .
+%gra:	1|3|COMPOUND 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	play not available . 287910_290610
+%mor:	verb|play-Fin-Imp-S part|not adj|available-S1 .
+%gra:	1|3|ROOT 2|3|ADVMOD 3|1|XCOMP 4|1|PUNCT
+*CHI:	wen . 290050_291040
+%mor:	intj|wen .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=whines . 291210_294260
+*MOT:	play not available . 291950_293240
+%mor:	verb|play-Fin-Imp-S part|not adj|available-S1 .
+%gra:	1|3|ROOT 2|3|ADVMOD 3|1|XCOMP 4|1|PUNCT
+*MOT:	here let's do this one . 294420_295720
+%mor:	adv|here verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S det|this-Def-Dem-Sing noun|one-Acc .
+%gra:	1|2|ADVMOD 2|6|ROOT 3|2|OBJ 4|2|XCOMP 5|6|DET 6|4|OBJ 7|2|PUNCT
+*CHI:	&=hums e  [/] e a  [/] a  [/] a &=hums . 295370_301240
+%mor:	noun|e det|a-Ind-Art .
+%gra:	1|2|ROOT 2|1|PUNCT 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	here clay . 295860_297680
+%mor:	adv|here noun|clay-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*AAC:	BALL . 298280_299900
+%mor:	noun|ball .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	ball , catch . 300510_302340
+%mor:	noun|ball cm|cm noun|catch .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|APPOS 4|1|PUNCT
+*CHI:	ya . 302360_302900
+%mor:	intj|ya .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	catch . 302950_303540
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yu . 303620_303980
+%mor:	propn|yu .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	catch . 304260_305050
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yung . 305110_305840
+%mor:	intj|yung .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=reaching .
+%xIS:	CHI-Gesture-S
+*CHI:	niun . 307350_307940
+%mor:	intj|niun .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	catch . 310620_311770
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums nia . 311410_312890
+%mor:	propn|nia .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	good . 313560_314220
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=grunts . 313560_314220
+*CHI:	done . 316290_317100
+%mor:	verb|do-Part-Past-S-irr .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	catch . 317300_318210
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	niun . 318360_319050
+%mor:	intj|niun .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	catch . 319900_320530
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=grunts . 319900_320530
+*CHI:	done . 321920_322630
+%mor:	verb|do-Part-Past-S-irr .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	mama . 322750_323350
+%mor:	noun|mama .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums done . 323150_324250
+%mor:	verb|do-Part-Past-S-irr .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	catch . 324570_325370
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=grunts . 324730_325670
+*MOT:	catch . 327590_328450
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

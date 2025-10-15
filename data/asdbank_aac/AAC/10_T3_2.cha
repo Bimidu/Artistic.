@@ -1,0 +1,389 @@
+@UTF8
+@PID:	11312/a-00082302-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|4;11.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	10_T3_2, video
+*COD:	C . 180000_482000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	does CHILDNAME read ? 180290_182010
+%mor:	aux|do-Fin-Ind-Pres-S3 propn|CHILDNAME verb|read-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	no  [/] no <ba be>  [/] <ba be>  [/] <ba be>  [/] <ba be>  [/] ba be . 182380_187630
+%mor:	intj|no noun|ba aux|be-Inf-S .
+%gra:	1|2|DISCOURSE 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	polar+bear  [/] polar+bear what do you hear ?  [+ bkr] 186390_188800
+%mor:	intj|polarbear pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|5|DISCOURSE 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+%xPCO:	parent is reading book .
+*CHI:	one . 196700_197270
+%mor:	num|one .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=hums . 197970_198910
+*CHI:	&=pointing . 198940_200330
+%xIS:	CHI-Gesture-S
+*MOT:	lion . 201690_202810
+%mor:	noun|lion .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	liwun . 203850_204960
+%mor:	intj|liwun .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates lion .
+*CHI:	&=pointing .
+%xIS:	CHI-Gesture-I
+*MOT:	what do you hear ?  [+ bkr] 205550_207290
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%xPCO:	parent is reading the book .
+*MOT:	I hear a , uh okay .  [+ bkr] 209220_211040
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 det|a-Ind-Art cm|cm intj|uh intj|okay .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|OBJ 4|3|PUNCT 5|2|DISCOURSE 6|2|DISCOURSE 7|2|PUNCT
+%xPCO:	parent is reading the book .
+*CHI:	hippomapa . 214280_215560
+%mor:	propn|hippomapa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'hippopotamus' .
+*MOT:	a hippopotamus in my ear you're right &=laughs . 215800_218330
+%mor:	det|a-Ind-Art noun|hippopotamus adp|in pron|my-Prs-Gen-S1 noun|ear pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|right-S1 .
+%gra:	1|2|DET 2|8|NSUBJ 3|5|CASE 4|5|NMOD-POSS 5|2|NMOD 6|8|NSUBJ 7|8|COP 8|8|ROOT 9|8|PUNCT
+%xPCO:	parent is reading the book .
+*CHI:	hippo . 224420_225520
+%mor:	noun|hippo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	hippopotamus . 225990_227250
+%mor:	noun|hippopotamus .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	lookie  [/] lookie . 227800_229240
+%mor:	intj|lookie .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	I hear a flamingo floating in my ear .  [+ bkr] 229660_233560
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 det|a-Ind-Art noun|flamingo-Acc verb|float-Ger-S adp|in pron|my-Prs-Gen-S1 noun|ear .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|4|DET 4|2|OBJ 5|4|ACL 6|8|CASE 7|8|NMOD-POSS 8|5|OBL 9|2|PUNCT
+%xPCO:	parent is reading the book .
+*CHI:	mingo . 231060_232040
+%mor:	propn|mingo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	flamingo xxx .  [+ bkr] 234010_236480
+%mor:	noun|flamingo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*CHI:	enga . 238050_238900
+%mor:	propn|enga .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	what do you hear ?  [+ bkr] 239610_241150
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*CHI:	there's a zebra xxx .  [+ bkr] 241220_244230
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|zebra .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*MOT:	in my ear .  [+ bkr] 244600_245660
+%mor:	adp|in pron|my-Prs-Gen-S1 noun|ear .
+%gra:	1|3|CASE 2|3|NMOD-POSS 3|3|ROOT 4|3|PUNCT
+*CHI:	on my ear .  [+ bkr] 245970_247260
+%mor:	adp|on pron|my-Prs-Gen-S1 noun|ear .
+%gra:	1|3|CASE 2|3|NMOD-POSS 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is reading the book .
+*MOT:	good+job . 247440_248190
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	zebra  [/] zebra what do you hear ?  [+ bkr] 248490_251390
+%mor:	noun|zebra-Acc pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|5|OBJ 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*CHI:	I hear a boa constrictor with xxx in my ear .  [+ bkr] 251790_256390
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 det|a-Ind-Art noun|boa noun|constrictor-Acc adp|with adp|in pron|my-Prs-Gen-S1 noun|ear .
+%gra:	1|2|NSUBJ 2|9|ROOT 3|5|DET 4|5|COMPOUND 5|2|OBJ 6|9|CASE 7|9|CASE 8|9|NMOD-POSS 9|2|OBL 10|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*CHI:	<wowa structor>  [/] wowa structor what do you hear ?  [+ bkr] 256620_261030
+%mor:	propn|wowa noun|structor pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|2|COMPOUND 2|6|ROOT 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|2|ACL-RELCL 7|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book and approximating 'boa constrictor' .
+*CHI:	I hear elephant xxx my ear .  [+ bkr] 261080_263910
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 noun|elephant-Acc pron|my-Prs-Gen-S1 noun|ear-Acc .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|NMOD-POSS 5|2|OBJ 6|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*CHI:	elephant  [/] elephant what do you hear ?  [+ bkr] 263960_266790
+%mor:	noun|elephant-Acc pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|5|OBJ 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*MOT:	I hear a +... 267070_268170
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 det|a-Ind-Art +...
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+%xPCO:	parent is reading the book .
+*CHI:	I hear a +... 268500_269760
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 det|a-Ind-Art +...
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is reading the book .
+*MOT:	a leopard .  [+ bkr] 272910_274490
+%mor:	det|a-Ind-Art noun|leopard .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	leopard .  [+ bkr] 275010_275850
+%mor:	noun|leopard .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	leopard  [/] leopard what do you hear ?  [+ bkr] 276690_279810
+%mor:	noun|leopard pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|5|ROOT 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|1|PARATAXIS 6|1|PUNCT
+%xPCO:	parent is reading the book .
+*CHI:	hear . 279190_279810
+%mor:	verb|hear-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	I hear a peacock xxx my ear .  [+ bkr] 281040_285620
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 det|a-Ind-Art noun|peacock-Acc pron|my-Prs-Gen-S1 noun|ear-Acc .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|DET 4|2|OBJ 5|6|NMOD-POSS 6|2|OBJ 7|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*MOT:	peacock  [/] peacock what do you hear ?  [+ bkr] 286220_288990
+%mor:	noun|peacock pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|5|ROOT 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|1|PARATAXIS 6|1|PUNCT
+%xPCO:	parent is reading the book .
+*CHI:	walrus xxx my ear .  [+ bkr] 291480_294760
+%mor:	noun|walrus pron|my-Prs-Gen-S1 noun|ear-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*MOT:	walrus  [/] walrus , good+job .  [+ bkr] 295930_298580
+%mor:	noun|walrus cm|cm noun|goodjob .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|APPOS 4|1|PUNCT
+*CHI:	walrus what do you hear ?  [+ bkr] 296330_299500
+%mor:	noun|walrus pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|5|ROOT 2|5|OBJ 3|5|AUX 4|5|NSUBJ 5|1|PARATAXIS 6|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is reading the book .
+*CHI:	xxx in my ear .  [+ bkr] 300110_304000
+%mor:	adp|in pron|my-Prs-Gen-S1 noun|ear .
+%gra:	1|3|CASE 2|3|NMOD-POSS 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*CHI:	okay sookay . 308260_309970
+%mor:	intj|okay propn|sookay .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	okay gills okay ge . 311240_313920
+%mor:	intj|okay noun|gill-Plur intj|okay noun|ge .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|DISCOURSE 4|2|APPOS 5|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	what do you hear ?  [+ bkr] 314580_315720
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|hear-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*MOT:	I hear a +... 316250_317570
+%mor:	pron|I-Prs-Nom-S1 verb|hear-Fin-Ind-Pres-S1 det|a-Ind-Art +...
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+%xPCO:	parent is reading the book .
+*MOT:	polar+bear . 318680_319660
+%mor:	noun|polarbear .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=pointing . 320020_320810
+%xIS:	CHI-Gesture-S
+*CHI:	a kolar+bear a xxx .  [+ bkr]
+%mor:	det|a-Ind-Art noun|kolarbear noun|a .
+%gra:	1|2|DET 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'polar bear .'
+*CHI:	&=pointing . 321460_322120
+%xIS:	CHI-Gesture-S
+*MOT:	uh a lion a +... 323610_326490
+%mor:	intj|uh det|a-Ind-Art noun|lion noun|a +...
+%gra:	1|3|DISCOURSE 2|3|DET 3|4|ROOT 4|3|PUNCT 5|3|PUNCT
+*CHI:	&=moving . 327180_328560
+%xIS:	CHI-Gesture-S
+*CHI:	&=pointing . 330110_331050
+%xIS:	CHI-Gesture-S
+*CHI:	&=pointing . 332020_332780
+%xIS:	CHI-Gesture-S
+*MOT:	a hippopotamus .  [+ bkr] 332880_334650
+%mor:	det|a-Ind-Art noun|hippopotamus .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*CHI:	&=pointing . 336320_337260
+%xIS:	CHI-Gesture-S
+*CHI:	flamingo and zebra goes xxx elephant uh  [/] uh .  [+ bkr] 338610_343900
+%mor:	noun|flamingo cconj|and noun|zebra verb|go-Fin-Ind-Pres-S3 noun|elephant-Acc intj|uh .
+%gra:	1|4|NSUBJ 2|3|CC 3|1|CONJ 4|6|ROOT 5|4|OBJ 6|4|DISCOURSE 7|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is reading the book .
+*CHI:	&=pointing .
+%xIS:	CHI-Gesture-S
+*CHI:	&=pointing .
+%xIS:	CHI-Gesture-S
+*MOT:	&=hums leopard . 343910_344990
+%mor:	noun|leopard .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	leopard .  [+ bkr] 345110_346050
+%mor:	noun|leopard .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=pointing . 346030_346950
+%xIS:	CHI-Gesture-S
+*CHI:	keekop . 346630_347900
+%mor:	intj|keekop .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'peacock .'
+*MOT:	and +... 348080_348670
+%mor:	cconj|and +...
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	++ keep .  [+ bkr] 349110_349870
+%mor:	verb|keep-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=pointing . 349940_350970
+%xIS:	CHI-Gesture-I
+*MOT:	yeah you said peacock good job . 350320_351950
+%mor:	intj|yeah pron|you-Prs-Nom-S2 verb|say-Fin-Ind-Past-S2-irr noun|peacock adj|good-S1 noun|job-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|6|COMPOUND 5|6|AMOD 6|3|OBJ 7|3|PUNCT
+*CHI:	keekop . 352030_353070
+%mor:	intj|keekop .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'peacock .'
+*MOT:	and +... 353510_354080
+%mor:	cconj|and +...
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	++ woah . 354120_355380
+%mor:	intj|woah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=pointing .
+%xIS:	CHI-Gesture-I
+*MOT:	good+job bye  [/] bye . 355590_359580
+%mor:	noun|goodjob intj|bye .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	good+job . 360760_362100
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want me to read you this book ? 365570_367330
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|I-Prs-Acc-S1 part|to verb|read-Inf-S pron|you-Prs-Acc-S2 det|this-Def-Dem-Sing noun|book-Acc ?
+%gra:	1|2|NSUBJ 2|8|ROOT 3|2|OBJ 4|5|MARK 5|2|XCOMP 6|5|IOBJ 7|8|DET 8|5|OBJ 9|2|PUNCT
+*CHI:	xxx . 374790_375900
+%xDN:	CHI-Speech-ND
+*MOT:	are those trains ? 384570_386680
+%mor:	aux|be-Fin-Ind-Pres-P3 det|that-Def-Dem-Plur noun|train-Plur ?
+%gra:	1|3|COP 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	are those trains ? 390550_392190
+%mor:	aux|be-Fin-Ind-Pres-P3 det|that-Def-Dem-Plur noun|train-Plur ?
+%gra:	1|3|COP 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	tre . 393720_394910
+%mor:	propn|tre .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating trains
+*AAC:	TRAIN . 396880_397980
+%mor:	noun|train .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	thank+you it's trains . 399420_401540
+%mor:	intj|thankyou pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|train-Plur .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	yeah . 402650_403420
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	is that a xxx ? 408100_409300
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|that-Dem det|a-Ind-Art ?
+%gra:	1|2|COP 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+*MOT:	is that animals ? 411280_413080
+%mor:	aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing noun|animal-Plur ?
+%gra:	1|3|COP 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	&=hums . 413590_414220
+*MOT:	&=hums woah . 416180_418200
+%mor:	intj|woah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you wanna maybe , let's read . 419230_420980
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-S adv|maybe cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|read-Inf-S .
+%gra:	1|2|NSUBJ 2|5|REPARANDUM 3|5|ADVMOD 4|3|PUNCT 5|7|ROOT 6|5|OBJ 7|5|XCOMP 8|5|PUNCT
+*MOT:	calling all trains .  [+ bkr] 425400_427150
+%mor:	verb|call-Part-Pres-S det|all-Def-Tot noun|train-Plur-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%xPCO:	parent is reading the book .
+*MOT:	and then we do this one ? 433770_435780
+%mor:	cconj|and adv|then pron|we-Prs-Nom-P1 verb|do-Fin-Ind-Pres-P1 det|this-Def-Dem-Sing noun|one-Acc ?
+%gra:	1|4|CC 2|4|ADVMOD 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*MOT:	today's mega mission goes out to Rescue_Reg .  [+ bkr] 436220_440590
+%mor:	noun|today~part|s noun|mega noun|mission verb|go-Fin-Ind-Pres-S3 adp|out adp|to propn|RescueReg .
+%gra:	1|4|NMOD-POSS 2|1|CASE 3|4|COMPOUND 4|5|NSUBJ 5|8|ROOT 6|5|COMPOUND-PRT 7|8|CASE 8|5|OBL 9|5|PUNCT
+%xPCO:	parent is reading the book .
+*MOT:	you'll pick up the shipment of helmets  [/] helmets and pogo+sticks .  [+ bkr] 441470_447060
+%mor:	pron|you-Prs-Nom-S2~aux|will-Fin-S verb|pick-Inf-S adp|up det|the-Def-Art noun|shipment-Acc adp|of noun|helmet-Plur cconj|and noun|pogostick-Plur .
+%gra:	1|3|NSUBJ 2|3|AUX 3|10|ROOT 4|3|COMPOUND-PRT 5|6|DET 6|3|OBJ 7|8|CASE 8|6|NMOD 9|10|CC 10|8|CONJ 11|3|PUNCT
+%xPCO:	parent is reading the book .
+*MOT:	from Port_Station and deliver them to school &~st , I can't focus if you ↫p↫pressing buttons while I'm talking xxx .  [+ bkr] 447980_454940
+%mor:	adp|from propn|PortStation cconj|and verb|deliver-Fin-Imp-S pron|they-Prs-Acc-P3 adp|to noun|school cm|cm pron|I-Prs-Nom-S1 aux|can-Fin-S~part|not verb|focus-Inf-S sconj|if pron|you-Prs-Nom-S2 verb|press-Part-Pres-S noun|button-Plur-Acc sconj|while pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|talk-Part-Pres-S .
+%gra:	1|2|CASE 2|12|OBL 3|4|CC 4|12|CONJ 5|4|OBJ 6|7|CASE 7|4|OBL 8|12|PUNCT 9|12|NSUBJ 10|12|AUX 11|12|ADVMOD 12|20|ROOT 13|15|MARK 14|15|NSUBJ 15|12|ADVCL 16|15|OBJ 17|20|MARK 18|20|NSUBJ 19|20|AUX 20|15|ADVCL 21|12|PUNCT
+%xPCO:	parent is reading the book .
+*MOT:	you have .  [+ bkr]
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	go with the pictures that it's showing you . 455590_459180
+%mor:	verb|go-Fin-Imp-S adp|with det|the-Def-Art noun|picture-Plur pron|that-Rel pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|show-Part-Pres-S pron|you-Prs-Acc-S2 .
+%gra:	1|9|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|8|OBJ 6|8|NSUBJ 7|8|AUX 8|4|ACL-RELCL 9|8|OBJ 10|1|PUNCT
+*CHI:	&=pointing . 458160_459070
+%xIS:	CHI-Gesture-I
+*CHI:	go picture . 459620_460950
+%mor:	verb|go-Fin-Imp-S noun|picture-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	&=hums . 461220_462250
+@End

@@ -1,0 +1,345 @@
+@UTF8
+@PID:	11312/a-00082283-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|4;07.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	06_T2, video, missing
+*COD:	C . 1_136290
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	I have all these toys okay you tell me which one . 1410_4000
+%mor:	pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 det|all-Def-Tot det|this-Def-Dem-Plur noun|toy-Plur-Acc intj|okay pron|you-Prs-Nom-S2 verb|tell-Fin-Ind-Pres-S2 pron|I-Prs-Acc-S1 det|which-Def-Int noun|one-Acc .
+%gra:	1|2|NSUBJ 2|11|ROOT 3|5|DET-PREDET 4|5|DET 5|2|OBJ 6|8|DISCOURSE 7|8|NSUBJ 8|2|PARATAXIS 9|8|IOBJ 10|11|DET 11|8|OBJ 12|2|PUNCT
+*CHI:	&=other . 4000_5570
+%xgco:	Child uses arms to stim (appears excited) .
+*CHI:	&=hums .
+*MOT:	so I have fur balls here and I have the paint box here . 4500_8870
+%mor:	adv|so pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 adj|fur-S1 noun|ball-Plur-Acc adv|here cconj|and pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 det|the-Def-Art noun|paint noun|box-Acc adv|here .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|13|ROOT 4|5|AMOD 5|3|OBJ 6|3|ADVMOD 7|9|CC 8|9|NSUBJ 9|3|CONJ 10|12|DET 11|12|COMPOUND 12|9|OBJ 13|9|ADVMOD 14|3|PUNCT
+*CHI:	&=hums . 6510_7130
+*CHI:	xxx . 7850_9610
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	ee . 10590_11160
+%mor:	propn|ee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	BALL . 11192_13461
+%mor:	noun|ball .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	okay you want the ball toy ? 11270_13060
+%mor:	intj|okay pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|ball noun|toy-Acc ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|6|DET 5|6|COMPOUND 6|3|OBJ 7|3|PUNCT
+*CHI:	&=other . 13330_14840
+%xgco:	Child stims by clappinng motion and shaking arms (excited) .
+*MOT:	okay mama will give you . 13460_14680
+%mor:	intj|okay noun|mama aux|will-Fin-S verb|give-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|5|ROOT 5|4|IOBJ 6|4|PUNCT
+*MOT:	can you just sit on your seat first and you wait okay ? 14910_16700
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 adv|just verb|sit-Inf-S adp|on pron|your-Prs-Gen-S2 noun|seat adv|first cconj|and pron|you-Prs-Nom-S2 verb|wait-Fin-Ind-Pres-S2 adj|okay-S1 ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|12|ROOT 5|7|CASE 6|7|NMOD-POSS 7|4|OBL 8|4|ADVMOD 9|11|CC 10|11|NSUBJ 11|4|CONJ 12|11|XCOMP 13|4|PUNCT
+*CHI:	ee . 16070_16990
+%mor:	propn|ee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	and you wait okay ? 17230_18460
+%mor:	cconj|and pron|you-Prs-Nom-S2 verb|wait-Fin-Ind-Pres-S2 adj|okay-S1 ?
+%gra:	1|3|CC 2|3|NSUBJ 3|4|ROOT 4|3|XCOMP 5|3|PUNCT
+*CHI:	ee . 17820_18540
+%mor:	propn|ee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you wait . 18820_19280
+%mor:	pron|you-Prs-Nom-S2 verb|wait-Fin-Ind-Pres-S2 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*CHI:	xxx . 19610_20960
+%xDN:	CHI-Speech-ND
+*MOT:	here , you wait . 20166_21722
+%mor:	adv|here cm|cm pron|you-Prs-Nom-S2 verb|wait-Fin-Ind-Pres-S2 .
+%gra:	1|4|ROOT 2|1|PUNCT 3|4|NSUBJ 4|1|PARATAXIS 5|1|PUNCT
+*MOT:	wait . 22222_23333
+%mor:	verb|wait-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	wait , I will get you a toy . 23555_24833
+%mor:	verb|wait-Fin-Imp-S cm|cm pron|I-Prs-Nom-S1 aux|will-Fin-S verb|get-Inf-S pron|you-Prs-Acc-S2 det|a-Ind-Art noun|toy-Acc .
+%gra:	1|8|ROOT 2|5|PUNCT 3|5|NSUBJ 4|5|AUX 5|1|PARATAXIS 6|5|IOBJ 7|8|DET 8|5|OBJ 9|1|PUNCT
+*MOT:	here . 26170_26740
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yeah do you like the balls ? 28940_31450
+%mor:	intj|yeah aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S det|the-Def-Art noun|ball-Plur-Acc ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*CHI:	&=shaking . 29310_30840
+%xgco:	Child shakes head .
+*MOT:	it's the new balls toy . 31910_33790
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|new-S1 noun|ball-Plur noun|toy .
+%gra:	1|6|NSUBJ 2|6|COP 3|6|DET 4|6|AMOD 5|6|COMPOUND 6|6|ROOT 7|6|PUNCT
+*CHI:	&=grunts no . 33070_34220
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	balls toy . 34750_35900
+%mor:	noun|ball-Plur noun|toy .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=other . 35000_37000
+%xgco:	Child stims by mvoing arms (excited) .
+*CHI:	&=laughs .
+*MOT:	yes , here is your ball toy . 36820_39050
+%mor:	intj|yes cm|cm adv|here aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|ball noun|toy .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|7|ROOT 4|3|COP 5|7|NMOD-POSS 6|7|COMPOUND 7|3|NSUBJ 8|3|PUNCT
+*CHI:	xxx . 38960_40500
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	ee . 42150_43450
+%mor:	propn|ee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=grunts . 46990_50470
+*CHI:	&=grunts . 51580_54010
+*MOT:	thank+you . 52230_53150
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=giving . 71010_72850
+%xgco:	Child holds out toy to parent (appears to want parent to open it) and she takes it .
+*MOT:	oh thank+you . 72460_73550
+%mor:	intj|oh intj|thankyou .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 74240_75840
+*MOT:	so many toys and there's so many balls . 77910_81800
+%mor:	adv|so adj|many-S1 noun|toy-Plur cconj|and pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 adv|so adj|many-S1 noun|ball-Plur .
+%gra:	1|2|ADVMOD 2|3|AMOD 3|9|ROOT 4|6|CC 5|6|EXPL 6|3|CONJ 7|8|ADVMOD 8|9|AMOD 9|6|NSUBJ 10|3|PUNCT
+*MOT:	this is a new one . 82960_85510
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|new-S1 noun|one .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	how do I open this one ? 86630_88160
+%mor:	adv|how aux|do-Fin-Ind-Pres-S1 pron|I-Prs-Nom-S1 verb|open-Inf-S det|this-Def-Dem-Sing noun|one-Acc ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*MOT:	how do I open this one ? 89400_91560
+%mor:	adv|how aux|do-Fin-Ind-Pres-S1 pron|I-Prs-Nom-S1 verb|open-Inf-S det|this-Def-Dem-Sing noun|one-Acc ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*CHI:	&=mumbles . 90120_91730
+*CHI:	&=other .
+%xgco:	Child stims by thrashing arms (frustrated) .
+*MOT:	looks very hard . 95490_96710
+%mor:	verb|look-Fin-Ind-Pres-S3 adv|very adj|hard-S1 .
+%gra:	1|3|ROOT 2|3|ADVMOD 3|1|XCOMP 4|1|PUNCT
+*CHI:	&=hums . 96690_98040
+*MOT:	so hard to open this one . 102710_104570
+%mor:	adv|so adj|hard-S1 part|to verb|open-Inf-S det|this-Def-Dem-Sing noun|one-Acc .
+%gra:	1|2|ADVMOD 2|6|ROOT 3|4|MARK 4|2|CSUBJ 5|6|DET 6|4|OBJ 7|2|PUNCT
+*CHI:	&=hums . 106320_107140
+*CHI:	&=hums . 113830_115570
+*MOT:	oh xxx zip it . 115320_116680
+%mor:	intj|oh intj|zip pron|it-Prs-Acc-S3 .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+*AAC:	BALL . 119038_123499
+%mor:	noun|ball .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	&=hums yuh . 119330_121040
+%mor:	intj|yuh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	<this is the ball yes>  [/] this is the ball yes . 122250_125270
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|ball intj|yes .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|5|ROOT 5|4|DISCOURSE 6|4|PUNCT
+*CHI:	&=sighs . 125390_126070
+*MOT:	thank+you . 126220_127070
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hurrah . 129030_130550
+%mor:	intj|hurrah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	how do you ask to open ? 132884_135115
+%mor:	adv|how aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|ask-Inf-S part|to verb|open-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|MARK 6|4|XCOMP 7|4|PUNCT
+*MOT:	how do you ask to open ? 135700_136920
+%mor:	adv|how aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|ask-Inf-S part|to verb|open-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|MARK 6|4|XCOMP 7|4|PUNCT
+*COD:	U . 136333_163000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME you are so smart . 161660_166160
+%mor:	intj|childname pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 adv|so adj|smart-S1 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*COD:	C . 163000_320840
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you got the scissor ? 166410_167440
+%mor:	pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Past-S2-irr det|the-Def-Art noun|scissor-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*CHI:	&=hums . 167630_168720
+*MOT:	oh uhuh this is too big this is mama's scissor . 168950_171460
+%mor:	intj|oh intj|uhuh pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adv|too adj|big-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 noun|mama~part|s noun|scissor .
+%gra:	1|6|DISCOURSE 2|6|DISCOURSE 3|6|NSUBJ 4|6|COP 5|6|ADVMOD 6|11|ROOT 7|11|NSUBJ 8|11|COP 9|11|NMOD-POSS 10|9|CASE 11|6|CCOMP 12|6|PUNCT
+*CHI:	&=giving . 173760_174800
+%xgco:	Child hands parent toy (appears to want parent to open it) .
+*MOT:	thank+you . 174080_175170
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<how do you ask to open>  [/] how do you ask to open ? 176222_180700
+%mor:	adv|how aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|ask-Inf-S part|to verb|open-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|MARK 6|4|XCOMP 7|4|PUNCT
+*CHI:	&=showing . 177530_178770
+%xgco:	Child shows parent toy (appears to want parent to open it) .
+*CHI:	xxx ee open . 178770_181200
+%mor:	x|ee adj|open-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*AAC:	BALL . 180166_183100
+%mor:	noun|ball .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	open  [/] open . 180700_183661
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ee oo open . 182150_184780
+%mor:	intj|ee adv|oo adj|open-S1 .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=showing .
+%xgco:	Child shows parent toy (appears to want parent to open it) .
+*MOT:	yes +... 184140_185390
+%mor:	intj|yes +...
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	++ xxx open . 186400_188570
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	there the open one . 186700_188933
+%mor:	pron|there-Dem-S1 det|the-Def-Art adj|open-S1 noun|one .
+%gra:	1|4|EXPL 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*AAC:	OPEN . 189866_192200
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	ei open . 190020_191600
+%mor:	noun|ei adj|open-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes that's the open one . 190800_192360
+%mor:	intj|yes pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|open-S1 noun|one .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|DET 5|6|AMOD 6|6|ROOT 7|6|PUNCT
+*CHI:	open . 192280_193240
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes , okay . 193000_193910
+%mor:	intj|yes cm|cm intj|okay .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|DISCOURSE 4|1|PUNCT
+*CHI:	&=hums . 194560_195630
+*MOT:	thank+you . 195570_196740
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=whines . 197860_199480
+*MOT:	xxx . 198040_199410
+*MOT:	with the scissor ? 200300_201240
+%mor:	adp|with det|the-Def-Art noun|scissor ?
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	&=whines . 200540_201630
+*MOT:	cut ? 201900_202490
+%mor:	verb|cut-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	cut  [/] cut . 203340_205310
+%mor:	verb|cut-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ah u . 204100_205200
+%mor:	intj|ah x|u .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	xxx . 207180_208660
+*CHI:	&=whines . 211840_213560
+*MOT:	yes open . 213433_216766
+%mor:	intj|yes adj|open-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	open  [/] open . 214380_216490
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=whines . 217380_220080
+*MOT:	xxx . 218380_221370
+*CHI:	xxx . 221580_223680
+*CHI:	&=whines . 224370_225800
+*AAC:	OPEN . 224433_226599
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	thank+you . 224860_226760
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay so it is open now . 226910_228840
+%mor:	intj|okay adv|so pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Pres-S3 adj|open-S1 adv|now .
+%gra:	1|5|DISCOURSE 2|5|ADVMOD 3|5|NSUBJ 4|5|COP 5|6|ROOT 6|5|ADVMOD 7|5|PUNCT
+*MOT:	wow <take it out>  [/] <take it out>  [/] take it out , yeah that is it . 228910_231620
+%mor:	intj|wow verb|take-Fin-Imp-S pron|it-Prs-Acc-S3 adp|out cm|cm intj|yeah pron|that-Dem aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 .
+%gra:	1|2|DISCOURSE 2|9|ROOT 3|2|OBJ 4|2|COMPOUND-PRT 5|9|PUNCT 6|9|DISCOURSE 7|9|NSUBJ 8|9|COP 9|2|PARATAXIS 10|2|PUNCT
+*MOT:	okay these are extras , just need one . 238070_240430
+%mor:	intj|okay pron|this-Dem-P1 aux|be-Fin-Ind-Pres-P3 noun|extra-Plur cm|cm adv|just verb|need-Fin-Imp-S num|one .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|8|ROOT 5|7|PUNCT 6|7|ADVMOD 7|4|PARATAXIS 8|7|OBJ 9|4|PUNCT
+*MOT:	alright . 244270_245380
+%mor:	intj|alright .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=whines . 250850_252680
+*AAC:	xxx . 254066_257133
+%xPS:	CHI-AAC-S
+*CHI:	xxx chalk . 254930_256690
+%mor:	noun|chalk .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay . 256750_257280
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	I will open this up . 257810_259430
+%mor:	pron|I-Prs-Nom-S1 aux|will-Fin-S verb|open-Inf-S pron|this-Dem-S1 adp|up .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|OBJ 5|3|COMPOUND-PRT 6|3|PUNCT
+*MOT:	xxx here . 261310_263440
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay how do you put this do you think ? 278070_280390
+%mor:	intj|okay adv|how aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|put-Inf-S pron|this-Dem-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S ?
+%gra:	1|5|DISCOURSE 2|5|ADVMOD 3|5|AUX 4|5|NSUBJ 5|9|ROOT 6|5|OBJ 7|9|AUX 8|9|NSUBJ 9|5|PARATAXIS 10|5|PUNCT
+*MOT:	xxx . 281350_283120
+*MOT:	you can put in  [/] in  [/] in okay ? 285710_288690
+%mor:	pron|you-Prs-Nom-S2 aux|can-Fin-S verb|put-Inf-S adp|in adj|okay-S1 ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|ADVMOD 5|3|OBL 6|3|PUNCT
+*MOT:	make a ball . 288770_289460
+%mor:	verb|make-Fin-Imp-S det|a-Ind-Art noun|ball-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*CHI:	&=whines . 300040_301360
+*MOT:	CHILDNAME look  [/] look . 307010_308810
+%mor:	noun|childname verb|look-Fin-Imp-S .
+%gra:	1|2|ROOT 2|1|LIST 3|1|PUNCT
+*MOT:	ball like this okay ? 308882_311676
+%mor:	noun|ball adp|like pron|this-Dem-S1 intj|okay ?
+%gra:	1|4|ROOT 2|3|CASE 3|1|NMOD 4|1|DISCOURSE 5|1|PUNCT
+*MOT:	ball's in . 311980_312840
+%mor:	noun|ball~part|s adv|in .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|3|ROOT 4|3|PUNCT
+*MOT:	xxx in . 313060_314260
+%mor:	adv|in .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ball goes in . 316400_319133
+%mor:	noun|ball verb|go-Fin-Ind-Pres-S3 adv|in .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*MOT:	here you make a ball . 319210_320720
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|make-Fin-Ind-Pres-S2 det|a-Ind-Art noun|ball-Acc .
+%gra:	1|5|ROOT 2|3|NSUBJ 3|1|CCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+@End

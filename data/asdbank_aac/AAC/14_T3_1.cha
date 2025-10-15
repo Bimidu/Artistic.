@@ -1,0 +1,353 @@
+@UTF8
+@PID:	11312/a-00082319-0
+@Begin
+@Languages:	eng
+@Participants:	AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|3;01.|male|||Target_Child|||
+@Media:	14_T3_1, video
+*AAC:	C . 1_105860
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<I@si just@si wanna@si jump@si>  [/] I@si just@si wanna@si jump@si . 280_3880
+%mor:	x|I x|just x|wanna x|jump .
+%gra:	1|4|FLAT 2|1|FLAT 3|4|FLAT 4|1|FLAT 5|1|PUNCT
+*CHI:	jump . 4150_5360
+%mor:	verb|jump-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	do@si the jump@si  [/] jump@si  [/] jump@si . 4290_7280
+%mor:	x|do det|the-Def-Art x|jump .
+%gra:	1|3|FLAT 2|3|DET 3|1|FLAT 4|1|PUNCT
+*MOT:	want to go . 7740_9260
+%mor:	verb|want-Fin-Ind-Pres-S1 part|to verb|go-Inf-S .
+%gra:	1|3|ROOT 2|3|MARK 3|1|XCOMP 4|1|PUNCT
+*MOT:	jump . 9530_10390
+%mor:	verb|jump-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	go@si turn@si . 11190_12750
+%mor:	x|go x|turn .
+%gra:	1|2|FLAT 2|2|FLAT 3|2|PUNCT
+*MOT:	your@si turn@si . 13200_14870
+%mor:	x|your x|turn .
+%gra:	1|2|FLAT 2|2|FLAT 3|2|PUNCT
+*MOT:	<my@si turn@si>  [/] <my@si turn@si>  [/] my@si turn@si jump . 15280_19140
+%mor:	x|my x|turn noun|jump .
+%gra:	1|3|FLAT 2|3|FLAT 3|3|ROOT 4|3|PUNCT
+*MOT:	xxx it is your turn . 20020_23030
+%mor:	pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NMOD-POSS 4|4|ROOT 5|4|PUNCT
+*CHI:	&=laughs . 20220_21600
+*MOT:	yeah it is my@si turn@si . 23440_26090
+%mor:	intj|yeah pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Pres-S3 x|my x|turn .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|FLAT 5|5|FLAT 6|5|PUNCT
+*MOT:	yeah your turn . 26760_29940
+%mor:	intj|yeah pron|your-Prs-Gen-S2 noun|turn .
+%gra:	1|3|DISCOURSE 2|3|NMOD-POSS 3|3|ROOT 4|3|PUNCT
+*MOT:	my turn . 32330_33650
+%mor:	pron|my-Prs-Gen-S1 noun|turn .
+%gra:	1|2|NMOD-POSS 2|2|ROOT 3|2|PUNCT
+*MOT:	it is my turn . 37780_39960
+%mor:	pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Pres-S3 pron|my-Prs-Gen-S1 noun|turn .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NMOD-POSS 4|4|ROOT 5|4|PUNCT
+*MOT:	jump . 40080_41540
+%mor:	verb|jump-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs . 41010_42700
+*MOT:	yay my turn . 42820_46280
+%mor:	intj|yay pron|my-Prs-Gen-S1 noun|turn .
+%gra:	1|3|DISCOURSE 2|3|NMOD-POSS 3|3|ROOT 4|3|PUNCT
+*MOT:	yay . 48250_50220
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay it's my turn . 51830_54510
+%mor:	intj|okay pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|my-Prs-Gen-S1 noun|turn .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|NMOD-POSS 5|5|ROOT 6|5|PUNCT
+*MOT:	you . 54670_56050
+%mor:	pron|you-Prs-Nom-S2 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	dinosaur . 58170_59500
+%mor:	noun|dinosaur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where are the dinosaurs ? 59570_61330
+%mor:	adv|where aux|be-Fin-Ind-Pres-P3 det|the-Def-Art noun|dinosaur-Plur ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	dinosaurs . 61780_63030
+%mor:	noun|dinosaur-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where is the dinosaur ? 63460_65400
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|dinosaur ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*CHI:	DINOSAUR . 67280_69360
+%mor:	propn|DINOSAUR .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	alright yeah get the dinosaur let's go . 68590_73400
+%mor:	intj|alright intj|yeah verb|get-Fin-Imp-S det|the-Def-Art noun|dinosaur-Acc verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|8|ROOT 4|5|DET 5|3|OBJ 6|3|XCOMP 7|6|OBJ 8|6|XCOMP 9|3|PUNCT
+*MOT:	&=roars . 73550_78410
+*CHI:	&=laughs . 73550_78410
+*MOT:	dinosaur gonna xxx . 80150_83830
+%mor:	noun|dinosaur noun|gonna .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=laughs . 83430_87960
+*MOT:	okay dinosaur one more chase . 87750_89670
+%mor:	intj|okay noun|dinosaur num|one adj|more-Cmp-S1 noun|chase .
+%gra:	1|2|DISCOURSE 2|5|NSUBJ 3|5|NUMMOD 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	chase . 89760_90410
+%mor:	noun|chase .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	chase . 90520_91580
+%mor:	noun|chase .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	chase . 91880_92790
+%mor:	noun|chase .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	chase . 98210_98790
+%mor:	noun|chase .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	CHASE . 98790_100630
+%mor:	noun|chase .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yeah get dinosaurs for the children &=roars . 98890_104420
+%mor:	intj|yeah verb|get-Fin-Imp-S noun|dinosaur-Plur-Acc adp|for det|the-Def-Art noun|child-Plur .
+%gra:	1|2|DISCOURSE 2|6|ROOT 3|2|OBJ 4|6|CASE 5|6|DET 6|2|OBL 7|2|PUNCT
+*CHI:	&=laughs . 103790_105830
+*AAC:	U . 105860_133000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	C . 133000_340440
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here get the balloon . 133400_135240
+%mor:	adv|here verb|get-Fin-Imp-S det|the-Def-Art noun|balloon-Acc .
+%gra:	1|2|ADVMOD 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	balloon . 135600_137080
+%mor:	noun|balloon .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	get the balloon from the board . 137350_139120
+%mor:	verb|get-Fin-Imp-S det|the-Def-Art noun|balloon-Acc adp|from det|the-Def-Art noun|board .
+%gra:	1|6|ROOT 2|3|DET 3|1|OBJ 4|6|CASE 5|6|DET 6|1|OBL 7|1|PUNCT
+*MOT:	balloon . 139150_140580
+%mor:	noun|balloon .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	BALLOON . 140710_141870
+%mor:	noun|balloon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	get the balloon , yay . 141430_144120
+%mor:	verb|get-Fin-Imp-S det|the-Def-Art noun|balloon-Acc cm|cm intj|yay .
+%gra:	1|5|ROOT 2|3|DET 3|1|OBJ 4|5|PUNCT 5|1|DISCOURSE 6|1|PUNCT
+*CHI:	&=laughs . 143130_145880
+*MOT:	okay . 150050_151340
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	let's go play the balloon . 151720_154780
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S verb|play-Inf-S det|the-Def-Art noun|balloon-Acc .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|3|XCOMP 5|6|DET 6|4|OBJ 7|1|PUNCT
+*MOT:	okay . 155620_157260
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs &=cries . 156430_159840
+*MOT:	&=gasps . 159050_160370
+*CHI:	bi bli . 160050_162810
+%mor:	intj|bi intj|bli .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	wee . 165560_166970
+%mor:	intj|wee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	uh oh get the balloon . 166430_168450
+%mor:	intj|uh intj|oh verb|get-Fin-Imp-S det|the-Def-Art noun|balloon-Acc .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*CHI:	bi . 172040_173050
+%mor:	noun|bi .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	oowee  [/] oowee . 173480_175980
+%mor:	intj|oowee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	eh  [/] eh . 174380_175740
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	owee  [/] owee  [/] owee . 177160_180880
+%mor:	intj|owee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	okay . 181360_182420
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	oowee  [/] oowee wee oowee  [/] oowee  [/] oowee  [/] oowee  [/] oowee  [/] oowee  [/] oowee  [/] oowee  [/] oowee . 182710_198180
+%mor:	verb|oowee-Fin-Imp-S noun|wee-Acc adv|oowee .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|ADVMOD 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	okay . 184660_185670
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 189580_190460
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh &=laughs . 191900_193380
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh . 194660_195640
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	oowee  [/] oowee . 201500_204020
+%mor:	intj|oowee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	uh oh . 202100_203420
+%mor:	intj|uh intj|oh .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*CHI:	oowee  [/] oowee wee oo . 206450_211000
+%mor:	verb|oowee-Fin-Imp-S noun|wee-Acc adv|oo .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|ADVMOD 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	yay . 208070_208890
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	oowee  [/] oowee  [/] oowee  [/] oowee  [/] oowee . 215160_223420
+%mor:	intj|oowee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	<uh oh>  [/] uh oh . 216700_221780
+%mor:	intj|uh intj|oh .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*CHI:	oowee . 225100_226570
+%mor:	intj|oowee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	&=grunts . 226050_227130
+*MOT:	xxx . 229920_232110
+*MOT:	okay beb , okay . 232230_234670
+%mor:	intj|okay noun|beb cm|cm intj|okay .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|PUNCT 4|2|DISCOURSE 5|2|PUNCT
+*CHI:	wee  [/] wee  [/] wee  [/] wee . 235370_238040
+%mor:	intj|wee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	stop . 238130_239820
+%mor:	verb|stop-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	GO . 239620_241520
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	go . 240910_242260
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME , oh where are you xxx . 248550_250690
+%mor:	propn|CHILDNAME cm|cm intj|oh adv|where aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 .
+%gra:	1|6|ROOT 2|4|PUNCT 3|4|DISCOURSE 4|1|PARATAXIS 5|4|COP 6|4|NSUBJ 7|1|PUNCT
+*MOT:	where is daddy ? 251680_253250
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 noun|daddy ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	daddy . 253880_255480
+%mor:	noun|daddy .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	GO . 254880_256140
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	what is that ? 256850_258470
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=other . 270410_272230
+%xgco:	Child puts hands onto parent's back and pulls themself up .
+%xIS:	CHI-Gesture-S
+*MOT:	go up . 272360_272770
+%mor:	verb|go-Fin-Imp-S adp|up .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*MOT:	let's go up . 272820_273580
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S adp|up .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|COMPOUND-PRT 5|1|PUNCT
+*MOT:	go up , wanna get up ? 274520_276840
+%mor:	verb|go-Fin-Imp-S adp|up cm|cm intj|wanna verb|get-Fin-Imp-S adp|up ?
+%gra:	1|6|ROOT 2|1|COMPOUND-PRT 3|5|PUNCT 4|5|DISCOURSE 5|1|PARATAXIS 6|5|COMPOUND-PRT 7|1|PUNCT
+*CHI:	go . 275220_275820
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	up . 277390_278670
+%mor:	adv|up .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	UP . 278670_280040
+%mor:	propn|UP .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yeah , up . 281780_284350
+%mor:	intj|yeah cm|cm adv|up .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*MOT:	up okay . 285080_287510
+%mor:	adv|up intj|okay .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*CHI:	&=hums . 287360_288460
+*CHI:	DOWN . 290550_292250
+%mor:	adv|down .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*MOT:	so , this is xxx . 292040_294220
+%mor:	adv|so cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 .
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	hug . 294500_295050
+%mor:	verb|hug-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hug . 295200_296160
+%mor:	verb|hug-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<give mommy a hug>  [/] give mommy a hug yeah . 296260_299680
+%mor:	verb|give-Fin-Imp-S noun|mommy det|a-Ind-Art noun|hug-Acc intj|yeah .
+%gra:	1|5|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|1|DISCOURSE 6|1|PUNCT
+*CHI:	HUG . 296490_298080
+%mor:	noun|hug .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	give mommy a hug , I@si love@si the@si little@si boy . 303530_307460
+%mor:	verb|give-Fin-Imp-S noun|mommy det|a-Ind-Art noun|hug-Acc cm|cm x|I x|love x|the x|little propn|boy .
+%gra:	1|10|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|6|PUNCT 6|4|FLAT 7|6|FLAT 8|10|FLAT 9|10|FLAT 10|4|APPOS 11|1|PUNCT
+*MOT:	my@si little@si boy@si I@si love@si my@si little@si boy@si . 307660_311610
+%mor:	x|my x|little x|boy x|I x|love x|my x|little x|boy .
+%gra:	1|8|FLAT 2|1|FLAT 3|1|FLAT 4|1|FLAT 5|1|FLAT 6|1|FLAT 7|8|FLAT 8|1|FLAT 9|1|PUNCT
+*MOT:	tickle . 318300_319550
+%mor:	verb|tickle-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	TICKLE . 319660_321970
+%mor:	noun|tickle .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle tickles . 320980_324730
+%mor:	verb|tickle-Fin-Imp-S noun|tickle-Plur-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	&=laughs . 321970_327690
+*MOT:	are you happy ? 328700_329660
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	CHILDNAME are you happy ? 330170_331430
+%mor:	propn|CHILDNAME aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	are you happy ? 331570_332770
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	HAPPY . 332930_334790
+%mor:	adj|happy-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	happy . 333520_334620
+%mor:	adj|happy-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs . 336340_338630
+*MOT:	yeah . 337180_338220
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	I should tickle you , you want me to tickle you ? 338480_340440
+%mor:	pron|I-Prs-Nom-S1 aux|should-Fin-S verb|tickle-Inf-S pron|you-Prs-Acc-S2 cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|I-Prs-Acc-S1 part|to verb|tickle-Inf-S pron|you-Prs-Acc-S2 ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|11|ROOT 4|3|OBJ 5|7|PUNCT 6|7|NSUBJ 7|3|PARATAXIS 8|7|OBJ 9|10|MARK 10|7|XCOMP 11|10|OBJ 12|3|PUNCT
+@End

@@ -1,0 +1,262 @@
+@UTF8
+@PID:	11312/c-00004179-1
+@Begin
+@Languages:	eng
+@Participants:	MOT Mother
+@ID:	eng|QuigleyMcNally|MOT|38;08.||||Mother|||
+@Date:	01-MAY-2010
+@Types:	long, toyplay, ASD
+*MOT:	what's that face ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing noun|face ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%com:	mother and child are facing each other .  child is sitting in booster seat tied to chair in front of mother on sofa .  child is making a face .  then he vocalises and mother imitates .
+*MOT:	ticka-ticka-ticka@i .
+%mor:	propn|tickatickaticka .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and mother imitates sound and recasts .
+*MOT:	Peppa_Pig .
+%mor:	propn|PeppaPig .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother begins to sing theme tune to cartoon .  child vocalises .
+*MOT:	Peppa_Pig .
+%mor:	propn|PeppaPig .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	do_do_do_do_do@si .
+%mor:	x|dododododo .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	think you're bein(g) a monkey .
+%mor:	verb|think-Fin-Imp-S pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 aux|be-Part-Pres-S det|a-Ind-Art noun|monkey .
+%gra:	1|6|ROOT 2|6|NSUBJ 3|6|AUX 4|6|COP 5|6|DET 6|1|CCOMP 7|1|PUNCT
+%com:	child is vocalising, twisting around in seat .
+*MOT:	Gav !
+%mor:	propn|Gav !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child is vocalising without looking at mother .
+*MOT:	what does the doggy say ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S3 det|the-Def-Art noun|doggy verb|say-Inf-S ?
+%gra:	1|5|OBJ 2|5|AUX 3|4|DET 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+%com:	child vocalises .
+*MOT:	good boy !
+%mor:	adj|good-S1 noun|boy !
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	bow+wow .
+%mor:	intj|bowwow .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child imitates .
+*MOT:	bow+wow .
+%mor:	intj|bowwow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what does the cat say ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S3 det|the-Def-Art noun|cat verb|say-Inf-S ?
+%gra:	1|5|OBJ 2|5|AUX 3|4|DET 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+%com:	child vocalises cat .
+*MOT:	cat !
+%mor:	noun|cat !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good boy .
+%mor:	adj|good-S1 noun|boy .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	meow .
+%mor:	noun|meow .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises cat .
+*MOT:	cat .
+%mor:	noun|cat .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	meow .
+%mor:	noun|meow .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises cat .
+*MOT:	cat .
+%mor:	noun|cat .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	&-eh , what other words d(o) you know ?
+%mor:	cm|cm det|what-Def-Int adj|other-S1 noun|word-Plur-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|know-Inf-S ?
+%gra:	1|7|PUNCT 2|4|DET 3|4|AMOD 4|7|OBJ 5|7|AUX 6|7|NSUBJ 7|7|ROOT 8|7|PUNCT
+*MOT:	&-eh , car .
+%mor:	cm|cm noun|car .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	child repeats car .
+*MOT:	good boy .
+%mor:	adj|good-S1 noun|boy .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%com:	child repeats car .
+*MOT:	(hoo)ray .
+%mor:	intj|hooray .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	em@i .
+%mor:	pron|they-Prs-Acc-P3 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises, mother doesn't understand, then he says cat again .
+*MOT:	cat , car .
+%mor:	noun|cat cm|cm noun|car .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|APPOS 4|1|PUNCT
+%com:	child vocalises .
+*MOT:	coat .
+%mor:	noun|coat .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and mother repeats .
+*MOT:	car !
+%mor:	noun|car !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises at length .
+*MOT:	you know bottle .
+%mor:	pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 noun|bottle-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%com:	child vocalises .
+*MOT:	bottle .
+%mor:	noun|bottle .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	bocca@n .
+%mor:	propn|bocca .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises in an attempt to repeat .
+*MOT:	bocca@n , good boy .
+%mor:	propn|bocca cm|cm adj|good-S1 noun|boy .
+%gra:	1|4|ROOT 2|4|PUNCT 3|4|AMOD 4|1|APPOS 5|1|PUNCT
+*MOT:	e:m@i , can you say Harry ?
+%mor:	pron|they-Prs-Acc-P3 cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|say-Inf-S propn|Harry-Acc ?
+%gra:	1|5|VOCATIVE 2|1|PUNCT 3|5|AUX 4|5|NSUBJ 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+%com:	child vocalises but doesn't sound like Harry .
+*MOT:	Ha:rry ?
+%mor:	propn|Harry ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises but doesn't sound like Harry .
+*MOT:	Harry ?
+%mor:	propn|Harry ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and starts to rock in chair .
+*MOT:	(th)at's too hard „ is it ?
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adv|too adj|hard-S1 cm|end aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|7|ROOT 5|4|PUNCT 6|4|COP 7|4|PARATAXIS 8|4|PUNCT
+%com:	mother exclaims as child is rocking very far forwards on chair .
+*MOT:	oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	hi !
+%mor:	intj|hi !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child is trying to get out of chair and vocalising .
+*MOT:	ah !
+%mor:	intj|ah !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oops .
+%mor:	intj|oop .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<no no no>  [/] no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<ah ah ah ah>  [/] ah .
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother is wagging her finger to tell child to stop rocking .  child vocalises .
+*MOT:	<ah ah>  [/] ah .
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh , not your nose !
+%mor:	intj|oh cm|cm part|not pron|your-Prs-Gen-S2 noun|nose !
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|ADVMOD 4|5|NMOD-POSS 5|5|ROOT 6|5|PUNCT
+*MOT:	oh your eye !
+%mor:	intj|oh pron|your-Prs-Gen-S2 noun|eye !
+%gra:	1|3|DISCOURSE 2|3|NMOD-POSS 3|3|ROOT 4|3|PUNCT
+*MOT:	oh !
+%mor:	intj|oh !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ah poor Gav .
+%mor:	intj|ah adj|poor-S1 propn|Gav .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	ah yuck .
+%mor:	intj|ah intj|yuck .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	<no , no , no , no>  [/] , no .
+%mor:	cm|cm intj|no .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+*MOT:	<no , no , no , no>  [/] , no .
+%mor:	cm|cm intj|no .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises also .
+*MOT:	<no , no>  [/] , no .
+%mor:	cm|cm intj|no .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+*MOT:	Gav .
+%mor:	propn|Gav .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<ah ah>  [/] ah .
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<ah ah>  [/] ah .
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	ah !
+%mor:	intj|ah !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh Gav where's your tummy ?
+%mor:	intj|oh intj|gav adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|tummy ?
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|6|ROOT 4|6|COP 5|6|NMOD-POSS 6|3|NSUBJ 7|3|PUNCT
+%com:	child vocalises and looks down .
+*MOT:	where's your tummy ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|tummy ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*MOT:	(hoo)ray !
+%mor:	intj|hooray !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and holds out hands .
+*MOT:	d(o) y(ou) wanna do it again ?
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|do-Inf-S pron|it-Prs-Acc-S3 adv|again ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|6|ROOT 5|4|OBJ 6|4|ADVMOD 7|4|PUNCT
+*MOT:	<ring around the rosie@f  [: rose] a pocket full of posies>  [=! singing] .
+%mor:	verb|ring-Inf-Imp-S adp|around det|the-Def-Art noun|rose det|a-Ind-Art noun|pocket-Acc adj|full-S1 adp|of noun|posie-Plur .
+%gra:	1|9|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|6|DET 6|1|OBJ 7|6|AMOD 8|9|CASE 9|7|OBL 10|1|PUNCT
+*MOT:	ah de_de_de@i , no kicking , no  [/] no .
+%mor:	intj|ah noun|dedede cm|cm det|no-Def-Neg noun|kick-Ger cm|cm intj|no .
+%gra:	1|2|DISCOURSE 2|7|ROOT 3|5|PUNCT 4|5|DET 5|2|PARATAXIS 6|7|PUNCT 7|2|DISCOURSE 8|2|PUNCT
+%com:	child vocalises .
+*MOT:	no  [/] , no .
+%mor:	cm|cm intj|no .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	ah , poor mama .
+%mor:	intj|ah cm|cm adj|poor-S1 noun|mama .
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+%com:	child vocalises .
+*MOT:	poor mama .
+%mor:	adj|poor-S1 noun|mama .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	kissie@f  [: kiss] ?
+%mor:	noun|kiss ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ah kissie@f  [: kiss] .
+%mor:	intj|ah noun|kiss .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	kissie@f  [: kiss] !
+%mor:	noun|kiss !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ah , good boy !
+%mor:	intj|ah cm|cm adj|good-S1 noun|boy !
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	what's that ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%com:	child is pulling mother's necklace and she makes noise to pretend she is being choked . child laughs .
+*MOT:	is that funny ?
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|that-Dem adj|funny-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%com:	they repeat this several times then child vocalises and mother imitates sound .
+*MOT:	baa-bopee@i .
+%mor:	propn|baabopee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother and child play hands clapping game and tickle .
+*MOT:	y(ou) giddy little goat , y(ou) .
+%mor:	pron|you-Prs-Nom-S2 adj|giddy-S1 adj|little-S1 noun|goat cm|cm pron|you-Prs-Nom-S2 .
+%gra:	1|4|NSUBJ 2|4|AMOD 3|4|AMOD 4|6|ROOT 5|6|PUNCT 6|4|APPOS 7|4|PUNCT
+@End

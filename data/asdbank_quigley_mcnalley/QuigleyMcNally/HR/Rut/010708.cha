@@ -1,0 +1,296 @@
+@UTF8
+@PID:	11312/c-00004137-1
+@Begin
+@Languages:	eng
+@Participants:	MOT Mother
+@ID:	eng|QuigleyMcNally|MOT|36;07.||||Mother|||
+@Types:	long, toyplay, ASD
+*MOT:	thank_you , you're welcome .
+%mor:	intj|thankyou cm|cm pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|COP 5|5|ROOT 6|5|PUNCT
+%com:	mother and child are facing each on couch . toys involved .
+*MOT:	what's this ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%com:	child vocalises . mother hold toy .
+*MOT:	what's this Ruth ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing propn|Ruth ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%com:	child vocalises .
+*MOT:	what's this one ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|one ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%com:	child vocalizes .
+*MOT:	what's this one ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|one ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%com:	child vocalises . child takes toy from mother .
+*MOT:	you're welcome .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this one ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|one ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%com:	child vocalises . child takes toy from mother
+*MOT:	<you're welcome>  [!] haha .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 intj|haha .
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|DISCOURSE 5|3|PUNCT
+%com:	mother kisses child . child vocalises
+*MOT:	what ?
+%mor:	pron|what-Int-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises . mother attempts to imitate child .
+*MOT:	the camera ?
+%mor:	det|the-Def-Art noun|camera ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	oh horses haha .
+%mor:	intj|oh noun|horse-Plur intj|haha .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+%com:	child points across the room .
+*MOT:	up there ?
+%mor:	adv|up adv|there ?
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%com:	child vocalises .
+*MOT:	xxx I will get it now .
+%mor:	pron|I-Prs-Nom-S1 aux|will-Fin-S verb|get-Inf-S pron|it-Prs-Acc-S3 adv|now .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+%com:	mother gets off couch and returns with a toy .
+*MOT:	now  [!] that's the lion , he says &=imit:lion .
+%mor:	adv|now pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|lion cm|cm pron|he-Prs-Nom-S3 verb|say-Fin-Ind-Pres-S3 .
+%gra:	1|5|ADVMOD 2|5|NSUBJ 3|5|COP 4|5|DET 5|8|ROOT 6|5|PUNCT 7|8|NSUBJ 8|5|PARATAXIS 9|5|PUNCT
+%com:	child vocalises .
+*MOT:	thank_you .
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's that ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	what's that !
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem !
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	what's that !
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem !
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	that's the duck .
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|duck .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	see  [!] &=imit:duck .
+%mor:	verb|see-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	here  [!] you've dropped it  [/] , it fell !
+%mor:	adv|here pron|you-Prs-Nom-S2~aux|have-Fin-Ind-Pres-S2 verb|drop-Part-Past-S cm|cm pron|it-Prs-Nom-S3 verb|fall-Fin-Ind-Past-S3-irr !
+%gra:	1|7|ADVMOD 2|4|NSUBJ 3|4|AUX 4|1|ADVCL-RELCL 5|1|PUNCT 6|7|NSUBJ 7|7|ROOT 8|7|PUNCT
+%com:	child vocalises .
+*MOT:	you're welcome .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	do you want this ?
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|this-Dem-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%com:	mother hands child a toy .
+*MOT:	<you're welcome>  [!] haha .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 intj|haha .
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|DISCOURSE 5|3|PUNCT
+*MOT:	what's this neee@f .
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing x|neee .
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|FLAT 5|1|PUNCT
+*MOT:	that's the duck &=imit:duck .
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|duck .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	and that's the blocks .
+%mor:	cconj|and pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|block-Plur .
+%gra:	1|5|CC 2|5|NSUBJ 3|5|COP 4|5|DET 5|5|ROOT 6|5|PUNCT
+%com:	child vocalises . hands mother a toy .
+*MOT:	thank_you .
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	you can't open  [!] it .
+%mor:	pron|you-Prs-Nom-S2 aux|can-Fin-S~part|not verb|open-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	thank_you !
+%mor:	intj|thankyou !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes . mother attempts to imitate child .
+*MOT:	&=imit:child <you're welcome>  [!] haha .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 intj|haha .
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|DISCOURSE 5|3|PUNCT
+%com:	child vocalises .
+*MOT:	oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises . child hands mother a toy .
+*MOT:	thanks .
+%mor:	noun|thanks .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	haha you're welcome .
+%mor:	intj|haha pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+%com:	child vocalises .
+*MOT:	look at this one !
+%mor:	verb|look-Fin-Imp-S adp|at det|this-Def-Dem-Sing noun|one !
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%com:	mother picks up another toy . mother plays with toy .
+*MOT:	&=imit:lion .
+%com:	child vocalises .
+*MOT:	oh thank_you .
+%mor:	intj|oh intj|thankyou .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	you want the block ?
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|block-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%com:	child vocalizes .
+*MOT:	<you're welcome>  [!] haha .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 intj|haha .
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|DISCOURSE 5|3|PUNCT
+%com:	child vocalizes . child points across the room .
+*MOT:	Mickey_Mouse ?
+%mor:	propn|MickeyMouse ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and who else ?
+%mor:	cconj|and pron|who-Int adv|else ?
+%gra:	1|2|CC 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+%com:	child vocalizes .
+*MOT:	Mickey and +..?
+%mor:	propn|Mickey cconj|and +..?
+%gra:	1|2|ROOT 2|1|CC 3|1|PUNCT
+%com:	child vocalizes .
+*MOT:	Mickey and Donald !
+%mor:	propn|Mickey cconj|and propn|Donald !
+%gra:	1|3|ROOT 2|3|CC 3|1|CONJ 4|1|PUNCT
+%com:	child hands mother a toy .
+*MOT:	thanks .
+%mor:	noun|thanks .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	there the blocks , we count .
+%mor:	pron|there-Dem-S1 det|the-Def-Art noun|block-Plur cm|cm pron|we-Prs-Nom-P1 verb|count-Fin-Ind-Pres-P1 .
+%gra:	1|3|EXPL 2|3|DET 3|6|ROOT 4|6|PUNCT 5|6|NSUBJ 6|3|PARATAXIS 7|3|PUNCT
+*MOT:	one , two , three !
+%mor:	num|one cm|cm num|two cm|cm num|three !
+%gra:	1|5|ROOT 2|3|PUNCT 3|1|CONJ 4|5|PUNCT 5|1|CONJ 6|1|PUNCT
+*MOT:	three blocks .
+%mor:	num|three noun|block-Plur .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%com:	child vocalizes . mother attempts to imitate child .
+*MOT:	&=imit:child now .
+%mor:	adv|now .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	yeah haha blocks .
+%mor:	intj|yeah intj|haha noun|block-Plur .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|3|ROOT 4|3|PUNCT
+%com:	child vocalizes .
+*MOT:	you're welcome .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%com:	child vocalizes .
+*MOT:	that's a duck .
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|duck .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+%com:	child vocalizes .
+*MOT:	yeah !
+%mor:	intj|yeah !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	it's a Donald_Duck .
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art propn|DonaldDuck .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+%com:	child vocalizes .
+*MOT:	it's a duck .
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|duck .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+%com:	mother picks up toy .
+*MOT:	now !
+%mor:	adv|now !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	you're welcome .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|welcome-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%com:	child vocalizes .
+*MOT:	it's a duck , see his nose ?
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|duck cm|cm verb|see-Fin-Imp-S pron|his-Prs-Gen-S3 noun|nose-Acc ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|8|ROOT 5|6|PUNCT 6|4|PARATAXIS 7|8|NMOD-POSS 8|6|OBJ 9|4|PUNCT
+%com:	child vocalizes .
+*MOT:	duck !
+%mor:	noun|duck !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	nose !
+%mor:	noun|nose !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	duck !
+%mor:	noun|duck !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .mother attempts to imitate child .
+*MOT:	&=imit:child no !
+%mor:	intj|no !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	duck !
+%mor:	noun|duck !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	nose , eyes !
+%mor:	noun|nose cm|cm noun|eye-Plur !
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|CONJ 4|1|PUNCT
+%com:	child vocalizes .
+*MOT:	eyes .
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	ah thank_you .
+%mor:	intj|ah intj|thankyou .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%com:	child vocalizes . mother attempts to imitate child .
+*MOT:	&=imit:child camera  [!] yeah .
+%mor:	noun|camera intj|yeah .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%com:	child vocalizes .
+*MOT:	you needta say cheese !
+%mor:	pron|you-Prs-Nom-S2 aux|needta-Fin-Ind-Pres-S2 verb|say-Fin-Ind-Pres-S2 noun|cheese-Acc !
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%com:	child vocalizes .
+*MOT:	yeah  [!] heehee .
+%mor:	intj|yeah intj|heehee .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	child vocalizes .
+*MOT:	cheese haha .
+%mor:	noun|cheese intj|haha .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	will 0we take a picture ?
+%mor:	aux|will-Fin-S verb|take-Inf-S det|a-Ind-Art noun|picture-Acc ?
+%gra:	1|2|AUX 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%com:	child vocalizes .
+*MOT:	haha .
+%mor:	intj|haha .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalizes .
+*MOT:	can I have one ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S num|one ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	can I have one please ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S num|one intj|please ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|DISCOURSE 6|3|PUNCT
+*MOT:	can I have one ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S num|one ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	can I have one ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S num|one ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	can I have one ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S num|one ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%com:	child hands mother a toy .
+*MOT:	thank_you !
+%mor:	intj|thankyou !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can I have one ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S num|one ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+@End

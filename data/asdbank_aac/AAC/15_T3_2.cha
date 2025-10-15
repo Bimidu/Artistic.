@@ -1,0 +1,400 @@
+@UTF8
+@PID:	11312/a-00082325-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|5;04.|male|||Target_Child|||
+@Media:	15_T3_2, video
+*COD:	U . 1_580000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 580000_681060
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	++ oh do you , oh you want Mommy's help . 583750_588320
+%mor:	intj|oh aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 cm|cm intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 propn|Mommy~part|s noun|help-Acc .
+%gra:	1|7|DISCOURSE 2|7|REPARANDUM 3|7|REPARANDUM 4|3|PUNCT 5|7|DISCOURSE 6|7|NSUBJ 7|10|ROOT 8|10|NMOD-POSS 9|8|CASE 10|7|OBJ 11|7|PUNCT
+%xPCO:	interruption of video
+*AAC:	HELP . 585540_587190
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-X
+*MOT:	you want to do it again . 588880_591540
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|do-Inf-S pron|it-Prs-Acc-S3 adv|again .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|MARK 4|2|XCOMP 5|4|OBJ 6|4|ADVMOD 7|2|PUNCT
+*MOT:	okay let's do it again . 592960_595300
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S pron|it-Prs-Acc-S3 adv|again .
+%gra:	1|2|DISCOURSE 2|6|ROOT 3|2|OBJ 4|2|XCOMP 5|4|OBJ 6|4|ADVMOD 7|2|PUNCT
+*MOT:	Mommy will help you . 596280_598580
+%mor:	propn|Mommy aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=coughs . 603400_605790
+*MOT:	it's your turn now . 605150_606820
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn adv|now .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NMOD-POSS 4|5|ROOT 5|4|ADVMOD 6|4|PUNCT
+*MOT:	your turn . 608000_609090
+%mor:	pron|your-Prs-Gen-S2 noun|turn .
+%gra:	1|2|NMOD-POSS 2|2|ROOT 3|2|PUNCT
+*MOT:	to put it on . 609840_611160
+%mor:	part|to verb|put-Inf-S pron|it-Prs-Acc-S3 adp|on .
+%gra:	1|2|MARK 2|4|ROOT 3|2|OBJ 4|2|COMPOUND-PRT 5|2|PUNCT
+*MOT:	thank+you . 611670_612840
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you need more help ? 616510_618570
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S adj|more-Cmp-S1 noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*MOT:	do you need more help ? 620290_621520
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S adj|more-Cmp-S1 noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*MOT:	do you need more help ? 624680_626190
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S adj|more-Cmp-S1 noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*MOT:	or should we stop ? 626530_627770
+%mor:	cconj|or aux|should-Fin-S pron|we-Prs-Nom-P1 verb|stop-Inf-S ?
+%gra:	1|4|CC 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	oh there it is . 629230_630440
+%mor:	intj|oh pron|there-Dem-S1 pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Pres-S3 .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|NSUBJ 4|2|COP 5|2|PUNCT
+*AAC:	HELP . 629410_631210
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	there's the help . 630910_632520
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|help .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+*MOT:	there's the help button . 633530_635340
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|help noun|button .
+%gra:	1|2|EXPL 2|5|ROOT 3|5|DET 4|5|COMPOUND 5|2|NSUBJ 6|2|PUNCT
+*MOT:	okay it's your turn now . 636690_639030
+%mor:	intj|okay pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn adv|now .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|NMOD-POSS 5|6|ROOT 6|5|ADVMOD 7|5|PUNCT
+*MOT:	CHILDNAME are you all finished ? 642610_645080
+%mor:	propn|CHILDNAME aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 det|all-Def-Tot verb|finish-Part-Past-S ?
+%gra:	1|5|NSUBJ-PASS 2|5|AUX-PASS 3|5|NSUBJ-PASS 4|3|DET 5|5|ROOT 6|5|PUNCT
+*MOT:	are you finished ? 646890_648550
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|finish-Part-Past-S ?
+%gra:	1|3|AUX-PASS 2|3|NSUBJ-PASS 3|3|ROOT 4|3|PUNCT
+*MOT:	oh you're getting more blocks . 651520_654190
+%mor:	intj|oh pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|get-Part-Pres-S adj|more-Cmp-S1 noun|block-Plur-Acc .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|6|ROOT 5|6|AMOD 6|4|OBJ 7|4|PUNCT
+*MOT:	because it's your turn . 655090_657230
+%mor:	sconj|because pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn .
+%gra:	1|5|MARK 2|5|NSUBJ 3|5|COP 4|5|NMOD-POSS 5|5|ROOT 6|5|PUNCT
+*MOT:	do you need some help to put on more ? 658700_661520
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S det|some-Def-Ind noun|help-Acc part|to verb|put-Inf-S adp|on adj|more-Cmp-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|9|ROOT 4|5|DET 5|3|OBJ 6|7|MARK 7|5|ACL 8|7|COMPOUND-PRT 9|7|OBL 10|3|PUNCT
+*CHI:	&=hums . 662280_662800
+*MOT:	or should Mommy clean up the blocks and put them away ? 664760_668200
+%mor:	cconj|or aux|should-Fin-S propn|Mommy verb|clean-Inf-S adp|up det|the-Def-Art noun|block-Plur-Acc cconj|and verb|put-Inf-S pron|they-Prs-Acc-P3 adv|away ?
+%gra:	1|4|CC 2|4|AUX 3|4|NSUBJ 4|11|ROOT 5|4|COMPOUND-PRT 6|7|DET 7|4|OBJ 8|9|CC 9|4|CONJ 10|9|OBJ 11|9|ADVMOD 12|4|PUNCT
+*CHI:	&=moving . 670720_672210
+%xIS:	CHI-Gesture-S
+*MOT:	No , you're saying Mommy  [/] Mommy I need +... 671140_676470
+%mor:	intj|no cm|cm pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|say-Part-Pres-S propn|Mommy pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 +...
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|AUX 5|8|ROOT 6|8|NSUBJ 7|8|NSUBJ 8|5|CCOMP 9|5|PUNCT
+*MOT:	I need +... 678570_679890
+%mor:	pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*AAC:	HELP . 679720_681010
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	++ help . 680660_681180
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 681060_712170
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 712170_1000600
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Mommy's putting another block on . 714090_716440
+%mor:	propn|Mommy~aux|be-Fin-Ind-Pres-S3 verb|put-Part-Pres-S det|another-Def-Ind noun|block-Acc adp|on .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|5|DET 5|3|OBJ 6|3|ADVMOD 7|3|PUNCT
+*MOT:	should we stop ? 717780_719560
+%mor:	aux|should-Fin-S pron|we-Prs-Nom-P1 verb|stop-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	should Mommy put the blocks away ? 719720_721600
+%mor:	aux|should-Fin-S propn|Mommy verb|put-Inf-S det|the-Def-Art noun|block-Plur-Acc adv|away ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|5|DET 5|3|OBJ 6|3|ADVMOD 7|3|PUNCT
+*MOT:	or is it your turn ? 722610_724130
+%mor:	cconj|or aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 pron|your-Prs-Gen-S2 noun|turn ?
+%gra:	1|5|CC 2|5|COP 3|5|NSUBJ 4|5|NMOD-POSS 5|5|ROOT 6|5|PUNCT
+*CHI:	&=breathes . 726410_727370
+*MOT:	or do you want help ? 730010_732050
+%mor:	cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|help-Acc ?
+%gra:	1|4|CC 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*AAC:	HELP . 733700_735860
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	help . 735470_736120
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	I will help you . 736660_738140
+%mor:	pron|I-Prs-Nom-S1 aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	Mommy will help you and put another block on . 739520_744060
+%mor:	propn|Mommy aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 cconj|and verb|put-Inf-S det|another-Def-Ind noun|block-Acc adp|on .
+%gra:	1|3|NSUBJ 2|3|AUX 3|9|ROOT 4|3|OBJ 5|6|CC 6|3|CONJ 7|8|DET 8|6|OBJ 9|6|ADVMOD 10|3|PUNCT
+*MOT:	oh we're gonna close the door ? 751170_753260
+%mor:	intj|oh pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 part|go verb|close-Inf-S det|the-Def-Art noun|door-Acc ?
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|7|ROOT 6|7|DET 7|5|OBJ 8|5|PUNCT
+*MOT:	(o)kay . 753360_754300
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	eeyuh . 755990_756820
+%mor:	propn|eeyuh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	should we stop playing blocks ? 757100_759470
+%mor:	aux|should-Fin-S pron|we-Prs-Nom-P1 verb|stop-Inf-S verb|play-Ger-S noun|block-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|3|XCOMP 5|4|OBJ 6|3|PUNCT
+*MOT:	or do you need more help ? 761940_763910
+%mor:	cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S adj|more-Cmp-S1 noun|help-Acc ?
+%gra:	1|4|CC 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|AMOD 6|4|OBJ 7|4|PUNCT
+*AAC:	HELP . 768250_770680
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	&=gasps . 768980_769880
+*MOT:	you need more help , I'll help you . 770200_773150
+%mor:	pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 adj|more-Cmp-S1 noun|help-Acc cm|cm pron|I-Prs-Nom-S1~aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|2|NSUBJ 2|9|ROOT 3|4|AMOD 4|2|OBJ 5|8|PUNCT 6|8|NSUBJ 7|8|AUX 8|2|PARATAXIS 9|8|OBJ 10|2|PUNCT
+*MOT:	Mommy's gonna put a block on , oh it's getting big . 775880_779810
+%mor:	propn|Mommy~aux|be-Fin-Ind-Pres-S3 adv|gonna verb|put-Part-Past-S-irr det|a-Ind-Art noun|block-Acc adp|on cm|cm intj|oh pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|get-Part-Pres-S adj|big-S1 .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|13|ROOT 5|6|DET 6|4|OBJ 7|4|COMPOUND-PRT 8|12|PUNCT 9|12|DISCOURSE 10|12|NSUBJ 11|12|AUX 12|4|PARATAXIS 13|12|XCOMP 14|4|PUNCT
+*MOT:	okay . 781930_783020
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	should Mommy take the blocks away , put them away ? 783600_786390
+%mor:	aux|should-Fin-S propn|Mommy verb|take-Inf-S det|the-Def-Art noun|block-Plur-Acc adv|away cm|cm verb|put-Inf-S pron|they-Prs-Acc-P3 adv|away ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|10|ROOT 4|5|DET 5|3|OBJ 6|3|ADVMOD 7|8|PUNCT 8|3|PARATAXIS 9|8|OBJ 10|8|ADVMOD 11|3|PUNCT
+*MOT:	or are you gonna put a block on ? 787400_789810
+%mor:	cconj|or aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adv|gonna verb|put-Inf-S det|a-Ind-Art noun|block-Acc adp|on ?
+%gra:	1|5|CC 2|5|AUX 3|5|NSUBJ 4|5|ADVMOD 5|8|ROOT 6|7|DET 7|5|OBJ 8|5|ADVMOD 9|5|PUNCT
+*MOT:	&=gasps you're gonna put a yellow block on top . 790290_793510
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|gonna verb|put-Inf-S det|a-Ind-Art adj|yellow-S1 noun|block-Acc adp|on noun|top .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|9|ROOT 5|7|DET 6|7|AMOD 7|4|OBJ 8|9|CASE 9|4|OBL 10|4|PUNCT
+*MOT:	good+job CHILDNAME . 795160_797150
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	okay . 798820_800100
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh you're gonna put another one on . 800740_802980
+%mor:	intj|oh pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|gonna verb|put-Inf-S det|another-Def-Ind noun|one-Acc adp|on .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|8|ROOT 6|7|DET 7|5|OBJ 8|5|ADVMOD 9|5|PUNCT
+*MOT:	good+job CHILDNAME . 804790_806820
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	more ? 809330_810180
+%mor:	adj|more-Cmp-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	more blocks ? 810770_812170
+%mor:	adj|more-Cmp-S1 noun|block-Plur ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	block . 815100_816130
+%mor:	noun|block .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	more blocks ? 816750_818150
+%mor:	adj|more-Cmp-S1 noun|block-Plur ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	do you want Mommy to put them all away , clean them up now ? 821100_824260
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|put-Inf-S pron|they-Prs-Acc-P3 det|all-Def-Tot adv|away cm|cm verb|clean-Inf-S pron|they-Prs-Acc-P3 adp|up adv|now ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|14|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|6|OBJ 8|9|ADVMOD 9|6|ADVMOD 10|11|PUNCT 11|6|CONJ 12|11|OBJ 13|11|COMPOUND-PRT 14|11|ADVMOD 15|3|PUNCT
+*MOT:	or do you need help ? 825310_826620
+%mor:	cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|4|CC 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*AAC:	HELP . 829630_831020
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	you need help . 830560_831790
+%mor:	pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	thank+you . 832140_832970
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	heh . 833300_833910
+%mor:	intj|heh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	I'll help you , I'm gonna get a yellow block . 833860_836260
+%mor:	pron|I-Prs-Nom-S1~aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 cm|cm pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 part|go verb|get-Inf-S det|a-Ind-Art adj|yellow-S1 noun|block-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|12|ROOT 4|3|OBJ 5|9|PUNCT 6|9|NSUBJ 7|9|AUX 8|9|ADVMOD 9|3|PARATAXIS 10|12|DET 11|12|AMOD 12|9|OBJ 13|3|PUNCT
+*CHI:	xxx . 841890_843060
+%xDN:	CHI-Speech-ND
+*MOT:	(o)kay still some blocks , can you put some blocks on ? 843010_847060
+%mor:	intj|okay adv|still det|some-Def-Ind noun|block-Plur cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S det|some-Def-Ind noun|block-Plur-Acc adp|on ?
+%gra:	1|8|DISCOURSE 2|4|ADVMOD 3|4|DET 4|8|DISLOCATED 5|8|PUNCT 6|8|AUX 7|8|NSUBJ 8|11|ROOT 9|10|DET 10|8|OBJ 11|8|ADVMOD 12|8|PUNCT
+*MOT:	your turn . 847490_848280
+%mor:	pron|your-Prs-Gen-S2 noun|turn .
+%gra:	1|2|NMOD-POSS 2|2|ROOT 3|2|PUNCT
+*CHI:	&=yells . 849360_851410
+*CHI:	xxx . 854030_855040
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	it's your turn , do you want some more help ? 855250_857760
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|some-Def-Ind adj|more-Cmp-S1 noun|help-Acc ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NMOD-POSS 4|11|ROOT 5|8|PUNCT 6|8|AUX 7|8|NSUBJ 8|4|PARATAXIS 9|11|DET 10|11|AMOD 11|8|OBJ 12|4|PUNCT
+*CHI:	uh . 861380_862330
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	HELP . 861460_863870
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	thank+you , I'll help you . 863880_866740
+%mor:	intj|thankyou cm|cm pron|I-Prs-Nom-S1~aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|AUX 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	oh I'm gonna get a big red block . 868000_870450
+%mor:	intj|oh pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 part|go verb|get-Inf-S det|a-Ind-Art adj|big-S1 adj|red-S1 noun|block-Acc .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|9|ROOT 6|9|DET 7|9|AMOD 8|9|AMOD 9|5|OBJ 10|5|PUNCT
+*CHI:	eh . 868050_868630
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	(o)kay . 871140_871870
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 874190_875130
+%xDN:	CHI-Speech-ND
+*MOT:	Mommy is helping . 874540_876630
+%mor:	propn|Mommy aux|be-Fin-Ind-Pres-S3 verb|help-Part-Pres-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+*MOT:	(o)kay . 878750_879770
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	should we clean it all up ? 880690_882910
+%mor:	aux|should-Fin-S pron|we-Prs-Nom-P1 verb|clean-Inf-S pron|it-Prs-Acc-S3 det|all-Def-Tot adp|up ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|DET 6|3|COMPOUND-PRT 7|3|PUNCT
+*MOT:	or are you , do you need help ? 883290_885580
+%mor:	cconj|or aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|7|CC 2|7|REPARANDUM 3|7|REPARANDUM 4|3|PUNCT 5|7|AUX 6|7|NSUBJ 7|8|ROOT 8|7|OBJ 9|7|PUNCT
+*MOT:	oh you need help . 885740_887190
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 noun|help-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	adading . 888310_889190
+%mor:	noun|adading-Ger .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	HELP . 888530_890070
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	thank+you . 889640_890830
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Mommy is going to help you . 891240_893660
+%mor:	propn|Mommy aux|be-Fin-Ind-Pres-S3 verb|go-Part-Pres-S part|to verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|3|PUNCT
+*MOT:	okay . 894890_895990
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	blue block on top . 896670_899220
+%mor:	adj|blue-S1 noun|block adp|on noun|top .
+%gra:	1|2|AMOD 2|4|ROOT 3|4|CASE 4|2|NMOD 5|2|PUNCT
+*MOT:	it's your turn now . 899550_901330
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn adv|now .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NMOD-POSS 4|5|ROOT 5|4|ADVMOD 6|4|PUNCT
+*MOT:	can you put a block on ? 901690_903530
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S det|a-Ind-Art noun|block-Acc adp|on ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|5|DET 5|3|OBJ 6|3|ADVMOD 7|3|PUNCT
+*CHI:	&=hums . 904570_905120
+*MOT:	pick up a block . 905660_906630
+%mor:	verb|pick-Fin-Imp-S adp|up det|a-Ind-Art noun|block-Acc .
+%gra:	1|4|ROOT 2|1|COMPOUND-PRT 3|4|DET 4|1|OBJ 5|1|PUNCT
+*MOT:	you put it on top . 908570_910170
+%mor:	pron|you-Prs-Nom-S2 verb|put-Fin-Ind-Past-S2-irr pron|it-Prs-Acc-S3 adp|on noun|top .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|CASE 5|2|OBL 6|2|PUNCT
+*MOT:	thank+you &=laughs . 912670_914680
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=coughs . 914930_916160
+*MOT:	okay . 916810_918210
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	are we all done or do you need more help ? 918970_922130
+%mor:	aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 adv|all verb|do-Part-Past-S-irr cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S adj|more-Cmp-S1 noun|help-Acc ?
+%gra:	1|4|AUX-PASS 2|4|NSUBJ-PASS 3|4|ADVMOD 4|10|ROOT 5|8|CC 6|8|AUX 7|8|NSUBJ 8|4|CONJ 9|10|AMOD 10|8|OBJ 11|4|PUNCT
+*MOT:	oh you want help . 923010_924510
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|help-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	you have to tell Mommy I want help . 924620_927330
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 part|to verb|tell-Inf-S propn|Mommy pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|4|MARK 4|2|XCOMP 5|4|IOBJ 6|7|NSUBJ 7|4|CCOMP 8|7|OBJ 9|2|PUNCT
+*AAC:	HELP . 928750_930770
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	thank+you , I'm gonna help you . 930350_933260
+%mor:	intj|thankyou cm|cm pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 part|go verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|AUX 5|6|ADVMOD 6|7|ROOT 7|6|OBJ 8|6|PUNCT
+*CHI:	ah . 934710_935710
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	(o)kay . 936900_938050
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh let's put these blocks on , oh look how big it's getting okay , &=gasps we're almost done . 938860_944750
+%mor:	intj|oh verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S det|this-Def-Dem-Plur noun|block-Plur-Acc adp|on cm|cm intj|oh verb|look-Fin-Imp-S adv|how adj|big-S1 pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|get-Part-Pres-S adj|okay-S1 cm|cm pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 adv|almost adj|done-S1 .
+%gra:	1|2|DISCOURSE 2|21|ROOT 3|2|OBJ 4|2|XCOMP 5|6|DET 6|4|OBJ 7|4|COMPOUND-PRT 8|10|PUNCT 9|10|DISCOURSE 10|2|PARATAXIS 11|12|ADVMOD 12|10|OBJ 13|15|NSUBJ 14|15|AUX 15|12|ADVCL-RELCL 16|15|XCOMP 17|21|PUNCT 18|21|NSUBJ 19|21|COP 20|21|ADVMOD 21|2|PARATAXIS 22|2|PUNCT
+*MOT:	do you need help ? 945370_946720
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=groans . 946430_947800
+*MOT:	or is it your turn , are you gonna put a blue block ? 947770_950750
+%mor:	cconj|or aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 pron|your-Prs-Gen-S2 noun|turn cm|cm aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adv|gonna verb|put-Inf-S det|a-Ind-Art adj|blue-S1 noun|block-Acc ?
+%gra:	1|5|CC 2|5|COP 3|5|NSUBJ 4|5|NMOD-POSS 5|13|ROOT 6|10|PUNCT 7|10|AUX 8|10|NSUBJ 9|10|ADVMOD 10|5|PARATAXIS 11|13|DET 12|13|AMOD 13|10|OBJ 14|5|PUNCT
+*MOT:	oh CHILDNAME's turn . 953010_956240
+%mor:	intj|oh propn|CHILDNAME~part|s noun|turn .
+%gra:	1|4|DISCOURSE 2|4|NMOD-POSS 3|2|CASE 4|4|ROOT 5|4|PUNCT
+*MOT:	here we go . 956360_957410
+%mor:	adv|here pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|1|PUNCT
+*MOT:	should Mommy clean up the blocks , put them all away ? 959970_963140
+%mor:	aux|should-Fin-S propn|Mommy verb|clean-Inf-S adp|up det|the-Def-Art noun|block-Plur-Acc cm|cm verb|put-Inf-S pron|they-Prs-Acc-P3 det|all-Def-Tot adv|away ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|11|ROOT 4|3|COMPOUND-PRT 5|6|DET 6|3|OBJ 7|8|PUNCT 8|3|PARATAXIS 9|8|OBJ 10|11|ADVMOD 11|8|ADVMOD 12|3|PUNCT
+*MOT:	no , it's your turn ? 963640_965380
+%mor:	intj|no cm|cm pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn ?
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|COP 5|6|NMOD-POSS 6|6|ROOT 7|6|PUNCT
+*MOT:	okay thank+you . 967090_969130
+%mor:	intj|okay intj|thankyou .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	&=gasps oh it's the last block . 969960_972210
+%mor:	intj|oh pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|last-S1 noun|block .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|DET 5|6|AMOD 6|6|ROOT 7|6|PUNCT
+*MOT:	thank+you . 972750_974110
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay , are you ready ? 975030_978230
+%mor:	intj|okay cm|cm aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|ready-S1 ?
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|COP 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*MOT:	<ready set>  [/] ready set , where's the go ? 978490_983830
+%mor:	adj|ready-S1 adj|set-S1 cm|cm adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|go ?
+%gra:	1|2|AMOD 2|7|ROOT 3|4|PUNCT 4|2|PARATAXIS 5|7|COP 6|7|DET 7|4|NSUBJ 8|2|PUNCT
+*MOT:	&=gasps good+job you got it . 983860_986350
+%mor:	noun|goodjob pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Past-S2-irr pron|it-Prs-Acc-S3 .
+%gra:	1|4|ROOT 2|3|NSUBJ 3|1|PARATAXIS 4|3|OBJ 5|1|PUNCT
+*AAC:	GO . 984530_986520
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	ready set go . 987630_989500
+%mor:	adj|ready-S1 noun|set verb|go-Fin-Imp-S .
+%gra:	1|2|AMOD 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*MOT:	oh they fell down that was so funny . 996660_1000600
+%mor:	intj|oh pron|they-Prs-Nom-P3 verb|fall-Fin-Ind-Past-P3-irr adp|down pron|that-Rel aux|be-Fin-Ind-Past-S3-irr adv|so adj|funny-S1 .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|8|ROOT 4|3|COMPOUND-PRT 5|8|NSUBJ 6|8|COP 7|8|ADVMOD 8|3|ADVCL-RELCL 9|3|PUNCT
+@End

@@ -1,0 +1,326 @@
+@UTF8
+@PID:	11312/a-00082320-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, CHI Target_Child, MOT Mother
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|3;01.|male|||Target_Child|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@Media:	14_T3_2, video
+*COD:	C . 1_280000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No AAC use observed . 180_970
+%mor:	det|no-Def-Neg noun|aac noun|use verb|observe-Fin-Ind-Past-S3 .
+%gra:	1|3|DET 2|3|COMPOUND 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	0 . 180_970
+*MOT:	come here . 5750_7750
+%mor:	verb|come-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	let's skip , here brown . 8460_10720
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|skip-Inf-S cm|cm adv|here adj|brown-S1 .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|6|PUNCT 5|6|ADVMOD 6|3|CONJ 7|1|PUNCT
+*MOT:	colour brown , yeah . 11320_13130
+%mor:	noun|colour adj|brown-S1 cm|cm intj|yeah .
+%gra:	1|2|COMPOUND 2|4|ROOT 3|4|PUNCT 4|2|DISCOURSE 5|2|PUNCT
+*CHI:	brown . 13960_15080
+%mor:	adj|brown-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	brown . 14830_16080
+%mor:	adj|brown-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yeah . 17120_19050
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	tell you what , it's sp , okay , wow it's +... 19560_24650
+%mor:	verb|tell-Fin-Imp-S pron|you-Prs-Acc-S2 pron|what-Int-S1 cm|cm pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 intj|sp cm|cm intj|okay cm|cm intj|wow pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|13|ROOT 2|1|IOBJ 3|1|OBJ 4|7|PUNCT 5|7|NSUBJ 6|7|COP 7|1|PARATAXIS 8|9|PUNCT 9|7|DISCOURSE 10|9|PUNCT 11|1|DISCOURSE 12|13|NSUBJ 13|1|PARATAXIS 14|1|PUNCT
+*CHI:	wa . 24020_24830
+%mor:	propn|wa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	brown . 24920_25410
+%mor:	adj|brown-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	what . 25100_25890
+%mor:	pron|what-Int-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay this is black . 26540_28560
+%mor:	intj|okay pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|black-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	black . 26980_28160
+%mor:	adj|black-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	black . 28980_29730
+%mor:	adj|black-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yeah black . 31390_32430
+%mor:	intj|yeah adj|black-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	yay . 34560_35940
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	wa . 41100_42370
+%mor:	propn|wa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	yeah . 42780_43710
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	watst . 43250_44820
+%mor:	noun|watst .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	colour of the dog . 45600_47650
+%mor:	noun|colour adp|of det|the-Def-Art noun|dog .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|NMOD 5|1|PUNCT
+*MOT:	brown dog and this is a black dog . 47900_51890
+%mor:	adj|brown-S1 noun|dog cconj|and pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|black-S1 noun|dog .
+%gra:	1|2|AMOD 2|8|ROOT 3|8|CC 4|8|NSUBJ 5|8|COP 6|8|DET 7|8|AMOD 8|2|CONJ 9|2|PUNCT
+*CHI:	pink . 51780_52590
+%mor:	adj|pink-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	purple . 52720_53420
+%mor:	adj|purple-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	purple , a pink oh yeah . 53420_56250
+%mor:	adj|purple-S1 cm|cm det|a-Ind-Art adj|pink-S1 intj|oh intj|yeah .
+%gra:	1|6|ROOT 2|4|PUNCT 3|4|DET 4|1|PARATAXIS 5|1|DISCOURSE 6|1|DISCOURSE 7|1|PUNCT
+*CHI:	purple . 55690_57320
+%mor:	adj|purple-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay pink . 57150_58080
+%mor:	intj|okay adj|pink-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	pink , oh you have pink dog , wow . 59270_65280
+%mor:	adj|pink-S1 cm|cm intj|oh pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 adj|pink-S1 noun|dog-Acc cm|cm intj|wow .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|DISCOURSE 4|5|NSUBJ 5|9|ROOT 6|7|AMOD 7|5|OBJ 8|9|PUNCT 9|5|DISCOURSE 10|5|PUNCT
+*CHI:	a pink dog . 65760_67610
+%mor:	det|a-Ind-Art adj|pink-S1 noun|dog .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yeah , pink dog . 67510_70350
+%mor:	intj|yeah cm|cm adj|pink-S1 noun|dog .
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*CHI:	ei . 71450_73580
+%mor:	intj|ei .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	that is orange dog . 74430_75720
+%mor:	pron|that-Dem aux|be-Fin-Ind-Pres-S3 adj|orange-S1 noun|dog .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	orange dog . 75800_77350
+%mor:	adj|orange-S1 noun|dog .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	yucky orange dog . 79620_82330
+%mor:	adj|yucky-S1 adj|orange-S1 noun|dog .
+%gra:	1|3|AMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	hey you wanna do a yellow dog ? 83960_86100
+%mor:	intj|hey pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|do-Inf-S det|a-Ind-Art adj|yellow-S1 noun|dog-Acc ?
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|7|ROOT 5|7|DET 6|7|AMOD 7|4|OBJ 8|4|PUNCT
+*MOT:	okay CHILDNAME , yellow dog . 86310_88930
+%mor:	intj|okay adj|childname-S1 cm|cm adj|yellow-S1 noun|dog .
+%gra:	1|5|DISCOURSE 2|5|AMOD 3|5|PUNCT 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	yeah . 89590_90950
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	a . 93400_94160
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	yellow . 94660_96740
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yellow dog , I don't ever seen a yellow dog . 97600_102130
+%mor:	adj|yellow-S1 noun|dog cm|cm pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not adv|ever verb|see-Part-Past-S-irr det|a-Ind-Art adj|yellow-S1 noun|dog-Acc .
+%gra:	1|2|AMOD 2|11|ROOT 3|8|PUNCT 4|8|NSUBJ 5|8|AUX 6|8|ADVMOD 7|8|ADVMOD 8|2|PARATAXIS 9|11|DET 10|11|AMOD 11|8|OBJ 12|2|PUNCT
+*CHI:	trayak . 100870_102810
+%mor:	propn|trayak .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	yellow dog . 103120_104760
+%mor:	adj|yellow-S1 noun|dog .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	what is that we should call that a green dog . 106310_111110
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Rel pron|we-Prs-Nom-P1 aux|should-Fin-S verb|call-Inf-S sconj|that det|a-Ind-Art adj|green-S1 noun|dog-Acc .
+%gra:	1|10|ROOT 2|1|COP 3|6|OBJ 4|6|NSUBJ 5|6|AUX 6|1|ACL-RELCL 7|10|MARK 8|10|DET 9|10|AMOD 10|6|OBJ 11|1|PUNCT
+*MOT:	yeah let's pass the other page . 114100_117460
+%mor:	intj|yeah verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|pass-Inf-S det|the-Def-Art adj|other-S1 noun|page-Acc .
+%gra:	1|2|DISCOURSE 2|7|ROOT 3|2|OBJ 4|2|XCOMP 5|7|DET 6|7|AMOD 7|4|OBJ 8|2|PUNCT
+*MOT:	oh you have only xxx . 117670_120630
+%mor:	intj|oh pron|you-Prs-Nom-S2 aux|have-Fin-Ind-Pres-S2 adv|only .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|ADVMOD 5|3|PUNCT
+*MOT:	ok I want , I'd like to colour a black dog . 120820_124250
+%mor:	intj|ok pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 cm|cm pron|I-Prs-Nom-S1~aux|would-Fin-S verb|like-Inf-S part|to verb|colour-Inf-S det|a-Ind-Art adj|black-S1 noun|dog-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|12|ROOT 4|7|PUNCT 5|7|NSUBJ 6|7|AUX 7|3|PARATAXIS 8|9|MARK 9|7|XCOMP 10|12|DET 11|12|AMOD 12|9|OBJ 13|3|PUNCT
+*CHI:	&=laughs . 123640_124590
+*MOT:	black dog . 125650_127320
+%mor:	adj|black-S1 noun|dog .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	ya  [/] ya  [/] ya  [/] ya  [/] ya  [/] ya  [/] ya  [/] ya  [/] ya  [/] ya  [/] ya . 143830_149200
+%mor:	intj|ya .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay . 146550_147350
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where is yellow ? 149390_150230
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 adj|yellow-S1 ?
+%gra:	1|3|ADVMOD 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	this is yellow . 150380_151430
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|yellow-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	yellow . 151990_152850
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yelololo . 154770_156640
+%mor:	propn|yelololo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yellow . 156500_157490
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yellow  [/] yellow  [/] yellow  [/] yellow &=hums . 157450_161150
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yellow . 160140_161130
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yellow dog . 161440_163020
+%mor:	adj|yellow-S1 noun|dog .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	a . 163190_164580
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	a . 165370_166860
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	wow so we have a +... 167030_172680
+%mor:	intj|wow adv|so pron|we-Prs-Nom-P1 verb|have-Fin-Ind-Pres-P1 det|a-Ind-Art +...
+%gra:	1|4|DISCOURSE 2|4|ADVMOD 3|4|NSUBJ 4|5|ROOT 5|4|PUNCT 6|4|PUNCT
+*CHI:	wa  [/] wa . 171560_173500
+%mor:	propn|wa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	see . 174100_175030
+%mor:	verb|see-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 177330_179110
+%xDN:	CHI-Speech-ND
+*CHI:	xxx . 187010_188380
+%xDN:	CHI-Speech-ND
+*MOT:	so <let's do picture>  [/] let's do picture . 187570_192250
+%mor:	adv|so verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S noun|picture-Acc .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|OBJ 4|2|XCOMP 5|4|OBJ 6|2|PUNCT
+*CHI:	xxx . 191710_192630
+%xDN:	CHI-Speech-ND
+*MOT:	picture CHILDNAME , look here . 192500_193930
+%mor:	noun|picture propn|CHILDNAME cm|cm verb|look-Fin-Imp-S adv|here .
+%gra:	1|5|ROOT 2|1|FLAT 3|4|PUNCT 4|1|PARATAXIS 5|4|ADVMOD 6|1|PUNCT
+*CHI:	xxx . 195690_197080
+%xDN:	CHI-Speech-ND
+*CHI:	&=mumbles . 199570_201860
+*MOT:	alright . 203960_205090
+%mor:	intj|alright .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 206820_207960
+%xDN:	CHI-Speech-ND
+*MOT:	okay , you still wanna draw ? 209120_211560
+%mor:	intj|okay cm|cm pron|you-Prs-Nom-S2 adv|still aux|wanna-Fin-S2 verb|draw-Inf-S ?
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|ADVMOD 5|6|AUX 6|6|ROOT 7|6|PUNCT
+*MOT:	alright let me see what this is xxx . 211700_214090
+%mor:	intj|alright verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 verb|see-Inf-S pron|what-Int-S1 pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 .
+%gra:	1|2|DISCOURSE 2|7|ROOT 3|2|OBJ 4|2|XCOMP 5|4|CCOMP 6|7|NSUBJ 7|5|ACL-RELCL 8|2|PUNCT
+*CHI:	&=laughs . 221600_223830
+*MOT:	yeah CHILDNAME is colouring yay  [/] yay . 223070_227820
+%mor:	intj|yeah propn|CHILDNAME aux|be-Fin-Ind-Pres-S3 verb|colour-Part-Pres-S intj|yay .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|5|ROOT 5|4|DISCOURSE 6|4|PUNCT
+*CHI:	yay . 226250_227440
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	black dog woo . 230250_233110
+%mor:	adj|black-S1 noun|dog noun|woo .
+%gra:	1|3|AMOD 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*MOT:	&=kisses &=laughs . 235350_237390
+*CHI:	ei . 238650_239510
+%mor:	intj|ei .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah . 239690_241140
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 240340_241330
+*MOT:	oh+my+god yucky . 244990_248850
+%mor:	propn|ohmygod intj|yucky .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	yucky . 251810_254010
+%mor:	adj|yucky-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ei . 253260_254520
+%mor:	intj|ei .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-X
+*MOT:	okay xxx . 258160_260530
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	adu . 260070_261720
+%mor:	intj|adu .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	so we got the puzzle <xxx put the puzzle together>  [/] xxx put the puzzle together . 262360_268020
+%mor:	adv|so pron|we-Prs-Nom-P1 verb|get-Fin-Ind-Past-P1-irr det|the-Def-Art noun|puzzle-Acc verb|put-Inf-S det|the-Def-Art noun|puzzle-Acc adv|together .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|9|ROOT 4|5|DET 5|3|OBJ 6|3|XCOMP 7|8|DET 8|6|OBJ 9|6|ADVMOD 10|3|PUNCT
+*MOT:	baby CHILDNAME come . 268840_270910
+%mor:	noun|baby noun|childname verb|come-Fin-Imp-S .
+%gra:	1|2|COMPOUND 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*MOT:	come CHILDNAME . 274060_275480
+%mor:	verb|come-Fin-Imp-S propn|CHILDNAME-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	&=hums . 275100_276200
+*CHI:	ebi uh . 277910_279760
+%mor:	propn|ebi intj|uh .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*COD:	U . 280000_293670
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where's the other one ? 293390_294790
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|other-S1 noun|one ?
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|AMOD 5|1|NSUBJ 6|1|PUNCT
+*COD:	C . 293670_300000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can't find it . 295540_297310
+%mor:	aux|can-Fin-S~part|not verb|find-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|3|AUX 2|3|ADVMOD 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	oh . 297950_299000
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

@@ -1,0 +1,285 @@
+@UTF8
+@PID:	11312/c-00004238-1
+@Begin
+@Languages:	eng
+@Participants:	MOT Mother
+@ID:	eng|QuigleyMcNally|MOT|38;02.||||Mother|||
+@Date:	01-JUN-2009
+@Types:	long, toyplay, TD
+*MOT:	have you seen Mudget the mouse ?
+%mor:	aux|have-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Part-Past-S-irr propn|Mudget-Acc det|the-Def-Art noun|mouse-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|DET 6|3|OBJ 7|3|PUNCT
+%com:	mother and child are facing each other, child is sitting on mother's lap .
+*MOT:	ooh look , Mudget the mouse .
+%mor:	intj|ooh verb|look-Fin-Imp-S cm|cm propn|Mudget det|the-Def-Art noun|mouse .
+%gra:	1|2|DISCOURSE 2|6|ROOT 3|4|PUNCT 4|2|VOCATIVE 5|6|DET 6|4|APPOS 7|2|PUNCT
+*MOT:	Mudget the mouse .
+%mor:	verb|mudget-Fin-Imp-S det|the-Def-Art noun|mouse-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*MOT:	hello , mmma@p .
+%mor:	intj|hello cm|cm x|mmma .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|FLAT 4|1|PUNCT
+*MOT:	ha-ha-ha@i .
+%mor:	intj|hahaha .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother imitating child .
+*MOT:	is this Mudget ?
+%mor:	aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|mudget ?
+%gra:	1|3|COP 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	oh Mudget's  [/] poor Mudget's ear .
+%mor:	intj|oh adj|poor-S1 propn|Mudget~part|s noun|ear .
+%gra:	1|5|DISCOURSE 2|3|AMOD 3|5|NMOD-POSS 4|3|CASE 5|5|ROOT 6|5|PUNCT
+*MOT:	hello Rube .
+%mor:	intj|hello propn|Rube .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	hello Rube .
+%mor:	intj|hello propn|Rube .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	hello Rube !
+%mor:	intj|hello propn|Rube !
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	Rube !
+%mor:	propn|Rube !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Rube !
+%mor:	propn|Rube !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Rube !
+%mor:	propn|Rube !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Rube !
+%mor:	propn|Rube !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Rube !
+%mor:	propn|Rube !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ye:(ah) .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother sings a few words softly under breath .
+*MOT:	I think you like the colors „ don't you ?
+%mor:	pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Pres-S1 pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 det|the-Def-Art noun|color-Plur-Acc cm|end aux|do-Fin-Imp-S~part|not pron|you-Prs-Nom-S2 ?
+%gra:	1|2|NSUBJ 2|10|ROOT 3|4|NSUBJ 4|2|CCOMP 5|6|DET 6|4|OBJ 7|8|PUNCT 8|2|PARATAXIS 9|10|ADVMOD 10|8|NSUBJ 11|2|PUNCT
+*MOT:	I think you do !
+%mor:	pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Pres-S1 pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2 !
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|NSUBJ 4|2|CCOMP 5|2|PUNCT
+%com:	mother makes lots of kissing noises .
+*MOT:	hi beautiful .
+%mor:	intj|hi adj|beautiful-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	now love bababababa@p .
+%mor:	adv|now verb|love-Fin-Ind-Pres-S x|bababababa .
+%gra:	1|2|ADVMOD 2|3|ROOT 3|2|FLAT 4|2|PUNCT
+%com:	mother joins in child's vocalisations .
+*MOT:	babababa@p .
+%mor:	x|babababa .
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	mother joins in child's vocalisations and then they take turns making ba sounds .
+*MOT:	babababa@p .
+%mor:	x|babababa .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	babababa@p .
+%mor:	x|babababa .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	babababa@p .
+%mor:	x|babababa .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	dadadada@p ?
+%mor:	x|dadadada ?
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	child imitates da sound .
+*MOT:	dadada@p .
+%mor:	x|dadada .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	0you 0are shaking <no no no no no no no>  [/] no .
+%mor:	verb|shake-Part-Pres-S intj|no .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	<no no no no>  [/] no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child is shaking head .
+*MOT:	no  [/] no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no  [/] no !
+%mor:	intj|no !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no  [/] no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	are y(ou) jump dancin(g) ?
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|jump-Inf-S noun|dancing-Acc-Ger ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	ah Rube's a dancer .
+%mor:	intj|ah propn|Rube~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|dancer .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|DET 5|5|ROOT 6|5|PUNCT
+*MOT:	Rube's a dancer .
+%mor:	propn|Rube~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|dancer .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	look !
+%mor:	verb|look-Fin-Imp-S !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look at Rube's dancing .
+%mor:	verb|look-Fin-Imp-S adp|at propn|Rube~part|s noun|dancing-Ger .
+%gra:	1|5|ROOT 2|5|CASE 3|5|NMOD-POSS 4|3|CASE 5|1|OBL 6|1|PUNCT
+*MOT:	do_do_do_do_do_do_do_do@si .
+%mor:	x|dodododododododo .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	good girl .
+%mor:	adj|good-S1 noun|girl .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%com:	child giggles and mother also .
+*MOT:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	who's got tickly legs ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 verb|get-Part-Past-S-irr adj|tickly-S1 noun|leg-Plur-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*MOT:	who's got tickly legs ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 verb|get-Part-Past-S-irr adj|tickly-S1 noun|leg-Plur-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*MOT:	yeah !
+%mor:	intj|yeah !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	who's got the tickly legs ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 verb|get-Part-Past-S-irr det|the-Def-Art adj|tickly-S1 noun|leg-Plur-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|3|PUNCT
+*MOT:	you do .
+%mor:	pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	you do .
+%mor:	pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*MOT:	tickly legs .
+%mor:	adj|tickly-S1 noun|leg-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises and mother imitates .
+*MOT:	now can I've a kiss ?
+%mor:	adv|now aux|can-Fin-S pron|I-Prs-Nom-S1~verb|have-Inf-S det|a-Ind-Art noun|kiss-Acc ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*MOT:	can mummy have a kiss ?
+%mor:	aux|can-Fin-S noun|mummy verb|have-Inf-S det|a-Ind-Art noun|kiss-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	oh big <kiss kiss kiss>  [/] kiss .
+%mor:	intj|oh adj|big-S1 noun|kiss .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	hm:-hm:-hm:-hm:@o .
+%mor:	x|hmhmhmhm .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	oh lovely kiss , yeah , (tha)t's a lovely kiss .
+%mor:	intj|oh adj|lovely-S1 noun|kiss cm|cm intj|yeah cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|lovely-S1 noun|kiss .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|11|ROOT 4|5|PUNCT 5|11|DISCOURSE 6|5|PUNCT 7|11|NSUBJ 8|11|COP 9|11|DET 10|11|AMOD 11|3|PARATAXIS 12|3|PUNCT
+*MOT:	now  [!] yoga baby .
+%mor:	adv|now noun|yoga noun|baby .
+%gra:	1|3|ADVMOD 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*MOT:	now  [!] yoga baby .
+%mor:	adv|now noun|yoga noun|baby .
+%gra:	1|3|ADVMOD 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+%com:	child vocalises and mother imitates .
+*MOT:	adadada@i .
+%mor:	propn|adadada .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good girl .
+%mor:	adj|good-S1 noun|girl .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	good girl .
+%mor:	adj|good-S1 noun|girl .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	what d(o) y(ou) see ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	0will 0we do your waving ?
+%mor:	verb|do-Fin-Imp-S pron|your-Prs-Gen-S2 noun|wave-Acc-Ger ?
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+*MOT:	0will we do your waving ?
+%mor:	pron|we-Prs-Nom-P1 verb|do-Fin-Ind-Pres-P1 pron|your-Prs-Gen-S2 noun|wave-Acc-Ger ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|2|PUNCT
+*MOT:	h:i !
+%mor:	intj|hi !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	hi !
+%mor:	intj|hi !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do_do_do_do_do_do_do_do@si .
+%mor:	x|dodododododododo .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	hi !
+%mor:	intj|hi !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and mother imitates .
+*MOT:	dadadada@i .
+%mor:	propn|dadadada .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and mother imitates .
+*MOT:	dadadada@i .
+%mor:	propn|dadadada .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hello .
+%mor:	intj|hello .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hello beautiful .
+%mor:	intj|hello adj|beautiful-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	hello beautiful .
+%mor:	intj|hello adj|beautiful-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	xxx can I have a kiss ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S det|a-Ind-Art noun|kiss-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	kiss  [/] kiss .
+%mor:	noun|kiss .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that's Mudget the mouse !
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 verb|mudget-Part-Pres-S det|the-Def-Art noun|mouse-Acc !
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	poor Mudget !
+%mor:	adj|poor-S1 noun|mudget !
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%com:	child vocalising .
+*MOT:	oop !
+%mor:	intj|oop !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oop !
+%mor:	intj|oop !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where did Mudget go ?
+%mor:	adv|where aux|do-Fin-Ind-Past-S3-irr propn|Mudget verb|go-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%com:	child vocalises .
+*MOT:	delicious !
+%mor:	adj|delicious-S1 !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	delicious !
+%mor:	adj|delicious-S1 !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child sucking toy .
+*MOT:	hey I see a little foot .
+%mor:	intj|hey pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 det|a-Ind-Art adj|little-S1 noun|foot-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|3|PUNCT
+*MOT:	I see a little foot .
+%mor:	pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 det|a-Ind-Art adj|little-S1 noun|foot-Acc .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|DET 4|5|AMOD 5|2|OBJ 6|2|PUNCT
+*MOT:	<I do , I do>  [/] , I do .
+%mor:	cm|cm pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1 .
+%gra:	1|3|PUNCT 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	<I do , I do>  [/] , I do .
+%mor:	cm|cm pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1 .
+%gra:	1|3|PUNCT 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%com:	child vocalises and mother imitates .
+*MOT:	bababa@i ?
+%mor:	propn|bababa ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and mother imitates .
+*MOT:	babababababa@i .
+%mor:	propn|babababababa .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	bababa@i .
+%mor:	propn|bababa .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ooh !
+%mor:	intj|ooh !
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

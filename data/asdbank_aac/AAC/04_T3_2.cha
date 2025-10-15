@@ -1,0 +1,405 @@
+@UTF8
+@PID:	11312/a-00082277-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, CHI Target_Child, MOT Mother, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|CHI|6;10.|male|||Target_Child|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	04_T3_2, video
+*COD:	C . 10_12420
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	beh . 1590_2810
+%mor:	intj|beh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	can you show me what you asked for ? 2720_4750
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|show-Inf-S pron|I-Prs-Acc-S1 pron|what-Rel-S1 pron|you-Prs-Nom-S2 verb|ask-Fin-Ind-Past-S2 adp|for ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|3|IOBJ 5|3|OBJ 6|7|NSUBJ 7|5|ACL-RELCL 8|7|OBL 9|3|PUNCT
+*AAC:	JUMP . 5540_6530
+%mor:	noun|jump .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	X
+*MOT:	jump wow . 6400_8410
+%mor:	verb|jump-Fin-Imp-S intj|wow .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	CHILDNAME wants to jump . 8500_10090
+%mor:	propn|CHILDNAME verb|want-Fin-Ind-Pres-S3 part|to verb|jump-Inf-S .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|MARK 4|2|XCOMP 5|2|PUNCT
+*MOT:	come let's jump . 10150_11400
+%mor:	verb|come-Fin-Imp-S verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|jump-Inf-S .
+%gra:	1|4|ROOT 2|1|XCOMP 3|2|OBJ 4|2|XCOMP 5|1|PUNCT
+*MOT:	forget about this let's jump . 12100_13720
+%mor:	verb|forget-Fin-Imp-S adp|about pron|this-Dem-S1 verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|jump-Inf-S .
+%gra:	1|6|ROOT 2|3|CASE 3|1|OBL 4|1|PARATAXIS 5|4|OBJ 6|4|XCOMP 7|1|PUNCT
+*COD:	U . 12430_27130
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 27160_133700
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want more ? 30280_31210
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|more-Cmp-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*AAC:	GO . 32670_33870
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	S
+*MOT:	go . 32810_33670
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that is go . 33750_34830
+%mor:	pron|that-Dem aux|be-Fin-Ind-Pres-S3 noun|go .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	go for what ? 35150_36280
+%mor:	verb|go-Fin-Imp-S adp|for pron|what-Int-S1 ?
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	go for the jumping . 36380_38140
+%mor:	verb|go-Fin-Imp-S adp|for det|the-Def-Art noun|jump-Ger .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+*CHI:	&=reaching . 37680_40150
+%xgco:	Target child extends arm out  towards AAC board
+%xIS:	CHI-Gesture-S
+*MOT:	wow . 38420_39330
+%mor:	intj|wow .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look . 39700_40470
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	next time you need to pick up jump but let , let's jump . 40520_44640
+%mor:	adj|next-S1 noun|time pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 part|to verb|pick-Inf-S adp|up noun|jump-Acc cconj|but verb|let-Fin-Imp-S cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|jump-Inf-S .
+%gra:	1|2|AMOD 2|4|OBL-UNMARKED 3|4|NSUBJ 4|14|ROOT 5|6|MARK 6|4|XCOMP 7|6|COMPOUND-PRT 8|6|OBJ 9|10|CC 10|4|CONJ 11|12|PUNCT 12|4|PARATAXIS 13|12|OBJ 14|12|XCOMP 15|4|PUNCT
+*MOT:	jump  [/] jump  [/] jump  [/] jump  [/] jump  [/] jump  [/] jump  [/] jump &=laughs . 44770_50900
+%mor:	verb|jump-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay sit down . 50970_52940
+%mor:	intj|okay verb|sit-Fin-Imp-S adp|down .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|COMPOUND-PRT 4|2|PUNCT
+*MOT:	&=laughs yay bravo CHILDNAME . 53180_56440
+%mor:	intj|yay propn|bravo propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|FLAT 4|2|PUNCT
+*MOT:	you really like the jumping , yes ? 56520_59280
+%mor:	pron|you-Prs-Nom-S2 adv|really verb|like-Fin-Ind-Pres-S2 det|the-Def-Art noun|jump-Acc-Ger cm|cm intj|yes ?
+%gra:	1|3|NSUBJ 2|3|ADVMOD 3|7|ROOT 4|5|DET 5|3|OBJ 6|7|PUNCT 7|3|DISCOURSE 8|3|PUNCT
+*MOT:	do you want to play with the cake ? 60650_62500
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|play-Inf-S adp|with det|the-Def-Art noun|cake ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|MARK 5|3|XCOMP 6|8|CASE 7|8|DET 8|5|OBL 9|3|PUNCT
+*MOT:	or more jumping , hmm ? 62870_64570
+%mor:	cconj|or adj|more-Cmp-S1 noun|jump-Ger cm|cm intj|hmm ?
+%gra:	1|3|CC 2|3|AMOD 3|5|ROOT 4|5|PUNCT 5|3|DISCOURSE 6|3|PUNCT
+*CHI:	uya . 64260_65550
+%mor:	intj|uya .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah ? 65400_66080
+%mor:	intj|yeah ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can you show me what do you want ? 66120_67420
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|show-Inf-S pron|I-Prs-Acc-S1 pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|3|IOBJ 5|8|OBJ 6|8|AUX 7|8|NSUBJ 8|3|CCOMP 9|3|PUNCT
+*MOT:	I thought initially that you want to press go for , for the cake . 69280_75080
+%mor:	pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Past-S1-irr adv|initially sconj|that pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|press-Inf-S verb|go-Inf-S adp|for cm|cm adp|for det|the-Def-Art noun|cake .
+%gra:	1|2|NSUBJ 2|14|ROOT 3|2|ADVMOD 4|6|MARK 5|6|NSUBJ 6|2|CCOMP 7|8|MARK 8|6|XCOMP 9|8|XCOMP 10|9|OBL 11|14|PUNCT 12|14|CASE 13|14|DET 14|9|OBL 15|2|PUNCT
+*MOT:	but I see that you want more the jumping . 77640_80460
+%mor:	cconj|but pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 sconj|that pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 det|the-Def-Art noun|jump-Acc-Ger .
+%gra:	1|3|CC 2|3|NSUBJ 3|9|ROOT 4|6|MARK 5|6|NSUBJ 6|3|CCOMP 7|6|OBJ 8|9|DET 9|6|OBJ 10|3|PUNCT
+*MOT:	&=laughs you already more the tickles ? 80570_83750
+%mor:	pron|you-Prs-Nom-S2 adv|already adv|more det|the-Def-Art noun|tickle-Plur ?
+%gra:	1|5|NSUBJ 2|5|ADVMOD 3|5|ADVMOD 4|5|DET 5|5|ROOT 6|5|PUNCT
+*MOT:	and the hugs and the jumping now ? 83880_87080
+%mor:	cconj|and det|the-Def-Art noun|hug-Plur cconj|and det|the-Def-Art noun|jump-Ger adv|now ?
+%gra:	1|3|CC 2|3|DET 3|7|ROOT 4|6|CC 5|6|DET 6|3|CONJ 7|3|ADVMOD 8|3|PUNCT
+*MOT:	hmm ? 88080_88610
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can you show me what do you want ? 88700_90110
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|show-Inf-S pron|I-Prs-Acc-S1 pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|3|IOBJ 5|8|OBJ 6|8|AUX 7|8|NSUBJ 8|3|CCOMP 9|3|PUNCT
+*MOT:	hmm ? 91390_91680
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	or you don't want nothing ? 91820_93220
+%mor:	cconj|or pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|want-Inf-S pron|nothing-Neg-S1 ?
+%gra:	1|5|CC 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	no Mommy , no , I don't want anything . 93390_97270
+%mor:	intj|no intj|mommy cm|cm intj|no cm|cm pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S pron|anything-Ind-S1 .
+%gra:	1|9|DISCOURSE 2|9|DISCOURSE 3|2|PUNCT 4|9|DISCOURSE 5|4|PUNCT 6|9|NSUBJ 7|9|AUX 8|9|ADVMOD 9|10|ROOT 10|9|OBJ 11|9|PUNCT
+*MOT:	hmm ? 98960_99630
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want kisses ? 100960_102430
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|kisse-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	&=laughs . 103260_105380
+*MOT:	come . 109050_109780
+%mor:	verb|come-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	come to Mommy . 110040_111240
+%mor:	verb|come-Fin-Imp-S adp|to propn|Mommy .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	it's me time now ? 116890_118350
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|I-Prs-Acc-S1 noun|time adv|now ?
+%gra:	1|3|NSUBJ 2|3|COP 3|5|ROOT 4|3|NMOD-UNMARKED 5|4|ADVMOD 6|3|PUNCT
+*MOT:	&=laughs . 118590_119320
+*CHI:	&=breathes . 121930_122720
+*MOT:	what do you want ? 122980_123850
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	it's nice to show me what do you want . 126490_128020
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|nice-S1 part|to verb|show-Inf-S pron|I-Prs-Acc-S1 pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S .
+%gra:	1|3|EXPL 2|3|COP 3|10|ROOT 4|5|MARK 5|3|CSUBJ 6|5|IOBJ 7|10|OBJ 8|10|AUX 9|10|NSUBJ 10|5|CCOMP 11|3|PUNCT
+*MOT:	jump , kiss , tickle . 128110_130840
+%mor:	verb|jump-Fin-Imp-S cm|cm verb|kiss-Fin-Imp-S cm|cm verb|tickle-Fin-Imp-S .
+%gra:	1|5|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|5|PUNCT 5|1|PARATAXIS 6|1|PUNCT
+*MOT:	hmm ? 131800_132320
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	let's see what CHILDNAME wants . 132490_134720
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S pron|what-Rel-S1 propn|CHILDNAME verb|want-Fin-Ind-Pres-S3 .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|6|OBJ 5|6|NSUBJ 6|3|CCOMP 7|1|PUNCT
+*COD:	U . 133730_162050
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	I love that . 161780_163350
+%mor:	pron|I-Prs-Nom-S1 verb|love-Fin-Ind-Pres-S1 pron|that-Dem .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*COD:	C . 162070_240070
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want Mommy to push you ? 163737_165262
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|push-Inf-S pron|you-Prs-Acc-S2 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|6|OBJ 8|3|PUNCT
+*MOT:	yes ? 165787_166412
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you remember ? 167425_168662
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|remember-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*AAC:	GO . 168980_170450
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	thank+you CHILDNAME . 170275_171587
+%mor:	intj|thankyou propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go . 171675_176025
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	go CHILDNAME go , say go  [/] go . 176162_179662
+%mor:	verb|go-Fin-Imp-S adv|childname verb|go-Fin-Imp-S cm|cm verb|say-Fin-Imp-S verb|go-Fin-Imp-S .
+%gra:	1|6|ROOT 2|1|ADVMOD 3|1|XCOMP 4|5|PUNCT 5|1|PARATAXIS 6|5|OBJ 7|1|PUNCT
+*CHI:	&=other . 176240_179460
+%xgco:	Child puts hand up in "stop" sign
+%xIS:	CHI-Gesture-S
+*CHI:	a &=hums .
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	and now we +... 179825_182025
+%mor:	cconj|and adv|now pron|we-Prs-Nom-P1 +...
+%gra:	1|3|CC 2|3|ADVMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	now we stop . 183187_184662
+%mor:	adv|now pron|we-Prs-Nom-P1 verb|stop-Fin-Ind-Pres-P1 .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	so do you want more ? 185275_187162
+%mor:	adv|so aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|more-Cmp-S1 ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*AAC:	GO . 187490_189630
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	<good+job CHILDNAME>  [/] good+job CHILDNAME . 189575_191887
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go &=laughs . 191962_194600
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	go  [/] go &=laughs . 195800_196875
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yay . 197012_199412
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and now +... 200612_201500
+%mor:	cconj|and adv|now +...
+%gra:	1|2|CC 2|2|ROOT 3|2|PUNCT
+*MOT:	now we stop . 203062_204137
+%mor:	adv|now pron|we-Prs-Nom-P1 verb|stop-Fin-Ind-Pres-P1 .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*AAC:	GO . 206650_208420
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	yay thank+you CHILDNAME . 206850_209712
+%mor:	intj|yay intj|thankyou propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|3|DISCOURSE 3|3|ROOT 4|3|PUNCT
+*MOT:	go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go  [/] go . 209887_212950
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and stop . 218537_220562
+%mor:	cconj|and verb|stop-Fin-Imp-S .
+%gra:	1|2|CC 2|2|ROOT 3|2|PUNCT
+*AAC:	THROW . 222400_224920
+%mor:	verb|throw-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	what's that ? 225450_227300
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	what's that ? 228812_230275
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	do you know what did you pick here ? 230375_232187
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|know-Inf-S pron|what-Int-S1 aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 verb|pick-Inf-S adv|here ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|7|OBJ 5|7|AUX 6|7|NSUBJ 7|3|CCOMP 8|7|ADVMOD 9|3|PUNCT
+*MOT:	www . 232987_237162
+%xPCO:	parent speaks to person behind camera .
+*MOT:	throw . 238712_239925
+%mor:	verb|throw-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 240070_265640
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=reaching . 245210_246280
+%xgco:	Child extends both arms out to catch a ball
+%xIS:	CHI-Gesture-S
+*MOT:	do you want Mommy to throw the ball ? 264162_266200
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|throw-Inf-S det|the-Def-Art noun|ball-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|8|DET 8|6|OBJ 9|3|PUNCT
+*COD:	C . 265640_292320
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	or you want to play with the ball ? 266475_268375
+%mor:	cconj|or pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|play-Inf-S adp|with det|the-Def-Art noun|ball ?
+%gra:	1|3|CC 2|3|NSUBJ 3|8|ROOT 4|5|MARK 5|3|XCOMP 6|8|CASE 7|8|DET 8|5|OBL 9|3|PUNCT
+*MOT:	come , show me . 268525_270437
+%mor:	verb|come-Fin-Imp-S cm|cm verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 .
+%gra:	1|4|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|IOBJ 5|1|PUNCT
+*MOT:	hmm ? 271737_272287
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	the ball is with Mommy . 272375_274137
+%mor:	det|the-Def-Art noun|ball aux|be-Fin-Ind-Pres-S3 adp|with propn|Mommy .
+%gra:	1|2|DET 2|5|NSUBJ 3|5|COP 4|5|CASE 5|5|ROOT 6|5|PUNCT
+*MOT:	if you need the ball , you need Mommy to +... 274337_277175
+%mor:	sconj|if pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 det|the-Def-Art noun|ball-Acc cm|cm pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 propn|Mommy-Acc part|to +...
+%gra:	1|3|MARK 2|3|NSUBJ 3|8|ADVCL 4|5|DET 5|3|OBJ 6|3|PUNCT 7|8|NSUBJ 8|10|ROOT 9|8|OBJ 10|8|PUNCT 11|8|PUNCT
+*MOT:	throw the ball huh ? 277430_278240
+%mor:	verb|throw-Fin-Imp-S det|the-Def-Art noun|ball-Acc intj|huh ?
+%gra:	1|4|ROOT 2|3|DET 3|1|OBJ 4|1|OBJ 5|1|PUNCT
+*MOT:	do you want to pick up this ? 280600_282500
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|pick-Inf-S adp|up pron|this-Dem-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|5|COMPOUND-PRT 7|5|OBJ 8|3|PUNCT
+*MOT:	no ? 282812_283400
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want free play ? 283475_284887
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|free-S1 noun|play-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*MOT:	one two three . 285212_286925
+%mor:	num|one num|two num|three .
+%gra:	1|3|NUMMOD 2|3|NUMMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	catch the ball , yay &=laughs . 287087_290562
+%mor:	verb|catch-Fin-Imp-S det|the-Def-Art noun|ball-Acc cm|cm intj|yay .
+%gra:	1|5|ROOT 2|3|DET 3|1|OBJ 4|5|PUNCT 5|1|DISCOURSE 6|1|PUNCT
+*MOT:	now it's your turn . 291237_292675
+%mor:	adv|now pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|turn .
+%gra:	1|5|ADVMOD 2|5|NSUBJ 3|5|COP 4|5|NMOD-POSS 5|5|ROOT 6|5|PUNCT
+*COD:	U . 292320_310960
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 310970_350330
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you remember ? 312525_314000
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|remember-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	do , we have up and down . 315070_316320
+%mor:	aux|do-Fin-Ind-Pres-P3 cm|cm pron|we-Prs-Nom-P1 verb|have-Fin-Ind-Pres-P1 adv|up cconj|and adv|down .
+%gra:	1|4|REPARANDUM 2|1|PUNCT 3|4|NSUBJ 4|7|ROOT 5|4|ADVMOD 6|7|CC 7|5|CONJ 8|4|PUNCT
+*MOT:	do you want to look ? 317000_318225
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|look-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|MARK 5|3|XCOMP 6|3|PUNCT
+*MOT:	heh ? 320775_321387
+%mor:	intj|heh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	let's see . 322037_322962
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+*MOT:	come , go up  [/] up . 323950_325925
+%mor:	verb|come-Fin-Imp-S cm|cm verb|go-Fin-Imp-S adp|up .
+%gra:	1|4|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|COMPOUND-PRT 5|1|PUNCT
+*MOT:	&=groans up . 327650_330475
+%mor:	adv|up .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and now we go down . 331925_334837
+%mor:	cconj|and adv|now pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 adv|down .
+%gra:	1|4|CC 2|4|ADVMOD 3|4|NSUBJ 4|5|ROOT 5|4|ADVMOD 6|4|PUNCT
+*MOT:	so if you want up again , look . 336000_338675
+%mor:	adv|so sconj|if pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adp|up adv|again cm|cm verb|look-Fin-Imp-S .
+%gra:	1|8|ADVMOD 2|4|MARK 3|4|NSUBJ 4|8|ADVCL 5|4|COMPOUND-PRT 6|4|ADVMOD 7|4|PUNCT 8|8|ROOT 9|8|PUNCT
+*AAC:	UP . 340390_342420
+%mor:	propn|UP .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	thank+you , let's go up  [/] up  [/] up  [/] up . 342350_344712
+%mor:	intj|thankyou cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S adp|up .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|6|ROOT 4|3|OBJ 5|3|XCOMP 6|5|COMPOUND-PRT 7|3|PUNCT
+*CHI:	&=moans . 344387_345162
+*MOT:	up  [/] up . 345400_346350
+%mor:	adv|up .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yay . 347625_348562
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you're up now . 349762_350975
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|up adv|now .
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|ADVMOD 5|3|PUNCT
+*COD:	U . 350340_363270
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes , you want ? 362262_363875
+%mor:	intj|yes cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 ?
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*COD:	C . 363280_373310
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	UP . 364480_366420
+%mor:	propn|UP .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	X
+*MOT:	yes good+job . 365237_367337
+%mor:	intj|yes noun|goodjob .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	xxx up  [/] up  [/] up  [/] up  [/] up . 367437_371112
+%mor:	adv|up .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 373310_392340
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	if you use the help . 390575_392300
+%mor:	sconj|if pron|you-Prs-Nom-S2 verb|use-Fin-Ind-Pres-S2 det|the-Def-Art noun|help-Acc .
+%gra:	1|3|MARK 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*COD:	C . 392340_402370
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	HELP . 392920_394280
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	help me Mommy . 394100_395450
+%mor:	verb|help-Fin-Imp-S pron|I-Prs-Acc-S1 propn|Mommy .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+*MOT:	yes let's help you . 396750_398650
+%mor:	intj|yes verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|OBJ 4|2|XCOMP 5|4|OBJ 6|2|PUNCT
+*MOT:	how you do it ? 399312_400450
+%mor:	adv|how pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 ?
+%gra:	1|4|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|3|OBJ 5|1|PUNCT
+*COD:	U . 402370_412380
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

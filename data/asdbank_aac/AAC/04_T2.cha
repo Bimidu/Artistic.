@@ -1,0 +1,280 @@
+@UTF8
+@PID:	11312/a-00082275-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child, FAT Father
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|6;10.|male|||Target_Child|||
+@ID:	eng|AAC|FAT|||||Father|||
+@Media:	04_T2, video
+*COD:	C . 1_17360
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look . 1150_1670
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	HELP . 4740_6050
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	help ? 6300_6820
+%mor:	verb|help-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 7020_8470
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	help with a kiss from mommy . 8670_10010
+%mor:	verb|help-Fin-Imp-S adp|with det|a-Ind-Art noun|kiss adp|from noun|mommy .
+%gra:	1|6|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|6|CASE 6|4|NMOD 7|1|PUNCT
+*MOT:	you want a kiss from mommy or from daddy ? 10180_12460
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|a-Ind-Art noun|kiss-Acc adp|from noun|mommy cconj|or adp|from noun|daddy ?
+%gra:	1|2|NSUBJ 2|9|ROOT 3|4|DET 4|2|OBJ 5|6|CASE 6|2|OBL 7|9|CC 8|9|CASE 9|6|CONJ 10|2|PUNCT
+*AAC:	TICKLE . 12840_13930
+%mor:	noun|tickle .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	S
+*MOT:	thank+you . 14620_15820
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and you pick up tickles  [/] tickles  [/] tickles  [/] tickles  [/] tickles  [/] tickles  [/] tickles &=kisses . 16500_22900
+%mor:	cconj|and pron|you-Prs-Nom-S2 verb|pick-Fin-Ind-Pres-S2 adp|up noun|tickle-Plur-Acc .
+%gra:	1|3|CC 2|3|NSUBJ 3|5|ROOT 4|3|COMPOUND-PRT 5|3|OBJ 6|3|PUNCT
+*COD:	U . 17360_57480
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ah , you want kisses . 56070_58200
+%mor:	intj|ah cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|kisse-Plur-Acc .
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*COD:	C . 57480_70090
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look kiss &=laughs . 58280_61540
+%mor:	verb|look-Fin-Imp-S noun|kiss-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	&=moans . 59180_60090
+*FAT:	&=laughs . 59650_60670
+*MOT:	you have a kiss here . 61750_62860
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 det|a-Ind-Art noun|kiss-Acc adv|here .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|DET 4|2|OBJ 5|2|ADVMOD 6|2|PUNCT
+*CHI:	&=hums . 62780_63930
+*AAC:	KISS . 64520_65680
+%mor:	noun|kiss .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	thank+you CHILDNAME . 65970_67650
+%mor:	intj|thankyou propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 67410_68620
+*MOT:	and now I am giving you kisses  [/] kisses  [/] kisses  [/] kisses  [/] kisses  [/] kisses  [/] kisses &=kisses . 68030_74600
+%mor:	cconj|and adv|now pron|I-Prs-Nom-S1 aux|be-Fin-Ind-Pres-S1 verb|give-Part-Pres-S pron|you-Prs-Acc-S2 noun|kisse-Plur-Acc .
+%gra:	1|5|CC 2|5|ADVMOD 3|5|NSUBJ 4|5|AUX 5|7|ROOT 6|5|IOBJ 7|5|OBJ 8|5|PUNCT
+*COD:	U . 70100_84790
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 84790_103580
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	hey look at , look at the board , CHILDNAME , look at the board . 90340_93610
+%mor:	intj|hey verb|look-Fin-Imp-S adp|at cm|cm verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|board cm|cm intj|childname cm|cm verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|board .
+%gra:	1|2|DISCOURSE 2|15|ROOT 3|2|OBL 4|5|PUNCT 5|2|PARATAXIS 6|8|CASE 7|8|DET 8|5|OBL 9|10|PUNCT 10|12|DISCOURSE 11|10|PUNCT 12|2|PARATAXIS 13|15|CASE 14|15|DET 15|12|OBL 16|2|PUNCT
+*AAC:	KISS . 94640_95790
+%mor:	noun|kiss .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	I will give you glowstick . 96220_98420
+%mor:	pron|I-Prs-Nom-S1 aux|will-Fin-S verb|give-Inf-S pron|you-Prs-Acc-S2 noun|glowstick-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|IOBJ 5|3|OBJ 6|3|PUNCT
+*FAT:	let's kiss . 101150_102220
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|kiss-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+*COD:	U . 103590_133990
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx look at the stages , and you can press the button if you choose the goal . 128730_135450
+%mor:	verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|stage-Plur cm|cm cconj|and pron|you-Prs-Nom-S2 aux|can-Fin-S verb|press-Inf-S det|the-Def-Art noun|button-Acc sconj|if pron|you-Prs-Nom-S2 verb|choose-Fin-Ind-Pres-S2 det|the-Def-Art noun|goal-Acc .
+%gra:	1|16|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|9|PUNCT 6|9|CC 7|9|NSUBJ 8|9|AUX 9|1|CONJ 10|11|DET 11|9|OBJ 12|14|MARK 13|14|NSUBJ 14|9|ADVCL 15|16|DET 16|14|OBJ 17|1|PUNCT
+*CHI:	&=moans . 130080_135100
+*COD:	C . 134010_154000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look . 136780_137490
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 137400_139540
+*MOT:	look at the board &=laughs . 138690_141350
+%mor:	verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|board .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+*MOT:	look . 142890_143690
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=moans . 143850_145880
+*AAC:	TICKLE . 147880_148620
+%mor:	noun|tickle .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	ah , <you choose tickles>  [/] you choose tickles tickles  [/] tickles  [/] tickles  [/] tickles  [/] tickles not kisses &=laughs . 149200_156950
+*COD:	U . 154020_167000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	we play with the kisses and tickles . 166250_168060
+%mor:	pron|we-Prs-Nom-P1 verb|play-Fin-Ind-Pres-P1 adp|with det|the-Def-Art noun|kisse-Plur cconj|and noun|tickle-Plur .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|5|CASE 4|5|DET 5|2|OBL 6|7|CC 7|5|CONJ 8|2|PUNCT
+*COD:	C . 167010_178820
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	let's see what we do now . 168260_170700
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S pron|what-Rel-S1 pron|we-Prs-Nom-P1 verb|do-Fin-Ind-Pres-P1 adv|now .
+%gra:	1|7|ROOT 2|1|OBJ 3|1|XCOMP 4|6|OBJ 5|6|NSUBJ 6|3|CCOMP 7|6|ADVMOD 8|1|PUNCT
+*MOT:	kisses or tickles ? 171650_172820
+%mor:	verb|kisse-Fin-Ind-Pres-S3 cconj|or verb|tickle-Fin-Ind-Pres-S3 ?
+%gra:	1|3|ROOT 2|3|CC 3|1|CONJ 4|1|PUNCT
+*MOT:	kisses or tickles , or do you want something else , hmm ? 175160_179010
+%mor:	verb|kisse-Fin-Ind-Pres-S3 cconj|or verb|tickle-Fin-Ind-Pres-S3 cm|cm cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|something-Ind-S1 adj|else-S1 cm|cm intj|hmm ?
+%gra:	1|12|ROOT 2|3|CC 3|1|CONJ 4|8|PUNCT 5|8|CC 6|8|AUX 7|8|NSUBJ 8|1|CONJ 9|8|OBJ 10|9|AMOD 11|12|PUNCT 12|1|DISCOURSE 13|1|PUNCT
+*COD:	U . 178830_223732
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes , apa . 222950_225480
+%mor:	intj|yes cm|cm intj|apa .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*COD:	C . 223780_360920
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	water . 226460_227270
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	water . 226490_227330
+%mor:	noun|water .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	thank+you CHILDNAME . 234540_235900
+%mor:	intj|thankyou propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	do you want to use the board and speak with mommy with the board ? 241550_245100
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|use-Inf-S det|the-Def-Art noun|board-Acc cconj|and verb|speak-Inf-S adp|with noun|mommy adp|with det|the-Def-Art noun|board ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|14|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|9|CC 9|5|CONJ 10|11|CASE 11|9|OBL 12|14|CASE 13|14|DET 14|9|OBL 15|3|PUNCT
+*MOT:	do you know what is this ? 247390_249070
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|know-Inf-S pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|COP 6|4|ACL-RELCL 7|3|PUNCT
+*CHI:	&=moans . 249120_249980
+*AAC:	YES . 249360_250700
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	this is , yes  [/] yes da  [/] da , you know to say da . 249660_254630
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 cm|cm intj|yes intj|da cm|cm pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 part|to verb|say-Inf-S propn|da-Acc .
+%gra:	1|2|NSUBJ 2|8|REPARANDUM 3|2|PUNCT 4|8|DISCOURSE 5|8|DISCOURSE 6|5|PUNCT 7|8|NSUBJ 8|11|ROOT 9|10|MARK 10|8|XCOMP 11|10|OBJ 12|8|PUNCT
+*MOT:	ah <you want kisses>  [/] you want kisses . 256220_258960
+%mor:	intj|ah pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|kisse-Plur-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	but if you want kisses you know that you need to look to the board and choose the right one , yes ? 259090_263940
+%mor:	cconj|but sconj|if pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|kisse-Plur-Acc pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 sconj|that pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 part|to verb|look-Inf-S adp|to det|the-Def-Art noun|board cconj|and verb|choose-Inf-S det|the-Def-Art adj|right-S1 noun|one-Acc cm|cm intj|yes ?
+%gra:	1|7|CC 2|4|MARK 3|4|NSUBJ 4|7|ADVCL 5|4|OBJ 6|7|NSUBJ 7|22|ROOT 8|10|MARK 9|10|NSUBJ 10|7|CCOMP 11|12|MARK 12|10|XCOMP 13|15|CASE 14|15|DET 15|12|OBL 16|17|CC 17|12|CONJ 18|20|DET 19|20|AMOD 20|17|OBJ 21|22|PUNCT 22|7|DISCOURSE 23|7|PUNCT
+*MOT:	look , this is kiss , this is the kiss . 264190_267000
+%mor:	verb|look-Fin-Imp-S cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 noun|kiss cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|kiss .
+%gra:	1|10|ROOT 2|5|PUNCT 3|5|NSUBJ 4|5|COP 5|1|PARATAXIS 6|10|PUNCT 7|10|NSUBJ 8|10|COP 9|10|DET 10|1|PARATAXIS 11|1|PUNCT
+*MOT:	kiss . 267640_267990
+%mor:	noun|kiss .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	kiss CHILDNAME , you need to look . 270140_272060
+%mor:	verb|kiss-Fin-Imp-S propn|CHILDNAME-Acc cm|cm pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 part|to verb|look-Inf-S .
+%gra:	1|7|ROOT 2|1|OBJ 3|5|PUNCT 4|5|NSUBJ 5|1|PARATAXIS 6|7|MARK 7|5|XCOMP 8|1|PUNCT
+*AAC:	DAD . 271800_273330
+%mor:	noun|dad .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+%xSSE:	SSE
+*MOT:	this is daddy , daddy will help you with something . 272150_275290
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 noun|daddy cm|cm noun|daddy aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 adp|with pron|something-Ind-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|10|ROOT 4|7|PUNCT 5|7|NSUBJ 6|7|AUX 7|3|PARATAXIS 8|7|OBJ 9|10|CASE 10|7|OBL 11|3|PUNCT
+*MOT:	do you want the kiss from daddy ? 275460_277770
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|the-Def-Art noun|kiss-Acc adp|from noun|daddy ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|5|DET 5|3|OBJ 6|7|CASE 7|5|NMOD 8|3|PUNCT
+*CHI:	&=hums . 277850_279000
+*MOT:	or do you want to play with daddy ? 278920_280210
+%mor:	cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|play-Inf-S adp|with noun|daddy ?
+%gra:	1|4|CC 2|4|AUX 3|4|NSUBJ 4|8|ROOT 5|6|MARK 6|4|XCOMP 7|8|CASE 8|6|OBL 9|4|PUNCT
+*MOT:	look we can play . 281290_281930
+%mor:	verb|look-Fin-Imp-S pron|we-Prs-Nom-P1 aux|can-Fin-S verb|play-Inf-S .
+%gra:	1|4|ROOT 2|4|NSUBJ 3|4|AUX 4|1|CCOMP 5|1|PUNCT
+*CHI:	&=moans . 282260_283420
+*FAT:	come , come here . 282300_283480
+%mor:	verb|come-Fin-Imp-S cm|cm verb|come-Fin-Imp-S adv|here .
+%gra:	1|4|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|ADVMOD 5|1|PUNCT
+*FAT:	okay you want kisses , okay . 285820_287700
+%mor:	intj|okay pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|kisse-Plur-Acc cm|cm intj|okay .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|PUNCT 6|3|DISCOURSE 7|3|PUNCT
+*FAT:	xxx face . 289260_290500
+%mor:	verb|face-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where is it ? 289600_290240
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|3|ROOT 2|1|COP 3|2|NSUBJ 4|1|PUNCT
+*MOT:	a kiss , you should show the kiss . 290980_292920
+%mor:	det|a-Ind-Art noun|kiss cm|cm pron|you-Prs-Nom-S2 aux|should-Fin-S verb|show-Inf-S det|the-Def-Art noun|kiss-Acc .
+%gra:	1|2|DET 2|6|DISLOCATED 3|2|PUNCT 4|6|NSUBJ 5|6|AUX 6|8|ROOT 7|8|DET 8|6|OBJ 9|6|PUNCT
+*MOT:	tickles  [/] tickles . 298040_298890
+%mor:	noun|tickle-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 298650_299380
+*FAT:	where the , where is it ? 300440_303450
+%mor:	adv|where det|the-Def-Art cm|cm adv|where aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|4|ADVMOD 2|4|REPARANDUM 3|2|PUNCT 4|6|ROOT 5|4|COP 6|5|NSUBJ 7|4|PUNCT
+*CHI:	&=hums . 301270_301880
+*MOT:	where is the kiss ? 308670_309410
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|kiss ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*FAT:	kiss , where is it ? 309460_310650
+%mor:	verb|kiss-Fin-Imp-S cm|cm adv|where aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|5|ROOT 2|4|PUNCT 3|1|PARATAXIS 4|3|COP 5|1|PARATAXIS 6|1|PUNCT
+*FAT:	show me the kiss . 311750_312830
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 det|the-Def-Art noun|kiss-Acc .
+%gra:	1|4|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|1|PUNCT
+*FAT:	look . 316590_317100
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ay CHILDNAME , don't be lazy . 317190_319580
+%mor:	intj|ay noun|childname cm|cm aux|do-Fin-Imp-S~part|not aux|be-Fin-Imp-S adj|lazy-S1 .
+%gra:	1|2|DISCOURSE 2|7|ROOT 3|7|PUNCT 4|7|AUX 5|7|ADVMOD 6|7|COP 7|2|PARATAXIS 8|2|PUNCT
+*FAT:	okay , nap . 320020_321710
+%mor:	intj|okay cm|cm noun|nap .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*AAC:	TICKLE . 321020_324130
+%mor:	noun|tickle .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	that is tickles , give him tickles . 321850_323910
+%mor:	pron|that-Dem aux|be-Fin-Ind-Pres-S3 noun|tickle-Plur cm|cm verb|give-Fin-Imp-S pron|he-Prs-Acc-S3 noun|tickle-Plur-Acc .
+%gra:	1|3|NSUBJ 2|3|COP 3|7|ROOT 4|5|PUNCT 5|3|PARATAXIS 6|5|IOBJ 7|5|OBJ 8|3|PUNCT
+*MOT:	you asked tickles you get tickles . 324020_325820
+%mor:	pron|you-Prs-Nom-S2 verb|ask-Fin-Ind-Past-S2 noun|tickle-Plur pron|you-Prs-Nom-S2 verb|get-Fin-Ind-Pres-S2 noun|tickle-Plur-Acc .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|IOBJ 4|5|NSUBJ 5|3|ACL-RELCL 6|5|OBJ 7|2|PUNCT
+*FAT:	xxx . 325500_327420
+*CHI:	ya . 327250_328650
+%mor:	intj|ya .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	xxx you watch now here . 329900_331620
+%mor:	pron|you-Prs-Nom-S2 verb|watch-Fin-Ind-Pres-S2 adv|now adv|here .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|ADVMOD 4|2|ADVMOD 5|2|PUNCT
+*FAT:	xxx . 333510_334340
+*FAT:	CHILDNAME . 335030_335940
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	www . 336780_339160
+*MOT:	xxx . 340310_341180
+*MOT:	and tickle you with a star . 347980_350340
+%mor:	cconj|and verb|tickle-Fin-Imp-S pron|you-Prs-Acc-S2 adp|with det|a-Ind-Art noun|star .
+%gra:	1|2|CC 2|6|ROOT 3|2|OBJ 4|6|CASE 5|6|DET 6|2|OBL 7|2|PUNCT
+*MOT:	do you want to play with this ? 350990_352620
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|play-Inf-S adp|with pron|this-Dem-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|CASE 7|5|OBL 8|3|PUNCT
+*MOT:	xxx . 354420_355460
+*MOT:	yay . 355930_357050
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx star . 359700_360960
+%mor:	noun|star .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

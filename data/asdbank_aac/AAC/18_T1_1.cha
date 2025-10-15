@@ -1,0 +1,334 @@
+@UTF8
+@PID:	11312/a-00082336-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, FAT Father, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|FAT|||||Father|||
+@ID:	eng|AAC|CHI|7;00.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	18_T1_1, video, missing
+*COD:	C . 1_319640
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	no ? 510_1100
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	can we tr(y) , okay we'll try another one then , no ? 1160_3730
+%mor:	aux|can-Fin-S pron|we-Prs-Nom-P1 verb|try-Inf-S cm|cm intj|okay pron|we-Prs-Nom-P1~aux|will-Fin-S verb|try-Inf-S det|another-Def-Ind noun|one-Acc adv|then cm|cm intj|no ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|13|ROOT 4|8|PUNCT 5|8|DISCOURSE 6|8|NSUBJ 7|8|AUX 8|3|PARATAXIS 9|10|DET 10|8|OBJ 11|8|ADVMOD 12|13|PUNCT 13|3|DISCOURSE 14|3|PUNCT
+*CHI:	&=hums . 3920_4710
+*FAT:	how about this one ? 4470_5550
+%mor:	adv|how adp|about det|this-Def-Dem-Sing noun|one ?
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+*FAT:	this one okay ? 7650_8670
+%mor:	det|this-Def-Dem-Sing noun|one intj|okay ?
+%gra:	1|2|DET 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*FAT:	okay . 9430_10180
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	blue hat , green hat , red hat , oops .  [+ bkr] 11190_15660
+%mor:	adj|blue-S1 noun|hat cm|cm adj|green-S1 noun|hat cm|cm adj|red-S1 noun|hat cm|cm noun|oop .
+%gra:	1|2|AMOD 2|10|ROOT 3|5|PUNCT 4|5|AMOD 5|2|LIST 6|8|PUNCT 7|8|AMOD 8|2|LIST 9|10|PUNCT 10|2|LIST 11|2|PUNCT
+*FAT:	red shirt , blue shirt , yellow shirt .  [+ bkr] 18030_22770
+%mor:	adj|red-S1 noun|shirt cm|cm adj|blue-S1 noun|shirt cm|cm adj|yellow-S1 noun|shirt .
+%gra:	1|2|AMOD 2|8|ROOT 3|5|PUNCT 4|5|AMOD 5|2|CONJ 6|8|PUNCT 7|8|AMOD 8|2|CONJ 9|2|PUNCT
+*CHI:	&=hums . 22990_24120
+*FAT:	yellow pant , red pant , green pant , oops .  [+ bkr] 25900_30880
+%mor:	adj|yellow-S1 noun|pant cm|cm adj|red-S1 noun|pant cm|cm adj|green-S1 noun|pant cm|cm noun|oop .
+%gra:	1|2|AMOD 2|10|ROOT 3|5|PUNCT 4|5|AMOD 5|2|LIST 6|8|PUNCT 7|8|AMOD 8|2|LIST 9|10|PUNCT 10|2|LIST 11|2|PUNCT
+*FAT:	xxx . 31560_32460
+*CHI:	&=hums . 31560_32460
+*FAT:	blue coat , oops , uh oh .  [+ bkr] 34240_39140
+%mor:	adj|blue-S1 noun|coat cm|cm noun|oop-Plur cm|cm intj|uh intj|oh .
+%gra:	1|2|AMOD 2|7|ROOT 3|4|PUNCT 4|2|CONJ 5|6|PUNCT 6|2|DISCOURSE 7|2|DISCOURSE 8|2|PUNCT
+*FAT:	uh oh CHILDNAME . 39910_41650
+%mor:	intj|uh intj|oh intj|childname .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|3|ROOT 4|3|PUNCT
+*FAT:	red sock .  [+ bkr] 41960_43540
+%mor:	adj|red-S1 noun|sock .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	oh ue . 46230_48370
+%mor:	intj|oh intj|ue .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	blue shoes , yellow shoes , blue shoes , oops .  [+ bkr] 48510_54150
+%mor:	adj|blue-S1 noun|shoe-Plur cm|cm adj|yellow-S1 noun|shoe-Plur cm|cm adj|blue-S1 noun|shoe-Plur cm|cm noun|oop .
+%gra:	1|2|AMOD 2|10|ROOT 3|5|PUNCT 4|5|AMOD 5|2|CONJ 6|8|PUNCT 7|8|AMOD 8|2|CONJ 9|10|PUNCT 10|2|CONJ 11|2|PUNCT
+*CHI:	&=hums . 51900_53340
+*FAT:	yellow hat , green shirt , blue pants , red shoes , oops .  [+ bkr] 58090_66450
+%mor:	adj|yellow-S1 noun|hat cm|cm adj|green-S1 noun|shirt cm|cm adj|blue-S1 noun|pants-Ptan cm|cm adj|red-S1 noun|shoe-Plur cm|cm noun|oop .
+%gra:	1|2|AMOD 2|13|ROOT 3|5|PUNCT 4|5|AMOD 5|2|LIST 6|8|PUNCT 7|8|AMOD 8|2|CONJ 9|11|PUNCT 10|11|AMOD 11|2|LIST 12|13|PUNCT 13|2|LIST 14|2|PUNCT
+*CHI:	&=hums . 60380_61470
+*CHI:	dailo  [/] dailo  [/] dailo  [/] dailo &=hums . 65210_70640
+%mor:	propn|dailo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	xxx oh silly . 66510_70150
+%mor:	intj|oh adj|silly-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	the end . 70460_71430
+%mor:	det|the-Def-Art noun|end .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*FAT:	you like this one ? 71520_72760
+%mor:	pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 det|this-Def-Dem-Sing noun|one-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*CHI:	owa . 72850_74120
+%mor:	noun|owa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*FAT:	no ? 73950_74600
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	look  [/] look . 75130_78120
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	do you want to see another one CHILDNAME ? 78590_80650
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|see-Inf-S det|another-Def-Ind noun|one-Acc propn|CHILDNAME-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|5|OBJ 9|3|PUNCT
+*FAT:	how about +... 82350_83950
+%mor:	adv|how adv|about +...
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*FAT:	++ this one ? 85580_86420
+%mor:	det|this-Def-Dem-Sing noun|one ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*FAT:	you want this one ? 86620_87660
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|this-Def-Dem-Sing noun|one-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*FAT:	no ? 89520_90200
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	that ? 91480_92100
+%mor:	pron|that-Dem ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	what are you telling me ? 92730_94080
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|tell-Part-Pres-S pron|I-Prs-Acc-S1 ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|IOBJ 6|4|PUNCT
+*CHI:	nda . 94470_95810
+%mor:	noun|nda .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*FAT:	xxx . 96530_97200
+*FAT:	read another book CHILDNAME . 100740_102600
+%mor:	verb|read-Fin-Imp-S det|another-Def-Ind noun|book-Acc noun|childname-Acc .
+%gra:	1|4|ROOT 2|4|DET 3|1|OBJ 4|1|OBJ 5|1|PUNCT
+*CHI:	&=hums . 102560_103480
+*FAT:	<brown bear>  [/] brown bear what do you see ?  [+ bkr] 102920_106250
+%mor:	adj|brown-S1 noun|bear pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|2|AMOD 2|6|ROOT 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|2|ACL-RELCL 7|2|PUNCT
+*FAT:	no  [/] no don't bite on that , CHILDNAME no ? 107490_109830
+%mor:	intj|no aux|do-Fin-Imp-S~part|not verb|bite-Fin-Imp-S adp|on pron|that-Dem cm|cm intj|childname intj|no ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|ADVMOD 4|9|ROOT 5|6|CASE 6|4|OBL 7|8|PUNCT 8|4|DISCOURSE 9|4|DISCOURSE 10|4|PUNCT
+*FAT:	no  [/] no  [/] no . 111040_111970
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ndou  [/] ndou &=hums anon danon &=hums . 113200_119220
+%mor:	propn|ndou propn|anon propn|danon .
+%gra:	1|3|ROOT 2|3|COMPOUND 3|1|FLAT 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	I see a red bird looking at me .  [+ bkr] 114550_118630
+%mor:	pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 det|a-Ind-Art adj|red-S1 noun|bird-Acc verb|look-Ger-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|5|DET 4|5|AMOD 5|2|OBJ 6|5|ACL 7|8|CASE 8|6|OBL 9|2|PUNCT
+*FAT:	<red bird>  [/] red bird what do you see ?  [+ bkr] 118960_121670
+%mor:	adj|red-S1 noun|bird pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|2|AMOD 2|6|ROOT 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|2|ACL-RELCL 7|2|PUNCT
+*CHI:	&=hums . 120940_122010
+*FAT:	I see a yellow duck looking at me .  [+ bkr] 122130_125290
+%mor:	pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 det|a-Ind-Art adj|yellow-S1 noun|duck-Acc verb|look-Ger-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|5|DET 4|5|AMOD 5|2|OBJ 6|5|ACL 7|8|CASE 8|6|OBL 9|2|PUNCT
+*FAT:	<yellow duck>  [/] yellow duck what do you see ?  [+ bkr] 125350_129300
+%mor:	adj|yellow-S1 noun|duck pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|2|AMOD 2|6|ROOT 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|2|ACL-RELCL 7|2|PUNCT
+*FAT:	see a blue horse looking at me .  [+ bkr] 129780_135430
+%mor:	verb|see-Fin-Imp-S det|a-Ind-Art adj|blue-S1 noun|horse-Acc verb|look-Ger-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|7|ROOT 2|4|DET 3|4|AMOD 4|1|OBJ 5|4|ACL 6|7|CASE 7|5|OBL 8|1|PUNCT
+*CHI:	&=hums . 134590_136990
+*FAT:	&=gasps <look at the horse>  [/] look at the horse . 135690_138330
+%mor:	verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|horse .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+*FAT:	<blue horse>  [/] blue horse what do you see ?  [+ bkr] 138490_141940
+%mor:	adj|blue-S1 noun|horse pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|2|AMOD 2|6|ROOT 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|2|ACL-RELCL 7|2|PUNCT
+*FAT:	I see a +...  [+ bkr] 141970_143410
+%mor:	pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 det|a-Ind-Art +...
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+*CHI:	&=other . 142610_143730
+%xgco:	Child pushes book away .
+%xIS:	CHI-Gesture-S
+*FAT:	oh you don't want ? 143440_145100
+%mor:	intj|oh pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|want-Inf-S ?
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*CHI:	&=other . 144330_145250
+%xgco:	Child pushes book closed .
+%xIS:	CHI-Gesture-S
+*CHI:	&=hums . 144870_146430
+*FAT:	no  [/] no  [/] no ? 145250_147980
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	you wanna do something else ? 148250_149570
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|do-Fin-S pron|something-Ind-S1 adj|else-S1 ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|OBJ 5|4|AMOD 6|3|PUNCT
+*FAT:	any one will do . 153230_154810
+%mor:	det|any-Def-Ind pron|one-Prs-S3 aux|will-Fin-S verb|do-Inf-S .
+%gra:	1|2|DET 2|4|NSUBJ 3|4|AUX 4|4|ROOT 5|4|PUNCT
+*FAT:	you just wanna play with the toy ? 156510_158110
+%mor:	pron|you-Prs-Nom-S2 adv|just aux|wanna-Fin-S verb|play-Inf-S adp|with det|the-Def-Art noun|toy ?
+%gra:	1|4|NSUBJ 2|4|ADVMOD 3|4|AUX 4|7|ROOT 5|7|CASE 6|7|DET 7|4|OBL 8|4|PUNCT
+*FAT:	here  [/] here . 159730_162070
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	anything you would like to see ? 164470_166320
+%mor:	pron|anything-Ind-S1 pron|you-Prs-Nom-S2 aux|would-Fin-S verb|like-Inf-S part|to verb|see-Inf-S ?
+%gra:	1|6|ROOT 2|4|NSUBJ 3|4|AUX 4|1|ACL-RELCL 5|6|MARK 6|4|XCOMP 7|1|PUNCT
+*AAC:	No AAC use , hand in shelve , bumped device screen by mistake but heard voice output from device . 166320_167240
+%mor:	det|no-Def-Neg noun|aac noun|use cm|cm noun|hand adp|in noun|shelve cm|cm verb|bump-Part-Past-S noun|device noun|screen adp|by noun|mistake cconj|but verb|hear-Fin-Ind-Past-S3-irr noun|voice noun|output-Acc adp|from noun|device .
+%gra:	1|3|DET 2|3|COMPOUND 3|19|ROOT 4|5|PUNCT 5|11|COMPOUND 6|11|CASE 7|11|COMPOUND 8|7|PUNCT 9|11|AMOD 10|11|COMPOUND 11|3|CONJ 12|13|CASE 13|11|NMOD 14|15|CC 15|3|CONJ 16|17|COMPOUND 17|15|OBJ 18|19|CASE 19|15|OBL 20|3|PUNCT
+*FAT:	xxx do you wanna play ? 167460_169400
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|play-Inf-S ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*AAC:	xxx . 173060_174360
+%xPS:	CHI-AAC-S
+*FAT:	you want , do you want something different CHILDNAME ? 178080_180500
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|something-Ind-S1 adj|different-S1 noun|childname-Acc ?
+%gra:	1|2|NSUBJ 2|9|ROOT 3|6|PUNCT 4|6|AUX 5|6|NSUBJ 6|2|PARATAXIS 7|6|OBJ 8|9|AMOD 9|6|OBJ 10|2|PUNCT
+*AAC:	MESSAGE_xxx . 182460_183260
+%mor:	propn|MESSAGExxx .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*AAC:	BOOK . 183370_183980
+%mor:	noun|book .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*FAT:	you want a book ? 184200_185540
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|a-Ind-Art noun|book-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*AAC:	BOOK . 185150_186120
+%mor:	noun|book .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*FAT:	<this is a book>  [/] this is a book . 185830_188180
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|book .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*AAC:	SINK . 187360_188240
+%mor:	noun|sink .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*AAC:	BALLOON_ON_A_STRING . 188870_189930
+%mor:	propn|BALLOONONASTRING .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	you want this book ? 194490_195650
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|this-Def-Dem-Sing noun|book-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*FAT:	this book ? 196470_197310
+%mor:	det|this-Def-Dem-Sing noun|book ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*AAC:	PLAY . 199390_200210
+%mor:	verb|play-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*FAT:	you wanna play ? 200260_201140
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S verb|play-Inf-S ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+*FAT:	you wanna play with Daddy ? 201180_202610
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|play-Inf-S adp|with propn|Daddy ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|CASE 5|3|OBL 6|3|PUNCT
+*FAT:	huh  [/] huh ? 203270_204890
+%mor:	intj|huh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 203470_204730
+%xgco:	Child pulls hand away from dad after dad asks if the child wants to play .
+%xIS:	CHI-Gesture-S
+*FAT:	CHILDNAME . 207280_208070
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	you don't wanna play ? 209120_210260
+%mor:	pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|wanna-Inf-S verb|play-Inf-S ?
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|XCOMP 6|4|PUNCT
+*CHI:	da awoi . 223830_225060
+%mor:	propn|da x|awoi .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	how about , you want a chewy ? 228520_231580
+%mor:	adv|how adp|about cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|a-Ind-Art noun|chewy-Acc ?
+%gra:	1|5|ADVMOD 2|5|REPARANDUM 3|2|PUNCT 4|5|NSUBJ 5|7|ROOT 6|7|DET 7|5|OBJ 8|5|PUNCT
+*CHI:	da . 233760_234350
+%mor:	propn|da .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	you needed a chewy is that all ? 239840_242090
+%mor:	pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Past-S2 det|a-Ind-Art noun|chewy-Acc aux|be-Fin-Ind-Pres-S3 sconj|that det|all-Def-Tot ?
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|DET 4|2|OBJ 5|2|COP 6|7|MARK 7|2|PARATAXIS 8|2|PUNCT
+*AAC:	xxx . 240610_241380
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*AAC:	MESSAGE_xxx . 243210_244660
+%mor:	propn|MESSAGExxx .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	this is a +... 246590_248270
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art +...
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+*FAT:	++ banana . 248790_249880
+%mor:	noun|banana .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	where's the banana ? 252270_253600
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|banana ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*FAT:	banana . 256320_256990
+%mor:	noun|banana .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No AAC use , bumped device strawberry button by mistake but heard voice output from device . 256530_257540
+%mor:	det|no-Def-Neg noun|aac noun|use cm|cm verb|bump-Part-Past-S noun|device noun|strawberry noun|button adp|by noun|mistake cconj|but verb|hear-Fin-Ind-Past-S3-irr noun|voice noun|output-Acc adp|from noun|device .
+%gra:	1|8|DET 2|3|COMPOUND 3|8|COMPOUND 4|3|PUNCT 5|8|AMOD 6|8|COMPOUND 7|8|COMPOUND 8|16|ROOT 9|10|CASE 10|8|NMOD 11|12|CC 12|8|CONJ 13|14|COMPOUND 14|12|OBJ 15|16|CASE 16|12|OBL 17|8|PUNCT
+*FAT:	you know strawberries xxx . 258010_260190
+%mor:	pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 noun|strawberry-Plur-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	daowa  [/] daowa  [/] daowa  [/] daowa da . 261250_266660
+%mor:	propn|daowa propn|da .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	banana  [/] banana . 261470_264040
+%mor:	noun|banana .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	daowa  [/] daowa  [/] daowa da . 267590_271430
+%mor:	propn|daowa propn|da .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	huh ? 272170_272930
+%mor:	intj|huh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	da dao  [/] dao  [/] dao da  [/] da . 272300_276470
+%mor:	propn|da propn|dao x|da .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|FLAT 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	what are you trying to play &=laughs ? 273570_276500
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|try-Part-Pres-S part|to verb|play-Inf-S ?
+%gra:	1|6|OBJ 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|MARK 6|4|XCOMP 7|4|PUNCT
+*FAT:	you're just obsessed with the xxx . 277990_280470
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|just adj|obsessed-S1 adp|with det|the-Def-Art .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|6|ROOT 5|6|CASE 6|4|OBL 7|4|PUNCT
+*AAC:	DRINK . 279840_280790
+%mor:	noun|drink .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	you want something different CHILDNAME , you want change ? 300740_304000
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|something-Ind-S1 adj|different-S1 propn|CHILDNAME cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|change-Acc ?
+%gra:	1|2|NSUBJ 2|9|ROOT 3|2|OBJ 4|3|AMOD 5|3|APPOS 6|8|PUNCT 7|8|NSUBJ 8|2|PARATAXIS 9|8|OBJ 10|2|PUNCT
+*CHI:	daowa  [/] daowa  [/] daowa . 303360_306340
+%mor:	propn|daowa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	daowa ? 306590_307320
+%mor:	propn|daowa ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	like this ? 311750_312650
+%mor:	adp|like pron|this-Dem-S1 ?
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+@End

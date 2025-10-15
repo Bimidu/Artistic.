@@ -1,0 +1,3788 @@
+@UTF8
+@PID:	11312/c-00005945-1
+@Begin
+@Languages:	eng
+@Participants:	INV Investigator, CHI Target_Child
+@ID:	eng|Rollins|INV|||||Investigator|||
+@ID:	eng|Rollins|CHI|3;11.|male|||Target_Child|||
+@Activities:	fisher price farm
+@Types:	long, toyplay, ASD
+*INV:	0  [=! gasps] .  [+ trn]
+%spa:	$MRK:MK
+*INV:	what's in there ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adp|in adv|there ?
+%gra:	1|4|ROOT 2|4|COP 3|4|CASE 4|1|OBL 5|1|PUNCT
+%spa:	$NIA:QN
+%act:	looks into closet
+%tim:	00:30:36
+*INV:	0  [=! gasps] .  [+ trn]
+%spa:	$MRK:MK
+*INV:	there's the farm .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|farm .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+*INV:	let's get the farm .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|get-Inf-S det|the-Def-Art noun|farm-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$NIA:RP
+*INV:	let's get the farm .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|get-Inf-S det|the-Def-Art noun|farm-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	pulls farm out of closet
+*INV:	0 .  [+ trn]
+%spa:	$DHA:RP
+%gpx:	points off camera
+*INV:	let's put it over here .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|it-Prs-Acc-S3 adp|over adv|here .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|6|CASE 6|3|OBL 7|1|PUNCT
+%spa:	$NIA:RP
+*INV:	I'll help .
+%mor:	pron|I-Prs-Nom-S1~aux|will-Fin-S verb|help-Inf-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:SI
+%act:	bends down to pick up box
+%com:	camera leaves for batteries
+%tim:	00:30:57
+*INV:	there's some fence .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|some-Def-Ind noun|fence .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+*CHI:	0 .
+%act:	picks up fence from the floor and puts it on table
+*INV:	what's in the barn ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adp|in det|the-Def-Art noun|barn ?
+%gra:	1|5|ROOT 2|5|COP 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+%spa:	$DNP:QN
+%gpx:	points to the barn
+*CHI:	0 .
+%act:	looks at barn
+*INV:	let's look in the barn .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|look-Inf-S adp|in det|the-Def-Art noun|barn .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|6|CASE 5|6|DET 6|3|OBL 7|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	opens barn doors
+*INV:	0  [=! gasps] .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	xxx .
+%act:	pulls out toys from barn
+*INV:	all right !
+%mor:	det|all-Def-Tot adj|right-S1 !
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ET
+*CHI:	0 .
+%act:	puts tractor and trailer together
+*INV:	what is this ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	points to tractor
+*CHI:	yyy .
+%spa:	$YYY:YY
+%act:	trying to put together tractor and trailer
+*INV:	<is this a tractor>  [>] ?
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 det|a-Ind-Art noun|tractor ?
+%gra:	1|4|COP 2|4|NSUBJ 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:YQ
+*CHI:	<&-uh oh>  [<] .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%act:	puts tractor and trailer down
+*INV:	&-uh there's the man .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|man .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	0 .
+%act:	takes man from Clinician's hand
+*INV:	0 .
+%act:	takes the cart and tractor
+*INV:	I'll set the cart (.) on the tractor .
+%mor:	pron|I-Prs-Nom-S1~aux|will-Fin-S verb|set-Inf-S det|the-Def-Art noun|cart-Acc adp|on det|the-Def-Art noun|tractor .
+%gra:	1|3|NSUBJ 2|3|AUX 3|8|ROOT 4|5|DET 5|3|OBJ 6|8|CASE 7|8|DET 8|3|OBL 9|3|PUNCT
+%spa:	$NIA:SI
+%act:	puts cart on tractor
+%tim:	00:31:24
+*INV:	there you go .
+%mor:	pron|there-Dem-S1 pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+%act:	puts tractor on table
+*INV:	put the man in the tractor .
+%mor:	verb|put-Fin-Imp-S det|the-Def-Art noun|man-Acc adp|in det|the-Def-Art noun|tractor .
+%gra:	1|6|ROOT 2|3|DET 3|1|OBJ 4|6|CASE 5|6|DET 6|1|OBL 7|1|PUNCT
+%spa:	$NIA:RP
+%gpx:	points to tractor
+*CHI:	0 .
+%act:	grabs the man and puts him in the tractor
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+%act:	pushes the tractor
+*INV:	0  [=! gasps] .  [+ trn]
+%spa:	$MRK:MK
+*INV:	drive the tractor .
+%mor:	verb|drive-Fin-Imp-S det|the-Def-Art noun|tractor-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	pulls tractor
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+%act:	looks at tractor
+%com:	car noises
+*INV:	xxx .  [+ trn]
+%spa:	$PRO:PR
+%act:	pushes tractor
+%com:	car noises
+*CHI:	red tractor .
+%mor:	adj|red-S1 noun|tractor .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST:WD
+%act:	pulls tractor
+*INV:	yes a red tractor .
+%mor:	intj|yes det|a-Ind-Art adj|red-S1 noun|tractor .
+%gra:	1|4|DISCOURSE 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:AP
+*INV:	you're right .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:AP
+*CHI:	a red tractor .
+%mor:	det|a-Ind-Art adj|red-S1 noun|tractor .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:ST:WD
+*INV:	mhm .
+%mor:	intj|mhm .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AC
+*CHI:	<a>  [>] +//.
+%mor:	x|a +//.
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:YY
+*INV:	<can you make it>  [<] +/.
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|make-Inf-S pron|it-Prs-Acc-S3 +/.
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$NIA:RP
+%gpx:	points to barn
+*CHI:	a red tractor .
+%mor:	det|a-Ind-Art adj|red-S1 noun|tractor .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:ST:WD
+*INV:	mhm .
+%mor:	intj|mhm .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AC
+*CHI:	man is yyy .
+%mor:	noun|man aux|be-Fin-Ind-Pres-S3 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+%act:	playing with tractor
+*INV:	a man is (.) driving a tractor .
+%mor:	det|a-Ind-Art noun|man aux|be-Fin-Ind-Pres-S3 verb|drive-Part-Pres-S det|a-Ind-Art noun|tractor-Acc .
+%gra:	1|2|DET 2|4|NSUBJ 3|4|AUX 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+%spa:	$NIA:CT
+%gpx:	points to tractor
+*CHI:	0 .
+%act:	pushes tractor around
+*INV:	you're right .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:AP
+%act:	touches chi's arm
+*INV:	<can you put it in the barn>  [>] ?
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|barn ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|PUNCT
+%spa:	$NIA:RP
+%gpx:	points to barn
+*CHI:	xxx  [<] .
+%act:	flaps arms
+*CHI:	0 .
+%act:	reaches for tractor
+*INV:	drive in the barn ?
+%mor:	verb|drive-Fin-Imp-S adp|in det|the-Def-Art noun|barn ?
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	pulls out water trough
+*CHI:	xxx .
+*INV:	xxx .  [+ trn]
+%spa:	$PRO:PR
+%act:	pushes tractor to barn
+*INV:	bye  [/] bye tractor .
+%mor:	intj|bye noun|tractor .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:MK
+%act:	waves to tractor
+%tim:	00:32:02
+*CHI:	xxx .
+%act:	puts both hands in barn
+*CHI:	0 .
+%act:	closes barn doors
+*INV:	bye  [/] bye tractor .
+%mor:	intj|bye noun|tractor .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	closes barn doors on top
+*INV:	nay@o .
+%mor:	x|nay .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DHA:PR
+%com:	horse sounds
+*CHI:	0 .
+%act:	looks toward sound
+*INV:	nay@o .
+%mor:	x|nay .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+*CHI:	xxx  [>] .  [+ trn]
+%spa:	$NIA:RP:VCR
+%act:	reaches toward horse
+*INV:	<what is that>  [<] ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	points toward horse
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:PR:VO
+%act:	pulls horse toward him
+%com:	horse noises
+*INV:	what is that Chi ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Dem propn|Chi ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NSUBJ 4|1|NSUBJ 5|1|PUNCT
+%spa:	$DJF:QN
+*CHI:	0 .
+%act:	walks horse around table
+*INV:	is that a horse ?
+%mor:	aux|be-Fin-Ind-Pres-S3 sconj|that det|a-Ind-Art noun|horse ?
+%gra:	1|4|COP 2|4|MARK 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:YQ
+*CHI:	0 .
+%act:	drops horse
+*INV:	horse .
+%mor:	noun|horse .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+*CHI:	0 .
+%act:	reaches for the barn
+*CHI:	xxx .
+%act:	opens barn doors
+*INV:	nay@o .
+%mor:	x|nay .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+%act:	puts horse on table
+*CHI:	0 .
+%act:	pulls tractor out of barn
+*INV:	there's the tractor .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|tractor .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$NIA:ST
+%tim:	00:32:27
+*CHI:	xxx .
+*CHI:	yyy tractor .
+%mor:	noun|tractor .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:YY:WD
+*CHI:	whoa .
+%mor:	intj|whoa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK:WD
+%act:	pushes tractor
+*INV:	yeah it's coming out .
+%mor:	intj|yeah pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|come-Part-Pres-S adp|out .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|5|ROOT 5|4|COMPOUND-PRT 6|4|PUNCT
+%spa:	$NIA:ST
+%gpx:	points toward tractor
+*CHI:	whoa .
+%mor:	intj|whoa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK:WD
+%act:	pushes tractor
+*INV:	it's not gonna stay in .
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 part|not adv|gonna verb|stay-Inf-S adp|in .
+%gra:	1|5|NSUBJ 2|5|AUX 3|5|ADVMOD 4|5|ADVMOD 5|6|ROOT 6|5|ADVMOD 7|5|PUNCT
+%spa:	$NIA:ST
+%act:	leans over to look at chi
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+%act:	pushing tractor
+%com:	car noises
+*INV:	let's put the man in .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S det|the-Def-Art noun|man-Acc adp|in .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|3|COMPOUND-PRT 7|1|PUNCT
+%spa:	$NIA:RP
+%act:	puts man in tractor
+%tim:	00:32:44
+*INV:	put the man in and let him drive .
+%mor:	verb|put-Fin-Imp-S det|the-Def-Art noun|man-Acc adp|in cconj|and verb|let-Fin-Imp-S pron|he-Prs-Acc-S3 verb|drive-Inf-S .
+%gra:	1|8|ROOT 2|3|DET 3|1|OBJ 4|1|COMPOUND-PRT 5|6|CC 6|1|CONJ 7|6|OBJ 8|6|XCOMP 9|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	messing with the tractor
+*INV:	put him in .
+%mor:	verb|put-Fin-Imp-S pron|he-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:RP
+%gpx:	points to tractor
+*CHI:	yyy .
+%spa:	$NIA:YY:VO
+*INV:	no ?
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DCA:YQ
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+*CHI:	xxx .  [+ trn]
+%spa:	$YYY:YY:VO
+*CHI:	xxx .  [+ trn]
+%spa:	$YYY:YY:VO
+*CHI:	xxx  [>] .  [+ trn]
+%spa:	$YYY:YY:VO
+%act:	pushes tractor
+*INV:	<let's put him in>  [<] .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|he-Prs-Acc-S3 adp|in .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|1|PUNCT
+%spa:	$NIA:RP
+%act:	reaches for the barn door
+*INV:	let's close it up .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|close-Inf-S pron|it-Prs-Acc-S3 adp|up .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|1|PUNCT
+%spa:	$NIA:RP
+%act:	closes barn doors
+*INV:	bye  [/] bye tractor .
+%mor:	intj|bye noun|tractor .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$PRO:PR
+*CHI:	0 .
+%act:	tries to open barn
+*INV:	0  [=! gasps] .  [+ trn]
+%spa:	$MRK:MK
+%act:	taps horse on table
+*CHI:	0 .
+%act:	looks at horse
+*INV:	nay@o .
+%mor:	x|nay .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+*CHI:	0 .
+%act:	puts man close to horse
+*INV:	nay@o .
+%mor:	x|nay .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+*CHI:	xxx .
+*INV:	0  [=! gasps] .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:PR:VO
+%com:	horse noises
+*INV:	what is this Chi ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing propn|Chi ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%spa:	$DJFA:QN
+%gpx:	points to horse
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:PR:VO
+%act:	taps man on horse on table
+*INV:	that the horse ?
+%mor:	sconj|that det|the-Def-Art noun|horse ?
+%gra:	1|3|MARK 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:YQ
+%act:	taps horse
+*INV:	da_da_da_da@si .
+%mor:	x|dadadada .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR
+%act:	leans over to look at chi
+%com:	singing horse song
+*INV:	0 .  [+ trn]
+%spa:	$NIA:RP
+%gpx:	taps on table
+*INV:	make him go .
+%mor:	verb|make-Fin-Imp-S pron|he-Prs-Acc-S3 verb|go-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+%spa:	$NIA:RP
+*INV:	make him go .
+%mor:	verb|make-Fin-Imp-S pron|he-Prs-Acc-S3 verb|go-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	moves horse
+*INV:	make him go .
+%mor:	verb|make-Fin-Imp-S pron|he-Prs-Acc-S3 verb|go-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+%spa:	$NIA:RP
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%tim:	00:33:25
+*CHI:	xxx .  [+ trn]
+%spa:	$YYY:YY:VO
+%act:	playing with the horse and man
+*INV:	who's that ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:QN
+%gpx:	points to man
+*INV:	is that old Mcdonald ?
+%mor:	aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing adj|old-S1 propn|McDonald ?
+%gra:	1|4|COP 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:YQ
+*INV:	old Mcdonald had a farm .
+%mor:	adj|old-S1 propn|McDonald verb|have-Fin-Ind-Past-S3-irr det|a-Ind-Art noun|farm-Acc .
+%gra:	1|2|AMOD 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%spa:	$PRO:PR
+%act:	tapping man
+%com:	singing
+*CHI:	0 .
+%act:	takes man from Clinician
+*INV:	<e@l i@l>  [/] e@l i@l <o@l>  [>] .
+%mor:	noun|e pron|I-Prs-Nom-S1 aux|of-Fin-Ind-Pres-S1 .
+%gra:	1|3|ROOT 2|1|VOCATIVE 3|1|PUNCT 4|1|PUNCT
+%spa:	$PRO:PR
+%com:	singing
+*CHI:	xxx  [<] .  [+ trn]
+%spa:	$YYY:YY:VO
+%act:	puts man in trough
+*INV:	xxx .  [+ trn]
+%spa:	$MRK:MK
+*INV:	I know you +//.
+%mor:	pron|I-Prs-Nom-S1 verb|know-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 +//.
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%spa:	$YYY:YY
+*INV:	in the water +...
+%mor:	adp|in det|the-Def-Art noun|water +...
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:ST
+%act:	moves horse
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:YY:VO
+*INV:	he's gonna drink .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 part|go verb|drink-Inf-S .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:SI
+*INV:	xxx .  [+ trn]
+%spa:	$PRO:PR
+%act:	making horse drink
+%com:	drinking noises
+*CHI:	no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:RD:WD
+%act:	takes horse from Clinician
+*INV:	nope ?
+%mor:	intj|nope ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DCC:RT
+*CHI:	0 .
+%act:	puts horse head in trough
+*INV:	you gonna put him in ?
+%mor:	pron|you-Prs-Nom-S2 adv|gonna verb|put-Fin-Ind-Pres-S2 pron|he-Prs-Acc-S3 adp|in ?
+%gra:	1|3|NSUBJ 2|3|ADVMOD 3|5|ROOT 4|3|OBJ 5|3|COMPOUND-PRT 6|3|PUNCT
+%spa:	$NIA:RQ
+*CHI:	xxx .
+%act:	leaves horse in trough
+*CHI:	xxx .
+%act:	looks toward Clinician's hand
+*INV:	0 .
+%act:	shows chi pig
+*CHI:	0 .
+%act:	looks at pig
+%tim:	00:33:52
+*CHI:	yyy .
+%spa:	$NIA:YY:VO
+%act:	takes pig from Clinician
+*INV:	oink@o  [/] oink@o .
+%mor:	x|oink .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+%com:	camera swings around
+*INV:	oink@o  [/] oink@o .
+%mor:	x|oink .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+*INV:	let's take him out .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|take-Inf-S pron|he-Prs-Acc-S3 adp|out .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|1|PUNCT
+%spa:	$NIA:RP
+%com:	can't hear well due to background noise
+*INV:	&-uh oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	reaches under table
+*INV:	he fell down .
+%mor:	pron|he-Prs-Nom-S3 verb|fall-Fin-Ind-Past-S3-irr adp|down .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|COMPOUND-PRT 4|2|PUNCT
+%spa:	$DRE:ST
+*CHI:	0 .
+%act:	puts horse on table
+*INV:	he fell down .
+%mor:	pron|he-Prs-Nom-S3 verb|fall-Fin-Ind-Past-S3-irr adp|down .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|COMPOUND-PRT 4|2|PUNCT
+%spa:	$DRE:ST
+*INV:	let's get the tractor out .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|get-Inf-S det|the-Def-Art noun|tractor-Acc adp|out .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|3|COMPOUND-PRT 7|1|PUNCT
+%spa:	$NIA:RP
+%gpx:	points to barn
+*CHI:	0 .
+%act:	opens barn doors
+*INV:	tractor out .
+%mor:	noun|tractor adp|out .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$NIA:SI
+%tim:	00:34:14
+*CHI:	xxx .
+%act:	takes tractor out of barn
+%com:	can't hear well due to noise
+*CHI:	0 .
+%act:	tries to put cart on tractor
+*INV:	the cart's on the tractor ?
+%mor:	det|the-Def-Art noun|cart~aux|be-Fin-Ind-Pres-S3 adp|on det|the-Def-Art noun|tractor ?
+%gra:	1|2|DET 2|6|NSUBJ 3|6|COP 4|6|CASE 5|6|DET 6|6|ROOT 7|6|PUNCT
+%spa:	$DCA:YQ
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:YY:VO
+%act:	touching cart
+*INV:	do you need help ?
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$NIA:RQ
+%gpx:	holds out hand
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:YY:VO
+%act:	plays with tractor
+*CHI:	&-uh oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK:WD
+%gpx:	reaches for toy
+*INV:	do you need help ?
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$NIA:RQ
+%gpx:	holds out hand then points to tractor
+*CHI:	0 .
+%act:	puts man in cart
+*INV:	you're putting the man in the cart ?
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|put-Part-Pres-S det|the-Def-Art noun|man-Acc adp|in det|the-Def-Art noun|cart ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|8|ROOT 4|5|DET 5|3|OBJ 6|8|CASE 7|8|DET 8|3|OBL 9|3|PUNCT
+%spa:	$DCA:YQ
+*CHI:	xxx .
+%act:	tries to put cart on tractor
+%tim:	00:34:43
+@Activities:	Winnie the pooh
+*INV:	where's your toy box ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|toy noun|box ?
+%gra:	1|5|ROOT 2|1|COP 3|5|NMOD-POSS 4|5|COMPOUND 5|1|NSUBJ 6|1|PUNCT
+%spa:	$DHA:QN
+%tim:	00:45:08
+*INV:	look here .
+%mor:	verb|look-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$DHA:RP
+%act:	taps on box
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	toy box .
+%mor:	noun|toy noun|box .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST:WD
+*INV:	yep .
+%mor:	intj|yep .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AP
+*CHI:	<toy box>  [>] .
+%mor:	noun|toy noun|box .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST:WD
+%act:	grabs toy box
+*INV:	<there's your toy box>  [<] .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|toy noun|box .
+%gra:	1|2|EXPL 2|5|ROOT 3|5|NMOD-POSS 4|5|COMPOUND 5|2|NSUBJ 6|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	0 .
+%act:	pulls box and looks inside
+*INV:	0 .
+%act:	picks up toy box
+*CHI:	Winnie Pooh .
+%mor:	propn|Winnie propn|Pooh .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%spa:	$NIA:ST
+*INV:	yes .
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AP
+*INV:	you saw Winnie the Pooh .
+%mor:	pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Past-S2-irr propn|Winnie-Acc det|the-Def-Art propn|Pooh .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|DET 5|3|APPOS 6|2|PUNCT
+%spa:	$DRE:ST
+*INV:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:MK
+*INV:	let's open the door .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|open-Inf-S det|the-Def-Art noun|door-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$NIA:RP
+%act:	opens door
+*CHI:	0 .
+%act:	walks out of the room
+*INV:	let's go back in our room .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S adv|back adp|in pron|our-Prs-Gen-P1 noun|room .
+%gra:	1|7|ROOT 2|1|OBJ 3|1|XCOMP 4|3|ADVMOD 5|7|CASE 6|7|NMOD-POSS 7|3|OBL 8|1|PUNCT
+%spa:	$NIA:RP
+%act:	puts hand on chi's back
+*INV:	0 .
+%act:	opens door
+%tim:	00:45:39
+*INV:	let's sit at this table .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|sit-Inf-S adp|at det|this-Def-Dem-Sing noun|table .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|6|CASE 5|6|DET 6|3|OBL 7|1|PUNCT
+%spa:	$NIA:RP
+*INV:	0 .
+%act:	puts bucket and toy box on table
+*INV:	Chi , do you want your bucket or the toy box ?
+%mor:	propn|Chi cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|your-Prs-Gen-S2 noun|bucket-Acc cconj|or det|the-Def-Art noun|toy noun|box ?
+%gra:	1|5|VOCATIVE 2|1|PUNCT 3|5|AUX 4|5|NSUBJ 5|11|ROOT 6|7|NMOD-POSS 7|5|OBJ 8|11|CC 9|11|DET 10|11|COMPOUND 11|7|CONJ 12|5|PUNCT
+%spa:	$NIA:TQ
+%act:	puts hand on each choice
+*CHI:	Winnie Pooh .
+%mor:	propn|Winnie propn|Pooh .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%spa:	$NIA:ST:WD
+%act:	takes Winnie out of toy box
+*INV:	toy box .
+%mor:	noun|toy noun|box .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:TA
+%act:	takes bucket off table
+*INV:	<you want>  [>] Winnie the Pooh .
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 propn|Winnie-Acc det|the-Def-Art propn|Pooh .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|DET 5|3|APPOS 6|2|PUNCT
+%spa:	$DHS:ST
+*CHI:	xxx  [<] .
+*INV:	0 .
+%act:	takes small box out of toy box
+*INV:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AD
+*CHI:	0 .
+%act:	sits at table
+*INV:	Winnie the Pooh .
+%mor:	propn|Winnie det|the-Def-Art propn|Pooh .
+%gra:	1|3|ROOT 2|3|DET 3|1|FLAT 4|1|PUNCT
+%spa:	$NIA:ST
+*CHI:	yyy .
+%spa:	$NIA:YY:VO
+%act:	takes Tigger out of box
+*INV:	there's Tigger .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 propn|Tigger .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:YY:VO
+%act:	takes piglet out of box
+*INV:	there's piglet .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 noun|piglet .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	yyy .
+%spa:	$NIA:YY:VO
+%act:	takes eore out of box
+*INV:	Egore .
+%mor:	propn|Egore .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+%tim:	00:46:05
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+%act:	sits down
+*CHI:	xxx .  [+ trn]
+%spa:	$YYY:YY:VO
+%act:	grabs Tigger
+*CHI:	xxx .
+*INV:	<let's>  [>]  [/] let's put that back in .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|that-Dem adp|back adp|in .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|3|COMPOUND-PRT 7|1|PUNCT
+%spa:	$NIA:RP
+%act:	puts toy back in box
+*CHI:	xxx  [<] .
+*INV:	here we go .
+%mor:	adv|here pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|1|PUNCT
+%spa:	$NIA:MK
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	here's Egore .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 propn|Egore .
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:ST
+%act:	puts eyeore in front of chi
+*INV:	and Tigger .
+%mor:	cconj|and propn|Tigger .
+%gra:	1|2|CC 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST
+%act:	puts Tigger upright
+*INV:	who's this ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DHA:QN
+%act:	puts piglet on chi's arm
+*CHI:	0 .
+%act:	looks at piglet and moves piglet's head
+*INV:	pig  [>] +//.
+%mor:	noun|pig +//.
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:SA
+*CHI:	<hi>  [<] pig .
+%mor:	intj|hi noun|pig .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$PRO:PR:WD
+*INV:	hi pig .
+%mor:	intj|hi noun|pig .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CT
+%tim:	00:46:25
+*INV:	pink pig .
+%mor:	adj|pink-S1 noun|pig .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	shows chi book
+*INV:	let's read the book .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|read-Inf-S det|the-Def-Art noun|book-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$NIA:RP
+%act:	moves animals out of way
+*CHI:	0 .
+%act:	opens book
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	who's that ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to book
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:YY:VO
+*INV:	there's Pooh .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 propn|Pooh .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DHA:ST
+%act:	brings stuffed Pooh to the book
+*CHI:	there's Pooh .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 propn|Pooh .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DJF:RT:WDE
+%act:	takes Pooh from Clinician
+*INV:	yeah Winnie the Pooh .
+%mor:	intj|yeah propn|Winnie det|the-Def-Art propn|Pooh .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|DET 4|2|FLAT 5|2|PUNCT
+%spa:	$DJF:AP
+*CHI:	yyy no .
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$YYY:YY:VO
+%act:	grabs Eyeore
+*INV:	no Egore's not in that picture .
+%mor:	det|no-Def-Neg propn|Egore~aux|be-Fin-Ind-Pres-S3 part|not adp|in det|that-Def-Dem-Sing noun|picture .
+%gra:	1|2|DET 2|7|NSUBJ 3|7|COP 4|7|ADVMOD 5|7|CASE 6|7|DET 7|7|ROOT 8|7|PUNCT
+%spa:	$DJF:YY
+*CHI:	0 .
+%act:	turns the page
+*INV:	more book .
+%mor:	adj|more-Cmp-S1 noun|book .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	butterfly .
+%mor:	noun|butterfly .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to book
+*INV:	a butterfly ?
+%mor:	det|a-Ind-Art noun|butterfly ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DCC:RT
+%gpx:	points to book
+*INV:	in a +/.
+%mor:	adp|in det|a-Ind-Art +/.
+%gra:	1|2|ROOT 2|1|PUNCT 3|1|PUNCT
+%spa:	$YYY:YY
+*CHI:	yyy .
+%spa:	$DJF:YY:VO
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	a bee ?
+%mor:	det|a-Ind-Art noun|bee ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DCC:YQ
+*CHI:	yyy .
+%spa:	$DJF:PR:VO
+%com:	bee sounds
+*CHI:	bee .
+%mor:	noun|bee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST:WD
+%act:	touches Clinician's hand
+*INV:	yeah bzzzzzz@o  [>] .
+%mor:	intj|yeah x|bzzzzzz .
+%gra:	1|2|DISCOURSE 2|2|FLAT 3|2|PUNCT
+%spa:	$DJF:AP
+%act:	moves hand around .
+%com:	bee sounds
+*CHI:	xxx  [<] .  [+ trn]
+%spa:	$DJF:PR:VO
+%com:	bee sounds
+*CHI:	yyy .
+%spa:	$DHA:YY:VO
+%gpx:	points to book
+*CHI:	green frog .
+%mor:	adj|green-S1 noun|frog .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to book
+*INV:	green frog .
+%mor:	adj|green-S1 noun|frog .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CT
+*INV:	good .
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AP
+*CHI:	look there's a bird .
+%mor:	verb|look-Fin-Imp-S pron|there-Int-S1~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|bird .
+%gra:	1|5|ROOT 2|1|EXPL 3|5|COP 4|5|DET 5|1|CCOMP 6|1|PUNCT
+%spa:	$DHA:RP:WD
+%gpx:	points to other page
+*INV:	&-uh huh .
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	tweet@o  [/] tweet@o .
+%mor:	x|tweet .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:WD
+*INV:	tweet@o  [/] tweet@o .
+%mor:	x|tweet .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:RT
+%gpx:	points to bird
+%tim:	00:47:04
+*INV:	good .
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AP
+%gpx:	points to bird
+*INV:	what color ?
+%mor:	det|what-Def-Int noun|color ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:QN
+%act:	taps on bird
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	color ?
+%mor:	noun|color ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:QN
+%act:	taps on page
+*CHI:	0 .
+%act:	looks at other page
+*INV:	is that a brown bird ?
+%mor:	aux|be-Fin-Ind-Pres-S3 sconj|that det|a-Ind-Art adj|brown-S1 noun|bird ?
+%gra:	1|5|COP 2|5|MARK 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:YQ
+*CHI:	0 .
+%act:	looks at bird
+*INV:	brown bird .
+%mor:	adj|brown-S1 noun|bird .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	0 .
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	grabs Winnie the Pooh
+*CHI:	they're fishing .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|fishing-Part-Pres-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST:WD
+%gpx:	points to page
+*INV:	they're fishing .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|fishing-Part-Pres-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:CT
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:YY:VO
+*INV:	they're fishing in the water .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|fishing-Part-Pres-S adp|in det|the-Def-Art noun|water .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*INV:	you're right .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:AP
+*CHI:	&=laughs .
+%act:	turns page
+*INV:	who's fishing ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 verb|fishing-Part-Pres-S ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:QN
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%gpx:	points to book
+%tim:	00:47:25
+*INV:	what does he have ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S3 pron|he-Prs-Nom-S3 verb|have-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:QN
+*INV:	he has +...
+%mor:	pron|he-Prs-Nom-S3 aux|have-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:EC
+*CHI:	tree  [/] tree .
+%mor:	noun|tree .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to book
+*INV:	yep there's a tree .
+%mor:	intj|yep pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|tree .
+%gra:	1|3|DISCOURSE 2|3|EXPL 3|5|ROOT 4|5|DET 5|3|NSUBJ 6|3|PUNCT
+%spa:	$DJF:AP
+%gpx:	points to tree
+*INV:	he has honey .
+%mor:	pron|he-Prs-Nom-S3 verb|have-Fin-Ind-Pres-S3 noun|honey-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to the honey
+*CHI:	0 .
+%act:	closes the book
+*INV:	he's taking the honey out_of the tree .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|take-Part-Pres-S det|the-Def-Art noun|honey noun|outof-Acc det|the-Def-Art noun|tree-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|8|ROOT 4|6|DET 5|6|COMPOUND 6|3|OBJ 7|8|DET 8|3|OBJ 9|3|PUNCT
+%spa:	$DJF:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	the book is finished .
+%mor:	det|the-Def-Art noun|book aux|be-Fin-Ind-Pres-S3 verb|finish-Part-Past-S .
+%gra:	1|2|DET 2|4|NSUBJ-PASS 3|4|AUX-PASS 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:ST
+*INV:	all done .
+%mor:	det|all-Def-Tot verb|do-Part-Past-S-irr .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:DC
+%act:	takes book from chi
+*INV:	we're gonna put it in the box .
+%mor:	pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 adv|gonna verb|put-Part-Past-S-irr pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|box .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|8|ROOT 5|4|OBJ 6|8|CASE 7|8|DET 8|4|OBL 9|4|PUNCT
+%spa:	$NIA:SI
+%act:	puts book in box
+*CHI:	yyy  [>] .
+%spa:	$YYY:YY:VO
+%act:	pulls book from other side of table
+*INV:	<you ready to>  [<] +//.
+%mor:	pron|you-Prs-Nom-S2 adj|ready-S1 part|to +//.
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+%spa:	$NIA:RQ
+*INV:	another book .
+%mor:	det|another-Def-Ind noun|book .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	xxx .
+*CHI:	0 .
+%act:	opens book
+*INV:	another book .
+%mor:	det|another-Def-Ind noun|book .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+*INV:	look at Tigger .
+%mor:	verb|look-Fin-Imp-S adp|at propn|Tigger .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points repeatedly to book
+*INV:	look at Tigger .
+%mor:	verb|look-Fin-Imp-S adp|at propn|Tigger .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+%spa:	$DHA:RP
+%act:	gets animal Tigger
+*INV:	he's bouncing on the rabbit .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|bounce-Part-Pres-S adp|on det|the-Def-Art noun|rabbit .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$DJF:ST
+%act:	bounces Tigger on book
+%tim:	00:47:54
+*CHI:	0 .
+%act:	turns the page
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	xxx .
+*CHI:	yyy .
+%spa:	$DHA:YY:VO
+%gpx:	points to book
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%gpx:	points to book
+*CHI:	yyy .
+%spa:	$DJF:YY:VO
+%act:	looks at other page
+*INV:	yes .
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AP
+*INV:	he got stuck in a pumpkin .
+%mor:	pron|he-Prs-Nom-S3 aux|get-Fin-Ind-Past-S3-irr adj|stuck-S1 adp|in det|a-Ind-Art noun|pumpkin .
+%gra:	1|3|NSUBJ 2|3|COP 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$DRE:ST
+%gpx:	points to page
+*CHI:	0 .
+%act:	looks at page Clinician is pointing to
+*INV:	ow I got stuck in a +/.
+%mor:	intj|ow pron|I-Prs-Nom-S1 aux|get-Fin-Ind-Past-S1-irr verb|stick-Part-Past-S-irr adp|in det|a-Ind-Art +/.
+%gra:	1|4|DISCOURSE 2|4|NSUBJ-PASS 3|4|AUX-PASS 4|6|ROOT 5|4|OBL 6|4|PUNCT 7|4|PUNCT
+%spa:	$DRE:ST:SF
+%act:	moving Tigger around
+*CHI:	a pumpkin .
+%mor:	det|a-Ind-Art noun|pumpkin .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST:WD
+%gpx:	points to book
+*INV:	a pumpkin .
+%mor:	det|a-Ind-Art noun|pumpkin .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST:SF
+%act:	moves Tigger
+*INV:	look at all the pumpkins .
+%mor:	verb|look-Fin-Imp-S adp|at det|all-Def-Tot det|the-Def-Art noun|pumpkin-Plur .
+%gra:	1|5|ROOT 2|5|CASE 3|5|DET-PREDET 4|5|DET 5|1|OBL 6|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to book
+*INV:	there's one .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 num|one .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DHA:CN
+%gpx:	points to book
+*INV:	two .
+%mor:	num|two .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CN
+%gpx:	points to book
+*CHI:	0 .
+%act:	moves one of the pages
+*INV:	three four five .
+%mor:	num|three num|four num|five .
+%gra:	1|3|NUMMOD 2|3|NUMMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:CN
+%gpx:	points to book
+*INV:	0 .
+%act:	holds up five fingers
+*INV:	five pumpkins .
+%mor:	num|five noun|pumpkin-Plur .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%act:	collects torn out pages
+*INV:	let's put these back here .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|this-Dem-P1 adv|back adv|here .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|ADVMOD 6|3|ADVMOD 7|1|PUNCT
+%spa:	$NIA:RP
+%act:	puts pages in back of book
+%tim:	00:48:20
+*INV:	here we go .
+%mor:	adv|here pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|1|PUNCT
+%spa:	$NIA:MK
+%act:	taps on book
+*CHI:	0 .
+%act:	turns page
+*INV:	five pumpkins .
+%mor:	num|five noun|pumpkin-Plur .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	yyy .
+%spa:	$DHA:YY:VO
+%gpx:	points to book
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	yyy  [= jargon] .
+%spa:	$YYY:YY:VJ
+%gpx:	points to book
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	gets piglet
+*INV:	who's there ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 adv|there ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:QN
+%gpx:	points to book
+*INV:	there's Pooh .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 propn|Pooh .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DHA:ST
+%act:	puts Pooh on book
+*INV:	and who's +/.
+%mor:	cconj|and pron|who-Int~aux|be-Fin-Ind-Pres-S3 +/.
+%gra:	1|2|CC 2|3|ROOT 3|2|COP 4|2|PUNCT
+%spa:	$DJF:QN
+*CHI:	yyy  [>] .
+%spa:	$YYY:YY:VO
+%act:	touches Pooh
+*INV:	<who's that>  [<] ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:QN
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+*INV:	who's that ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:QN
+%act:	shows piglet
+*INV:	that +/.
+%mor:	pron|that-Dem +/.
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:YQ
+*CHI:	xxx .  [+ trn]
+%spa:	$YYY:YY:VO
+*INV:	that pig ?
+%mor:	det|that-Def-Dem-Sing noun|pig ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:YQ
+*INV:	and piglet .
+%mor:	cconj|and noun|piglet .
+%gra:	1|2|CC 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST
+%act:	puts piglet next to Pooh
+*CHI:	xxx .
+%act:	looks around
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%gpx:	points to book
+*INV:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to book
+*INV:	here they are .
+%mor:	adv|here pron|they-Prs-Nom-P3 aux|be-Fin-Ind-Pres-P3 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|COP 4|1|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to book
+*CHI:	0 .
+%act:	looks at book
+*INV:	they're going for a walk .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|go-Part-Pres-S adp|for det|a-Ind-Art noun|walk .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to book
+%tim:	00:48:47
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	turns page
+*INV:	going for a walk .
+%mor:	verb|go-Part-Pres-S adp|for det|a-Ind-Art noun|walk .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$DJF:ST
+*INV:	0 .  [+ trn]
+%spa:	$DHA:RP
+%gpx:	points to book
+*INV:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+*INV:	Tigger's going yyy  [>] .
+%mor:	propn|Tigger~part|s noun|go-Ger .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+%act:	grabs Tigger
+*CHI:	yyy  [<] .
+%spa:	$DJF:PR:VO
+*INV:	hello  [/] hello .
+%mor:	intj|hello .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:PR:SF
+%act:	moves Tigger
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to book
+*INV:	they're hiding in the tree .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|hide-Part-Pres-S adp|in det|the-Def-Art noun|tree .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to book
+*INV:	he's going hello .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|go-Part-Pres-S intj|hello .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$DJF:ST:SF
+%act:	moving Tigger
+*INV:	where are you ?
+%mor:	adv|where aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN:SF
+%act:	moving Tigger
+*INV:	hello ?
+%mor:	intj|hello ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:MK:SF
+%act:	moving Tigger
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%gpx:	points to book
+*CHI:	0 .
+%act:	looks at page
+*INV:	there's Pooh and piglet .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 propn|Pooh cconj|and noun|piglet .
+%gra:	1|2|EXPL 2|5|ROOT 3|2|NSUBJ 4|5|CC 5|3|CONJ 6|2|PUNCT
+%spa:	$DHA:ST
+%act:	points to book
+*INV:	you ready for more pictures ?
+%mor:	pron|you-Prs-Nom-S2 adj|ready-S1 adp|for adj|more-Cmp-S1 noun|picture-Plur ?
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|CASE 4|5|AMOD 5|2|OBL 6|2|PUNCT
+%spa:	$NIA:RQ
+%act:	taps on book
+*CHI:	0 .
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+%tim:	00:49:11
+*CHI:	yyy  [= jargon] .
+%spa:	$YYY:YY:VJ
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	grabs piglet and Tigger
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AC
+*INV:	say hello .
+%mor:	verb|say-Fin-Imp-S intj|hello .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%spa:	$DJF:EI
+%act:	taps on book
+*CHI:	yyy .
+%spa:	$YYY:YY:VCP
+%gpx:	points to book
+*INV:	is a kangaroo ?
+%mor:	aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|kangaroo ?
+%gra:	1|3|COP 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DCC:YQ
+%gpx:	points to picture
+*INV:	<a baby kangaroo>  [>] .
+%mor:	det|a-Ind-Art noun|baby noun|kangaroo .
+%gra:	1|3|DET 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:YQ
+*CHI:	yyy  [<] .
+%spa:	$MRK:MK:VO
+%act:	puts hands on book
+*CHI:	0 .
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%gpx:	points to book
+*CHI:	yyy .
+%spa:	$DJF:YY:VO
+*INV:	yes Sydney goes skating .
+%mor:	intj|yes propn|Sydney verb|go-Fin-Ind-Pres-S3 noun|skating-Acc-Ger .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$DJF:ST
+*CHI:	yyy .
+%spa:	$DHA:YY:VO
+%gpx:	points to other page
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:PR:VO
+%act:	flips hand onto book
+*INV:	oh no .
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:MK
+%gpx:	points to picture
+*INV:	0 .
+%gpx:	taps on picture
+*INV:	their house crashed .
+%mor:	pron|their-Prs-Gen-P3 noun|house verb|crash-Fin-Ind-Past-S3 .
+%gra:	1|2|NMOD-POSS 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$DRE:ST
+*CHI:	xxx .
+*INV:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to book
+*INV:	they're skating .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|skate-Part-Pres-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to book
+*INV:	they're gonna fall down .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 part|go verb|fall-Inf-S adp|down .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|COMPOUND-PRT 6|4|PUNCT
+%spa:	$DJF:ST
+%act:	taps on book
+*INV:	they're gonna fall down .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 part|go verb|fall-Inf-S adp|down .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|COMPOUND-PRT 6|4|PUNCT
+%spa:	$DJF:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	grabs Tigger
+*INV:	skate  [/] skate .
+%mor:	noun|skate .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:SI
+%act:	moves Tigger around
+*INV:	fall down .
+%mor:	verb|fall-Fin-Imp-S adp|down .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+%spa:	$NIA:SI
+%act:	lets go of Tigger
+%tim:	00:49:40
+*CHI:	0 .
+%act:	turns page
+*CHI:	&=laughs .
+%act:	moves hands on page
+*INV:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to book
+*INV:	Tigger is +...
+%mor:	propn|Tigger aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:EC
+*CHI:	&=laughs .
+*INV:	in the tree .
+%mor:	adp|in det|the-Def-Art noun|tree .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+%act:	leans over
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+%act:	leans close to book
+*INV:	he's in the tree .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|in det|the-Def-Art noun|tree .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|CASE 4|5|DET 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*INV:	he's on his tail .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|on pron|his-Prs-Gen-S3 noun|tail .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|CASE 4|5|NMOD-POSS 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*INV:	is that the kangaroo ?
+%mor:	aux|be-Fin-Ind-Pres-S3 sconj|that det|the-Def-Art noun|kangaroo ?
+%gra:	1|4|COP 2|4|MARK 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:YQ
+%gpx:	points to picture
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:PR:VO
+*CHI:	xxx .
+%act:	looks at other page
+*INV:	look there +//.
+%mor:	verb|look-Fin-Imp-S adv|there +//.
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$DHA:RP
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:PR:VO
+*INV:	Tigger's on the tree .
+%mor:	propn|Tigger~part|s adp|on det|the-Def-Art noun|tree .
+%gra:	1|5|ROOT 2|1|CASE 3|5|CASE 4|5|DET 5|1|NMOD 6|1|PUNCT
+%spa:	$DJF:ST
+%act:	holds Tigger up
+*INV:	saying help !
+%mor:	verb|say-Part-Pres-S noun|help-Acc !
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%spa:	$NIA:RP:SF
+%gpx:	points to picture
+*INV:	help .
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:RP:SF
+*INV:	I need help .
+%mor:	pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 noun|help-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%spa:	$NIA:RP:SF
+%act:	holding Tigger up
+*CHI:	help  [/] help I need help .
+%mor:	verb|help-Fin-Imp-S pron|I-Prs-Nom-S1 verb|need-Fin-Ind-Pres-S1 noun|help-Acc .
+%gra:	1|4|ROOT 2|3|NSUBJ 3|1|CCOMP 4|3|OBJ 5|1|PUNCT
+%spa:	$NIA:RT:WDE
+*INV:	he needs to get down the tree .
+%mor:	pron|he-Prs-Nom-S3 verb|need-Fin-Ind-Pres-S3 part|to verb|get-Inf-S adp|down det|the-Def-Art noun|tree-Acc .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|MARK 4|2|XCOMP 5|4|COMPOUND-PRT 6|7|DET 7|4|OBJ 8|2|PUNCT
+%spa:	$NIA:ST
+%act:	moves finger down the tree
+*CHI:	down tree .
+%mor:	adp|down noun|tree .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:RT:WDE
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AC
+*INV:	oh no .
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:MK
+%act:	lifts up Tigger
+%tim:	00:50:08
+*INV:	how are we going to get Tigger down ?
+%mor:	adv|how aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 verb|go-Part-Pres-S part|to verb|get-Inf-S propn|Tigger-Acc adp|down ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|8|ROOT 5|6|MARK 6|4|XCOMP 7|6|OBJ 8|6|COMPOUND-PRT 9|4|PUNCT
+%spa:	$NIA:QN
+%act:	moves fingers on picture
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%gpx:	points to picture
+*INV:	there's more pictures .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|AMOD 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to both pages
+*CHI:	0 .
+%act:	lays head on book
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+%act:	lifts page to turn
+*CHI:	xxx .
+%act:	lays head on book
+*CHI:	0 .
+%act:	lifts head
+*INV:	you looking at Pooh and piglet ?
+%mor:	pron|you-Prs-Nom-S2 verb|look-Part-Pres-S adp|at propn|Pooh cconj|and noun|piglet ?
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|CASE 4|2|OBL 5|6|CC 6|4|CONJ 7|2|PUNCT
+%spa:	$DCA:YQ
+%gpx:	points to picture
+*CHI:	xxx .
+%spa:	$DJF:YY:VO
+%act:	flips hand on book
+*INV:	they're saying oh no poor Tigger .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|say-Part-Pres-S intj|oh det|no-Def-Neg adj|poor-S1 propn|Tigger-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|7|DISCOURSE 5|7|DET 6|7|AMOD 7|3|OBJ 8|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*INV:	oh no .
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	turns page
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	&-uh <oh look>  [>] .
+%mor:	intj|oh verb|look-Fin-Imp-S .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to book
+*CHI:	xxx  [<] .
+*INV:	what happens ?
+%mor:	pron|what-Int-S1 verb|happen-Fin-Ind-Pres-S3 ?
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:QN
+%act:	lifts Tigger up
+*INV:	he goes (.) falls down .
+%mor:	pron|he-Prs-Nom-S3 verb|go-Fin-Ind-Pres-S3 verb|fall-Fin-Ind-Pres-S3 adp|down .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|XCOMP 4|3|COMPOUND-PRT 5|2|PUNCT
+%spa:	$NIA:ST
+%act:	drops Tigger
+*CHI:	xxx .
+%act:	looks at the book
+*INV:	falls down the tree .
+%mor:	verb|fall-Fin-Ind-Pres-S3 adp|down det|the-Def-Art noun|tree .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$NIA:ST
+%act:	moves finger down the tree
+%tim:	00:50:36
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%act:	moves Tigger
+*CHI:	0 .
+%act:	leans closer to the book
+*INV:	they're watching them .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|watch-Part-Pres-S pron|they-Prs-Acc-P3 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to the picture
+*CHI:	0 .
+%act:	turns the page
+*INV:	more pictures ?
+%mor:	adj|more-Cmp-S1 noun|picture-Plur ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DCA:YQ
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	look Tigger's crying .
+%mor:	verb|look-Fin-Imp-S propn|Tigger~part|s noun|cry-Acc-Ger .
+%gra:	1|4|ROOT 2|4|NMOD-POSS 3|2|CASE 4|1|OBJ 5|1|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to picture
+*CHI:	xxx .  [+ trn]
+%spa:	$YYY:YY:VO
+%act:	moves Clinician's hand away
+*INV:	poor Tigger .
+%mor:	adj|poor-S1 propn|Tigger .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CM
+%act:	grabs Tigger
+*INV:	he's sad  [>] .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|sad-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+*CHI:	yyy  [<] .
+%spa:	$YYY:YY:VO
+%act:	looking at book
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+*INV:	two kangaroos ?
+%mor:	num|two noun|kangaroo-Plur ?
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DCC:YQ
+*CHI:	0 .
+%act:	turns page
+%tim:	00:54:57
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%gpx:	points to book
+*CHI:	oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:MK:VO
+%act:	moves page
+*INV:	yeah look here .
+%mor:	intj|yeah verb|look-Fin-Imp-S adv|here .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+%spa:	$DHA:RP
+%act:	taps on picture
+*INV:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+*CHI:	0 .
+%act:	looks at page
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	grabs Tigger and Pooh
+*INV:	Tigger's on Pooh .
+%mor:	propn|Tigger~part|s adp|on propn|Pooh .
+%gra:	1|4|NMOD-POSS 2|1|CASE 3|4|CASE 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:ST
+%act:	puts Tigger on Pooh
+*CHI:	0 .
+%act:	trying to turn page
+*INV:	look he's on Pooh .
+%mor:	verb|look-Fin-Imp-S pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|on propn|Pooh .
+%gra:	1|5|ROOT 2|5|NSUBJ 3|5|COP 4|5|CASE 5|1|CCOMP 6|1|PUNCT
+%spa:	$DHA:ST
+%act:	sets Tigger and Pooh aside
+*INV:	oh no .
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	turns page
+*INV:	poor Pooh .
+%mor:	adj|poor-S1 propn|Pooh .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CM
+*CHI:	0 .
+%act:	moves page aside
+*INV:	you want +//.
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 +//.
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:YY
+%act:	takes page
+*INV:	0 .
+%act:	opens page
+*INV:	see there's some more .
+%mor:	verb|see-Fin-Imp-S pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|some-Def-Ind adj|more-Cmp-S1 .
+%gra:	1|5|ROOT 2|3|EXPL 3|1|CCOMP 4|5|DET 5|3|NSUBJ 6|1|PUNCT
+%spa:	$DHA:ST
+%act:	moves page toward chi
+*INV:	who's there ?
+%mor:	pron|who-Int~aux|be-Fin-Ind-Pres-S3 adv|there ?
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to picture
+*INV:	a frog ?
+%mor:	det|a-Ind-Art noun|frog ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:YQ
+*CHI:	a frog .
+%mor:	det|a-Ind-Art noun|frog .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT:WD
+%gpx:	points to frog
+*INV:	he's going in the +/.
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|go-Part-Pres-S adp|in det|the-Def-Art +/.
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|CASE 5|3|OBL 6|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*CHI:	yyy .
+%spa:	$DJF:YY:VO
+%act:	closes the page
+*INV:	in the rabbit .
+%mor:	adp|in det|the-Def-Art noun|rabbit .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+%tim:	00:51:26
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	puts page on table
+*CHI:	oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:MK:WD
+%gpx:	points to picture
+*CHI:	two .
+%mor:	num|two .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST:WD
+*INV:	mhm .
+%mor:	intj|mhm .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	yyy two .
+%mor:	num|two .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST:WD
+*INV:	chapter two .
+%mor:	noun|chapter num|two .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+%spa:	$DJF:CT
+*CHI:	chapter two .
+%mor:	noun|chapter num|two .
+%gra:	1|2|ROOT 2|1|DEP 3|1|PUNCT
+%spa:	$DJF:RT:WD
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+%act:	starts closing book
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+%act:	puts hand on page end to open
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AC
+*INV:	are we finished with the book ?
+%mor:	aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 verb|finish-Part-Past-S adp|with det|the-Def-Art noun|book ?
+%gra:	1|3|AUX-PASS 2|3|NSUBJ-PASS 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$NIA:YQ
+%act:	closes book
+*CHI:	xxx .
+%act:	puts hand on book
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	are we finished  [>] ?
+%mor:	aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 verb|finish-Part-Past-S ?
+%gra:	1|3|AUX-PASS 2|3|NSUBJ-PASS 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:YQ
+%gpx:	shakes hand to signal finished
+*CHI:	xxx  [<] .
+%spa:	$DHA:YY:VO
+*INV:	yes .
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	0 .  [+ trn]
+%spa:	$DHA:RP
+%act:	taps on picture
+*CHI:	0 .
+%act:	looks at picture
+*INV:	is it another elephant ?
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 det|another-Def-Ind noun|elephant ?
+%gra:	1|4|COP 2|4|NSUBJ 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:EI
+*CHI:	xxx .
+%act:	turns book over
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	xxx .
+%act:	looks at book
+%tim:	00:51:52
+*INV:	Winnie the Pooh and Tigger too .
+%mor:	propn|Winnie det|the-Def-Art propn|Pooh cconj|and propn|Tigger adv|too .
+%gra:	1|6|ROOT 2|3|DET 3|1|FLAT 4|5|CC 5|3|CONJ 6|1|ADVMOD 7|1|PUNCT
+%spa:	$TXT:TX
+%gpx:	points to each word
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	what a silly Tigger .
+%mor:	det|what-Def-Int det|a-Ind-Art adj|silly-S1 propn|Tigger .
+%gra:	1|4|DET-PREDET 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to book
+*INV:	0 .  [+ trn]
+%spa:	$DHA:RP
+%gpx:	points to book
+*INV:	what are these ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-P3 pron|this-Dem-P1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	points to picture
+*CHI:	yyy  [= jargon] .
+%spa:	$DJF:YY:VJ
+*INV:	uhuh .
+%mor:	intj|uhuh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	0 .
+%act:	grabs Tigger
+*INV:	there's Tigger .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 propn|Tigger .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	yyy .
+%spa:	$NIA:YY:VO
+%act:	takes piglet from Clinician
+*INV:	xxx .  [+ trn]
+%spa:	$MRK:MK
+*INV:	your piglet .
+%mor:	pron|your-Prs-Gen-S2 noun|piglet .
+%gra:	1|2|NMOD-POSS 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	are we finished ?
+%mor:	aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 verb|finish-Part-Past-S ?
+%gra:	1|3|AUX-PASS 2|3|NSUBJ-PASS 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:YQ
+%act:	pulls box close
+%tim:	00:52:13
+*INV:	let's put them in the box .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|they-Prs-Acc-P3 adp|in det|the-Def-Art noun|box .
+%gra:	1|7|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|1|PUNCT
+%spa:	$NIA:RP
+%act:	puts hand on animals
+*INV:	0 .
+%act:	taps on box
+*CHI:	0 .
+%act:	looking at something in corner
+*INV:	let's clean up .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|clean-Inf-S adp|up .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|COMPOUND-PRT 5|1|PUNCT
+%spa:	$NIA:RP
+%act:	puts book in box
+*CHI:	0 .
+%act:	stands up holding animals
+*INV:	<clean up>  [/] <clean up>  [>] .
+%mor:	verb|clean-Fin-Imp-S adp|up .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+%spa:	$PRO:PR
+*CHI:	<bye>  [<] .
+%mor:	intj|bye .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:MK:WD
+%act:	throws piglet in box
+*INV:	bye  [/] bye .
+%mor:	intj|bye .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:MK
+%act:	waves to piglet
+*CHI:	bye .
+%mor:	intj|bye .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:MK:WD
+%act:	puts Tigger in box
+*INV:	everybody +...
+%mor:	pron|everybody-Tot-S1 +...
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:PR
+%act:	puts Pooh in box
+*CHI:	bye .
+%mor:	intj|bye .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:MK:WD
+%act:	throws eyeore in box
+*INV:	<clean up>  [/] clean up .
+%mor:	verb|clean-Fin-Imp-S adp|up .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+%spa:	$PRO:PR
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	0 .
+%act:	picks up other box from floor
+%tim:	00:52:28
+@Activities:	toy box
+*CHI:	0 .
+%act:	puts key in door
+*INV:	open .
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:SI
+%act:	helps chi
+%tim:	00:53:32
+*INV:	0 .
+%act:	opens door
+*CHI:	0 .
+%act:	pulls door down
+*INV:	yay .
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%act:	holds out hand
+%gpx:	points to hand
+*CHI:	0 .
+%act:	plays with key in hand
+*INV:	can I have the key ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S det|the-Def-Art noun|key-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%spa:	$NIA:RP
+*CHI:	0  [>] .
+%act:	puts key in Clinician's hand
+*INV:	<let me have the key>  [<] .
+%mor:	verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 verb|have-Inf-S det|the-Def-Art noun|key-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$NIA:RP
+*INV:	thank you .
+%mor:	verb|thank-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%spa:	$MRK:MK
+%act:	puts key aside
+*CHI:	xxx .
+*INV:	0 .
+%act:	moves toy around
+*CHI:	0 .
+%act:	looks away
+*INV:	what about this door ?
+%mor:	pron|what-Int-S1 adp|about det|this-Def-Dem-Sing noun|door ?
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|NMOD 5|1|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to door
+*INV:	0 .
+%act:	taps on door
+*CHI:	0 .
+%act:	looks at door
+*INV:	what color ?
+%mor:	det|what-Def-Int noun|color ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:QN
+%act:	taps on door
+*CHI:	0 .
+%act:	looks at door
+*CHI:	black door .
+%mor:	adj|black-S1 noun|door .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:SA:WD
+%act:	touches door
+*INV:	a brown door .
+%mor:	det|a-Ind-Art adj|brown-S1 noun|door .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:CT
+%act:	gets key out of box
+*CHI:	a brown door .
+%mor:	det|a-Ind-Art adj|brown-S1 noun|door .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:RT:WD
+*INV:	look we need a brown +...
+%mor:	verb|look-Fin-Imp-S pron|we-Prs-Nom-P1 verb|need-Fin-Ind-Pres-P1 det|a-Ind-Art noun|brown-Acc +...
+%gra:	1|5|ROOT 2|3|NSUBJ 3|1|CCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$DHA:EC
+%act:	shows brown key to chi
+*CHI:	0 .
+%act:	takes key from Clinician
+*CHI:	brown key .
+%mor:	adj|brown-S1 noun|key .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:SC
+%act:	puts key in door
+*INV:	a brown key .
+%mor:	det|a-Ind-Art adj|brown-S1 noun|key .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:CT
+*INV:	good .
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AP
+%act:	helps chi open door
+%tim:	00:53:57
+*CHI:	0 .
+%act:	puts key on table
+*INV:	open .
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:SI
+*CHI:	0 .
+%act:	reaches in though the door
+*INV:	<what's in there>  [>] ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adp|in adv|there ?
+%gra:	1|4|ROOT 2|4|COP 3|4|CASE 4|1|OBL 5|1|PUNCT
+%spa:	$NIA:QN
+*CHI:	<key>  [<] .
+%mor:	noun|key .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:ST:WD
+%act:	takes key out
+*INV:	0 .
+%act:	taps key on table
+*INV:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+*CHI:	0 .
+%act:	touches open green door
+*INV:	yay .
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%act:	turns toy around
+*INV:	what color is this ?
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+%spa:	$DHA:QN
+%act:	taps on door
+*CHI:	yyy .
+%spa:	$DJF:SA:VO
+%act:	looking at door
+*INV:	orange ?
+%mor:	adj|orange-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DCC:YQ
+*CHI:	orange door .
+%mor:	adj|orange-S1 noun|door .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT:WD
+*INV:	orange door okay .
+%mor:	adj|orange-S1 noun|door intj|okay .
+%gra:	1|2|AMOD 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+%spa:	$DJF:AP
+%act:	gets orange key out of box
+*INV:	what do we need ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 verb|need-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:QN
+%act:	looks at chi
+*INV:	what do you need ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%spa:	$NIQ:QN
+*CHI:	0 .  [+ trn]
+%spa:	$NIA:RP:CR
+%gpx:	reaches for Clinician's hand
+*CHI:	&=gasp .  [+ trn]
+%spa:	$MRK:MK:VO
+*INV:	0 .
+%act:	opens hand
+*CHI:	0 .
+%act:	takes key from Clinician's hand
+*CHI:	xxx .
+%act:	puts key in door
+*INV:	orange key .
+%mor:	adj|orange-S1 noun|key .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:SA
+*CHI:	orange key .
+%mor:	adj|orange-S1 noun|key .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:RT:WD
+%act:	trying to open door
+*INV:	0 .
+%act:	helps chi
+*INV:	there we go .
+%mor:	pron|there-Int-S1 pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+%act:	turns key
+*CHI:	xxx .
+%act:	trying to open door
+*INV:	there you go .
+%mor:	pron|there-Dem-S1 pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+*INV:	Chi , open the door .
+%mor:	propn|Chi cm|cm verb|open-Fin-Imp-S det|the-Def-Art noun|door-Acc .
+%gra:	1|3|VOCATIVE 2|1|PUNCT 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%spa:	$NIA:SI
+%tim:	00:54:31
+*CHI:	0 .
+%act:	opens the door
+*INV:	I'll take the key .
+%mor:	pron|I-Prs-Nom-S1~aux|will-Fin-S verb|take-Inf-S det|the-Def-Art noun|key-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%spa:	$NIA:SI
+%act:	takes the key
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	are all the doors open ?
+%mor:	aux|be-Fin-Ind-Pres-P3 det|all-Def-Tot det|the-Def-Art noun|door-Plur adj|open-S1 ?
+%gra:	1|5|COP 2|4|DET-PREDET 3|4|DET 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+%spa:	$DHA:YQ
+%act:	turns the toy around
+*INV:	oh no .
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:MK
+%gpx:	points to a closed door
+*CHI:	0 .
+%act:	looks at closed door
+*INV:	0 .
+%act:	reaches into box for key
+*CHI:	<oh no>  [>] .
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$MRK:RT:WDE
+*INV:	<we don't have a key>  [<] .
+%mor:	pron|we-Prs-Nom-P1 aux|do-Fin-Ind-Pres-P1~part|not verb|have-Inf-S det|a-Ind-Art noun|key-Acc .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+%spa:	$NIA:ST
+%act:	plays with the door to try to open it
+*CHI:	yellow key .
+%mor:	adj|yellow-S1 noun|key .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:RP:WD
+%gpx:	points to door
+*INV:	0 .
+%act:	moves finger on door
+*INV:	there we go .
+%mor:	pron|there-Int-S1 pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+*INV:	now open it .
+%mor:	adv|now adj|open-S1 pron|it-Prs-Acc-S3 .
+%gra:	1|2|ADVMOD 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	opens door
+*INV:	open .
+%mor:	adj|open-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:SI
+*INV:	good .
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AB
+*INV:	good .
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:AB
+*INV:	where are the animals ?
+%mor:	adv|where aux|be-Fin-Ind-Pres-P3 det|the-Def-Art noun|animal-Plur ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%spa:	$DNP:QN
+%act:	puts hand in toy
+*INV:	0 .  [+ trn]
+%spa:	$DHA:ST
+%act:	taps on door
+*INV:	no animals .
+%mor:	det|no-Def-Neg noun|animal-Plur .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DNP:ST
+%act:	leans over
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	we need an animal .
+%mor:	pron|we-Prs-Nom-P1 verb|need-Fin-Ind-Pres-P1 det|a-Ind-Art noun|animal-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%spa:	$DNP:ST
+%act:	puts hand in box
+*INV:	0 .
+%act:	takes animal out of box
+*INV:	&-uh oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%act:	looks on the floor
+*CHI:	0 .
+%act:	grabs animal
+*INV:	what is this ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%act:	holds up animal
+%tim:	00:55:00
+*CHI:	0 .
+%act:	takes animal from Clinician
+*CHI:	yyy .
+%spa:	$YYY:YY:VJ
+%act:	puts animal on top of toy
+*INV:	what is it ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+*CHI:	yyy  [= jargon] .
+%spa:	$YYY:YY:VJ
+%act:	puts animal on table
+*INV:	is that a +...
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|that-Dem det|a-Ind-Art +...
+%gra:	1|2|COP 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+%spa:	$DJF:EC
+%act:	leans forward
+*INV:	bear ?
+%mor:	noun|bear ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:EI
+*INV:	grrr@o .
+%mor:	x|grrr .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+*CHI:	yyy  [= jargon] .
+%spa:	$YYY:YY:VJ
+*INV:	grrr@o .
+%mor:	x|grrr .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+%act:	shakes hands
+*CHI:	yyy  [>] .
+%spa:	$YYY:YY:VJ
+*INV:	xxx  [<] .
+*INV:	0 .
+%act:	moves toy
+*INV:	he goes in the green cage .
+%mor:	pron|he-Prs-Nom-S3 verb|go-Fin-Ind-Pres-S3 adp|in det|the-Def-Art adj|green-S1 noun|cage .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|6|CASE 4|6|DET 5|6|AMOD 6|2|OBL 7|2|PUNCT
+%spa:	$NIA:ST
+%gpx:	points to green door
+*CHI:	0 .
+%act:	touches animal to table and up again
+*INV:	and Chi put me in my cage .
+%mor:	cconj|and propn|Chi verb|put-Fin-Ind-Past-S3-irr pron|I-Prs-Acc-S1 adp|in pron|my-Prs-Gen-S1 noun|cage .
+%gra:	1|3|CC 2|3|NSUBJ 3|7|ROOT 4|3|OBJ 5|7|CASE 6|7|NMOD-POSS 7|3|OBL 8|3|PUNCT
+%spa:	$NIA:RP:SF
+*INV:	0 .
+%act:	takes animal from chi
+*INV:	put me in my cage .
+%mor:	verb|put-Fin-Imp-S pron|I-Prs-Acc-S1 adp|in pron|my-Prs-Gen-S1 noun|cage .
+%gra:	1|5|ROOT 2|1|OBJ 3|5|CASE 4|5|NMOD-POSS 5|1|OBL 6|1|PUNCT
+%spa:	$NIA:RP:SF
+%act:	waving animal in front of chi
+%tim:	00:55:24
+*CHI:	0 .
+%act:	puts animal in cage
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+%act:	closes door
+*INV:	oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%gpx:	points to cage
+*INV:	he went in the yellow cage .
+%mor:	pron|he-Prs-Nom-S3 verb|go-Fin-Ind-Past-S3-irr adp|in det|the-Def-Art adj|yellow-S1 noun|cage .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|6|CASE 4|6|DET 5|6|AMOD 6|2|OBL 7|2|PUNCT
+%spa:	$DRE:ST
+*CHI:	xxx .
+%act:	touches door
+*INV:	let's lock him up .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|lock-Inf-S pron|he-Prs-Acc-S3 adp|up .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|1|PUNCT
+%spa:	$NIA:RP
+%act:	turns lock with finger
+*CHI:	0 .
+%act:	moves finger on door
+*INV:	he's locked in his cage .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|lock-Part-Past-S adp|in pron|his-Prs-Gen-S3 noun|cage .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|6|ROOT 4|6|CASE 5|6|NMOD-POSS 6|3|OBL 7|3|PUNCT
+%spa:	$NIA:ST
+%act:	pulls on door
+*CHI:	0 .
+%act:	plays with door
+*CHI:	yyy .
+%spa:	$NIA:YY:VO
+%com:	couldn't tell if it was "locked cage" or "yellow key"
+*CHI:	0 .
+%act:	picks up key
+*CHI:	0 .
+%act:	puts key in lock
+*INV:	0 .
+%act:	helps chi
+*INV:	yep .
+%mor:	intj|yep .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+%act:	turns lock with finger
+*INV:	there you go .
+%mor:	pron|there-Dem-S1 pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+*CHI:	0 .
+%act:	tries to turn key in lock
+*INV:	need help .
+%mor:	verb|need-Fin-Imp-Pres-S2 noun|help-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%spa:	$NIA:SI
+%act:	turns lock with finger and door opens
+*INV:	there you go .
+%mor:	pron|there-Dem-S1 pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+*CHI:	xxx .
+%act:	reaches into toy
+*INV:	now it's open .
+%mor:	adv|now pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|open-S1 .
+%gra:	1|4|ADVMOD 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:ST
+*CHI:	0 .
+%act:	takes animal out and puts it back in
+*CHI:	0 .
+%act:	closes door
+*CHI:	0 .
+%act:	puts key to the lock
+*INV:	lock him up .
+%mor:	verb|lock-Fin-Imp-S pron|he-Prs-Acc-S3 adp|up .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	moves finger
+*INV:	lock him up .
+%mor:	verb|lock-Fin-Imp-S pron|he-Prs-Acc-S3 adp|up .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	helps chi by locking door with finger
+*INV:	there you go .
+%mor:	pron|there-Dem-S1 pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+%tim:	00:55:57
+*CHI:	0 .
+%act:	puts key to door
+*INV:	he's locked in the yellow cage .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|lock-Part-Past-S adp|in det|the-Def-Art adj|yellow-S1 noun|cage .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|7|ROOT 4|7|CASE 5|7|DET 6|7|AMOD 7|3|OBL 8|3|PUNCT
+%spa:	$NIA:ST
+%act:	looks in the box
+*INV:	0 .
+%act:	takes red animal out of box
+*INV:	roar@o .
+%mor:	x|roar .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+*CHI:	0 .
+%act:	looks at animal
+*CHI:	yyy  [= jargon] .
+%spa:	$YYY:YY:VJ
+%act:	puts animal in cage
+*INV:	<roar@o>  [>] .
+%mor:	x|roar .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$NIA:PR
+%act:	turns cage
+*CHI:	0  [<] .
+%act:	closes door
+*CHI:	0 .
+%act:	closes door again
+*INV:	you put the lion in his cage .
+%mor:	pron|you-Prs-Nom-S2 verb|put-Fin-Ind-Past-S2-irr det|the-Def-Art noun|lion-Acc adp|in pron|his-Prs-Gen-S3 noun|cage .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|4|DET 4|2|OBJ 5|7|CASE 6|7|NMOD-POSS 7|2|OBL 8|2|PUNCT
+%spa:	$DRE:ST
+%act:	picks up red key
+*INV:	0 .  [+ trn]
+%spa:	$DHA:RP
+%act:	taps on door
+*INV:	what color ?
+%mor:	det|what-Def-Int noun|color ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:QN
+*CHI:	red door .
+%mor:	adj|red-S1 noun|door .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:SA:WD
+%act:	touches door
+*INV:	0 .
+%act:	holds up red key
+*INV:	red door needs the (.) <red key>  [>] .
+%mor:	adj|red-S1 noun|door verb|need-Fin-Ind-Pres-S3 det|the-Def-Art adj|red-S1 noun|key-Acc .
+%gra:	1|2|AMOD 2|3|NSUBJ 3|6|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|3|PUNCT
+%spa:	$NIA:ST
+*CHI:	0  [<] .
+%act:	takes red key
+*CHI:	0 .
+%act:	puts key in lock
+*INV:	there we go .
+%mor:	pron|there-Int-S1 pron|we-Prs-Nom-P1 verb|go-Fin-Ind-Pres-P1 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+%act:	helps chi
+%tim:	00:56:21
+*INV:	we gotta put it in the lock .
+%mor:	pron|we-Prs-Nom-P1 aux|getta-Fin-S verb|put-Inf-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|lock .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|PUNCT
+%spa:	$NIA:SI
+%act:	takes key and puts it in lock
+*INV:	in the lock .
+%mor:	adp|in det|the-Def-Art noun|lock .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:SI
+*CHI:	0 .
+%act:	holds key
+*INV:	let's (.) lock the door .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|lock-Inf-S det|the-Def-Art noun|door-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$NIA:SI
+*INV:	bye  [/] bye red lion .
+%mor:	intj|bye adj|red-S1 noun|lion .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$PRO:MK
+%gpx:	waves at the door
+%tim:	00:56:32
+@Activities:	book
+*CHI:	yyy book .
+%mor:	noun|book .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:ST:WD
+%act:	opens book
+%tim:	01:42:10
+*INV:	yes there's a book .
+%mor:	intj|yes pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|book .
+%gra:	1|3|DISCOURSE 2|3|EXPL 3|5|ROOT 4|5|DET 5|3|NSUBJ 6|3|PUNCT
+%spa:	$DJF:AP
+%act:	moves book
+*INV:	let's bring it down here .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|bring-Inf-S pron|it-Prs-Acc-S3 adp|down adv|here .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|3|ADVMOD 7|1|PUNCT
+%spa:	$NIA:RP
+%act:	moves book to floor
+*INV:	let's put it down .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|it-Prs-Acc-S3 adp|down .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|1|PUNCT
+%spa:	$NIA:RP
+*INV:	right here .
+%mor:	adv|right adv|here .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:MK
+%act:	sits down on floor
+*CHI:	xxx  [>] .
+%act:	sits down on floor
+*INV:	yeah  [<] .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+*CHI:	xxx .
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	turns page
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	touches page
+*INV:	what's in here  [>] ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adp|in adv|here ?
+%gra:	1|4|ROOT 2|4|COP 3|4|CASE 4|1|OBL 5|1|PUNCT
+%spa:	$DJF:QN
+*CHI:	yyy  [<] .
+%spa:	$DJF:YY:VO
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+*INV:	what's this ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	points to book
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	0  [>] .
+%act:	lifts corner of page
+*INV:	<that a (.) clock>  [<] ?
+%mor:	sconj|that det|a-Ind-Art noun|clock ?
+%gra:	1|3|MARK 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:EI
+*CHI:	0 .
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	s@l t@l o@l p@l stop .
+%mor:	x|s noun|t x|of noun|p verb|stop-Inf-S .
+%gra:	1|5|ROOT 2|1|FLAT 3|1|GOESWITH 4|5|DISCOURSE 5|1|PARATAXIS 6|1|PUNCT
+%spa:	$PRO:PR:WD
+%gpx:	points to picture
+*INV:	no that's shop .
+%mor:	intj|no pron|that-Dem~aux|be-Fin-Ind-Pres-S3 noun|shop .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to picture
+*INV:	s@l h@l o@l p@l .
+%mor:	x|s noun|h x|of noun|p .
+%gra:	1|2|AMOD 2|4|ROOT 3|4|DISCOURSE 4|2|NMOD-UNMARKED 5|2|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to picture
+*INV:	shop .
+%mor:	noun|shop .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+%tim:	01:42:39
+*CHI:	stop .
+%mor:	verb|stop-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST:WD
+%gpx:	points to picture
+*INV:	shop .
+%mor:	noun|shop .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to picture
+*CHI:	0 .
+%act:	turns page
+*INV:	woo what's here ?
+%mor:	verb|woo-Fin-Imp-S pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adv|here ?
+%gra:	1|4|ROOT 2|1|OBJ 3|4|COP 4|1|CCOMP 5|1|PUNCT
+%spa:	$DJF:QN
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	firetruck .
+%mor:	noun|firetruck .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:SA:WD
+%gpx:	points to picture
+*CHI:	red firetruck .
+%mor:	adj|red-S1 noun|firetruck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST:WD
+*INV:	a red firetruck .
+%mor:	det|a-Ind-Art adj|red-S1 noun|firetruck .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:AP
+%gpx:	points to picture
+*INV:	look here .
+%mor:	verb|look-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to picture
+*CHI:	0 .
+%act:	looks to where Clinician is pointing
+*INV:	there's another red firetruck .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|another-Def-Ind adj|red-S1 noun|firetruck .
+%gra:	1|2|EXPL 2|5|ROOT 3|5|DET 4|5|AMOD 5|2|NSUBJ 6|2|PUNCT
+%spa:	$DJF:ST
+%gpx:	pointing to firetruck
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:YY:VO
+%act:	touches picture
+*CHI:	another red  [//] red firetruck .
+%mor:	det|another-Def-Ind adj|red-S1 noun|firetruck .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:RT:WD
+%act:	touching picture
+%tim:	01:42:59
+*INV:	&-uh huh .
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	one .
+%mor:	num|one .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CN
+%gpx:	points to another picture
+*INV:	two .
+%mor:	num|two .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CN
+%gpx:	points to firetruck
+*INV:	two red firetrucks .
+%mor:	num|two adj|red-S1 noun|firetruck-Plur .
+%gra:	1|3|NUMMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+%act:	shows two fingers and touches both firetrucks
+*CHI:	yellow truck .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to truck
+*INV:	mhm <a yellow>  [>] +/.
+%mor:	intj|mhm det|a-Ind-Art adj|yellow-S1 +/.
+%gra:	1|3|DISCOURSE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:AP
+%gpx:	points to truck
+*CHI:	<truck>  [<] .
+%mor:	noun|truck .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*INV:	yellow truck .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CT
+*CHI:	xxx  [>] .  [+ trn]
+%spa:	$PRO:PR:VO
+%com:	car noises
+*INV:	xxx  [<] .  [+ trn]
+%spa:	$PRO:PR
+%com:	car noises
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+%com:	car noises
+*INV:	what else ?
+%mor:	pron|what-Int-S1 adv|else ?
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$DHA:QN
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+*CHI:	a tractor .
+%mor:	det|a-Ind-Art noun|tractor .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to tractor
+*INV:	a tractor .
+%mor:	det|a-Ind-Art noun|tractor .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:AP
+%gpx:	points to tractor
+*INV:	what color  [>] ?
+%mor:	det|what-Def-Int noun|color ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:QN
+%gpx:	pointing to tractor
+*CHI:	<yellow tractor>  [<] .
+%mor:	adj|yellow-S1 noun|tractor .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:SA:WD
+%gpx:	points to tractor
+*INV:	a yellow tractor .
+%mor:	det|a-Ind-Art adj|yellow-S1 noun|tractor .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:AP
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%gpx:	points to another picture
+*CHI:	yyy .
+%spa:	$DHA:ST:VO
+%gpx:	points to different picture
+*INV:	a tractor ?
+%mor:	det|a-Ind-Art noun|tractor ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DCC:YQ
+%gpx:	points to picture chi is pointing to
+*INV:	a +/.
+%mor:	x|a +/.
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$YYY:YY
+*CHI:	a tractor .
+%mor:	det|a-Ind-Art noun|tractor .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT:WD
+%gpx:	pointing to picture
+*INV:	a  [//] a bulldozer .
+%mor:	det|a-Ind-Art noun|bulldozer .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CT
+%gpx:	pointing to picutre
+*CHI:	a bulldozer .
+%mor:	det|a-Ind-Art noun|bulldozer .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT:WD
+%gpx:	points to bulldozer
+*INV:	&-uh huh .
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+%tim:	01:43:27
+*INV:	what is this ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to another picture
+*CHI:	two tractor .
+%mor:	num|two noun|tractor .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:SA:WD
+*INV:	two tractor .
+%mor:	num|two noun|tractor .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT
+%gpx:	points to tractors
+*INV:	you're right .
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:AP
+%gpx:	points to first picture
+*CHI:	yellow truck .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%act:	touches page
+*INV:	mhm .
+%mor:	intj|mhm .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+%gpx:	points to other page
+*INV:	what is this ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to picture
+*CHI:	another yellow truck .
+%mor:	det|another-Def-Ind adj|yellow-S1 noun|truck .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to truck on other page
+*INV:	oh good .
+%mor:	intj|oh adj|good-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:AP
+*INV:	you found another one .
+%mor:	pron|you-Prs-Nom-S2 verb|find-Fin-Ind-Past-S2-irr det|another-Def-Ind noun|one-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%spa:	$DRE:ST
+%gpx:	points to yellow truck
+*INV:	good job .
+%mor:	adj|good-S1 noun|job .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:AB
+*INV:	one two .
+%mor:	num|one num|two .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CN
+%gpx:	points to two trucks
+*INV:	two truck .
+%mor:	num|two noun|truck .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+*INV:	<Chi what is this>  [>] ?
+%mor:	propn|Chi pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|4|ROOT 2|1|OBJ 3|4|COP 4|1|PARATAXIS 5|1|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to picture on other page
+*CHI:	0  [<] .
+%act:	looks at what Clinician is pointing to
+*CHI:	0 .
+%act:	picks up page to turn it
+*INV:	is (th)at a green bus ?
+%mor:	aux|be-Fin-Ind-Pres-S3 sconj|that det|a-Ind-Art adj|green-S1 noun|bus ?
+%gra:	1|5|COP 2|5|MARK 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:YQ
+*CHI:	0 .
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	two .
+%mor:	num|two .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to picture
+*INV:	one .
+%mor:	num|one .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to picture
+*INV:	one  [>] .
+%mor:	num|one .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to page
+*CHI:	0  [<] .
+%act:	moves Clinician's finger
+*CHI:	a tractor .
+%mor:	det|a-Ind-Art noun|tractor .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%act:	touches page
+*CHI:	yellow tractor .
+%mor:	adj|yellow-S1 noun|tractor .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST:WD
+*INV:	&-uh huh .
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+%tim:	01:43:57
+*INV:	what's this ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to another picture
+*CHI:	yyy  [=! voc] .
+%spa:	$DJF:PR:VO
+%act:	touches other page
+*INV:	yeah it's a tank .
+%mor:	intj|yeah pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|tank .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|DET 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:AP
+%gpx:	points to tank
+*INV:	there's a drum .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|drum .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to drum
+*CHI:	xxx .
+*INV:	there's a robot .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|robot .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to robot
+*CHI:	xxx  [>] .
+*INV:	robot  [<] .
+%mor:	noun|robot .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+*INV:	what's this ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	points to picture
+*INV:	is that a (.) horsie ?
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|that-Dem det|a-Ind-Art noun|horsie ?
+%gra:	1|4|COP 2|4|NSUBJ 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:YQ
+%gpx:	points to horse
+*INV:	<nay@o>  [>] .
+%mor:	x|nay .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+*CHI:	xxx  [<] .
+%act:	turns page
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+%act:	touches page
+*CHI:	0  [>] .
+%act:	turns page
+*INV:	<slide down>  [<] .
+%mor:	verb|slide-Fin-Imp-S adp|down .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to picture
+*CHI:	0 .
+%act:	turns page
+*INV:	<more more>  [/] more .
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%act:	touches page
+*CHI:	yellow truck .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to truck
+*INV:	<yellow truck>  [>] .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to truck
+*CHI:	xxx  [<] .  [+ trn]
+%spa:	$PRO:PR:VO
+*INV:	0 .  [+ trn]
+%spa:	$DHA:RP
+%act:	taps on picture
+*INV:	what's this ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to picture
+*INV:	what is that ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:QN
+%act:	rubs finger on picture
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+*INV:	is this a (.) plane ?
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 det|a-Ind-Art noun|plane ?
+%gra:	1|4|COP 2|4|NSUBJ 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:EI
+%gpx:	pointing to plane
+%tim:	01:44:30
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+*INV:	there's the plane  [>] .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|plane .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	xxx  [<] .  [+ trn]
+%spa:	$PRO:PR:VO
+*INV:	I see a helicopter .
+%mor:	pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 det|a-Ind-Art noun|helicopter-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to helicopter
+*CHI:	0 .
+%act:	looks at helicopter
+*INV:	look at the helicopter .
+%mor:	verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|helicopter .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	pointing to helicopter
+*INV:	it's a &~heli +/.
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art +/.
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to helicopter
+*CHI:	yellow truck .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to picture
+*INV:	mhm .
+%mor:	intj|mhm .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	xxx  [>] .
+*INV:	<look here the people are getting on the plane>  [<] .
+%mor:	verb|look-Fin-Imp-S adv|here det|the-Def-Art noun|person-Plur aux|be-Fin-Ind-Pres-P3 verb|get-Part-Pres-S adp|on det|the-Def-Art noun|plane .
+%gra:	1|9|ROOT 2|1|ADVMOD 3|4|DET 4|6|NSUBJ 5|6|AUX 6|1|CCOMP 7|9|CASE 8|9|DET 9|6|OBL 10|1|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to picture
+*CHI:	yellow truck .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+*INV:	yes .
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	there's another <yellow truck>  [>] .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|another-Def-Ind adj|yellow-S1 noun|truck .
+%gra:	1|2|EXPL 2|5|ROOT 3|5|DET 4|5|AMOD 5|2|NSUBJ 6|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	<another yellow truck>  [<] .
+%mor:	det|another-Def-Ind adj|yellow-S1 noun|truck .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST:WD
+%tim:	01:44:52
+*INV:	look the people are getting on the plane .
+%mor:	verb|look-Fin-Imp-S det|the-Def-Art noun|person-Plur aux|be-Fin-Ind-Pres-P3 verb|get-Part-Pres-S adp|on det|the-Def-Art noun|plane .
+%gra:	1|8|ROOT 2|3|DET 3|5|NSUBJ 4|5|AUX 5|1|CCOMP 6|8|CASE 7|8|DET 8|5|OBL 9|1|PUNCT
+%spa:	$DHA:ST
+*CHI:	0 .
+%act:	turns page
+*INV:	turn the next +//.
+%mor:	verb|turn-Fin-Imp-S det|the-Def-Art adj|next-S1 +//.
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	0 .
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	they're on a farm  [>] .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 adp|on det|a-Ind-Art noun|farm .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|CASE 4|5|DET 5|5|ROOT 6|5|PUNCT
+%spa:	$DHA:ST
+*CHI:	<yellow truck>  [<] .
+%mor:	adj|yellow-S1 noun|truck .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to book
+*INV:	there's a farm .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|farm .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%act:	touches page
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	here's a horsie .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|horsie .
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to page
+*CHI:	0 .
+%act:	leans closer to book
+*INV:	horsie .
+%mor:	propn|horsie .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*INV:	and there's some chickens .
+%mor:	cconj|and pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|some-Def-Ind noun|chicken-Plur .
+%gra:	1|3|CC 2|3|EXPL 3|5|ROOT 4|5|DET 5|3|NSUBJ 6|3|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to chickens
+*INV:	and a rooster .
+%mor:	cconj|and det|a-Ind-Art noun|rooster .
+%gra:	1|3|CC 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+%tim:	01:45:13
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	looks at what Clinician is pointing to
+*INV:	there's a tractor .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|tractor .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to tractor
+*CHI:	tractor .
+%mor:	noun|tractor .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:RT:WD
+%gpx:	points to tractor
+*INV:	&-uh huh .
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	another tractor .
+%mor:	det|another-Def-Ind noun|tractor .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to another tractor
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	two tractors .
+%mor:	num|two noun|tractor-Plur .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%act:	holds up two fingers
+*INV:	there's some (.) geese  [>] .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|some-Def-Ind noun|geese-Plur .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+*CHI:	0  [<] .
+%act:	turns page
+*CHI:	xxx .
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	0 .
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	0 .
+%act:	turns page
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%gpx:	points to picture
+*INV:	what's that ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	pointing to picture
+*CHI:	tv .
+%mor:	noun|TV .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:SA:WD
+%act:	turns page
+*INV:	tv .
+%mor:	noun|TV .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CT
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AP
+*CHI:	a white moon .
+%mor:	det|a-Ind-Art adj|white-S1 noun|moon .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to picture
+*INV:	&-uh huh .
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	a white moon .
+%mor:	det|a-Ind-Art adj|white-S1 noun|moon .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:RT
+*INV:	there's a balloon .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|balloon .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to balloon
+*CHI:	0 .
+%act:	looks at balloon
+%tim:	01:45:44
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	a red balloon .
+%mor:	det|a-Ind-Art adj|red-S1 noun|balloon .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:ST
+*INV:	and a +...
+%mor:	cconj|and det|a-Ind-Art +...
+%gra:	1|2|ROOT 2|1|PUNCT 3|1|PUNCT
+%spa:	$DJF:EC
+%gpx:	pointing to balloon
+*INV:	what color is that ?
+%mor:	det|what-Def-Int noun|color aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:QN
+%act:	looks at chi
+*CHI:	xxx .
+%act:	touches other page
+*INV:	a blue balloon .
+%mor:	det|a-Ind-Art adj|blue-S1 noun|balloon .
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:SA
+*CHI:	0 .
+%act:	turns page
+*INV:	they're at the store .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 adp|at det|the-Def-Art noun|store .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|CASE 4|5|DET 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:ST
+%act:	touches page
+*INV:	they're at the store .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 adp|at det|the-Def-Art noun|store .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|CASE 4|5|DET 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:ST
+%tim:	01:45:59
+*INV:	what do you see ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:QN
+*CHI:	0 .
+%act:	looking at page
+*INV:	what do you see ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:QN
+*INV:	there's a man .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|man .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to man
+*INV:	0 .
+%act:	looks at chi
+*INV:	that's the meat man .
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|meat noun|man .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:ST
+%gpx:	pointing to man
+*INV:	meat man .
+%mor:	noun|meat noun|man .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to man
+*CHI:	meat man .
+%mor:	noun|meat noun|man .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT:WCP
+%gpx:	points to man
+*INV:	&-uh huh .
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	there's the woman .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|woman .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to woman
+*CHI:	there's woman .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 noun|woman .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DJF:RT:WCP
+%gpx:	points to woman
+*INV:	she's getting tomatoes .
+%mor:	pron|she-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|get-Part-Pres-S noun|tomato-Plur-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	pointing to tomatoes
+*CHI:	tomato .
+%mor:	noun|tomato .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:RT:ECP
+%gpx:	points to picture
+*INV:	tomatoes .
+%mor:	noun|tomato-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:CT
+*CHI:	0 .
+%act:	leans closer to book
+*INV:	look at that woman .
+%mor:	verb|look-Fin-Imp-S adp|at det|that-Def-Dem-Sing noun|woman .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to another woman
+*INV:	she's +/.
+%mor:	pron|she-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 +/.
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:YY
+*CHI:	look at that woman .
+%mor:	verb|look-Fin-Imp-S adp|at det|that-Def-Dem-Sing noun|woman .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$DJF:RT:ECP
+%gpx:	points to woman
+*INV:	yeah she's reaching for the bread .
+%mor:	intj|yeah pron|she-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|reach-Part-Pres-S adp|for det|the-Def-Art noun|bread .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|7|ROOT 5|7|CASE 6|7|DET 7|4|OBL 8|4|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*CHI:	reaching <bread>  [>] .
+%mor:	verb|reach-Part-Pres-S noun|bread-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%spa:	$DJF:RT:ECP
+%gpx:	points to picture
+*INV:	<she's getting>  [<] the bread .
+%mor:	pron|she-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|get-Part-Pres-S det|the-Def-Art noun|bread-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%spa:	$DJF:ST
+*INV:	yes .
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AP
+%tim:	01:46:28
+*INV:	that man already has her money .
+%mor:	sconj|that noun|man adv|already verb|have-Fin-Ind-Pres-S3 pron|her-Prs-Gen-S3 noun|money-Acc .
+%gra:	1|4|MARK 2|4|NSUBJ 3|4|ADVMOD 4|6|ROOT 5|6|NMOD-POSS 6|4|OBJ 7|4|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to another picture on page
+*INV:	you wanna get more pictures  [>] ?
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|get-Inf-S adj|more-Cmp-S1 noun|picture-Plur-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+%spa:	$NIA:RQ
+%gpx:	moves hands to signal turn page
+*CHI:	xxx  [<] .
+*INV:	0 .
+%act:	lifts page
+*CHI:	more .
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:RT:WDE
+%act:	turns page
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	0 .
+%act:	puts hands on page to turn it
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*CHI:	0 .
+%act:	turns page
+*INV:	lookee here .
+%mor:	verb|lookee-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to picture
+*CHI:	<two two>  [/] two .
+%mor:	num|two .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to different picture
+*INV:	a one .
+%mor:	det|a-Ind-Art noun|one .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to same picture as chi
+*INV:	that is a one .
+%mor:	pron|that-Dem aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|one .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:CT
+%gpx:	pointing to picture
+*CHI:	0 .
+%act:	leans close to book
+*INV:	he has a race+car .
+%mor:	pron|he-Prs-Nom-S3 verb|have-Fin-Ind-Pres-S3 det|a-Ind-Art noun|racecar-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	race+car .
+%mor:	noun|racecar .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:RT:WCP
+%gpx:	points to picture
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	look  [>] .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to picture
+*CHI:	0  [<] .
+%act:	starts to turn page
+*CHI:	0 .
+%act:	looks at what Clinician is pointing
+*INV:	he's a  [//] an astronaut .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|astronaut .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*CHI:	0 .
+%act:	turns page
+%tim:	01:46:57
+*CHI:	xxx .
+%act:	moves arms and leans forward
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%gpx:	points to picture
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+*INV:	look he's taking a bath .
+%mor:	verb|look-Fin-Imp-S pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|take-Part-Pres-S det|a-Ind-Art noun|bath-Acc .
+%gra:	1|6|ROOT 2|4|NSUBJ 3|4|AUX 4|1|CCOMP 5|6|DET 6|4|OBJ 7|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	pointing to picture
+*CHI:	0 .
+%act:	looks at picture
+*INV:	he's taking a +//.
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|take-Part-Pres-S det|a-Ind-Art +//.
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|PUNCT 5|3|PUNCT
+%spa:	$DJF:ST
+%act:	taps on picture
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%gpx:	points to different picture
+*INV:	he's chopping wood .
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|chop-Part-Pres-S noun|wood-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*INV:	oh look she +//.
+%mor:	intj|oh verb|look-Fin-Imp-S pron|she-Prs-Nom-S3 +//.
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%spa:	$DHA:RP
+%act:	puts hands on picture
+*INV:	what's she doing ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|she-Prs-Nom-S3 verb|do-Part-Pres-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:QN
+*CHI:	0 .
+%act:	leans toward book to turn page
+*INV:	is she brushing her teeth ?
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|she-Prs-Nom-S3 verb|brush-Part-Pres-S pron|her-Prs-Gen-S3 noun|tooth-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|3|PUNCT
+%spa:	$DJF:YQ
+*CHI:	0 .
+%act:	turns page
+*INV:	brush your teeth tch@o  [/] tch@o .
+%mor:	verb|brush-Fin-Imp-S pron|your-Prs-Gen-S2 noun|tooth-Plur x|tch .
+%gra:	1|4|ROOT 2|4|NMOD-POSS 3|4|COMPOUND 4|1|FLAT 5|1|PUNCT
+%spa:	$PRO:PR
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%gpx:	points to picture
+*INV:	what is +/.
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 +/.
+%gra:	1|2|ROOT 2|1|COP 3|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	points with both hands to picture
+*CHI:	yyy .
+%spa:	$DHA:YY:VO
+%gpx:	points to picture in book
+*INV:	that's a canon .
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|Canon .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to picture chi is pointing to
+%tim:	01:47:21
+*INV:	0 .  [+ trn]
+%spa:	$DHA:RP
+%act:	taps on different picture
+*INV:	look here .
+%mor:	verb|look-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$DHA:RP
+%act:	taps on picture
+*INV:	look at the (.) dinosaur .
+%mor:	verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|dinosaur .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$DJF:RP
+%act:	leans close to chi
+*CHI:	roar@o .
+%mor:	x|roar .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:VO
+*INV:	roar@o .
+%mor:	x|roar .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+%act:	moving finger on picture
+*CHI:	<roar@o roar@o roar@o>  [/] roar@o .
+%mor:	x|roar .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:VO
+*INV:	that's a purple dinosaur .
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|purple-S1 noun|dinosaur .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:ST
+%gpx:	pointing to book
+*CHI:	purple dinosaur .
+%mor:	adj|purple-S1 noun|dinosaur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT:WCP
+%gpx:	points to book
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	look at the dragon .
+%mor:	verb|look-Fin-Imp-S adp|at det|the-Def-Art noun|dragon .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to another picture
+*CHI:	0 .
+%act:	looks where Clinician is pointing
+*CHI:	yyy  [>] .
+%spa:	$DJF:YY:VO
+%gpx:	points to same picture
+*INV:	&=gasp  [<] .  [+ trn]
+%spa:	$MRK:MK
+*INV:	oh .
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+*CHI:	<roar@o>  [>] .
+%mor:	x|roar .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:VO
+*INV:	<he shoots out fire>  [<] .
+%mor:	pron|he-Prs-Nom-S3 verb|shoot-Fin-Ind-Pres-S3 adp|out noun|fire-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|COMPOUND-PRT 4|2|OBJ 5|2|PUNCT
+%spa:	$DJF:ST
+%act:	moves hands from face out
+*CHI:	0 .
+%act:	turns page
+*CHI:	yyy .
+%spa:	$YYY:YY:VO
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	up tweet@o  [/] tweet@o .
+%mor:	adp|up x|tweet .
+%gra:	1|2|CASE 2|2|FLAT 3|2|PUNCT
+%spa:	$DHA:PR
+%gpx:	points to picture
+*INV:	<tweet@o  [/] tweet@o>  [>] .
+%mor:	x|tweet .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+*CHI:	<tweet@o  [/] tweet@o>  [<] .
+%mor:	x|tweet .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:WD
+%gpx:	points to picture
+*CHI:	tweet@o  [/] tweet@o .
+%mor:	x|tweet .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:WD
+*INV:	what are those ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-P3 pron|that-Dem-P1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+%gpx:	pointing to picture
+%tim:	01:47:47
+*CHI:	a bird .
+%mor:	det|a-Ind-Art noun|bird .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:SA:WD
+%gpx:	points to picture
+*INV:	a birds .
+%mor:	det|a-Ind-Art noun|bird-Plur .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:AP
+*INV:	<how many birds>  [>] ?
+%mor:	adv|how adj|many-S1 noun|bird-Plur ?
+%gra:	1|2|ADVMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:QN
+%gpx:	points to birds
+*CHI:	<<tweet@o tweet@o>  [/] tweet@o>  [<] .
+%mor:	x|tweet .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:WD
+*INV:	one two .
+%mor:	num|one num|two .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CN
+%gpx:	points to picture
+*CHI:	xxx .  [+ trn]
+%spa:	$DHA:PR:VO
+%act:	touches other page
+*INV:	oh lightning .
+%mor:	intj|oh noun|lightning-Ger .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%act:	touches other page
+*INV:	what's this ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to different picture
+*CHI:	0 .
+%act:	looks where Clinician is pointing
+*INV:	ruf@o  [/] ruf@o .
+%mor:	x|ruf .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+*CHI:	0 .
+%act:	moves Clinician's hand
+*INV:	what is that ?
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DJF:QN
+*CHI:	xxx .  [+ trn]
+%spa:	$DHA:PR:VO
+%act:	slams hand down on book
+*INV:	oh you're still looking at the lightening .
+%mor:	intj|oh pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|still verb|look-Part-Pres-S adp|at det|the-Def-Art noun|lightening-Ger .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|8|ROOT 6|8|CASE 7|8|DET 8|5|OBL 9|5|PUNCT
+%spa:	$NIA:ST
+%gpx:	points to lightning
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:PR:VO
+%gpx:	points to page
+*INV:	yes .
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	it's coming <out_of the sky>  [>] .
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|come-Part-Pres-S adp|outof det|the-Def-Art noun|sky .
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$DJF:ST
+%gpx:	pointing to book
+*CHI:	xxx  [<] .  [+ trn]
+%spa:	$DJF:PR:VO
+*INV:	<look it>  [/] look it  [>] .
+%mor:	verb|look-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	pointing to different picture
+*CHI:	xxx  [<] .  [+ trn]
+%spa:	$DJF:PR:VO
+%act:	touches book
+%tim:	01:48:11
+*INV:	look here .
+%mor:	verb|look-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%spa:	$DHA:RP
+%gpx:	points to another picture
+*CHI:	0 .
+%act:	looks to where Clinician is pointing
+*INV:	there's the doggie .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|doggie .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DJF:ST
+*INV:	ruf@o  [/] ruf@o .
+%mor:	x|ruf .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+%gpx:	pointing to picture
+*CHI:	0 .
+%act:	moves Clinician's hand from page
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:PR:VO
+%act:	looking at other page again
+*INV:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	you like that lightning .
+%mor:	pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 det|that-Def-Dem-Sing noun|lightning-Acc-Ger .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%spa:	$DHS:ST
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%gpx:	points to another picture
+*INV:	what's this ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%spa:	$DHA:QN
+*CHI:	0 .
+%act:	moves Clinician's arm
+*INV:	xxx .  [+ trn]
+%spa:	$MRK:MK
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:PR:VO
+*INV:	lightning .
+%mor:	noun|lightning-Ger .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to picture
+*CHI:	0 .
+%act:	looks at Clinician
+*INV:	there's a kitty cat .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|kitty noun|cat .
+%gra:	1|2|EXPL 2|5|ROOT 3|5|DET 4|5|COMPOUND 5|2|NSUBJ 6|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to picture
+*CHI:	0 .
+%act:	looks down at book
+*CHI:	0 .
+%act:	moves Clinician's arm
+*CHI:	xxx .  [+ trn]
+%spa:	$DJF:PR:VO
+%act:	slams hand down on book
+%tim:	01:48:30
+*INV:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:MK
+*INV:	more pictures .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	ready for more ?
+%mor:	adj|ready-S1 adp|for adj|more-Cmp-S1 ?
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+%spa:	$NIA:RQ
+%act:	holds page up
+*CHI:	lightning .
+%mor:	noun|lightning-Ger .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DHA:ST:WD
+%gpx:	points to picture
+%act:	turns page
+*INV:	yep .
+%mor:	intj|yep .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*INV:	bye lightning .
+%mor:	intj|bye noun|lightning-Ger .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$PRO:PR
+%gpx:	waves goodbye
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	they're playing baseball  [>] .
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 verb|play-Part-Pres-S noun|baseball-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to picture
+*CHI:	yyy  [<] .
+%spa:	$DHA:YY:VO
+%gpx:	points to picture
+*INV:	0 .
+%gpx:	points to different picture
+*CHI:	xxx .
+*INV:	what's <he on>  [>] ?
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|he-Prs-Nom-S3 adp|on ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NSUBJ 4|1|ACL-RELCL 5|1|PUNCT
+%spa:	$DHA:QN
+*CHI:	xxx  [<] .
+%act:	looking at book
+*INV:	is he on a motorcycle ?
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|he-Prs-Nom-S3 adp|on det|a-Ind-Art noun|motorcycle ?
+%gra:	1|5|COP 2|5|NSUBJ 3|5|CASE 4|5|DET 5|5|ROOT 6|5|PUNCT
+%spa:	$DJF:YQ
+*CHI:	vroom@o  [/] vroom@o .
+%mor:	x|vroom .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR:WD
+%gpx:	points to picture
+*INV:	vroom@o .
+%mor:	x|vroom .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$DJF:PR
+*INV:	I think it's a red motorcycle .
+%mor:	pron|I-Prs-Nom-S1 verb|think-Fin-Ind-Pres-S1 pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|red-S1 noun|motorcycle .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|7|NSUBJ 4|7|COP 5|7|DET 6|7|AMOD 7|2|CCOMP 8|2|PUNCT
+%spa:	$DJF:ST
+*INV:	and who's that ?
+%mor:	cconj|and pron|who-Int~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|4|CC 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+%spa:	$DHA:QN
+%gpx:	points to another picture
+%tim:	01:48:52
+*CHI:	0 .
+%gpx:	points to different picture
+*INV:	he's on a +...
+%mor:	pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|on det|a-Ind-Art +...
+%gra:	1|3|NSUBJ 2|3|COP 3|4|ROOT 4|3|PUNCT 5|3|PUNCT
+%spa:	$DJF:EC
+*CHI:	two  [/] two .
+%mor:	num|two .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST:WD
+%gpx:	pointing to picture
+*INV:	a one race+car .
+%mor:	det|a-Ind-Art num|one noun|racecar .
+%gra:	1|3|DET 2|3|NUMMOD 3|3|ROOT 4|3|PUNCT
+%spa:	$DJF:CT
+%gpx:	points to picture
+*CHI:	0 .
+%act:	turns page
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	there's a bear  [>] .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|bear .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points in book
+*CHI:	two  [/] two three four five six seven eight nine ten .
+%mor:	num|two num|three num|four num|five num|six num|seven num|eight num|nine num|ten .
+%gra:	1|2|COMPOUND 2|3|COMPOUND 3|5|COMPOUND 4|5|COMPOUND 5|7|COMPOUND 6|7|COMPOUND 7|8|COMPOUND 8|9|NUMMOD 9|9|ROOT 10|9|PUNCT
+%spa:	$DHA:CN:WD
+%gpx:	points in book
+*INV:	eleven .
+%mor:	num|eleven .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:EI
+*CHI:	eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty .
+%mor:	num|eleven num|twelve num|thirteen num|fourteen num|fifteen num|sixteen num|seventeen num|eighteen num|nineteen num|twenty .
+%gra:	1|10|NUMMOD 2|3|COMPOUND 3|10|NUMMOD 4|10|NUMMOD 5|6|COMPOUND 6|8|COMPOUND 7|8|COMPOUND 8|10|NUMMOD 9|10|NUMMOD 10|10|ROOT 11|10|PUNCT
+%spa:	$DJF:CN
+%gpx:	points in book
+*INV:	twenty .
+%mor:	num|twenty .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:RT
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%gpx:	points in book
+*INV:	there's a train .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|train .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|DET 4|2|NSUBJ 5|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	there's train .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 noun|train .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DJF:RT:ECP
+%gpx:	points in book
+*INV:	one train .
+%mor:	num|one noun|train .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%gpx:	pointing in book
+%tim:	01:49:20
+*INV:	one train .
+%mor:	num|one noun|train .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%gpx:	points in book
+*INV:	let's count the cars .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|count-Inf-S det|the-Def-Art noun|car-Plur-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+%spa:	$DJF:RP
+*INV:	one two .
+%mor:	num|one num|two .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:CN
+%gpx:	points in book
+*INV:	two cars .
+%mor:	num|two noun|car-Plur .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+*CHI:	a car .
+%mor:	det|a-Ind-Art noun|car .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST:WD
+%gpx:	points in book
+*CHI:	a car .
+%mor:	det|a-Ind-Art noun|car .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST:WD
+%gpx:	points in book
+*INV:	uhuh .
+%mor:	intj|uhuh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	0  [>] .
+%act:	turns page
+*INV:	<more pictures>  [>] .
+%mor:	adj|more-Cmp-S1 noun|picture-Plur .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:ST
+*INV:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:MK
+*CHI:	xxx .
+%act:	closes book
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+*INV:	we're finished .
+%mor:	pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 verb|finish-Part-Past-S .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:DC
+*CHI:	<a car a car a car a car a car>  [/] a car .
+%mor:	det|a-Ind-Art noun|car .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%spa:	$DHA:ST:WD
+%act:	leaning over book
+*INV:	&=gasp .  [+ trn]
+%spa:	$MRK:MK
+%tim:	01:49:49
+*INV:	lots_of cars .
+%mor:	noun|lotsof noun|car-Plur .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%act:	moves hand over book
+*CHI:	lots cars .
+%mor:	noun|lot-Plur noun|car-Plur .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:RT:WDE
+*INV:	yeah  [>] .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:AC
+*CHI:	0  [<] .
+%act:	puts hand on book
+*INV:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:MK
+%act:	taps on book
+*INV:	let's (.) go bye  [/] bye book .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S intj|bye noun|book-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DISCOURSE 5|3|OBJ 6|1|PUNCT
+%spa:	$NIA:RP
+%act:	taps on book
+*CHI:	xxx .
+%act:	starts to stand up
+*INV:	let's +//.
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 +//.
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%spa:	$NIA:RP
+*INV:	we're finished with the book .
+%mor:	pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 verb|finish-Part-Past-S adp|with det|the-Def-Art noun|book .
+%gra:	1|3|NSUBJ-PASS 2|3|AUX-PASS 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+%spa:	$NIA:DC
+%act:	gets up
+*INV:	<<clean up>  [/] clean up>  [>] .
+%mor:	verb|clean-Fin-Imp-S adp|up .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+%spa:	$PRO:PR
+*CHI:	0  [<] .
+%act:	takes book to table
+*INV:	0 .
+%act:	unzips bag
+*INV:	everybody .
+%mor:	pron|everybody-Tot-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:PR
+*CHI:	xxx .
+%act:	puts book on table
+*INV:	<clean up>  [/] clean up .
+%mor:	verb|clean-Fin-Imp-S adp|up .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+%spa:	$PRO:PR
+%act:	puts book in bag
+%tim:	01:50:10
+@End

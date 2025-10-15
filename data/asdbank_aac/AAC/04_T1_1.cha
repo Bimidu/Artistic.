@@ -1,0 +1,350 @@
+@UTF8
+@PID:	11312/a-00082273-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, CHI Target_Child, MOT Mother, FAT Father
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|6;10.|male|||Target_Child|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|FAT|||||Father|||
+@Media:	04_T1_1, video
+*COD:	C . 1_309480
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No CHI-ACC observed . 1_1000
+%mor:	det|no-Def-Neg noun|chiacc verb|observe-Fin-Ind-Past-S3 .
+%gra:	1|2|DET 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	uh a . 1800_3000
+%mor:	intj|uh det|a-Ind-Art .
+%gra:	1|2|ROOT 2|1|PUNCT 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	<you wanna help me>  [/] you wanna help me ? 5200_7940
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|help-Inf-S pron|I-Prs-Acc-S1 ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	huh ? 8250_8710
+%mor:	intj|huh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<take some>  [/] take some take  [/] take  [/] take  [/] take  [/] take . 8820_12350
+%mor:	verb|take-Fin-Imp-S det|some-Def-Ind noun|take-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*MOT:	take , here . 12700_14700
+%mor:	verb|take-Fin-Imp-S cm|cm adv|here .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|ADVMOD 4|1|PUNCT
+*MOT:	xxx take . 15350_16810
+%mor:	verb|take-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	take more . 17040_18010
+%mor:	verb|take-Fin-Imp-S adj|more-Cmp-S1 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	take more CHILDNAME , take more here . 18740_21270
+%mor:	verb|take-Fin-Imp-S adj|more-Cmp-S1 propn|CHILDNAME-Acc cm|cm verb|take-Fin-Imp-S2 adj|more-Cmp-S1 adv|here .
+%gra:	1|7|ROOT 2|3|AMOD 3|1|OBJ 4|5|PUNCT 5|1|PARATAXIS 6|7|ADVMOD 7|5|ADVMOD 8|1|PUNCT
+*MOT:	put it on the table . 21320_22360
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|on det|the-Def-Art noun|table .
+%gra:	1|5|ROOT 2|1|OBJ 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+*CHI:	&=hums . 22280_24540
+*MOT:	you wanna put it on the table , huh ? 22430_24400
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|put-Fin-Ind-Pres-S pron|it-Prs-Acc-S3 adp|on det|the-Def-Art noun|table cm|cm intj|huh ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|9|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|9|PUNCT 9|3|PARATAXIS 10|3|PUNCT
+*MOT:	you wanna put it on the table ? 24440_26070
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|put-Fin-Ind-Past-S2-irr pron|it-Prs-Acc-S3 adp|on det|the-Def-Art noun|table ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|PUNCT
+*MOT:	put here . 26120_27010
+%mor:	verb|put-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*FAT:	www . 27090_30210
+%xpar:	parent 2 talking to parent 1.
+*MOT:	wait , here okay let's start . 30150_32210
+%mor:	verb|wait-Fin-Imp-S cm|cm adv|here intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|start-Inf-S .
+%gra:	1|7|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|5|DISCOURSE 5|1|PARATAXIS 6|5|OBJ 7|5|XCOMP 8|1|PUNCT
+*MOT:	xxx start with t@l . 32310_35070
+%mor:	verb|start-Fin-Imp-S adp|with noun|t .
+%gra:	1|3|ROOT 2|1|OBL 3|1|OBL 4|1|PUNCT
+*MOT:	give me this . 35870_36820
+%mor:	verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 pron|this-Dem-S1 .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|OBJ 4|1|PUNCT
+*MOT:	thank+you . 36920_37490
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	start with t@l , t@l is for tree . 37760_40250
+%mor:	verb|start-Fin-Imp-S adp|with noun|t cm|cm noun|t aux|be-Fin-Ind-Pres-S3 adp|for noun|tree .
+%gra:	1|8|ROOT 2|3|CASE 3|1|OBL 4|8|PUNCT 5|8|NSUBJ 6|8|COP 7|8|CASE 8|1|PARATAXIS 9|1|PUNCT
+*FAT:	good looking . 43840_44990
+%mor:	adj|good-S1 noun|look-Ger .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	hey . 47140_47810
+%mor:	intj|hey .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you wanna put it on the board ? 48680_50120
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|put-Fin-Ind-Past-S2-irr pron|it-Prs-Acc-S3 adp|on det|the-Def-Art noun|board ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|PUNCT
+*MOT:	where is it , xxx +/. 50230_51430
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 cm|cm +/.
+%gra:	1|4|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT 5|1|PUNCT
+*FAT:	oh good+job CHILDNAME . 51250_53190
+%mor:	intj|oh propn|goodjob propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|FLAT 4|2|PUNCT
+*MOT:	okay next one . 53700_54770
+%mor:	intj|okay adj|next-S1 noun|one .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	s@l . 55750_56460
+%mor:	x|s .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	s@l is for swan . 56570_58110
+%mor:	x|s aux|be-Fin-Ind-Pres-S3 adp|for propn|swan .
+%gra:	1|4|AMOD 2|4|COP 3|4|CASE 4|4|ROOT 5|4|PUNCT
+*MOT:	the bird . 59240_60190
+%mor:	det|the-Def-Art noun|bird .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	that's it bravo  [/] bravo . 60380_62960
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 noun|bravo .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*FAT:	good+job CHILDNAME . 62670_64030
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	high+five  [/] high+five ? 64740_66720
+%mor:	noun|highfive ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	r@l , r@l is for rooster . 68980_71420
+%mor:	x|be cm|cm x|be aux|be-Fin-Ind-Pres-S3 adp|for noun|rooster .
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|COP 5|6|CASE 6|6|ROOT 7|6|PUNCT
+*MOT:	doodoodoo@o . 72430_73850
+%mor:	x|doodoodoo .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xPCO:	parent imitates rooster crow .
+*MOT:	excellent , bravo . 74590_76560
+%mor:	adj|excellent-S1 cm|cm noun|bravo .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+*MOT:	next . 76900_77680
+%mor:	adv|next .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	v@l . 78600_79370
+%mor:	num|v .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	v@l is for , huh ? 80360_81620
+%mor:	noun|v aux|be-Fin-Ind-Pres-S3 adp|for cm|cm intj|huh ?
+%gra:	1|5|NSUBJ 2|5|COP 3|5|CASE 4|3|PUNCT 5|5|ROOT 6|5|PUNCT
+*MOT:	not v@l . 81680_82530
+%mor:	part|not x|v .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	u@l . 83370_84120
+%mor:	propn|you .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	u@l is for umbrella . 84210_85670
+%mor:	pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S3 adp|for noun|umbrella .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|CASE 4|4|ROOT 5|4|PUNCT
+*CHI:	&=hums . 85540_86570
+*MOT:	grab it , aye that's the umbrella yes . 86660_90250
+%mor:	verb|grab-Fin-Imp-S pron|it-Prs-Acc-S3 cm|cm intj|aye pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|umbrella intj|yes .
+%gra:	1|9|ROOT 2|1|OBJ 3|8|PUNCT 4|8|DISCOURSE 5|8|NSUBJ 6|8|COP 7|8|DET 8|1|PARATAXIS 9|1|DISCOURSE 10|1|PUNCT
+*FAT:	good+job mommy . 90060_91400
+%mor:	noun|goodjob noun|mommy .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	v@l , v@l is for vase . 91420_93860
+%mor:	intj|v cm|cm noun|v aux|be-Fin-Ind-Pres-S3 adp|for noun|vase .
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|COP 5|6|CASE 6|6|ROOT 7|6|PUNCT
+*MOT:	or victory . 94420_95910
+%mor:	cconj|or noun|victory .
+%gra:	1|2|CC 2|2|ROOT 3|2|PUNCT
+*MOT:	okay take  [/] take , take a good look . 104020_106340
+%mor:	intj|okay verb|take-Fin-Imp-S cm|cm verb|take-Fin-Imp-S det|a-Ind-Art adj|good-S1 noun|look-Acc .
+%gra:	1|2|DISCOURSE 2|7|ROOT 3|4|PUNCT 4|2|PARATAXIS 5|7|DET 6|7|AMOD 7|4|OBJ 8|2|PUNCT
+*MOT:	where is it ? 107930_109000
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|3|ROOT 2|1|COP 3|2|NSUBJ 4|1|PUNCT
+*MOT:	it's easy . 110690_111680
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|easy-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	it's the easiest one . 112650_114260
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|easy-Sup-S1 noun|one .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*FAT:	good+job you saw the colour green , yes it's green  [/] green . 117510_122690
+%mor:	noun|goodjob pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Past-S2-irr det|the-Def-Art noun|colour noun|green-Acc cm|cm intj|yes pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|green-S1 .
+%gra:	1|3|VOCATIVE 2|3|NSUBJ 3|11|ROOT 4|6|DET 5|6|COMPOUND 6|3|OBJ 7|11|PUNCT 8|11|DISCOURSE 9|11|NSUBJ 10|11|COP 11|3|PARATAXIS 12|3|PUNCT
+*MOT:	xxx . 122000_124030
+*FAT:	and look , let's do it together . 122910_126500
+%mor:	cconj|and verb|look-Fin-Imp-S cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S pron|it-Prs-Acc-S3 adv|together .
+%gra:	1|2|CC 2|8|ROOT 3|4|PUNCT 4|2|PARATAXIS 5|4|OBJ 6|4|XCOMP 7|6|OBJ 8|6|ADVMOD 9|2|PUNCT
+*MOT:	oh . 127350_127940
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	good+job CHILDNAME . 127780_129180
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	I like that you tried to match them by the colour . 129580_132810
+%mor:	pron|I-Prs-Nom-S1 verb|like-Fin-Ind-Pres-S1 sconj|that pron|you-Prs-Nom-S2 verb|try-Fin-Ind-Past-S2 part|to verb|match-Inf-S pron|they-Prs-Acc-P3 adp|by det|the-Def-Art noun|colour .
+%gra:	1|2|NSUBJ 2|11|ROOT 3|5|MARK 4|5|NSUBJ 5|2|CCOMP 6|7|MARK 7|5|XCOMP 8|7|OBJ 9|11|CASE 10|11|DET 11|7|OBL 12|2|PUNCT
+*MOT:	xxx . 129690_132140
+*MOT:	w@l , w@l is for worth . 132270_134650
+%mor:	intj|with cm|cm noun|with aux|be-Fin-Ind-Pres-S3 adp|for adj|worth-S1 .
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|COP 5|6|CASE 6|6|ROOT 7|6|PUNCT
+*MOT:	xxx . 135170_136410
+*MOT:	and x@l , x@l is for xylophone . 137270_140430
+%mor:	cconj|and noun|x cm|cm noun|x aux|be-Fin-Ind-Pres-S3 adp|for noun|xylophone .
+%gra:	1|7|CC 2|7|DISCOURSE 3|2|PUNCT 4|7|NSUBJ 5|7|COP 6|7|CASE 7|7|ROOT 8|7|PUNCT
+*MOT:	eh ? 141920_142930
+%mor:	intj|eh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good , this , what colour is it ? 143900_146510
+%mor:	adj|good-S1 cm|cm pron|this-Dem-S1 cm|cm det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|8|ROOT 2|3|PUNCT 3|1|VOCATIVE 4|3|PUNCT 5|6|DET 6|8|NSUBJ 7|1|PARATAXIS 8|1|PARATAXIS 9|1|PUNCT
+*MOT:	it's purple . 146810_147850
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|purple-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	and that w@l it's +... 148010_149520
+%mor:	cconj|and sconj|that adp|with pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|2|CC 2|5|MARK 3|5|CASE 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*MOT:	yellow  [/] yellow . 149830_152800
+%mor:	adj|yellow-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	start from the board xxx , pick another letter . 154010_157160
+%mor:	verb|start-Fin-Imp-S adp|from det|the-Def-Art noun|board cm|cm verb|pick-Fin-Imp-S det|another-Def-Ind noun|letter-Acc .
+%gra:	1|8|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|6|PUNCT 6|1|PARATAXIS 7|8|DET 8|6|OBJ 9|1|PUNCT
+*MOT:	pick another letter you have a bunch here . 157250_159500
+%mor:	verb|pick-Fin-Imp-S det|another-Def-Ind noun|letter-Acc pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 det|a-Ind-Art noun|bunch-Acc adv|here .
+%gra:	1|8|ROOT 2|3|DET 3|1|OBJ 4|5|NSUBJ 5|3|ACL-RELCL 6|7|DET 7|5|OBJ 8|5|ADVMOD 9|1|PUNCT
+*MOT:	I have a lot here . 161170_162840
+%mor:	pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 det|a-Ind-Art noun|lot adv|here .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|DET 4|5|OBL-UNMARKED 5|2|ADVMOD 6|2|PUNCT
+*MOT:	look <pick another one>  [/] pick another one . 163330_166340
+%mor:	verb|look-Fin-Imp-S verb|pick-Inf-S det|another-Def-Ind noun|one-Acc .
+%gra:	1|4|ROOT 2|1|XCOMP 3|4|DET 4|2|OBJ 5|1|PUNCT
+*MOT:	yay . 167060_167670
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	k@l is for key . 167750_170010
+%mor:	propn|k aux|be-Fin-Ind-Pres-S3 adp|for noun|key .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|CASE 4|4|ROOT 5|4|PUNCT
+*MOT:	and it's purple . 175800_177590
+%mor:	cconj|and pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|purple-S1 .
+%gra:	1|4|CC 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	colour is purple . 177980_179590
+%mor:	noun|colour aux|be-Fin-Ind-Pres-S3 adj|purple-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	letter k@l . 181310_182760
+%mor:	noun|letter noun|k .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	want to find it together , huh you want to find it together ? 189000_192640
+%mor:	verb|want-Fin-Imp-S part|to verb|find-Inf-S pron|it-Prs-Acc-S3 adv|together cm|cm intj|huh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|find-Inf-S pron|it-Prs-Acc-S3 adv|together ?
+%gra:	1|13|ROOT 2|3|MARK 3|1|XCOMP 4|3|OBJ 5|3|ADVMOD 6|9|PUNCT 7|9|DISCOURSE 8|9|NSUBJ 9|1|PARATAXIS 10|11|MARK 11|9|XCOMP 12|11|OBJ 13|11|ADVMOD 14|1|PUNCT
+*MOT:	no  [/] no . 192670_194310
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 195700_196580
+*MOT:	good . 196470_197050
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay , wanna find it together ? 197330_199420
+%mor:	intj|okay cm|cm intj|wanna verb|find-Fin-Imp-S pron|it-Prs-Acc-S3 adv|together ?
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|DISCOURSE 4|6|ROOT 5|4|OBJ 6|4|ADVMOD 7|4|PUNCT
+*MOT:	what do you think , it's that one ? 199800_202020
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S cm|cm pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing num|one ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|9|ROOT 5|9|PUNCT 6|9|NSUBJ 7|9|COP 8|9|DET 9|4|PARATAXIS 10|4|PUNCT
+*MOT:	yay . 202080_203750
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	w@l . 205160_205940
+%mor:	noun|with .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	you like a lot of w@l . 206100_208040
+%mor:	pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 det|a-Ind-Art noun|lot-Acc adp|of noun|with .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|DET 4|2|OBJ 5|6|CASE 6|4|NMOD 7|2|PUNCT
+*MOT:	that's the letter of the day . 208800_210680
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|letter adp|of det|the-Def-Art noun|day .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|7|ROOT 5|7|CASE 6|7|DET 7|4|NMOD 8|4|PUNCT
+*MOT:	it's for week . 211190_212780
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adp|for noun|week .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|CASE 4|4|ROOT 5|4|PUNCT
+*MOT:	okay . 212960_213860
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you wanna take another letter ? 215680_217890
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-S2 verb|take-Inf-S det|another-Def-Ind noun|letter-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*CHI:	&=moans . 217090_218800
+*MOT:	&=hums . 218520_219310
+*MOT:	pick another letter . 220160_221220
+%mor:	verb|pick-Fin-Imp-S det|another-Def-Ind noun|letter-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*MOT:	h@l . 222290_223450
+%mor:	propn|h .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	h@l is for horse . 223610_225370
+%mor:	propn|h aux|be-Fin-Ind-Pres-S3 adp|for noun|horse .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|CASE 4|4|ROOT 5|4|PUNCT
+*MOT:	meh@o  [/] meh@o . 225430_228130
+%mor:	x|meh .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xPCO:	parent imitates horse .
+*CHI:	&=hums . 225940_227920
+*MOT:	it's easy . 232040_232960
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|easy-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	&=laughs . 234490_235460
+*MOT:	xxx . 236040_237490
+*MOT:	it's here , the horse . 239320_241110
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adv|here cm|cm det|the-Def-Art noun|horse .
+%gra:	1|3|NSUBJ 2|3|COP 3|6|ROOT 4|6|PUNCT 5|6|DET 6|3|PARATAXIS 7|3|PUNCT
+*FAT:	yes it looks like the m@l a little bit . 248120_250460
+%mor:	intj|yes pron|it-Prs-Nom-S3 verb|look-Fin-Ind-Pres-S3 adp|like det|the-Def-Art noun|m det|a-Ind-Art adj|little-S1 noun|bit .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|9|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|9|DET 8|9|AMOD 9|3|OBL-UNMARKED 10|3|PUNCT
+*MOT:	h@l . 251030_251770
+%mor:	propn|h .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hmm , h@l is there . 253190_254530
+%mor:	intj|hmm cm|cm noun|h aux|be-Fin-Ind-Pres-S3 adv|there .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|COP 5|5|ROOT 6|5|PUNCT
+*CHI:	&=hums . 253350_255650
+*MOT:	there . 256460_257070
+%mor:	adv|there .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	they're almost similar CHILDNAME , look . 256720_259700
+%mor:	pron|they-Prs-Nom-P3~aux|be-Fin-Ind-Pres-P3 adv|almost adj|similar-S1 propn|CHILDNAME cm|cm verb|look-Fin-Imp-S .
+%gra:	1|5|NSUBJ 2|5|COP 3|4|ADVMOD 4|5|AMOD 5|7|ROOT 6|7|PUNCT 7|5|PARATAXIS 8|5|PUNCT
+*FAT:	there . 261660_262450
+%mor:	adv|there .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=hums you wanna put h@l on the board ? 262800_266280
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|put-Inf-Pres-S noun|h-Acc adp|on det|the-Def-Art noun|board ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|PUNCT
+*MOT:	let's put this on the board first . 268710_271300
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|this-Dem-S1 adp|on det|the-Def-Art noun|board adv|first .
+%gra:	1|8|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|ADVMOD 9|1|PUNCT
+*MOT:	xxx . 272480_273100
+*MOT:	xxx . 273760_274870
+*MOT:	it's <the other way>  [/] the other way , turn . 280100_283030
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|other-S1 noun|way cm|cm noun|turn .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|AMOD 5|7|ROOT 6|7|PUNCT 7|5|APPOS 8|5|PUNCT
+*MOT:	turn  [/] turn xxx turn and put it like this . 284050_288020
+%mor:	verb|turn-Fin-Imp-S verb|turn-Inf-S cconj|and verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|like pron|this-Dem-S1 .
+%gra:	1|7|ROOT 2|1|XCOMP 3|4|CC 4|2|CONJ 5|4|OBJ 6|7|CASE 7|4|OBL 8|1|PUNCT
+*MOT:	that's m@l . 288080_289350
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 noun|m .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*FAT:	yes it's like w@l . 290020_292460
+%mor:	intj|yes pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 intj|like adp|with .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|5|ROOT 5|4|PUNCT 6|4|PUNCT
+*MOT:	it looks like w@l . 290720_292460
+%mor:	pron|it-Prs-Nom-S3 verb|look-Fin-Ind-Pres-S3 adp|like adp|with .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|CASE 4|2|OBL 5|2|PUNCT
+*FAT:	<good+job>  [/] good+job . 292730_293820
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	looks like w@l but it's upside down . 293410_296200
+%mor:	verb|look-Fin-Ind-Pres-S3 adp|like intj|with cconj|but pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|upside-S1 adv|down .
+%gra:	1|8|ROOT 2|3|CASE 3|1|OBL 4|7|CC 5|7|NSUBJ 6|7|COP 7|1|CONJ 8|7|ADVMOD 9|1|PUNCT
+*FAT:	exactly like w@l CHILDNAME . 296080_298110
+%mor:	adv|exactly adp|like adp|with propn|CHILDNAME .
+%gra:	1|4|ADVMOD 2|4|CASE 3|4|CASE 4|4|ROOT 5|4|PUNCT
+*FAT:	good+job CHILDNAME . 298230_300260
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	xxx . 298620_299940
+*FAT:	are you still want to play with this ? 301030_303480
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adv|still verb|want-Fin-Ind-Pres-S2 part|to verb|play-Inf-S adp|with pron|this-Dem-S1 ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|8|ROOT 5|6|MARK 6|4|XCOMP 7|8|CASE 8|6|OBL 9|4|PUNCT
+*MOT:	xxx . 301560_302980
+*CHI:	&=hums . 302260_303450
+@End

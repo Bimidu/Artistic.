@@ -1,0 +1,408 @@
+@UTF8
+@PID:	11312/a-00082330-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, CHI Target_Child, MOT Mother, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|CHI|8;03.|male|||Target_Child|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	16_T3_2, video
+*COD:	C . 1_196610
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	make this . 3800_5920
+%mor:	verb|make-Fin-Imp-S pron|this-Dem-S1 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	hey CHILDNAME . 7900_9090
+%mor:	intj|hey propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	I'm gonna give you two minutes okay ? 17690_19970
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 part|go verb|give-Inf-S pron|you-Prs-Acc-S2 num|two noun|minute-Plur adj|okay-S1 ?
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|8|ROOT 5|4|IOBJ 6|7|NUMMOD 7|8|OBL-UNMARKED 8|4|XCOMP 9|4|PUNCT
+*MOT:	&=hums CHILDNAME are you watching Paw_Patrol ? 25200_29770
+%mor:	propn|CHILDNAME aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|watch-Part-Pres-S propn|PawPatrol-Acc ?
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	no . 30050_31110
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no ? 31280_32040
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	what's up dog . 32040_33850
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 adp|up noun|dog .
+%gra:	1|4|ROOT 2|4|COP 3|4|CASE 4|1|NSUBJ 5|1|PUNCT
+*CHI:	&=sighs waldesu . 33910_35560
+%mor:	propn|waldesu .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	that's Paw_Patrol . 34510_36150
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 propn|PawPatrol .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*CHI:	xxx Paw_Patrol xxx . 35770_40060
+%mor:	propn|PawPatrol .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	xxx . 41340_44030
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	ah . 44800_46590
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	let's skip through . 46160_48040
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|skip-Inf-S adp|through .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|ADVMOD 5|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=gasps oh no . 49330_51400
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	look xxx . 50400_52490
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=hums . 53030_54030
+*CHI:	I want juice . 54500_55310
+%mor:	pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 noun|juice-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you want mango juice look . 54520_56940
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|mango noun|juice noun|look-Acc .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|4|COMPOUND 4|5|COMPOUND 5|2|OBJ 6|2|PUNCT
+*CHI:	mango juice ? 55940_56940
+%mor:	noun|mango noun|juice ?
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	ah you want to drink ? 57710_59410
+%mor:	intj|ah pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|drink-Inf-S ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|5|MARK 5|3|XCOMP 6|3|PUNCT
+*MOT:	okay . 59830_60700
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	DRINK . 61960_64850
+%mor:	noun|drink .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	hmm would you like to drink more juice okay very good . 63450_66480
+%mor:	intj|hmm aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S part|to verb|drink-Inf-S adj|more-Cmp-S1 noun|juice-Acc adj|okay-S1 adv|very adj|good-S1 .
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|NSUBJ 4|11|ROOT 5|6|MARK 6|4|XCOMP 7|8|AMOD 8|6|OBJ 9|6|XCOMP 10|11|ADVMOD 11|6|ADVMOD 12|4|PUNCT
+*MOT:	thank+you CHILDNAME . 68800_69970
+%mor:	intj|thankyou propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	oh . 72910_74410
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=sighs . 75260_76300
+*CHI:	is this fits . 85020_86850
+%mor:	aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|fit-Plur .
+%gra:	1|3|COP 2|3|DET 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=gasps . 90450_91480
+*CHI:	oh . 98070_99280
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	oh . 100810_102030
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	what's that ? 120500_121700
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	xxx CHILDNAME . 120660_122200
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	FINISHED . 126510_128460
+%mor:	verb|finihhe-Part-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	endanse . 129360_130980
+%mor:	noun|endanse .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	finished ? 131360_132420
+%mor:	verb|finish-Fin-Ind-Past-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	finished ? 132390_133160
+%mor:	verb|finish-Fin-Ind-Past-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	no more tablet ? 133210_134220
+%mor:	det|no-Def-Neg adj|more-Cmp-S1 noun|tablet ?
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	uketa . 134730_135600
+%mor:	propn|uketa .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	finished . 135720_136168
+%mor:	verb|finish-Fin-Ind-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay no more tablet or more duck ? 137460_140130
+%mor:	intj|okay det|no-Def-Neg adj|more-Cmp-S1 noun|tablet cconj|or adj|more-Cmp-S1 noun|duck ?
+%gra:	1|4|DISCOURSE 2|4|DET 3|4|AMOD 4|7|ROOT 5|7|CC 6|7|AMOD 7|4|CONJ 8|4|PUNCT
+*CHI:	ek tou twis . 140280_142400
+%mor:	propn|ek x|tou x|twis .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|FLAT 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	CHILDNAME . 143770_145280
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 145530_146240
+*MOT:	CHILDNAME . 146550_147510
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what do you want come on . 148000_148860
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S verb|come-Inf-S adp|on .
+%gra:	1|5|OBJ 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|4|XCOMP 6|5|COMPOUND-PRT 7|4|PUNCT
+*AAC:	MORE . 148520_149960
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	xxx . 149279_149733
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	or not . 149590_150440
+%mor:	cconj|or part|not .
+%gra:	1|2|CC 2|2|ROOT 3|2|PUNCT
+*CHI:	that one . 151550_152670
+%mor:	det|that-Def-Dem-Sing num|one .
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	that one ? 152790_153430
+%mor:	det|that-Def-Dem-Sing num|one ?
+%gra:	1|2|DET 2|2|ROOT 3|2|PUNCT
+*MOT:	okay . 153430_153890
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	I'll give you +... 155700_157560
+%mor:	pron|I-Prs-Nom-S1~aux|will-Fin-S verb|give-Inf-S pron|you-Prs-Acc-S2 +...
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|IOBJ 5|3|PUNCT
+*MOT:	++ three more minutes . 159030_160650
+%mor:	num|three adj|more-Cmp-S1 noun|minute-Plur .
+%gra:	1|3|NUMMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	CHILDNAME . 164420_165320
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	three minutes . 165770_166970
+%mor:	num|three noun|minute-Plur .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+*AAC:	MORE . 182270_184530
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	here . 184285_184785
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	continue ? 184860_186100
+%mor:	verb|continue-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=breathes . 186200_187030
+*MOT:	look . 191380_192190
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 196610_229410
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 229410_376360
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 263200_264150
+*CHI:	oh no . 266130_266970
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	FINISHED . 267930_270850
+%mor:	verb|finihhe-Part-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	can play with bubble . 269430_271990
+%mor:	aux|can-Fin-S verb|play-Inf-S adp|with noun|bubble .
+%gra:	1|2|AUX 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+*CHI:	&=coughs . 272330_274740
+*MOT:	xxx . 272930_273960
+*MOT:	oh . 275050_275900
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=coughs . 276910_281320
+*AAC:	FINISHED . 277550_280420
+%mor:	verb|finihhe-Part-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	oh CHILDNAME my turn . 280500_282540
+%mor:	intj|oh intj|childname pron|my-Prs-Gen-S1 noun|turn .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|NMOD-POSS 4|4|ROOT 5|4|PUNCT
+*CHI:	she cry . 289080_290680
+%mor:	pron|she-Prs-Nom-S3 verb|cry-Fin-Ind-Pres-S3 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	finished ? 290170_290840
+%mor:	verb|finish-Fin-Ind-Past-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	you know how pink that taste . 290790_292350
+%mor:	pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 adv|how adj|pink-S1 det|that-Def-Dem-Sing verb|taste-Fin-Ind-Pres-S3 .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|ADVMOD 4|2|OBJ 5|6|NSUBJ 6|4|ADVCL-RELCL 7|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME let's play look at the board . 292540_295660
+%mor:	intj|childname verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|play-Inf-S verb|look-Inf-S adp|at det|the-Def-Art noun|board .
+%gra:	1|2|DISCOURSE 2|8|ROOT 3|2|OBJ 4|2|XCOMP 5|4|XCOMP 6|8|CASE 7|8|DET 8|5|OBL 9|2|PUNCT
+*CHI:	yuhuh . 295260_296130
+%mor:	intj|yuhuh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*AAC:	MORE . 295700_302231
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*MOT:	your turn , have a look . 295850_297680
+%mor:	pron|your-Prs-Gen-S2 noun|turn cm|cm verb|have-Fin-Imp-S det|a-Ind-Art noun|look-Acc .
+%gra:	1|2|NMOD-POSS 2|4|OBL-UNMARKED 3|2|PUNCT 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*MOT:	here . 298200_298790
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=coughs . 299090_301950
+*MOT:	oh . 300770_301700
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	FINISHED . 302980_305110
+%mor:	verb|finihhe-Part-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	more bubble ? 303280_304300
+%mor:	adj|more-Cmp-S1 noun|bubble ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	no . 304890_305590
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=hums . 307610_308800
+*MOT:	your turn CHILDNAME . 310310_311810
+%mor:	pron|your-Prs-Gen-S2 noun|turn noun|childname .
+%gra:	1|3|NMOD-POSS 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*CHI:	turn ? 311390_311980
+%mor:	noun|turn ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes . 312590_313320
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	wow let's bubble . 314990_318600
+%mor:	intj|wow verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|bubble-Inf-S .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|OBJ 4|2|XCOMP 5|2|PUNCT
+*MOT:	wow awesome . 319480_323040
+%mor:	intj|wow adj|awesome-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	good+job . 323900_325790
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME . 325870_326630
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	my turn . 327860_329070
+%mor:	pron|my-Prs-Gen-S1 noun|turn .
+%gra:	1|2|NMOD-POSS 2|2|ROOT 3|2|PUNCT
+*CHI:	you need more ? 329230_330900
+%mor:	pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 adj|more-Cmp-S1 ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	BUBBLES , FINISHED . 331200_337050
+%mor:	noun|bubble-Plur cm|cm verb|finihhe-Part-Past-S .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	it's my turn . 331420_332570
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|my-Prs-Gen-S1 noun|turn .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|NMOD-POSS 4|4|ROOT 5|4|PUNCT
+*CHI:	finished  [/] finished . 335390_338790
+%mor:	verb|finish-Fin-Ind-Past-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	CHILDNAME . 335800_337160
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that's the bubbles . 339540_341200
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|bubble-Plur .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*CHI:	with the xxx . 341760_343350
+%mor:	adp|with det|the-Def-Art .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	finished ? 343560_344520
+%mor:	verb|finish-Fin-Ind-Past-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 344570_345150
+*CHI:	xxx no more &~san . 345810_349650
+%mor:	intj|no adj|more-Cmp-S1 .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay . 348930_349700
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	da . 350490_351290
+%mor:	propn|da .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	what do you want CHILDNAME ? 353080_354510
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|CHILDNAME-Acc ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	couch , tansut . 355080_356970
+%mor:	noun|couch cm|cm noun|tansut .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|APPOS 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	tell me what do you want . 356240_357210
+%mor:	verb|tell-Fin-Imp-S pron|I-Prs-Acc-S1 pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S .
+%gra:	1|6|ROOT 2|1|IOBJ 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|1|CCOMP 7|1|PUNCT
+*AAC:	TV . 356710_358420
+%mor:	noun|TV .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	tansya . 357690_358470
+%mor:	propn|tansya .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	ah . 358870_359680
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME . 359960_360800
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	tan . 363170_364090
+%mor:	noun|tan .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	one more . 364320_365880
+%mor:	num|one adj|more-Cmp-S1 .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	not television . 368160_370020
+%mor:	part|not noun|television .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	&=coughs . 373920_376060
+@End

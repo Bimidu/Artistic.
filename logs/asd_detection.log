@@ -1,0 +1,9 @@
+2025-10-15 15:08:58 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-15 15:09:34 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-15 15:09:45 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-15 15:09:45 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
+2025-10-15 15:09:45 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-10-15 15:11:27 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-15 15:11:27 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
+2025-10-15 15:11:27 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-10-15 15:11:27 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1

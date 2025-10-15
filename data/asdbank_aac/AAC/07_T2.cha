@@ -1,0 +1,161 @@
+@UTF8
+@PID:	11312/a-00082288-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, FAT Father, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|FAT|||||Father|||
+@ID:	eng|AAC|CHI|6;09.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	07_T2, video
+*COD:	C . 20_193340
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	here let's try the xxx . 6390_8550
+%mor:	adv|here verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|try-Inf-S det|the-Def-Art .
+%gra:	1|2|ADVMOD 2|5|ROOT 3|2|OBJ 4|2|XCOMP 5|4|OBJ 6|2|PUNCT
+*FAT:	not with xxx , it's just the water . 12610_15210
+%mor:	part|not adp|with cm|cm pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adv|just det|the-Def-Art noun|water .
+%gra:	1|8|ADVMOD 2|8|REPARANDUM 3|2|PUNCT 4|8|NSUBJ 5|8|COP 6|8|ADVMOD 7|8|DET 8|8|ROOT 9|8|PUNCT
+*FAT:	xxx . 16270_17160
+*CHI:	&=groans . 19020_20760
+*FAT:	yeah he's laying down in the tub xxx . 23550_26480
+%mor:	intj|yeah pron|he-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 verb|lay-Part-Pres-S adp|down adp|in det|the-Def-Art noun|tub .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|8|ROOT 5|4|COMPOUND-PRT 6|8|CASE 7|8|DET 8|4|OBL 9|4|PUNCT
+*FAT:	CHILDNAME  [/] CHILDNAME &=pointing . 26680_29080
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	see , you see it , you see the binder ? 32270_35150
+%mor:	verb|see-Fin-Imp-S cm|cm pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 cm|cm pron|you-Prs-Nom-S2 verb|see-Fin-Ind-Pres-S2 det|the-Def-Art noun|binder-Acc ?
+%gra:	1|10|ROOT 2|4|PUNCT 3|4|NSUBJ 4|1|PARATAXIS 5|4|OBJ 6|8|PUNCT 7|8|NSUBJ 8|1|PARATAXIS 9|10|DET 10|8|OBJ 11|1|PUNCT
+*FAT:	on a big board . 36170_37940
+%mor:	adp|on det|a-Ind-Art adj|big-S1 noun|board .
+%gra:	1|4|CASE 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*CHI:	tsei . 36480_37570
+%mor:	propn|tsei .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-X
+*FAT:	SIBNAME pour . 43250_44940
+%mor:	propn|SIBNAME verb|pour-Fin-Imp-S .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*FAT:	spill it . 49380_50450
+%mor:	verb|spill-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*FAT:	xxx . 67250_71880
+*FAT:	what's this CHILDNAME ? 96330_98140
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|childname ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*FAT:	xxx . 98820_99570
+*FAT:	big pour CHILDNAME . 113970_116140
+%mor:	adj|big-S1 verb|pour-Inf-S propn|CHILDNAME-Acc .
+%gra:	1|2|AMOD 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*FAT:	www . 116300_118790
+%xPCO:	parent speaking to sibling .
+*FAT:	www . 119280_121430
+%xPCO:	parent speaking to sibling .
+*FAT:	www . 122800_124590
+%xPCO:	parent speaking to sibling .
+*FAT:	CHILDNAME look at xxx . 127130_129590
+%mor:	propn|CHILDNAME verb|look-Fin-Imp-S adp|at .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBL 4|2|PUNCT
+*FAT:	come on . 135060_135990
+%mor:	verb|come-Fin-Imp-S adp|on .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*FAT:	www . 137000_138720
+%xPCO:	parent speaking to sibling .
+*FAT:	CHILDNAME . 145140_146390
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	see the juice ? 149410_150850
+%mor:	verb|see-Fin-Imp-S det|the-Def-Art noun|juice-Acc ?
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*FAT:	here , four . 150970_151930
+%mor:	adv|here cm|cm num|four .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|DISCOURSE 4|1|PUNCT
+*FAT:	www . 155000_159390
+%xPCO:	parent speaking to sibling .
+*FAT:	splash . 170030_171220
+%mor:	noun|splash .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 193350_213050
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 213060_222400
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	xxx . 214090_215870
+*AAC:	MORE . 217970_221450
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*FAT:	pour , here you go . 221480_223480
+%mor:	verb|pour-Fin-Imp-S cm|cm adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|5|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|5|NSUBJ 5|3|ADVCL-RELCL 6|1|PUNCT
+*COD:	U . 222410_258930
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 258930_370920
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	CHILDNAME board . 262060_263490
+%mor:	propn|CHILDNAME noun|board .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*FAT:	CHILDNAME . 279720_280770
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	pour ? 281560_282310
+%mor:	verb|pour-Fin-Imp-S2 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	MORE . 281780_284220
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*FAT:	xxx pour . 284760_287070
+%mor:	verb|pour-Fin-Imp-S2 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	www . 293170_295640
+%xPCO:	parent speaking to sibling .
+*FAT:	www . 298740_301330
+%xPCO:	parent speaking to sibling .
+*FAT:	CHILDNAME you wanna pour ? 302260_304530
+%mor:	intj|childname pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|pour-Fin-S ?
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|4|ROOT 5|4|PUNCT
+*FAT:	one big pour ? 305260_306360
+%mor:	num|one adj|big-S1 noun|pour ?
+%gra:	1|3|NUMMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*AAC:	MORE . 306200_308100
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*FAT:	yeah pour yeah  [/] yeah  [/] yeah . 307170_309980
+%mor:	intj|yeah verb|pour-Fin-Imp-S intj|yeah .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*FAT:	good+job SIBNAME . 310430_312110
+%mor:	propn|goodjob propn|SIBNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	www . 312670_315010
+%xPCO:	parent speaking to sibling .
+*AAC:	MORE . 319780_321210
+%mor:	adj|more-Cmp-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*FAT:	pour . 320560_321790
+%mor:	verb|pour-Fin-Imp-S2 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	good+job . 322490_323730
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	xxx . 324860_327750
+*FAT:	want another big pour CHILDNAME ? 330830_333120
+%mor:	verb|want-Fin-Ind-Pres-S det|another-Def-Ind adj|big-S1 noun|pour noun|childname-Acc ?
+%gra:	1|5|ROOT 2|5|DET 3|5|AMOD 4|5|COMPOUND 5|1|OBJ 6|1|PUNCT
+*FAT:	it's ready . 357150_358420
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|ready-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*FAT:	want another big pour CHILDNAME ? 358860_361100
+%mor:	verb|want-Fin-Ind-Pres-S det|another-Def-Ind adj|big-S1 noun|pour noun|childname-Acc ?
+%gra:	1|5|ROOT 2|5|DET 3|5|AMOD 4|5|COMPOUND 5|1|OBJ 6|1|PUNCT
+*FAT:	pouring in the xxx . 364450_366150
+%mor:	verb|pour-Part-Pres-S adp|in det|the-Def-Art .
+%gra:	1|3|ROOT 2|1|COMPOUND-PRT 3|1|OBL 4|1|PUNCT
+@End

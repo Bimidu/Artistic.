@@ -1,0 +1,201 @@
+@UTF8
+@PID:	11312/a-00082286-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, FAT Father, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|FAT|||||Father|||
+@ID:	eng|AAC|CHI|6;09.|male|||Target_Child|||
+@Media:	07_T1_1, video
+*COD:	C . 1_256278
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No CHI-ACC observed . 1_1390
+%mor:	det|no-Def-Neg noun|chiacc verb|observe-Fin-Ind-Past-S3 .
+%gra:	1|2|DET 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*FAT:	www . 1_13550
+%xPCO:	Dad explaining context of video .
+*FAT:	alright CHILDNAME . 14370_15830
+%mor:	intj|alright propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	okay . 18710_19600
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	www . 25830_32610
+%xPCO:	parent showing toy bin to camera .
+*FAT:	alright CHILDNAME I want you to help me clean this up . 36170_40290
+%mor:	intj|alright intj|childname pron|I-Prs-Nom-S1 verb|want-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 part|to verb|help-Inf-S pron|I-Prs-Acc-S1 verb|clean-Inf-S pron|this-Dem-S1 adp|up .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|NSUBJ 4|11|ROOT 5|4|OBJ 6|7|MARK 7|4|XCOMP 8|7|OBJ 9|7|XCOMP 10|9|OBJ 11|9|COMPOUND-PRT 12|4|PUNCT
+*FAT:	you pick this up then put it in the toy bin . 40780_42850
+%mor:	pron|you-Prs-Nom-S2 verb|pick-Fin-Ind-Pres-S2 pron|this-Dem-S1 adp|up adv|then verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|toy noun|bin .
+%gra:	1|2|NSUBJ 2|11|ROOT 3|2|OBJ 4|2|COMPOUND-PRT 5|6|ADVMOD 6|2|PARATAXIS 7|6|OBJ 8|11|CASE 9|11|DET 10|11|COMPOUND 11|6|OBL 12|2|PUNCT
+*FAT:	here CHILDNAME . 44430_45940
+%mor:	adv|here propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	&=taps this , put it in the toy bin . 47430_49300
+%mor:	pron|this-Dem-S1 cm|cm verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|toy noun|bin .
+%gra:	1|3|NSUBJ 2|1|PUNCT 3|8|ROOT 4|3|OBJ 5|8|CASE 6|8|DET 7|8|COMPOUND 8|3|OBL 9|3|PUNCT
+*FAT:	here , in the bin . 49630_52390
+%mor:	adv|here cm|cm adp|in det|the-Def-Art noun|bin .
+%gra:	1|5|ROOT 2|5|PUNCT 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+*FAT:	okay here CHILDNAME . 54780_57090
+%mor:	intj|okay adv|here propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|VOCATIVE 4|2|PUNCT
+*FAT:	can you put it in the bin for me please ? 57460_60030
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|bin adp|for pron|I-Prs-Acc-S1 intj|please ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|10|ROOT 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|9|CASE 9|3|OBL 10|3|DISCOURSE 11|3|PUNCT
+*FAT:	no in here . 60720_61900
+%mor:	intj|no adp|in adv|here .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*FAT:	froot+loop ? 64260_65240
+%mor:	noun|frootloop ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	thank you put it <in the bin>  [/] in the bin . 65590_69400
+%mor:	verb|thank-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|bin .
+%gra:	1|7|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|7|CASE 6|7|DET 7|3|OBL 8|1|PUNCT
+*CHI:	&=breathes . 67150_68890
+*FAT:	CHILDNAME &=pointing . 70100_70930
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent points at Thomas the Tank Engine .
+*FAT:	good+job CHILDNAME . 71590_73260
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	good+job . 73460_74470
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	okay CHILDNAME here , why don't we take Thomas and put him in the bin . 76640_81480
+%mor:	intj|okay intj|childname adv|here cm|cm adv|why aux|do-Fin-Ind-Pres-P1~part|not pron|we-Prs-Nom-P1 verb|take-Inf-S propn|Thomas-Acc cconj|and verb|put-Inf-S pron|he-Prs-Acc-S3 adp|in det|the-Def-Art noun|bin .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|9|ADVMOD 4|9|PUNCT 5|9|ADVMOD 6|9|AUX 7|9|ADVMOD 8|9|NSUBJ 9|16|ROOT 10|9|OBJ 11|12|CC 12|9|CONJ 13|12|OBJ 14|16|CASE 15|16|DET 16|12|OBL 17|9|PUNCT
+*FAT:	CHILDNAME  [/] CHILDNAME  [/] CHILDNAME . 82070_85920
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	CHILDNAME take Thomas . 86820_88630
+%mor:	propn|CHILDNAME verb|take-Fin-Imp-S propn|Thomas-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*FAT:	CHILDNAME . 89680_90930
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	CHILDNAME , Thomas , put him in the bin . 93010_95860
+%mor:	propn|CHILDNAME cm|cm propn|Thomas cm|cm verb|put-Fin-Imp-S pron|he-Prs-Acc-S3 adp|in det|the-Def-Art noun|bin .
+%gra:	1|5|NSUBJ 2|3|PUNCT 3|1|APPOS 4|1|PUNCT 5|9|ROOT 6|5|OBJ 7|9|CASE 8|9|DET 9|5|OBL 10|5|PUNCT
+*FAT:	yup in the bin . 97050_99010
+%mor:	intj|yup adp|in det|the-Def-Art noun|bin .
+%gra:	1|4|DISCOURSE 2|4|CASE 3|4|DET 4|4|ROOT 5|4|PUNCT
+*FAT:	&=pointing in here . 99770_100800
+%mor:	adp|in adv|here .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+%xPCO:	parent points at toy bin .
+*FAT:	nope  [/] nope &=pointing . 100920_103500
+%mor:	intj|nope .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent points at Thomas the Tank Engine .
+*FAT:	or here put the dragon in the bin . 104460_107230
+%mor:	cconj|or adv|here verb|put-Fin-Imp-S det|the-Def-Art noun|dragon-Acc adp|in det|the-Def-Art noun|bin .
+%gra:	1|3|CC 2|3|ADVMOD 3|8|ROOT 4|5|DET 5|3|OBJ 6|8|CASE 7|8|DET 8|3|OBL 9|3|PUNCT
+*FAT:	good+job CHILDNAME . 107550_109330
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	www . 113810_117790
+%xPCO:	parent instructing sibling .
+*FAT:	okay CHILDNAME . 119750_121000
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	www . 122960_123780
+%xPCO:	parent responds to sibling .
+*FAT:	okay CHILDNAME here , can you put this in the bin for me too ? 124460_127420
+%mor:	intj|okay intj|childname adv|here cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S pron|this-Dem-S1 adp|in det|the-Def-Art noun|bin adp|for pron|I-Prs-Acc-S1 adv|too ?
+%gra:	1|7|DISCOURSE 2|7|DISCOURSE 3|7|ADVMOD 4|3|PUNCT 5|7|AUX 6|7|NSUBJ 7|14|ROOT 8|7|OBJ 9|11|CASE 10|11|DET 11|7|OBL 12|13|CASE 13|7|OBL 14|7|ADVMOD 15|7|PUNCT
+*FAT:	put it in the bin &=pointing . 127420_128570
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|bin .
+%gra:	1|5|ROOT 2|1|OBJ 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+%xPCO:	parent pointing at toy bin .
+*FAT:	good+job CHILDNAME good+job . 129310_132440
+%mor:	propn|goodjob propn|CHILDNAME noun|goodjob .
+%gra:	1|3|COMPOUND 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*FAT:	www . 133180_135620
+%xPCO:	parent instructing sibling .
+*FAT:	here , here's another item to put in the bin . 136940_139750
+%mor:	adv|here cm|cm adv|here~aux|be-Fin-Ind-Pres-S3 det|another-Def-Ind noun|item part|to verb|put-Inf-S adp|in det|the-Def-Art noun|bin-Acc .
+%gra:	1|3|ADVMOD 2|1|PUNCT 3|11|ROOT 4|3|COP 5|6|DET 6|3|NSUBJ 7|8|MARK 8|6|ACL 9|11|CASE 10|11|DET 11|8|OBJ 12|3|PUNCT
+*CHI:	anon &=groans . 137730_141440
+%mor:	intj|anon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	yeah . 144260_144950
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=groans . 144570_146280
+*FAT:	CHILDNAME in the bin . 146660_147910
+%mor:	propn|CHILDNAME adp|in det|the-Def-Art noun|bin .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|NMOD 5|1|PUNCT
+*FAT:	good+job , and another one into the bin . 149080_152330
+%mor:	noun|goodjob cm|cm cconj|and det|another-Def-Ind noun|one adp|into det|the-Def-Art noun|bin .
+%gra:	1|8|ROOT 2|5|PUNCT 3|5|CC 4|5|DET 5|1|CONJ 6|8|CASE 7|8|DET 8|5|NMOD 9|1|PUNCT
+*FAT:	okay good+job CHILDNAME . 153520_155890
+%mor:	intj|okay propn|goodjob propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|FLAT 4|2|PUNCT
+*FAT:	here you go . 156210_157530
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|1|PUNCT
+*CHI:	&=groans . 156250_157170
+*FAT:	www . 159340_163020
+%xPCO:	parent responding to sibling .
+*FAT:	here you go CHILDNAME here's another item you can put in there . 163460_168570
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 propn|CHILDNAME-Acc adv|here~aux|be-Fin-Ind-Pres-S3 det|another-Def-Ind noun|item pron|you-Prs-Nom-S2 aux|can-Fin-S verb|put-Inf-S adp|in adv|there .
+%gra:	1|13|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|3|OBJ 5|1|ADVMOD 6|8|COP 7|8|DET 8|1|NSUBJ 9|11|NSUBJ 10|11|AUX 11|8|ACL-RELCL 12|13|CASE 13|11|OBL 14|1|PUNCT
+*FAT:	and here too . 171630_173480
+%mor:	cconj|and adv|here adv|too .
+%gra:	1|2|CC 2|3|ROOT 3|2|ADVMOD 4|2|PUNCT
+*FAT:	CHILDNAME in the bin . 173590_175630
+%mor:	propn|CHILDNAME adp|in det|the-Def-Art noun|bin .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|NMOD 5|1|PUNCT
+*FAT:	CHILDNAME &=pointing . 177570_178660
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent gesturing to toy bin .
+*FAT:	put it in the bin . 179380_180870
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in det|the-Def-Art noun|bin .
+%gra:	1|5|ROOT 2|1|OBJ 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+*FAT:	good+job CHILDNAME . 188010_190150
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	okay now um +... 192470_195110
+%mor:	intj|okay adv|now intj|um +...
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*FAT:	good+job CHILDNAME . 204760_206260
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	now do you want something to drink ? 207190_209570
+%mor:	adv|now aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|something-Ind-S1 part|to verb|drink-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|7|ROOT 5|4|OBJ 6|7|MARK 7|5|ACL 8|4|PUNCT
+*FAT:	you want a drink CHILDNAME ? 214830_216850
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|a-Ind-Art noun|drink noun|childname-Acc ?
+%gra:	1|2|NSUBJ 2|5|ROOT 3|5|DET 4|5|COMPOUND 5|2|OBJ 6|2|PUNCT
+*CHI:	bey . 217700_218550
+%mor:	propn|bey .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*FAT:	www . 220350_222340
+*FAT:	CHILDNAME . 224930_226410
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	here you go CHILDNAME . 232100_233620
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 propn|CHILDNAME-Acc .
+%gra:	1|4|ROOT 2|3|NSUBJ 3|1|PARATAXIS 4|3|OBJ 5|1|PUNCT
+*FAT:	where'd your cup go ? 233890_235800
+%mor:	adv|where~aux|would-Fin-S pron|your-Prs-Gen-S2 noun|cup verb|go-Inf-S ?
+%gra:	1|5|ADVMOD 2|5|AUX 3|4|NMOD-POSS 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*FAT:	www . 238610_239570
+%xPCO:	parent responding to sibling's request .
+*FAT:	here you go CHILDNAME here's your xxx . 241140_243650
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 propn|CHILDNAME-Acc adv|here~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 .
+%gra:	1|7|ROOT 2|3|NSUBJ 3|1|CCOMP 4|3|OBJ 5|3|ADVMOD 6|7|COP 7|1|PARATAXIS 8|1|PUNCT
+*FAT:	www . 244200_247750
+%xPCO:	parent instructing sibling .
+*FAT:	www . 248090_249990
+%xPCO:	parent talking to sibling .
+*FAT:	www . 254230_256250
+%xPCO:	parent talking to sibling .
+@End

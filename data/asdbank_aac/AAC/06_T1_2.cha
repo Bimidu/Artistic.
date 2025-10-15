@@ -1,0 +1,305 @@
+@UTF8
+@PID:	11312/a-00082282-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|4;07.|male|||Target_Child|||
+@Media:	06_T1_2, video, missing
+*COD:	C . 1_310189
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No AAC use , absence of AAC device . 20_870
+%mor:	det|no-Def-Neg noun|aac noun|use cm|cm noun|absence adp|of propn|AAC noun|device .
+%gra:	1|3|DET 2|3|COMPOUND 3|8|ROOT 4|5|PUNCT 5|3|APPOS 6|8|CASE 7|8|COMPOUND 8|5|NMOD 9|3|PUNCT
+*MOT:	it's table time , okay ? 90_2330
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|table noun|time cm|cm intj|okay ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|COMPOUND 4|6|ROOT 5|6|PUNCT 6|4|DISCOURSE 7|4|PUNCT
+*MOT:	very good . 2440_4290
+%mor:	adv|very adj|good-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	and we're gonna work on the table . 4830_7600
+%mor:	cconj|and pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 part|go verb|work-Inf-S adp|on det|the-Def-Art noun|table .
+%gra:	1|5|CC 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|8|ROOT 6|8|CASE 7|8|DET 8|5|OBL 9|5|PUNCT
+*CHI:	&=hums . 6300_7970
+*MOT:	okay . 8290_8830
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ap . 9300_10550
+%mor:	noun|ap .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you want some help ? 11100_11680
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|some-Def-Ind noun|help-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*CHI:	&=hums . 15760_16920
+*MOT:	here you can take that . 16420_18500
+%mor:	adv|here pron|you-Prs-Nom-S2 aux|can-Fin-S verb|take-Inf-S pron|that-Dem .
+%gra:	1|5|ROOT 2|4|NSUBJ 3|4|AUX 4|1|CCOMP 5|4|OBJ 6|1|PUNCT
+*MOT:	let's make a shape . 22140_23970
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|make-Inf-S det|a-Ind-Art noun|shape-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+*MOT:	want to make a shape ? 25670_26460
+%mor:	verb|want-Fin-Imp-Pres-S part|to verb|make-Inf-S det|a-Ind-Art noun|shape-Acc ?
+%gra:	1|5|ROOT 2|3|MARK 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+*CHI:	&=hums . 26170_27820
+*MOT:	you can roll it . 28220_29220
+%mor:	pron|you-Prs-Nom-S2 aux|can-Fin-S verb|roll-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	there's two shapes . 33210_34390
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 num|two noun|shape-Plur .
+%gra:	1|2|EXPL 2|4|ROOT 3|4|NUMMOD 4|2|NSUBJ 5|2|PUNCT
+*MOT:	let's do shapes . 38640_40750
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S noun|shape-Plur-Acc .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|1|PUNCT
+*CHI:	&=hums . 44070_44590
+*MOT:	it's table time . 45210_46510
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|table noun|time .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|COMPOUND 4|4|ROOT 5|4|PUNCT
+*CHI:	yaya . 46270_47280
+%mor:	propn|yaya .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME it's your table time . 48900_50550
+%mor:	propn|CHILDNAME pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|table noun|time .
+%gra:	1|6|VOCATIVE 2|6|NSUBJ 3|6|COP 4|6|NMOD-POSS 5|6|COMPOUND 6|6|ROOT 7|6|PUNCT
+*MOT:	look here , what are you doing ? 52250_54120
+%mor:	verb|look-Fin-Imp-S adv|here cm|cm pron|what-Int-S1 aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|do-Part-Pres-S ?
+%gra:	1|7|ROOT 2|1|ADVMOD 3|7|PUNCT 4|7|OBJ 5|7|AUX 6|7|NSUBJ 7|1|PARATAXIS 8|1|PUNCT
+*MOT:	table time . 54560_55370
+%mor:	noun|table noun|time .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=moans . 55520_58000
+*MOT:	can you point ? 56690_57580
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|point-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	point here , table time first do table time . 57950_60290
+%mor:	noun|point adv|here cm|cm noun|table noun|time adj|first-S1 verb|do-Inf-S noun|table noun|time-Acc .
+%gra:	1|9|ROOT 2|1|ADVMOD 3|7|PUNCT 4|5|COMPOUND 5|7|NSUBJ 6|7|ADVMOD 7|1|PARATAXIS 8|9|COMPOUND 9|7|OBJ 10|1|PUNCT
+*CHI:	&=hums . 60690_61000
+*CHI:	&=pointing . 61110_62030
+%xIS:	CHI-Gesture-I
+*MOT:	yes it's table time good+job . 61480_65150
+%mor:	intj|yes pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|table noun|time noun|goodjob .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|COMPOUND 5|6|COMPOUND 6|6|ROOT 7|6|PUNCT
+*MOT:	okay look I have here snack , do you want a snack ? 74570_78570
+%mor:	intj|okay noun|look pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 adv|here noun|snack-Acc cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|a-Ind-Art noun|snack-Acc ?
+%gra:	1|2|DISCOURSE 2|12|ROOT 3|4|NSUBJ 4|2|ACL-RELCL 5|4|ADVMOD 6|4|OBJ 7|10|PUNCT 8|10|AUX 9|10|NSUBJ 10|2|PARATAXIS 11|12|DET 12|10|OBJ 13|2|PUNCT
+*MOT:	CHILDNAME I have your snack here . 80250_81630
+%mor:	propn|CHILDNAME pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 pron|your-Prs-Gen-S2 noun|snack-Acc adv|here .
+%gra:	1|3|VOCATIVE 2|3|NSUBJ 3|6|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|3|ADVMOD 7|3|PUNCT
+*MOT:	you want a snack ? 83070_84110
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|a-Ind-Art noun|snack-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	look , look here CHILDNAME  [/] CHILDNAME . 85790_89640
+%mor:	verb|look-Fin-Imp-S cm|cm verb|look-Fin-Imp-S adv|here propn|CHILDNAME-Acc .
+%gra:	1|5|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|ADVMOD 5|3|OBJ 6|1|PUNCT
+*MOT:	snack , do you want snack ? 90910_92510
+%mor:	noun|snack cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|snack-Acc ?
+%gra:	1|6|ROOT 2|5|PUNCT 3|5|AUX 4|5|NSUBJ 5|1|PARATAXIS 6|5|OBJ 7|1|PUNCT
+*CHI:	snack  [/] snack . 92460_94420
+%mor:	noun|snack .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes , I will give you one snack , okay ? 94280_95960
+%mor:	intj|yes cm|cm pron|I-Prs-Nom-S1 aux|will-Fin-S verb|give-Inf-S pron|you-Prs-Acc-S2 num|one noun|snack-Acc cm|cm intj|okay ?
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NSUBJ 4|5|AUX 5|10|ROOT 6|5|IOBJ 7|8|NUMMOD 8|5|OBJ 9|10|PUNCT 10|5|DISCOURSE 11|5|PUNCT
+*MOT:	wait  [/] wait <hang on>  [/] hang on . 96240_97620
+%mor:	verb|wait-Fin-Imp-S verb|hang-Inf-S adp|on .
+%gra:	1|3|ROOT 2|1|XCOMP 3|2|COMPOUND-PRT 4|1|PUNCT
+*MOT:	it's a snack  [/] snack . 98410_100750
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|snack .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*MOT:	you want more ? 101620_102580
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	yum . 103900_105430
+%mor:	intj|yum .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes it's snack time give me this . 107960_109920
+%mor:	intj|yes pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|snack noun|time verb|give-Inf-Imp-S pron|I-Prs-Acc-S1 pron|this-Dem-S1 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|COMPOUND 5|6|OBL-UNMARKED 6|8|ROOT 7|6|IOBJ 8|6|OBJ 9|6|PUNCT
+*MOT:	can you say snack ? 110510_111460
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|say-Inf-S noun|snack-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	snack ? 112480_113470
+%mor:	noun|snack ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no , do you want snack ? 114370_115940
+%mor:	intj|no cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|snack-Acc ?
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|AUX 4|5|NSUBJ 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	here , I have more , you want more ? 116140_117650
+%mor:	adv|here cm|cm pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 adj|more-Cmp-S1 cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 ?
+%gra:	1|4|ADVMOD 2|1|PUNCT 3|4|NSUBJ 4|9|ROOT 5|4|OBJ 6|8|PUNCT 7|8|NSUBJ 8|4|PARATAXIS 9|8|OBJ 10|4|PUNCT
+*MOT:	say snack . 118250_119190
+%mor:	verb|say-Fin-Imp-S noun|snack-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	&=hums . 119040_120540
+*MOT:	here I have your snack here . 123560_125270
+%mor:	adv|here pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 pron|your-Prs-Gen-S2 noun|snack-Acc adv|here .
+%gra:	1|6|ROOT 2|3|NSUBJ 3|1|CCOMP 4|5|NMOD-POSS 5|3|OBJ 6|3|ADVMOD 7|1|PUNCT
+*CHI:	&=hums . 125420_126850
+*MOT:	wait  [/] wait first you do , wait  [/] wait . 127500_129780
+%mor:	verb|wait-Fin-Imp-S adj|first-S1 pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2 cm|cm verb|wait-Fin-Imp-S .
+%gra:	1|6|ROOT 2|1|ADVMOD 3|4|NSUBJ 4|1|PARATAXIS 5|6|PUNCT 6|1|PARATAXIS 7|1|PUNCT
+*MOT:	hey CHILDNAME , come here , you have to look here first . 133380_136220
+%mor:	intj|hey intj|childname cm|cm verb|come-Fin-Imp-S adv|here cm|cm pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 part|to verb|look-Inf-S adv|here adv|first .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|2|PUNCT 4|12|ROOT 5|4|ADVMOD 6|8|PUNCT 7|8|NSUBJ 8|4|PARATAXIS 9|10|MARK 10|8|XCOMP 11|10|ADVMOD 12|10|ADVMOD 13|4|PUNCT
+*CHI:	&=moans . 136360_136930
+*MOT:	okay you are looking for that , okay that's good . 136450_138560
+%mor:	intj|okay pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 verb|look-Part-Pres-S adp|for pron|that-Dem cm|cm intj|okay pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|good-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|11|ROOT 5|6|CASE 6|4|OBL 7|11|PUNCT 8|11|DISCOURSE 9|11|NSUBJ 10|11|COP 11|4|PARATAXIS 12|4|PUNCT
+*MOT:	that's fine . 139100_139820
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|fine-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	good+job . 141060_142360
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want snack ? 143000_144240
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|snack-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	here . 145590_146190
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 147750_148820
+*MOT:	CHILDNAME . 150600_151160
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here is your snack . 152720_153930
+%mor:	adv|here aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|snack .
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*MOT:	listen , this is the snack . 155450_156470
+%mor:	verb|listen-Fin-Imp-S cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|snack .
+%gra:	1|6|ROOT 2|6|PUNCT 3|6|NSUBJ 4|6|COP 5|6|DET 6|1|PARATAXIS 7|1|PUNCT
+*CHI:	snack . 156250_156940
+%mor:	noun|snack .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	first you do this . 156530_157310
+%mor:	adv|first pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 pron|this-Dem-S1 .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=pointing . 156990_157820
+%xIS:	CHI-Gesture-I
+*MOT:	yes . 157560_158700
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here , you can have one snack . 162370_164070
+%mor:	adv|here cm|cm pron|you-Prs-Nom-S2 aux|can-Fin-S verb|have-Inf-S num|one noun|snack-Acc .
+%gra:	1|5|ADVMOD 2|1|PUNCT 3|5|NSUBJ 4|5|AUX 5|7|ROOT 6|7|NUMMOD 7|5|OBJ 8|5|PUNCT
+*MOT:	look , this is your snack . 164470_167530
+%mor:	verb|look-Fin-Imp-S cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|snack .
+%gra:	1|6|ROOT 2|6|PUNCT 3|6|NSUBJ 4|6|COP 5|6|NMOD-POSS 6|1|PARATAXIS 7|1|PUNCT
+*MOT:	<take it>  [/] take it . 168130_171030
+%mor:	verb|take-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	say thank+you . 172950_174120
+%mor:	verb|say-Fin-Imp-S intj|thankyou .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	tell me if you want more , okay ? 187630_189070
+%mor:	verb|tell-Fin-Imp-S pron|I-Prs-Acc-S1 sconj|if pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 adj|more-Cmp-S1 cm|cm intj|okay ?
+%gra:	1|8|ROOT 2|1|IOBJ 3|5|MARK 4|5|NSUBJ 5|1|ADVCL 6|5|OBJ 7|8|PUNCT 8|1|DISCOURSE 9|1|PUNCT
+*MOT:	do you want snack ? 193630_194730
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|snack-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	good+job . 201660_203130
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 204760_205670
+*MOT:	want more snack ? 206070_207330
+%mor:	verb|want-Fin-Imp-S adj|more-Cmp-S1 noun|snack-Acc ?
+%gra:	1|3|ROOT 2|3|AMOD 3|1|OBJ 4|1|PUNCT
+*MOT:	can you say more ? 207810_208620
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|say-Inf-S adj|more-Cmp-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	I give you more snack . 208650_210000
+%mor:	pron|I-Prs-Nom-S1 verb|give-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 adj|more-Cmp-S1 noun|snack-Acc .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|IOBJ 4|5|AMOD 5|2|OBJ 6|2|PUNCT
+*MOT:	more snack ? 211240_212060
+%mor:	adj|more-Cmp-S1 noun|snack ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 215380_216550
+*MOT:	do you want more snack ? 216560_217760
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|more-Cmp-S1 noun|snack-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*CHI:	&=moans . 235380_236440
+*MOT:	CHILDNAME do you want the scissor ? 245260_246540
+%mor:	propn|CHILDNAME aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|the-Def-Art noun|scissor-Acc ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*MOT:	you want your scissor ? 247280_248370
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|your-Prs-Gen-S2 noun|scissor-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|2|PUNCT
+*MOT:	scissor , look there's a scissor here . 248910_251230
+%mor:	noun|scissor cm|cm verb|look-Fin-Imp-S pron|there-Int-S1~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|scissor adv|here .
+%gra:	1|3|VOCATIVE 2|1|PUNCT 3|8|ROOT 4|3|EXPL 5|7|COP 6|7|DET 7|3|CCOMP 8|7|ADVMOD 9|3|PUNCT
+*MOT:	scissor . 253530_254390
+%mor:	noun|scissor .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hmm ? 257260_257740
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want your scissor ? 259450_260360
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|your-Prs-Gen-S2 noun|scissor-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|2|PUNCT
+*MOT:	you can cut the play+doh . 261410_262440
+%mor:	pron|you-Prs-Nom-S2 aux|can-Fin-S verb|cut-Inf-S det|the-Def-Art noun|playdoh-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	here , take your scissor . 263530_264650
+%mor:	adv|here cm|cm verb|take-Fin-Imp-S2 pron|your-Prs-Gen-S2 noun|scissor-Acc .
+%gra:	1|3|ADVMOD 2|1|PUNCT 3|5|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|3|PUNCT
+*MOT:	scissor . 265510_266190
+%mor:	noun|scissor .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay put it here . 268720_269620
+%mor:	intj|okay verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adv|here .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|OBJ 4|2|ADVMOD 5|2|PUNCT
+*CHI:	doo . 270070_270350
+%mor:	noun|doo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	good+job . 270500_271640
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here take your scissor . 273310_274530
+%mor:	adv|here verb|take-Fin-Imp-S pron|your-Prs-Gen-S2 noun|scissor-Acc .
+%gra:	1|2|ADVMOD 2|4|ROOT 3|4|NMOD-POSS 4|2|OBJ 5|2|PUNCT
+*MOT:	scissor . 276040_276760
+%mor:	noun|scissor .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and you want to cut the play+doh ? 277380_278730
+%mor:	cconj|and pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|cut-Inf-S det|the-Def-Art noun|playdoh-Acc ?
+%gra:	1|3|CC 2|3|NSUBJ 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|3|PUNCT
+*CHI:	&=hums . 280160_280740
+*MOT:	with the scissor . 280800_281930
+%mor:	adp|with det|the-Def-Art noun|scissor .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	very nice . 284450_287090
+%mor:	adv|very adj|nice-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	good+job , that's your scissor here , look . 288900_292950
+%mor:	noun|goodjob cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|scissor adv|here cm|cm verb|look-Fin-Imp-S .
+%gra:	1|6|VOCATIVE 2|1|PUNCT 3|6|NSUBJ 4|6|COP 5|6|NMOD-POSS 6|9|ROOT 7|6|ADVMOD 8|9|PUNCT 9|6|PARATAXIS 10|6|PUNCT
+*MOT:	look , your scissor is here . 293360_294990
+%mor:	verb|look-Fin-Imp-S cm|cm pron|your-Prs-Gen-S2 noun|scissor aux|be-Fin-Ind-Pres-S3 adv|here .
+%gra:	1|6|ROOT 2|6|PUNCT 3|4|NMOD-POSS 4|6|NSUBJ 5|6|COP 6|1|PARATAXIS 7|1|PUNCT
+*MOT:	scissor , okay <give me this>  [/] give me this . 297850_299730
+%mor:	noun|scissor cm|cm intj|okay verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 pron|this-Dem-S1 .
+%gra:	1|4|VOCATIVE 2|1|PUNCT 3|4|DISCOURSE 4|6|ROOT 5|4|IOBJ 6|4|OBJ 7|4|PUNCT
+*MOT:	where's your scissor ? 300330_301860
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|scissor ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*MOT:	look here CHILDNAME . 302430_303620
+%mor:	verb|look-Fin-Imp-S adv|here propn|CHILDNAME .
+%gra:	1|3|ROOT 2|1|ADVMOD 3|1|VOCATIVE 4|1|PUNCT
+*CHI:	&=squeals . 303640_305060
+*MOT:	hmm , this is the scissor . 305360_307100
+%mor:	intj|hmm cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|scissor .
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|6|NSUBJ 4|6|COP 5|6|DET 6|6|ROOT 7|6|PUNCT
+*MOT:	look . 307530_308040
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

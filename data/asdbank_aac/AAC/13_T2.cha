@@ -1,0 +1,264 @@
+@UTF8
+@PID:	11312/a-00082313-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|3;01.|female|||Target_Child|||
+@Media:	13_T2, video
+*COD:	U . 1_38000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yeah could you ask first ? 37880_40030
+%mor:	intj|yeah aux|could-Fin-S pron|you-Prs-Nom-S2 verb|ask-Inf-S adv|first ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|ADVMOD 6|4|PUNCT
+*COD:	C . 38000_351520
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	read . 40190_41320
+%mor:	verb|read-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	READ . 40320_42120
+%mor:	verb|read-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	&=breathes . 42420_43330
+*MOT:	good+job , read . 45050_47490
+%mor:	noun|goodjob cm|cm noun|read .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|APPOS 4|1|PUNCT
+*MOT:	you're going to read . 48650_50590
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|go-Part-Pres-S part|to verb|read-Inf-S .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|MARK 5|3|XCOMP 6|3|PUNCT
+*MOT:	do you see that CHILDNAME ? 56480_58060
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S det|that-Def-Dem-Sing propn|CHILDNAME-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	yeah . 58080_59220
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 69000_71380
+*MOT:	that's pretty cool huh ? 73900_76150
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adv|pretty adj|cool-S1 intj|huh ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|5|ROOT 5|4|VOCATIVE 6|4|PUNCT
+*MOT:	I can't make that happen again girl . 77970_81180
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S~part|not verb|make-Inf-S pron|that-Dem verb|happen-Inf-S adv|again noun|girl-Acc .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|8|ROOT 5|4|OBJ 6|4|XCOMP 7|6|ADVMOD 8|6|OBJ 9|4|PUNCT
+*CHI:	&=reaching . 80360_83660
+%xIS:	CHI-Gesture-S
+*MOT:	&=laughs okay hold on cause I'm gonna make you ask for that cause I have to get a chair CHILDNAME , cause I'm not falling off . 81660_89690
+%mor:	intj|okay verb|hold-Fin-Imp-S adp|on sconj|cause pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 part|go verb|make-Inf-S pron|you-Prs-Acc-S2 verb|ask-Inf-S adp|for pron|that-Dem sconj|cause pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 part|to verb|get-Inf-S det|a-Ind-Art noun|chair-Acc propn|CHILDNAME cm|cm sconj|cause pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 part|not verb|fall-Part-Pres-S adp|off .
+%gra:	1|2|DISCOURSE 2|27|ROOT 3|2|COMPOUND-PRT 4|8|MARK 5|8|NSUBJ 6|8|AUX 7|8|ADVMOD 8|2|ADVCL 9|8|OBJ 10|8|XCOMP 11|12|CASE 12|10|OBL 13|15|MARK 14|15|NSUBJ 15|8|ADVCL 16|17|MARK 17|15|XCOMP 18|19|DET 19|17|OBJ 20|19|APPOS 21|26|PUNCT 22|26|MARK 23|26|NSUBJ 24|26|AUX 25|26|ADVMOD 26|17|ADVCL 27|26|COMPOUND-PRT 28|2|PUNCT
+*MOT:	CHILDNAME you're gonna have to wait two seconds my love , I'll come do it . 90480_95290
+%mor:	intj|childname pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 part|go verb|have-Inf-S part|to verb|wait-Inf-S num|two noun|second-Plur pron|my-Prs-Gen-S1 noun|love cm|cm pron|I-Prs-Nom-S1~aux|will-Fin-S verb|come-Inf-S verb|do-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|17|ROOT 6|7|MARK 7|5|XCOMP 8|9|NUMMOD 9|7|OBL-UNMARKED 10|11|NMOD-POSS 11|7|OBL-UNMARKED 12|15|PUNCT 13|15|NSUBJ 14|15|AUX 15|5|PARATAXIS 16|15|XCOMP 17|16|OBJ 18|5|PUNCT
+*MOT:	but I have to get a chair . 95600_97150
+%mor:	cconj|but pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 part|to verb|get-Inf-S det|a-Ind-Art noun|chair-Acc .
+%gra:	1|3|CC 2|3|NSUBJ 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|DET 7|5|OBJ 8|3|PUNCT
+*AAC:	MUSIC . 99610_100440
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*CHI:	&=hums . 100140_101030
+*MOT:	woohoo good+job , music  [/] music . 100300_104920
+%mor:	noun|woohoo noun|goodjob cm|cm noun|music .
+%gra:	1|2|COMPOUND 2|4|ROOT 3|4|PUNCT 4|2|APPOS 5|2|PUNCT
+*MOT:	music . 107350_108880
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx take the binder xxx . 111730_113930
+%mor:	verb|take-Fin-Imp-S det|the-Def-Art noun|binder-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*CHI:	&=reaching . 118500_121580
+%xIS:	CHI-Gesture-S
+*MOT:	yes ? 122710_123650
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	smile to the camera . 128800_131360
+%mor:	verb|smile-Fin-Imp-S adp|to det|the-Def-Art noun|camera .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+*MOT:	that's right . 134540_136210
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	you like the light xxx . 136540_140500
+%mor:	pron|you-Prs-Nom-S2 verb|like-Fin-Ind-Pres-S2 det|the-Def-Art noun|light-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*CHI:	&=moving . 140000_141240
+%xIS:	CHI-Gesture-S
+*CHI:	&=pointing . 141560_142100
+%xIS:	CHI-Gesture-S
+*CHI:	uh . 144020_144740
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	over there my love , look CHILDNAME , look  [/] look  [/] look  [/] look . 145420_150980
+%mor:	adp|over adv|there pron|my-Prs-Gen-S1 noun|love cm|cm verb|look-Fin-Imp-S propn|CHILDNAME-Acc cm|cm verb|look-Fin-Imp-S .
+%gra:	1|2|CASE 2|6|OBL 3|4|NMOD-POSS 4|6|NSUBJ 5|6|PUNCT 6|9|ROOT 7|6|OBJ 8|9|PUNCT 9|6|PARATAXIS 10|6|PUNCT
+*MOT:	look  [/] look  [/] look . 151930_153050
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	MUSIC . 153800_155240
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	good+job , music  [/] music . 154810_159180
+%mor:	noun|goodjob cm|cm noun|music .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|APPOS 4|1|PUNCT
+*MOT:	music  [/] music  [/] music . 162970_168700
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=reaching . 167040_168720
+%xIS:	CHI-Gesture-S
+*MOT:	you're good . 170190_171410
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|good-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*CHI:	&=moving . 171950_174080
+%xIS:	CHI-Gesture-S
+*MOT:	don't worry I'm standing here , don't worry bug . 173950_176990
+%mor:	aux|do-Fin-Imp-S~part|not verb|worry-Fin-Imp-S pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|stand-Part-Pres-S adv|here cm|cm aux|do-Fin-Imp-S~part|not verb|worry-Fin-Imp-S noun|bug-Acc .
+%gra:	1|3|AUX 2|3|ADVMOD 3|12|ROOT 4|6|NSUBJ 5|6|AUX 6|3|CCOMP 7|6|ADVMOD 8|11|PUNCT 9|11|AUX 10|11|ADVMOD 11|3|PARATAXIS 12|11|OBJ 13|3|PUNCT
+*CHI:	&=reaching . 185170_186820
+%xIS:	CHI-Gesture-S
+*MOT:	what do you want ? 186910_188100
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	&=reaching . 188560_189430
+%xIS:	CHI-Gesture-S
+*MOT:	that's a xxx . 189120_190680
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|PUNCT 4|2|PUNCT
+*CHI:	uh  [/] uh . 190490_191740
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	uh  [/] uh  [/] uh . 191600_193020
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 197970_199250
+*MOT:	yay . 199530_200770
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yee . 201280_202470
+%mor:	intj|yee .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Hakuna_Matata . 202870_205430
+%mor:	propn|HakunaMatata .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 205180_206250
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah . 206310_207440
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Hakuna . 207800_209630
+%mor:	propn|Hakuna .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=moving . 209310_210420
+%xIS:	CHI-Gesture-S
+*MOT:	Haku . 210010_211040
+%mor:	propn|Haku .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=pointing . 210430_210790
+%xIS:	CHI-Gesture-S
+*MOT:	back there see ? 213990_215900
+%mor:	adv|back adv|there verb|see-Fin-Imp-S ?
+%gra:	1|3|ADVMOD 2|3|ADVMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	&=hums . 215510_216680
+*MOT:	look CHILDNAME . 217730_219740
+%mor:	verb|look-Fin-Imp-S propn|CHILDNAME-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	CHILDNAME look . 220110_221390
+%mor:	noun|childname verb|look-Fin-Imp-S .
+%gra:	1|2|ROOT 2|1|LIST 3|1|PUNCT
+*MOT:	music . 223570_224990
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	MUSIC . 227570_229280
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	music  [/] music xxx . 229200_233270
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=pointing . 230010_230650
+%xIS:	CHI-Gesture-S
+*MOT:	music  [/] music . 234480_236980
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=reaching . 235940_237280
+%xIS:	CHI-Gesture-S
+*MOT:	music . 239350_240620
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=moving . 240810_242550
+%xIS:	CHI-Gesture-S
+*CHI:	&=reaching . 242930_243740
+%xIS:	CHI-Gesture-S
+*MOT:	music . 243060_244100
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that's right bug . 246030_248510
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 noun|bug .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	music . 249160_250900
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=moving . 250030_251300
+%xIS:	CHI-Gesture-S
+*MOT:	&=laughs xxx . 254590_258870
+*CHI:	uh &=grunts . 256190_257500
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=reaching . 264950_265990
+%xIS:	CHI-Gesture-S
+*AAC:	MUSIC . 269250_276710
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	good+job , you're nearly , that's right good+job . 272520_276500
+%mor:	noun|goodjob cm|cm pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adv|nearly cm|cm pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 noun|goodjob .
+%gra:	1|10|DISCOURSE 2|1|PUNCT 3|4|NSUBJ 4|10|REPARANDUM 5|10|ADVMOD 6|5|PUNCT 7|10|NSUBJ 8|10|COP 9|10|AMOD 10|10|ROOT 11|10|PUNCT
+*MOT:	music  [/] music . 277020_280540
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 281370_282410
+*MOT:	music &=hums music . 281800_285840
+%mor:	noun|music noun|music .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=reaching . 283130_284400
+%xIS:	CHI-Gesture-S
+*CHI:	&=moving . 292310_294250
+%xIS:	CHI-Gesture-S
+*CHI:	&=pointing . 296660_297750
+%xIS:	CHI-Gesture-S
+*MOT:	xxx &=hums . 299280_302170
+*MOT:	xxx . 309670_311000
+*MOT:	yay . 312550_314400
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 319030_320440
+*MOT:	yay that's right . 321280_324240
+%mor:	intj|yay pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*AAC:	MUSIC . 322770_325030
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	good+job . 324340_326160
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	music  [/] music CHILDNAME , music yay . 326600_333800
+%mor:	noun|music noun|childname cm|cm noun|music intj|yay .
+%gra:	1|2|COMPOUND 2|5|ROOT 3|4|PUNCT 4|2|LIST 5|2|DISCOURSE 6|2|PUNCT
+*CHI:	&=hums . 329850_331060
+*MOT:	woohoo . 337830_339320
+%mor:	intj|woohoo .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	that's right CHILDNAMEa(rina) . 341590_343200
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|right-S1 propn|CHILDNAMEarina .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DISCOURSE 4|4|ROOT 5|4|PUNCT
+@End

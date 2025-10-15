@@ -1,0 +1,157 @@
+@UTF8
+@PID:	11312/a-00082318-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|3;01.|male|||Target_Child|||
+@Media:	14_T2, video
+*COD:	C . 1_313520
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	xxx . 11250_14080
+*MOT:	eat . 14780_15680
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 20750_21900
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME ? 24730_25830
+%mor:	noun|childname ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=hums . 29670_30650
+*MOT:	eat . 34760_35920
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 42030_43080
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 45600_46910
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 48070_49320
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 52530_53940
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 57030_58300
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	EAT . 59050_61080
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	eat , there xxx . 65750_67920
+%mor:	verb|eat-Fin-Imp-S cm|cm adv|there .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|ADVMOD 4|1|PUNCT
+*MOT:	q@l . 69310_70210
+%mor:	propn|q .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 76180_78050
+%xgco:	Child gives thumbs up whilst shaking hand up and down .
+%xIS:	CHI-Gesture-S
+*MOT:	eat . 77500_78950
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 82190_83670
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 84990_85930
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 88060_89070
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	EAT . 90020_92950
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yeah . 92760_93910
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 97040_97810
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat CHILDNAME . 130640_131990
+%mor:	verb|eat-Fin-Imp-S propn|CHILDNAME-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	xxx look it . 134990_136810
+%mor:	verb|look-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	eat . 137040_138070
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME . 140410_141420
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	EAT . 148000_150260
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yeah eat . 149960_153340
+%mor:	intj|yeah verb|eat-Fin-Imp-S .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	good boy . 156370_157710
+%mor:	adj|good-S1 noun|boy .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	put it back right here . 157800_160110
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adv|back adv|right adv|here .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|ADVMOD 4|5|ADVMOD 5|1|ADVMOD 6|1|PUNCT
+*MOT:	eat . 161420_162710
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 163460_164350
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	EAT . 167050_169350
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	yeah that's my baby boy &=laughs . 169490_175030
+%mor:	intj|yeah pron|that-Dem~aux|be-Fin-Ind-Pres-S3 pron|my-Prs-Gen-S1 noun|baby noun|boy .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|NMOD-POSS 5|6|COMPOUND 6|6|ROOT 7|6|PUNCT
+*MOT:	eat . 225110_226510
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 231140_232250
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 236370_237390
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 244060_245910
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 253060_254870
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 254260_255200
+*MOT:	eat . 258620_260490
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 262760_264430
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 266360_267870
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 274000_276610
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	eat . 279270_280680
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	EAT . 300620_303310
+%mor:	verb|eat-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	eat yay , xxx that . 303690_307860
+%mor:	verb|eat-Fin-Imp-S intj|yay cm|cm pron|that-Dem .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|PUNCT 4|1|PARATAXIS 5|1|PUNCT
+*MOT:	where are you going ? 308500_310120
+%mor:	adv|where aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|go-Part-Pres-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+@End

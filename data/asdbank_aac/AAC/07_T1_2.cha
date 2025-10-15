@@ -1,0 +1,140 @@
+@UTF8
+@PID:	11312/a-00082287-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, FAT Father, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|FAT|||||Father|||
+@ID:	eng|AAC|CHI|6;09.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	07_T1_2, video
+*COD:	C . 10_318480
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	okay CHILDNAME . 1760_2970
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=groans . 2860_3540
+*FAT:	www . 4460_10870
+%xPCO:	parent speaking to researcher .
+*FAT:	www . 17350_22100
+*CHI:	&=palm . 18190_20370
+%xgco:	Target child upturns palms to get candy
+%xIS:	CHI-Gesture-S
+*FAT:	okay . 25490_26070
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	is that good CHILDNAME ? 27980_29850
+%mor:	aux|be-Fin-Ind-Pres-S3 det|that-Def-Dem-Sing adj|good-S1 noun|childname ?
+%gra:	1|4|COP 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*CHI:	&=hums . 29210_31060
+*FAT:	okay so what else ? 30680_32460
+%mor:	intj|okay adv|so pron|what-Int-S1 adv|else ?
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|4|ROOT 4|3|ADVMOD 5|3|PUNCT
+*FAT:	&=hums . 36070_36820
+*AAC:	CANDY ? 38450_41580
+%mor:	noun|candy ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	www . 41970_45370
+%xPCO:	parent speaking to researcher .
+*AAC:	SMARTIES ? 50020_55130
+%mor:	propn|SMARTIES-Plur ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	yeah Smarties . 54590_56870
+%mor:	intj|yeah propn|Smarties-Plur .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	www . 59690_64040
+%xPCO:	parent speaking to researcher .
+*FAT:	okay . 72380_73440
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	www . 76910_79940
+%xPCO:	parent speaking to sibling .
+*AAC:	SOUR PATCH KIDS . 81240_84400
+%mor:	adj|sour-S1 noun|patch noun|kids-Plur .
+%gra:	1|3|AMOD 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	oh of course , Sour_Patch_Kids again . 84420_87420
+%mor:	intj|oh adp|of noun|course cm|cm propn|SourPatchKids-Plur adv|again .
+%gra:	1|5|DISCOURSE 2|5|ADVMOD 3|2|FIXED 4|2|PUNCT 5|6|ROOT 6|5|ADVMOD 7|5|PUNCT
+*FAT:	www . 89050_90750
+%xPCO:	parent speaking to researcher .
+*CHI:	&=groans . 90450_92880
+*FAT:	&=laughs . 92930_94150
+*FAT:	www . 94290_104010
+%xPCO:	parent speaking to researcher .
+*CHI:	&=laughs . 97900_101190
+*FAT:	um . 105420_106500
+%mor:	intj|um .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	www . 112270_115060
+%xPCO:	parent speaking to researcher .
+*FAT:	I know +... 125300_127640
+%mor:	pron|I-Prs-Nom-S1 verb|know-Fin-Ind-Pres-S1 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*CHI:	&=groans . 126400_129810
+*FAT:	hey CHILDNAME . 132340_133710
+%mor:	intj|hey propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	xxx . 146470_149480
+*FAT:	here are you thirsty ? 159860_162000
+%mor:	adv|here aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|thirsty-S1 ?
+%gra:	1|4|ROOT 2|4|COP 3|4|NSUBJ 4|1|PARATAXIS 5|1|PUNCT
+*FAT:	alright CHILDNAME , you want milk or water ? 173860_180870
+%mor:	intj|alright intj|childname cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|milk-Acc cconj|or noun|water ?
+%gra:	1|5|DISCOURSE 2|5|DISCOURSE 3|2|PUNCT 4|5|NSUBJ 5|8|ROOT 6|5|OBJ 7|8|CC 8|6|CONJ 9|5|PUNCT
+*CHI:	&=grunts . 181540_183140
+*CHI:	&=groans . 189260_191610
+*FAT:	&=laughs . 191010_192390
+*CHI:	&=laughs . 194460_196810
+*FAT:	okay CHILDNAME . 200220_201470
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums . 201620_202540
+*CHI:	&=hums . 204530_206590
+*FAT:	oh . 217600_218170
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	xxx . 232060_232790
+*FAT:	oh really ? 237710_239020
+%mor:	intj|oh adv|really ?
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	so +/. 257480_258210
+%mor:	adv|so +/.
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent interrupted by sibling .
+*FAT:	www . 259190_261140
+%xPCO:	parent speaking to sibling .
+*FAT:	www . 262920_264320
+%xPCO:	parent speaking to sibling .
+*FAT:	www . 269790_271630
+%xPCO:	parent speaking to sibling .
+*FAT:	okay CHILDNAME . 274990_276340
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=coughs . 303320_306930
+*FAT:	alright CHILDNAME is there anything else in here you would like ? 303700_307450
+%mor:	intj|alright propn|CHILDNAME verb|be-Fin-Ind-Pres-S3 pron|there-Int-S1 pron|anything-Ind-S1 adj|else-S1 adp|in adv|here pron|you-Prs-Nom-S2 aux|would-Fin-S verb|like-Inf-S ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|11|ROOT 4|3|EXPL 5|3|NSUBJ 6|5|AMOD 7|8|CASE 8|3|OBL 9|11|NSUBJ 10|11|AUX 11|3|PARATAXIS 12|3|PUNCT
+*AAC:	MandMs . 307000_311450
+%mor:	propn|MandMs .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*FAT:	xxx . 308060_308940
+*FAT:	what's that ? 309150_310020
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	eh . 309560_311500
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*FAT:	M_and_M's I don't have M_and_M's dude . 311300_315010
+%mor:	propn|MandM~part|s pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|have-Inf-S propn|MandM~part|s noun|dude-Acc .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|6|NSUBJ 4|6|AUX 5|6|ADVMOD 6|9|ROOT 7|9|NMOD-POSS 8|7|CASE 9|6|OBJ 10|6|PUNCT
+*FAT:	CHILDNAME . 315740_316830
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+@End

@@ -1,0 +1,283 @@
+@UTF8
+@PID:	11312/a-00082306-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|8;00.|male|||Target_Child|||
+@Media:	11_T3_1, video
+*COD:	C . 1_317530
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want to play ? 1090_2200
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|play-Inf-S ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|MARK 4|2|XCOMP 5|2|PUNCT
+*AAC:	RICE . 2730_4080
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	rice . 3960_4850
+%mor:	noun|rice .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	rice . 9490_10210
+%mor:	noun|rice .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=hums . 28760_30080
+*MOT:	can I borrow ? 39200_40210
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	mama play rice . 41610_43300
+%mor:	noun|mama verb|play-Fin-Imp-S noun|rice-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*AAC:	RICE . 44810_48240
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	oh you want rice ? 48110_49260
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|rice-Acc ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	I have it . 49330_50230
+%mor:	pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	borrow . 55770_56890
+%mor:	verb|borrow-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	mama play rice , thank you . 57970_59600
+%mor:	noun|mama verb|play-Fin-Imp-S noun|rice-Acc cm|cm verb|thank-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|OBJ 4|5|PUNCT 5|2|PARATAXIS 6|5|OBJ 7|2|PUNCT
+*AAC:	RICE . 60790_63530
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	rice . 63730_64910
+%mor:	noun|rice .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can I borrow ? 82010_83550
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	thank+you . 84660_85260
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	RICE . 87390_89390
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	rice . 88500_89250
+%mor:	noun|rice .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ray . 89380_91310
+%mor:	noun|ray .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates rice
+*MOT:	&=hums . 91400_92070
+*MOT:	can I borrow ? 97040_98010
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*AAC:	RICE . 101550_103520
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	&=moans . 101730_103320
+*MOT:	oh you want rice . 103360_104890
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|rice-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=hums . 104020_104660
+*MOT:	xxx . 105570_106420
+*MOT:	good+job . 117380_118390
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can I borrow ? 131260_132210
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	thank+you . 133680_134400
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	RICE . 137010_138690
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	oh rice . 138130_139510
+%mor:	intj|oh noun|rice .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	ray . 139560_140350
+%mor:	noun|ray .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child approximates rice .
+*MOT:	yep , rice . 140170_142270
+%mor:	intj|yep cm|cm noun|rice .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*CHI:	&=hums . 153890_154790
+*MOT:	borrow ? 161230_162040
+%mor:	verb|borrow-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	RICE . 164470_166270
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*CHI:	mmnini . 165630_166860
+%mor:	propn|mmnini .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh you want rice , here . 166750_168510
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|rice-Acc cm|cm adv|here .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|PUNCT 6|3|ADVMOD 7|3|PUNCT
+*MOT:	good+job xxx . 169400_170540
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=hums . 177370_178390
+*MOT:	can I borrow ? 186240_187260
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	CHILDNAME you have apple . 189650_190700
+%mor:	propn|CHILDNAME pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 noun|apple-Acc .
+%gra:	1|3|VOCATIVE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	would you like apple ? 191300_191850
+%mor:	aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S noun|apple-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*AAC:	APPLE . 191930_193150
+%mor:	propn|APPLE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	would you like apple ? 192940_193890
+%mor:	aux|would-Fin-S pron|you-Prs-Nom-S2 verb|like-Inf-S noun|apple-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	apple . 194060_194780
+%mor:	noun|apple .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=other . 195540_196230
+%xgco:	Child pushes his moms hand down to indicate that he doesn't want the item that's in her hand .
+%xIS:	CHI-Gesture-S
+*MOT:	oh no you don't like apple , okay . 195770_198140
+%mor:	intj|oh intj|no pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|like-Inf-S noun|apple-Acc cm|cm intj|okay .
+%gra:	1|6|DISCOURSE 2|6|DISCOURSE 3|6|NSUBJ 4|6|AUX 5|6|ADVMOD 6|9|ROOT 7|6|OBJ 8|9|PUNCT 9|6|DISCOURSE 10|6|PUNCT
+*AAC:	RICE . 196680_199300
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	rice . 199670_200590
+%mor:	noun|rice .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	anane . 201200_201980
+%mor:	propn|anane .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	here . 202310_203020
+%mor:	adv|here .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good+job . 205220_206030
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=hums . 207480_210640
+*MOT:	can I borrow ? 213830_214950
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	thank+you . 215510_216160
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	RICE . 217520_219530
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	xxx . 217750_219260
+*CHI:	anane . 220040_220900
+%mor:	propn|anane .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you want rice , here . 220220_222250
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|rice-Acc cm|cm adv|here .
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|PUNCT 5|2|ADVMOD 6|2|PUNCT
+*CHI:	xxx . 222070_222870
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	CHILDNAME <do you want drink>  [/] do you want drink ? 236210_237950
+%mor:	noun|childname-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|drink-Acc ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*AAC:	DRINK . 238010_239760
+%mor:	noun|drink .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	drink , you want this ? 239760_241390
+%mor:	verb|drink-Fin-Imp-S cm|cm pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|this-Dem-S1 ?
+%gra:	1|5|ROOT 2|4|PUNCT 3|4|NSUBJ 4|1|PARATAXIS 5|4|OBJ 6|1|PUNCT
+*CHI:	nani . 241320_242130
+%mor:	propn|nani .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	drink ? 241960_242560
+%mor:	verb|drink-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 242150_242930
+%xgco:	Child pushes his moms hand away to indicate that he doesn't want the item that's in her hand .
+%xIS:	CHI-Gesture-S
+*MOT:	no ? 242640_243110
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 243150_243680
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can I borrow ? 247530_248630
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*AAC:	RICE . 251570_253860
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	oh rice , sure . 253880_255400
+%mor:	intj|oh noun|rice cm|cm adj|sure-S1 .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|PUNCT 4|2|PARATAXIS 5|2|PUNCT
+*CHI:	&=grunts . 254650_255350
+*MOT:	you want rice , here you go . 255450_257320
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|rice-Acc cm|cm adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|2|NSUBJ 2|7|ROOT 3|2|OBJ 4|5|PUNCT 5|2|PARATAXIS 6|7|NSUBJ 7|5|ADVCL-RELCL 8|2|PUNCT
+*MOT:	look CHILDNAME I got , here . 276440_279080
+%mor:	verb|look-Fin-Imp-S propn|CHILDNAME-Acc pron|I-Prs-Nom-S1 verb|get-Fin-Ind-Past-S1-irr cm|cm adv|here .
+%gra:	1|6|ROOT 2|1|OBJ 3|4|NSUBJ 4|1|PARATAXIS 5|6|PUNCT 6|4|ADVMOD 7|1|PUNCT
+*MOT:	CHILDNAME do you like bubble ? 289870_290980
+%mor:	propn|CHILDNAME aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S noun|bubble-Acc ?
+%gra:	1|4|VOCATIVE 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	bubble ? 291790_292160
+%mor:	noun|bubble ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	BUBBLES . 295280_297600
+%mor:	noun|bubble-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	do you want bubble ? 296750_297890
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|bubble-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=other . 299180_300120
+%xgco:	Child pushes his moms hand away to indicate that he doesn't want the item that's in her hand .
+%xIS:	CHI-Gesture-S
+*MOT:	no bubble , okay . 299740_301070
+%mor:	det|no-Def-Neg noun|bubble cm|cm intj|okay .
+%gra:	1|2|DET 2|4|ROOT 3|4|PUNCT 4|2|DISCOURSE 5|2|PUNCT
+*MOT:	can I borrow ? 304070_304880
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|borrow-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*AAC:	RICE . 307640_309170
+%mor:	propn|RICE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*MOT:	rice , okay you want rice . 308340_310580
+%mor:	noun|rice cm|cm intj|okay pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|rice-Acc .
+%gra:	1|6|ROOT 2|5|PUNCT 3|5|DISCOURSE 4|5|NSUBJ 5|1|PARATAXIS 6|5|OBJ 7|1|PUNCT
+*CHI:	&=moans . 308470_310040
+*MOT:	there you go . 311810_312890
+%mor:	pron|there-Dem-S1 pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+@End

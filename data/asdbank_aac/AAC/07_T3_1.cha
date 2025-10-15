@@ -1,0 +1,247 @@
+@UTF8
+@PID:	11312/a-00082289-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, FAT Father, CHI Target_Child, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|FAT|||||Father|||
+@ID:	eng|AAC|CHI|6;09.|male|||Target_Child|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	07_T3_1, video
+*COD:	C . 1_135000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	you know what ? 1990_3960
+%mor:	pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 pron|what-Int-S1 ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*FAT:	here CHILDNAME . 5310_6660
+%mor:	adv|here propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*CHI:	ouk . 9080_10050
+%mor:	intj|ouk .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	DRINK . 9310_11440
+%mor:	noun|drink .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	drink  [/] drink . 10890_13180
+%mor:	verb|drink-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	good+job CHILDNAME . 24770_26370
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	switch them up , resetting xxx . 28260_31600
+%mor:	verb|switch-Fin-Imp-S pron|they-Prs-Acc-P3 adp|up cm|cm verb|resett-Part-Pres-S .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|5|PUNCT 5|1|PARATAXIS 6|1|PUNCT
+*AAC:	COMB . 32060_33320
+%mor:	noun|comb .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*FAT:	oh , comb . 32310_34440
+%mor:	intj|oh cm|cm noun|comb .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*FAT:	CHILDNAME that's the comb . 35840_38070
+%mor:	intj|childname pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|comb .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|DET 5|5|ROOT 6|5|PUNCT
+*FAT:	comb , see ? 39730_40850
+%mor:	noun|comb cm|cm verb|see-Fin-Imp-S ?
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+*FAT:	you want the drink you want this one . 44580_46130
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|drink-Acc pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|this-Def-Dem-Sing noun|one .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|4|DET 4|2|OBJ 5|6|NSUBJ 6|4|ACL-RELCL 7|8|DET 8|6|OBL-UNMARKED 9|2|PUNCT
+*FAT:	this one's for drinking . 46180_48670
+%mor:	det|this-Def-Dem-Sing noun|one~aux|be-Fin-Ind-Pres-S3 adp|for noun|drinking-Ger .
+%gra:	1|2|DET 2|5|NSUBJ 3|5|COP 4|5|CASE 5|5|ROOT 6|5|PUNCT
+*FAT:	reset it . 51330_52340
+%mor:	verb|reset-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*AAC:	COMB . 54680_56580
+%mor:	noun|comb .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+%xSSE:	CHI-AAC-SSE
+*FAT:	oh CHILDNAME that's comb . 55620_58140
+%mor:	intj|oh intj|childname pron|that-Dem~aux|be-Fin-Ind-Pres-S3 noun|comb .
+%gra:	1|5|DISCOURSE 2|5|DISCOURSE 3|5|NSUBJ 4|5|COP 5|5|ROOT 6|5|PUNCT
+*FAT:	see , comb . 60260_61760
+%mor:	verb|see-Fin-Imp-S cm|cm noun|comb .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+*FAT:	it's the comb one . 64230_65580
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|comb noun|one .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+*FAT:	if you want the drink you want this one , the drink . 65630_67800
+%mor:	sconj|if pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|drink-Acc pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|this-Def-Dem-Sing noun|one-Acc cm|cm det|the-Def-Art noun|drink .
+%gra:	1|3|MARK 2|3|NSUBJ 3|12|ADVCL 4|5|DET 5|3|OBJ 6|7|NSUBJ 7|5|ACL-RELCL 8|9|DET 9|7|OBJ 10|3|PUNCT 11|12|DET 12|12|ROOT 13|12|PUNCT
+*FAT:	see ? 69270_69950
+%mor:	verb|see-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	reset  [/] reset . 71360_73110
+%mor:	verb|reset-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	which one CHILDNAME ? 75290_76620
+%mor:	det|which-Def-Int noun|one noun|childname ?
+%gra:	1|3|DET 2|3|NUMMOD 3|3|ROOT 4|3|PUNCT
+*FAT:	you ready ? 76960_77830
+%mor:	pron|you-Prs-Nom-S2 adj|ready-S1 ?
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*AAC:	COMB . 77910_79690
+%mor:	noun|comb .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*FAT:	aw buddy +... 78380_79800
+%mor:	intj|aw noun|buddy +...
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	comb . 81600_83010
+%mor:	noun|comb .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	see ? 86510_87340
+%mor:	verb|see-Fin-Imp-S ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	okay CHILDNAME . 89760_91120
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*AAC:	DRINK . 98220_100280
+%mor:	noun|drink .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*FAT:	drink . 100550_101360
+%mor:	verb|drink-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	www . 109490_112440
+%xPCO:	Dad speaking to sibling .
+*FAT:	okay CHILDNAME , let's try something different . 119770_123450
+%mor:	intj|okay intj|childname cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|try-Inf-S pron|something-Ind-S1 adj|different-S1 .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|2|PUNCT 4|8|ROOT 5|4|OBJ 6|4|XCOMP 7|6|OBJ 8|7|AMOD 9|4|PUNCT
+*FAT:	okay ? 127510_128240
+%mor:	intj|okay ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	cookies . 128660_130320
+%mor:	noun|cookie-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	COOKIES . 128760_131130
+%mor:	noun|coooie-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	that is a cookie . 131100_133480
+%mor:	pron|that-Dem aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|cookie .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|4|ROOT 5|4|PUNCT
+*FAT:	snack . 134590_135450
+%mor:	noun|snack .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	U . 135010_151760
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 151770_214900
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	a good snack ? 153770_154870
+%mor:	det|a-Ind-Art adj|good-S1 noun|snack ?
+%gra:	1|3|DET 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*FAT:	okay . 159190_160030
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	cookies xxx . 170200_171860
+%mor:	noun|cookie-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	okay CHILDNAME let's try xxx . 176060_178320
+%mor:	intj|okay intj|childname verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|try-Inf-S .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|5|ROOT 4|3|OBJ 5|3|XCOMP 6|3|PUNCT
+*CHI:	&-hums . 183890_184900
+*CHI:	&=hums . 185890_186970
+*FAT:	CHILDNAME . 194480_195610
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	more cookies ? 196050_197020
+%mor:	adj|more-Cmp-S1 noun|cookie-Plur ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*FAT:	oh . 198260_198820
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	you want a drink . 204590_205620
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|a-Ind-Art noun|drink-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*FAT:	let me put it back there . 208830_210570
+%mor:	verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 verb|put-Inf-S pron|it-Prs-Acc-S3 adv|back adv|there .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|ADVMOD 6|3|ADVMOD 7|1|PUNCT
+*COD:	U . 214900_247700
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 247710_265850
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs . 247720_249520
+*FAT:	oh just hold on a second . 250090_252510
+%mor:	intj|oh adv|just verb|hold-Fin-Imp-S adp|on det|a-Ind-Art noun|second .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+*FAT:	okay CHILDNAME . 254890_256170
+%mor:	intj|okay propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*FAT:	catch . 257790_258700
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	CATCH . 258200_260250
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	catch good+job . 259730_261560
+%mor:	verb|catch-Fin-Imp-S noun|goodjob-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*FAT:	www . 261880_263030
+%xPCO:	Dad talking to sibling .
+*COD:	U . 265850_276070
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 276080_283840
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	you want the ball ? 278420_279790
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|ball-Acc ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*AAC:	CATCH . 279350_281170
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	catch good+job . 280230_282040
+%mor:	verb|catch-Fin-Imp-S noun|goodjob-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*FAT:	&=laughs he took the , he took the ball . 283340_285950
+%mor:	pron|he-Prs-Nom-S3 verb|take-Fin-Ind-Past-S3-irr det|the-Def-Art cm|cm pron|he-Prs-Nom-S3 verb|take-Fin-Ind-Past-S3-irr det|the-Def-Art noun|ball-Acc .
+%gra:	1|2|NSUBJ 2|8|ROOT 3|2|OBJ 4|6|PUNCT 5|6|NSUBJ 6|2|PARATAXIS 7|8|DET 8|6|OBJ 9|2|PUNCT
+*COD:	U . 283860_305130
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 305130_331850
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	CATCH . 306760_308850
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	good+job CHILDNAME . 307140_309170
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	good+job CHILDNAME . 315870_317410
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*FAT:	www . 319340_320610
+%xPCO:	parent speaks to other child .
+*FAT:	CHILDNAME . 322560_323530
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*FAT:	it's ready . 324820_326120
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|ready-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*AAC:	CATCH . 325890_328350
+%mor:	verb|catch-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-S
+*FAT:	good+job catch . 327270_328790
+%mor:	noun|goodjob noun|catch .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=reaching . 329210_330350
+%xgco:	Target child reaches out hand for ball
+%xIS:	CHI-Gesture-S
+@End

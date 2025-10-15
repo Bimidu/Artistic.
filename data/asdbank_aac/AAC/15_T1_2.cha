@@ -1,0 +1,258 @@
+@UTF8
+@PID:	11312/a-00082322-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|5;04.|male|||Target_Child|||
+@Media:	15_T1_2, video
+*COD:	C . 1_57900
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No observed child AAC use . 30_2580
+%mor:	det|no-Def-Neg verb|observe-Fin-Ind-Past-S3 noun|child noun|aac noun|use .
+%gra:	1|5|DET 2|5|AMOD 3|5|COMPOUND 4|5|COMPOUND 5|5|ROOT 6|5|PUNCT
+*MOT:	No observed parent verbal prompts . 30_2580
+%mor:	det|no-Def-Neg verb|observe-Fin-Ind-Past-S3 noun|parent adj|verbal-S1 noun|prompt-Plur .
+%gra:	1|5|DET 2|5|AMOD 3|5|COMPOUND 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	look at this one . 4580_5840
+%mor:	verb|look-Fin-Imp-S adp|at det|this-Def-Dem-Sing noun|one .
+%gra:	1|4|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|1|PUNCT
+*MOT:	Nate . 7850_8770
+%mor:	propn|Nate .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	Nate look . 13560_15340
+%mor:	propn|Nate verb|look-Fin-Ind-Pres-S3 .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	look at this . 15930_17050
+%mor:	verb|look-Fin-Imp-S adp|at pron|this-Dem-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*CHI:	he ee . 17090_18100
+%mor:	pron|he-Prs-Nom-S3 aux|ee-Fin-Ind-Pres-S3 .
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=gasps . 17370_18300
+*CHI:	uh . 18960_20980
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	<where's Stanley>  [/] where's Stanley ? 19590_22150
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 propn|Stanley ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	you don't want to do reading ? 24310_26180
+%mor:	pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|want-Inf-S part|to verb|do-Inf-S noun|reading-Acc-Ger ?
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|7|ROOT 5|6|MARK 6|4|XCOMP 7|6|OBJ 8|4|PUNCT
+*CHI:	ah . 26090_27590
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	Nate . 26710_27300
+%mor:	propn|Nate .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	ar . 35920_37850
+%mor:	propn|be .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	uh . 40150_41050
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ya . 41370_42320
+%mor:	intj|ya .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	hey . 42800_44960
+%mor:	intj|hey .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME , what should we do ? 45610_48220
+%mor:	propn|CHILDNAME cm|cm pron|what-Int-S1 aux|should-Fin-S pron|we-Prs-Nom-P1 verb|do-Inf-S ?
+%gra:	1|6|VOCATIVE 2|1|PUNCT 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|6|ROOT 7|6|PUNCT
+*CHI:	huh . 48580_49330
+%mor:	intj|huh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	we . 50880_52110
+%mor:	pron|we-Prs-Nom-P1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=groans . 53600_55570
+*MOT:	do you want your car , your plasma car ? 54970_57860
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|your-Prs-Gen-S2 noun|car-Acc cm|cm pron|your-Prs-Gen-S2 noun|plasma noun|car ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|9|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|9|PUNCT 7|9|NMOD-POSS 8|9|COMPOUND 9|5|APPOS 10|3|PUNCT
+*COD:	U . 57900_73000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	why don't you get on . 72330_73640
+%mor:	adv|why aux|do-Fin-Ind-Pres-S2~part|not pron|you-Prs-Nom-S2 verb|get-Inf-S adp|on .
+%gra:	1|5|ADVMOD 2|5|AUX 3|5|ADVMOD 4|5|NSUBJ 5|6|ROOT 6|5|ADVMOD 7|5|PUNCT
+*COD:	C . 73000_97000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you wanna get on there ? 75180_76760
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-Pres-S2 verb|get-Inf-S adp|on adv|there ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|ADVMOD 5|3|ADVMOD 6|3|PUNCT
+*MOT:	drive around . 77770_79100
+%mor:	verb|drive-Fin-Imp-S adv|around .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*CHI:	xxx uh . 83530_85920
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=hums . 86420_87140
+*MOT:	www . 89840_96950
+%xPCO:	conversation with the researcher .
+*COD:	U . 97000_135000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 135000_309560
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	eh . 137630_138930
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	are you gonna dump them ? 138390_139700
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|go verb|dump-Inf-S pron|they-Prs-Acc-P3 ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	three two +/. 140040_141400
+%mor:	num|three num|two +/.
+%gra:	1|2|ROOT 2|1|COMPOUND 3|1|PUNCT
+%xPCO:	interruption of video .
+*MOT:	+, one &=gasps good+job . 144550_148140
+%mor:	num|one noun|goodjob .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	do you wanna put them back , help me put them back in . 148250_150740
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 intj|wanna verb|put-Inf-S pron|they-Prs-Acc-P3 adp|back cm|cm verb|help-Inf-S pron|I-Prs-Acc-S1 verb|put-Inf-S pron|they-Prs-Acc-P3 adv|back adp|in .
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|DISCOURSE 4|13|ROOT 5|4|OBJ 6|4|COMPOUND-PRT 7|8|PUNCT 8|4|PARATAXIS 9|8|OBJ 10|8|XCOMP 11|10|OBJ 12|10|ADVMOD 13|10|OBL 14|4|PUNCT
+*MOT:	in . 152080_152910
+%mor:	adv|in .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 152340_153110
+%xDN:	CHI-Speech-ND
+*MOT:	in . 153680_154360
+%mor:	adv|in .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(o)kay . 155450_156210
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 156980_157650
+%xgco:	Child pushes his mom's hand away .
+%xIS:	CHI-Gesture-S
+*MOT:	no you don't want them back in ? 159510_161000
+%mor:	intj|no pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|want-Inf-S pron|they-Prs-Acc-P3 adv|back adp|in ?
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|8|ROOT 6|5|OBJ 7|5|ADVMOD 8|5|OBL 9|5|PUNCT
+*MOT:	okay Mommy's gonna put them all back in . 161200_163560
+%mor:	intj|okay propn|Mommy~aux|be-Fin-Ind-Pres-S3 adv|gonna verb|put-Inf-S pron|they-Prs-Acc-P3 det|all-Def-Tot adv|back adv|in .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|9|ROOT 6|5|OBJ 7|8|DET 8|5|ADVMOD 9|5|ADVMOD 10|5|PUNCT
+*MOT:	CHILDNAME come dump them . 171660_174630
+%mor:	propn|CHILDNAME verb|come-Fin-Imp-S verb|dump-Fin-Imp-S pron|they-Prs-Acc-P3 .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|XCOMP 4|3|OBJ 5|2|PUNCT
+*MOT:	oh we're back over at the eggs . 174970_177090
+%mor:	intj|oh pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 adv|back adv|over adp|at det|the-Def-Art noun|egg-Plur .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|8|ROOT 6|8|CASE 7|8|DET 8|5|OBL 9|5|PUNCT
+*CHI:	&=hums . 180060_181150
+*MOT:	that's the real egg . 183050_185200
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|real-S1 noun|egg .
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	what do you think about the real egg ? 190980_193330
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S adp|about det|the-Def-Art adj|real-S1 noun|egg ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|8|ROOT 5|8|CASE 6|8|DET 7|8|AMOD 8|4|OBL 9|4|PUNCT
+*MOT:	what do you think ? 193480_194510
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*CHI:	uh . 197030_197970
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	wow that's pretty cool . 204820_206970
+%mor:	intj|wow pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adv|pretty adj|cool-S1 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	does it feel different ? 207550_209250
+%mor:	aux|do-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 verb|feel-Inf-S adj|different-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|XCOMP 5|3|PUNCT
+*MOT:	do you see yourself , look , do you see the egg ? 212710_215910
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S pron|yourself-Prs-Acc-S2 cm|cm verb|look-Inf-S cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S det|the-Def-Art noun|egg-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|12|ROOT 4|3|OBJ 5|6|PUNCT 6|3|PARATAXIS 7|10|PUNCT 8|10|AUX 9|10|NSUBJ 10|3|PARATAXIS 11|12|DET 12|10|OBJ 13|3|PUNCT
+*CHI:	xxx . 220000_221340
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh . 223950_224510
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	lick the egg . 225240_226580
+%mor:	verb|lick-Fin-Imp-S det|the-Def-Art noun|egg-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*MOT:	do you see CHILDNAME ? 228140_229940
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|see-Inf-S propn|CHILDNAME-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	wey . 232130_234200
+%mor:	propn|wey .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	you wanna look at this book ? 232910_234930
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|look-Inf-S adp|at det|this-Def-Dem-Sing noun|book ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|6|ROOT 4|6|CASE 5|6|DET 6|3|OBL 7|3|PUNCT
+*CHI:	&=giving . 237450_239200
+%xIS:	CHI-Gesture-S
+*MOT:	egg . 239630_240650
+%mor:	noun|egg .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	should we put that egg in here ? 243120_244970
+%mor:	aux|should-Fin-S pron|we-Prs-Nom-P1 verb|put-Inf-S det|that-Def-Dem-Sing noun|egg-Acc adp|in adv|here ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|5|DET 5|3|OBJ 6|7|CASE 7|3|OBL 8|3|PUNCT
+*MOT:	in the carton ? 245780_247040
+%mor:	adp|in det|the-Def-Art noun|carton ?
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	&=laughs . 247000_248310
+*MOT:	no , cause that's a real egg . 247940_250720
+%mor:	intj|no cm|cm sconj|cause pron|that-Dem~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|real-S1 noun|egg .
+%gra:	1|8|DISCOURSE 2|1|PUNCT 3|8|MARK 4|8|NSUBJ 5|8|COP 6|8|DET 7|8|AMOD 8|8|ROOT 9|8|PUNCT
+*CHI:	&=laughs . 249920_252960
+*MOT:	want Mommy to take it , if you want . 253290_256140
+%mor:	verb|want-Fin-Ind-Pres-S propn|Mommy-Acc part|to verb|take-Inf-S pron|it-Prs-Acc-S3 cm|cm sconj|if pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 .
+%gra:	1|9|ROOT 2|1|OBJ 3|4|MARK 4|1|XCOMP 5|4|OBJ 6|9|PUNCT 7|9|MARK 8|9|NSUBJ 9|4|ADVCL 10|1|PUNCT
+*MOT:	www . 259920_266690
+%xPCO:	parent speaks to someone off camera .
+*CHI:	&=laughs . 260780_261970
+*CHI:	eebee . 263470_265470
+%mor:	propn|eebee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	wehee . 268830_270910
+%mor:	intj|wehee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	uh . 277560_278820
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	um beh . 280450_283140
+%mor:	intj|um intj|beh .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	do you like the real egg ? 282870_285110
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|like-Inf-S det|the-Def-Art adj|real-S1 noun|egg-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|3|PUNCT
+*MOT:	real egg . 288140_290740
+%mor:	adj|real-S1 noun|egg .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	real egg . 291900_294060
+%mor:	adj|real-S1 noun|egg .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	are we gonna put it in there ? 296180_297810
+%mor:	aux|be-Fin-Ind-Pres-P1 pron|we-Prs-Nom-P1 adv|gonna verb|put-Inf-S pron|it-Prs-Acc-S3 adp|in adv|there ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|7|ROOT 5|4|OBJ 6|7|CASE 7|4|OBL 8|4|PUNCT
+*CHI:	&=other . 301700_303980
+%xgco:	Child takes his mom's hand and pushes her away .
+%xIS:	CHI-Gesture-S
+*MOT:	okay do you want me to go , are you just gonna watch yourself ? 303090_307260
+%mor:	intj|okay aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|I-Prs-Acc-S1 part|to verb|go-Inf-S cm|cm aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adv|just part|go verb|watch-Inf-S pron|yourself-Prs-Acc-S2 ?
+%gra:	1|4|DISCOURSE 2|4|AUX 3|4|NSUBJ 4|14|ROOT 5|4|OBJ 6|7|MARK 7|4|XCOMP 8|13|PUNCT 9|13|AUX 10|13|NSUBJ 11|13|ADVMOD 12|13|ADVMOD 13|4|PARATAXIS 14|13|OBJ 15|4|PUNCT
+@End

@@ -1,0 +1,1061 @@
+@UTF8
+@PID:	11312/a-00082268-0
+@Begin
+@Languages:	eng
+@Participants:	AAC Media, COD Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|5;05.|female|||Target_Child|||
+@Media:	03_T1_1, video, missing
+*AAC:	No CHI-ACC observed . 1_1000
+%mor:	det|no-Def-Neg noun|chiacc verb|observe-Fin-Ind-Past-S3 .
+%gra:	1|2|DET 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*COD:	C . 10_367420
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME look . 2450_3640
+%mor:	noun|childname verb|look-Fin-Imp-S .
+%gra:	1|2|ROOT 2|1|LIST 3|1|PUNCT
+*MOT:	come . 3720_4370
+%mor:	verb|come-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	noosh . 4430_5190
+%mor:	intj|noosh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'nose .'
+*MOT:	yes it's nose good girl . 5300_8580
+%mor:	intj|yes pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|nose adj|good-S1 noun|girl .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|COMPOUND 5|6|AMOD 6|6|ROOT 7|6|PUNCT
+*MOT:	what's this CHILDNAME ? 8880_9750
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|childname ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*CHI:	es . 9530_10360
+%mor:	x|es .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating eyes .
+*MOT:	yes eyes . 10460_11900
+%mor:	intj|yes noun|eye-Plur .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	&=hums oo  [/] oo . 11670_14140
+%mor:	intj|oo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	come CHILDNAME baby . 12780_14290
+%mor:	verb|come-Fin-Imp-S propn|CHILDNAME noun|baby-Acc .
+%gra:	1|3|ROOT 2|3|COMPOUND 3|1|OBJ 4|1|PUNCT
+*CHI:	oh no . 14900_15990
+%mor:	intj|oh intj|no .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+%xPS:	CHI-Speech-S
+*MOT:	oh hair . 16560_17910
+%mor:	intj|oh noun|hair .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	hai . 17720_18730
+%mor:	intj|hai .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'hair .'
+*MOT:	yes hair . 18580_20040
+%mor:	intj|yes noun|hair .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 20570_21550
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	wuso eeyo . 21290_22450
+%mor:	propn|wuso propn|eeyo .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	ear &=laughs . 22870_25540
+%mor:	noun|ear .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent pokes child's ear .
+*CHI:	uh . 23560_24430
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what's this ? 25580_26420
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	mouth . 26490_27210
+%mor:	noun|mouth .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes mouth good girl . 27360_29820
+%mor:	intj|yes noun|mouth adj|good-S1 noun|girl .
+%gra:	1|4|DISCOURSE 2|4|COMPOUND 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	what's this ? 30010_31000
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	or ? 31160_32200
+%mor:	cconj|or ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	grape . 32410_33370
+%mor:	noun|grape .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	gape . 33710_34440
+%mor:	verb|gipe-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'grape .'
+*MOT:	yes . 34690_35410
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 35770_36750
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	ai . 36760_37510
+%mor:	noun|be .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	that one no this . 37580_39070
+%mor:	sconj|that num|one intj|no pron|this-Dem-S1 .
+%gra:	1|2|MARK 2|4|ROOT 3|2|DISCOURSE 4|2|CONJ 5|2|PUNCT
+*CHI:	orange . 38930_39670
+%mor:	adj|orange-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	orange good girl . 39770_41610
+%mor:	adj|orange-S1 adj|good-S1 noun|girl .
+%gra:	1|3|AMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 41760_42790
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	sugar . 42530_43490
+%mor:	noun|sugar .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	ice cream . 43520_44870
+%mor:	noun|ice noun|cream .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	&=pointing .
+%xgco:	Target child points at something
+%xIS:	CHI-Gesture-S
+*CHI:	sugar . 44710_45430
+%mor:	noun|sugar .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=laughs yeah but not n for now . 45130_48910
+%mor:	intj|yeah cconj|but part|not adv|and adp|for adv|now .
+%gra:	1|4|DISCOURSE 2|4|CC 3|4|ADVMOD 4|6|ROOT 5|6|CASE 6|4|OBL 7|4|PUNCT
+*MOT:	what's this ? 48940_49670
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	soos . 49500_50100
+%mor:	propn|soos .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes good girl . 50050_52670
+%mor:	intj|yes adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 52710_53300
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	pee . 53340_53890
+%mor:	noun|pee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	milk . 54290_55400
+%mor:	noun|milk .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	gook . 55480_56040
+%mor:	intj|gook .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes . 56140_57030
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 57390_58170
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	bana . 58100_58860
+%mor:	propn|bana .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'banana .'
+*MOT:	uh xiangjiao@s:zho banana . 59380_61370
+%mor:	intj|uh x|xiangjiao propn|banana .
+%gra:	1|3|DISCOURSE 2|3|FLAT 3|3|ROOT 4|3|PUNCT
+*CHI:	nana . 61230_61830
+%mor:	propn|nana .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'banana .'
+*MOT:	nana . 62070_62990
+%mor:	propn|nana .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=pointing . 62600_63770
+%xgco:	Target child points at picture of cookies
+%xIS:	CHI-Gesture-S
+*MOT:	what's this ? 63260_63790
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	cookie . 63910_64420
+%mor:	noun|cookie .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes cookie . 64660_66630
+%mor:	intj|yes noun|cookie .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 66970_67750
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=pointing .
+%xgco:	Target child points to picture of cake
+%xIS:	CHI-Gesture-S
+*CHI:	cake . 67710_68300
+%mor:	noun|cake .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes good girl cake . 68450_70260
+%mor:	intj|yes adj|good-S1 noun|girl noun|cake .
+%gra:	1|4|DISCOURSE 2|4|AMOD 3|4|COMPOUND 4|4|ROOT 5|4|PUNCT
+*CHI:	&=pointing .
+%xgco:	Target child points to picture of carrot
+%xIS:	CHI-Gesture-S
+*MOT:	what's this ? 70610_71400
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	tenik . 71280_72250
+%mor:	noun|tenik .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes carrot . 72280_73780
+%mor:	intj|yes noun|carrot .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 73950_74860
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	jees . 74870_75580
+%mor:	noun|jee-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'cheese .'
+*MOT:	cheese good girl . 75590_77540
+%mor:	noun|cheese adj|good-S1 noun|girl .
+%gra:	1|3|COMPOUND 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 77750_78420
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	apple . 78450_78890
+%mor:	noun|apple .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes good girl . 78970_80510
+%mor:	intj|yes adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 81090_81810
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	boyee . 81620_82430
+%mor:	noun|boyee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	bread . 82600_83610
+%mor:	noun|bread .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	bed . 83530_84090
+%mor:	noun|bed .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes . 84050_85320
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 85360_86100
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	enee . 86050_86810
+%mor:	intj|enee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	this  [/] this . 87400_88020
+%mor:	pron|this-Dem-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	shawberry . 88130_89200
+%mor:	noun|shawberry .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'strawberry .'
+*MOT:	yes strawberry . 89350_91280
+%mor:	intj|yes noun|strawberry .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	good girl . 91540_92760
+%mor:	adj|good-S1 noun|girl .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 92880_93440
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	shoes . 93380_94060
+%mor:	noun|shoe-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes shoes . 94010_95740
+%mor:	intj|yes noun|shoe-Plur .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 95910_96610
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	bant . 96650_97250
+%mor:	noun|bant .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes pants . 97490_99240
+%mor:	intj|yes noun|pants-Ptan .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	<what's this>  [/] what's this ? 99260_101890
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	goodoo . 100090_100670
+%mor:	propn|goodoo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	goo yoo  [/] yoo . 102070_103210
+%mor:	verb|goo-Fin-Imp-S propn|yoo-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=laughs diaper  [/] diaper . 103230_107460
+%mor:	noun|diaper .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 107500_107990
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	shoes . 108000_108590
+%mor:	noun|shoe-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay shoes . 108920_110230
+%mor:	intj|okay noun|shoe-Plur .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	huh what's this ? 110260_111200
+%mor:	intj|huh pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+*CHI:	boot . 111360_112000
+%mor:	noun|boot .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes boot . 111830_113570
+%mor:	intj|yes noun|boot .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 113610_114260
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	gigi . 114270_115140
+%mor:	propn|gigi .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	sweater . 115400_117100
+%mor:	noun|sweater .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes good girl . 117270_118450
+%mor:	intj|yes adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	&=pointing . 117840_118410
+%xgco:	Target child points to picture of hat
+%xIS:	CHI-Gesture-S
+*CHI:	hat . 118240_118750
+%mor:	noun|hat .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=other . 118470_119270
+%xgco:	Target child taps head
+%xIS:	CHI-Gesture-S
+*MOT:	yes hat . 119150_120910
+%mor:	intj|yes noun|hat .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 121020_121710
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	sook . 121660_122420
+%mor:	propn|sook .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'sock .'
+*MOT:	yes sock . 122280_124120
+%mor:	intj|yes noun|sock .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	was , what's this ? 124130_125740
+%mor:	aux|be-Fin-Ind-Past-S3-irr cm|cm pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|COP 2|1|PUNCT 3|5|ROOT 4|5|COP 5|3|NSUBJ 6|3|PUNCT
+*CHI:	xxx .
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=pointing . 124310_124900
+%xgco:	Target child points to picture of pencils
+%xIS:	CHI-Gesture-S
+*CHI:	xxx .
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=pointing . 126110_127120
+%xgco:	Target child points to picture of pencils
+%xIS:	CHI-Gesture-S
+*MOT:	pencil  [/] pencil . 126780_130530
+%mor:	noun|pencil .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	hoo . 130560_131320
+%mor:	intj|hoo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah ball football . 131360_134600
+%mor:	intj|yeah noun|ball noun|football .
+%gra:	1|3|DISCOURSE 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*CHI:	boo . 134410_135130
+%mor:	noun|boo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	oh okay ball . 135120_136810
+%mor:	intj|oh intj|okay noun|ball .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|3|ROOT 4|3|PUNCT
+*CHI:	&=other .
+%xgco:	Target child motions to eyes
+%xIS:	CHI-Gesture-S
+*CHI:	xxx . 136390_137240
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what's this ? 137210_137800
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	seeing . 137700_137880
+%mor:	verb|see-Part-Pres-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=pointing . 138060_139460
+%xgco:	Target child points to picture of glasses
+%xIS:	CHI-Gesture-S
+*MOT:	glass , glasses . 139280_141830
+%mor:	noun|glass cm|cm noun|glasses-Ptan .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|CONJ 4|1|PUNCT
+*CHI:	yeah . 140800_141690
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what's this ? 142930_143720
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	xxx . 143740_144570
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	fork . 144840_145510
+%mor:	noun|fork .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	fork . 145540_146440
+%mor:	noun|fork .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes . 146710_147360
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 147380_148180
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	shud . 148090_148770
+%mor:	intj|shud .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes good girl . 148880_150100
+%mor:	intj|yes adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 150360_151010
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	flowe . 151070_151820
+%mor:	verb|flowe-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'flower .'
+*MOT:	flower good girl . 151990_154130
+%mor:	noun|flower adj|good-S1 noun|girl .
+%gra:	1|3|COMPOUND 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 154370_155030
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=pointing . 154720_155110
+%xgco:	Target child points to picture of telephone
+%xIS:	CHI-Gesture-S
+*CHI:	picture . 156350_157220
+%mor:	noun|picture .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	phone hello CHILDNAME &=laughs . 157460_160010
+%mor:	noun|phone intj|hello propn|CHILDNAME .
+%gra:	1|2|COMPOUND 2|3|ROOT 3|2|FLAT 4|2|PUNCT
+*CHI:	&=hums . 159730_160670
+*MOT:	phone . 160420_161340
+%mor:	noun|phone .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 161580_162370
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	noyu . 162260_163010
+%mor:	intj|noyu .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	gift . 163190_163960
+%mor:	noun|gift .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	gift . 163980_164590
+%mor:	noun|gift .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yeah what's this ? 164690_165660
+%mor:	intj|yeah pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+*CHI:	dook . 165590_166170
+%mor:	intj|dook .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	book yes good girl . 166350_168190
+%mor:	verb|book-Inf-Imp-S intj|yes adj|good-S1 noun|girl-Acc .
+%gra:	1|4|ROOT 2|4|DISCOURSE 3|4|AMOD 4|1|OBJ 5|1|PUNCT
+*MOT:	what's this ? 168220_168890
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	oyo . 168900_169470
+%mor:	propn|oyo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	key . 169700_170400
+%mor:	noun|key .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	tey . 170460_171030
+%mor:	noun|tey .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes open the door . 171120_172670
+%mor:	intj|yes verb|open-Fin-Imp-S det|the-Def-Art noun|door-Acc .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	what's this ? 172830_173510
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	duyoyo . 173410_174100
+%mor:	propn|duyoyo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=laughs okay . 174560_178230
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 178710_179420
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	peebee . 179520_180250
+%mor:	noun|peebee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'baby .'
+*MOT:	baby . 180550_182340
+%mor:	noun|baby .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 182360_182750
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	sawmenoo . 182760_183270
+%mor:	propn|sawmenoo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	shenmeya@s:zho , chair . 183610_185880
+%mor:	x|shenmeya cm|cm noun|chair .
+%gra:	1|3|FLAT 2|3|PUNCT 3|1|APPOS 4|1|PUNCT
+*CHI:	goy . 184100_184980
+%mor:	noun|goy .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	tair . 186090_186980
+%mor:	intj|tair .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'chair .'
+*MOT:	yes . 187000_188260
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay and what's this ? 189320_191420
+%mor:	intj|okay cconj|and pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|DISCOURSE 2|3|CC 3|5|NSUBJ 4|5|COP 5|5|ROOT 6|5|PUNCT
+*CHI:	dodo@o . 191420_191710
+%mor:	x|dodo .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'knock knock .'
+*CHI:	&=other . 191700_192800
+%xgco:	Target child knocks on picture of door
+%xIS:	CHI-Gesture-I
+*MOT:	knock_knock@o door yes knock_knock@o door . 192270_196690
+%mor:	x|knockknock noun|door intj|yes x|knockknock noun|door .
+%gra:	1|2|FLAT 2|5|COMPOUND 3|5|DISCOURSE 4|5|FLAT 5|5|ROOT 6|5|PUNCT
+*CHI:	&=other . 195170_196330
+%xgco:	Target child knocks on picture of door
+%xIS:	CHI-Gesture-S
+*MOT:	what's this ? 196720_197440
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	&=pointing . 196960_197850
+%xgco:	Target child knocks on picture of toilet
+%xIS:	CHI-Gesture-S
+*CHI:	soobee . 197480_198300
+%mor:	intj|soobee .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	toilet . 198720_200280
+%mor:	noun|toilet .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 200700_201460
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	shood . 201480_202160
+%mor:	verb|shood-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	mm sleep yes . 202440_204210
+%mor:	intj|mm verb|sleep-Fin-Imp-S intj|yes .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*MOT:	sleep on the bed this is the bed . 204370_207430
+%mor:	verb|sleep-Fin-Imp-S adp|on det|the-Def-Art noun|bed pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|bed .
+%gra:	1|8|ROOT 2|4|CASE 3|4|DET 4|1|OBL 5|8|NSUBJ 6|8|COP 7|8|DET 8|1|PARATAXIS 9|1|PUNCT
+*CHI:	bed . 207790_208340
+%mor:	noun|bed .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	what's this ? 208690_209700
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	xxx . 209860_210620
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	house . 210730_211830
+%mor:	noun|house .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	us . 211880_212430
+%mor:	pron|we-Prs-Acc-P1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes what's this ? 212730_214010
+%mor:	intj|yes pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+*CHI:	bus . 214160_215130
+%mor:	noun|bus .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes bus . 215200_216440
+%mor:	intj|yes noun|bus .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	<school+bus>  [/] school+bus . 216500_220060
+%mor:	noun|schoolbus .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 220140_220870
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	feiji@s:zho . 220750_221610
+%mor:	x|feiji .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	airplane .
+*MOT:	<feiji@s:zho meicuo@s:zho>  [/] feiji@s:zho meicuo@s:zho airplane  [/] airplane . 221640_226880
+%mor:	x|feiji x|meicuo noun|airplane .
+%gra:	1|3|FLAT 2|3|FLAT 3|3|ROOT 4|3|PUNCT
+%xPCO:	airplane, that's right .
+*CHI:	airplane . 226890_227820
+%mor:	noun|airplane .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes good girl . 227910_229120
+%mor:	intj|yes adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 229150_229970
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	car . 229990_230880
+%mor:	noun|car .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	uh yes  [/] yes a car . 230920_233310
+%mor:	intj|uh intj|yes det|a-Ind-Art noun|car .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|DET 4|4|ROOT 5|4|PUNCT
+*CHI:	car . 233360_234110
+%mor:	noun|car .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	what kind of car ? 233970_235540
+%mor:	det|what-Def-Int noun|kind adp|of noun|car ?
+%gra:	1|2|DET 2|4|ROOT 3|4|CASE 4|2|NMOD 5|2|PUNCT
+*CHI:	car . 235540_236420
+%mor:	noun|car .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	truck . 236440_237650
+%mor:	noun|truck .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	duck . 237700_238520
+%mor:	noun|duck .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'truck .'
+*MOT:	yes truck . 238570_239740
+%mor:	intj|yes noun|truck .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	what's this ? 239770_240630
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	boyo . 240400_241450
+%mor:	intj|boyo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	sheep . 241510_242680
+%mor:	noun|sheep-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	sheep . 242700_243510
+%mor:	noun|sheep-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	du  [/] du  [/] du  [/] du  [/] du  [/] du . 243500_244930
+%mor:	propn|du .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay we  [/] we can say boat . 244990_246790
+%mor:	intj|okay pron|we-Prs-Nom-P1 aux|can-Fin-S verb|say-Inf-S noun|boat-Acc .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*CHI:	boat . 247130_247860
+%mor:	noun|boat .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yeah . 247840_248460
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 248480_249170
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	boy car . 249200_250680
+%mor:	intj|boy noun|car .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes good girl . 250720_252650
+%mor:	intj|yes adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	what's this ? 252700_253260
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	woyo . 253260_253970
+%mor:	intj|woyo .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	tractor . 253920_254840
+%mor:	noun|tractor .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	tato . 254940_255510
+%mor:	propn|tato .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+%xVCO:	child is approximating 'tractor .'
+*MOT:	yas . 255520_256490
+%mor:	propn|yas .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay what's this ? 257250_258500
+%mor:	intj|okay pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+*CHI:	sush . 258710_259640
+%mor:	noun|sush .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	horse  [/] horse . 259650_262250
+%mor:	noun|horse .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 262450_263090
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	kabeet . 263020_263740
+%mor:	intj|kabeet .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating 'rabbit .'
+*MOT:	yes good girl . 263820_265530
+%mor:	intj|yes adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	koy . 265630_265990
+%mor:	intj|koy .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	pig &=snorts &=laughs . 266650_269380
+%mor:	noun|pig .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPCO:	parent is imitating a pig .
+*CHI:	&=snorts . 267330_268080
+%xVCO:	child is imitating a pig .
+*MOT:	what's this ? 269480_270320
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	xxx . 270710_271430
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes . 271360_272360
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 272720_273770
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	duck . 273800_274800
+%mor:	noun|duck .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes . 274750_276000
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 276060_277260
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	cow . 277410_278260
+%mor:	noun|cow .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes . 278090_279540
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 279730_280460
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	dog . 280330_281070
+%mor:	noun|dog .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes . 280930_282590
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what's this ? 283060_283830
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	cat . 283910_284410
+%mor:	noun|cat .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes . 284470_285630
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	meow@o . 285490_286050
+%mor:	x|meow .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	meow@o . 286080_286720
+%mor:	x|meow .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	what's this ? 286740_287130
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	&=laughs . 287240_290190
+*CHI:	wada  [/] wada wa woah . 288240_292690
+%mor:	propn|wada x|wa intj|woah .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|DISCOURSE 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	oh it's the last one . 290590_293520
+%mor:	intj|oh pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|last-S1 noun|one .
+%gra:	1|6|DISCOURSE 2|6|NSUBJ 3|6|COP 4|6|DET 5|6|AMOD 6|6|ROOT 7|6|PUNCT
+*CHI:	ba  [/] ba  [/] ba  [/] ba  [/] ba bo . 293050_296490
+%mor:	noun|ba noun|bo .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME you did a good job you know ? 297190_299910
+%mor:	intj|childname pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Past-S2-irr det|a-Ind-Art adj|good-S1 noun|job-Acc pron|you-Prs-Nom-S2 verb|know-Fin-Ind-Pres-S2 ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|8|ROOT 4|6|DET 5|6|AMOD 6|3|OBJ 7|8|NSUBJ 8|6|ACL-RELCL 9|3|PUNCT
+*CHI:	hand . 299940_300800
+%mor:	noun|hand .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes hand good job CHILDNAME my little one . 300760_305160
+%mor:	intj|yes noun|hand adj|good-S1 noun|job adp|childname pron|my-Prs-Gen-S1 adj|little-S1 noun|one .
+%gra:	1|4|DISCOURSE 2|4|COMPOUND 3|4|AMOD 4|8|ROOT 5|8|CASE 6|8|NMOD-POSS 7|8|AMOD 8|4|NMOD 9|4|PUNCT
+*MOT:	you're wonderful . 305780_307010
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 adj|wonderful-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*CHI:	so nose . 306920_307980
+%mor:	adv|so noun|nose .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=other .
+%xgco:	Target child moves face towards target parent's face
+%xIS:	CHI-Gesture-S
+*MOT:	nose &=laughs nose . 308030_311520
+%mor:	noun|nose noun|nose .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*MOT:	oh <good girl>  [/] good girl . 311600_314180
+%mor:	intj|oh adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	&=other . 313720_315030
+%xgco:	Target child moves face towards book
+%xIS:	CHI-Gesture-S
+*MOT:	eyes . 314240_315760
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	es . 315520_316420
+%mor:	x|es .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*CHI:	&=other .
+%xgco:	Target child moves face towards target parent's face
+%xIS:	CHI-Gesture-S
+*MOT:	eyes ah &=laughs . 316270_319150
+%mor:	noun|eye-Plur intj|ah .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*MOT:	eyes . 320120_321140
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	eyes . 321140_321940
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yeah you have beautiful eyes . 322290_324530
+%mor:	intj|yeah pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 adj|beautiful-S1 noun|eye-Plur-Acc .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|5|AMOD 5|3|OBJ 6|3|PUNCT
+*CHI:	eyes . 323990_324800
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	you have two beautiful eyes CHILDNAME . 324800_326910
+%mor:	pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 num|two adj|beautiful-S1 noun|eye-Plur noun|childname-Acc .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|6|NUMMOD 4|6|AMOD 5|6|COMPOUND 6|2|OBJ 7|2|PUNCT
+*CHI:	eyes . 326320_326910
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	yes eyes . 326950_328670
+%mor:	intj|yes noun|eye-Plur .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	ah good girl . 329730_331470
+%mor:	intj|ah adj|good-S1 noun|girl .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	eyes . 334570_335370
+%mor:	noun|eye-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah . 335140_335960
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	so today . 337180_338180
+%mor:	adv|so noun|today .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*CHI:	uh . 338030_338700
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	ah . 339480_340200
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	wonderful . 339620_340410
+%mor:	adj|wonderful-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no I don't want give it to you . 340610_343430
+%mor:	intj|no pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S verb|give-Inf-S pron|it-Prs-Acc-S3 adp|to pron|you-Prs-Acc-S2 .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|9|ROOT 6|5|XCOMP 7|6|OBJ 8|9|CASE 9|6|OBL 10|5|PUNCT
+*MOT:	&=hums hoo  [/] hoo what's this ? 343640_346960
+%mor:	intj|hoo pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+*CHI:	shish . 347110_348060
+%mor:	noun|shish .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+%xVCO:	child is approximating fish .
+*MOT:	yes fish &=laughs . 348350_350740
+%mor:	intj|yes noun|fish .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	golden fish . 350880_352490
+%mor:	adj|golden-S1 noun|fish .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	you remember uh Peppa_Pig's pets , Goldy oh Goldy &=laughs . 353600_362110
+%mor:	pron|you-Prs-Nom-S2 verb|remember-Fin-Ind-Pres-S2 intj|uh propn|PeppaPig~part|s noun|pet-Plur-Acc cm|cm propn|Goldy intj|oh propn|Goldy .
+%gra:	1|2|NSUBJ 2|10|ROOT 3|6|DISCOURSE 4|6|NMOD-POSS 5|4|CASE 6|2|OBJ 7|8|PUNCT 8|6|APPOS 9|10|DISCOURSE 10|8|APPOS 11|2|PUNCT
+*MOT:	good girl . 363610_364920
+%mor:	adj|good-S1 noun|girl .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	chicken . 363820_365760
+%mor:	noun|chicken .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	hey xxx . 366410_367440
+%mor:	intj|hey .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+@End

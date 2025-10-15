@@ -1,0 +1,358 @@
+@UTF8
+@PID:	11312/c-00004212-1
+@Begin
+@Languages:	eng
+@Participants:	MOT Mother
+@ID:	eng|QuigleyMcNally|MOT|37;02.10||||Mother|||
+@Types:	long, toyplay, TD
+*MOT:	<crocodile don't forget to>  [=! singing] +...
+%mor:	noun|crocodile aux|do-Fin-Imp-S~part|not verb|forget-Fin-Imp-S adp|to +...
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|PUNCT 6|4|PUNCT
+%com:	child screams .
+*MOT:	haha , scream@si .
+%mor:	intj|haha cm|cm x|scream .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|FLAT 4|1|PUNCT
+%com:	child vocalises .
+*MOT:	bum-bum@wp .
+%mor:	x|bumbum .
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	where's your belly+button ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|bellybutton ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*MOT:	where's your belly+button ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|bellybutton ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*MOT:	oh where's mummy's nose ?
+%mor:	intj|oh adv|where~aux|be-Fin-Ind-Pres-S3 noun|mummy~part|s noun|nose ?
+%gra:	1|2|DISCOURSE 2|6|ROOT 3|2|COP 4|6|NMOD-POSS 5|4|CASE 6|2|NSUBJ 7|2|PUNCT
+*MOT:	where's mummy's nose ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 noun|mummy~part|s noun|nose ?
+%gra:	1|5|ROOT 2|1|COP 3|5|NMOD-POSS 4|3|CASE 5|1|NSUBJ 6|1|PUNCT
+%com:	child vocalises and mother responds .
+*MOT:	what do you mean no ?
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|mean-Inf-S intj|no ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|DISCOURSE 6|4|PUNCT
+*MOT:	where's your nose ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|nose ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*MOT:	where's your nose ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|nose ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*MOT:	Eri , where's your nose ?
+%mor:	propn|Eri cm|cm adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|nose ?
+%gra:	1|3|VOCATIVE 2|1|PUNCT 3|6|ROOT 4|3|COP 5|6|NMOD-POSS 6|3|NSUBJ 7|3|PUNCT
+%com:	child vocalises and picks up balloon .
+*MOT:	where's the other balloon ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|other-S1 noun|balloon ?
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|AMOD 5|1|NSUBJ 6|1|PUNCT
+*MOT:	blow the balloon up for mammy .
+%mor:	verb|blow-Fin-Imp-S det|the-Def-Art noun|balloon-Acc adp|up adp|for noun|mammy .
+%gra:	1|6|ROOT 2|3|DET 3|1|OBJ 4|1|COMPOUND-PRT 5|6|CASE 6|1|OBL 7|1|PUNCT
+%com:	child vocalises .
+*MOT:	no , Sinead's gone .
+%mor:	intj|no cm|cm propn|Sinead~part|s adj|gone-S1 .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|NMOD-POSS 4|3|CASE 5|5|ROOT 6|5|PUNCT
+*MOT:	Sinead's gone .
+%mor:	propn|Sinead~part|s adj|gone-S1 .
+%gra:	1|3|NMOD-POSS 2|1|CASE 3|3|ROOT 4|3|PUNCT
+%com:	child blows in balloon .
+*MOT:	good girl , aw wow .
+%mor:	adj|good-S1 noun|girl cm|cm intj|aw intj|wow .
+%gra:	1|2|AMOD 2|5|ROOT 3|4|PUNCT 4|2|DISCOURSE 5|2|DISCOURSE 6|2|PUNCT
+*MOT:	that's really good „ isn't it ?
+%mor:	pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adv|really adj|good-S1 cm|end aux|be-Fin-Ind-Pres-S3~part|not pron|it-Prs-Nom-S3 ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|8|ROOT 5|4|PUNCT 6|4|COP 7|6|ADVMOD 8|4|PARATAXIS 9|4|PUNCT
+*MOT:	where's daddy ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 noun|daddy ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%com:	child vocalises .
+*MOT:	where's he gone ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|he-Prs-Nom-S3 adj|gone-S1 ?
+%gra:	1|4|ADVMOD 2|4|COP 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	where's he gone ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|he-Prs-Nom-S3 adj|gone-S1 ?
+%gra:	1|4|ADVMOD 2|4|COP 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	oh what's that ?
+%mor:	intj|oh pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|COP 4|2|NSUBJ 5|2|PUNCT
+%com:	child vocalises . mother attempts to imitate .
+*MOT:	&=imit:child where's Nanna ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 propn|Nanna ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%com:	child vocalises .
+*MOT:	she's gone .
+%mor:	pron|she-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|gone-S1 .
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	where's Mila ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 propn|Mila ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%com:	child vocalises .
+*MOT:	where's Becky ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 propn|Becky ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%com:	child vocalises .
+*MOT:	0is she gone as well ?
+%mor:	pron|she-Prs-Nom-S3 verb|go-Fin-Ind-Past-S3-irr adv|as adv|well ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|2|ADVMOD 4|3|FIXED 5|2|PUNCT
+%com:	child vocalises .
+*MOT:	will you sing me a song ?
+%mor:	aux|will-Fin-S pron|you-Prs-Nom-S2 verb|sing-Inf-S pron|I-Prs-Acc-S1 det|a-Ind-Art noun|song-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|IOBJ 5|6|DET 6|3|OBJ 7|3|PUNCT
+%com:	child vocalises .
+*MOT:	what ?
+%mor:	pron|what-Int-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	cork ?
+%mor:	propn|cork ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	huh ?
+%mor:	intj|huh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	gone .
+%mor:	adj|gone-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	sing me a song .
+%mor:	verb|sing-Fin-Imp-S pron|I-Prs-Acc-S1 det|a-Ind-Art noun|song-Acc .
+%gra:	1|4|ROOT 2|1|IOBJ 3|4|DET 4|1|OBJ 5|1|PUNCT
+%com:	child vocalises .
+*MOT:	Becky's in school .
+%mor:	propn|Becky~part|s adp|in noun|school .
+%gra:	1|4|NMOD-POSS 2|1|CASE 3|4|CASE 4|4|ROOT 5|4|PUNCT
+*MOT:	<where's mammy's nose>  [/] , where's mammy's nose ?
+%mor:	cm|cm adv|where~aux|be-Fin-Ind-Pres-S3 noun|mammy~part|s noun|nose ?
+%gra:	1|2|PUNCT 2|6|ROOT 3|2|COP 4|6|NMOD-POSS 5|4|CASE 6|2|NSUBJ 7|2|PUNCT
+%com:	child vocalises .
+*MOT:	no wait a minute .
+%mor:	intj|no verb|wait-Fin-Imp-S det|a-Ind-Art noun|minute .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|DET 4|2|NMOD-UNMARKED 5|2|PUNCT
+*MOT:	where's mammy's nose ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 noun|mammy~part|s noun|nose ?
+%gra:	1|5|ROOT 2|1|COP 3|5|NMOD-POSS 4|3|CASE 5|1|NSUBJ 6|1|PUNCT
+*MOT:	where's my nose ?
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|my-Prs-Gen-S1 noun|nose ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+%com:	child vocalises .
+*MOT:	where's , ah <no no no no no>  [/] no not allowed tah_tah@wp .
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 cm|cm intj|ah adv|no part|not verb|allow-Part-Past-S x|tahtah .
+%gra:	1|7|ADVMOD 2|7|REPARANDUM 3|2|PUNCT 4|7|DISCOURSE 5|7|ADVMOD 6|7|ADVMOD 7|8|ROOT 8|7|FLAT 9|7|PUNCT
+*MOT:	okay tah@wp .
+%mor:	intj|okay x|tah .
+%gra:	1|2|DISCOURSE 2|2|FLAT 3|2|PUNCT
+*MOT:	don't put them in your mouth okay .
+%mor:	aux|do-Fin-Imp-S~part|not verb|put-Fin-Imp-S pron|they-Prs-Acc-P3 adp|in pron|your-Prs-Gen-S2 noun|mouth intj|okay .
+%gra:	1|3|AUX 2|3|ADVMOD 3|8|ROOT 4|3|OBJ 5|7|CASE 6|7|NMOD-POSS 7|3|OBL 8|3|DISCOURSE 9|3|PUNCT
+*MOT:	no  [/] , no !
+%mor:	cm|cm intj|no !
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	will I blow them ?
+%mor:	aux|will-Fin-S pron|I-Prs-Nom-S1 verb|blow-Inf-S pron|they-Prs-Acc-P3 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	look  [/] , look !
+%mor:	cm|cm verb|look-Fin-Imp-S !
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	mother tries to blows up balloon .
+*MOT:	good god haha , it's bit difficult „ isn't it ?
+%mor:	adj|good-S1 noun|god intj|haha cm|cm pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|bit adj|difficult-S1 cm|end aux|be-Fin-Ind-Pres-S3~part|not pron|it-Prs-Nom-S3 ?
+%gra:	1|2|AMOD 2|8|DISCOURSE 3|8|DISCOURSE 4|3|PUNCT 5|8|NSUBJ 6|8|COP 7|8|OBL-UNMARKED 8|12|ROOT 9|8|PUNCT 10|8|COP 11|10|ADVMOD 12|8|PARATAXIS 13|8|PUNCT
+%com:	child vocalises .
+*MOT:	haha , look !
+%mor:	intj|haha cm|cm verb|look-Fin-Imp-S !
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*MOT:	pft_pft@o .
+%mor:	x|pftpft .
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	pft@o .
+%mor:	x|pft .
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	pft@o .
+%mor:	x|pft .
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	more 0of this .
+%mor:	adv|more pron|this-Dem-S1 .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	yeah okay .
+%mor:	intj|yeah intj|okay .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises . mother tries to blow up blow, child lets air out with noise .
+*MOT:	ah .
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises . mother attempts to imitate .
+*MOT:	&=imit:child more ?
+%mor:	adj|more-Cmp-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh you're going to fall down .
+%mor:	intj|oh pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|go-Part-Pres-S part|to verb|fall-Inf-S adp|down .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|7|ROOT 5|6|MARK 6|4|XCOMP 7|6|COMPOUND-PRT 8|4|PUNCT
+*MOT:	now  [!] okay .
+%mor:	adv|now intj|okay .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	mammy's not able to blow that one , it's too hard .
+%mor:	noun|mammy~aux|be-Fin-Ind-Pres-S3 part|not adj|able-S1 part|to verb|blow-Inf-S det|that-Def-Dem-Sing noun|one-Acc cm|cm pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adv|too adj|hard-S1 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|13|ROOT 5|6|MARK 6|4|XCOMP 7|8|DET 8|6|OBJ 9|13|PUNCT 10|13|NSUBJ 11|13|COP 12|13|ADVMOD 13|4|PARATAXIS 14|4|PUNCT
+%com:	child vocalises .
+*MOT:	it's too difficult .
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adv|too adj|difficult-S1 .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+%com:	mother blows into balloon and lets the air out .
+*MOT:	ah .
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	again ?
+%mor:	adv|again ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother blows up balloon and lets air out .
+*MOT:	oh haha .
+%mor:	intj|oh intj|haha .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	child laughs .
+*MOT:	haha , is that funny ?
+%mor:	intj|haha cm|cm aux|be-Fin-Ind-Pres-S3 pron|that-Dem adj|funny-S1 ?
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|COP 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+%com:	child vocalises .
+*MOT:	again ?
+%mor:	adv|again ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother blows up balloon and lets air out .
+*MOT:	haha .
+%mor:	intj|haha .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child laughs .
+*MOT:	yes , great fun !
+%mor:	intj|yes cm|cm adj|great-S1 noun|fun !
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	will we do it again ?
+%mor:	aux|will-Fin-S pron|we-Prs-Nom-P1 verb|do-Inf-S pron|it-Prs-Acc-S3 adv|again ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+%com:	child vocalises .
+*MOT:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother blows up balloon and lets the air out .
+*MOT:	oh haha .
+%mor:	intj|oh intj|haha .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises .
+*MOT:	can I have a kiss , can have a kiss ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S det|a-Ind-Art noun|kiss-Acc cm|cm aux|can-Fin-S verb|have-Inf-S det|a-Ind-Art noun|kiss-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|10|ROOT 4|5|DET 5|3|OBJ 6|8|PUNCT 7|8|AUX 8|3|PARATAXIS 9|10|DET 10|8|OBJ 11|3|PUNCT
+%com:	mother kisses child .
+*MOT:	mwah@o good girl .
+%mor:	x|mwah adj|good-S1 noun|girl .
+%gra:	1|3|FLAT 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	now .
+%mor:	adv|now .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you ready ?
+%mor:	pron|you-Prs-Nom-S2 adj|ready-S1 ?
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+%com:	child vocalises . mother blows up balloon and lets the air out .
+*MOT:	haha .
+%mor:	intj|haha .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	yeah  [!] it's great fun .
+%mor:	intj|yeah pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adj|great-S1 noun|fun .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	now .
+%mor:	adv|now .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	again ?
+%mor:	adv|again ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother attempts to blow up balloon but spits it out accidentally .l
+*MOT:	oh haha .
+%mor:	intj|oh intj|haha .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	mother blows up balloon and lets the air out .
+*MOT:	wahoo haha .
+%mor:	propn|wahoo intj|haha .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%com:	child vocalises .
+*MOT:	here , I have it here look .
+%mor:	adv|here cm|cm pron|I-Prs-Nom-S1 verb|have-Fin-Ind-Pres-S1 pron|it-Prs-Acc-S3 adv|here verb|look-Fin-S .
+%gra:	1|4|ADVMOD 2|1|PUNCT 3|4|NSUBJ 4|7|ROOT 5|4|OBJ 6|4|ADVMOD 7|4|XCOMP 8|4|PUNCT
+*MOT:	look .
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	one more time ?
+%mor:	num|one adj|more-Cmp-S1 noun|time ?
+%gra:	1|3|NUMMOD 2|3|AMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	yeah ?
+%mor:	intj|yeah ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother blows up balloon and lets the air out .
+*MOT:	wow !
+%mor:	intj|wow !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	where'd it go ?
+%mor:	adv|where~aux|would-Fin-S pron|it-Prs-Nom-S3 verb|go-Inf-S ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	it's here look  [/] , look .
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adv|here cm|cm verb|look-Fin-Imp-S .
+%gra:	1|3|NSUBJ 2|3|COP 3|5|ROOT 4|5|PUNCT 5|3|PARATAXIS 6|3|PUNCT
+%com:	child vocalises and hands balloon to mother .
+*MOT:	again , yeah .
+%mor:	adv|again cm|cm intj|yeah .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|DISCOURSE 4|1|PUNCT
+%com:	mother blows up balloon and lets the air out .
+*MOT:	oo: woop@wp .
+%mor:	noun|oo x|woop .
+%gra:	1|2|COMPOUND 2|2|FLAT 3|2|PUNCT
+*MOT:	haha .
+%mor:	intj|haha .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	yeah !
+%mor:	intj|yeah !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	it's really good „ isn't it ?
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 adv|really adj|good-S1 cm|end aux|be-Fin-Ind-Pres-S3~part|not pron|it-Prs-Nom-S3 ?
+%gra:	1|4|NSUBJ 2|4|COP 3|4|ADVMOD 4|8|ROOT 5|4|PUNCT 6|4|COP 7|6|ADVMOD 8|4|PARATAXIS 9|4|PUNCT
+*MOT:	again ?
+%mor:	adv|again ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises .
+*MOT:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother blows up balloon and lets the air out .
+*MOT:	haha .
+%mor:	intj|haha .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child vocalises and claps hands, and mother imitates .
+*MOT:	yeah , 0will we do it again ?
+%mor:	intj|yeah cm|cm pron|we-Prs-Nom-P1 verb|do-Fin-Ind-Pres-P1 pron|it-Prs-Acc-S3 adv|again ?
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|NSUBJ 4|6|ROOT 5|4|OBJ 6|4|ADVMOD 7|4|PUNCT
+%com:	child vocalises .
+*MOT:	yeah .
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can I have a kiss first ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S det|a-Ind-Art noun|kiss-Acc adv|first ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|5|DET 5|3|OBJ 6|3|ADVMOD 7|3|PUNCT
+*MOT:	can I have a kiss ?
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|have-Inf-S det|a-Ind-Art noun|kiss-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%com:	child vocalises .
+*MOT:	can I xxx .
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 .
+%gra:	1|2|ROOT 2|1|NSUBJ 3|1|PUNCT
+@End

@@ -1,0 +1,136 @@
+@UTF8
+@PID:	11312/a-00082324-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|5;04.|male|||Target_Child|||
+@Media:	15_T3_1, video
+*COD:	U . 1_14000
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 14000_144103
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	go away . 14410_15690
+%mor:	verb|go-Fin-Imp-S adv|away .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	oh . 21010_21970
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh . 23860_24420
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	(o)kay . 26740_27960
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	GO AWAY . 27760_28650
+%mor:	verb|go-Fin-Imp-S adv|away .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	okay I'm leaving . 29910_32040
+%mor:	intj|okay pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|leave-Part-Pres-S .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|4|ROOT 5|4|PUNCT
+*MOT:	oh I'm back . 44890_46170
+%mor:	intj|oh pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 adv|back .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	xxx . 47450_49580
+%xDN:	CHI-Speech-ND
+*MOT:	do you want me to stay or do you want me to go away ? 49720_52260
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|I-Prs-Acc-S1 part|to verb|stay-Inf-S cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|I-Prs-Acc-S1 part|to verb|go-Inf-S adv|away ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|14|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|10|CC 8|10|AUX 9|10|NSUBJ 10|3|CONJ 11|10|OBJ 12|13|MARK 13|10|XCOMP 14|13|ADVMOD 15|3|PUNCT
+*MOT:	should you tell me on the I_Pad ? 54090_55780
+%mor:	aux|should-Fin-S pron|you-Prs-Nom-S2 verb|tell-Inf-S pron|I-Prs-Acc-S1 adp|on det|the-Def-Art propn|IPad ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|IOBJ 5|7|CASE 6|7|DET 7|3|OBL 8|3|PUNCT
+*CHI:	&=other . 55880_57330
+%xgco:	Child pushes his parent to ask her to leave .
+%xIS:	CHI-Gesture-S
+*MOT:	oh you want me to go away , no you have to tell me to go away . 56600_60030
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|I-Prs-Acc-S1 part|to verb|go-Inf-S adv|away cm|cm intj|no pron|you-Prs-Nom-S2 verb|have-Fin-Ind-Pres-S2 part|to verb|tell-Inf-S pron|I-Prs-Acc-S1 part|to verb|go-Inf-S adv|away .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|17|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|6|ADVMOD 8|11|PUNCT 9|11|DISCOURSE 10|11|NSUBJ 11|3|PARATAXIS 12|13|MARK 13|11|XCOMP 14|13|IOBJ 15|16|MARK 16|13|XCOMP 17|16|ADVMOD 18|3|PUNCT
+*MOT:	pointer . 61200_62050
+%mor:	noun|pointer .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	GO AWAY . 63610_64900
+%mor:	verb|go-Fin-Imp-S adv|away .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	okay I'm leaving . 64940_66790
+%mor:	intj|okay pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|leave-Part-Pres-S .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|AUX 4|4|ROOT 5|4|PUNCT
+*CHI:	uh . 69060_69600
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*CHI:	&=hums . 73290_74170
+*CHI:	eh . 79550_80370
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	oh I'm back . 84150_85880
+%mor:	intj|oh pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 adv|back .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	oh . 87200_88680
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	what do you want me to do ? 89640_91160
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|I-Prs-Acc-S1 part|to verb|do-Inf-S ?
+%gra:	1|7|OBJ 2|4|AUX 3|4|NSUBJ 4|7|ROOT 5|4|OBJ 6|7|MARK 7|4|XCOMP 8|4|PUNCT
+*MOT:	what do you want Mommy to do ? 92280_93830
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|do-Inf-S ?
+%gra:	1|7|OBJ 2|4|AUX 3|4|NSUBJ 4|7|ROOT 5|4|OBJ 6|7|MARK 7|4|XCOMP 8|4|PUNCT
+*MOT:	you want Mommy to stay or do you want Mommy to go away ? 94030_98050
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 propn|Mommy-Acc part|to verb|stay-Inf-S cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|go-Inf-S adv|away ?
+%gra:	1|2|NSUBJ 2|13|ROOT 3|2|OBJ 4|5|MARK 5|2|XCOMP 6|9|CC 7|9|AUX 8|9|NSUBJ 9|2|CONJ 10|9|OBJ 11|12|MARK 12|9|XCOMP 13|12|ADVMOD 14|2|PUNCT
+*CHI:	ah ah . 100030_101460
+%mor:	intj|ah intj|ah .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+%xDN:	CHI-Speech-X
+*MOT:	do you want Mommy to stay or do you want Mommy to go away ? 103950_110490
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|stay-Inf-S cconj|or aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|go-Inf-S adv|away ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|14|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|10|CC 8|10|AUX 9|10|NSUBJ 10|3|CONJ 11|10|OBJ 12|13|MARK 13|10|XCOMP 14|13|ADVMOD 15|3|PUNCT
+*AAC:	STOP . 111560_112640
+%mor:	verb|stop-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	oh you want me to stop ? 112930_114110
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|I-Prs-Acc-S1 part|to verb|stop-Inf-S ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|3|PUNCT
+*MOT:	okay . 114660_115420
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and you want me to +... 116040_120000
+%mor:	cconj|and pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 pron|I-Prs-Acc-S1 part|to +...
+%gra:	1|3|CC 2|3|NSUBJ 3|5|ROOT 4|3|OBJ 5|3|XCOMP 6|3|PUNCT
+*AAC:	GO AWAY . 122970_124020
+%mor:	verb|go-Fin-Imp-S adv|away .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	++ go away . 123820_124880
+%mor:	verb|go-Fin-Imp-S adv|away .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	oh I'm back . 139800_141740
+%mor:	intj|oh pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 adv|back .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*COD:	U . 144103_163006
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you want Mommy to go away &=laughs ? 162480_164760
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 propn|Mommy-Acc part|to verb|go-Inf-S adv|away ?
+%gra:	1|2|NSUBJ 2|6|ROOT 3|2|OBJ 4|5|MARK 5|2|XCOMP 6|5|ADVMOD 7|2|PUNCT
+*COD:	C . 163006_180000
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want Mommy to go away ? 166040_168960
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S propn|Mommy-Acc part|to verb|go-Inf-S adv|away ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|OBJ 5|6|MARK 6|3|XCOMP 7|6|ADVMOD 8|3|PUNCT
+*MOT:	oh . 172490_173830
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	say I'm pooping . 176870_178430
+%mor:	verb|say-Fin-Imp-S pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|poop-Part-Pres-S .
+%gra:	1|4|ROOT 2|4|NSUBJ 3|4|AUX 4|1|CCOMP 5|1|PUNCT
+@End

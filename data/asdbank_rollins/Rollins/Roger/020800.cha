@@ -1,0 +1,470 @@
+@UTF8
+@PID:	11312/c-00005933-1
+@Begin
+@Languages:	eng
+@Participants:	INV Investigator, CHI Target_Child
+@ID:	eng|Rollins|INV|||||Investigator|||
+@ID:	eng|Rollins|CHI|2;08.|male|||Target_Child|||
+@Activities:	cookie monster
+@Types:	long, toyplay, ASD
+*INV:	we needta open the door .
+%mor:	pron|we-Prs-Nom-P1 aux|needta-Fin-Ind-Pres-P1 verb|open-Fin-Ind-Pres-S1 det|the-Def-Art noun|door-Acc .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+%spa:	$NIA:RP
+%tim:	00:20:59
+*CHI:	0 .
+%act:	waits by the door
+*INV:	open the door .
+%mor:	verb|open-Fin-Imp-S det|the-Def-Art noun|door-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	opens the door
+*CHI:	0 .
+%act:	walks through the door
+*INV:	open the door .
+%mor:	verb|open-Fin-Imp-S det|the-Def-Art noun|door-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+*INV:	there's cookie .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 noun|cookie .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+%spa:	$DHA:ST
+%gpx:	points to a box on the shelf
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:YY:NB
+%gpx:	points up to the shelf
+*INV:	cookie .
+%mor:	noun|cookie .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$NIA:CT
+*INV:	let's get it down .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|get-Inf-S pron|it-Prs-Acc-S3 adp|down .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|1|PUNCT
+%spa:	$NIA:RP
+%act:	takes the box off the shelf
+*INV:	let's get it down .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|get-Inf-S pron|it-Prs-Acc-S3 adp|down .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|3|COMPOUND-PRT 6|1|PUNCT
+%spa:	$NIA:SI
+%act:	puts the box on the table
+*INV:	&=gasp .  [+ trn]
+%spa:	$DHA:MK
+%act:	pulls the toy out of the box
+*INV:	cookie monster .
+%mor:	noun|cookie noun|monster .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%act:	hands him a toy cookie monster
+*INV:	cookie monster .
+%mor:	noun|cookie noun|monster .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%spa:	$DJF:ST
+%act:	gets shape cookies out of the box
+%tim:	00:21:31
+*CHI:	0 .
+%act:	holds the cookie monster up
+*INV:	cookie .
+%mor:	noun|cookie .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$DJF:ST
+%gpx:	points to the toy
+*CHI:	&=laughs .
+%act:	puts the toy back on the table
+*INV:	okay .
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$MRK:MK
+*INV:	open his mouth .
+%mor:	verb|open-Fin-Imp-S pron|his-Prs-Gen-S3 noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	opens the cookie monster's mouth
+*INV:	here's a heart cookie .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|heart noun|cookie .
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|1|PUNCT
+%spa:	$NIA:TO
+*CHI:	xxx .
+%act:	scoots the cookie monster away
+*CHI:	xxx .
+*CHI:	xxx .
+%act:	opens the mouth back up
+*INV:	here's a heart cookie .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|heart noun|cookie .
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|1|PUNCT
+%spa:	$DHA:ST
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	puts it through the heart-shaped hole and takes it out the back
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VCO
+%act:	moves the mouth up and down
+*INV:	xxx .
+%spa:	$PRO:PR
+%com:	makes eating noises
+%tim:	00:22:00
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:RP:VNR
+%act:	turns to the examiner for another cookie
+*INV:	here's the star cookie .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|star noun|cookie .
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|1|PUNCT
+%spa:	$NIA:TO
+%act:	hands him the cookie
+*CHI:	0 .
+%act:	takes the cookie and picks up cookie monster
+*INV:	open his mouth .
+%mor:	verb|open-Fin-Imp-S pron|his-Prs-Gen-S3 noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+*CHI:	on yyy mark .
+%mor:	adp|on noun|mark .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+%spa:	$PRO:PR:WD
+*CHI:	get set .
+%mor:	aux|get-Fin-Imp-S verb|set-Part-Past-S-irr .
+%gra:	1|2|COP 2|2|ROOT 3|2|PUNCT
+%spa:	$PRO:PR:WD
+*CHI:	go .
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:PR:WD
+*INV:	go .
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:RT
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	walks around the room carrying cookie monster
+*CHI:	0 .
+%act:	sets him back on the table
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:RP
+%act:	opens cookie monster's mouth
+*CHI:	xxx .
+%act:	looks over the cookie
+%tim:	00:22:30
+*CHI:	xxx .
+%act:	closes the mouth
+*INV:	close the mouth .
+%mor:	verb|close-Fin-Imp-S det|the-Def-Art noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+*CHI:	xxx .
+%act:	turns cookie monster around
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+%com:	chewing noises
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+*CHI:	0 .
+%act:	opens the mouth and puts the cookie in the correct hole
+*INV:	there you go .
+%mor:	pron|there-Dem-S1 pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|EXPL 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:MK
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	takes the cookie out the back
+*CHI:	0 .  [+ trn]
+%spa:	$PRO:PR:VCO
+%act:	opens and closes the mouth
+*INV:	xxx .  [+ trn]
+%spa:	$PRO:PR
+%com:	makes eating noises
+*CHI:	0 .  [+ trn]
+%spa:	$NIA:RP:NR
+%act:	reaches for another cookie
+*INV:	there's a square cookie .
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 det|a-Ind-Art adj|square-S1 noun|cookie .
+%gra:	1|2|EXPL 2|5|ROOT 3|5|DET 4|5|AMOD 5|2|NSUBJ 6|2|PUNCT
+%spa:	$NIA:TO
+%act:	hands him a square
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:YY:VO
+*CHI:	0 .
+%act:	picks up cookie monster
+*CHI:	xxx .  [+ trn]
+%spa:	$SDS:PR:VO
+%act:	walks around the room
+%tim:	00:23:00
+*CHI:	get set .
+%mor:	aux|get-Fin-Imp-S verb|set-Part-Past-S-irr .
+%gra:	1|2|COP 2|2|ROOT 3|2|PUNCT
+%spa:	$SDS:PR:WD
+*CHI:	go .
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$SDS:PR:WD
+*CHI:	0 .
+%act:	brings him back to the table
+*INV:	open his mouth .
+%mor:	verb|open-Fin-Imp-S pron|his-Prs-Gen-S3 noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:RP
+%act:	opens cookie monster's mouth
+*CHI:	xxx .
+%act:	closes the mouth
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	opens the mouth
+*CHI:	yyy  [= jargon] .
+%spa:	$YYY:YY:VJ
+%act:	puts the cookie in
+*CHI:	xxx .
+*INV:	&~mm .
+%spa:	$PRO:PR
+%act:	opens and closes the mouth
+%tim:	00:23:30
+*INV:	0 .
+%act:	takes the cookie out
+*CHI:	0 .  [+ trn]
+%spa:	$NIA:RP:NR
+%act:	reaches for another cookie
+*INV:	here's the (.) triangle cookie .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|triangle noun|cookie .
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|1|PUNCT
+%spa:	$NIA:TO
+%act:	hands him the cookie
+*CHI:	xxx .  [+ trn]
+%spa:	$YYY:YY:VO
+%act:	picks up cookie monster and turns him around
+*CHI:	mark .
+%mor:	noun|mark .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:PR:VO
+*CHI:	get set .
+%mor:	aux|get-Fin-Imp-S verb|set-Part-Past-S-irr .
+%gra:	1|2|COP 2|2|ROOT 3|2|PUNCT
+%spa:	$PRO:PR:WD
+*CHI:	go .
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:PR:WD
+*INV:	go .
+%mor:	verb|go-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%spa:	$PRO:RT
+*CHI:	0 .
+%act:	walks around the room
+*CHI:	0 .
+%act:	puts cookie monster back
+*INV:	<open his mouth>  [>] .
+%mor:	verb|open-Fin-Imp-S pron|his-Prs-Gen-S3 noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	opens the mouth
+%tim:	00:24:02
+*CHI:	xxx  [<] .
+*INV:	open his mouth .
+%mor:	verb|open-Fin-Imp-S pron|his-Prs-Gen-S3 noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+*CHI:	0 .
+%act:	opens the mouth again when it closes
+*INV:	open his mouth .
+%mor:	verb|open-Fin-Imp-S pron|his-Prs-Gen-S3 noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	holds it open
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	reaches around and puts his hand in the back
+*CHI:	0 .
+%act:	closes the mouth and puts his hand through the back again
+*CHI:	0 .
+%act:	plays with the shape holes
+*INV:	mmmmm@o .
+%mor:	x|mmmmm .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR
+%act:	opens and closes the mouth and makes eating noises
+%tim:	00:24:30
+*CHI:	xxx .
+%act:	picks cookie monster up
+*CHI:	0 .
+%act:	puts him down and squats to look at him
+*INV:	here's the heart cookie .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|heart noun|cookie .
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|1|PUNCT
+%spa:	$DHA:ST
+%act:	holds the cookie out
+*INV:	the heart cookie for Amy .
+%mor:	det|the-Def-Art noun|heart noun|cookie adp|for propn|Amy .
+%gra:	1|3|DET 2|3|COMPOUND 3|5|ROOT 4|5|CASE 5|3|NMOD 6|3|PUNCT
+%spa:	$NIA:ST
+%act:	opens the mouth
+*INV:	I'm going to put it in .
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|go-Part-Pres-S part|to verb|put-Inf-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|5|COMPOUND-PRT 8|3|PUNCT
+%spa:	$NIA:SI
+%act:	puts the cookie through the hole
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:SI
+%tim:	00:25:01
+*INV:	mmmmm@o .
+%mor:	x|mmmmm .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR
+%act:	moves the mouth up and down
+*INV:	0 .
+%act:	takes it out
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:YY:VO
+%act:	holds up the triangle cookie
+*INV:	this is for Riley .
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adp|for propn|Riley .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|CASE 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:ST
+%gpx:	touches the triangle
+*INV:	open his mouth .
+%mor:	verb|open-Fin-Imp-S pron|his-Prs-Gen-S3 noun|mouth-Acc .
+%gra:	1|3|ROOT 2|3|NMOD-POSS 3|1|OBJ 4|1|PUNCT
+%spa:	$NIA:SI
+%act:	opens the mouth
+*CHI:	0 .
+%act:	puts it through the hole
+*INV:	put it in .
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|1|PUNCT
+%spa:	$NIA:SI
+*INV:	&~mm .
+%spa:	$PRO:PR
+%act:	moves the mouth up and down
+*CHI:	xxx  [>] .  [+ trn]
+%spa:	$NIA:RP:VNR
+%act:	goes for another cookie
+*INV:	here's the <heart cookie for Amy>  [<] .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|heart noun|cookie adp|for propn|Amy .
+%gra:	1|7|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|7|CASE 7|5|NMOD 8|1|PUNCT
+%spa:	$NIA:ST
+%act:	picks out the heart cookie
+*CHI:	xxx .
+*INV:	I'm going to (.) put it in .
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|go-Part-Pres-S part|to verb|put-Inf-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|5|COMPOUND-PRT 8|3|PUNCT
+%spa:	$NIA:SI
+%act:	puts it through the hole
+*INV:	mmmm@o .
+%mor:	x|mmmm .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR
+%act:	opens and closes mouth
+*CHI:	xxx .  [+ trn]
+%spa:	$PRO:PR:VO
+*INV:	here's the square cookie .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|square-S1 noun|cookie .
+%gra:	1|5|ROOT 2|1|COP 3|5|DET 4|5|AMOD 5|1|NSUBJ 6|1|PUNCT
+%spa:	$DHA:ST
+%act:	holds the cookie out
+%tim:	00:25:31
+*INV:	for Riley .
+%mor:	adp|for propn|Riley .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:TO
+*CHI:	0 .
+%act:	picks up cookie monster
+*CHI:	mmmm@o .
+%mor:	x|mmmm .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR:VO
+%act:	opens and closes the mouth
+*INV:	&~mm .
+%spa:	$PRO:PR
+%com:	eating noises
+*CHI:	mmmm@o .
+%mor:	x|mmmm .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR:VO
+%act:	opens and closes mouth
+*INV:	mmmmm@o .
+%mor:	x|mmmmm .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR
+*CHI:	0 .
+%act:	opens and closes mouth
+*INV:	here's the heart cookie for Amy .
+%mor:	adv|here~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|heart noun|cookie adp|for propn|Amy .
+%gra:	1|7|ROOT 2|1|COP 3|5|DET 4|5|COMPOUND 5|1|NSUBJ 6|7|CASE 7|5|NMOD 8|1|PUNCT
+%spa:	$DHA:ST
+%act:	gets the heart cookie
+%tim:	00:26:01
+*INV:	I'm gonna put it in .
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 part|go verb|put-Inf-S pron|it-Prs-Acc-S3 adp|in .
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|6|ROOT 5|4|OBJ 6|4|COMPOUND-PRT 7|4|PUNCT
+%spa:	$NIA:SI
+%act:	puts it in the mouth
+*INV:	mmmmm@o .
+%mor:	x|mmmmm .
+%gra:	1|1|FLAT 2|1|PUNCT
+%spa:	$PRO:PR
+%act:	moves the mouth up and down
+*CHI:	0 .
+%act:	puts his hand through the hole in the back
+*CHI:	0 .
+%act:	turns cookie monster upside down
+*INV:	let's put cookie monster in the box .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S noun|cookie noun|monster-Acc adp|in det|the-Def-Art noun|box .
+%gra:	1|8|ROOT 2|1|OBJ 3|1|XCOMP 4|5|COMPOUND 5|3|OBJ 6|8|CASE 7|8|DET 8|3|OBL 9|1|PUNCT
+%spa:	$NIA:RP
+*CHI:	0 .
+%act:	puts cookie monster in the box
+*INV:	in the box .
+%mor:	adp|in det|the-Def-Art noun|box .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:SI
+*INV:	in the box .
+%mor:	adp|in det|the-Def-Art noun|box .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:SI
+%act:	puts the cookies in the box
+*INV:	okay we're done .
+%mor:	intj|okay pron|we-Prs-Nom-P1~aux|be-Fin-Ind-Pres-P1 verb|do-Part-Past-S-irr .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ-PASS 3|4|AUX-PASS 4|4|ROOT 5|4|PUNCT
+%spa:	$NIA:DC
+*CHI:	xxx .  [+ trn]
+%spa:	$NIA:MK:CO
+%act:	steps back and raises his hand
+%tim:	00:26:29
+*INV:	bye  [/] bye cookie .
+%mor:	intj|bye noun|cookie .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:CT
+*INV:	bye  [/] bye cookie .
+%mor:	intj|bye noun|cookie .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%spa:	$NIA:MK
+*INV:	on the shelf .
+%mor:	adp|on det|the-Def-Art noun|shelf .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:SI
+%act:	puts the box on the shelf
+*INV:	on the shelf .
+%mor:	adp|on det|the-Def-Art noun|shelf .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$NIA:SI
+*INV:	on the shelf .
+%mor:	adp|on det|the-Def-Art noun|shelf .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%spa:	$DRE:ST
+*INV:	let's go play in the sand .
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|go-Inf-S verb|play-Inf-S adp|in det|the-Def-Art noun|sand .
+%gra:	1|7|ROOT 2|1|OBJ 3|1|XCOMP 4|3|XCOMP 5|7|CASE 6|7|DET 7|4|OBL 8|1|PUNCT
+%spa:	$NIA:RP
+@End

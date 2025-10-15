@@ -1,0 +1,219 @@
+@UTF8
+@PID:	11312/c-00004230-1
+@Begin
+@Languages:	eng
+@Participants:	MOT Mother
+@ID:	eng|QuigleyMcNally|MOT|35;10.||||Mother|||
+@Date:	01-SEP-2009
+@Types:	long, toyplay, TD
+*MOT:	thr:ee (.) and (.) pop !
+%mor:	num|three cconj|and noun|pop !
+%gra:	1|3|ROOT 2|3|CC 3|1|CONJ 4|1|PUNCT
+%com:	mother and child are facing each other, child sitting on mother's lap .  mother is bouncing child up and down and child is shouting .
+*MOT:	<I'm some popcorn sitting in the pan>  [=! singing] .
+%mor:	pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 det|some-Def-Ind noun|popcorn verb|sit-Part-Pres-S adp|in det|the-Def-Art noun|pan .
+%gra:	1|4|NSUBJ 2|4|COP 3|4|DET 4|8|ROOT 5|4|ACL 6|8|CASE 7|8|DET 8|5|OBL 9|4|PUNCT
+*MOT:	<<shake me>  [/] shake me fast as you can>  [=! singing] .
+%mor:	verb|shake-Fin-Imp-S pron|I-Prs-Acc-S1 adv|fast sconj|as pron|you-Prs-Nom-S2 aux|can-Fin-S .
+%gra:	1|6|ROOT 2|1|OBJ 3|1|ADVMOD 4|6|MARK 5|6|NSUBJ 6|1|ADVCL 7|1|PUNCT
+%com:	child is shouting and looking around, trying to get off lap .
+*MOT:	one (.) two (.) three (.) and (..) pop !
+%mor:	num|one num|two num|three cconj|and noun|pop !
+%gra:	1|3|NUMMOD 2|3|COMPOUND 3|5|ROOT 4|5|CC 5|3|CONJ 6|3|PUNCT
+*MOT:	you want hugs ?
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|hug-Plur-Acc ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	is that what you want ?
+%mor:	aux|be-Fin-Ind-Pres-S3 sconj|that pron|what-Rel-S1 pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 ?
+%gra:	1|3|COP 2|3|MARK 3|5|ROOT 4|5|NSUBJ 5|3|ACL-RELCL 6|3|PUNCT
+*MOT:	huggy_duggy_dicky_dicky@wp .
+%mor:	x|huggyduggydickydicky .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	have y(ou) got any tickles today ?
+%mor:	aux|have-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|get-Part-Past-S-irr det|any-Def-Ind noun|tickle-Plur-Acc noun|today ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|5|DET 5|3|OBJ 6|3|OBL-UNMARKED 7|3|PUNCT
+*MOT:	haha <tickle tickle>  [/] tickle .
+%mor:	intj|haha verb|tickle-Fin-Imp-S .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	haha <tickle tickle>  [/] tickle .
+%mor:	intj|haha verb|tickle-Fin-Imp-S .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%com:	child shouts, then vocalises and mother imitates .
+*MOT:	ah_bah_bah_bah_bah@p .
+%mor:	x|ahbahbahbahbah .
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	child is fussing and trying to get off lap, mother is playfully slapping child on bottom .
+*MOT:	bum_bum@wp .
+%mor:	x|bumbum .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	bum_bum@wp .
+%mor:	x|bumbum .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	bum_bum_bum@wp .
+%mor:	x|bumbumbum .
+%gra:	1|1|FLAT 2|1|PUNCT
+%com:	mother is humming and child joins in .
+*MOT:	are y(ou) dancin(g) ?
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|dance-Part-Pres-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	nnh-nnh-nhh-nhh@p .
+%mor:	x|nnhnnhnhhnhh .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	noo-noo-noo-noo-noo@p .
+%mor:	x|noonoonoonoonoo .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	are y(ou) dancin(g) ?
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|dance-Part-Pres-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	whoo !
+%mor:	intj|whoo !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child starts to wave .
+*MOT:	hi !
+%mor:	intj|hi !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	whoo !
+%mor:	intj|whoo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hi !
+%mor:	intj|hi !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hiya !
+%mor:	intj|hiya !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	two hands .
+%mor:	num|two noun|hand-Plur .
+%gra:	1|2|NUMMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	hiya !
+%mor:	intj|hiya !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother is imitating child's hand movement .
+*MOT:	(i)t's kiss +/.
+%mor:	pron|it-Prs-Nom-S3~aux|be-Fin-Ind-Pres-S3 noun|kiss +/.
+%gra:	1|3|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+*MOT:	kisses .
+%mor:	noun|kisse-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	mother blows kiss .
+*MOT:	you do one for me ?
+%mor:	pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 num|one adp|for pron|I-Prs-Acc-S1 ?
+%gra:	1|2|NSUBJ 2|5|ROOT 3|2|OBJ 4|5|CASE 5|2|OBL 6|2|PUNCT
+*MOT:	bop@p !
+%mor:	x|bop !
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	(hoo)ray !
+%mor:	intj|hooray !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child beginning to fuss .
+*MOT:	what about this ?
+%mor:	pron|what-Int-S1 adp|about pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|CASE 3|1|NMOD 4|1|PUNCT
+%com:	mother blows kiss .
+*MOT:	d(o) y(ou) know how to do kisses ?
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|know-Inf-S adv|how part|to verb|do-Inf-S noun|kisse-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|3|OBJ 5|6|MARK 6|4|ACL 7|6|OBJ 8|3|PUNCT
+%com:	child raises mother's scarf from blouse to mother's mouth .
+*MOT:	<mm mm>  [/] mm , delicious .
+%mor:	intj|mm cm|cm adj|delicious-S1 .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*MOT:	spotty blouse , very tasty .
+%mor:	adj|spotty-S1 noun|blouse cm|cm adv|very adj|tasty-S1 .
+%gra:	1|2|AMOD 2|5|ROOT 3|5|PUNCT 4|5|ADVMOD 5|2|PARATAXIS 6|2|PUNCT
+*MOT:	<ow , ow>  [/] , ow .
+%mor:	cm|cm intj|ow .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	child has caught mother's hair in hand .
+*MOT:	does it tickle y(ou) ?
+%mor:	aux|do-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 verb|tickle-Inf-S pron|you-Prs-Acc-S2 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+%com:	mother is rubbing scarf over child's face and playing peekaboo . child is laughing loudly and squealing with delight .
+*MOT:	oh where's Rhi ?
+%mor:	intj|oh adv|where~aux|be-Fin-Ind-Pres-S3 propn|Rhi ?
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|COP 4|2|NSUBJ 5|2|PUNCT
+*MOT:	I can't see +/.
+%mor:	pron|I-Prs-Nom-S1 aux|can-Fin-S~part|not verb|see-Inf-S +/.
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	boo !
+%mor:	noun|boo !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	now I see Rhi .
+%mor:	adv|now pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 propn|Rhi-Acc .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	now I see y(ou) .
+%mor:	adv|now pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	no , <can't find her>  [/] , can't find her .
+%mor:	intj|no cm|cm cm|cm aux|can-Fin-S~part|not verb|find-Inf-S pron|her-Prs-Acc-S3 .
+%gra:	1|6|DISCOURSE 2|1|PUNCT 3|1|PUNCT 4|6|AUX 5|6|ADVMOD 6|7|ROOT 7|6|OBJ 8|6|PUNCT
+*MOT:	ah , wait (un)til I see .
+%mor:	intj|ah cm|cm verb|wait-Fin-Imp-S sconj|until pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|6|ROOT 4|6|MARK 5|6|NSUBJ 6|3|ADVCL 7|3|PUNCT
+*MOT:	ah !
+%mor:	intj|ah !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	ah found you !
+%mor:	intj|ah verb|find-Fin-Ind-Past-S3-irr pron|you-Prs-Acc-S2 !
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	ah I found you .
+%mor:	intj|ah pron|I-Prs-Nom-S1 verb|find-Fin-Ind-Past-S1-irr pron|you-Prs-Acc-S2 .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	<peep peep>  [/] peep .
+%mor:	noun|peep .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh found you !
+%mor:	intj|oh verb|find-Fin-Ind-Past-S3-irr pron|you-Prs-Acc-S2 !
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%com:	child is taking turns to do it to mother . child is vocalising and mother is repeating .
+*MOT:	ah !
+%mor:	intj|ah !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child is vocalising and mother is repeating .
+*MOT:	ah !
+%mor:	intj|ah !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can y(ou) not see +/.
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 part|not verb|see-Inf-S +/.
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	o:h@i !
+%mor:	intj|oh !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you do it .
+%mor:	pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%com:	child is vocalising and mother is repeating .
+*MOT:	ah !
+%mor:	intj|ah !
+%gra:	1|1|ROOT 2|1|PUNCT
+%com:	child is vocalising and mother is repeating .
+*MOT:	&-uh@i !
+*MOT:	oh , mammy do it .
+%mor:	intj|oh cm|cm intj|mammy verb|do-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|DISCOURSE 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	mammy do it .
+%mor:	noun|mammy verb|do-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%com:	mother covering her eyes and playing peekaboo .  both are laughing and child is excitedly pulling scarf off each time .
+*MOT:	oh I see +/.
+%mor:	intj|oh pron|I-Prs-Nom-S1 verb|see-Fin-Ind-Pres-S1 +/.
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	<ow , ow>  [/] , ow .
+%mor:	cm|cm intj|ow .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	child has scratched mother's face accidentally .
+*MOT:	<no , no>  [/] , no .
+%mor:	cm|cm intj|no .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+*MOT:	no , don't grab mammy's mouth .
+%mor:	intj|no cm|cm aux|do-Fin-Imp-S~part|not verb|grab-Fin-Imp-S noun|mammy~part|s noun|mouth-Acc .
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|AUX 4|5|ADVMOD 5|8|ROOT 6|8|NMOD-POSS 7|6|CASE 8|5|OBJ 9|5|PUNCT
+*MOT:	peep !
+%mor:	noun|peep !
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	<no , no>  [/] , no !
+%mor:	cm|cm intj|no !
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+%com:	child is grabbing mother's mouth .
+*MOT:	no  [/] , no .
+%mor:	cm|cm intj|no .
+%gra:	1|2|PUNCT 2|2|ROOT 3|2|PUNCT
+@End

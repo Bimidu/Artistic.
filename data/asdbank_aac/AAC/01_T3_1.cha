@@ -1,0 +1,320 @@
+@UTF8
+@PID:	11312/a-00082261-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, CHI Target_Child, MOT Mother, AAC Media
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|CHI|5;03.|male|||Target_Child|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@Media:	01_T3_1, video, missing
+*COD:	C . 1_292040
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=cries . 2010_4320
+*MOT:	ready love ? 2320_3580
+%mor:	adj|ready-S1 noun|love ?
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	here you go . 4070_5200
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 .
+%gra:	1|3|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|1|PUNCT
+*MOT:	here you go CHILDNAME sit , sit on the chair . 17200_20890
+%mor:	adv|here pron|you-Prs-Nom-S2 verb|go-Fin-Ind-Pres-S2 propn|CHILDNAME-Acc verb|sit-Fin-Imp-S cm|cm verb|sit-Fin-Imp-S adp|on det|the-Def-Art noun|chair .
+%gra:	1|10|ROOT 2|3|NSUBJ 3|1|ADVCL-RELCL 4|3|OBJ 5|3|XCOMP 6|7|PUNCT 7|3|PARATAXIS 8|10|CASE 9|10|DET 10|7|OBL 11|1|PUNCT
+*CHI:	ana &=breathes . 20130_22070
+%mor:	propn|ana .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	okay sit on the chair . 21600_23550
+%mor:	intj|okay verb|sit-Fin-Imp-S adp|on det|the-Def-Art noun|chair .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|5|CASE 4|5|DET 5|2|OBL 6|2|PUNCT
+*MOT:	look at this . 23750_24970
+%mor:	verb|look-Fin-Imp-S adp|at pron|this-Dem-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	cut . 29390_30650
+%mor:	verb|cut-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	uh aya . 32800_33990
+%mor:	intj|uh propn|aya .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=hums . 38630_39700
+*CHI:	ay . 40000_41800
+%mor:	intj|ay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	xxx &=laughs . 43320_45980
+%xDN:	CHI-Speech-ND
+*CHI:	&=breathes . 50150_51010
+*MOT:	so look CHILDNAME Mommy's gonna cut one piece and then you cut one piece okay ? 50450_54670
+%mor:	adv|so verb|look-Fin-Imp-S propn|CHILDNAME-Acc propn|Mommy~aux|be-Fin-Ind-Pres-S3 adv|gonna verb|cut-Inf-S num|one noun|piece-Acc cconj|and adv|then pron|you-Prs-Nom-S2 verb|cut-Fin-Ind-Past-S2-irr num|one noun|piece-Acc adj|okay-S1 ?
+%gra:	1|2|DISCOURSE 2|16|ROOT 3|2|OBJ 4|7|NSUBJ 5|7|AUX 6|7|ADVMOD 7|2|CCOMP 8|9|NUMMOD 9|7|OBJ 10|13|CC 11|13|ADVMOD 12|13|NSUBJ 13|2|CONJ 14|15|NUMMOD 15|13|OBJ 16|13|XCOMP 17|2|PUNCT
+*MOT:	cut  [/] cut . 54790_57190
+%mor:	verb|cut-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=laughs &=sighs . 57090_61430
+*MOT:	now you're gonna cut . 57870_59400
+%mor:	adv|now pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 part|go verb|cut-Part-Past-S-irr .
+%gra:	1|5|ADVMOD 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*MOT:	cut  [/] cut , excellent , give it to mom , cut . 60900_66100
+%mor:	verb|cut-Part-Past-S-irr cm|cm adj|excellent-S1 cm|cm verb|give-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to noun|mom cm|cm verb|cut-Fin-Imp-S .
+%gra:	1|5|ADVCL 2|3|PUNCT 3|1|CONJ 4|1|PUNCT 5|10|ROOT 6|5|OBJ 7|8|CASE 8|5|OBL 9|10|PUNCT 10|5|PARATAXIS 11|5|PUNCT
+*AAC:	CUT . 61860_68670
+%mor:	noun|cut .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	beautiful , cut , &~k let's do it together . 68020_71780
+%mor:	adj|beautiful-S1 cm|cm verb|cut-Part-Past-S-irr cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S pron|it-Prs-Acc-S3 adv|together .
+%gra:	1|9|ROOT 2|3|PUNCT 3|1|CONJ 4|5|PUNCT 5|1|PARATAXIS 6|5|OBJ 7|5|XCOMP 8|7|OBJ 9|7|ADVMOD 10|1|PUNCT
+*CHI:	&=cries . 69210_70590
+*MOT:	one two three cut . 71800_74310
+%mor:	num|one num|two num|three noun|cut .
+%gra:	1|4|NUMMOD 2|4|NUMMOD 3|4|NUMMOD 4|4|ROOT 5|4|PUNCT
+%xpar:	parent is counting down before cutting .
+*CHI:	&=breathes ay . 73850_77750
+%mor:	intj|ay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	CUT . 77590_79200
+%mor:	noun|cut .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*CHI:	&=laughs . 77840_81810
+*MOT:	yeah cut , you do it all by yourself . 77890_81600
+%mor:	intj|yeah noun|cut cm|cm pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 pron|it-Prs-Acc-S3 det|all-Def-Tot adp|by pron|yourself-Prs-Acc-S2 .
+%gra:	1|2|DISCOURSE 2|9|ROOT 3|5|PUNCT 4|5|NSUBJ 5|2|PARATAXIS 6|5|OBJ 7|5|ADVMOD 8|9|CASE 9|5|OBL 10|2|PUNCT
+*MOT:	one two three cut , <good+job>  [/] good+job . 81630_87320
+%mor:	num|one num|two num|three noun|cut cm|cm noun|goodjob .
+%gra:	1|4|NUMMOD 2|4|NUMMOD 3|4|NUMMOD 4|6|ROOT 5|6|PUNCT 6|4|APPOS 7|4|PUNCT
+%xpar:	parent is counting down before cutting .
+*CHI:	&=laughs . 82770_86920
+*AAC:	CUT . 89330_91150
+%mor:	noun|cut .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	excellent cut  [/] cut . 89750_92840
+%mor:	adj|excellent-S1 noun|cut .
+%gra:	1|2|AMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	ah . 93080_94110
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	can  [/] can I help you ? 93170_95260
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|help-Inf-S pron|you-Prs-Acc-S2 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=laughs . 95670_96830
+*MOT:	put it here &=tapping , put it here and I'll help , uh we he we cut on the board , cut . 96320_101940
+%mor:	verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adv|here cm|cm verb|put-Fin-Imp-S pron|it-Prs-Acc-S3 adv|here cconj|and pron|I-Prs-Nom-S1~aux|will-Fin-S verb|help-Inf-S cm|cm intj|uh pron|we-Prs-Nom-P1 pron|he-Prs-Nom-S3 pron|we-Prs-Nom-P1 verb|cut-Fin-Ind-Pres-P1 adp|on det|the-Def-Art noun|board cm|cm verb|cut-Fin-Ind-Past-P1-irr .
+%gra:	1|22|ROOT 2|1|OBJ 3|1|ADVMOD 4|5|PUNCT 5|1|CONJ 6|5|OBJ 7|5|ADVMOD 8|11|CC 9|11|NSUBJ 10|11|AUX 11|1|CONJ 12|17|PUNCT 13|17|DISCOURSE 14|17|REPARANDUM 15|17|NSUBJ 16|17|NSUBJ 17|1|PARATAXIS 18|20|CASE 19|20|DET 20|17|OBL 21|22|PUNCT 22|17|CONJ 23|1|PUNCT
+%xpar:	parent is tapping table while speaking .
+*CHI:	&=grunts . 97310_97960
+*CHI:	ah . 101030_102480
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	let me help you we do it together okay ? 102010_104420
+%mor:	verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 verb|help-Inf-S pron|you-Prs-Acc-S2 pron|we-Prs-Nom-P1 verb|do-Fin-Ind-Pres-P1 pron|it-Prs-Acc-S3 adv|together intj|okay ?
+%gra:	1|9|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|6|NSUBJ 6|3|CCOMP 7|6|OBJ 8|6|ADVMOD 9|1|DISCOURSE 10|1|PUNCT
+*MOT:	one two three cut . 104590_107170
+%mor:	num|one num|two num|three noun|cut .
+%gra:	1|4|NUMMOD 2|4|NUMMOD 3|4|NUMMOD 4|4|ROOT 5|4|PUNCT
+%xpar:	parent is counting down before cutting .
+*MOT:	good+job . 107730_109450
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	xxx . 107730_109450
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh my turn , my turn to cut . 109560_112240
+%mor:	intj|oh pron|my-Prs-Gen-S1 noun|turn cm|cm pron|my-Prs-Gen-S1 noun|turn part|to verb|cut-Inf-S .
+%gra:	1|3|DISCOURSE 2|3|NMOD-POSS 3|8|ROOT 4|6|PUNCT 5|6|NMOD-POSS 6|3|PARATAXIS 7|8|MARK 8|6|ACL 9|3|PUNCT
+*MOT:	cut . 112320_112960
+%mor:	verb|cut-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	cut the cucumber . 113870_115720
+%mor:	verb|cut-Fin-Imp-S det|the-Def-Art noun|cucumber-Acc .
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*MOT:	and what colour is the cucumber ? 116240_118340
+%mor:	cconj|and det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|cucumber ?
+%gra:	1|6|CC 2|3|DET 3|6|NSUBJ 4|6|COP 5|6|DET 6|6|ROOT 7|6|PUNCT
+*MOT:	look &=tapping , what colour is the cucumber , look , buddy &=tapping . 119130_124990
+%mor:	verb|look-Fin-Imp-S cm|cm det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|cucumber cm|cm verb|look-Fin-Imp-S cm|cm noun|buddy .
+%gra:	1|11|ROOT 2|7|PUNCT 3|4|DET 4|7|NSUBJ 5|7|COP 6|7|DET 7|1|PARATAXIS 8|9|PUNCT 9|7|CONJ 10|11|PUNCT 11|7|CONJ 12|1|PUNCT
+%xpar:	parent is tapping child's shoulder to get their attention .
+*CHI:	uh bu . 120460_121640
+%mor:	intj|uh intj|bu .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	yeah . 125440_126980
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	buddy what colour is the cucumber ? 126730_128640
+%mor:	noun|buddy det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|cucumber ?
+%gra:	1|6|ROOT 2|3|DET 3|6|NSUBJ 4|6|COP 5|6|DET 6|1|APPOS 7|1|PUNCT
+*CHI:	yeah dee yeah . 128060_131400
+%mor:	intj|yeah intj|dee intj|yeah .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	what colour is it ? 128900_130510
+%mor:	det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|2|DET 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*MOT:	CHILDNAME what colour is the cucumber ? 130600_132620
+%mor:	propn|CHILDNAME det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|cucumber ?
+%gra:	1|6|ROOT 2|3|DET 3|6|NSUBJ 4|6|COP 5|6|DET 6|1|PARATAXIS 7|1|PUNCT
+*CHI:	nee yu . 133550_135540
+%mor:	intj|nee propn|yu .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME what colour is the cucumber ? 135770_137690
+%mor:	propn|CHILDNAME det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|cucumber ?
+%gra:	1|6|ROOT 2|3|DET 3|6|NSUBJ 4|6|COP 5|6|DET 6|1|PARATAXIS 7|1|PUNCT
+*MOT:	look  [/] look . 138950_141200
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	uh . 139440_141480
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+%xVCO:	child bites into the cucumber .
+*MOT:	green ? 141930_142840
+%mor:	adj|green-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME the cucumber is green . 143440_145810
+%mor:	propn|CHILDNAME det|the-Def-Art noun|cucumber aux|be-Fin-Ind-Pres-S3 adj|green-S1 .
+%gra:	1|5|VOCATIVE 2|3|DET 3|5|NSUBJ 4|5|COP 5|5|ROOT 6|5|PUNCT
+*MOT:	put the cucumber here . 156710_158080
+%mor:	verb|put-Fin-Imp-S det|the-Def-Art noun|cucumber-Acc adv|here .
+%gra:	1|4|ROOT 2|3|DET 3|1|OBJ 4|1|ADVMOD 5|1|PUNCT
+*MOT:	CHILDNAME put the cucumber here please . 158720_160950
+%mor:	propn|CHILDNAME verb|put-Fin-Ind-Past-S-irr det|the-Def-Art noun|cucumber-Acc adv|here intj|please .
+%gra:	1|2|NSUBJ 2|6|ROOT 3|4|DET 4|2|OBJ 5|2|ADVMOD 6|2|DISCOURSE 7|2|PUNCT
+*MOT:	let's cut it . 161980_163140
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|cut-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|OBJ 5|1|PUNCT
+*CHI:	&=groans . 161980_163140
+*MOT:	Mommy cuts one piece then you cut one piece , cut . 163310_166580
+%mor:	propn|Mommy verb|cut-Fin-Ind-Pres-S3 num|one noun|piece-Acc adv|then pron|you-Prs-Nom-S2 verb|cut-Fin-Ind-Pres-S2 num|one noun|piece-Acc cm|cm verb|cut-Fin-Imp-Past-S-irr .
+%gra:	1|2|NSUBJ 2|11|ROOT 3|4|NUMMOD 4|2|OBJ 5|7|ADVMOD 6|7|NSUBJ 7|2|PARATAXIS 8|9|NUMMOD 9|7|OBJ 10|11|PUNCT 11|7|PARATAXIS 12|2|PUNCT
+*CHI:	uh . 169120_170110
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	cut  [/] cut , good+job CHILDNAMEy cut , cut more cucumber . 170750_178020
+%mor:	verb|cut-Fin-S cm|cm noun|goodjob propn|CHILDNAMEy noun|cut-Acc cm|cm verb|cut-Fin-Imp-S2 adj|more-Cmp-S1 noun|cucumber-Acc .
+%gra:	1|9|ROOT 2|5|PUNCT 3|5|COMPOUND 4|5|COMPOUND 5|1|OBJ 6|7|PUNCT 7|1|PARATAXIS 8|9|AMOD 9|7|OBJ 10|1|PUNCT
+*CHI:	&=grunts . 173010_174210
+*MOT:	ready , <look at what you're doing>  [/] look at what you're doing , one two three cut . 178040_183140
+%mor:	adj|ready-S1 cm|cm verb|look-Fin-Imp-S adp|at pron|what-Rel-S1 pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|do-Part-Pres-S cm|cm num|one num|two num|three noun|cut .
+%gra:	1|13|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|5|CASE 5|3|OBL 6|8|NSUBJ 7|8|AUX 8|5|ACL-RELCL 9|13|PUNCT 10|13|NUMMOD 11|13|NUMMOD 12|13|NUMMOD 13|1|PARATAXIS 14|1|PUNCT
+%xpar:	parent is counting down before cutting .
+*CHI:	uh . 178630_179460
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	you cut it . 183490_184350
+%mor:	pron|you-Prs-Nom-S2 verb|cut-Fin-Ind-Past-S2-irr pron|it-Prs-Acc-S3 .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*MOT:	how many pieces do you have ? 184400_185710
+%mor:	adv|how adj|many-S1 noun|piece-Plur-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|have-Inf-S ?
+%gra:	1|2|ADVMOD 2|3|AMOD 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|6|ROOT 7|6|PUNCT
+*MOT:	one two three four five six seven eight , eight pieces of cucumber . 185940_196000
+%mor:	num|one num|two num|three num|four num|five num|six num|seven num|eight cm|cm num|eight noun|piece-Plur adp|of noun|cucumber .
+%gra:	1|3|COMPOUND 2|3|COMPOUND 3|8|NUMMOD 4|8|NUMMOD 5|8|NUMMOD 6|8|NUMMOD 7|8|NUMMOD 8|13|ROOT 9|11|PUNCT 10|11|NUMMOD 11|8|APPOS 12|13|CASE 13|11|NMOD 14|8|PUNCT
+%xpar:	parent is counting cucumber slices .
+*MOT:	and the cucumber is , what colour is it ? 196340_200830
+%mor:	cconj|and det|the-Def-Art noun|cucumber aux|be-Fin-Ind-Pres-S3 cm|cm det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|4|CC 2|3|DET 3|4|NSUBJ 4|9|ROOT 5|4|PUNCT 6|7|DET 7|9|NSUBJ 8|9|COP 9|4|PARATAXIS 10|4|PUNCT
+*MOT:	what colour is the cucumber ? 201470_202790
+%mor:	det|what-Def-Int noun|colour aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|cucumber ?
+%gra:	1|2|DET 2|5|NSUBJ 3|5|COP 4|5|DET 5|5|ROOT 6|5|PUNCT
+*MOT:	green . 204280_205420
+%mor:	adj|green-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	uh do you wanna eat ? 205780_207470
+%mor:	intj|uh aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 intj|wanna verb|eat-Inf-S ?
+%gra:	1|5|DISCOURSE 2|5|AUX 3|5|NSUBJ 4|5|DISCOURSE 5|5|ROOT 6|5|PUNCT
+*CHI:	&=cries . 207920_210730
+*MOT:	do you wanna eat ? 210200_211920
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|eat-Inf-S ?
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|4|ROOT 5|4|PUNCT
+*CHI:	&=whines . 211430_213720
+*MOT:	do you want , do you want the bread ? 213610_217620
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|the-Def-Art noun|bread-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|9|ROOT 4|7|PUNCT 5|7|AUX 6|7|NSUBJ 7|3|PARATAXIS 8|9|DET 9|7|OBJ 10|3|PUNCT
+*MOT:	good+job . 219330_221480
+%mor:	noun|goodjob .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	here , here's your bread . 221670_223410
+%mor:	adv|here cm|cm adv|here~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|bread .
+%gra:	1|3|ADVMOD 2|1|PUNCT 3|6|ROOT 4|3|COP 5|6|NMOD-POSS 6|3|NSUBJ 7|3|PUNCT
+*CHI:	uh e . 223480_226050
+%mor:	intj|uh noun|e .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh you want the cucumber ? 225630_227590
+%mor:	intj|oh pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 det|the-Def-Art noun|cucumber-Acc ?
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	you're eating the cucumber ? 230660_232690
+%mor:	pron|you-Prs-Nom-S2~aux|be-Fin-Ind-Pres-S2 verb|eat-Part-Pres-S det|the-Def-Art noun|cucumber-Acc ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	my turn to cut , my turn to cut it . 234420_237640
+%mor:	pron|my-Prs-Gen-S1 noun|turn part|to verb|cut-Inf-S cm|cm pron|my-Prs-Gen-S1 noun|turn-Acc part|to verb|cut-Inf-S pron|it-Prs-Acc-S3 .
+%gra:	1|2|NMOD-POSS 2|10|ROOT 3|4|MARK 4|2|ACL 5|7|PUNCT 6|7|NMOD-POSS 7|4|OBJ 8|9|MARK 9|7|ACL 10|9|OBJ 11|2|PUNCT
+*MOT:	can I cut the cucumber ? 241150_243170
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|cut-Inf-S det|the-Def-Art noun|cucumber-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	pass it to me put it here . 243190_244840
+%mor:	verb|pass-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 verb|put-Fin-S pron|it-Prs-Acc-S3 adv|here .
+%gra:	1|7|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|ADVCL 6|5|OBJ 7|5|ADVMOD 8|1|PUNCT
+*CHI:	xxx . 244360_245700
+%xDN:	CHI-Speech-ND
+*MOT:	oh look what I'm doing , look  [/] look CHILDNAMEy , <CHILDNAME look what I'm doing>  [/] CHILDNAME look what I'm doing . 244910_251690
+%mor:	intj|oh verb|look-Fin-Imp-S pron|what-Rel-S1 pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|do-Part-Pres-S cm|cm verb|look-Fin-Imp-S propn|CHILDNAMEy-Acc cm|cm intj|childname verb|look-Fin-Imp-S pron|what-Rel-S1 pron|I-Prs-Nom-S1~aux|be-Fin-Ind-Pres-S1 verb|do-Part-Pres-S .
+%gra:	1|2|DISCOURSE 2|16|ROOT 3|2|OBJ 4|6|NSUBJ 5|6|AUX 6|3|ACL-RELCL 7|8|PUNCT 8|2|PARATAXIS 9|8|OBJ 10|12|PUNCT 11|12|DISCOURSE 12|2|PARATAXIS 13|12|OBJ 14|16|NSUBJ 15|16|AUX 16|13|ACL-RELCL 17|2|PUNCT
+*MOT:	cut and then I cut again , look cut . 251710_254940
+%mor:	verb|cut-Part-Past-S-irr cconj|and adv|then pron|I-Prs-Nom-S1 verb|cut-Fin-Ind-Past-S1-irr adv|again cm|cm verb|look-Fin-Imp-S2 verb|cut-Part-Past-S-irr .
+%gra:	1|9|ROOT 2|5|CC 3|5|ADVMOD 4|5|NSUBJ 5|1|CONJ 6|5|ADVMOD 7|8|PUNCT 8|1|PARATAXIS 9|8|XCOMP 10|1|PUNCT
+*MOT:	CHILDNAME &=tapping . 255690_256900
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xpar:	parent is tapping child's arm to get their attention .
+*MOT:	look cut the cucumber . 259950_261740
+%mor:	verb|look-Fin-Imp-S verb|cut-Fin-S det|the-Def-Art noun|cucumber-Acc .
+%gra:	1|4|ROOT 2|1|XCOMP 3|4|DET 4|2|OBJ 5|1|PUNCT
+*MOT:	you wanna do it ? 261870_263100
+%mor:	pron|you-Prs-Nom-S2 aux|wanna-Fin-Ind-S2 verb|do-Fin-Ind-Pres-S pron|it-Prs-Acc-S3 ?
+%gra:	1|3|NSUBJ 2|3|AUX 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	do you wanna cut it , cut , yeah good+job . 272860_276260
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 part|wana verb|cut-Inf-S pron|it-Prs-Acc-S3 cm|cm verb|cut-Inf-S cm|cm intj|yeah noun|goodjob .
+%gra:	1|4|AUX 2|4|NSUBJ 3|4|ADVMOD 4|10|ROOT 5|4|OBJ 6|7|PUNCT 7|4|CONJ 8|10|PUNCT 9|10|DISCOURSE 10|7|PARATAXIS 11|4|PUNCT
+*MOT:	here bud(dy) cut it . 276570_278030
+%mor:	adv|here noun|buddy verb|cut-Fin-Ind-Past-S3-irr pron|it-Prs-Acc-S3 .
+%gra:	1|3|ADVMOD 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=breathes . 278010_278820
+*MOT:	put that down , put your monkey down , here take the knife and we cut it . 278730_282900
+%mor:	verb|put-Fin-Imp-S pron|that-Dem adp|down cm|cm verb|put-Fin-Imp-S pron|your-Prs-Gen-S2 noun|monkey-Acc adp|down cm|cm adv|here verb|take-Fin-Imp-S det|the-Def-Art noun|knife-Acc cconj|and pron|we-Prs-Nom-P1 verb|cut-Fin-Ind-Past-P1-irr pron|it-Prs-Acc-S3 .
+%gra:	1|17|ROOT 2|1|OBJ 3|1|COMPOUND-PRT 4|5|PUNCT 5|1|CONJ 6|7|NMOD-POSS 7|5|OBJ 8|5|COMPOUND-PRT 9|10|PUNCT 10|5|ADVMOD 11|1|PARATAXIS 12|13|DET 13|11|OBJ 14|16|CC 15|16|NSUBJ 16|1|CONJ 17|16|OBJ 18|1|PUNCT
+*CHI:	uh . 279770_281330
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	one piece then we cut another piece . 283340_285560
+%mor:	num|one noun|piece adv|then pron|we-Prs-Nom-P1 verb|cut-Fin-Ind-Past-P1-irr det|another-Def-Ind noun|piece-Acc .
+%gra:	1|2|NUMMOD 2|5|NSUBJ 3|5|ADVMOD 4|5|NSUBJ 5|7|ROOT 6|7|DET 7|5|OBJ 8|5|PUNCT
+*MOT:	wow , how many pieces do you have right here ? 285870_287850
+%mor:	intj|wow cm|cm adv|how adj|many-S1 noun|piece-Plur-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|have-Inf-S adv|right adv|here ?
+%gra:	1|8|DISCOURSE 2|1|PUNCT 3|4|ADVMOD 4|5|AMOD 5|8|OBJ 6|8|AUX 7|8|NSUBJ 8|10|ROOT 9|10|ADVMOD 10|8|ADVMOD 11|8|PUNCT
+*CHI:	ah . 288400_289550
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	come here bud(dy) . 288600_289630
+%mor:	verb|come-Fin-Imp-S adv|here noun|buddy-Acc .
+%gra:	1|3|ROOT 2|1|ADVMOD 3|1|OBJ 4|1|PUNCT
+*CHI:	&=squeals . 291320_292000
+@End

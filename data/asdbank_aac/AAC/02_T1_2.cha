@@ -1,0 +1,668 @@
+@UTF8
+@PID:	11312/a-00082264-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, AAC Media, MOT Mother, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|CHI|9;10.|male|||Target_Child|||
+@Media:	02_T1_2, video
+*COD:	C . 10_329839
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	No CHI-AAC observed . 20_1250
+%mor:	det|no-Def-Neg noun|chiaac verb|observe-Fin-Ind-Past-S3 .
+%gra:	1|2|DET 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	okay . 750_1190
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	welcome back . 1670_3070
+%mor:	intj|welcome adv|back .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	welcome back , yeah . 3180_4560
+%mor:	intj|welcome adv|back cm|cm intj|yeah .
+%gra:	1|4|ROOT 2|1|ADVMOD 3|4|PUNCT 4|1|DISCOURSE 5|1|PUNCT
+*CHI:	xxx . 5290_5800
+*MOT:	CHILDNAME look at me . 5850_7260
+%mor:	propn|CHILDNAME verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+*CHI:	CHILDNAME look at me .  [+ per] 6300_8250
+%mor:	propn|CHILDNAME verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|CASE 4|2|OBL 5|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look at me . 7850_9050
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*CHI:	look at me .  [+ per] 8730_9620
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look look , look outside . 9710_11160
+%mor:	verb|look-Fin-Imp-S noun|look-Acc cm|cm verb|look-Fin-Imp-S2 adv|outside .
+%gra:	1|5|ROOT 2|1|OBJ 3|4|PUNCT 4|1|PARATAXIS 5|4|ADVMOD 6|1|PUNCT
+*CHI:	look look , look outside .  [+ per] 10430_12620
+%mor:	verb|look-Fin-Imp-S noun|look-Acc cm|cm verb|look-Fin-Imp-S2 adv|outside .
+%gra:	1|5|ROOT 2|1|OBJ 3|4|PUNCT 4|1|PARATAXIS 5|4|ADVMOD 6|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look at me . 13030_14200
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*CHI:	&=mumbles . 14640_15170
+*MOT:	CHILDNAME . 15200_15850
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME . 17610_18270
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	CHILDNAME .  [+ per] 18550_19280
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	what is the weather today ? 20000_21610
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|weather noun|today ?
+%gra:	1|5|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|NMOD-UNMARKED 6|1|PUNCT
+*CHI:	is it rainy ? 22610_25480
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 adj|rainy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what ? 24660_25300
+%mor:	pron|what-Int-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	what ?  [+ per] 25810_26610
+%mor:	pron|what-Int-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	what's that , can you see ? 27480_29230
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|7|ROOT 2|1|COP 3|1|NSUBJ 4|7|PUNCT 5|7|AUX 6|7|NSUBJ 7|1|PARATAXIS 8|1|PUNCT
+*CHI:	what's that , can you see ?  [+ per] 28520_30350
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|that-Dem cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|see-Inf-S ?
+%gra:	1|7|ROOT 2|1|COP 3|1|NSUBJ 4|7|PUNCT 5|7|AUX 6|7|NSUBJ 7|1|PARATAXIS 8|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	can you show it to me ? 30560_31620
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|show-Inf-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|CASE 6|3|OBL 7|3|PUNCT
+*CHI:	can you show it to me ?  [+ per] 31750_32930
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|show-Inf-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|6|ROOT 4|3|OBJ 5|6|CASE 6|3|OBL 7|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	what is it ? 33260_33870
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	what is bit ?  [+ per] 34010_35010
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 noun|bit ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	&=laughs is it a radio ? 35900_37520
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 det|a-Ind-Art noun|radio ?
+%gra:	1|4|COP 2|4|NSUBJ 3|4|DET 4|4|ROOT 5|4|PUNCT
+*CHI:	is it radio ?  [+ per] 37430_39170
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 noun|radio ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	oh . 40740_41200
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	oh .  [+ per] 41130_41650
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	show , show me your radio , come on . 41570_44220
+%mor:	verb|show-Fin-Imp-S cm|cm verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 pron|your-Prs-Gen-S2 noun|radio-Acc cm|cm verb|come-Fin-Imp-S2 adp|on .
+%gra:	1|9|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|3|IOBJ 5|6|NMOD-POSS 6|3|OBJ 7|8|PUNCT 8|1|PARATAXIS 9|8|COMPOUND-PRT 10|1|PUNCT
+*MOT:	show me your radio , what , show me your radio . 44370_49120
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 pron|your-Prs-Gen-S2 noun|radio-Acc cm|cm pron|what-Int-S1 cm|cm verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 pron|your-Prs-Gen-S2 noun|radio-Acc .
+%gra:	1|11|ROOT 2|1|IOBJ 3|4|NMOD-POSS 4|1|OBJ 5|6|PUNCT 6|8|NSUBJ 7|6|PUNCT 8|1|PARATAXIS 9|8|IOBJ 10|11|NMOD-POSS 11|8|OBJ 12|1|PUNCT
+*MOT:	can I see ? 50740_51620
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|see-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	show it to the camera xxx . 51940_53580
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to det|the-Def-Art noun|camera .
+%gra:	1|5|ROOT 2|1|OBJ 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+*CHI:	show it to the camera .  [+ per] 53970_56080
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to det|the-Def-Art noun|camera .
+%gra:	1|5|ROOT 2|1|OBJ 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	show it , show it . 55040_57360
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 cm|cm verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 .
+%gra:	1|5|ROOT 2|1|OBJ 3|4|PUNCT 4|1|PARATAXIS 5|4|OBJ 6|1|PUNCT
+*CHI:	ou . 57370_59350
+%mor:	x|ou .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what is it ? 59260_60640
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+*MOT:	what is this one ? 61130_62530
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|this-Def-Dem-Sing noun|one ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	can I see ? 63850_64470
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|see-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	what is this ? 64830_65780
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	what is bits ?  [+ per] 65960_66710
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 noun|bit-Plur ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	radio . 67480_68050
+%mor:	noun|radio .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	radio .  [+ per] 68580_69100
+%mor:	noun|radio .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	what's the weather ? 71600_72770
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|weather ?
+%gra:	1|4|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+*MOT:	CHILDNAME ? 73680_74400
+%mor:	noun|childname ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	what is the weather ?  [+ per] 74720_75790
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|weather ?
+%gra:	1|4|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	is it sunny or rainy ? 76450_79330
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 adj|sunny-S1 cconj|or adj|rainy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|5|ROOT 4|5|CC 5|3|CONJ 6|3|PUNCT
+*CHI:	is it sunny or rainy ?  [+ per] 79850_81890
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 adj|sunny-S1 cconj|or adj|rainy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|5|ROOT 4|5|CC 5|3|CONJ 6|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	come on , come here . 82040_83880
+%mor:	verb|come-Fin-Imp-S adp|on cm|cm verb|come-Fin-Imp-S adv|here .
+%gra:	1|5|ROOT 2|1|COMPOUND-PRT 3|4|PUNCT 4|1|PARATAXIS 5|4|ADVMOD 6|1|PUNCT
+*MOT:	sit down . 84480_85750
+%mor:	verb|sit-Fin-Imp-S adp|down .
+%gra:	1|2|ROOT 2|1|COMPOUND-PRT 3|1|PUNCT
+*CHI:	&=moans . 87180_87900
+*MOT:	what's the weather today ? 88660_90700
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|weather noun|today ?
+%gra:	1|5|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|1|NMOD-UNMARKED 6|1|PUNCT
+*CHI:	is it rainy ? 91280_92870
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 adj|rainy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+*MOT:	look at me . 94450_95600
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*CHI:	look at me .  [+ per] 95710_96340
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look . 96420_97010
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	watch outside , look . 99090_100480
+%mor:	verb|watch-Fin-Imp-S adv|outside cm|cm verb|look-Fin-Imp-S .
+%gra:	1|4|ROOT 2|1|ADVMOD 3|4|PUNCT 4|1|PARATAXIS 5|1|PUNCT
+*CHI:	&=mumbles outside  [* s:per] . 99850_101540
+%mor:	adv|outside .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	is it raining ? 104080_105000
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 verb|rain-Part-Pres-S ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	is it raining ?  [+ per] 104880_106070
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 verb|rain-Part-Pres-S ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	CHILDNAME . 106630_107240
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	CHILDNAME .  [+ per] 107690_107960
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look at me . 108470_109210
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*CHI:	&=breathes . 109630_110490
+*MOT:	okay , how's your school ? 111360_112670
+%mor:	intj|okay cm|cm adv|how~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|school ?
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|6|ROOT 4|3|COP 5|6|NMOD-POSS 6|3|NSUBJ 7|3|PUNCT
+*CHI:	okay .  [+ per] 111630_112020
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	good . 112780_113990
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what's your name ? 116330_117010
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|name ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*CHI:	CHILDNAME . 117000_117550
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what's the name of your teacher ? 118940_121060
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|name adp|of pron|your-Prs-Gen-S2 noun|teacher ?
+%gra:	1|7|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|7|CASE 6|7|NMOD-POSS 7|4|NMOD 8|1|PUNCT
+*CHI:	Mister Chad . 121890_123150
+%mor:	propn|Mister propn|Chad .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what did you learn today ? 124780_126720
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 verb|learn-Inf-S noun|today ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBL-UNMARKED 6|4|PUNCT
+*CHI:	French . 127040_127990
+%mor:	adj|French-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	&=hums where's your daddy ? 128590_130640
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|daddy ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+*CHI:	where is Daddy ? 132800_133930
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 propn|Daddy ?
+%gra:	1|3|ROOT 2|1|COP 3|1|NSUBJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	where ? 135010_135590
+%mor:	adv|where ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	where ?  [+ per] 135690_136540
+%mor:	adv|where ?
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	where's daddy ? 137390_138150
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 noun|daddy ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	where's Daddy ?  [+ per] 138190_139490
+%mor:	adv|where~aux|be-Fin-Ind-Pres-S3 propn|Daddy ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	&=whines . 140470_141480
+*MOT:	in the office . 141340_142420
+%mor:	adp|in det|the-Def-Art noun|office .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	in the office .  [+ per] 142380_144120
+%mor:	adp|in det|the-Def-Art noun|office .
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	yeah , where is your brother ? 144140_145970
+%mor:	intj|yeah cm|cm adv|where aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|brother ?
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|6|ROOT 4|3|COP 5|6|NMOD-POSS 6|3|NSUBJ 7|3|PUNCT
+*CHI:	yeah .  [+ per] 144550_145140
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	where is your brother ?  [+ per] 145700_147260
+%mor:	adv|where aux|be-Fin-Ind-Pres-S3 pron|your-Prs-Gen-S2 noun|brother ?
+%gra:	1|4|ROOT 2|1|COP 3|4|NMOD-POSS 4|1|NSUBJ 5|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	oh , can you play something in the radio ? 149430_152470
+%mor:	intj|oh cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|play-Inf-S pron|something-Ind-S1 adp|in det|the-Def-Art noun|radio ?
+%gra:	1|5|DISCOURSE 2|1|PUNCT 3|5|AUX 4|5|NSUBJ 5|9|ROOT 6|5|OBJ 7|9|CASE 8|9|DET 9|5|OBL 10|5|PUNCT
+*CHI:	play some radio ? 151720_153000
+%mor:	verb|play-Fin-Imp-S det|some-Def-Ind noun|radio-Acc ?
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	can I see your radio ? 153100_154300
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|see-Inf-S pron|your-Prs-Gen-S2 noun|radio-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|NMOD-POSS 5|3|OBJ 6|3|PUNCT
+*CHI:	can see radio ?  [+ per] 154000_155480
+%mor:	aux|can-Fin-S verb|see-Inf-S noun|radio-Acc ?
+%gra:	1|2|AUX 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+%xDN:	CHI-Speech-D
+*MOT:	play something . 155950_157020
+%mor:	verb|play-Fin-Imp-S pron|something-Ind-S1 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	play something .  [+ per] 156930_158050
+%mor:	verb|play-Fin-Imp-S pron|something-Ind-S1 .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	play something , can I hear something ? 160120_161790
+%mor:	verb|play-Fin-Imp-S pron|something-Ind-S1 cm|cm aux|can-Fin-S pron|I-Prs-Nom-S1 verb|hear-Inf-S pron|something-Ind-S1 ?
+%gra:	1|7|ROOT 2|1|OBJ 3|6|PUNCT 4|6|AUX 5|6|NSUBJ 6|1|PARATAXIS 7|6|OBJ 8|1|PUNCT
+*CHI:	play  [* s:per] hear some ? 160790_163060
+%mor:	verb|play-Fin-Imp-S verb|hear-Inf-S det|some-Def-Ind ?
+%gra:	1|3|ROOT 2|1|XCOMP 3|2|OBJ 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	like a music ? 161940_163210
+%mor:	adp|like det|a-Ind-Art noun|music ?
+%gra:	1|3|CASE 2|3|DET 3|3|ROOT 4|3|PUNCT
+*CHI:	music  [* s:per] . 163610_164370
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	play music come on . 164190_165650
+%mor:	verb|play-Fin-Imp-S noun|music-Acc verb|come-Fin-S adp|on .
+%gra:	1|4|ROOT 2|1|OBJ 3|1|XCOMP 4|3|ADVMOD 5|1|PUNCT
+*MOT:	can I see ? 167310_167940
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|see-Inf-S ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	can I see it ? 169220_170050
+%mor:	aux|can-Fin-S pron|I-Prs-Nom-S1 verb|see-Inf-S pron|it-Prs-Acc-S3 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	show it to me . 170750_171590
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|PUNCT
+*CHI:	show it to me .  [+ per] 171440_172640
+%mor:	verb|show-Fin-Imp-S pron|it-Prs-Acc-S3 adp|to pron|I-Prs-Acc-S1 .
+%gra:	1|4|ROOT 2|1|OBJ 3|4|CASE 4|1|OBL 5|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	&=laughs . 173420_174570
+*CHI:	&=breathes . 173910_174910
+*MOT:	what is the colour of your T+Shirt ? 176330_178850
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|colour adp|of pron|your-Prs-Gen-S2 noun|tshirt ?
+%gra:	1|7|ROOT 2|1|COP 3|4|DET 4|1|NSUBJ 5|7|CASE 6|7|NMOD-POSS 7|4|NMOD 8|1|PUNCT
+*CHI:	&=moans . 176560_178660
+*CHI:	red . 179680_181310
+%mor:	adj|red-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	how about your pants ? 181490_183370
+%mor:	adv|how adp|about pron|your-Prs-Gen-S2 noun|pants-Ptan ?
+%gra:	1|4|ROOT 2|4|CASE 3|4|NMOD-POSS 4|1|OBL 5|1|PUNCT
+*CHI:	black . 183970_184760
+%mor:	adj|black-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	show me your nose . 186150_187250
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 pron|your-Prs-Gen-S2 noun|nose-Acc .
+%gra:	1|4|ROOT 2|1|IOBJ 3|4|NMOD-POSS 4|1|OBJ 5|1|PUNCT
+*CHI:	nose . 187990_189040
+%mor:	noun|nose .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	how many nose do you have ? 189310_191050
+%mor:	adv|how adj|many-S1 noun|nose-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|have-Inf-S ?
+%gra:	1|2|ADVMOD 2|3|AMOD 3|6|OBJ 4|6|AUX 5|6|NSUBJ 6|6|ROOT 7|6|PUNCT
+*CHI:	one . 191910_192600
+%mor:	num|one .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	how about your eyes , where are your eyes ? 193610_196460
+%mor:	adv|how adp|about pron|your-Prs-Gen-S2 noun|eye-Plur cm|cm adv|where aux|be-Fin-Ind-Pres-P3 pron|your-Prs-Gen-S2 noun|eye-Plur ?
+%gra:	1|9|ROOT 2|4|CASE 3|4|NMOD-POSS 4|1|OBL 5|6|PUNCT 6|1|PARATAXIS 7|6|COP 8|9|NMOD-POSS 9|6|NSUBJ 10|1|PUNCT
+*CHI:	one , two . 196690_197520
+%mor:	num|one cm|cm num|two .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|CONJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	two , two eyes , how about your ears ? 197790_199840
+%mor:	num|two cm|cm num|two noun|eye-Plur cm|cm adv|how adp|about pron|your-Prs-Gen-S2 noun|ear-Plur ?
+%gra:	1|9|ROOT 2|4|PUNCT 3|4|NUMMOD 4|1|CONJ 5|6|PUNCT 6|1|PARATAXIS 7|9|CASE 8|9|NMOD-POSS 9|6|OBL 10|1|PUNCT
+*CHI:	one , two . 200960_201650
+%mor:	num|one cm|cm num|two .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|CONJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	how about your mouth ? 202220_203400
+%mor:	adv|how adp|about pron|your-Prs-Gen-S2 noun|mouth ?
+%gra:	1|4|ROOT 2|4|CASE 3|4|NMOD-POSS 4|1|OBL 5|1|PUNCT
+*CHI:	one . 203520_204040
+%mor:	num|one .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	how about your hands ? 204340_205680
+%mor:	adv|how adp|about pron|your-Prs-Gen-S2 noun|hand-Plur ?
+%gra:	1|4|ROOT 2|4|CASE 3|4|NMOD-POSS 4|1|OBL 5|1|PUNCT
+*CHI:	one , two . 208610_209340
+%mor:	num|one cm|cm num|two .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|CONJ 4|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	okay . 209690_210260
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	okay .  [+ per] 210350_211170
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	so two plus two equals +... 211790_215620
+%mor:	adv|so num|two cconj|plus num|two verb|equal-Fin-Ind-Pres-S3 +...
+%gra:	1|2|ADVMOD 2|5|NSUBJ 3|4|CC 4|2|CONJ 5|5|ROOT 6|5|PUNCT
+*CHI:	so two plus two .  [+ per] 212360_214260
+%mor:	adv|so num|two cconj|plus num|two .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|CC 4|2|CONJ 5|2|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	equals  [* s:per] four . 214990_216460
+%mor:	verb|equal-Fin-Ind-Pres-S3 num|four .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	how about five plus five ? 216940_220600
+%mor:	adv|how adv|about num|five cconj|plus num|five ?
+%gra:	1|3|ADVMOD 2|3|ADVMOD 3|5|ROOT 4|5|CC 5|3|CONJ 6|3|PUNCT
+*CHI:	five plus five equals ten . 219210_223250
+%mor:	num|five cconj|plus num|five verb|equal-Fin-Ind-Pres-S3 num|ten .
+%gra:	1|4|NSUBJ 2|3|CC 3|1|CONJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	how about fifteen plus two ? 223830_226920
+%mor:	adv|how adv|about num|fifteen cconj|plus num|two ?
+%gra:	1|3|ADVMOD 2|3|ADVMOD 3|5|ROOT 4|5|CC 5|3|CONJ 6|3|PUNCT
+*CHI:	fifteen plus two equals . 226410_232000
+%mor:	num|fifteen cconj|plus num|two verb|equal-Fin-Ind-Pres-S3 .
+%gra:	1|4|NSUBJ 2|3|CC 3|1|CONJ 4|4|ROOT 5|4|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	equals +... 229610_230470
+%mor:	verb|equal-Fin-Ind-Pres-S3 +...
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=hums . 233900_236100
+*MOT:	how many ? 236720_237720
+%mor:	adv|how adj|many-S1 ?
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*CHI:	seventeen . 238610_239380
+%mor:	num|seventeen .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh very good . 239470_240430
+%mor:	intj|oh adv|very adj|good-S1 .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|3|ROOT 4|3|PUNCT
+*CHI:	good .  [+ per] 240290_241630
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	how about , uh +... 241980_244180
+%mor:	adv|how adp|about cm|cm intj|uh +...
+%gra:	1|4|ROOT 2|1|CASE 3|4|PUNCT 4|1|DISCOURSE 5|1|PUNCT
+*MOT:	what else do you know ? 244400_245660
+%mor:	pron|what-Int-S1 adv|else aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|know-Inf-S ?
+%gra:	1|5|OBJ 2|1|ADVMOD 3|5|AUX 4|5|NSUBJ 5|5|ROOT 6|5|PUNCT
+*MOT:	what else did you learn today ? 247060_248690
+%mor:	pron|what-Int-S1 adv|else aux|do-Fin-Ind-Past-S2-irr pron|you-Prs-Nom-S2 verb|learn-Inf-S noun|today ?
+%gra:	1|5|OBJ 2|1|ADVMOD 3|5|AUX 4|5|NSUBJ 5|6|ROOT 6|5|OBL-UNMARKED 7|5|PUNCT
+*CHI:	French . 249120_249700
+%mor:	adj|French-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	french , so what's the french for , for apple ? 249930_253380
+%mor:	adj|French-S1 cm|cm adv|so pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|French-S1 adp|for cm|cm adp|for noun|apple ?
+%gra:	1|11|ROOT 2|7|PUNCT 3|7|ADVMOD 4|1|PARATAXIS 5|7|COP 6|7|DET 7|4|NSUBJ 8|7|OBL 9|11|PUNCT 10|11|CASE 11|7|OBL 12|1|PUNCT
+*CHI:	pomme@s:fra . 256120_256580
+%mor:	x|pomme .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	for banana ? 256860_257950
+%mor:	adp|for noun|banana ?
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+*CHI:	for banana .  [+ per] 258690_259740
+%mor:	adp|for noun|banana .
+%gra:	1|2|CASE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	what's the french for banana ? 260520_262240
+%mor:	pron|what-Int-S1~aux|be-Fin-Ind-Pres-S3 det|the-Def-Art noun|French adp|for noun|banana ?
+%gra:	1|6|ROOT 2|4|COP 3|4|DET 4|1|NSUBJ 5|6|CASE 6|4|NMOD 7|1|PUNCT
+*CHI:	banane@s:fra . 264220_264910
+%mor:	x|banane .
+%gra:	1|1|FLAT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	oh very good . 265000_266360
+%mor:	intj|oh adv|very adj|good-S1 .
+%gra:	1|3|DISCOURSE 2|3|ADVMOD 3|3|ROOT 4|3|PUNCT
+*MOT:	so +... 269210_270150
+%mor:	adv|so +...
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	are you happy today ? 272360_273670
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 noun|today ?
+%gra:	1|3|COP 2|3|NSUBJ 3|4|ROOT 4|3|OBL-UNMARKED 5|3|PUNCT
+*CHI:	are you happy today ?  [+ per] 273710_275330
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 noun|today ?
+%gra:	1|3|COP 2|3|NSUBJ 3|4|ROOT 4|3|OBL-UNMARKED 5|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	are you happy ? 275360_276480
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	good . 277150_277920
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	good . 277780_278230
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	are you happy ? 278760_279660
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	are you happy ?  [+ per] 279620_281870
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|happy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	huh ? 281490_281910
+%mor:	intj|huh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	yeah . 282510_283050
+%mor:	intj|yeah .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yeah , okay . 283230_284440
+%mor:	intj|yeah cm|cm intj|okay .
+%gra:	1|3|ROOT 2|1|PUNCT 3|1|DISCOURSE 4|1|PUNCT
+*CHI:	&=yawns yeah okay .  [+ per] 283780_286090
+%mor:	intj|yeah intj|okay .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	are you sleepy ? 285890_287190
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|sleepy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	are you sleepy ?  [+ per] 286800_289480
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|sleepy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	look at me . 289270_290150
+%mor:	verb|look-Fin-Imp-S adp|at pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|3|CASE 3|1|OBL 4|1|PUNCT
+*MOT:	are you sleepy ? 291050_292120
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|sleepy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	am I sleepy ? 292520_294740
+%mor:	aux|be-Fin-Ind-Pres-S1 pron|I-Prs-Nom-S1 adj|sleepy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	are you sleepy ? 294890_295800
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|sleepy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*MOT:	huh ? 297530_297860
+%mor:	intj|huh ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=grunts . 298350_299050
+*MOT:	are you sleepy ? 299270_300060
+%mor:	aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 adj|sleepy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	good . 301570_302330
+%mor:	adj|good-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	good ? 302440_303170
+%mor:	adj|good-S1 ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	maybe you are not sleepy ? 304180_305590
+%mor:	adv|maybe pron|you-Prs-Nom-S2 aux|be-Fin-Ind-Pres-S2 part|not adj|sleepy-S1 ?
+%gra:	1|5|ADVMOD 2|5|NSUBJ 3|5|COP 4|5|ADVMOD 5|5|ROOT 6|5|PUNCT
+*CHI:	I am not . 305250_306230
+%mor:	pron|I-Prs-Nom-S1 aux|be-Fin-Ind-Pres-S1 part|not .
+%gra:	1|2|NSUBJ 2|3|COP 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	what is this ? 306720_307560
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+*CHI:	what is this ?  [+ per] 307750_308760
+%mor:	pron|what-Int-S1 aux|be-Fin-Ind-Pres-S3 pron|this-Dem-S1 ?
+%gra:	1|3|ROOT 2|3|COP 3|1|NSUBJ 4|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	this bump this stuff . 308800_309990
+%mor:	det|this-Def-Dem-Sing noun|bump det|this-Def-Dem-Sing noun|stuff .
+%gra:	1|2|DET 2|4|ROOT 3|4|DET 4|2|NMOD-UNMARKED 5|2|PUNCT
+*CHI:	I bump this hat . 309890_311020
+%mor:	pron|I-Prs-Nom-S1 verb|bump-Fin-Ind-Pres-S1 det|this-Def-Dem-Sing noun|hat-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	stuff . 311300_312260
+%mor:	noun|stuff .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	stuff . 312500_313130
+%mor:	noun|stuff .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	mosquito bite . 313250_314580
+%mor:	noun|mosquito noun|bite .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+*CHI:	mosquito bite .  [+ per] 314440_316200
+%mor:	noun|mosquito noun|bite .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	is it itchy ? 316330_317520
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 adj|itchy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*CHI:	is it itchy ?  [+ per] 317430_319460
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 adj|itchy-S1 ?
+%gra:	1|3|COP 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	is it ? 319370_320120
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|2|ROOT 2|1|NSUBJ 3|1|PUNCT
+*CHI:	is it ?  [+ per] 320560_321460
+%mor:	aux|be-Fin-Ind-Pres-S3 pron|it-Prs-Nom-S3 ?
+%gra:	1|2|ROOT 2|1|NSUBJ 3|1|PUNCT
+%xDN:	CHI-Speech-ND
+*MOT:	yes or no ? 322050_323140
+%mor:	intj|yes cconj|or intj|no ?
+%gra:	1|3|ROOT 2|3|CC 3|1|DISCOURSE 4|1|PUNCT
+*CHI:	yes . 323080_323420
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	yes . 323650_324160
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=sighs . 324840_325380
+*MOT:	okay . 325140_325920
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	oh that's good . 327520_328660
+%mor:	intj|oh pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|good-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+*CHI:	oh that's good .  [+ per] 328320_329610
+%mor:	intj|oh pron|that-Dem~aux|be-Fin-Ind-Pres-S3 adj|good-S1 .
+%gra:	1|4|DISCOURSE 2|4|NSUBJ 3|4|COP 4|4|ROOT 5|4|PUNCT
+%xDN:	CHI-Speech-ND
+@End

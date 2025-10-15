@@ -1,0 +1,346 @@
+@UTF8
+@PID:	11312/a-00082276-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|6;10.|male|||Target_Child|||
+@Media:	04_T3_1, video
+*COD:	C . 10_348113
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	hi CHILDNAME , can you , can you undress yourself ? 2750_5590
+%mor:	intj|hi propn|CHILDNAME cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 cm|cm aux|can-Fin-S pron|you-Prs-Nom-S2 verb|undress-Inf-S pron|yourself-Prs-Acc-S2 ?
+%gra:	1|9|DISCOURSE 2|9|VOCATIVE 3|2|PUNCT 4|9|REPARANDUM 5|9|REPARANDUM 6|5|PUNCT 7|9|AUX 8|9|NSUBJ 9|10|ROOT 10|9|OBJ 11|9|PUNCT
+*MOT:	do you want to remove your T_shirt ? 6000_8400
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|remove-Inf-S pron|your-Prs-Gen-S2 noun|tshirt-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|7|ROOT 4|5|MARK 5|3|XCOMP 6|7|NMOD-POSS 7|5|OBJ 8|3|PUNCT
+*MOT:	you need help ? 10140_11300
+%mor:	pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 noun|help-Acc ?
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*AAC:	HELP . 14880_17280
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	thank+you CHILDNAME . 17250_18870
+%mor:	intj|thankyou propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	let's remove your T_shirt . 18883_21510
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|remove-Inf-S pron|your-Prs-Gen-S2 noun|tshirt-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|NMOD-POSS 5|3|OBJ 6|1|PUNCT
+*MOT:	you can do it , the rest . 21860_23530
+%mor:	pron|you-Prs-Nom-S2 aux|can-Fin-S verb|do-Inf-S pron|it-Prs-Acc-S3 cm|cm det|the-Def-Art noun|rest .
+%gra:	1|3|NSUBJ 2|3|AUX 3|7|ROOT 4|3|OBJ 5|7|PUNCT 6|7|DET 7|3|PARATAXIS 8|3|PUNCT
+*MOT:	thank+you . 28750_29440
+%mor:	intj|thankyou .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	and the pants ? 29770_30850
+%mor:	cconj|and det|the-Def-Art noun|pants-Ptan ?
+%gra:	1|3|CC 2|3|DET 3|3|ROOT 4|3|PUNCT
+*MOT:	can you do it ? 31190_32480
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|do-Inf-S pron|it-Prs-Acc-S3 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	good+job CHILDNAME . 48960_50750
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	yay . 56810_58040
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you need help ? 58540_59400
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	help . 59810_60460
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look CHILDNAME . 61860_62820
+%mor:	verb|look-Fin-Imp-S propn|CHILDNAME-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*MOT:	do you need help ? 63250_64320
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*AAC:	HELP . 66620_68140
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	thank+you CHILDNAME , okay . 68480_70560
+%mor:	intj|thankyou intj|childname cm|cm intj|okay .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|4|PUNCT 4|1|DISCOURSE 5|2|PUNCT
+*MOT:	good+job CHILDNAME . 71470_73040
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	now let's pick up the clothes . 74250_76230
+%mor:	adv|now verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|pick-Inf-S adp|up det|the-Def-Art noun|clothes-Ptan-Acc .
+%gra:	1|2|ADVMOD 2|7|ROOT 3|2|OBJ 4|2|XCOMP 5|4|COMPOUND-PRT 6|7|DET 7|4|OBJ 8|2|PUNCT
+*MOT:	I am filming CHILDNAME now . 77380_78580
+%mor:	pron|I-Prs-Nom-S1 aux|be-Fin-Ind-Pres-S1 verb|film-Part-Pres-S propn|CHILDNAME-Acc adv|now .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+*MOT:	come CHILDNAME , what T_shirt do you want ? 78850_81790
+%mor:	verb|come-Fin-Imp-S propn|CHILDNAME-Acc cm|cm det|what-Def-Int noun|tshirt-Acc aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|8|ROOT 2|1|OBJ 3|8|PUNCT 4|5|DET 5|8|OBJ 6|8|AUX 7|8|NSUBJ 8|1|PARATAXIS 9|1|PUNCT
+*MOT:	do you want this T_shirt or this T_shirt ? 81920_84340
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|this-Def-Dem-Sing propn|Tshirt-Acc cconj|or det|this-Def-Dem-Sing noun|tshirt ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|DET 5|3|OBJ 6|8|CC 7|8|DET 8|5|CONJ 9|3|PUNCT
+*MOT:	can you show me ? 86220_87410
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|show-Inf-S pron|I-Prs-Acc-S1 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|IOBJ 5|3|PUNCT
+*MOT:	do you want this T_shirt ? 87740_89440
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|this-Def-Dem-Sing noun|tshirt-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	James . 89630_90640
+%mor:	propn|James .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want this T_shirt ? 90940_92170
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|this-Def-Dem-Sing noun|tshirt-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	no ? 92470_93190
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yeah , xxx mommy . 94770_96460
+%mor:	intj|yeah cm|cm noun|mommy .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*MOT:	look  [/] look here on the board . 96730_98140
+%mor:	verb|look-Fin-Imp-S adv|here adp|on det|the-Def-Art noun|board .
+%gra:	1|5|ROOT 2|1|ADVMOD 3|5|CASE 4|5|DET 5|1|OBL 6|1|PUNCT
+*MOT:	no . 98200_98680
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	do you want it ? 107630_108630
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S pron|it-Prs-Acc-S3 ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	no , so no , it is okay . 109120_111620
+%mor:	intj|no cm|cm adv|so intj|no cm|cm pron|it-Prs-Nom-S3 aux|be-Fin-Ind-Pres-S3 adj|okay-S1 .
+%gra:	1|8|DISCOURSE 2|1|PUNCT 3|8|ADVMOD 4|8|DISCOURSE 5|4|PUNCT 6|8|NSUBJ 7|8|COP 8|8|ROOT 9|8|PUNCT
+*AAC:	NO . 111920_113530
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	you can pick up no and give mommy no . 112140_114210
+%mor:	pron|you-Prs-Nom-S2 aux|can-Fin-S verb|pick-Inf-S adp|up intj|no cconj|and verb|give-Inf-S noun|mommy intj|no .
+%gra:	1|3|NSUBJ 2|3|AUX 3|9|ROOT 4|3|COMPOUND-PRT 5|3|DISCOURSE 6|7|CC 7|3|CONJ 8|7|IOBJ 9|3|DISCOURSE 10|3|PUNCT
+*MOT:	yes , understood . 114570_116150
+%mor:	intj|yes cm|cm verb|understand-Part-Past-S-irr .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*MOT:	now <do you want this one>  [/] do you want this one ? 116250_120190
+%mor:	adv|now aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|this-Def-Dem-Sing noun|one-Acc ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|6|ROOT 5|6|DET 6|4|OBJ 7|4|PUNCT
+*MOT:	yes ? 121200_121690
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay . 121890_122910
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	so do you need help ? 123370_125140
+%mor:	adv|so aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|4|ADVMOD 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	you need mommy to help you or you can take it alone ? 126060_129680
+%mor:	pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 noun|mommy-Acc part|to verb|help-Inf-S pron|you-Prs-Acc-S2 cconj|or pron|you-Prs-Nom-S2 aux|can-Fin-S verb|take-Inf-S pron|it-Prs-Acc-S3 adv|alone ?
+%gra:	1|2|NSUBJ 2|12|ROOT 3|2|OBJ 4|5|MARK 5|2|ADVCL 6|5|OBJ 7|10|CC 8|10|NSUBJ 9|10|AUX 10|2|CONJ 11|10|OBJ 12|10|ADVMOD 13|2|PUNCT
+*MOT:	show me please . 131460_133060
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 intj|please .
+%gra:	1|3|ROOT 2|1|IOBJ 3|1|DISCOURSE 4|1|PUNCT
+*MOT:	do you need help ? 133350_134490
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*AAC:	HELP . 135880_138100
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	help , come . 139020_140530
+%mor:	verb|help-Fin-Imp-S cm|cm verb|come-Fin-Imp-S .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+*MOT:	put  [/] put on your T_shirt . 140970_142820
+%mor:	verb|put-Fin-Imp-S adp|on pron|your-Prs-Gen-S2 noun|tshirt-Acc .
+%gra:	1|4|ROOT 2|1|COMPOUND-PRT 3|4|NMOD-POSS 4|1|OBJ 5|1|PUNCT
+*MOT:	and the other hand ? 155010_156470
+%mor:	cconj|and det|the-Def-Art adj|other-S1 noun|hand ?
+%gra:	1|4|CC 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	yay &=laughs . 158940_161490
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	good+job CHILDNAME . 165160_166700
+%mor:	propn|goodjob propn|CHILDNAME .
+%gra:	1|2|ROOT 2|1|FLAT 3|1|PUNCT
+*MOT:	yay . 168540_170490
+%mor:	intj|yay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	let's see the pants . 170790_172150
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|see-Inf-S det|the-Def-Art noun|pants-Ptan-Acc .
+%gra:	1|5|ROOT 2|1|OBJ 3|1|XCOMP 4|5|DET 5|3|OBJ 6|1|PUNCT
+*MOT:	do you want these pants or these pants ? 172260_174500
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|this-Def-Dem-Plur noun|pants-Ptan-Acc cconj|or det|this-Def-Dem-Plur noun|pants-Ptan ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|DET 5|3|OBJ 6|8|CC 7|8|DET 8|5|CONJ 9|3|PUNCT
+*MOT:	these pants , do you want these pants ? 174580_175720
+%mor:	det|this-Def-Dem-Plur noun|pants-Ptan cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|this-Def-Dem-Plur noun|pants-Ptan-Acc ?
+%gra:	1|2|DET 2|6|DISLOCATED 3|2|PUNCT 4|6|AUX 5|6|NSUBJ 6|8|ROOT 7|8|DET 8|6|OBJ 9|6|PUNCT
+*MOT:	no ? 176320_176960
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look . 177150_177620
+%mor:	verb|look-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	NO . 178330_179980
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	no , no mommy I don't want them . 179150_182140
+%mor:	intj|no cm|cm det|no-Def-Neg noun|mommy pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S pron|they-Prs-Acc-P3 .
+%gra:	1|4|DISCOURSE 2|1|PUNCT 3|4|DET 4|9|ROOT 5|8|NSUBJ 6|8|AUX 7|8|ADVMOD 8|4|ACL-RELCL 9|8|OBJ 10|4|PUNCT
+*MOT:	we'll put them away . 182720_184060
+%mor:	pron|we-Prs-Nom-P1~aux|will-Fin-S verb|put-Inf-S pron|they-Prs-Acc-P3 adv|away .
+%gra:	1|3|NSUBJ 2|3|AUX 3|5|ROOT 4|3|OBJ 5|3|ADVMOD 6|3|PUNCT
+*MOT:	do you want these ones ? 184250_185280
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S det|this-Def-Dem-Plur noun|one-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|5|ROOT 4|5|DET 5|3|OBJ 6|3|PUNCT
+*MOT:	yes ? 186340_186900
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	help . 187150_187770
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	if you need help , tell me . 187910_189930
+%mor:	sconj|if pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 noun|help-Acc cm|cm verb|tell-Fin-Imp-S pron|I-Prs-Acc-S1 .
+%gra:	1|3|MARK 2|3|NSUBJ 3|6|ADVCL 4|3|OBJ 5|3|PUNCT 6|7|ROOT 7|6|IOBJ 8|6|PUNCT
+*MOT:	yes . 190020_191050
+%mor:	intj|yes .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	HELP . 190580_193330
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	X
+*MOT:	is the good place . 191100_192560
+%mor:	aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|good-S1 noun|place .
+%gra:	1|4|COP 2|4|DET 3|4|AMOD 4|4|ROOT 5|4|PUNCT
+*MOT:	thank+you CHILDNAME . 192960_193930
+%mor:	intj|thankyou propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	let's put your pants , mommy will help you . 194490_197320
+%mor:	verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|put-Inf-S pron|your-Prs-Gen-S2 noun|pants-Ptan-Acc cm|cm noun|mommy aux|will-Fin-S verb|help-Inf-S pron|you-Prs-Acc-S2 .
+%gra:	1|10|ROOT 2|1|OBJ 3|1|XCOMP 4|5|NMOD-POSS 5|3|OBJ 6|9|PUNCT 7|9|NSUBJ 8|9|AUX 9|1|PARATAXIS 10|9|OBJ 11|1|PUNCT
+*MOT:	help . 198880_200120
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you do the rest . 202990_204440
+%mor:	pron|you-Prs-Nom-S2 verb|do-Fin-Ind-Pres-S2 det|the-Def-Art noun|rest-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	let me see . 209250_210060
+%mor:	verb|let-Fin-Imp-S pron|I-Prs-Acc-S1 verb|see-Inf-S .
+%gra:	1|3|ROOT 2|1|OBJ 3|1|XCOMP 4|1|PUNCT
+*MOT:	okay CHILDNAME come to see . 220380_221770
+%mor:	intj|okay intj|childname verb|come-Fin-Imp-S part|to verb|see-Inf-S .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|5|ROOT 4|5|MARK 5|3|ADVCL 6|3|PUNCT
+*MOT:	do you need help to fix the pants ? 221900_222920
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|need-Inf-S noun|help-Acc part|to verb|fix-Inf-S det|the-Def-Art noun|pants-Ptan-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|3|OBJ 5|6|MARK 6|4|ACL 7|8|DET 8|6|OBJ 9|3|PUNCT
+*MOT:	help . 224750_225280
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	HELP . 224780_226590
+%mor:	verb|help-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	bravo , come , <let's fix them well>  [/] let's fix them well . 225460_231130
+%mor:	noun|bravo cm|cm verb|come-Fin-Imp-S cm|cm verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|fix-Inf-S pron|they-Prs-Acc-P3 adv|well .
+%gra:	1|5|VOCATIVE 2|1|PUNCT 3|5|PARATAXIS 4|5|PUNCT 5|9|ROOT 6|5|OBJ 7|5|XCOMP 8|7|OBJ 9|7|ADVMOD 10|5|PUNCT
+*CHI:	&=hums . 227220_227750
+*MOT:	yes good+job CHILDNAME . 231780_233830
+%mor:	intj|yes propn|goodjob propn|CHILDNAME .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|FLAT 4|2|PUNCT
+*MOT:	now we can go on the bed , go on the bed . 234040_237400
+%mor:	adv|now pron|we-Prs-Nom-P1 aux|can-Fin-S verb|go-Inf-S adp|on det|the-Def-Art noun|bed cm|cm verb|go-Inf-S adp|on det|the-Def-Art noun|bed .
+%gra:	1|4|ADVMOD 2|4|NSUBJ 3|4|AUX 4|12|ROOT 5|7|CASE 6|7|DET 7|4|OBL 8|9|PUNCT 9|4|PARATAXIS 10|12|CASE 11|12|DET 12|9|OBL 13|4|PUNCT
+*MOT:	and we can play a little bit together . 238850_241200
+%mor:	cconj|and pron|we-Prs-Nom-P1 aux|can-Fin-S verb|play-Inf-S det|a-Ind-Art adj|little-S1 noun|bit adv|together .
+%gra:	1|4|CC 2|4|NSUBJ 3|4|AUX 4|8|ROOT 5|7|DET 6|7|AMOD 7|8|OBL-UNMARKED 8|4|ADVMOD 9|4|PUNCT
+*MOT:	what do you think , should we play with the cake ? 244180_246620
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|think-Inf-S cm|cm aux|should-Fin-S pron|we-Prs-Nom-P1 verb|play-Inf-S adp|with det|the-Def-Art noun|cake ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|11|ROOT 5|8|PUNCT 6|8|AUX 7|8|NSUBJ 8|4|PARATAXIS 9|11|CASE 10|11|DET 11|8|OBL 12|4|PUNCT
+*MOT:	you love the cake . 246750_247970
+%mor:	pron|you-Prs-Nom-S2 verb|love-Fin-Ind-Pres-S2 det|the-Def-Art noun|cake-Acc .
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|DET 4|2|OBJ 5|2|PUNCT
+*MOT:	hmm ? 248640_249170
+%mor:	intj|hmm ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	can you help mommy ? 249680_252640
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|help-Inf-S noun|mommy-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	look you need to help mommy to put the pajamas behind the pillow . 252970_260450
+%mor:	verb|look-Fin-Imp-S pron|you-Prs-Nom-S2 verb|need-Fin-Ind-Pres-S2 part|to verb|help-Inf-S noun|mommy-Acc part|to verb|put-Inf-S det|the-Def-Art noun|pajama-Plur-Acc adp|behind det|the-Def-Art noun|pillow .
+%gra:	1|13|ROOT 2|3|NSUBJ 3|1|CCOMP 4|5|MARK 5|3|XCOMP 6|5|OBJ 7|8|MARK 8|5|ADVCL 9|10|DET 10|8|OBJ 11|13|CASE 12|13|DET 13|8|OBL 14|1|PUNCT
+*MOT:	can you put the pajamas behind the pillow ? 260600_263850
+%mor:	aux|can-Fin-S pron|you-Prs-Nom-S2 verb|put-Inf-S det|the-Def-Art noun|pajama-Plur-Acc adp|behind det|the-Def-Art noun|pillow ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|8|ROOT 4|5|DET 5|3|OBJ 6|8|CASE 7|8|DET 8|3|OBL 9|3|PUNCT
+*MOT:	no ? 264530_264950
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	no you don't want that ? 265580_267730
+%mor:	intj|no pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|want-Inf-S pron|that-Dem ?
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	this is no , no mommy no . 268760_269880
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 intj|no cm|cm det|no-Def-Neg noun|mommy intj|no .
+%gra:	1|6|NSUBJ 2|6|COP 3|6|DISCOURSE 4|3|PUNCT 5|6|DET 6|7|ROOT 7|6|DISCOURSE 8|6|PUNCT
+*AAC:	NO . 270930_273810
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	no I don't want that . 273470_275440
+%mor:	intj|no pron|I-Prs-Nom-S1 aux|do-Fin-Ind-Pres-S1~part|not verb|want-Inf-S pron|that-Dem .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|AUX 4|5|ADVMOD 5|6|ROOT 6|5|OBJ 7|5|PUNCT
+*MOT:	so mommy will put the pajamas behind the pillow for you . 275830_282270
+%mor:	adv|so noun|mommy aux|will-Fin-S verb|put-Inf-S det|the-Def-Art noun|pajama-Plur-Acc adp|behind det|the-Def-Art noun|pillow adp|for pron|you-Prs-Acc-S2 .
+%gra:	1|4|ADVMOD 2|4|NSUBJ 3|4|AUX 4|11|ROOT 5|6|DET 6|4|OBJ 7|9|CASE 8|9|DET 9|4|OBL 10|11|CASE 11|4|OBL 12|4|PUNCT
+*MOT:	yes ? 282930_283610
+%mor:	intj|yes ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes , good+job . 291020_292600
+%mor:	intj|yes cm|cm intj|goodjob .
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|3|ROOT 4|3|PUNCT
+*MOT:	you want to play with the cake with mommy , hmm ? 294060_296890
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|play-Inf-S adp|with det|the-Def-Art noun|cake adp|with noun|mommy cm|cm intj|hmm ?
+%gra:	1|2|NSUBJ 2|11|ROOT 3|4|MARK 4|2|XCOMP 5|7|CASE 6|7|DET 7|4|OBL 8|9|CASE 9|4|OBL 10|11|PUNCT 11|2|DISCOURSE 12|2|PUNCT
+*MOT:	what do you want &=laughs ? 299140_300160
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	do you want tickles &=laughs ? 300360_302000
+%mor:	aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S noun|tickle-Plur-Acc ?
+%gra:	1|3|AUX 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*MOT:	tickles  [/] tickles  [/] tickles  [/] tickles  [/] tickles  [/] tickles  [/] tickles . 302150_304860
+%mor:	noun|tickle-Plur .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	mm . 306280_307610
+%mor:	intj|mm .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	&=gasps you want hugs . 308170_310980
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 noun|hug-Plur-Acc .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|OBJ 4|2|PUNCT
+*CHI:	&=moans . 310080_311420
+*MOT:	look , do you know where are the hugs and kisses ? 311480_314630
+%mor:	verb|look-Fin-Imp-S cm|cm aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|know-Inf-S adv|where aux|be-Fin-Ind-Pres-P3 det|the-Def-Art noun|hug-Plur cconj|and noun|kisse-Plur ?
+%gra:	1|11|ROOT 2|5|PUNCT 3|5|AUX 4|5|NSUBJ 5|1|PARATAXIS 6|5|CCOMP 7|9|COP 8|9|DET 9|6|NSUBJ 10|11|CC 11|9|CONJ 12|1|PUNCT
+*MOT:	come CHILDNAME , I can give you plenty of kisses . 317900_321790
+%mor:	verb|come-Fin-Imp-S propn|CHILDNAME-Acc cm|cm pron|I-Prs-Nom-S1 aux|can-Fin-S verb|give-Inf-S pron|you-Prs-Acc-S2 noun|plenty-Acc adp|of noun|kisse-Plur .
+%gra:	1|10|ROOT 2|1|OBJ 3|6|PUNCT 4|6|NSUBJ 5|6|AUX 6|1|PARATAXIS 7|6|IOBJ 8|6|OBJ 9|10|CASE 10|8|NMOD 11|1|PUNCT
+*MOT:	but do you want to look on the board ? 322790_325140
+%mor:	cconj|but aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S part|to verb|look-Inf-S adp|on det|the-Def-Art noun|board ?
+%gra:	1|4|CC 2|4|AUX 3|4|NSUBJ 4|9|ROOT 5|6|MARK 6|4|XCOMP 7|9|CASE 8|9|DET 9|6|OBL 10|4|PUNCT
+*MOT:	no ? 325540_325920
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	yes this is a kiss and a hug from mommy . 327630_330400
+%mor:	intj|yes pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 det|a-Ind-Art noun|kiss cconj|and det|a-Ind-Art noun|hug adp|from noun|mommy .
+%gra:	1|5|DISCOURSE 2|5|NSUBJ 3|5|COP 4|5|DET 5|10|ROOT 6|8|CC 7|8|DET 8|5|CONJ 9|10|CASE 10|8|NMOD 11|5|PUNCT
+*AAC:	KISS . 330780_335410
+%mor:	noun|kiss .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	P
+*MOT:	thank+you CHILDNAME jigga  [/] jigga  [/] jigga &=kisses . 335510_339240
+%mor:	intj|thankyou propn|CHILDNAME propn|jigga .
+%gra:	1|2|DISCOURSE 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*MOT:	a &=laughs &=kisses . 340200_342270
+%mor:	x|a .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	who is the sweetest boy ? 343270_345040
+%mor:	pron|who-Rel aux|be-Fin-Ind-Pres-S3 det|the-Def-Art adj|sweetest-Sup-S1 noun|boy ?
+%gra:	1|5|NSUBJ 2|5|COP 3|5|DET 4|5|AMOD 5|5|ROOT 6|5|PUNCT
+@End

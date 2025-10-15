@@ -1,0 +1,344 @@
+@UTF8
+@PID:	11312/a-00082335-0
+@Begin
+@Languages:	eng
+@Participants:	COD Media, MOT Mother, AAC Media, CHI Target_Child
+@ID:	eng|AAC|COD|||||Media|||
+@ID:	eng|AAC|MOT|||||Mother|||
+@ID:	eng|AAC|AAC|||||Media|||
+@ID:	eng|AAC|CHI|5;02.|female|||Target_Child|||
+@Media:	17_T3_2, video
+*COD:	U . 1_24280
+%mor:	noun|U .
+%gra:	1|1|ROOT 2|1|PUNCT
+*COD:	C . 24280_324280
+%mor:	propn|C .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay xxx . 24490_26850
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	come . 27070_27750
+%mor:	verb|come-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	come show me . 28460_29420
+%mor:	verb|come-Fin-Imp-S verb|show-Inf-S pron|I-Prs-Acc-S1 .
+%gra:	1|3|ROOT 2|1|XCOMP 3|2|IOBJ 4|1|PUNCT
+*MOT:	come on show me Mama@g . 29720_31200
+%mor:	verb|come-Fin-Imp-S adp|on verb|show-Inf-S pron|I-Prs-Acc-S1 noun|mama-Acc .
+%gra:	1|5|ROOT 2|1|COMPOUND-PRT 3|1|XCOMP 4|3|IOBJ 5|3|OBJ 6|1|PUNCT
+*MOT:	you want to sleeping ? 31330_32900
+%mor:	pron|you-Prs-Nom-S2 verb|want-Fin-Ind-Pres-S2 part|to verb|sleep-Ger-S ?
+%gra:	1|2|NSUBJ 2|4|ROOT 3|4|MARK 4|2|XCOMP 5|2|PUNCT
+*MOT:	oh . 33290_33990
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME . 34690_36240
+%mor:	noun|childname .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	look here . 36710_38310
+%mor:	verb|look-Fin-Imp-S adv|here .
+%gra:	1|2|ROOT 2|1|ADVMOD 3|1|PUNCT
+*MOT:	sleep , sleeping . 38620_41010
+%mor:	verb|sleep-Fin-Imp-S cm|cm noun|sleeping-Ger .
+%gra:	1|3|ROOT 2|3|PUNCT 3|1|PARATAXIS 4|1|PUNCT
+*AAC:	SLEEP . 43660_45400
+%mor:	noun|sleep .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	sleeping CHILDNAME want to sleeping allez@s:fra . 45630_49020
+%mor:	verb|sleep-Part-S propn|CHILDNAME-Acc verb|want-Fin-Ind-Pres-P3 part|to verb|sleep-Ger-S x|allez .
+%gra:	1|3|CSUBJ 2|1|OBJ 3|6|ROOT 4|5|MARK 5|3|XCOMP 6|5|FLAT 7|3|PUNCT
+*MOT:	&=snores . 49570_53470
+*MOT:	Mommy the tickle ? 61030_62530
+%mor:	propn|Mommy det|the-Def-Art noun|tickle-Acc ?
+%gra:	1|3|ROOT 2|3|DET 3|1|OBJ 4|1|PUNCT
+*AAC:	TICKLE . 64680_66830
+%mor:	noun|tickle .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	tickle . 67330_69240
+%mor:	verb|tickle-Fin-Imp-S .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	come here to tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle  [/] tickle . 69670_75330
+%mor:	verb|come-Fin-Imp-S adv|here part|to verb|tickle-Inf-S .
+%gra:	1|4|ROOT 2|1|ADVMOD 3|4|MARK 4|1|ADVCL 5|1|PUNCT
+*CHI:	&=groans . 70870_74220
+*MOT:	okay let's get up , tomorrow is Valentine's+Day okay . 75450_79340
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|get-Inf-S adp|up cm|cm noun|tomorrow aux|be-Fin-Ind-Pres-S3 propn|Valentine~propn|sDay intj|okay .
+%gra:	1|2|DISCOURSE 2|11|ROOT 3|2|OBJ 4|2|XCOMP 5|4|COMPOUND-PRT 6|9|PUNCT 7|9|NSUBJ 8|9|COP 9|2|PARATAXIS 10|9|FLAT 11|2|DISCOURSE 12|2|PUNCT
+*CHI:	eh . 76700_77600
+%mor:	intj|eh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	sit down okay sit down . 79410_81530
+%mor:	verb|sit-Fin-Imp-S adp|down adj|okay-S1 verb|sit-Fin-Imp-S adp|down .
+%gra:	1|5|ROOT 2|1|COMPOUND-PRT 3|1|XCOMP 4|1|XCOMP 5|4|COMPOUND-PRT 6|1|PUNCT
+*CHI:	&=hums . 79850_81540
+*MOT:	I love  [/] love +... 81710_85130
+%mor:	pron|I-Prs-Nom-S1 verb|love-Fin-Ind-Pres-S1 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*AAC:	COCOMELON . 84570_86190
+%mor:	noun|cocomelon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	you love Cocomelon , this is nice , okay . 86450_90690
+%mor:	pron|you-Prs-Nom-S2 verb|love-Fin-Ind-Pres-S2 propn|Cocomelon-Acc cm|cm pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 adj|nice-S1 cm|cm intj|okay .
+%gra:	1|2|NSUBJ 2|9|ROOT 3|2|OBJ 4|7|PUNCT 5|7|NSUBJ 6|7|COP 7|2|PARATAXIS 8|9|PUNCT 9|7|DISCOURSE 10|2|PUNCT
+*MOT:	but you love +... 91060_92480
+%mor:	cconj|but pron|you-Prs-Nom-S2 verb|love-Fin-Ind-Pres-S2 +...
+%gra:	1|3|CC 2|3|NSUBJ 3|3|ROOT 4|3|PUNCT
+*AAC:	LOVE . 92500_94470
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	love +... 94620_95730
+%mor:	verb|love-Fin-Ind-Pres-S1 +...
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	DADDY . 96940_98770
+%mor:	noun|daddy .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	Daddy you love Daddy . 97870_100030
+%mor:	propn|Daddy pron|you-Prs-Nom-S2 verb|love-Fin-Ind-Pres-S2 propn|Daddy-Acc .
+%gra:	1|3|VOCATIVE 2|3|NSUBJ 3|4|ROOT 4|3|OBJ 5|3|PUNCT
+*CHI:	&=hums . 101770_103920
+*MOT:	CHILDNAME love +... 102460_103790
+%mor:	propn|CHILDNAME verb|love-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*AAC:	LOVE . 106330_107680
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+%xSSE:	CHI-AAC-SSE
+*MOT:	CHILDNAME love +... 107700_109320
+%mor:	propn|CHILDNAME verb|love-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*AAC:	COCOMELON . 112170_113570
+%mor:	noun|cocomelon .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	ah I know you love Cocomelon yeah . 113650_116290
+%mor:	intj|ah pron|I-Prs-Nom-S1 verb|know-Fin-Ind-Pres-S1 pron|you-Prs-Nom-S2 verb|love-Fin-Ind-Pres-S2 propn|Cocomelon-Acc intj|yeah .
+%gra:	1|3|DISCOURSE 2|3|NSUBJ 3|7|ROOT 4|5|NSUBJ 5|3|CCOMP 6|5|OBJ 7|3|DISCOURSE 8|3|PUNCT
+*CHI:	&=groans . 116210_118890
+*MOT:	xxx +/. 118070_120300
+%xPCO:	audio cuts out .
+*MOT:	key alala xxx love . 121490_125060
+%mor:	adj|key-S1 noun|alala noun|love .
+%gra:	1|3|AMOD 2|3|COMPOUND 3|3|ROOT 4|3|PUNCT
+*MOT:	say love . 125200_126680
+%mor:	verb|say-Fin-Imp-S noun|love-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*AAC:	LOVE . 129100_130590
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	love . 130590_131660
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	BROTHER . 133380_135530
+%mor:	noun|brother .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	SIBNAME allez@s:fra . 136300_138620
+%mor:	propn|SIBNAME x|allez .
+%gra:	1|2|COMPOUND 2|2|FLAT 3|2|PUNCT
+*MOT:	love . 138850_139780
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	LOVE . 140350_142150
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	oh . 142950_144530
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	MAMAN . 146600_148000
+%mor:	propn|MAMAN .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	Mama . 148300_150060
+%mor:	noun|mama .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	forget love . 150680_152550
+%mor:	verb|forget-Fin-Imp-S noun|love-Acc .
+%gra:	1|2|ROOT 2|1|OBJ 3|1|PUNCT
+*CHI:	Ma . 151520_152170
+%mor:	propn|ma .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*AAC:	LOVE . 153880_154990
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	love okay . 155110_157110
+%mor:	verb|love-Fin-Ind-Pres-S intj|okay .
+%gra:	1|2|ROOT 2|1|DISCOURSE 3|1|PUNCT
+*AAC:	SISTER_ONE . 160070_161930
+%mor:	propn|SISTERONE .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	SIBNAME . 161990_163040
+%mor:	propn|SIBNAME .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	okay last member of family . 164270_166610
+%mor:	intj|okay adj|last-S1 noun|member adp|of noun|family .
+%gra:	1|3|DISCOURSE 2|3|AMOD 3|5|ROOT 4|5|CASE 5|3|NMOD 6|3|PUNCT
+*AAC:	LOVE . 166080_167290
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	love . 167610_168640
+%mor:	verb|love-Fin-Ind-Pres-S1 .
+%gra:	1|1|ROOT 2|1|PUNCT
+*AAC:	SISTER_TWO . 170880_172140
+%mor:	propn|SISTERTWO .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	CHILDNAME oh I love you CHILDNAME . 172600_176650
+%mor:	intj|childname intj|oh pron|I-Prs-Nom-S1 verb|love-Fin-Ind-Pres-S1 pron|you-Prs-Acc-S2 propn|CHILDNAME-Acc .
+%gra:	1|4|DISCOURSE 2|4|DISCOURSE 3|4|NSUBJ 4|6|ROOT 5|4|OBJ 6|4|OBJ 7|4|PUNCT
+*MOT:	(o)kay okay come in to . 178150_180240
+%mor:	intj|okay intj|okay verb|come-Fin-Imp-S adp|in adp|to .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|5|ROOT 4|3|ADVMOD 5|3|PUNCT 6|3|PUNCT
+*CHI:	xxx . 179470_181520
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	no look  [/] look oh okay . 180290_182320
+%mor:	intj|no noun|look intj|oh intj|okay .
+%gra:	1|2|DISCOURSE 2|4|ROOT 3|2|DISCOURSE 4|2|DISCOURSE 5|2|PUNCT
+*MOT:	<this is>  [/] this is +... 182590_187030
+%mor:	pron|this-Dem-S1 aux|be-Fin-Ind-Pres-S3 +...
+%gra:	1|2|NSUBJ 2|2|ROOT 3|2|PUNCT
+*AAC:	xxx . 187170_188530
+%xPS:	CHI-AAC-P
+*MOT:	xxx . 189530_191130
+%xPCO:	audio cuts out .
+*MOT:	xxx . 191240_193450
+*MOT:	okay . 193830_194820
+%mor:	intj|okay .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	there's one . 195520_197000
+%mor:	pron|there-Int-S1~verb|be-Fin-Ind-Pres-S3 num|one .
+%gra:	1|2|EXPL 2|3|ROOT 3|2|NSUBJ 4|2|PUNCT
+*AAC:	BABY SHARK . 196630_198090
+%mor:	propn|BABY propn|SHARK .
+%gra:	1|2|COMPOUND 2|2|ROOT 3|2|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	okay let's do Baby_Shark . 197850_200150
+%mor:	intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|do-Inf-S propn|BabyShark-Acc .
+%gra:	1|2|DISCOURSE 2|5|ROOT 3|2|OBJ 4|2|XCOMP 5|4|OBJ 6|2|PUNCT
+*MOT:	allez@s:fra . 200330_201080
+%mor:	x|allez .
+%gra:	1|1|FLAT 2|1|PUNCT
+*MOT:	baby big kisses , Baby_Shark , okay let's sit down right down here . 201300_206560
+%mor:	adj|baby-S1 adj|big-S1 noun|kisse-Plur cm|cm propn|BabyShark cm|cm intj|okay verb|let-Fin-Imp-S~pron|we-Prs-Acc-P1 verb|sit-Inf-S adp|down adv|right adp|down adv|here .
+%gra:	1|3|AMOD 2|3|AMOD 3|8|NSUBJ 4|5|PUNCT 5|3|APPOS 6|3|PUNCT 7|8|DISCOURSE 8|14|ROOT 9|8|OBJ 10|8|XCOMP 11|10|COMPOUND-PRT 12|14|ADVMOD 13|14|CASE 14|10|ADVMOD 15|8|PUNCT
+*CHI:	xxx . 205510_207010
+%xDN:	CHI-Speech-ND
+*MOT:	<Baby_Shark dododododo>  [/] Baby_Shark dododododo Baby_Shark . 206600_214020
+%mor:	propn|BabyShark propn|dododododo propn|BabyShark .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|FLAT 4|1|PUNCT
+*CHI:	oh xxx . 209690_211940
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*MOT:	<Mommy_Shark dodododododo>  [/] <Mommy_Shark dodododododo>  [/] Mommy_Shark dodododododo Mommy_Shark &=sings . 214110_223270
+%mor:	propn|MommyShark propn|dodododododo propn|MommyShark .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|FLAT 4|1|PUNCT
+*CHI:	uh . 217020_218190
+%mor:	intj|uh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-ND
+*CHI:	shark . 223100_223920
+%mor:	noun|shark .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-P
+*MOT:	<Sister_Shark dodododododo>  [/] <Sister_Shark dodododododo>  [/] Sister_Shark dodododododo Sister_Shark &=sings . 223470_233170
+%mor:	propn|SisterShark propn|dodododododo propn|SisterShark .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|FLAT 4|1|PUNCT
+*MOT:	<Brother_Shark dodododododo>  [/] <Brother_Shark dodododododo>  [/] Brother_Shark dodododododo Brother_Shark &=sings . 233240_242410
+%mor:	propn|BrotherShark propn|dodododododo propn|BrotherShark .
+%gra:	1|3|ROOT 2|1|FLAT 3|1|FLAT 4|1|PUNCT
+*MOT:	okay , want , are you want +... 242590_246490
+%mor:	intj|okay cm|cm verb|want-Fin-Imp-S cm|cm aux|be-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S +...
+%gra:	1|3|DISCOURSE 2|1|PUNCT 3|7|ROOT 4|7|PUNCT 5|7|AUX 6|7|NSUBJ 7|3|PARATAXIS 8|3|PUNCT
+*MOT:	oh . 248660_249850
+%mor:	intj|oh .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	&=other . 254700_255860
+%xgco:	Child pushes mom's hand away .
+%xIS:	CHI-Gesture-S
+*MOT:	what do you want okay ? 258400_260220
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S adj|okay-S1 ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|5|ROOT 5|4|XCOMP 6|4|PUNCT
+*MOT:	what do you want ? 261230_262370
+%mor:	pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|4|OBJ 2|4|AUX 3|4|NSUBJ 4|4|ROOT 5|4|PUNCT
+*MOT:	show me , what do you want ? 264130_265750
+%mor:	verb|show-Fin-Imp-S pron|I-Prs-Acc-S1 cm|cm pron|what-Int-S1 aux|do-Fin-Ind-Pres-S2 pron|you-Prs-Nom-S2 verb|want-Inf-S ?
+%gra:	1|7|ROOT 2|1|IOBJ 3|7|PUNCT 4|7|OBJ 5|7|AUX 6|7|NSUBJ 7|1|PARATAXIS 8|1|PUNCT
+*MOT:	xxx . 270130_271870
+*AAC:	NO . 272700_273920
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	no ? 275650_276560
+%mor:	intj|no ?
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	you don't want nothing ? 276590_277350
+%mor:	pron|you-Prs-Nom-S2 aux|do-Fin-Ind-Pres-S2~part|not verb|want-Inf-S pron|nothing-Neg-S1 ?
+%gra:	1|4|NSUBJ 2|4|AUX 3|4|ADVMOD 4|5|ROOT 5|4|OBJ 6|4|PUNCT
+*MOT:	oh CHILDNAME want nothing she said . 278580_281880
+%mor:	intj|oh intj|childname verb|want-Fin-Ind-Pres-S2 pron|nothing-Neg-S1 pron|she-Prs-Nom-S3 verb|say-Fin-Ind-Past-S3-irr .
+%gra:	1|3|DISCOURSE 2|3|DISCOURSE 3|6|ROOT 4|3|OBJ 5|6|NSUBJ 6|4|ACL-RELCL 7|3|PUNCT
+*MOT:	no . 282180_282920
+%mor:	intj|no .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	CHILDNAME said no . 284740_286170
+%mor:	propn|CHILDNAME verb|say-Fin-Ind-Past-S3-irr intj|no .
+%gra:	1|2|NSUBJ 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*MOT:	okay Mama@g . 287320_289230
+%mor:	intj|okay noun|mama .
+%gra:	1|2|DISCOURSE 2|2|ROOT 3|2|PUNCT
+*MOT:	come , you wanna play music , come on give me music . 289700_292570
+%mor:	verb|come-Fin-Imp-S cm|cm pron|you-Prs-Nom-S2 aux|wanna-Fin-S verb|play-Inf-S noun|music-Acc cm|cm verb|come-Fin-Imp-S adp|on verb|give-Fin-Imp-S pron|I-Prs-Acc-S1 noun|music-Acc .
+%gra:	1|12|ROOT 2|5|PUNCT 3|5|NSUBJ 4|5|AUX 5|1|PARATAXIS 6|5|OBJ 7|8|PUNCT 8|1|PARATAXIS 9|10|MARK 10|8|ADVCL 11|10|IOBJ 12|10|OBJ 13|1|PUNCT
+*MOT:	music . 293560_294540
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+*CHI:	heh . 298050_298820
+%mor:	intj|heh .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xDN:	CHI-Speech-D
+%xPS:	CHI-Speech-S
+*AAC:	MUSIC . 299760_301050
+%mor:	noun|music .
+%gra:	1|1|ROOT 2|1|PUNCT
+%xPS:	CHI-AAC-P
+*MOT:	okay music okay . 301070_304250
+%mor:	intj|okay noun|music intj|okay .
+%gra:	1|2|DISCOURSE 2|3|ROOT 3|2|DISCOURSE 4|2|PUNCT
+*MOT:	head shoulders <knees and toes>  [/] knees and toes &=sings . 304760_308290
+%mor:	verb|head-Inf-S noun|shoulder-Plur noun|knee-Plur-Acc cconj|and noun|toe-Plur .
+%gra:	1|5|ROOT 2|3|COMPOUND 3|1|OBJ 4|5|CC 5|3|CONJ 6|1|PUNCT
+*MOT:	come here xxx , just come . 308350_310620
+%mor:	verb|come-Fin-Imp-S adv|here cm|cm adv|just verb|come-Fin-Imp-S .
+%gra:	1|5|ROOT 2|1|ADVMOD 3|5|PUNCT 4|5|ADVMOD 5|1|PARATAXIS 6|1|PUNCT
+*MOT:	ah . 310950_312040
+%mor:	intj|ah .
+%gra:	1|1|ROOT 2|1|PUNCT
+*MOT:	just come xxx . 313740_316320
+%mor:	adv|just verb|come-Fin-Imp-S .
+%gra:	1|2|ADVMOD 2|2|ROOT 3|2|PUNCT
+*MOT:	head and shoulders <knees and toes>  [/] knees and toes &=sings . 316810_320780
+%mor:	noun|head cconj|and noun|shoulder-Plur noun|knee-Plur cconj|and noun|toe-Plur .
+%gra:	1|4|COMPOUND 2|3|CC 3|1|CONJ 4|6|ROOT 5|6|CC 6|4|CONJ 7|4|PUNCT
+*MOT:	head shoulders knees and toes &=sings . 321250_324270
+%mor:	verb|head-Inf-S noun|shoulder-Plur noun|knee-Plur-Acc cconj|and noun|toe-Plur .
+%gra:	1|5|ROOT 2|3|COMPOUND 3|1|OBJ 4|5|CC 5|3|CONJ 6|1|PUNCT
+@End
