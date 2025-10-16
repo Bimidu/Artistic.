@@ -18,75 +18,75 @@ This system extracts **pragmatic and conversational features** from speech trans
 graph TB
     %% Data Input Layer
     subgraph "📊 Data Sources"
-        A[TalkBank ASDBank<br/>CHAT Files (.cha)]
-        B[Metadata Files<br/>(.cdc, .xlsx)]
+        A["TalkBank ASDBank<br/>CHAT Files (.cha)"]
+        B["Metadata Files<br/>(.cdc, .xlsx)"]
     end
     
     %% Phase 1: Data Parsing
     subgraph "🔍 Phase 1: Data Parsing"
-        C[CHAT Parser<br/>chat_parser.py]
-        D[Dataset Inventory<br/>dataset_inventory.py]
+        C["CHAT Parser<br/>chat_parser.py"]
+        D["Dataset Inventory<br/>dataset_inventory.py"]
     end
     
     %% Phase 2: Feature Extraction
     subgraph "⚙️ Phase 2: Feature Extraction"
         subgraph "Team Member A (Placeholder)"
-            E1[Acoustic & Prosodic<br/>Features (12)]
+            E1["Acoustic & Prosodic<br/>Features (12)"]
         end
         subgraph "Team Member B (Placeholder)"
-            E2[Syntactic & Semantic<br/>Features (12)]
+            E2["Syntactic & Semantic<br/>Features (12)"]
         end
         subgraph "Implemented ✅"
-            E3[Pragmatic & Conversational<br/>Features (61)]
-            E4[Turn-Taking Features (15)]
-            E5[Linguistic Features (14)]
-            E6[Pragmatic Features (16)]
-            E7[Conversational Features (16)]
+            E3["Pragmatic & Conversational<br/>Features (61)"]
+            E4["Turn-Taking Features (15)"]
+            E5["Linguistic Features (14)"]
+            E6["Pragmatic Features (16)"]
+            E7["Conversational Features (16)"]
         end
     end
     
     %% Phase 3: Preprocessing
     subgraph "🧹 Phase 3: Data Preprocessing"
-        F1[Data Validator<br/>data_validator.py]
-        F2[Data Cleaner<br/>data_cleaner.py]
-        F3[Feature Selector<br/>feature_selector.py]
-        F4[Data Preprocessor<br/>preprocessor.py]
+        F1["Data Validator<br/>data_validator.py"]
+        F2["Data Cleaner<br/>data_cleaner.py"]
+        F3["Feature Selector<br/>feature_selector.py"]
+        F4["Data Preprocessor<br/>preprocessor.py"]
     end
     
     %% Phase 4: Model Training
     subgraph "🤖 Phase 4: Machine Learning"
         subgraph "Component Trainers"
-            G1[Acoustic Trainer<br/>(Placeholder)]
-            G2[Syntactic Trainer<br/>(Placeholder)]
-            G3[Pragmatic Trainer<br/>(Implemented ✅)]
+            G1["Acoustic Trainer<br/>(Placeholder)"]
+            G2["Syntactic Trainer<br/>(Placeholder)"]
+            G3["Pragmatic Trainer<br/>(Implemented ✅)"]
         end
         subgraph "ML Models"
-            H1[Random Forest]
-            H2[XGBoost]
-            H3[LightGBM]
-            H4[SVM]
-            H5[Logistic Regression]
-            H6[Neural Network]
+            H1["Random Forest"]
+            H2["XGBoost"]
+            H3["LightGBM"]
+            H4["SVM"]
+            H5["Logistic Regression"]
+            H6["Neural Network"]
         end
-        G4[Model Evaluator<br/>model_evaluator.py]
-        G5[Model Registry<br/>model_registry.py]
+        G4["Model Evaluator<br/>model_evaluator.py"]
+        G5["Model Registry<br/>model_registry.py"]
     end
     
     %% Phase 5: API Layer
     subgraph "🌐 Phase 5: FastAPI Backend"
-        I1[REST API<br/>app.py]
-        I2[Prediction Endpoint<br/>/predict]
-        I3[Feature Endpoint<br/>/features]
-        I4[Model Endpoint<br/>/models]
-        I5[Health Check<br/>/health]
+        I1["REST API<br/>app.py"]
+        I2["Prediction Endpoint<br/>/predict"]
+        I3["Feature Endpoint<br/>/features"]
+        I4["Model Endpoint<br/>/models"]
+        I5["Health Check<br/>/health"]
     end
     
     %% Output Layer
     subgraph "📈 Output"
-        J1[ASD/TD Predictions]
-        J2[Feature Importance]
-        J3[Model Metrics]
-        J4[API Documentation]
+        J1["ASD/TD Predictions"]
+        J2["Feature Importance"]
+        J3["Model Metrics"]
+        J4["API Documentation"]
     end
     
     %% Data Flow Connections
@@ -200,6 +200,13 @@ python run_api.py
 # Visit: http://localhost:8000/docs
 ```
 
+### 5. Open Frontend
+```bash
+# Open frontend.html in your browser
+open frontend.html
+# Or visit: file:///path/to/frontend.html
+```
+
 ## 📊 Implemented Features
 
 ### ✅ Pragmatic & Conversational (61 Features)
@@ -288,6 +295,7 @@ models = trainer.train_multiple_models(X_train, y_train, X_test, y_test)
 - `GET /features` - List all supported features
 - `GET /categories` - Show implementation status by category
 - `GET /models` - List available trained models
+- `GET /health` - Health check
 
 ### Example Usage
 ```python
@@ -295,13 +303,37 @@ import requests
 
 # Make prediction
 response = requests.post("http://localhost:8000/predict", 
-                        json={"features": feature_dict})
+                        json={"participant_id": "ASD_001", "transcript": "hello there"})
 prediction = response.json()
 
 # Check feature status
 response = requests.get("http://localhost:8000/categories")
 status = response.json()
 ```
+
+## 🖥️ Web Frontend
+
+A simple HTML frontend (`frontend.html`) is provided for easy interaction with the API:
+
+### Features
+- **Prediction Interface**: Enter participant ID and transcript for ASD/TD prediction
+- **Feature Browser**: View all 61 available pragmatic/conversational features
+- **Category Status**: Check implementation status of all three feature categories
+- **Model Management**: View available trained models
+- **API Testing**: Test connection and explore endpoints
+
+### Usage
+1. Start the API server: `python run_api.py`
+2. Open `frontend.html` in your browser
+3. The frontend will automatically test the connection
+4. Use the interface to make predictions and explore the system
+
+### Interface Sections
+- **API Configuration**: Set API URL and test connection
+- **Make Prediction**: Submit transcripts for ASD/TD classification
+- **Available Features**: Browse all extracted features
+- **Feature Categories**: View implementation status by team
+- **Available Models**: See trained model information
 
 ## 📁 Data Format
 
