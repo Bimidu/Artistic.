@@ -22,40 +22,93 @@ from src.utils.logger import setup_logger
 from config import config
 
 
-def example_1_parse_single_file():
+def example_1_parse_multiple_files():
     """
-    Example 1: Parse a single CHAT transcript file
+    Example 1: Parse multiple CHAT files from various ASDBank datasets
     """
     print("\n" + "="*70)
-    print("EXAMPLE 1: Parse Single CHAT File")
+    print("EXAMPLE 1: Parse Multiple CHAT Files from ASDBank")
     print("="*70 + "\n")
     
     # Initialize parser
     parser = CHATParser()
     
-    # Parse a file (update path to your data)
-    file_path = config.paths.data_dir / "asdbank_eigsti/Eigsti/ASD/1010.cha"
+    # Define multiple files to parse from different datasets
+    test_files = [
+        # Eigsti dataset - ASD group
+        ("asdbank_eigsti/Eigsti/ASD/1010.cha", "ASD"),
+        ("asdbank_eigsti/Eigsti/ASD/1012.cha", "ASD"),
+        ("asdbank_eigsti/Eigsti/ASD/1017.cha", "ASD"),
+        ("asdbank_eigsti/Eigsti/ASD/1020.cha", "ASD"),
+        
+        # Eigsti dataset - TD group
+        ("asdbank_eigsti/Eigsti/TD/1011.cha", "TD"),
+        ("asdbank_eigsti/Eigsti/TD/1013.cha", "TD"),
+        ("asdbank_eigsti/Eigsti/TD/1022.cha", "TD"),
+        ("asdbank_eigsti/Eigsti/TD/1024.cha", "TD"),
+        
+        # Flusberg dataset - different children
+        ("asdbank_flusberg/Flusberg/Brett/050800.cha", "ASD"),
+        ("asdbank_flusberg/Flusberg/Jack/060900.cha", "ASD"),
+        ("asdbank_flusberg/Flusberg/Mark/070700.cha", "ASD"),
+        
+        # Nadig dataset
+        ("asdbank_nadig/Nadig/101.cha", "ASD"),
+        ("asdbank_nadig/Nadig/102.cha", "ASD"),
+        ("asdbank_nadig/Nadig/103.cha", "ASD"),
+        
+        # AAC dataset
+        ("asdbank_aac/AAC/01_T1_1.cha", "AAC"),
+        ("asdbank_aac/AAC/01_T2.cha", "AAC"),
+        ("asdbank_aac/AAC/02_T1_1.cha", "AAC"),
+        
+        # Rollins dataset
+        ("asdbank_rollins/Rollins/Carl/030400.cha", "ASD"),
+        ("asdbank_rollins/Rollins/Josh/030400.cha", "ASD"),
+    ]
     
-    if not file_path.exists():
-        print(f"File not found: {file_path}")
-        print("Please update the path to point to a valid .cha file")
-        return
+    parsed_count = 0
+    total_files = len(test_files)
     
-    # Parse the transcript
-    transcript = parser.parse_file(file_path)
+    print(f"Processing {total_files} CHAT files from multiple ASDBank datasets...\n")
     
-    # Display results
-    print(f"Participant ID: {transcript.participant_id}")
-    print(f"Diagnosis: {transcript.diagnosis}")
-    print(f"Age: {transcript.age_months} months")
-    print(f"Total Utterances: {transcript.total_utterances}")
-    print(f"Child Utterances: {len(transcript.child_utterances)}")
-    print(f"Valid Utterances: {len(transcript.valid_utterances)}")
+    for file_path_str, expected_diagnosis in test_files:
+        file_path = config.paths.data_dir / file_path_str
+        
+        if not file_path.exists():
+            print(f"[WARNING]  File not found: {file_path_str}")
+            continue
+        
+        try:
+            # Parse the transcript
+            transcript = parser.parse_file(file_path)
+            parsed_count += 1
+            
+            # Display results
+            print(f"[CHECK] [{parsed_count:2d}/{total_files}] {file_path.name}")
+            print(f"   Dataset: {file_path_str.split('/')[0]}")
+            print(f"   Participant: {transcript.participant_id}")
+            print(f"   Diagnosis: {transcript.diagnosis or 'Unknown'}")
+            print(f"   Age: {transcript.age_months or 'Unknown'} months")
+            print(f"   Utterances: {transcript.total_utterances} total, {len(transcript.child_utterances)} child")
+            print(f"   Valid Utterances: {len(transcript.valid_utterances)}")
+            
+            # Show a sample utterance if available
+            if transcript.child_utterances:
+                sample_utt = transcript.child_utterances[0]
+                sample_text = sample_utt.text[:50] + "..." if len(sample_utt.text) > 50 else sample_utt.text
+                print(f"   Sample: [{sample_utt.speaker}]: {sample_text}")
+            
+            print()
+            
+        except Exception as e:
+            print(f"[X] Error parsing {file_path.name}: {e}")
+            continue
     
-    # Show first few utterances
-    print(f"\nFirst 3 child utterances:")
-    for i, utt in enumerate(transcript.child_utterances[:3], 1):
-        print(f"  {i}. [{utt.speaker}]: {utt.text}")
+    print(f"[CHART] SUMMARY:")
+    print(f"   Successfully parsed: {parsed_count}/{total_files} files")
+    print(f"   Success rate: {parsed_count/total_files*100:.1f}%")
+    print(f"   Datasets covered: Eigsti, Flusberg, Nadig, AAC, Rollins")
 
 
 def example_2_build_inventory():
@@ -153,58 +206,239 @@ def example_3_extract_features_single():
 
 def example_4_extract_features_batch():
     """
-    Example 4: Extract features from multiple files
+    Example 4: Extract features from multiple datasets and directories
     """
     print("\n" + "="*70)
-    print("EXAMPLE 4: Batch Feature Extraction")
+    print("EXAMPLE 4: Comprehensive Batch Feature Extraction")
     print("="*70 + "\n")
     
     # Initialize extractor
     extractor = FeatureExtractor(categories='pragmatic_conversational')
     
-    # Extract from directory
-    dataset_dir = config.paths.data_dir / "asdbank_eigsti/Eigsti/ASD"
+    # Define multiple directories to process
+    datasets_to_process = [
+        # Eigsti dataset - ASD and TD groups
+        ("asdbank_eigsti/Eigsti/ASD", "eigsti_asd_features.csv", "ASD"),
+        ("asdbank_eigsti/Eigsti/TD", "eigsti_td_features.csv", "TD"),
+        ("asdbank_eigsti/Eigsti/DD", "eigsti_dd_features.csv", "DD"),
+        
+        # Flusberg dataset - different children
+        ("asdbank_flusberg/Flusberg/Brett", "flusberg_brett_features.csv", "ASD"),
+        ("asdbank_flusberg/Flusberg/Jack", "flusberg_jack_features.csv", "ASD"),
+        ("asdbank_flusberg/Flusberg/Mark", "flusberg_mark_features.csv", "ASD"),
+        
+        # Nadig dataset
+        ("asdbank_nadig/Nadig", "nadig_features.csv", "ASD"),
+        
+        # AAC dataset (sample)
+        ("asdbank_aac/AAC", "aac_features.csv", "AAC"),
+        
+        # Rollins dataset
+        ("asdbank_rollins/Rollins", "rollins_features.csv", "ASD"),
+    ]
     
-    if not dataset_dir.exists():
-        print(f"Directory not found: {dataset_dir}")
+    all_results = []
+    total_processed = 0
+    
+    print(f"Processing {len(datasets_to_process)} datasets...\n")
+    
+    for dataset_path, output_filename, diagnosis in datasets_to_process:
+        dataset_dir = config.paths.data_dir / dataset_path
+        
+        if not dataset_dir.exists():
+            print(f"[WARNING]  Directory not found: {dataset_path}")
+            continue
+        
+        try:
+            print(f"[DIR] Processing: {dataset_path}")
+            
+            # Extract features and save to CSV
+            output_file = config.paths.output_dir / output_filename
+            
+            df = extractor.extract_from_directory(
+                directory=dataset_dir,
+                output_file=output_file
+            )
+            
+            if df is not None and not df.empty:
+                # Add diagnosis column
+                df['diagnosis'] = diagnosis
+                df['dataset'] = dataset_path.split('/')[0]
+                
+                all_results.append(df)
+                total_processed += len(df)
+                
+                print(f"   [CHECK] Extracted {len(df)} samples")
+                print(f"   [DISK] Saved to: {output_filename}")
+                print(f"   [CHART] Features: {len([c for c in df.columns if c in extractor.all_feature_names])}")
+            else:
+                print(f"   [WARNING]  No valid samples found")
+            
+            print()
+            
+        except Exception as e:
+            print(f"   [X] Error processing {dataset_path}: {e}")
+            continue
+    
+    # Combine all results
+    if all_results:
+        print("[REFRESH] Combining all datasets...")
+        import pandas as pd
+        combined_df = pd.concat(all_results, ignore_index=True)
+        
+        # Save combined dataset
+        combined_output = config.paths.output_dir / "all_asdbank_features.csv"
+        combined_df.to_csv(combined_output, index=False)
+        
+        print(f"[CHART] COMPREHENSIVE SUMMARY:")
+        print(f"   Total samples processed: {total_processed}")
+        print(f"   Total datasets: {len(all_results)}")
+        print(f"   Combined features: {combined_df.shape}")
+        print(f"   [DISK] Combined dataset saved to: {combined_output}")
+        
+        # Show diagnosis distribution
+        print(f"\n[GRAPH] Diagnosis Distribution:")
+        diagnosis_counts = combined_df['diagnosis'].value_counts()
+        for diagnosis, count in diagnosis_counts.items():
+            print(f"   {diagnosis}: {count} samples")
+        
+        # Show dataset distribution
+        print(f"\n[DATASET] Dataset Distribution:")
+        dataset_counts = combined_df['dataset'].value_counts()
+        for dataset, count in dataset_counts.items():
+            print(f"   {dataset}: {count} samples")
+        
+        # Show feature statistics for key features
+        print(f"\n[CHART] Key Feature Statistics:")
+        key_features = ['mlu_words', 'type_token_ratio', 'turns_per_minute', 'echolalia_ratio']
+        
+        for feature in key_features:
+            if feature in combined_df.columns:
+                stats = combined_df[feature].describe()
+                print(f"   {feature}:")
+                print(f"     Mean: {stats['mean']:.3f}, Std: {stats['std']:.3f}")
+                print(f"     Range: [{stats['min']:.3f}, {stats['max']:.3f}]")
+    
+    else:
+        print("[X] No datasets were successfully processed")
+
+
+def example_5_process_all_chat_files():
+    """
+    Example 5: Process ALL available CHAT files in the ASDBank dataset
+    """
+    print("\n" + "="*70)
+    print("EXAMPLE 5: Process ALL CHAT Files in ASDBank")
+    print("="*70 + "\n")
+    
+    # Initialize parser
+    parser = CHATParser()
+    
+    # Find all CHAT files recursively
+    data_dir = config.paths.data_dir
+    all_cha_files = list(data_dir.rglob("*.cha"))
+    
+    print(f"[SEARCH] Found {len(all_cha_files)} CHAT files in ASDBank dataset")
+    print(f"[DIR] Searching in: {data_dir}")
+    
+    if not all_cha_files:
+        print("[X] No CHAT files found!")
         return
     
-    # Extract features and save to CSV
-    output_file = config.paths.output_dir / "eigsti_asd_features.csv"
+    # Process files in batches
+    batch_size = 50  # Process 50 files at a time
+    total_batches = (len(all_cha_files) + batch_size - 1) // batch_size
     
-    print(f"Extracting features from: {dataset_dir}")
-    print(f"Output will be saved to: {output_file}\n")
+    all_transcripts = []
+    success_count = 0
+    error_count = 0
     
-    df = extractor.extract_from_directory(
-        directory=dataset_dir,
-        output_file=output_file
-    )
+    for batch_num in range(total_batches):
+        start_idx = batch_num * batch_size
+        end_idx = min(start_idx + batch_size, len(all_cha_files))
+        batch_files = all_cha_files[start_idx:end_idx]
+        
+        print(f"\n[BATCH] Processing batch {batch_num + 1}/{total_batches} ({len(batch_files)} files)")
+        
+        batch_success = 0
+        batch_errors = 0
+        
+        for i, file_path in enumerate(batch_files):
+            try:
+                # Parse the transcript
+                transcript = parser.parse_file(file_path)
+                all_transcripts.append(transcript)
+                batch_success += 1
+                success_count += 1
+                
+                # Progress indicator
+                if (i + 1) % 10 == 0 or (i + 1) == len(batch_files):
+                    print(f"   [CHECK] {i + 1}/{len(batch_files)} files processed")
+                
+            except Exception as e:
+                batch_errors += 1
+                error_count += 1
+                if batch_errors <= 3:  # Show first 3 errors per batch
+                    print(f"   [X] Error in {file_path.name}: {str(e)[:50]}...")
+        
+        print(f"   [CHART] Batch {batch_num + 1} complete: {batch_success} success, {batch_errors} errors")
     
-    # Display summary
-    print(f"\nExtracted features: {df.shape}")
-    print(f"\nFeature columns:")
-    feature_cols = [c for c in df.columns if c in extractor.all_feature_names]
-    for i, col in enumerate(feature_cols[:10], 1):
-        print(f"  {i}. {col}")
-    if len(feature_cols) > 10:
-        print(f"  ... and {len(feature_cols) - 10} more features")
+    # Generate comprehensive summary
+    print(f"\n" + "="*70)
+    print("[CHART] COMPREHENSIVE ASDBANK PROCESSING SUMMARY")
+    print("="*70)
     
-    # Show statistics
-    summary = extractor.get_feature_summary(df)
-    print(f"\nSummary Statistics:")
-    print(f"  Total samples: {summary['total_samples']}")
-    print(f"  Total features: {summary['feature_count']}")
+    print(f"[DIR] Total CHAT files found: {len(all_cha_files)}")
+    print(f"[CHECK] Successfully parsed: {success_count}")
+    print(f"[X] Errors encountered: {error_count}")
+    print(f"[GRAPH] Success rate: {success_count/(success_count + error_count)*100:.1f}%")
     
-    # Show some feature statistics
-    if 'mlu_words' in summary['feature_stats']:
-        mlu_stats = summary['feature_stats']['mlu_words']
-        print(f"\nMLU Words:")
-        print(f"  Mean: {mlu_stats['mean']:.3f}")
-        print(f"  Std: {mlu_stats['std']:.3f}")
-        print(f"  Range: [{mlu_stats['min']:.3f}, {mlu_stats['max']:.3f}]")
+    if all_transcripts:
+        # Analyze dataset distribution
+        dataset_counts = {}
+        diagnosis_counts = {}
+        total_utterances = 0
+        total_child_utterances = 0
+        
+        for transcript in all_transcripts:
+            # Count by dataset
+            dataset = transcript.file_path.parent.parent.parent.name if transcript.file_path else "unknown"
+            dataset_counts[dataset] = dataset_counts.get(dataset, 0) + 1
+            
+            # Count by diagnosis
+            diagnosis = transcript.diagnosis or "Unknown"
+            diagnosis_counts[diagnosis] = diagnosis_counts.get(diagnosis, 0) + 1
+            
+            # Count utterances
+            total_utterances += transcript.total_utterances
+            total_child_utterances += len(transcript.child_utterances)
+        
+        print(f"\n[DATASET] Dataset Distribution:")
+        for dataset, count in sorted(dataset_counts.items()):
+            print(f"   {dataset}: {count} files")
+        
+        print(f"\n[DIAGNOSIS] Diagnosis Distribution:")
+        for diagnosis, count in sorted(diagnosis_counts.items()):
+            print(f"   {diagnosis}: {count} files")
+        
+        print(f"\n[SPEECH] Utterance Statistics:")
+        print(f"   Total utterances: {total_utterances:,}")
+        print(f"   Child utterances: {total_child_utterances:,}")
+        print(f"   Average utterances per file: {total_utterances/len(all_transcripts):.1f}")
+        print(f"   Average child utterances per file: {total_child_utterances/len(all_transcripts):.1f}")
+        
+        # Show age distribution if available
+        ages = [t.age_months for t in all_transcripts if t.age_months is not None]
+        if ages:
+            print(f"\n[AGE] Age Distribution:")
+            print(f"   Age range: {min(ages)} - {max(ages)} months")
+            print(f"   Average age: {sum(ages)/len(ages):.1f} months")
+    
+    print(f"\n[SUCCESS] ASDBank processing complete!")
+    print(f"[DISK] All parsed transcripts available in memory for further analysis")
 
 
-def example_5_compare_asd_vs_td():
+def example_6_compare_asd_vs_td():
     """
     Example 5: Compare features between ASD and TD groups
     """
@@ -268,26 +502,38 @@ def example_5_compare_asd_vs_td():
 
 
 def main():
-    """Run all examples"""
+    """Run comprehensive examples with multiple CHAT files"""
     
     # Setup logging
     setup_logger()
     
     print("\n" + "="*70)
-    print("ASD DETECTION FEATURE EXTRACTION - EXAMPLES")
+    print("ASD DETECTION FEATURE EXTRACTION - COMPREHENSIVE EXAMPLES")
     print("Phase 1 & 2: CHAT Parsing and Feature Extraction")
+    print("Processing Multiple ASDBank Datasets")
     print("="*70)
     
-    # Uncomment the examples you want to run:
+    # Run the comprehensive examples:
     
-    example_1_parse_single_file()
-    # example_2_build_inventory()
-    # example_3_extract_features_single()
-    # example_4_extract_features_batch()
-    # example_5_compare_asd_vs_td()
+    # Example 1: Parse multiple files from different datasets
+    example_1_parse_multiple_files()
+    
+    # Example 4: Comprehensive batch feature extraction from multiple datasets
+    example_4_extract_features_batch()
+    
+    # Example 5: Process ALL CHAT files in ASDBank (comprehensive analysis)
+    # Uncomment the line below to process ALL available CHAT files (may take longer)
+    # example_5_process_all_chat_files()
+    
+    # Other examples (commented out to save time, uncomment as needed):
+    # example_2_build_inventory()           # Build complete dataset inventory
+    # example_3_extract_features_single()   # Extract features from single transcript
+    # example_6_compare_asd_vs_td()         # Compare ASD vs TD groups
     
     print("\n" + "="*70)
-    print("Examples completed!")
+    print("[SUCCESS] COMPREHENSIVE EXAMPLES COMPLETED!")
+    print("[CHART] Multiple ASDBank datasets processed successfully")
+    print("[DISK] Feature files saved to output directory")
     print("="*70 + "\n")
 
 

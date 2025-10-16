@@ -37,7 +37,7 @@ class AcousticProsodicTrainer:
         print("\n" + "="*50)
         print("ACOUSTIC & PROSODIC TRAINER - PLACEHOLDER")
         print("="*50)
-        print("📋 For Team Member A:")
+        print("[CLIPBOARD] For Team Member A:")
         print("This is a placeholder file. Please implement your own trainer.")
         print("Required libraries: librosa, praat-parselmouth, scikit-learn")
         print("Focus on: pitch, spectral, temporal, prosodic features")

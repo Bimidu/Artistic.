@@ -16,10 +16,10 @@ Author: Bimidu Gunathilake
 """
 
 import re
+from datetime import datetime, date
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, field
-from datetime import datetime
 
 import pylangacq
 import pandas as pd
@@ -54,6 +54,27 @@ class Utterance:
     actions: Optional[str] = None
     comments: Optional[str] = None
     is_valid: bool = True
+    
+    @property
+    def word_count(self) -> int:
+        """Get the number of words in the utterance."""
+        if self.tokens:
+            # Count non-empty tokens (filter out punctuation-only tokens)
+            return len([token for token in self.tokens if hasattr(token, 'word') and token.word and token.word.strip()])
+        elif self.text:
+            # Fallback to text splitting
+            return len(self.text.split())
+        else:
+            return 0
+    
+    @property
+    def morpheme_count(self) -> int:
+        """Get the number of morphemes in the utterance."""
+        if self.morphology:
+            # Count morphemes by splitting on spaces and counting non-empty elements
+            morphemes = [m.strip() for m in self.morphology.split() if m.strip()]
+            return len(morphemes)
+        return self.word_count
 
 
 @dataclass
@@ -233,7 +254,13 @@ class CHATParser:
             return metadata
         
         # Extract from first file (usually only one file per reader)
-        file_headers = list(headers.values())[0] if headers else {}
+        # Handle both dict and list formats from pylangacq
+        if isinstance(headers, dict):
+            file_headers = list(headers.values())[0] if headers else {}
+        elif isinstance(headers, list) and headers:
+            file_headers = headers[0] if headers[0] else {}
+        else:
+            file_headers = {}
         
         # Extract participant ID
         pid = file_headers.get('PID', '')
@@ -247,17 +274,42 @@ class CHATParser:
         # Extract date
         date_str = file_headers.get('Date', '')
         if date_str:
-            metadata['date_str'] = date_str
-            # Try to parse date (format varies: DD-MMM-YYYY)
-            try:
-                metadata['session_date'] = datetime.strptime(date_str, '%d-%b-%Y')
-            except ValueError:
-                logger.warning(f"Could not parse date: {date_str}")
+            # Handle different date formats from pylangacq
+            if isinstance(date_str, date):
+                # Already a date object
+                metadata['session_date'] = date_str
+                metadata['date_str'] = date_str.strftime('%d-%b-%Y')
+            elif isinstance(date_str, (set, list)):
+                # Handle set/list format
+                date_str = list(date_str)[0] if date_str else ''
+                if date_str and isinstance(date_str, str):
+                    metadata['date_str'] = date_str
+                    try:
+                        metadata['session_date'] = datetime.strptime(date_str, '%d-%b-%Y')
+                    except ValueError:
+                        logger.warning(f"Could not parse date: {date_str}")
+            elif isinstance(date_str, str):
+                # String format
+                metadata['date_str'] = date_str
+                try:
+                    metadata['session_date'] = datetime.strptime(date_str, '%d-%b-%Y')
+                except ValueError:
+                    logger.warning(f"Could not parse date: {date_str}")
+            else:
+                # Convert to string for storage
+                metadata['date_str'] = str(date_str)
         
         # Extract languages
         langs = file_headers.get('Languages', '')
         if langs:
-            metadata['languages'] = [l.strip() for l in langs.split(',')]
+            # Handle case where langs might be a set or other type
+            if isinstance(langs, (set, list)):
+                langs = list(langs)[0] if langs else ''
+            elif not isinstance(langs, str):
+                langs = str(langs)
+            
+            if langs:
+                metadata['languages'] = [l.strip() for l in langs.split(',')]
         
         # Extract other headers
         for key in ['Media', 'Location', 'Situation', 'Comment', 'Tape Location']:
@@ -291,7 +343,18 @@ class CHATParser:
             return participants
         
         # Extract from first file
-        file_participants = list(participant_data.values())[0] if participant_data else {}
+        # Handle different formats from pylangacq
+        if isinstance(participant_data, dict):
+            file_participants = list(participant_data.values())[0] if participant_data else {}
+        elif isinstance(participant_data, (set, list)) and participant_data:
+            file_participants = list(participant_data)[0] if participant_data else {}
+        else:
+            file_participants = {}
+        
+        # Ensure file_participants is a dictionary before iterating
+        if not isinstance(file_participants, dict):
+            logger.warning(f"Participant data is not in expected format: {type(file_participants)}")
+            return participants
         
         for speaker_code, info in file_participants.items():
             participants[speaker_code] = {
@@ -362,11 +425,22 @@ class CHATParser:
                 # Get tokens (words)
                 tokens = utterance.tokens or []
                 
+                # If text is empty but we have tokens, reconstruct text from tokens
+                if not text and tokens:
+                    text = ' '.join(token.word for token in tokens if token.word)
+                
                 # Get tiers (morphology, grammar, timing, etc.)
                 tiers = utterance.tiers or {}
                 
-                # Extract morphology (%mor)
+                # Extract morphology (%mor) - try from tiers first, then from tokens
                 morphology = tiers.get('mor')
+                if not morphology and tokens:
+                    # Extract morphology from token morpheme information
+                    mor_list = []
+                    for token in tokens:
+                        if hasattr(token, 'mor') and token.mor:
+                            mor_list.append(token.mor)
+                    morphology = ' '.join(mor_list) if mor_list else None
                 
                 # Extract grammar (%gra)
                 grammar = tiers.get('gra')
@@ -383,10 +457,7 @@ class CHATParser:
                 # Extract comments (%com)
                 comments = tiers.get('com')
                 
-                # Validate utterance
-                is_valid = is_valid_utterance(text, min_words=self.min_words)
-                
-                # Create Utterance object
+                # Create Utterance object first
                 utt = Utterance(
                     speaker=speaker,
                     text=text,
@@ -396,8 +467,12 @@ class CHATParser:
                     timing=timing,
                     actions=actions,
                     comments=comments,
-                    is_valid=is_valid,
+                    is_valid=True,  # Will be validated below
                 )
+                
+                # Validate utterance after creation (can use word_count property)
+                if utt.word_count < self.min_words:
+                    utt.is_valid = False
                 
                 utterances.append(utt)
                 

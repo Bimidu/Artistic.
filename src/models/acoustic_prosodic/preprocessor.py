@@ -32,7 +32,7 @@ class AcousticProsodicPreprocessor:
         print("\n" + "="*50)
         print("ACOUSTIC & PROSODIC PREPROCESSOR - PLACEHOLDER")
         print("="*50)
-        print("📋 For Team Member A:")
+        print("[CLIPBOARD] For Team Member A:")
         print("This is a placeholder file. Please implement your own preprocessor.")
         print("Focus on: audio validation, feature cleaning, scaling")
         print("="*50 + "\n")

@@ -32,7 +32,7 @@ class SyntacticSemanticPreprocessor:
         print("\n" + "="*50)
         print("SYNTACTIC & SEMANTIC PREPROCESSOR - PLACEHOLDER")
         print("="*50)
-        print("📋 For Team Member B:")
+        print("[CLIPBOARD] For Team Member B:")
         print("This is a placeholder file. Please implement your own preprocessor.")
         print("Focus on: NLP validation, feature cleaning, scaling")
         print("="*50 + "\n")

@@ -136,19 +136,27 @@ class TurnTakingFeatures(BaseFeatureExtractor):
         Returns:
             Turns per minute, or 0 if timing unavailable
         """
+        if not utterances:
+            return 0.0
+        
         # Get utterances with timing information
         timed_utterances = [u for u in utterances if u.timing is not None]
         
         if not timed_utterances or len(timed_utterances) < 2:
-            return 0.0
+            # If no timing, estimate based on typical conversation rate
+            # Assume 15-minute session if no timing available
+            estimated_duration_minutes = 15.0
+            return len(utterances) / estimated_duration_minutes
         
         # Calculate duration in minutes
-        start_time = timed_utterances[0].timing
-        end_time = timed_utterances[-1].timing
+        start_time = min(u.timing for u in timed_utterances)
+        end_time = max(u.timing for u in timed_utterances)
         duration_minutes = (end_time - start_time) / 60.0
         
         if duration_minutes <= 0:
-            return 0.0
+            # Fallback to estimated duration
+            estimated_duration_minutes = 15.0
+            return len(utterances) / estimated_duration_minutes
         
         # Calculate turns per minute
         return len(utterances) / duration_minutes

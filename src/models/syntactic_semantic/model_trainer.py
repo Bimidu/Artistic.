@@ -37,7 +37,7 @@ class SyntacticSemanticTrainer:
         print("\n" + "="*50)
         print("SYNTACTIC & SEMANTIC TRAINER - PLACEHOLDER")
         print("="*50)
-        print("📋 For Team Member B:")
+        print("[CLIPBOARD] For Team Member B:")
         print("This is a placeholder file. Please implement your own trainer.")
         print("Required libraries: spacy, nltk, scikit-learn")
         print("Focus on: syntax, semantics, grammar, complexity features")

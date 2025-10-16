@@ -147,10 +147,10 @@ class BaseFeatureExtractor(ABC):
             in_words: If True, count words; if False, count characters
             
         Returns:
-            List of utterance lengths
+            List of utterance lengths (including 0 for empty utterances)
         """
         if in_words:
-            return [len(u.tokens) for u in utterances if u.tokens]
+            return [u.word_count for u in utterances]
         else:
             return [len(u.text) for u in utterances]
     
