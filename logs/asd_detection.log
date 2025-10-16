@@ -7,3 +7,142 @@
 2025-10-15 15:11:27 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
 2025-10-15 15:11:27 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
 2025-10-15 15:11:27 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-10-16 10:12:51 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-10-16 10:12:51 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Preprocessing data by category: ['acoustic_prosodic', 'syntactic_semantic', 'pragmatic_conversational']
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Preprocessing acoustic_prosodic with 3 features
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Acoustic/Prosodic preprocessing - PLACEHOLDER
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Preprocessing syntactic_semantic with 3 features
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Syntactic/Semantic preprocessing - PLACEHOLDER
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Preprocessing pragmatic_conversational with 3 features
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Pragmatic/Conversational preprocessing - IMPLEMENTED
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (50, 3)
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_validator:validate - Starting validation for dataset with shape (50, 3)
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_validator:_check_outliers - Detected 1 outliers across 1 features
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_validator:validate - Validation complete - Valid: True, Warnings: 0, Errors: 0
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Data validation passed
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 2 feature columns
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (50, 3)
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 1 outliers using method: clip
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (50, 3)
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Data cleaned - Shape: (50, 3)
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Performing feature selection
+2025-10-16 10:12:51 | INFO     | src.preprocessing.feature_selector:select_from_model - Selecting features from model with threshold=median
+2025-10-16 10:12:51 | INFO     | src.preprocessing.feature_selector:select_from_model - Selected 1 features
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Selected 1 features
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Split data - Train: (40, 1), Test: (10, 1)
+2025-10-16 10:12:51 | INFO     | src.preprocessing.data_cleaner:fit_transform - Scaled 1 features using standard
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Features scaled
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:fit_transform - Preprocessing pipeline complete
+2025-10-16 10:12:51 | INFO     | src.preprocessing.preprocessor:preprocess_by_category - Category preprocessing complete - 3 categories processed
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:__init__ - ModelTrainer initialized
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Training models by category: ['acoustic_prosodic', 'syntactic_semantic', 'pragmatic_conversational']
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Training models for acoustic_prosodic with 2 features
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Acoustic/Prosodic training - PLACEHOLDER
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Training models for syntactic_semantic with 2 features
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Syntactic/Semantic training - PLACEHOLDER
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Training models for pragmatic_conversational with 2 features
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Pragmatic/Conversational training - IMPLEMENTED
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_multiple_models - Training multiple models for comparison
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_model - Training random_forest model...
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_model - random_forest training complete
+2025-10-16 10:12:51 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0555 seconds
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_model - Training xgboost model...
+2025-10-16 10:12:51 | ERROR    | src.models.model_trainer:train_multiple_models - Error training xgboost: Invalid classes inferred from unique values of `y`.  Expected: [0 1], got ['ASD' 'TD']
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_model - Training lightgbm model...
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_model - lightgbm training complete
+2025-10-16 10:12:51 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0273 seconds
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_multiple_models - Successfully trained 2 models
+2025-10-16 10:12:51 | INFO     | src.models.model_trainer:train_by_category - Category training complete - 3 categories processed
+2025-10-16 10:25:22 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:25:39 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:26:03 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:26:03 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer - PLACEHOLDER (Team Member A)
+2025-10-16 10:26:03 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer - PLACEHOLDER (Team Member B)
+2025-10-16 10:26:03 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-10-16 10:26:03 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-10-16 10:26:03 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer - PLACEHOLDER (Team Member A)
+2025-10-16 10:26:03 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer - PLACEHOLDER (Team Member B)
+2025-10-16 10:26:03 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-10-16 10:26:03 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-10-16 10:26:03 | INFO     | src.models.model_trainer:__init__ - ModelTrainer initialized with component trainers
+2025-10-16 10:26:11 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:26:11 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer - PLACEHOLDER (Team Member A)
+2025-10-16 10:26:11 | WARNING  | src.models.acoustic_prosodic.model_trainer:train_multiple_models - train_multiple_models() - PLACEHOLDER (Team Member A)
+2025-10-16 10:26:11 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer - PLACEHOLDER (Team Member B)
+2025-10-16 10:26:11 | WARNING  | src.models.syntactic_semantic.model_trainer:train_multiple_models - train_multiple_models() - PLACEHOLDER (Team Member B)
+2025-10-16 10:26:11 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_multiple_models - Training multiple pragmatic models (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_random_forest model (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_random_forest training complete (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.1311 seconds
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_xgboost model (IMPLEMENTED)
+2025-10-16 10:26:11 | ERROR    | src.models.pragmatic_conversational.model_trainer:train_multiple_models - Error training xgboost: Invalid classes inferred from unique values of `y`.  Expected: [0 1], got ['ASD' 'TD']
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_lightgbm model (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_lightgbm training complete (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0361 seconds
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_svm model (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_svm training complete (IMPLEMENTED)
+2025-10-16 10:26:11 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0022 seconds
+2025-10-16 10:26:11 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_logistic model (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_logistic training complete (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 1.0950 seconds
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_multiple_models - Successfully trained 4 models (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.utils.helpers:wrapper - Function 'train_multiple_models' executed in 1.2654 seconds
+2025-10-16 10:26:12 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer - PLACEHOLDER (Team Member A)
+2025-10-16 10:26:12 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer - PLACEHOLDER (Team Member B)
+2025-10-16 10:26:12 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:__init__ - ModelTrainer initialized with component trainers
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:train_by_category - Training models by category: ['acoustic_prosodic', 'syntactic_semantic', 'pragmatic_conversational']
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:train_by_category - Training models for acoustic_prosodic with 4 features
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:train_by_category - Acoustic/Prosodic training - PLACEHOLDER
+2025-10-16 10:26:12 | WARNING  | src.models.acoustic_prosodic.model_trainer:train_multiple_models - train_multiple_models() - PLACEHOLDER (Team Member A)
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:train_by_category - Training models for syntactic_semantic with 4 features
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:train_by_category - Syntactic/Semantic training - PLACEHOLDER
+2025-10-16 10:26:12 | WARNING  | src.models.syntactic_semantic.model_trainer:train_multiple_models - train_multiple_models() - PLACEHOLDER (Team Member B)
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:train_by_category - Training models for pragmatic_conversational with 6 features
+2025-10-16 10:26:12 | INFO     | src.models.model_trainer:train_by_category - Pragmatic/Conversational training - IMPLEMENTED
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_multiple_models - Training multiple pragmatic models (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_random_forest model (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_random_forest training complete (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.1028 seconds
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_xgboost model (IMPLEMENTED)
+2025-10-16 10:26:12 | ERROR    | src.models.pragmatic_conversational.model_trainer:train_multiple_models - Error training xgboost: Invalid classes inferred from unique values of `y`.  Expected: [0 1], got ['ASD' 'TD']
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_lightgbm model (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_lightgbm training complete (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0259 seconds
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_svm model (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_svm training complete (IMPLEMENTED)
+2025-10-16 10:26:12 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0011 seconds
+2025-10-16 10:26:12 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - Training pragmatic_logistic model (IMPLEMENTED)
+2025-10-16 10:26:13 | INFO     | src.models.pragmatic_conversational.model_trainer:train_model - pragmatic_logistic training complete (IMPLEMENTED)
+2025-10-16 10:26:13 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.7893 seconds
+2025-10-16 10:26:13 | INFO     | src.models.pragmatic_conversational.model_trainer:train_multiple_models - Successfully trained 4 models (IMPLEMENTED)
+2025-10-16 10:26:13 | INFO     | src.utils.helpers:wrapper - Function 'train_multiple_models' executed in 0.9199 seconds
+2025-10-16 10:26:13 | INFO     | src.models.model_trainer:train_by_category - Category training complete - 3 categories processed
+2025-10-16 10:29:23 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:29:23 | INFO     | src.models.model_registry:_load_registry - No existing registry found, starting fresh
+2025-10-16 10:29:23 | INFO     | src.models.model_registry:__init__ - ModelRegistry initialized - Directory: models
+2025-10-16 10:29:23 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-10-16 10:29:23 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
+2025-10-16 10:29:23 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-10-16 10:29:23 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer - PLACEHOLDER (Team Member A)
+2025-10-16 10:29:23 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer - PLACEHOLDER (Team Member B)
+2025-10-16 10:29:23 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-10-16 10:29:23 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-10-16 10:29:23 | INFO     | src.models.model_trainer:__init__ - ModelTrainer initialized with component trainers
+2025-10-16 10:29:23 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
+2025-10-16 10:29:23 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-10-16 10:29:40 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:29:40 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:29:40 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-10-16 10:29:40 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1010.cha
+2025-10-16 10:29:41 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-10-16 10:29:41 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/ASD/1010.cha: 'list' object has no attribute 'values'

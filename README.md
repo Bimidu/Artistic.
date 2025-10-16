@@ -1,386 +1,411 @@
-# ASD Detection from Conversational Features
+# ASD Detection System
 
-A comprehensive system for detecting Autism Spectrum Disorder (ASD) in children through analysis of conversational and pragmatic features extracted from CHAT-formatted transcripts.
+A comprehensive machine learning system for detecting Autism Spectrum Disorder (ASD) in children using conversational patterns from TalkBank ASDBank datasets.
 
-## 📋 Project Overview
+## 🎯 Overview
 
-This project implements **Phase 1 & 2** of an ASD detection system that analyzes conversational patterns in children. The system extracts pragmatic and conversational features from TalkBank ASDBank datasets to identify patterns that distinguish ASD from typically developing (TD) children.
+This system extracts **pragmatic and conversational features** from speech transcripts and trains machine learning models to classify children as either ASD or Typically Developing (TD). The architecture supports three feature categories with separate training pipelines:
 
-### Feature Categories
+- **Acoustic & Prosodic** - Team Member A (Placeholder)
+- **Syntactic & Semantic** - Team Member B (Placeholder)  
+- **Pragmatic & Conversational** - Fully Implemented ✅
 
-The complete system is designed for **three categories of features**:
+## 🏗️ System Architecture
 
-1. **🎵 Acoustic & Prosodic Features** (Team Member A - Placeholder)
-   - Pitch variations, speech rate, pause patterns
-   - *Status: To be implemented*
+### Complete System Diagram
 
-2. **📝 Syntactic & Semantic Features** (Team Member B - Placeholder)
-   - Grammar structures, semantic relationships
-   - *Status: To be implemented*
-
-3. **💬 Pragmatic & Conversational Features** (✅ **FULLY IMPLEMENTED**)
-   - Turn-taking patterns
-   - Linguistic complexity (MLU, vocabulary diversity)
-   - Pragmatic language (echolalia, questions, pronouns)
-   - Conversational management (topic, discourse, repairs)
-   - Behavioral/non-verbal markers
-
-## 🗂️ Dataset Information
-
-### Available Datasets
-- **asdbank_aac**: 18 minimally speaking autistic children (Canada)
-- **asdbank_eigsti**: 16 ASD + 16 TD + 16 DD children (Rochester)
-- **asdbank_flusberg**: 6 autistic children, longitudinal (Amherst)
-- **asdbank_nadig**: 20 ASD + 18 TYP children (Montreal, bilingual)
-- **asdbank_quigley_mcnalley**: 105 HR + 98 LR children
-- **asdbank_rollins**: 5 autistic children
-
-### Key Features Extracted
-
-#### Turn-Taking Features (15 features)
-- Turn frequency and distribution
-- Response latency
-- Turn initiation patterns
-- Turn switching behavior
-
-#### Linguistic Features (14 features)
-- MLU (Mean Length of Utterance) in words & morphemes
-- Vocabulary diversity (Type-Token Ratio)
-- Grammatical complexity
-- Lexical density
-
-#### Pragmatic Features (16 features)
-- Echolalia detection (immediate & delayed)
-- Question usage patterns
-- Pronoun usage and reversal
-- Social language markers
-- Response appropriateness
-
-#### Conversational Features (16 features)
-- Topic management and shifts
-- Discourse marker usage
-- Conversational repair strategies
-- Non-verbal behavioral markers
-- Topic relevance
-
-**Total: 61+ pragmatic & conversational features**
-
-## 🚀 Installation
-
-### Prerequisites
-- Python 3.9+
-- pip package manager
-
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   cd /Users/bimidugunathilake/Documents/SE/Projects/Artistic.
-   ```
-
-2. **Create virtual environment** (recommended)
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Configure environment**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your settings
-   ```
-
-## 📖 Usage
-
-### Example 1: Parse a Single CHAT File
-
-```python
-from src.parsers.chat_parser import CHATParser
-
-# Initialize parser
-parser = CHATParser()
-
-# Parse a transcript
-transcript = parser.parse_file("data/asdbank_eigsti/Eigsti/ASD/1010.cha")
-
-print(f"Participant: {transcript.participant_id}")
-print(f"Diagnosis: {transcript.diagnosis}")
-print(f"Total Utterances: {transcript.total_utterances}")
+```mermaid
+graph TB
+    %% Data Input Layer
+    subgraph "📊 Data Sources"
+        A[TalkBank ASDBank<br/>CHAT Files (.cha)]
+        B[Metadata Files<br/>(.cdc, .xlsx)]
+    end
+    
+    %% Phase 1: Data Parsing
+    subgraph "🔍 Phase 1: Data Parsing"
+        C[CHAT Parser<br/>chat_parser.py]
+        D[Dataset Inventory<br/>dataset_inventory.py]
+    end
+    
+    %% Phase 2: Feature Extraction
+    subgraph "⚙️ Phase 2: Feature Extraction"
+        subgraph "Team Member A (Placeholder)"
+            E1[Acoustic & Prosodic<br/>Features (12)]
+        end
+        subgraph "Team Member B (Placeholder)"
+            E2[Syntactic & Semantic<br/>Features (12)]
+        end
+        subgraph "Implemented ✅"
+            E3[Pragmatic & Conversational<br/>Features (61)]
+            E4[Turn-Taking Features (15)]
+            E5[Linguistic Features (14)]
+            E6[Pragmatic Features (16)]
+            E7[Conversational Features (16)]
+        end
+    end
+    
+    %% Phase 3: Preprocessing
+    subgraph "🧹 Phase 3: Data Preprocessing"
+        F1[Data Validator<br/>data_validator.py]
+        F2[Data Cleaner<br/>data_cleaner.py]
+        F3[Feature Selector<br/>feature_selector.py]
+        F4[Data Preprocessor<br/>preprocessor.py]
+    end
+    
+    %% Phase 4: Model Training
+    subgraph "🤖 Phase 4: Machine Learning"
+        subgraph "Component Trainers"
+            G1[Acoustic Trainer<br/>(Placeholder)]
+            G2[Syntactic Trainer<br/>(Placeholder)]
+            G3[Pragmatic Trainer<br/>(Implemented ✅)]
+        end
+        subgraph "ML Models"
+            H1[Random Forest]
+            H2[XGBoost]
+            H3[LightGBM]
+            H4[SVM]
+            H5[Logistic Regression]
+            H6[Neural Network]
+        end
+        G4[Model Evaluator<br/>model_evaluator.py]
+        G5[Model Registry<br/>model_registry.py]
+    end
+    
+    %% Phase 5: API Layer
+    subgraph "🌐 Phase 5: FastAPI Backend"
+        I1[REST API<br/>app.py]
+        I2[Prediction Endpoint<br/>/predict]
+        I3[Feature Endpoint<br/>/features]
+        I4[Model Endpoint<br/>/models]
+        I5[Health Check<br/>/health]
+    end
+    
+    %% Output Layer
+    subgraph "📈 Output"
+        J1[ASD/TD Predictions]
+        J2[Feature Importance]
+        J3[Model Metrics]
+        J4[API Documentation]
+    end
+    
+    %% Data Flow Connections
+    A --> C
+    B --> D
+    C --> E1
+    C --> E2
+    C --> E3
+    C --> E4
+    C --> E5
+    C --> E6
+    C --> E7
+    
+    E1 --> F1
+    E2 --> F1
+    E3 --> F1
+    E4 --> F1
+    E5 --> F1
+    E6 --> F1
+    E7 --> F1
+    
+    F1 --> F2
+    F2 --> F3
+    F3 --> F4
+    
+    F4 --> G1
+    F4 --> G2
+    F4 --> G3
+    
+    G1 --> H1
+    G2 --> H2
+    G3 --> H1
+    G3 --> H2
+    G3 --> H3
+    G3 --> H4
+    G3 --> H5
+    G3 --> H6
+    
+    G3 --> G4
+    G4 --> G5
+    
+    G5 --> I1
+    I1 --> I2
+    I1 --> I3
+    I1 --> I4
+    I1 --> I5
+    
+    I2 --> J1
+    I3 --> J2
+    I4 --> J3
+    I5 --> J4
+    
+    %% Styling
+    classDef implemented fill:#90EE90,stroke:#333,stroke-width:2px
+    classDef placeholder fill:#FFE4B5,stroke:#333,stroke-width:2px
+    classDef data fill:#E6F3FF,stroke:#333,stroke-width:2px
+    classDef api fill:#F0E68C,stroke:#333,stroke-width:2px
+    classDef output fill:#FFB6C1,stroke:#333,stroke-width:2px
+    
+    class E3,E4,E5,E6,E7,G3 implemented
+    class E1,E2,G1,G2 placeholder
+    class A,B,C,D,F1,F2,F3,F4 data
+    class I1,I2,I3,I4,I5 api
+    class J1,J2,J3,J4 output
 ```
 
-### Example 2: Build Dataset Inventory
+### Component Status Legend
+- 🟢 **Green (Implemented)**: Pragmatic & Conversational features - Production ready
+- 🟡 **Yellow (Placeholder)**: Acoustic & Syntactic features - Ready for team implementation
+- 🔵 **Blue (Data)**: Parsing and preprocessing components
+- 🟡 **Yellow (API)**: FastAPI backend services
+- 🟣 **Pink (Output)**: Results and documentation
 
-```python
-from src.parsers.dataset_inventory import DatasetInventory
-
-# Initialize inventory
-inventory = DatasetInventory()
-
-# Build complete inventory
-inventory.build_inventory(datasets=['asdbank_eigsti'])
-
-# Get summary
-summary = inventory.get_dataset_summary()
-df = inventory.to_dataframe()
-
-# Export
-inventory.export_to_csv("output/inventory.csv")
-```
-
-### Example 3: Extract Features from Single Transcript
-
-```python
-from src.features.feature_extractor import FeatureExtractor
-from src.parsers.chat_parser import CHATParser
-
-# Parse transcript
-parser = CHATParser()
-transcript = parser.parse_file("data/asdbank_eigsti/Eigsti/ASD/1010.cha")
-
-# Extract features (pragmatic & conversational only)
-extractor = FeatureExtractor(categories='pragmatic_conversational')
-features = extractor.extract_from_transcript(transcript)
-
-print(f"MLU: {features.features['mlu_words']:.2f}")
-print(f"Echolalia Ratio: {features.features['echolalia_ratio']:.2f}")
-```
-
-### Example 4: Batch Feature Extraction
-
-```python
-from src.features.feature_extractor import FeatureExtractor
-
-# Initialize extractor
-extractor = FeatureExtractor(categories='pragmatic_conversational')
-
-# Extract from entire directory
-df = extractor.extract_from_directory(
-    directory='data/asdbank_eigsti/Eigsti/ASD',
-    output_file='output/asd_features.csv'
-)
-
-print(f"Extracted {df.shape[1]} features from {df.shape[0]} transcripts")
-```
-
-### Example 5: Compare ASD vs TD
-
-```python
-# Extract features from both groups
-asd_df = extractor.extract_from_directory('data/asdbank_eigsti/Eigsti/ASD')
-td_df = extractor.extract_from_directory('data/asdbank_eigsti/Eigsti/TD')
-
-# Compare key features
-print(f"ASD MLU: {asd_df['mlu_words'].mean():.2f}")
-print(f"TD MLU: {td_df['mlu_words'].mean():.2f}")
-```
-
-## 📁 Project Structure
+### Directory Structure
 
 ```
-Artistic./
-├── config.py                 # Configuration management
-├── requirements.txt          # Python dependencies
-├── README.md                # This file
-│
-├── data/                    # Dataset directory
-│   ├── asdbank_aac/
-│   ├── asdbank_eigsti/
-│   ├── asdbank_flusberg/
-│   ├── asdbank_nadig/
-│   └── ...
-│
-├── src/                     # Source code
-│   ├── parsers/            # Phase 1: CHAT parsing
-│   │   ├── chat_parser.py
-│   │   └── dataset_inventory.py
-│   │
-│   ├── features/           # Phase 2: Feature extraction
-│   │   ├── base_features.py
-│   │   ├── feature_extractor.py
-│   │   │
-│   │   ├── acoustic_prosodic/        # Category 1 (Team Member A)
-│   │   │   ├── acoustic_prosodic.py
-│   │   │   └── __init__.py
-│   │   │
-│   │   ├── syntactic_semantic/       # Category 2 (Team Member B)
-│   │   │   ├── syntactic_semantic.py
-│   │   │   └── __init__.py
-│   │   │
-│   │   └── pragmatic_conversational/ # Category 3 (Implemented)
-│   │       ├── turn_taking.py
-│   │       ├── linguistic.py
-│   │       ├── pragmatic.py
-│   │       ├── conversational.py
-│   │       └── __init__.py
-│   │
-│   └── utils/              # Utilities
-│       ├── logger.py
-│       └── helpers.py
-│
-├── examples/               # Usage examples
-│   └── example_usage.py
-│
-├── output/                # Output directory
-├── models/                # ML models (Phase 3)
-├── logs/                  # Log files
-└── cache/                 # Cached data
+src/
+├── parsers/                    # CHAT file parsing
+├── features/                   # Feature extraction
+│   ├── acoustic_prosodic/     # Team Member A (placeholder)
+│   ├── syntactic_semantic/    # Team Member B (placeholder)
+│   └── pragmatic_conversational/ # Fully implemented (61 features)
+├── preprocessing/              # Data preprocessing pipeline
+├── models/                     # ML training & evaluation
+│   ├── acoustic_prosodic/     # Team Member A (placeholder)
+│   ├── syntactic_semantic/    # Team Member B (placeholder)
+│   └── pragmatic_conversational/ # Fully implemented
+└── api/                        # FastAPI backend
 ```
 
-## 🔬 Feature Details
+## 🚀 Quick Start
 
-### Turn-Taking Features
-- `turns_per_minute`: Conversation engagement
-- `child_turn_ratio`: Child participation level
-- `avg_response_latency`: Processing speed indicator
-- `child_initiation_ratio`: Social initiation ability
-
-### Linguistic Features
-- `mlu_words`: Language development marker
-- `type_token_ratio`: Vocabulary diversity
-- `lexical_density`: Language complexity
-- `utterance_complexity_score`: Composite metric
-
-### Pragmatic Features
-- `echolalia_ratio`: Repetition patterns (common in ASD)
-- `pronoun_reversal_count`: Pronoun confusion
-- `question_ratio`: Question usage
-- `social_phrase_ratio`: Social language use
-
-### Conversational Features
-- `topic_shift_ratio`: Topic management
-- `discourse_marker_ratio`: Conversation structuring
-- `self_repair_count`: Communication awareness
-- `topic_relevance_score`: Conversational coherence
-
-## 🔧 Configuration
-
-Edit `config.py` or `.env` to customize:
-
-```python
-# Data paths
-DATA_DIR=./data
-OUTPUT_DIR=./output
-
-# Feature extraction
-MIN_UTTERANCES=10
-MIN_WORDS=5
-WINDOW_SIZE=300
-
-# Processing
-N_JOBS=4
-BATCH_SIZE=32
+### 1. Setup
+```bash
+pip install -r requirements.txt
 ```
 
-## 📊 Output
-
-The system generates:
-
-1. **CSV Files**: Feature matrices for ML training
-2. **JSON Cache**: Processed inventory for quick access
-3. **Logs**: Detailed processing information
-4. **Summary Statistics**: Feature distributions and comparisons
-
-Example output (`output/features.csv`):
-```csv
-participant_id,diagnosis,age_months,mlu_words,echolalia_ratio,question_ratio,...
-1010,ASD,63,2.45,0.23,0.08,...
-1011,TD,48,3.12,0.01,0.15,...
-```
-
-## 🧪 Testing
-
-Run the example script:
+### 2. Extract Features
 ```bash
 python examples/example_usage.py
 ```
 
-## 📚 Key Dependencies
-
-- **pylangacq** (0.20.0): CHAT file parsing
-- **pandas** (2.1.3): Data manipulation
-- **numpy** (1.26.2): Numerical computing
-- **tqdm**: Progress bars
-- **loguru**: Advanced logging
-
-## 🤝 Integration for Other Team Members
-
-### For Team Member A (Acoustic/Prosodic Features)
-
-1. Implement `src/features/acoustic_prosodic/acoustic_prosodic.py`
-2. Extract features from audio files
-3. Use libraries: librosa, praat-parselmouth
-4. Access audio via `transcript.metadata.get('media')`
-
-```python
-# Your implementation in acoustic_prosodic/acoustic_prosodic.py
-class AcousticProsodicFeatures(BaseFeatureExtractor):
-    def extract(self, transcript):
-        audio_path = self._get_audio_path(transcript)
-        # Extract pitch, speech rate, etc.
-        return FeatureResult(features={...})
+### 3. Train Models
+```bash
+python examples/train_model.py
 ```
 
-### For Team Member B (Syntactic/Semantic Features)
-
-1. Implement `src/features/syntactic_semantic/syntactic_semantic.py`
-2. Extract grammar and semantic features
-3. Use libraries: spaCy, NLTK
-4. Access morphology via `utterance.morphology`
-
-```python
-# Your implementation in syntactic_semantic/syntactic_semantic.py
-class SyntacticSemanticFeatures(BaseFeatureExtractor):
-    def extract(self, transcript):
-        # Extract dependency depth, semantic roles, etc.
-        return FeatureResult(features={...})
+### 4. Start API
+```bash
+python run_api.py
+# Visit: http://localhost:8000/docs
 ```
 
-## 📈 Next Steps (Phase 3+)
+## 📊 Implemented Features
 
-- [ ] Machine Learning model training
-- [ ] Cross-validation and evaluation
-- [ ] Backend API development (FastAPI/Flask)
-- [ ] Integration of all three feature categories
-- [ ] Web interface for predictions
+### ✅ Pragmatic & Conversational (61 Features)
 
-## 📝 Citation
+**Turn-Taking (15 features)**
+- Turn length statistics, overlap patterns, pause analysis
 
-If using the ASDBank dataset, please cite:
-- [TalkBank ASDBank](https://asd.talkbank.org/)
-- Individual corpus citations in dataset README files
+**Linguistic Complexity (14 features)**  
+- MLU (Mean Length of Utterance), TTR (Type-Token Ratio), sentence complexity
 
-## 📄 License
+**Pragmatic Markers (16 features)**
+- Echolalia detection, pronoun reversal, social language use
 
-[Your License Here]
+**Conversational Management (16 features)**
+- Topic shifts, conversational repairs, coherence measures
 
-## 👥 Authors
+## 🤖 Machine Learning Pipeline
 
-ASD Detection Team - 2024
+### Models Supported
+- Random Forest
+- XGBoost  
+- LightGBM
+- Support Vector Machine
+- Logistic Regression
+- Neural Network (MLP)
 
-## 🐛 Troubleshooting
+### Preprocessing
+- Data validation & cleaning
+- Feature scaling & selection
+- Train/test splitting with stratification
 
-**Issue**: `FileNotFoundError` when parsing
-- **Solution**: Ensure data files are in the correct directory structure
+### Evaluation
+- Accuracy, Precision, Recall, F1-Score
+- ROC AUC, Confusion Matrix
+- Feature importance analysis
 
-**Issue**: `ImportError` for pylangacq
-- **Solution**: Run `pip install pylangacq`
+## 🔧 Component Development
 
-**Issue**: Features return all zeros
-- **Solution**: Check transcript has valid child utterances
+### For Team Member A (Acoustic/Prosodic)
+```python
+# Implement in: src/models/acoustic_prosodic/
+class AcousticProsodicTrainer:
+    def train_multiple_models(self, X_train, y_train):
+        # Your implementation here
+        pass
+```
+
+**Focus Areas:**
+- Pitch features (mean, std, range, slope)
+- Spectral features (MFCC, spectral centroid)  
+- Temporal features (speaking rate, pause patterns)
+- Prosodic features (intonation, stress, rhythm)
+
+**Required Libraries:** `librosa`, `praat-parselmouth`, `scikit-learn`
+
+### For Team Member B (Syntactic/Semantic)
+```python
+# Implement in: src/models/syntactic_semantic/
+class SyntacticSemanticTrainer:
+    def train_multiple_models(self, X_train, y_train):
+        # Your implementation here
+        pass
+```
+
+**Focus Areas:**
+- Syntactic features (dependency depth, clause complexity)
+- Semantic features (coherence, density, consistency)
+- Grammatical features (error rates, agreement)
+- Complexity features (structure diversity, abstractness)
+
+**Required Libraries:** `spacy`, `nltk`, `scikit-learn`
+
+### Current Implementation (Pragmatic/Conversational)
+```python
+# Already implemented in: src/models/pragmatic_conversational/
+from src.models.pragmatic_conversational import PragmaticConversationalTrainer
+
+trainer = PragmaticConversationalTrainer()
+models = trainer.train_multiple_models(X_train, y_train, X_test, y_test)
+```
+
+## 🌐 API Endpoints
+
+### Core Endpoints
+- `POST /predict` - Make predictions on new data
+- `GET /features` - List all supported features
+- `GET /categories` - Show implementation status by category
+- `GET /models` - List available trained models
+
+### Example Usage
+```python
+import requests
+
+# Make prediction
+response = requests.post("http://localhost:8000/predict", 
+                        json={"features": feature_dict})
+prediction = response.json()
+
+# Check feature status
+response = requests.get("http://localhost:8000/categories")
+status = response.json()
+```
+
+## 📁 Data Format
+
+### Input Data
+```python
+# CHAT format files (.cha) from TalkBank ASDBank
+data = {
+    'participant_id': 'ASD_001',
+    'transcript': '*CHI: hello there .',
+    'diagnosis': 'ASD'  # or 'TD'
+}
+```
+
+### Feature Output
+```python
+# 61 pragmatic/conversational features
+features = {
+    'mlu_words': 4.2,
+    'type_token_ratio': 0.65,
+    'echolalia_ratio': 0.1,
+    'turn_taking_patterns': 0.3,
+    # ... 57 more features
+}
+```
+
+## 🧪 Testing
+
+### Run Feature Extraction
+```bash
+python examples/example_usage.py
+```
+
+### Run Model Training
+```bash
+python examples/train_model.py
+```
+
+### Test API
+```bash
+python run_api.py
+# Visit http://localhost:8000/docs for interactive testing
+```
+
+## 📈 Performance
+
+### Current Implementation (Pragmatic/Conversational)
+- **Features:** 61 pragmatic/conversational features
+- **Models:** 7 ML algorithms with hyperparameter tuning
+- **Evaluation:** Comprehensive metrics and feature importance
+- **Status:** Production-ready
+
+### Placeholder Components
+- **Acoustic/Prosodic:** Ready for Team Member A implementation
+- **Syntactic/Semantic:** Ready for Team Member B implementation
+
+## 🔄 Integration Workflow
+
+1. **Team Member A** implements acoustic/prosodic trainer
+2. **Team Member B** implements syntactic/semantic trainer  
+3. **Main orchestrator** automatically integrates all components
+4. **API** serves predictions from all feature categories
+
+```python
+# Main orchestrator handles all components
+from src.models.model_trainer import ModelTrainer
+
+trainer = ModelTrainer()  # Has all component trainers
+results = trainer.train_by_category(feature_data, y_train)
+
+# Results show status for each component:
+# - acoustic_prosodic: "placeholder" or "implemented"
+# - syntactic_semantic: "placeholder" or "implemented"  
+# - pragmatic_conversational: "implemented"
+```
+
+## 📋 Requirements
+
+### Core Dependencies
+- `pandas` - Data manipulation
+- `scikit-learn` - Machine learning
+- `xgboost` - Gradient boosting
+- `lightgbm` - Light gradient boosting
+- `fastapi` - API framework
+- `uvicorn` - ASGI server
+
+### Feature-Specific Dependencies
+- `pylangacq` - CHAT file parsing
+- `loguru` - Enhanced logging
+- `joblib` - Model serialization
+
+## 🎯 Next Steps
+
+1. **Team Member A**: Implement acoustic/prosodic features
+2. **Team Member B**: Implement syntactic/semantic features
+3. **Integration**: All components work together via orchestrator
+4. **Production**: Deploy complete system with all feature categories
 
 ## 📞 Support
 
-For questions or issues:
-- Check examples in `examples/example_usage.py`
-- Review log files in `logs/`
-- Contact team members for integration
+- **Current Implementation**: Pragmatic/conversational features fully working
+- **Team Development**: Each component can be developed independently
+- **Integration**: Main orchestrator handles component coordination
+- **Documentation**: All APIs and interfaces clearly defined
 
 ---
 
-**Status**: ✅ Phase 1 & 2 Complete | 🔄 Phase 3 In Progress
-
+**Status**: Pragmatic/conversational component production-ready. Acoustic/syntactic components ready for team implementation.
