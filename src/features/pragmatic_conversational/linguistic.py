@@ -162,8 +162,14 @@ class LinguisticFeatures(BaseFeatureExtractor):
             
             # Calculate average word length in characters
             if utterance.tokens:
-                avg_len = np.mean([len(word) for word in utterance.tokens])
-                word_char_lengths.append(avg_len)
+                # Extract word strings from tokens and calculate their character lengths
+                word_lengths = []
+                for token in utterance.tokens:
+                    if hasattr(token, 'word') and token.word:
+                        word_lengths.append(len(token.word))
+                if word_lengths:
+                    avg_len = np.mean(word_lengths)
+                    word_char_lengths.append(avg_len)
         
         if morpheme_counts:
             features['mlu_morphemes'] = np.mean(morpheme_counts)
@@ -235,8 +241,12 @@ class LinguisticFeatures(BaseFeatureExtractor):
         all_words = []
         for utterance in utterances:
             if utterance.tokens:
-                # Normalize to lowercase for counting
-                all_words.extend([w.lower() for w in utterance.tokens])
+                # Extract word strings from tokens and normalize to lowercase for counting
+                words = []
+                for token in utterance.tokens:
+                    if hasattr(token, 'word') and token.word:
+                        words.append(token.word.lower())
+                all_words.extend(words)
         
         if not all_words:
             return features
@@ -352,7 +362,12 @@ class LinguisticFeatures(BaseFeatureExtractor):
         all_tokens = []
         for utterance in utterances:
             if utterance.tokens:
-                all_tokens.extend([w.lower() for w in utterance.tokens])
+                # Extract word strings from tokens
+                words = []
+                for token in utterance.tokens:
+                    if hasattr(token, 'word') and token.word:
+                        words.append(token.word.lower())
+                all_tokens.extend(words)
         
         if not all_tokens:
             return features

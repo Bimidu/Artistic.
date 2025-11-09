@@ -348,7 +348,11 @@ class PragmaticFeatures(BaseFeatureExtractor):
             if not utterance.tokens:
                 continue
             
-            words = [w.lower() for w in utterance.tokens]
+            # Extract word strings from tokens
+            words = []
+            for token in utterance.tokens:
+                if hasattr(token, 'word') and token.word:
+                    words.append(token.word.lower())
             total_words += len(words)
             
             for word in words:
@@ -481,7 +485,7 @@ class PragmaticFeatures(BaseFeatureExtractor):
                     # Check if child responded
                     if utterance.speaker == 'CHI':
                         # Simple check: response is appropriate if not too short or unintelligible
-                        if len(utterance.tokens) >= 1 and 'xxx' not in utterance.text:
+                        if utterance.word_count >= 1 and 'xxx' not in utterance.text:
                             appropriate_count += 1
         
         features['appropriate_response_ratio'] = calculate_ratio(

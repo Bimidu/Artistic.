@@ -5,7 +5,7 @@ This module handles all configuration settings for the ASD detection system,
 including paths, feature extraction parameters, and system settings.
 
 Author: Bimidu Gunathilake
-Date: 2024
+Date: 2025-10-15
 """
 
 import os

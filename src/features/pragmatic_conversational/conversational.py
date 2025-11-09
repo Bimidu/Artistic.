@@ -229,13 +229,24 @@ class ConversationalFeatures(BaseFeatureExtractor):
         # Get content words (exclude function words)
         function_words = {'a', 'an', 'the', 'is', 'are', 'was', 'were', 'to', 'in', 'on', 'at'}
         
+        # Extract word strings from tokens
+        prev_token_words = []
+        for token in prev_utterance.tokens:
+            if hasattr(token, 'word') and token.word:
+                prev_token_words.append(token.word.lower())
+        
+        curr_token_words = []
+        for token in curr_utterance.tokens:
+            if hasattr(token, 'word') and token.word:
+                curr_token_words.append(token.word.lower())
+        
         prev_words = set(
-            w.lower() for w in prev_utterance.tokens
-            if w.lower() not in function_words
+            w for w in prev_token_words
+            if w not in function_words
         )
         curr_words = set(
-            w.lower() for w in curr_utterance.tokens
-            if w.lower() not in function_words
+            w for w in curr_token_words
+            if w not in function_words
         )
         
         if not prev_words or not curr_words:
