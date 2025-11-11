@@ -2,41 +2,41 @@
 
 A comprehensive machine learning system for detecting Autism Spectrum Disorder (ASD) in children using conversational patterns from TalkBank ASDBank datasets.
 
-## 🎯 Overview
+## Overview
 
 This system extracts **pragmatic and conversational features** from speech transcripts and trains machine learning models to classify children as either ASD or Typically Developing (TD). The architecture supports three feature categories with separate training pipelines:
 
 - **Acoustic & Prosodic** - Team Member A (Placeholder)
 - **Syntactic & Semantic** - Team Member B (Placeholder)  
-- **Pragmatic & Conversational** - Fully Implemented ✅
+- **Pragmatic & Conversational** - Fully Implemented
 
-## 🏗️ System Architecture
+## System Architecture
 
 ### Complete System Diagram
 
 ```mermaid
 graph TB
     %% Data Input Layer
-    subgraph "📊 Data Sources"
+    subgraph "Data Sources"
         A["TalkBank ASDBank<br/>CHAT Files (.cha)"]
         B["Metadata Files<br/>(.cdc, .xlsx)"]
     end
     
     %% Phase 1: Data Parsing
-    subgraph "🔍 Phase 1: Data Parsing"
+    subgraph "Phase 1: Data Parsing"
         C["CHAT Parser<br/>chat_parser.py"]
         D["Dataset Inventory<br/>dataset_inventory.py"]
     end
     
     %% Phase 2: Feature Extraction
-    subgraph "⚙️ Phase 2: Feature Extraction"
+    subgraph "Phase 2: Feature Extraction"
         subgraph "Team Member A (Placeholder)"
             E1["Acoustic & Prosodic<br/>Features (12)"]
         end
         subgraph "Team Member B (Placeholder)"
             E2["Syntactic & Semantic<br/>Features (12)"]
         end
-        subgraph "Implemented ✅"
+        subgraph "Implemented"
             E3["Pragmatic & Conversational<br/>Features (61)"]
             E4["Turn-Taking Features (15)"]
             E5["Linguistic Features (14)"]
@@ -46,7 +46,7 @@ graph TB
     end
     
     %% Phase 3: Preprocessing
-    subgraph "🧹 Phase 3: Data Preprocessing"
+    subgraph "Phase 3: Feature Engineering & Dataset Preparation"
         F1["Data Validator<br/>data_validator.py"]
         F2["Data Cleaner<br/>data_cleaner.py"]
         F3["Feature Selector<br/>feature_selector.py"]
@@ -54,11 +54,11 @@ graph TB
     end
     
     %% Phase 4: Model Training
-    subgraph "🤖 Phase 4: Machine Learning"
+    subgraph "Phase 4: Machine Learning"
         subgraph "Component Trainers"
             G1["Acoustic Trainer<br/>(Placeholder)"]
             G2["Syntactic Trainer<br/>(Placeholder)"]
-            G3["Pragmatic Trainer<br/>(Implemented ✅)"]
+            G3["Pragmatic Trainer<br/>(Implemented)"]
         end
         subgraph "ML Models"
             H1["Random Forest"]
@@ -73,7 +73,7 @@ graph TB
     end
     
     %% Phase 5: API Layer
-    subgraph "🌐 Phase 5: FastAPI Backend"
+    subgraph "Phase 5: FastAPI Backend"
         I1["REST API<br/>app.py"]
         I2["Prediction Endpoint<br/>/predict"]
         I3["Feature Endpoint<br/>/features"]
@@ -82,7 +82,7 @@ graph TB
     end
     
     %% Output Layer
-    subgraph "📈 Output"
+    subgraph "Output"
         J1["ASD/TD Predictions"]
         J2["Feature Importance"]
         J3["Model Metrics"]
@@ -154,11 +154,11 @@ graph TB
 ```
 
 ### Component Status Legend
-- 🟢 **Green (Implemented)**: Pragmatic & Conversational features - Production ready
-- 🟡 **Yellow (Placeholder)**: Acoustic & Syntactic features - Ready for team implementation
-- 🔵 **Blue (Data)**: Parsing and preprocessing components
-- 🟡 **Yellow (API)**: FastAPI backend services
-- 🟣 **Pink (Output)**: Results and documentation
+- **Green (Implemented)**: Pragmatic & Conversational features - Production ready
+- **Orange (Placeholder)**: Acoustic & Syntactic features - Ready for team implementation
+- **Blue (Data)**: Parsing and preprocessing components
+- **Yellow (API)**: FastAPI backend services
+- **Pink (Output)**: Results and documentation
 
 ### Directory Structure
 
@@ -177,7 +177,7 @@ src/
 └── api/                        # FastAPI backend
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Setup
 ```bash
@@ -207,9 +207,9 @@ open frontend.html
 # Or visit: file:///path/to/frontend.html
 ```
 
-## 📊 Implemented Features
+## Implemented Features
 
-### ✅ Pragmatic & Conversational (61 Features)
+### Pragmatic & Conversational (61 Features)
 
 **Turn-Taking (15 features)**
 - Turn length statistics, overlap patterns, pause analysis
@@ -223,7 +223,7 @@ open frontend.html
 **Conversational Management (16 features)**
 - Topic shifts, conversational repairs, coherence measures
 
-## 🤖 Machine Learning Pipeline
+## Machine Learning Pipeline
 
 ### Models Supported
 - Random Forest
@@ -243,7 +243,7 @@ open frontend.html
 - ROC AUC, Confusion Matrix
 - Feature importance analysis
 
-## 🔧 Component Development
+## Component Development
 
 ### For Team Member A (Acoustic/Prosodic)
 ```python
@@ -288,7 +288,7 @@ trainer = PragmaticConversationalTrainer()
 models = trainer.train_multiple_models(X_train, y_train, X_test, y_test)
 ```
 
-## 🌐 API Endpoints
+## API Endpoints
 
 ### Core Endpoints
 - `POST /predict` - Make predictions on new data
@@ -311,7 +311,7 @@ response = requests.get("http://localhost:8000/categories")
 status = response.json()
 ```
 
-## 🖥️ Web Frontend
+## Web Frontend
 
 A simple HTML frontend (`frontend.html`) is provided for easy interaction with the API:
 
@@ -335,7 +335,7 @@ A simple HTML frontend (`frontend.html`) is provided for easy interaction with t
 - **Feature Categories**: View implementation status by team
 - **Available Models**: See trained model information
 
-## 📁 Data Format
+## Data Format
 
 ### Input Data
 ```python
@@ -359,7 +359,7 @@ features = {
 }
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Run Feature Extraction
 ```bash
@@ -377,7 +377,7 @@ python run_api.py
 # Visit http://localhost:8000/docs for interactive testing
 ```
 
-## 📈 Performance
+## Performance
 
 ### Current Implementation (Pragmatic/Conversational)
 - **Features:** 61 pragmatic/conversational features
@@ -389,7 +389,7 @@ python run_api.py
 - **Acoustic/Prosodic:** Ready for Team Member A implementation
 - **Syntactic/Semantic:** Ready for Team Member B implementation
 
-## 🔄 Integration Workflow
+## Integration Workflow
 
 1. **Team Member A** implements acoustic/prosodic trainer
 2. **Team Member B** implements syntactic/semantic trainer  
@@ -409,7 +409,7 @@ results = trainer.train_by_category(feature_data, y_train)
 # - pragmatic_conversational: "implemented"
 ```
 
-## 📋 Requirements
+## Requirements
 
 ### Core Dependencies
 - `pandas` - Data manipulation
@@ -424,20 +424,254 @@ results = trainer.train_by_category(feature_data, y_train)
 - `loguru` - Enhanced logging
 - `joblib` - Model serialization
 
-## 🎯 Next Steps
-
-1. **Team Member A**: Implement acoustic/prosodic features
-2. **Team Member B**: Implement syntactic/semantic features
-3. **Integration**: All components work together via orchestrator
-4. **Production**: Deploy complete system with all feature categories
-
-## 📞 Support
-
-- **Current Implementation**: Pragmatic/conversational features fully working
-- **Team Development**: Each component can be developed independently
-- **Integration**: Main orchestrator handles component coordination
-- **Documentation**: All APIs and interfaces clearly defined
 
 ---
 
-**Status**: Pragmatic/conversational component production-ready. Acoustic/syntactic components ready for team implementation.
+
+[//]: # (```mermaid)
+
+[//]: # (flowchart TB)
+
+[//]: # (  %% Data Sources)
+
+[//]: # (  subgraph DS["Data Sources"])
+
+[//]: # (    A1["TalkBank ASDBank\nCHAT files &#40;.cha&#41;"])
+
+[//]: # (    A2["Metadata &#40;.cdc, .xlsx&#41;"])
+
+[//]: # (    A3["Audio files &#40;.wav&#41; [future]"])
+
+[//]: # (  end)
+
+[//]: # ()
+[//]: # (  %% Phase 1: Parsing)
+
+[//]: # (  subgraph P1["Phase 1: Data Parsing"])
+
+[//]: # (    B1["CHAT Parser\nsrc/parsers/chat_parser.py"])
+
+[//]: # (    B2["Dataset Inventory\nsrc/parsers/dataset_inventory.py"])
+
+[//]: # (    N1["Output: TranscriptData &#40;utterances, diagnosis, age, counts&#41;"])
+
+[//]: # (  end)
+
+[//]: # ()
+[//]: # (  %% Phase 2: Feature Extraction)
+
+[//]: # (  subgraph P2["Phase 2: Feature Extraction"])
+
+[//]: # (    direction TB)
+
+[//]: # (    C0["Feature Orchestrator\nsrc/features/feature_extractor.py"])
+
+[//]: # ()
+[//]: # (    subgraph P2A["Pragmatic & Conversational &#40;Implemented&#41;"])
+
+[//]: # (      C1["Turn-Taking\nturn_taking.py"])
+
+[//]: # (      C2["Linguistic\nlinguistic.py"])
+
+[//]: # (      C3["Pragmatic\npragmatic.py"])
+
+[//]: # (      C4["Conversational\nconversational.py"])
+
+[//]: # (    end)
+
+[//]: # ()
+[//]: # (    subgraph P2B["Syntactic & Semantic &#40;Placeholder&#41;"])
+
+[//]: # (      C5["SyntacticSemanticFeatures\nsyntactic_semantic/"])
+
+[//]: # (    end)
+
+[//]: # ()
+[//]: # (    subgraph P2C["Acoustic & Prosodic &#40;Temporarily disabled&#41;"])
+
+[//]: # (      C6["AcousticProsodicFeatures\nacoustic_prosodic/"])
+
+[//]: # (    end)
+
+[//]: # ()
+[//]: # (    N2["Output: FeatureSet &#40;dict&#41; and DataFrame rows"])
+
+[//]: # (  end)
+
+[//]: # ()
+[//]: # (  %% Phase 3: Preprocessing)
+
+[//]: # (  subgraph P3["Phase 3: Data Preprocessing"])
+
+[//]: # (    D1["Validation\ndata_validator.py"])
+
+[//]: # (    D2["Cleaning &#40;missing/outliers&#41;\ndata_cleaner.py"])
+
+[//]: # (    D3["Feature Selection\nfeature_selector.py"])
+
+[//]: # (    D4["Scaling &#40;Standard/MinMax/Robust&#41;\npreprocessor.py"])
+
+[//]: # (    N3["fit_transform → X_train, X_test, y_train, y_test"])
+
+[//]: # (  end)
+
+[//]: # ()
+[//]: # (  %% Phase 4: Modeling)
+
+[//]: # (  subgraph P4["Phase 4: Modeling"])
+
+[//]: # (    E1["Category Trainers\nsrc/models/.../model_trainer.py"])
+
+[//]: # (    E2["Model Evaluator\nmodel_evaluator.py"])
+
+[//]: # (    E3["Model Registry\nmodel_registry.py"])
+
+[//]: # ()
+[//]: # (    subgraph E4["Algorithms"])
+
+[//]: # (      F1["Random Forest"])
+
+[//]: # (      F2["XGBoost"])
+
+[//]: # (      F3["LightGBM"])
+
+[//]: # (      F4["SVM"])
+
+[//]: # (      F5["Logistic Regression"])
+
+[//]: # (      F6["Neural Network &#40;MLP&#41;"])
+
+[//]: # (    end)
+
+[//]: # (  end)
+
+[//]: # ()
+[//]: # (  %% Phase 5: Serving &#40;API&#41;)
+
+[//]: # (  subgraph P5["Phase 5: FastAPI Serving"])
+
+[//]: # (    G1["FastAPI App\nsrc/api/app.py"])
+
+[//]: # (    G2["/predict &#40;features&#41;"])
+
+[//]: # (    G3["/predict/file &#40;CSV&#41;"])
+
+[//]: # (    G4["/predict/transcript &#40;.cha&#41;"])
+
+[//]: # (    G5["/features, /categories, /models, /health"])
+
+[//]: # (    N4["transcript → parse → extract → preprocess → predict"])
+
+[//]: # (  end)
+
+[//]: # ()
+[//]: # (  %% Outputs)
+
+[//]: # (  subgraph OUT["Outputs"])
+
+[//]: # (    H1["Feature CSVs\noutput/*.csv"])
+
+[//]: # (    H2["Trained models + preprocessors\nmodels/ &#40;via registry&#41;"])
+
+[//]: # (    H3["Predictions &#40;ASD/TD&#41; + probabilities"])
+
+[//]: # (    H4["Metrics & feature importance"])
+
+[//]: # (    H5["API Docs &#40;OpenAPI&#41;"])
+
+[//]: # (  end)
+
+[//]: # ()
+[//]: # (  %% Edges)
+
+[//]: # (  A1 --> B1)
+
+[//]: # (  A2 --> B2)
+
+[//]: # (  B1 --> C0)
+
+[//]: # (  C0 --> C1)
+
+[//]: # (  C0 --> C2)
+
+[//]: # (  C0 --> C3)
+
+[//]: # (  C0 --> C4)
+
+[//]: # (  C0 -. optional_placeholders .-> C5)
+
+[//]: # (  C0 -. temporarily_disabled .-> C6)
+
+[//]: # (  C1 --> N2)
+
+[//]: # (  C2 --> N2)
+
+[//]: # (  C3 --> N2)
+
+[//]: # (  C4 --> N2)
+
+[//]: # (  N2 --> D1)
+
+[//]: # (  D1 --> D2)
+
+[//]: # (  D2 --> D3)
+
+[//]: # (  D3 --> D4)
+
+[//]: # (  D4 --> N3)
+
+[//]: # (  D4 --> E1)
+
+[//]: # (  E1 --> E4)
+
+[//]: # (  E4 --> E2)
+
+[//]: # (  E2 --> E3)
+
+[//]: # (  C0 --> H1)
+
+[//]: # (  E3 --> G1)
+
+[//]: # (  G1 --> G2)
+
+[//]: # (  G1 --> G3)
+
+[//]: # (  G1 --> G4)
+
+[//]: # (  G1 --> G5)
+
+[//]: # (  G2 --> H3)
+
+[//]: # (  G3 --> H3)
+
+[//]: # (  G4 --> H3)
+
+[//]: # (  E2 --> H4)
+
+[//]: # (  G5 --> H5)
+
+[//]: # (  E3 --> H2)
+
+[//]: # (  ```)
+API transcript sequence
+  ```mermaid
+  sequenceDiagram
+  autonumber
+  participant Client
+  participant API as FastAPI (app.py)
+  participant Parser as CHATParser
+  participant FX as FeatureExtractor
+  participant Prep as DataPreprocessor
+  participant Model as Trained Model
+
+  Client->>API: POST /predict/transcript (.cha)
+  API->>Parser: parse_file(tmp_path)
+  Parser-->>API: TranscriptData
+  API->>FX: extract_from_transcript(TranscriptData)
+  FX-->>API: FeatureSet → DataFrame row
+  API->>Prep: transform(features_df)
+  Prep-->>API: features_scaled_df
+  API->>Model: predict + predict_proba
+  Model-->>API: class, probabilities
+  API-->>Client: prediction, confidence, probabilities, model_used
+  ```
