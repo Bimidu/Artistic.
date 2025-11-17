@@ -1,140 +1,92 @@
 """
-Acoustic and Prosodic Feature Extractor (PLACEHOLDER)
+Basic Acoustic & Prosodic Feature Extractor
+Author: Team Member A
 
-This module is a placeholder for acoustic and prosodic features to be implemented
-by Team Member A. These features analyze audio characteristics of speech.
+Current Status:
+---------------
+Implemented Features:
+ - Pitch mean & standard deviation (fundamental frequency, F0)
+ - Energy mean & standard deviation (RMS)
+ - Tempo (approximate speaking rate proxy)
+ - MFCC mean & standard deviation (13 coefficients)
 
-Features to be implemented:
-- Pitch Features:
-  - Mean pitch (F0)
-  - Pitch range (min/max)
-  - Pitch variability (standard deviation)
-  - Pitch contour patterns
-  
-- Speech Rate Features:
-  - Speaking rate (syllables/words per second)
-  - Articulation rate
-  - Pause frequency and duration
-  
-- Prosodic Features:
-  - Intonation patterns
-  - Stress patterns
-  - Rhythm metrics
-  - Voice quality measures
-  
-- Pause Patterns:
-  - Silent pause duration
-  - Filled pause frequency (um, uh, etc.)
-  - Inter-turn pause duration
-
-Integration Points:
-- Audio files should be linked via transcript metadata
-- Use libraries like: librosa, praat-parselmouth, or pyAudioAnalysis
-- Extract features from WAV/MP3 files corresponding to transcripts
-
-Author: Team Member A (To be implemented)
+To Be Implemented (Next Phase):
+ - Pitch range and slope
+ - Speaking rate, articulation rate, and pause rate
+ - Intonation, stress, and rhythm measures
+ - Pause duration and filled pause ratio
+ - Advanced prosodic & temporal dynamics
 """
 
-from typing import List, Dict, Any
-from src.parsers.chat_parser import TranscriptData
-from ..base_features import BaseFeatureExtractor, FeatureResult
+import librosa
+import numpy as np
+import pandas as pd
+from pathlib import Path
 
 
-class AcousticProsodicFeatures(BaseFeatureExtractor):
-    """
-    PLACEHOLDER: Extract acoustic and prosodic features from audio.
-    
-    This class is a placeholder for future implementation.
-    When implemented, it should extract audio-based features from
-    recordings corresponding to the transcripts.
-    
-    Integration Guide for Team Member A:
-    ------------------------------------
-    1. Audio File Access:
-       - Use transcript.metadata.get('media') to get audio file path
-       - Or construct path from transcript.file_path
-    
-    2. Required Libraries:
-       pip install librosa praat-parselmouth pyAudioAnalysis
-    
-    3. Example Implementation:
-       ```python
-       import librosa
-       
-       def extract(self, transcript: TranscriptData) -> FeatureResult:
-           audio_path = self._get_audio_path(transcript)
-           y, sr = librosa.load(audio_path)
-           
-           # Extract pitch
-           pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
-           
-           # Extract other features...
-           
-           return FeatureResult(
-               features={...},
-               feature_type='acoustic_prosodic'
-           )
-       ```
-    
-    4. Contact: Coordinate with main team for integration
-    """
-    
-    @property
-    def feature_names(self) -> List[str]:
-        """
-        Get list of acoustic/prosodic feature names.
-        
-        TO BE IMPLEMENTED by Team Member A.
-        """
-        return [
-            # Pitch features (to be implemented)
-            'mean_pitch',
-            'pitch_std',
-            'pitch_range',
-            'pitch_slope',
-            
-            # Speech rate features (to be implemented)
-            'speaking_rate',
-            'articulation_rate',
-            'pause_rate',
-            
-            # Prosodic features (to be implemented)
-            'intonation_variability',
-            'stress_pattern_score',
-            'rhythm_score',
-            
-            # Pause features (to be implemented)
-            'mean_pause_duration',
-            'filled_pause_ratio',
-        ]
-    
-    def extract(self, transcript: TranscriptData) -> FeatureResult:
-        """
-        Extract acoustic and prosodic features.
-        
-        PLACEHOLDER IMPLEMENTATION - Returns zeros.
-        
-        Args:
-            transcript: Parsed transcript data with audio metadata
-            
-        Returns:
-            FeatureResult with acoustic/prosodic features
-        """
-        # PLACEHOLDER: Return zero features
-        # Team Member A should implement actual audio analysis here
-        
-        features = {name: 0.0 for name in self.feature_names}
-        
-        return FeatureResult(
-            features=features,
-            feature_type='acoustic_prosodic',
-            metadata={
-                'status': 'placeholder',
-                'note': 'To be implemented by Team Member A',
-                'audio_available': transcript.metadata.get('media') is not None
-            }
-        )
+def extract_basic_features(wav_path: Path):
+    """Extract basic acoustic & prosodic features from one audio file."""
+    try:
+        y, sr = librosa.load(wav_path, sr=16000)
+
+        # --- Pitch (fundamental frequency) ---
+        f0, _, _ = librosa.pyin(y, fmin=50, fmax=400, sr=sr)
+        f0 = f0[~np.isnan(f0)]
+        pitch_mean = np.mean(f0) if len(f0) else 0
+        pitch_std = np.std(f0) if len(f0) else 0
+
+        # --- Energy / RMS ---
+        rms = librosa.feature.rms(y=y)[0]
+        energy_mean = np.mean(rms)
+        energy_std = np.std(rms)
+
+        # --- Tempo (rough speech rate proxy) ---
+        tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
+        tempo = tempo if np.isfinite(tempo) else 0
+
+        # --- MFCCs (Mel-Frequency Cepstral Coefficients) ---
+        mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+        mfcc_means = np.mean(mfcc, axis=1)
+        mfcc_stds = np.std(mfcc, axis=1)
+
+        # Combine everything
+        features = {
+            "file": wav_path.name,
+            "pitch_mean": pitch_mean,
+            "pitch_std": pitch_std,
+            "energy_mean": energy_mean,
+            "energy_std": energy_std,
+            "tempo": tempo,
+        }
+
+        for i, (m, s) in enumerate(zip(mfcc_means, mfcc_stds), start=1):
+            features[f"mfcc{i}_mean"] = m
+            features[f"mfcc{i}_std"] = s
+
+        return features
+
+    except Exception as e:
+        print(f"Error processing {wav_path.name}: {e}")
+        return {}
 
 
-__all__ = ["AcousticProsodicFeatures"]
+if __name__ == "__main__":
+    input_dir = Path("data/asdbank_aac/AAC/child_only")
+    output_csv = Path("output/audio/acoustic_features.csv")
 
+    rows = []
+    wav_files = list(input_dir.glob("*.wav"))
+    print(f"Found {len(wav_files)} child audio files to process.\n")
+
+    for wav in wav_files:
+        feats = extract_basic_features(wav)
+        if feats:
+            rows.append(feats)
+            print(f"Extracted: {wav.name}")
+
+    if rows:
+        df = pd.DataFrame(rows)
+        df.to_csv(output_csv, index=False)
+        print(f"\nAll features saved to → {output_csv}")
+    else:
+        print("No valid features extracted.")

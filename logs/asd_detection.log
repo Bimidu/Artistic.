@@ -3669,3 +3669,1104 @@ Parsed %mor tier --
 2025-10-16 12:55:18 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/rollins_features.csv
 2025-10-16 12:55:18 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 10.5405 seconds
 2025-10-16 12:55:31 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 14:49:47 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 14:51:41 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 14:54:43 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:01:17 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:01:19 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:01:19 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:01:19 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:19 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1010.cha
+2025-11-11 15:01:20 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:01:20 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 357 utterances from 1010.cha
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1012.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/ASD/1012.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1017.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/ASD/1017.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1020.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/ASD/1020.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1011.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/TD/1011.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1013.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/TD/1013.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1022.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/TD/1022.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1024.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_eigsti/Eigsti/TD/1024.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 050800.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_flusberg/Flusberg/Brett/050800.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060900.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_flusberg/Flusberg/Jack/060900.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070700.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_flusberg/Flusberg/Mark/070700.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 101.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_nadig/Nadig/101.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 102.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_nadig/Nadig/102.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 103.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_nadig/Nadig/103.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T1_1.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_aac/AAC/01_T1_1.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T2.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_aac/AAC/01_T2.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 02_T1_1.cha
+2025-11-11 15:01:20 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_aac/AAC/02_T1_1.cha: [Errno 32] Broken pipe
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 16 transcript files in data/asdbank_eigsti/Eigsti/ASD
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 16 transcript files in data/asdbank_eigsti/Eigsti/TD
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 16 transcript files in data/asdbank_eigsti/Eigsti/DD
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 10 transcript files in data/asdbank_flusberg/Flusberg/Brett
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 12 transcript files in data/asdbank_flusberg/Flusberg/Jack
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 13 transcript files in data/asdbank_flusberg/Flusberg/Mark
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 38 transcript files in data/asdbank_nadig/Nadig
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 83 transcript files in data/asdbank_aac/AAC
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:20 | INFO     | src.features.feature_extractor:extract_from_directory - Found 21 transcript files in data/asdbank_rollins/Rollins
+2025-11-11 15:01:20 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:01:24 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:01:24 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
+2025-11-11 15:01:24 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-11-11 15:01:30 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:01:30 | INFO     | src.features.feature_extractor:__init__ - Acoustic & Prosodic features are temporarily disabled. Excluded from 'all' categories.
+2025-11-11 15:01:30 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['syntactic_semantic', 'pragmatic_conversational']
+2025-11-11 15:01:30 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-11-11 15:02:07 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:07 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:07 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:02:07 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1010.cha
+2025-11-11 15:02:07 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:07 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:07 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 357 utterances from 1010.cha
+2025-11-11 15:02:07 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1012.cha
+2025-11-11 15:02:08 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:08 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:08 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 862 utterances from 1012.cha
+2025-11-11 15:02:08 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1017.cha
+2025-11-11 15:02:08 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:08 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:08 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 738 utterances from 1017.cha
+2025-11-11 15:02:08 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1020.cha
+2025-11-11 15:02:09 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:09 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:09 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 616 utterances from 1020.cha
+2025-11-11 15:02:09 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1011.cha
+2025-11-11 15:02:09 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:10 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:10 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 801 utterances from 1011.cha
+2025-11-11 15:02:10 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1013.cha
+2025-11-11 15:02:10 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:10 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:10 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 462 utterances from 1013.cha
+2025-11-11 15:02:10 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1022.cha
+2025-11-11 15:02:11 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:11 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:11 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 491 utterances from 1022.cha
+2025-11-11 15:02:11 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1024.cha
+2025-11-11 15:02:11 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:11 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:11 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 808 utterances from 1024.cha
+2025-11-11 15:02:11 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 050800.cha
+2025-11-11 15:02:12 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:12 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:12 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 790 utterances from 050800.cha
+2025-11-11 15:02:12 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060900.cha
+2025-11-11 15:02:12 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:13 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:13 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 747 utterances from 060900.cha
+2025-11-11 15:02:13 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070700.cha
+2025-11-11 15:02:13 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:13 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:13 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 805 utterances from 070700.cha
+2025-11-11 15:02:13 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 101.cha
+2025-11-11 15:02:13 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:14 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:14 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 291 utterances from 101.cha
+2025-11-11 15:02:14 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 102.cha
+2025-11-11 15:02:14 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:14 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:14 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 312 utterances from 102.cha
+2025-11-11 15:02:14 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 103.cha
+2025-11-11 15:02:15 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:15 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:15 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 230 utterances from 103.cha
+2025-11-11 15:02:15 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T1_1.cha
+2025-11-11 15:02:15 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:15 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:15 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 102 utterances from 01_T1_1.cha
+2025-11-11 15:02:15 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T2.cha
+2025-11-11 15:02:16 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:16 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:16 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 95 utterances from 01_T2.cha
+2025-11-11 15:02:16 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 02_T1_1.cha
+2025-11-11 15:02:16 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:16 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:16 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 138 utterances from 02_T1_1.cha
+2025-11-11 15:02:16 | INFO     | src.features.feature_extractor:__init__ - FeatureExtractor initialized with categories: ['pragmatic_conversational']
+2025-11-11 15:02:16 | INFO     | src.features.feature_extractor:__init__ - Include placeholders: True
+2025-11-11 15:02:16 | INFO     | src.features.feature_extractor:extract_from_directory - Found 16 transcript files in data/asdbank_eigsti/Eigsti/ASD
+2025-11-11 15:02:16 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:02:16 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1082.cha
+2025-11-11 15:02:16 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:17 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:17 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 350 utterances from 1082.cha
+2025-11-11 15:02:17 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1040.cha
+2025-11-11 15:02:17 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:17 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:17 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 496 utterances from 1040.cha
+2025-11-11 15:02:17 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1081.cha
+2025-11-11 15:02:17 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:18 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:18 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 361 utterances from 1081.cha
+2025-11-11 15:02:18 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1047.cha
+2025-11-11 15:02:18 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:18 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:18 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 199 utterances from 1047.cha
+2025-11-11 15:02:18 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1046.cha
+2025-11-11 15:02:19 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:19 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:19 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 397 utterances from 1046.cha
+2025-11-11 15:02:19 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1085.cha
+2025-11-11 15:02:19 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:19 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:19 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 232 utterances from 1085.cha
+2025-11-11 15:02:19 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1044.cha
+2025-11-11 15:02:20 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:20 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:20 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 385 utterances from 1044.cha
+2025-11-11 15:02:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1045.cha
+2025-11-11 15:02:20 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:20 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:20 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 343 utterances from 1045.cha
+2025-11-11 15:02:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1035.cha
+2025-11-11 15:02:21 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:21 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:21 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 588 utterances from 1035.cha
+2025-11-11 15:02:21 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1020.cha
+2025-11-11 15:02:21 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:21 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:21 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 616 utterances from 1020.cha
+2025-11-11 15:02:21 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1032.cha
+2025-11-11 15:02:22 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:22 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:22 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 686 utterances from 1032.cha
+2025-11-11 15:02:22 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1017.cha
+2025-11-11 15:02:22 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:22 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:22 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 738 utterances from 1017.cha
+2025-11-11 15:02:22 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1010.cha
+2025-11-11 15:02:23 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:23 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:23 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 357 utterances from 1010.cha
+2025-11-11 15:02:23 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1012.cha
+2025-11-11 15:02:23 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:23 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:23 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 862 utterances from 1012.cha
+2025-11-11 15:02:23 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1072.cha
+2025-11-11 15:02:24 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:24 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:24 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 641 utterances from 1072.cha
+2025-11-11 15:02:24 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1070.cha
+2025-11-11 15:02:24 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:24 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:24 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 618 utterances from 1070.cha
+2025-11-11 15:02:24 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 16/16 files (0 errors)
+2025-11-11 15:02:24 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/eigsti_asd_features.csv
+2025-11-11 15:02:24 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 8.1067 seconds
+2025-11-11 15:02:24 | INFO     | src.features.feature_extractor:extract_from_directory - Found 16 transcript files in data/asdbank_eigsti/Eigsti/TD
+2025-11-11 15:02:24 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:02:24 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1068.cha
+2025-11-11 15:02:25 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:25 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:25 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 307 utterances from 1068.cha
+2025-11-11 15:02:25 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1056.cha
+2025-11-11 15:02:25 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:25 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:25 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 273 utterances from 1056.cha
+2025-11-11 15:02:25 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1080.cha
+2025-11-11 15:02:26 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:26 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:26 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 370 utterances from 1080.cha
+2025-11-11 15:02:26 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1078.cha
+2025-11-11 15:02:26 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:26 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:26 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 361 utterances from 1078.cha
+2025-11-11 15:02:26 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1079.cha
+2025-11-11 15:02:27 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:27 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:27 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 430 utterances from 1079.cha
+2025-11-11 15:02:27 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1022.cha
+2025-11-11 15:02:27 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:27 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:27 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 491 utterances from 1022.cha
+2025-11-11 15:02:27 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1024.cha
+2025-11-11 15:02:28 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:28 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:28 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 808 utterances from 1024.cha
+2025-11-11 15:02:28 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1025.cha
+2025-11-11 15:02:28 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:28 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:28 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 564 utterances from 1025.cha
+2025-11-11 15:02:28 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1011.cha
+2025-11-11 15:02:29 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:29 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:29 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 801 utterances from 1011.cha
+2025-11-11 15:02:29 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1013.cha
+2025-11-11 15:02:29 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:29 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:29 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 462 utterances from 1013.cha
+2025-11-11 15:02:29 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1060.cha
+2025-11-11 15:02:30 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:30 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:30 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 487 utterances from 1060.cha
+2025-11-11 15:02:30 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1061.cha
+2025-11-11 15:02:30 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:30 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:30 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 323 utterances from 1061.cha
+2025-11-11 15:02:30 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1075.cha
+2025-11-11 15:02:31 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:31 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:31 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 481 utterances from 1075.cha
+2025-11-11 15:02:31 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1076.cha
+2025-11-11 15:02:31 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:31 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:31 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 497 utterances from 1076.cha
+2025-11-11 15:02:31 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1062.cha
+2025-11-11 15:02:32 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:32 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:32 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 347 utterances from 1062.cha
+2025-11-11 15:02:32 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1064.cha
+2025-11-11 15:02:32 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:32 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:32 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 232 utterances from 1064.cha
+2025-11-11 15:02:32 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 16/16 files (0 errors)
+2025-11-11 15:02:32 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/eigsti_td_features.csv
+2025-11-11 15:02:32 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 8.2646 seconds
+2025-11-11 15:02:32 | INFO     | src.features.feature_extractor:extract_from_directory - Found 16 transcript files in data/asdbank_eigsti/Eigsti/DD
+2025-11-11 15:02:32 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:02:32 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1069.cha
+2025-11-11 15:02:33 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:33 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:33 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 672 utterances from 1069.cha
+2025-11-11 15:02:33 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1055.cha
+2025-11-11 15:02:33 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:33 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:33 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 335 utterances from 1055.cha
+2025-11-11 15:02:33 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1041.cha
+2025-11-11 15:02:34 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:34 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:34 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 189 utterances from 1041.cha
+2025-11-11 15:02:34 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1054.cha
+2025-11-11 15:02:34 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:34 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:34 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 432 utterances from 1054.cha
+2025-11-11 15:02:34 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1042.cha
+2025-11-11 15:02:35 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:35 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:35 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 219 utterances from 1042.cha
+2025-11-11 15:02:35 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1057.cha
+2025-11-11 15:02:35 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:35 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:35 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 273 utterances from 1057.cha
+2025-11-11 15:02:35 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1043.cha
+2025-11-11 15:02:36 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:36 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:36 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 422 utterances from 1043.cha
+2025-11-11 15:02:36 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1052.cha
+2025-11-11 15:02:36 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:37 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:37 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 342 utterances from 1052.cha
+2025-11-11 15:02:37 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1030.cha
+2025-11-11 15:02:37 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:37 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:37 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 282 utterances from 1030.cha
+2025-11-11 15:02:37 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1031.cha
+2025-11-11 15:02:38 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:38 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:38 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 313 utterances from 1031.cha
+2025-11-11 15:02:38 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1027.cha
+2025-11-11 15:02:38 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:38 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:38 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 480 utterances from 1027.cha
+2025-11-11 15:02:38 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1028.cha
+2025-11-11 15:02:39 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:39 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:39 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 460 utterances from 1028.cha
+2025-11-11 15:02:39 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1048.cha
+2025-11-11 15:02:39 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:39 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:39 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 223 utterances from 1048.cha
+2025-11-11 15:02:39 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1074.cha
+2025-11-11 15:02:40 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:40 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:40 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 788 utterances from 1074.cha
+2025-11-11 15:02:40 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1063.cha
+2025-11-11 15:02:40 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:40 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:40 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 231 utterances from 1063.cha
+2025-11-11 15:02:40 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 1058.cha
+2025-11-11 15:02:41 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:41 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:41 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 314 utterances from 1058.cha
+2025-11-11 15:02:41 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 16/16 files (0 errors)
+2025-11-11 15:02:41 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/eigsti_dd_features.csv
+2025-11-11 15:02:41 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 8.2796 seconds
+2025-11-11 15:02:41 | INFO     | src.features.feature_extractor:extract_from_directory - Found 10 transcript files in data/asdbank_flusberg/Flusberg/Brett
+2025-11-11 15:02:41 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:02:41 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060819.cha
+2025-11-11 15:02:41 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:41 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:41 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1076 utterances from 060819.cha
+2025-11-11 15:02:41 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060207.cha
+2025-11-11 15:02:42 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:42 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:42 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1225 utterances from 060207.cha
+2025-11-11 15:02:42 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060011.cha
+2025-11-11 15:02:42 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:42 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:42 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1310 utterances from 060011.cha
+2025-11-11 15:02:42 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060406.cha
+2025-11-11 15:02:43 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:43 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:43 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1129 utterances from 060406.cha
+2025-11-11 15:02:43 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070101.cha
+2025-11-11 15:02:43 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:43 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:43 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 976 utterances from 070101.cha
+2025-11-11 15:02:43 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070301.cha
+2025-11-11 15:02:44 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:44 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:44 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1039 utterances from 070301.cha
+2025-11-11 15:02:44 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070517.cha
+2025-11-11 15:02:44 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:45 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:45 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 637 utterances from 070517.cha
+2025-11-11 15:02:45 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 050800.cha
+2025-11-11 15:02:45 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:45 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:45 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 790 utterances from 050800.cha
+2025-11-11 15:02:45 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060622.cha
+2025-11-11 15:02:45 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:46 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:46 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1270 utterances from 060622.cha
+2025-11-11 15:02:46 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 051002.cha
+2025-11-11 15:02:46 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:46 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:46 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 885 utterances from 051002.cha
+2025-11-11 15:02:46 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 10/10 files (0 errors)
+2025-11-11 15:02:46 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/flusberg_brett_features.csv
+2025-11-11 15:02:46 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 5.3702 seconds
+2025-11-11 15:02:46 | INFO     | src.features.feature_extractor:extract_from_directory - Found 12 transcript files in data/asdbank_flusberg/Flusberg/Jack
+2025-11-11 15:02:46 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:02:46 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080121.cha
+2025-11-11 15:02:47 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:47 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:47 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 637 utterances from 080121.cha
+2025-11-11 15:02:47 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070315.cha
+2025-11-11 15:02:47 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:47 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:47 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 810 utterances from 070315.cha
+2025-11-11 15:02:47 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070516.cha
+2025-11-11 15:02:48 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:48 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:48 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1165 utterances from 070516.cha
+2025-11-11 15:02:48 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070106.cha
+2025-11-11 15:02:48 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:48 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:48 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 966 utterances from 070106.cha
+2025-11-11 15:02:48 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080221.cha
+2025-11-11 15:02:49 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:49 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:49 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1059 utterances from 080221.cha
+2025-11-11 15:02:49 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080012.cha
+2025-11-11 15:02:49 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:49 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:49 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1185 utterances from 080012.cha
+2025-11-11 15:02:49 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070726.cha
+2025-11-11 15:02:50 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:50 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:50 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1315 utterances from 070726.cha
+2025-11-11 15:02:50 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 071001.cha
+2025-11-11 15:02:50 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:50 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:50 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1219 utterances from 071001.cha
+2025-11-11 15:02:50 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080808.cha
+2025-11-11 15:02:51 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:51 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:51 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 635 utterances from 080808.cha
+2025-11-11 15:02:51 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 061028.cha
+2025-11-11 15:02:51 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:51 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:51 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1065 utterances from 061028.cha
+2025-11-11 15:02:51 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 060900.cha
+2025-11-11 15:02:52 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:52 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:52 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 747 utterances from 060900.cha
+2025-11-11 15:02:52 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080506.cha
+2025-11-11 15:02:52 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:52 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:52 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1027 utterances from 080506.cha
+2025-11-11 15:02:52 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 12/12 files (0 errors)
+2025-11-11 15:02:52 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/flusberg_jack_features.csv
+2025-11-11 15:02:52 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 6.3118 seconds
+2025-11-11 15:02:52 | INFO     | src.features.feature_extractor:extract_from_directory - Found 13 transcript files in data/asdbank_flusberg/Flusberg/Mark
+2025-11-11 15:02:52 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:02:52 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 090526.cha
+2025-11-11 15:02:53 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:53 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:53 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1400 utterances from 090526.cha
+2025-11-11 15:02:53 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 090320.cha
+2025-11-11 15:02:53 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:54 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:54 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1139 utterances from 090320.cha
+2025-11-11 15:02:54 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 090126.cha
+2025-11-11 15:02:54 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:54 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:54 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1087 utterances from 090126.cha
+2025-11-11 15:02:54 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080915.cha
+2025-11-11 15:02:55 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:55 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:55 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1399 utterances from 080915.cha
+2025-11-11 15:02:55 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080422.cha
+2025-11-11 15:02:55 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:55 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:55 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1481 utterances from 080422.cha
+2025-11-11 15:02:55 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080224.cha
+2025-11-11 15:02:56 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:56 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:56 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1534 utterances from 080224.cha
+2025-11-11 15:02:56 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070700.cha
+2025-11-11 15:02:56 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:56 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:56 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 805 utterances from 070700.cha
+2025-11-11 15:02:56 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 071026.cha
+2025-11-11 15:02:57 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:57 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:57 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 2249 utterances from 071026.cha
+2025-11-11 15:02:57 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080023.cha
+2025-11-11 15:02:57 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:57 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:57 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1528 utterances from 080023.cha
+2025-11-11 15:02:58 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 081118.cha
+2025-11-11 15:02:58 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:58 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:58 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1581 utterances from 081118.cha
+2025-11-11 15:02:58 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 090818.cha
+2025-11-11 15:02:59 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:02:59 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:02:59 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1104 utterances from 090818.cha
+2025-11-11 15:02:59 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 080700.cha
+2025-11-11 15:02:59 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:00 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:00 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1650 utterances from 080700.cha
+2025-11-11 15:03:00 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 070812.cha
+2025-11-11 15:03:00 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:00 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:00 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1703 utterances from 070812.cha
+2025-11-11 15:03:00 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 13/13 files (0 errors)
+2025-11-11 15:03:00 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/flusberg_mark_features.csv
+2025-11-11 15:03:00 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 7.8314 seconds
+2025-11-11 15:03:00 | INFO     | src.features.feature_extractor:extract_from_directory - Found 38 transcript files in data/asdbank_nadig/Nadig
+2025-11-11 15:03:00 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:03:00 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 139.cha
+2025-11-11 15:03:01 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:01 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:01 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 253 utterances from 139.cha
+2025-11-11 15:03:01 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 111.cha
+2025-11-11 15:03:01 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:01 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:01 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 167 utterances from 111.cha
+2025-11-11 15:03:01 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 110.cha
+2025-11-11 15:03:02 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:02 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:02 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 231 utterances from 110.cha
+2025-11-11 15:03:02 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 104.cha
+2025-11-11 15:03:02 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:02 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:02 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 244 utterances from 104.cha
+2025-11-11 15:03:02 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 138.cha
+2025-11-11 15:03:03 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:03 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:03 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 202 utterances from 138.cha
+2025-11-11 15:03:03 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 128.cha
+2025-11-11 15:03:03 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:03 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:03 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 331 utterances from 128.cha
+2025-11-11 15:03:03 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 115.cha
+2025-11-11 15:03:04 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:04 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:04 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 197 utterances from 115.cha
+2025-11-11 15:03:04 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 101.cha
+2025-11-11 15:03:04 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:04 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:04 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 291 utterances from 101.cha
+2025-11-11 15:03:04 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 117.cha
+2025-11-11 15:03:04 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:05 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:05 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 337 utterances from 117.cha
+2025-11-11 15:03:05 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 103.cha
+2025-11-11 15:03:05 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:05 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:05 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 230 utterances from 103.cha
+2025-11-11 15:03:05 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 102.cha
+2025-11-11 15:03:05 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:06 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:06 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 312 utterances from 102.cha
+2025-11-11 15:03:06 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 159.cha
+2025-11-11 15:03:06 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:06 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:06 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 162 utterances from 159.cha
+2025-11-11 15:03:06 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 165.cha
+2025-11-11 15:03:06 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:07 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:07 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 290 utterances from 165.cha
+2025-11-11 15:03:07 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 167.cha
+2025-11-11 15:03:07 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:07 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:07 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 179 utterances from 167.cha
+2025-11-11 15:03:07 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 163.cha
+2025-11-11 15:03:07 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:07 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:07 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 213 utterances from 163.cha
+2025-11-11 15:03:07 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 149.cha
+2025-11-11 15:03:08 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:08 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:08 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 345 utterances from 149.cha
+2025-11-11 15:03:08 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 161.cha
+2025-11-11 15:03:08 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:08 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:08 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 152 utterances from 161.cha
+2025-11-11 15:03:08 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 145.cha
+2025-11-11 15:03:09 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:09 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:09 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 172 utterances from 145.cha
+2025-11-11 15:03:09 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 157.cha
+2025-11-11 15:03:09 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:09 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:09 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 311 utterances from 157.cha
+2025-11-11 15:03:09 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 143.cha
+2025-11-11 15:03:10 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:10 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:10 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 314 utterances from 143.cha
+2025-11-11 15:03:10 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 141.cha
+2025-11-11 15:03:10 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:10 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:10 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 267 utterances from 141.cha
+2025-11-11 15:03:10 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 169.cha
+2025-11-11 15:03:11 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:11 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:11 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 254 utterances from 169.cha
+2025-11-11 15:03:11 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 140.cha
+2025-11-11 15:03:11 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:11 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:11 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 54 utterances from 140.cha
+2025-11-11 15:03:11 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 133.cha
+2025-11-11 15:03:12 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:12 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:12 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 231 utterances from 133.cha
+2025-11-11 15:03:12 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 127.cha
+2025-11-11 15:03:12 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:12 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:12 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 184 utterances from 127.cha
+2025-11-11 15:03:12 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 126.cha
+2025-11-11 15:03:13 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:13 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:13 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 323 utterances from 126.cha
+2025-11-11 15:03:13 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 132.cha
+2025-11-11 15:03:13 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:13 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:13 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 275 utterances from 132.cha
+2025-11-11 15:03:13 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 124.cha
+2025-11-11 15:03:14 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:14 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:14 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 284 utterances from 124.cha
+2025-11-11 15:03:14 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 125.cha
+2025-11-11 15:03:14 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:14 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:14 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 402 utterances from 125.cha
+2025-11-11 15:03:14 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 119.cha
+2025-11-11 15:03:15 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:15 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:15 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 186 utterances from 119.cha
+2025-11-11 15:03:15 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 121.cha
+2025-11-11 15:03:15 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:15 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:15 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 304 utterances from 121.cha
+2025-11-11 15:03:15 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 135.cha
+2025-11-11 15:03:16 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:16 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:16 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 245 utterances from 135.cha
+2025-11-11 15:03:16 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 109.cha
+2025-11-11 15:03:16 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:16 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:16 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 242 utterances from 109.cha
+2025-11-11 15:03:16 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 108.cha
+2025-11-11 15:03:17 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:17 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:17 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 180 utterances from 108.cha
+2025-11-11 15:03:17 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 134.cha
+2025-11-11 15:03:17 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:17 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:17 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 353 utterances from 134.cha
+2025-11-11 15:03:17 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 120.cha
+2025-11-11 15:03:18 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:18 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:18 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 173 utterances from 120.cha
+2025-11-11 15:03:18 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 122.cha
+2025-11-11 15:03:18 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:18 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:18 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 237 utterances from 122.cha
+2025-11-11 15:03:18 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 123.cha
+2025-11-11 15:03:18 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:19 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:19 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 322 utterances from 123.cha
+2025-11-11 15:03:19 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 38/38 files (0 errors)
+2025-11-11 15:03:19 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/nadig_features.csv
+2025-11-11 15:03:19 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 18.3000 seconds
+2025-11-11 15:03:19 | INFO     | src.features.feature_extractor:extract_from_directory - Found 83 transcript files in data/asdbank_aac/AAC
+2025-11-11 15:03:19 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:03:19 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 07_T1_2.cha
+2025-11-11 15:03:19 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:19 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:19 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 56 utterances from 07_T1_2.cha
+2025-11-11 15:03:19 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 06_T1_2.cha
+2025-11-11 15:03:19 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:19 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:19 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 106 utterances from 06_T1_2.cha
+2025-11-11 15:03:19 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 06_T3_1.cha
+2025-11-11 15:03:20 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:20 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:20 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 119 utterances from 06_T3_1.cha
+2025-11-11 15:03:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 07_T3_1.cha
+2025-11-11 15:03:20 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:20 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:20 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 77 utterances from 07_T3_1.cha
+2025-11-11 15:03:20 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 12_T2.cha
+2025-11-11 15:03:21 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:21 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:21 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 152 utterances from 12_T2.cha
+2025-11-11 15:03:21 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 06_T1_1.cha
+2025-11-11 15:03:21 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:21 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:21 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 128 utterances from 06_T1_1.cha
+2025-11-11 15:03:21 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 07_T1_1.cha
+2025-11-11 15:03:22 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:22 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:22 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 67 utterances from 07_T1_1.cha
+2025-11-11 15:03:22 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 07_T3_2.cha
+2025-11-11 15:03:22 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:22 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:22 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 63 utterances from 07_T3_2.cha
+2025-11-11 15:03:22 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 06_T3_2.cha
+2025-11-11 15:03:23 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:23 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:23 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 146 utterances from 06_T3_2.cha
+2025-11-11 15:03:23 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 10_T1_2.cha
+2025-11-11 15:03:23 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:23 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:23 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 39 utterances from 10_T1_2.cha
+2025-11-11 15:03:23 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 11_T1_2.cha
+2025-11-11 15:03:24 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:24 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:24 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 221 utterances from 11_T1_2.cha
+2025-11-11 15:03:24 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 10_T2.cha
+2025-11-11 15:03:24 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:24 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:24 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 46 utterances from 10_T2.cha
+2025-11-11 15:03:24 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 02_T2.cha
+2025-11-11 15:03:25 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:25 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:25 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 52 utterances from 02_T2.cha
+2025-11-11 15:03:25 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 11_T3_1.cha
+2025-11-11 15:03:25 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:25 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:25 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 87 utterances from 11_T3_1.cha
+2025-11-11 15:03:25 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 10_T3_1.cha
+2025-11-11 15:03:26 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:26 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:26 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 76 utterances from 10_T3_1.cha
+2025-11-11 15:03:26 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 11_T1_1.cha
+2025-11-11 15:03:26 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:26 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:26 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 202 utterances from 11_T1_1.cha
+2025-11-11 15:03:26 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 10_T1_1.cha
+2025-11-11 15:03:27 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:27 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:27 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 41 utterances from 10_T1_1.cha
+2025-11-11 15:03:27 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 10_T3_2.cha
+2025-11-11 15:03:27 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:27 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:27 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 97 utterances from 10_T3_2.cha
+2025-11-11 15:03:27 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 11_T3_2.cha
+2025-11-11 15:03:28 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:28 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:28 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 81 utterances from 11_T3_2.cha
+2025-11-11 15:03:28 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 17_T1_2.cha
+2025-11-11 15:03:28 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:28 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:28 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 154 utterances from 17_T1_2.cha
+2025-11-11 15:03:28 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 16_T1_2.cha
+2025-11-11 15:03:29 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:29 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:29 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 99 utterances from 16_T1_2.cha
+2025-11-11 15:03:29 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 18_T2.cha
+2025-11-11 15:03:30 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:30 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:30 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 93 utterances from 18_T2.cha
+2025-11-11 15:03:30 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 06_T2.cha
+2025-11-11 15:03:30 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:30 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:30 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 121 utterances from 06_T2.cha
+2025-11-11 15:03:30 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 14_T2.cha
+2025-11-11 15:03:31 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:31 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:31 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 49 utterances from 14_T2.cha
+2025-11-11 15:03:31 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 16_T3_1.cha
+2025-11-11 15:03:31 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:31 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:31 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 139 utterances from 16_T3_1.cha
+2025-11-11 15:03:31 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 17_T3_1.cha
+2025-11-11 15:03:32 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:32 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:32 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 111 utterances from 17_T3_1.cha
+2025-11-11 15:03:32 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 16_T1_1.cha
+2025-11-11 15:03:32 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:32 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:32 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 84 utterances from 16_T1_1.cha
+2025-11-11 15:03:32 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 17_T1_1.cha
+2025-11-11 15:03:33 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:33 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:33 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 126 utterances from 17_T1_1.cha
+2025-11-11 15:03:33 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 17_T3_2.cha
+2025-11-11 15:03:33 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:33 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:33 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 107 utterances from 17_T3_2.cha
+2025-11-11 15:03:33 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 16_T3_2.cha
+2025-11-11 15:03:34 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:34 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:34 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 118 utterances from 16_T3_2.cha
+2025-11-11 15:03:34 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T1_2.cha
+2025-11-11 15:03:34 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:34 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:34 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 107 utterances from 01_T1_2.cha
+2025-11-11 15:03:34 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T3_1.cha
+2025-11-11 15:03:35 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:35 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:35 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 103 utterances from 01_T3_1.cha
+2025-11-11 15:03:35 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T1_1.cha
+2025-11-11 15:03:35 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:35 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:35 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 102 utterances from 01_T1_1.cha
+2025-11-11 15:03:35 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 16_T2.cha
+2025-11-11 15:03:35 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:36 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:36 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 104 utterances from 16_T2.cha
+2025-11-11 15:03:36 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T3_2.cha
+2025-11-11 15:03:36 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:36 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:36 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 76 utterances from 01_T3_2.cha
+2025-11-11 15:03:36 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 04_T2.cha
+2025-11-11 15:03:36 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:37 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:37 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 98 utterances from 04_T2.cha
+2025-11-11 15:03:37 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 12_T1_1.cha
+2025-11-11 15:03:37 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:37 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:37 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 151 utterances from 12_T1_1.cha
+2025-11-11 15:03:37 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 13_T1_1.cha
+2025-11-11 15:03:37 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:37 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:37 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 85 utterances from 13_T1_1.cha
+2025-11-11 15:03:37 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 18_T1_2.cha
+2025-11-11 15:03:38 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:38 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:38 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 68 utterances from 18_T1_2.cha
+2025-11-11 15:03:38 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 01_T2.cha
+2025-11-11 15:03:38 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:38 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:38 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 95 utterances from 01_T2.cha
+2025-11-11 15:03:38 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 18_T3_1.cha
+2025-11-11 15:03:39 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:39 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:39 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 106 utterances from 18_T3_1.cha
+2025-11-11 15:03:39 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 13_T3_2.cha
+2025-11-11 15:03:39 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:39 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:39 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 89 utterances from 13_T3_2.cha
+2025-11-11 15:03:39 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 13_T2.cha
+2025-11-11 15:03:40 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:40 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:40 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 94 utterances from 13_T2.cha
+2025-11-11 15:03:40 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 13_T1_2.cha
+2025-11-11 15:03:40 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:40 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:40 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 73 utterances from 13_T1_2.cha
+2025-11-11 15:03:40 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 12_T1_2.cha
+2025-11-11 15:03:41 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:41 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:41 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 166 utterances from 12_T1_2.cha
+2025-11-11 15:03:41 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 18_T1_1.cha
+2025-11-11 15:03:41 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:41 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:41 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 107 utterances from 18_T1_1.cha
+2025-11-11 15:03:41 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 18_T3_2.cha
+2025-11-11 15:03:42 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:42 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:42 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 96 utterances from 18_T3_2.cha
+2025-11-11 15:03:42 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 13_T3_1.cha
+2025-11-11 15:03:42 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:42 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:42 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 81 utterances from 13_T3_1.cha
+2025-11-11 15:03:42 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 05_T1_1.cha
+2025-11-11 15:03:43 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:43 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:43 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 221 utterances from 05_T1_1.cha
+2025-11-11 15:03:43 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 04_T1_1.cha
+2025-11-11 15:03:43 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:43 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:43 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 123 utterances from 04_T1_1.cha
+2025-11-11 15:03:43 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 04_T3_2.cha
+2025-11-11 15:03:43 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:44 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:44 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 130 utterances from 04_T3_2.cha
+2025-11-11 15:03:44 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 04_T1_2.cha
+2025-11-11 15:03:44 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:44 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:44 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 72 utterances from 04_T1_2.cha
+2025-11-11 15:03:44 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 05_T1_2.cha
+2025-11-11 15:03:44 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:45 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:45 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 173 utterances from 05_T1_2.cha
+2025-11-11 15:03:45 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 11_T2.cha
+2025-11-11 15:03:45 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:45 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:45 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 118 utterances from 11_T2.cha
+2025-11-11 15:03:45 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 04_T3_1.cha
+2025-11-11 15:03:45 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:45 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:45 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 110 utterances from 04_T3_1.cha
+2025-11-11 15:03:45 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 03_T2.cha
+2025-11-11 15:03:46 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:46 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:46 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 138 utterances from 03_T2.cha
+2025-11-11 15:03:46 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 09_T1_2.cha
+2025-11-11 15:03:46 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:46 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:46 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 140 utterances from 09_T1_2.cha
+2025-11-11 15:03:46 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 08_T1_2.cha
+2025-11-11 15:03:47 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:47 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:47 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 101 utterances from 08_T1_2.cha
+2025-11-11 15:03:47 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 02_T1_1.cha
+2025-11-11 15:03:47 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:47 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:47 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 138 utterances from 02_T1_1.cha
+2025-11-11 15:03:47 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 03_T1_1.cha
+2025-11-11 15:03:48 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:48 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:48 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 284 utterances from 03_T1_1.cha
+2025-11-11 15:03:48 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 03_T3_2.cha
+2025-11-11 15:03:48 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:48 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:48 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 134 utterances from 03_T3_2.cha
+2025-11-11 15:03:48 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 02_T3_2.cha
+2025-11-11 15:03:49 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:49 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:49 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 82 utterances from 02_T3_2.cha
+2025-11-11 15:03:49 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 09_T3_1.cha
+2025-11-11 15:03:49 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:49 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:49 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 113 utterances from 09_T3_1.cha
+2025-11-11 15:03:49 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 07_T2.cha
+2025-11-11 15:03:50 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:50 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:50 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 55 utterances from 07_T2.cha
+2025-11-11 15:03:50 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 08_T1_1.cha
+2025-11-11 15:03:50 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:50 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:50 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 78 utterances from 08_T1_1.cha
+2025-11-11 15:03:50 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 09_T1_1.cha
+2025-11-11 15:03:50 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:51 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:51 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 137 utterances from 09_T1_1.cha
+2025-11-11 15:03:51 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 15_T2.cha
+2025-11-11 15:03:51 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:51 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:51 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 90 utterances from 15_T2.cha
+2025-11-11 15:03:51 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 03_T1_2.cha
+2025-11-11 15:03:51 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:51 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:51 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 156 utterances from 03_T1_2.cha
+2025-11-11 15:03:51 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 02_T1_2.cha
+2025-11-11 15:03:52 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:52 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:52 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 191 utterances from 02_T1_2.cha
+2025-11-11 15:03:52 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 02_T3_1.cha
+2025-11-11 15:03:52 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:52 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:52 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 102 utterances from 02_T3_1.cha
+2025-11-11 15:03:52 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 03_T3_1.cha
+2025-11-11 15:03:53 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:53 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:53 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 163 utterances from 03_T3_1.cha
+2025-11-11 15:03:53 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 09_T3_2.cha
+2025-11-11 15:03:53 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:53 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:53 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 65 utterances from 09_T3_2.cha
+2025-11-11 15:03:53 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 09_T2.cha
+2025-11-11 15:03:54 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:54 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:54 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 61 utterances from 09_T2.cha
+2025-11-11 15:03:54 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 17_T2.cha
+2025-11-11 15:03:54 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:54 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:54 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 100 utterances from 17_T2.cha
+2025-11-11 15:03:54 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 15_T1_1.cha
+2025-11-11 15:03:55 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:55 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:55 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 102 utterances from 15_T1_1.cha
+2025-11-11 15:03:55 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 14_T1_1.cha
+2025-11-11 15:03:55 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:55 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:55 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 30 utterances from 14_T1_1.cha
+2025-11-11 15:03:55 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 05_T2.cha
+2025-11-11 15:03:56 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:56 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:56 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 154 utterances from 05_T2.cha
+2025-11-11 15:03:56 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 14_T3_2.cha
+2025-11-11 15:03:56 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:56 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:56 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 98 utterances from 14_T3_2.cha
+2025-11-11 15:03:56 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 15_T3_2.cha
+2025-11-11 15:03:57 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:57 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:57 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 129 utterances from 15_T3_2.cha
+2025-11-11 15:03:57 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 14_T1_2.cha
+2025-11-11 15:03:57 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:57 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:57 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 46 utterances from 14_T1_2.cha
+2025-11-11 15:03:57 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 15_T1_2.cha
+2025-11-11 15:03:58 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:58 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:58 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 81 utterances from 15_T1_2.cha
+2025-11-11 15:03:58 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 15_T3_1.cha
+2025-11-11 15:03:58 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:58 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:58 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 40 utterances from 15_T3_1.cha
+2025-11-11 15:03:58 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 14_T3_1.cha
+2025-11-11 15:03:59 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:59 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:59 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 115 utterances from 14_T3_1.cha
+2025-11-11 15:03:59 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 83/83 files (0 errors)
+2025-11-11 15:03:59 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/aac_features.csv
+2025-11-11 15:03:59 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 40.2443 seconds
+2025-11-11 15:03:59 | INFO     | src.features.feature_extractor:extract_from_directory - Found 21 transcript files in data/asdbank_rollins/Rollins
+2025-11-11 15:03:59 | INFO     | src.parsers.chat_parser:__init__ - CHATParser initialized with min_words=1
+2025-11-11 15:03:59 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 020800.cha
+2025-11-11 15:03:59 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:03:59 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:03:59 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 413 utterances from 020800.cha
+2025-11-11 15:03:59 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 021100.cha
+2025-11-11 15:04:00 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:00 | ERROR    | src.parsers.chat_parser:parse_file - Error parsing file data/asdbank_rollins/Rollins/Carl/021100.cha: cannot align the utterance and %mor tiers:
+Tiers --
+{'INV': '0on 0the shelf .', '%mor': 'noun|shelf .', '%gra': '1|1|ROOT 2|1|PUNCT', '%spa': '$NIA:RP'}
+Cleaned-up utterance --
+0on 0the shelf .
+Parsed %mor tier --
+['noun|shelf', '.']
+2025-11-11 15:04:00 | ERROR    | src.features.feature_extractor:extract_from_files - Error processing 021100.cha: Failed to parse data/asdbank_rollins/Rollins/Carl/021100.cha: cannot align the utterance and %mor tiers:
+Tiers --
+{'INV': '0on 0the shelf .', '%mor': 'noun|shelf .', '%gra': '1|1|ROOT 2|1|PUNCT', '%spa': '$NIA:RP'}
+Cleaned-up utterance --
+0on 0the shelf .
+Parsed %mor tier --
+['noun|shelf', '.']
+2025-11-11 15:04:00 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030700.cha
+2025-11-11 15:04:00 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:00 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:00 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 422 utterances from 030700.cha
+2025-11-11 15:04:00 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030000.cha
+2025-11-11 15:04:01 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:01 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:01 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 300 utterances from 030000.cha
+2025-11-11 15:04:01 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 020800.cha
+2025-11-11 15:04:01 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:01 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:01 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 129 utterances from 020800.cha
+2025-11-11 15:04:01 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 021000.cha
+2025-11-11 15:04:02 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:02 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:02 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 391 utterances from 021000.cha
+2025-11-11 15:04:02 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030300.cha
+2025-11-11 15:04:02 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:02 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:02 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 205 utterances from 030300.cha
+2025-11-11 15:04:02 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 020600.cha
+2025-11-11 15:04:03 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:03 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:03 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 680 utterances from 020600.cha
+2025-11-11 15:04:03 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 021100.cha
+2025-11-11 15:04:03 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:03 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:03 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 463 utterances from 021100.cha
+2025-11-11 15:04:03 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030500.cha
+2025-11-11 15:04:04 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:04 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:04 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 618 utterances from 030500.cha
+2025-11-11 15:04:04 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030200.cha
+2025-11-11 15:04:04 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:04 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:04 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 557 utterances from 030200.cha
+2025-11-11 15:04:04 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 020200.cha
+2025-11-11 15:04:05 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:05 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:05 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 576 utterances from 020200.cha
+2025-11-11 15:04:05 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030800.cha
+2025-11-11 15:04:05 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:05 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:05 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 738 utterances from 030800.cha
+2025-11-11 15:04:05 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 031100.cha
+2025-11-11 15:04:05 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:06 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:06 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 1018 utterances from 031100.cha
+2025-11-11 15:04:06 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030100.cha
+2025-11-11 15:04:06 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:06 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:06 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 599 utterances from 030100.cha
+2025-11-11 15:04:06 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030300.cha
+2025-11-11 15:04:07 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:07 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:07 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 757 utterances from 030300.cha
+2025-11-11 15:04:07 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030600.cha
+2025-11-11 15:04:07 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:07 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:07 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 770 utterances from 030600.cha
+2025-11-11 15:04:07 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 020800.cha
+2025-11-11 15:04:08 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:08 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:08 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 434 utterances from 020800.cha
+2025-11-11 15:04:08 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 021100.cha
+2025-11-11 15:04:08 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:08 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:08 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 356 utterances from 021100.cha
+2025-11-11 15:04:08 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 030100.cha
+2025-11-11 15:04:08 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:09 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:09 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 336 utterances from 030100.cha
+2025-11-11 15:04:09 | INFO     | src.parsers.chat_parser:parse_file - Parsing CHAT file: 020500.cha
+2025-11-11 15:04:09 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-11-11 15:04:09 | WARNING  | src.parsers.chat_parser:_extract_participants - Participant data is not in expected format: <class 'str'>
+2025-11-11 15:04:09 | INFO     | src.parsers.chat_parser:parse_file - Successfully parsed 356 utterances from 020500.cha
+2025-11-11 15:04:09 | INFO     | src.features.feature_extractor:extract_from_files - Extracted features from 20/21 files (1 errors)
+2025-11-11 15:04:09 | WARNING  | src.features.feature_extractor:extract_from_files - Failed files: ['021100.cha']
+2025-11-11 15:04:09 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/rollins_features.csv
+2025-11-11 15:04:09 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 10.2147 seconds
