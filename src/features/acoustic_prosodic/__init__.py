@@ -20,6 +20,6 @@ from .acoustic_prosodic import AcousticProsodicFeatures
 __all__ = ["AcousticProsodicFeatures"]
 
 __version__ = "1.0.0"
-__status__ = "placeholder"
+__status__ = "implemented"
 __team__ = "Team Member A"
 __feature_count__ = 12
