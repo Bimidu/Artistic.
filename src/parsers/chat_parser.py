@@ -18,7 +18,7 @@ Author: Bimidu Gunathilake
 import re
 from datetime import datetime, date
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Tuple, Any, Union
 from dataclasses import dataclass, field
 
 import pylangacq
@@ -163,7 +163,7 @@ class CHATParser:
         self.min_words = min_words
         logger.info(f"CHATParser initialized with min_words={min_words}")
     
-    def parse_file(self, file_path: str | Path) -> TranscriptData:
+    def parse_file(self, file_path: Union[str, Path]) -> TranscriptData:
         """
         Parse a CHAT file and extract all information.
         
@@ -484,7 +484,7 @@ class CHATParser:
     
     def parse_directory(
         self,
-        directory: str | Path,
+        directory: Union[str, Path],
         pattern: str = "**/*.cha",
         recursive: bool = True
     ) -> List[TranscriptData]:

@@ -3,14 +3,19 @@ Main Feature Extraction Orchestrator
 
 This module coordinates all three categories of feature extractors:
 1. Acoustic & Prosodic (placeholder - Team Member A)
-2. Syntactic & Semantic (placeholder - Team Member B)
-3. Pragmatic & Conversational (fully implemented)
+2. Syntactic & Semantic (fully implemented - Randil Haturusinghe)
+   - Syntactic complexity (dependency depth, clause complexity, subordination)
+   - Grammatical accuracy (error rates, tense consistency, structure diversity)
+   - Semantic features (coherence, density, thematic consistency)
+   - Vocabulary semantic features (abstractness, semantic fields, word senses)
+   - Advanced semantic (semantic roles, entity density, verb arguments)
+3. Pragmatic & Conversational (fully implemented - Bimidu Gunathilake)
 
 Author: Bimidu Gunathilake
 """
 
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Union
 from dataclasses import dataclass, field
 import pandas as pd
 import numpy as np
@@ -44,12 +49,12 @@ logger = get_logger(__name__)
 class FeatureSet:
     """
     Complete feature set extracted from a transcript.
-    
+
     Contains features from all three categories:
-    - Acoustic & Prosodic (Team Member A)
-    - Syntactic & Semantic (Team Member B)
-    - Pragmatic & Conversational (Fully Implemented)
-    
+    - Acoustic & Prosodic (placeholder - Team Member A)
+    - Syntactic & Semantic (fully implemented - Randil Haturusinghe, 26 features)
+    - Pragmatic & Conversational (fully implemented - Bimidu Gunathilake)
+
     Attributes:
         participant_id: Participant identifier
         file_path: Source transcript file
@@ -85,20 +90,28 @@ class FeatureSet:
 class FeatureExtractor:
     """
     Main feature extraction orchestrator for all three feature categories.
-    
+
     This class coordinates:
-    1. Acoustic & Prosodic extractors (placeholder)
-    2. Syntactic & Semantic extractors (placeholder)
-    3. Pragmatic & Conversational extractors (fully implemented)
-    
+    1. Acoustic & Prosodic extractors (placeholder - Team Member A)
+    2. Syntactic & Semantic extractors (fully implemented - Randil Haturusinghe)
+       - 26 features covering syntactic complexity, grammatical accuracy,
+         semantic coherence, and vocabulary semantics
+    3. Pragmatic & Conversational extractors (fully implemented - Bimidu Gunathilake)
+
     Example:
         >>> # Extract only pragmatic/conversational features
         >>> extractor = FeatureExtractor(
         ...     categories=['pragmatic_conversational']
         ... )
         >>> feature_set = extractor.extract_from_transcript(transcript)
-        
-        >>> # Extract all features (when all modules are ready)
+
+        >>> # Extract syntactic/semantic and pragmatic features
+        >>> extractor = FeatureExtractor(
+        ...     categories=['syntactic_semantic', 'pragmatic_conversational']
+        ... )
+        >>> feature_set = extractor.extract_from_transcript(transcript)
+
+        >>> # Extract all implemented features
         >>> extractor = FeatureExtractor(categories='all')
         >>> feature_set = extractor.extract_from_transcript(transcript)
     """
@@ -111,9 +124,9 @@ class FeatureExtractor:
             'team': 'Team Member A',
         },
         'syntactic_semantic': {
-            'description': 'Syntactic and semantic features from text',
-            'status': 'placeholder',
-            'team': 'Team Member B',
+            'description': 'Syntactic complexity, grammatical accuracy, and semantic features',
+            'status': 'implemented',
+            'team': 'Randil Haturusinghe',
         },
         'pragmatic_conversational': {
             'description': 'Pragmatic and conversational features',
@@ -124,7 +137,7 @@ class FeatureExtractor:
     
     def __init__(
         self,
-        categories: Optional[List[str] | str] = 'pragmatic_conversational',
+        categories: Optional[Union[List[str], str]] = 'pragmatic_conversational',
         include_placeholders: bool = True
     ):
         """
@@ -209,7 +222,9 @@ class FeatureExtractor:
             )
             # Temporarily disabled - AcousticProsodicFeatures class not implemented
         
-        # CATEGORY 2: Syntactic & Semantic (PLACEHOLDER)
+        # CATEGORY 2: Syntactic & Semantic (FULLY IMPLEMENTED)
+        # Includes syntactic complexity, grammatical accuracy, semantic coherence,
+        # and vocabulary semantic features (26 total features)
         if 'syntactic_semantic' in self.active_categories:
             if SyntacticSemanticFeatures is not None:
                 self.extractors['syntactic_semantic'] = SyntacticSemanticFeatures()
@@ -395,7 +410,7 @@ class FeatureExtractor:
     @timing_decorator
     def extract_from_directory(
         self,
-        directory: str | Path,
+        directory: Union[str, Path],
         pattern: str = "**/*.cha",
         output_file: Optional[Path] = None
     ) -> pd.DataFrame:

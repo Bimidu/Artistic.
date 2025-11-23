@@ -15,7 +15,7 @@ Author: Randil Haturusinghe
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Literal, Any
+from typing import Dict, List, Tuple, Optional, Literal, Any, Union
 from pathlib import Path
 import joblib
 
@@ -445,7 +445,7 @@ class SyntacticSemanticPreprocessor:
 
         return selected_features
 
-    def save(self, save_path: str | Path):
+    def save(self, save_path: Union[str, Path]):
         """
         Save fitted syntactic/semantic preprocessor.
 
@@ -479,7 +479,7 @@ class SyntacticSemanticPreprocessor:
         self.logger.info(f"Syntactic/semantic preprocessor saved to {save_path}")
 
     @classmethod
-    def load(cls, load_path: str | Path) -> 'SyntacticSemanticPreprocessor':
+    def load(cls, load_path: Union[str, Path]) -> 'SyntacticSemanticPreprocessor':
         """
         Load fitted syntactic/semantic preprocessor.
 

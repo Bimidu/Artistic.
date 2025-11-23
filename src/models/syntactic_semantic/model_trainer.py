@@ -15,7 +15,7 @@ Author: Randil Haturusinghe
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Any, Literal
+from typing import Dict, List, Tuple, Optional, Any, Literal, Union
 from dataclasses import dataclass, field
 from pathlib import Path
 import joblib
@@ -417,7 +417,7 @@ class SyntacticSemanticTrainer:
     def save_model(
         self,
         model_name: str,
-        save_path: str | Path
+        save_path: Union[str, Path]
     ):
         """
         Save trained syntactic/semantic model with metadata.
