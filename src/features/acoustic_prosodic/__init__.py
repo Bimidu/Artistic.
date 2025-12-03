@@ -22,6 +22,6 @@ Author: Team Member A (Acoustic/Prosodic Specialist)
 # __all__ = ["AcousticProsodicFeatures"]
 
 __version__ = "1.0.0"
-__status__ = "temporarily_disabled"
+__status__ = "implemented"
 __team__ = "Team Member A"
 __feature_count__ = 12
