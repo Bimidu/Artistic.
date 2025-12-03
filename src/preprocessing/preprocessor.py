@@ -131,41 +131,54 @@ class DataPreprocessor:
             if col not in [self.target_column, 'participant_id', 'file_path']
         ]
         self.logger.info(f"Identified {len(self.feature_columns_)} feature columns")
-        
-        # Step 3: Clean data
-        df_clean = self.cleaner.clean(
+
+        # Step 3: Split into train/test on the raw data to avoid leakage
+        df_train, df_test = train_test_split(
             df,
+            test_size=self.test_size,
+            random_state=self.random_state,
+            stratify=df[self.target_column]
+        )
+        self.logger.info(
+            f"Initial split on raw data - "
+            f"Train: {df_train.shape}, Test: {df_test.shape}"
+        )
+
+        # Step 4: Clean train and test data separately
+        df_train_clean = self.cleaner.clean(
+            df_train,
             target_column=self.target_column,
             feature_columns=self.feature_columns_
         )
-        self.logger.info(f"Data cleaned - Shape: {df_clean.shape}")
-        
-        # Step 4: Split into features and target
-        X = df_clean[self.feature_columns_]
-        y = df_clean[self.target_column]
-        
-        # Step 5: Feature selection (on full dataset before split)
+        df_test_clean = self.cleaner.clean(
+            df_test,
+            target_column=self.target_column,
+            feature_columns=self.feature_columns_
+        )
+        self.logger.info(
+            "Data cleaned - "
+            f"Train: {df_train_clean.shape}, Test: {df_test_clean.shape}"
+        )
+
+        # Step 5: Split into features and target for train and test
+        X_train = df_train_clean[self.feature_columns_]
+        y_train = df_train_clean[self.target_column]
+        X_test = df_test_clean[self.feature_columns_]
+        y_test = df_test_clean[self.target_column]
+
+        # Step 6: Feature selection (fit on training data only)
         if self.selector is not None:
             self.logger.info(f"Performing feature selection")
             self.selected_features_ = self.selector.select_from_model(
-                X, y,
+                X_train,
+                y_train,
                 max_features=self.n_features
             )
-            X = X[self.selected_features_]
+            X_train = X_train[self.selected_features_]
+            X_test = X_test[self.selected_features_]
             self.logger.info(f"Selected {len(self.selected_features_)} features")
         else:
             self.selected_features_ = self.feature_columns_
-        
-        # Step 6: Split into train/test
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y,
-            test_size=self.test_size,
-            random_state=self.random_state,
-            stratify=y
-        )
-        self.logger.info(
-            f"Split data - Train: {X_train.shape}, Test: {X_test.shape}"
-        )
         
         # Step 7: Scale features (fit on train, transform both)
         X_train = self.scaler.fit_transform(X_train, self.selected_features_)
@@ -220,28 +233,22 @@ class DataPreprocessor:
             List of (X_train, X_val, y_train, y_val) tuples
         """
         self.logger.info(f"Preparing {n_splits}-fold cross-validation splits")
-        
-        # Clean and select features
-        df_clean = self.cleaner.clean(
-            df,
-            target_column=self.target_column,
-            feature_columns=self.feature_columns_
-        )
-        
-        X = df_clean[self.feature_columns_]
-        y = df_clean[self.target_column]
-        
-        # Feature selection
-        if self.selector is not None:
-            self.selected_features_ = self.selector.select_from_model(
-                X, y,
-                max_features=self.n_features
+
+        # Ensure feature columns are identified
+        if self.feature_columns_ is None:
+            self.feature_columns_ = [
+                col for col in df.columns
+                if col not in [self.target_column, 'participant_id', 'file_path']
+            ]
+            self.logger.info(
+                f"Identified {len(self.feature_columns_)} feature columns for K-fold"
             )
-            X = X[self.selected_features_]
-        else:
-            self.selected_features_ = self.feature_columns_
-        
-        # Create stratified folds
+
+        # Work with raw features/target; cleaning and selection will be done per fold
+        X = df[self.feature_columns_]
+        y = df[self.target_column]
+
+        # Create stratified folds on the raw data
         skf = StratifiedKFold(
             n_splits=n_splits,
             shuffle=True,
@@ -250,15 +257,44 @@ class DataPreprocessor:
         
         splits = []
         for train_idx, val_idx in skf.split(X, y):
-            X_train_fold = X.iloc[train_idx]
-            X_val_fold = X.iloc[val_idx]
-            y_train_fold = y.iloc[train_idx]
-            y_val_fold = y.iloc[val_idx]
-            
-            # Scale each fold independently
+            # Split raw data into train/validation for this fold
+            df_train_fold = df.iloc[train_idx]
+            df_val_fold = df.iloc[val_idx]
+
+            # Clean train and validation data separately for this fold
+            df_train_clean = self.cleaner.clean(
+                df_train_fold,
+                target_column=self.target_column,
+                feature_columns=self.feature_columns_
+            )
+            df_val_clean = self.cleaner.clean(
+                df_val_fold,
+                target_column=self.target_column,
+                feature_columns=self.feature_columns_
+            )
+
+            X_train_fold = df_train_clean[self.feature_columns_]
+            y_train_fold = df_train_clean[self.target_column]
+            X_val_fold = df_val_clean[self.feature_columns_]
+            y_val_fold = df_val_clean[self.target_column]
+
+            # Feature selection per fold, using only training portion
+            if self.selector is not None:
+                selected_features = self.selector.select_from_model(
+                    X_train_fold,
+                    y_train_fold,
+                    max_features=self.n_features
+                )
+            else:
+                selected_features = self.feature_columns_
+
+            X_train_fold = X_train_fold[selected_features]
+            X_val_fold = X_val_fold[selected_features]
+
+            # Scale each fold independently (fit on fold's train, transform val)
             scaler = FeatureScaler(method=self.scaler.method)
-            X_train_fold = scaler.fit_transform(X_train_fold, self.selected_features_)
-            X_val_fold = scaler.transform(X_val_fold, self.selected_features_)
+            X_train_fold = scaler.fit_transform(X_train_fold, selected_features)
+            X_val_fold = scaler.transform(X_val_fold, selected_features)
             
             splits.append((X_train_fold, X_val_fold, y_train_fold, y_val_fold))
         
