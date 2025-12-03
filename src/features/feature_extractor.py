@@ -1,10 +1,20 @@
 """
 Main Feature Extraction Orchestrator
 
-This module coordinates all three categories of feature extractors:
-1. Acoustic & Prosodic (placeholder - Team Member A)
-2. Syntactic & Semantic (placeholder - Team Member B)
-3. Pragmatic & Conversational (fully implemented)
+This module coordinates all feature extractors organized according to
+the research methodology:
+
+Methodology Sections:
+  3.3.1 - Turn-Taking Metrics
+  3.3.2 - Topic Maintenance and Semantic Coherence
+  3.3.3 - Pause and Latency Analysis
+  3.3.4 - Conversational Repair Detection
+
+Additional Feature Categories:
+  - Linguistic Features (MLU, vocabulary diversity)
+  - Pragmatic Features (echolalia, pronouns, social language)
+  - Acoustic & Prosodic Features (placeholder - Team Member A)
+  - Syntactic & Semantic Features (placeholder - Team Member B)
 
 Author: Bimidu Gunathilake
 """
@@ -20,18 +30,18 @@ from src.parsers.chat_parser import TranscriptData
 from src.utils.logger import get_logger
 from src.utils.helpers import timing_decorator
 
-# Pragmatic & Conversational Features 
+# Pragmatic & Conversational Features - Methodology aligned (Primary)
 from .pragmatic_conversational import (
-    TurnTakingFeatures,
-    LinguisticFeatures,
-    PragmaticFeatures,
-    ConversationalFeatures,
+    TurnTakingFeatures,       # Section 3.3.1
+    TopicCoherenceFeatures,   # Section 3.3.2
+    PauseLatencyFeatures,     # Section 3.3.3
+    RepairDetectionFeatures,  # Section 3.3.4
+    LinguisticFeatures,       # Supporting
+    PragmaticFeatures,        # Supporting
+    ConversationalFeatures,   # Supporting (legacy)
 )
 
 # Placeholder modules for other team members
-# Temporarily disabled: acoustic_prosodic module not fully implemented
-# from .acoustic_prosodic import AcousticProsodicFeatures
-
 try:
     from .syntactic_semantic import SyntacticSemanticFeatures
 except ImportError:
@@ -45,10 +55,15 @@ class FeatureSet:
     """
     Complete feature set extracted from a transcript.
     
-    Contains features from all three categories:
-    - Acoustic & Prosodic (Team Member A)
-    - Syntactic & Semantic (Team Member B)
-    - Pragmatic & Conversational (Fully Implemented)
+    Contains features from all methodology sections:
+    - 3.3.1 Turn-Taking Metrics
+    - 3.3.2 Topic Maintenance and Semantic Coherence
+    - 3.3.3 Pause and Latency Analysis
+    - 3.3.4 Conversational Repair Detection
+    
+    Plus supporting features:
+    - Linguistic (MLU, vocabulary)
+    - Pragmatic (echolalia, pronouns)
     
     Attributes:
         participant_id: Participant identifier
@@ -84,106 +99,144 @@ class FeatureSet:
 
 class FeatureExtractor:
     """
-    Main feature extraction orchestrator for all three feature categories.
+    Main feature extraction orchestrator.
     
-    This class coordinates:
-    1. Acoustic & Prosodic extractors (placeholder)
-    2. Syntactic & Semantic extractors (placeholder)
-    3. Pragmatic & Conversational extractors (fully implemented)
+    Coordinates extraction from all methodology-aligned modules:
+    - Section 3.3.1: Turn-Taking Metrics
+    - Section 3.3.2: Topic Maintenance and Semantic Coherence
+    - Section 3.3.3: Pause and Latency Analysis
+    - Section 3.3.4: Conversational Repair Detection
+    
+    Plus supporting modules:
+    - Linguistic Features
+    - Pragmatic Features
     
     Example:
-        >>> # Extract only pragmatic/conversational features
-        >>> extractor = FeatureExtractor(
-        ...     categories=['pragmatic_conversational']
-        ... )
+        >>> # Extract all methodology-aligned features
+        >>> extractor = FeatureExtractor(categories='methodology')
         >>> feature_set = extractor.extract_from_transcript(transcript)
         
-        >>> # Extract all features (when all modules are ready)
+        >>> # Extract all features including supporting
         >>> extractor = FeatureExtractor(categories='all')
         >>> feature_set = extractor.extract_from_transcript(transcript)
     """
     
-    # Define the three main feature categories
+    # Define feature categories aligned with methodology
     FEATURE_CATEGORIES = {
+        # Primary methodology sections
+        'turn_taking': {
+            'section': '3.3.1',
+            'description': 'Turn-Taking Metrics',
+            'status': 'implemented',
+        },
+        'topic_coherence': {
+            'section': '3.3.2',
+            'description': 'Topic Maintenance and Semantic Coherence',
+            'status': 'implemented',
+        },
+        'pause_latency': {
+            'section': '3.3.3',
+            'description': 'Pause and Latency Analysis',
+            'status': 'implemented',
+        },
+        'repair_detection': {
+            'section': '3.3.4',
+            'description': 'Conversational Repair Detection',
+            'status': 'implemented',
+        },
+        # Supporting categories
+        'linguistic': {
+            'section': 'supporting',
+            'description': 'Linguistic Features (MLU, vocabulary)',
+            'status': 'implemented',
+        },
+        'pragmatic': {
+            'section': 'supporting',
+            'description': 'Pragmatic Features (echolalia, pronouns)',
+            'status': 'implemented',
+        },
+        'conversational': {
+            'section': 'supporting',
+            'description': 'Legacy Conversational Features',
+            'status': 'implemented',
+        },
+        # Placeholder categories for other team members
         'acoustic_prosodic': {
+            'section': 'audio',
             'description': 'Acoustic and prosodic features from audio',
             'status': 'placeholder',
             'team': 'Team Member A',
         },
         'syntactic_semantic': {
+            'section': 'text',
             'description': 'Syntactic and semantic features from text',
             'status': 'placeholder',
             'team': 'Team Member B',
         },
-        'pragmatic_conversational': {
-            'description': 'Pragmatic and conversational features',
-            'status': 'implemented',
-            'team': 'Current Implementation',
-        },
     }
+    
+    # Category groupings
+    METHODOLOGY_CATEGORIES = [
+        'turn_taking', 'topic_coherence', 'pause_latency', 'repair_detection'
+    ]
+    SUPPORTING_CATEGORIES = ['linguistic', 'pragmatic']
+    LEGACY_CATEGORIES = ['conversational']
     
     def __init__(
         self,
-        categories: Optional[List[str] | str] = 'pragmatic_conversational',
-        include_placeholders: bool = True
+        categories: Optional[List[str] | str] = 'methodology',
+        include_legacy: bool = False,
+        include_supporting: bool = True
     ):
         """
         Initialize feature extractor with specified categories.
         
         Args:
             categories: Which feature categories to extract:
-                       - 'all': Extract all three categories
-                       - 'pragmatic_conversational': Only pragmatic features (default)
-                       - List of category names to extract
-            include_placeholders: If True, include placeholder modules (zeros)
-                                If False, skip unimplemented modules
+                - 'methodology': Sections 3.3.1-3.3.4 only (default)
+                - 'all': All implemented categories
+                - 'pragmatic_conversational': Backward compatible (all pragmatic)
+                - List of specific category names
+            include_legacy: Whether to include legacy conversational features
+            include_supporting: Whether to include supporting features (linguistic, pragmatic)
         
         Example:
-            >>> # Only pragmatic/conversational (recommended for now)
-            >>> extractor = FeatureExtractor()
+            >>> # Methodology sections only
+            >>> extractor = FeatureExtractor(categories='methodology')
             
-            >>> # All categories (with placeholders)
+            >>> # All features
             >>> extractor = FeatureExtractor(categories='all')
             
             >>> # Specific categories
             >>> extractor = FeatureExtractor(
-            ...     categories=['pragmatic_conversational', 'syntactic_semantic']
+            ...     categories=['turn_taking', 'topic_coherence']
             ... )
         """
-        self.include_placeholders = include_placeholders
+        self.include_legacy = include_legacy
+        self.include_supporting = include_supporting
         
         # Determine which categories to use
-        if categories == 'all':
-            # Exclude acoustic_prosodic as it's temporarily disabled
-            available_categories = [
-                cat for cat in self.FEATURE_CATEGORIES.keys()
-                if cat != 'acoustic_prosodic'  # Temporarily disabled
-            ]
-            self.active_categories = available_categories
-            logger.info(
-                "Acoustic & Prosodic features are temporarily disabled. "
-                "Excluded from 'all' categories."
+        if categories == 'methodology':
+            self.active_categories = list(self.METHODOLOGY_CATEGORIES)
+            if include_supporting:
+                self.active_categories.extend(self.SUPPORTING_CATEGORIES)
+        elif categories == 'all':
+            self.active_categories = (
+                list(self.METHODOLOGY_CATEGORIES) +
+                list(self.SUPPORTING_CATEGORIES)
+            )
+            if include_legacy:
+                self.active_categories.extend(self.LEGACY_CATEGORIES)
+        elif categories == 'pragmatic_conversational':
+            # Backward compatibility
+            self.active_categories = (
+                list(self.METHODOLOGY_CATEGORIES) +
+                list(self.SUPPORTING_CATEGORIES)
             )
         elif isinstance(categories, str):
-            # If specifically requesting acoustic_prosodic, warn but allow (will be skipped)
-            if categories == 'acoustic_prosodic':
-                logger.warning(
-                    "Acoustic & Prosodic features are temporarily disabled. "
-                    "This category will be skipped."
-                )
             self.active_categories = [categories]
         else:
-            # Filter out acoustic_prosodic from list if present
-            filtered = []
-            for cat in categories:
-                if cat == 'acoustic_prosodic':
-                    logger.warning(
-                        "Acoustic & Prosodic features are temporarily disabled. "
-                        "Skipping this category."
-                    )
-                else:
-                    filtered.append(cat)
-            self.active_categories = filtered
+            self.active_categories = list(categories)
         
         # Initialize extractors
         self._initialize_extractors()
@@ -191,41 +244,49 @@ class FeatureExtractor:
         logger.info(
             f"FeatureExtractor initialized with categories: {self.active_categories}"
         )
-        logger.info(
-            f"Include placeholders: {include_placeholders}"
-        )
     
     def _initialize_extractors(self):
         """Initialize all feature extractors based on active categories."""
         self.extractors = {}
         
-        # CATEGORY 1: Acoustic & Prosodic (TEMPORARILY DISABLED)
-        # Note: This should not be in active_categories due to filtering in __init__,
-        # but keeping as safety check
-        if 'acoustic_prosodic' in self.active_categories:
-            logger.warning(
-                "Acoustic & Prosodic features are temporarily disabled. "
-                "Skipping initialization."
-            )
-            # Temporarily disabled - AcousticProsodicFeatures class not implemented
+        # Methodology-aligned extractors (Sections 3.3.1 - 3.3.4)
+        if 'turn_taking' in self.active_categories:
+            self.extractors['turn_taking'] = TurnTakingFeatures()
+            logger.debug("Initialized TurnTakingFeatures (Section 3.3.1)")
         
-        # CATEGORY 2: Syntactic & Semantic (PLACEHOLDER)
+        if 'topic_coherence' in self.active_categories:
+            self.extractors['topic_coherence'] = TopicCoherenceFeatures()
+            logger.debug("Initialized TopicCoherenceFeatures (Section 3.3.2)")
+        
+        if 'pause_latency' in self.active_categories:
+            self.extractors['pause_latency'] = PauseLatencyFeatures()
+            logger.debug("Initialized PauseLatencyFeatures (Section 3.3.3)")
+        
+        if 'repair_detection' in self.active_categories:
+            self.extractors['repair_detection'] = RepairDetectionFeatures()
+            logger.debug("Initialized RepairDetectionFeatures (Section 3.3.4)")
+        
+        # Supporting extractors
+        if 'linguistic' in self.active_categories:
+            self.extractors['linguistic'] = LinguisticFeatures()
+            logger.debug("Initialized LinguisticFeatures")
+        
+        if 'pragmatic' in self.active_categories:
+            self.extractors['pragmatic'] = PragmaticFeatures()
+            logger.debug("Initialized PragmaticFeatures")
+        
+        # Legacy extractors
+        if 'conversational' in self.active_categories:
+            self.extractors['conversational'] = ConversationalFeatures()
+            logger.debug("Initialized ConversationalFeatures (legacy)")
+        
+        # Syntactic/Semantic (if available)
         if 'syntactic_semantic' in self.active_categories:
             if SyntacticSemanticFeatures is not None:
                 self.extractors['syntactic_semantic'] = SyntacticSemanticFeatures()
+                logger.debug("Initialized SyntacticSemanticFeatures")
             else:
-                logger.warning(
-                    "SyntacticSemanticFeatures not available. Skipping this category."
-                )
-        
-        # CATEGORY 3: Pragmatic & Conversational (FULLY IMPLEMENTED)
-        if 'pragmatic_conversational' in self.active_categories:
-            self.extractors['pragmatic_conversational'] = {
-                'turn_taking': TurnTakingFeatures(),
-                'linguistic': LinguisticFeatures(),
-                'pragmatic': PragmaticFeatures(),
-                'conversational': ConversationalFeatures(),
-            }
+                logger.warning("SyntacticSemanticFeatures not available")
     
     @property
     def all_feature_names(self) -> List[str]:
@@ -237,16 +298,18 @@ class FeatureExtractor:
         """
         feature_names = []
         
-        for category, extractors in self.extractors.items():
-            if isinstance(extractors, dict):
-                # Pragmatic/conversational has sub-extractors
-                for extractor in extractors.values():
-                    feature_names.extend(extractor.feature_names)
-            else:
-                # Single extractor
-                feature_names.extend(extractors.feature_names)
+        for category, extractor in self.extractors.items():
+            feature_names.extend(extractor.feature_names)
         
         return feature_names
+    
+    @property
+    def feature_count_by_category(self) -> Dict[str, int]:
+        """Get feature count per category."""
+        return {
+            category: len(extractor.feature_names)
+            for category, extractor in self.extractors.items()
+        }
     
     def extract_from_transcript(
         self,
@@ -267,12 +330,13 @@ class FeatureExtractor:
             >>> features = extractor.extract_from_transcript(transcript)
             >>> print(f"Extracted {len(features.features)} features")
         """
-        # Use provided categories or default to active categories
-        extract_categories = categories or self.active_categories
+        extract_categories = categories or list(self.extractors.keys())
         
         all_features = {}
         extraction_metadata = {}
         extracted_categories = []
+        
+        logger.debug(f"Extracting features from {transcript.participant_id}")
         
         # Extract from each category
         for category in extract_categories:
@@ -281,29 +345,16 @@ class FeatureExtractor:
                 continue
             
             try:
-                extractors = self.extractors[category]
+                extractor = self.extractors[category]
+                result = extractor.extract(transcript)
                 
-                if isinstance(extractors, dict):
-                    # Pragmatic/conversational with sub-extractors
-                    for name, extractor in extractors.items():
-                        result = extractor.extract(transcript)
-                        all_features.update(result.features)
-                        extraction_metadata[f"{category}_{name}"] = result.metadata
-                else:
-                    # Single extractor (acoustic/syntactic)
-                    result = extractors.extract(transcript)
-                    
-                    # Check if it's a placeholder
-                    is_placeholder = result.metadata.get('status') == 'placeholder'
-                    
-                    if is_placeholder and not self.include_placeholders:
-                        logger.debug(f"Skipping placeholder category: {category}")
-                        continue
-                    
-                    all_features.update(result.features)
-                    extraction_metadata[category] = result.metadata
-                
+                all_features.update(result.features)
+                extraction_metadata[category] = result.metadata
                 extracted_categories.append(category)
+                
+                logger.debug(
+                    f"Extracted {len(result.features)} features from {category}"
+                )
                 
             except Exception as e:
                 logger.error(f"Error extracting {category} features: {e}")
@@ -324,7 +375,8 @@ class FeatureExtractor:
         )
         
         logger.debug(
-            f"Extracted {len(all_features)} features from {len(extracted_categories)} categories"
+            f"Extracted {len(all_features)} features from "
+            f"{len(extracted_categories)} categories"
         )
         
         return feature_set
@@ -447,6 +499,7 @@ class FeatureExtractor:
         summary = {
             'total_samples': len(df),
             'feature_count': len(self.all_feature_names),
+            'feature_count_by_category': self.feature_count_by_category,
             'diagnosis_counts': {},
             'feature_stats': {},
             'missing_values': {},
@@ -461,18 +514,19 @@ class FeatureExtractor:
         feature_cols = [col for col in df.columns if col in self.all_feature_names]
         
         for col in feature_cols:
-            summary['feature_stats'][col] = {
-                'mean': float(df[col].mean()),
-                'std': float(df[col].std()),
-                'min': float(df[col].min()),
-                'max': float(df[col].max()),
-                'median': float(df[col].median()),
-            }
-            
-            # Count missing values
-            missing = df[col].isna().sum()
-            if missing > 0:
-                summary['missing_values'][col] = int(missing)
+            if pd.api.types.is_numeric_dtype(df[col]):
+                summary['feature_stats'][col] = {
+                    'mean': float(df[col].mean()),
+                    'std': float(df[col].std()),
+                    'min': float(df[col].min()),
+                    'max': float(df[col].max()),
+                    'median': float(df[col].median()),
+                }
+                
+                # Count missing values
+                missing = df[col].isna().sum()
+                if missing > 0:
+                    summary['missing_values'][col] = int(missing)
         
         return summary
     
@@ -497,22 +551,22 @@ class FeatureExtractor:
         feature_cols = [col for col in df.columns if col in self.all_feature_names]
         
         for col in feature_cols:
+            if not pd.api.types.is_numeric_dtype(df[col]):
+                continue
+                
             if method == 'zscore':
-                # Z-score normalization
                 mean = df[col].mean()
                 std = df[col].std()
                 if std > 0:
                     df_norm[col] = (df[col] - mean) / std
                     
             elif method == 'minmax':
-                # Min-max normalization to [0, 1]
                 min_val = df[col].min()
                 max_val = df[col].max()
                 if max_val > min_val:
                     df_norm[col] = (df[col] - min_val) / (max_val - min_val)
                     
             elif method == 'robust':
-                # Robust normalization using median and IQR
                 median = df[col].median()
                 q75 = df[col].quantile(0.75)
                 q25 = df[col].quantile(0.25)
@@ -530,26 +584,34 @@ class FeatureExtractor:
         print("FEATURE EXTRACTION CATEGORIES")
         print("="*70)
         
-        for category, info in self.FEATURE_CATEGORIES.items():
-            status_icon = "✓" if info['status'] == 'implemented' else "○"
-            active_icon = "●" if category in self.active_categories else "○"
-            
-            print(f"\n{active_icon} {category.upper().replace('_', ' & ')}")
-            print(f"   Status: {status_icon} {info['status'].upper()}")
-            print(f"   Team: {info['team']}")
-            print(f"   Description: {info['description']}")
-            
-            if category in self.extractors:
-                extractors = self.extractors[category]
-                if isinstance(extractors, dict):
-                    num_features = sum(len(e.feature_names) for e in extractors.values())
-                    print(f"   Sub-extractors: {', '.join(extractors.keys())}")
-                else:
-                    num_features = len(extractors.feature_names)
-                print(f"   Features: {num_features}")
+        # Methodology sections
+        print("\n📋 METHODOLOGY SECTIONS (Primary)")
+        print("-" * 50)
         
+        for category in self.METHODOLOGY_CATEGORIES:
+            info = self.FEATURE_CATEGORIES[category]
+            active_icon = "●" if category in self.active_categories else "○"
+            count = len(self.extractors[category].feature_names) if category in self.extractors else 0
+            
+            print(f"{active_icon} Section {info['section']}: {info['description']}")
+            print(f"    Features: {count}")
+        
+        # Supporting sections
+        print("\n📚 SUPPORTING FEATURES")
+        print("-" * 50)
+        
+        for category in self.SUPPORTING_CATEGORIES:
+            info = self.FEATURE_CATEGORIES[category]
+            active_icon = "●" if category in self.active_categories else "○"
+            count = len(self.extractors[category].feature_names) if category in self.extractors else 0
+            
+            print(f"{active_icon} {info['description']}")
+            print(f"    Features: {count}")
+        
+        # Summary
         print("\n" + "="*70)
         print(f"Total Active Features: {len(self.all_feature_names)}")
+        print(f"Active Categories: {len(self.active_categories)}")
         print("="*70 + "\n")
 
 
