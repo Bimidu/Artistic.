@@ -39,8 +39,14 @@ Modules:
 from .feature_extractor import FeatureExtractor, FeatureSet
 
 # Import from organized submodules
-from .acoustic_prosodic import AcousticProsodicFeatures
-from .syntactic_semantic import SyntacticSemanticFeatures
+# Temporarily disabled: acoustic_prosodic module not fully implemented
+# from .acoustic_prosodic import AcousticProsodicFeatures
+
+try:
+    from .syntactic_semantic import SyntacticSemanticFeatures
+except ImportError:
+    SyntacticSemanticFeatures = None
+
 from .pragmatic_conversational import (
     TurnTakingFeatures,
     LinguisticFeatures,
@@ -51,7 +57,7 @@ from .pragmatic_conversational import (
 __all__ = [
     "FeatureExtractor",
     "FeatureSet",
-    "AcousticProsodicFeatures",
+    # "AcousticProsodicFeatures",  # Temporarily disabled
     "SyntacticSemanticFeatures",
     "TurnTakingFeatures",
     "LinguisticFeatures",

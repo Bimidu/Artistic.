@@ -20,7 +20,7 @@ from src.parsers.chat_parser import TranscriptData
 from src.utils.logger import get_logger
 from src.utils.helpers import timing_decorator
 
-# Pragmatic & Conversational Features (FULLY IMPLEMENTED)
+# Pragmatic & Conversational Features 
 from .pragmatic_conversational import (
     TurnTakingFeatures,
     LinguisticFeatures,
@@ -29,8 +29,13 @@ from .pragmatic_conversational import (
 )
 
 # Placeholder modules for other team members
-from .acoustic_prosodic import AcousticProsodicFeatures
-from .syntactic_semantic import SyntacticSemanticFeatures
+# Temporarily disabled: acoustic_prosodic module not fully implemented
+# from .acoustic_prosodic import AcousticProsodicFeatures
+
+try:
+    from .syntactic_semantic import SyntacticSemanticFeatures
+except ImportError:
+    SyntacticSemanticFeatures = None
 
 logger = get_logger(__name__)
 
@@ -149,11 +154,36 @@ class FeatureExtractor:
         
         # Determine which categories to use
         if categories == 'all':
-            self.active_categories = list(self.FEATURE_CATEGORIES.keys())
+            # Exclude acoustic_prosodic as it's temporarily disabled
+            available_categories = [
+                cat for cat in self.FEATURE_CATEGORIES.keys()
+                if cat != 'acoustic_prosodic'  # Temporarily disabled
+            ]
+            self.active_categories = available_categories
+            logger.info(
+                "Acoustic & Prosodic features are temporarily disabled. "
+                "Excluded from 'all' categories."
+            )
         elif isinstance(categories, str):
+            # If specifically requesting acoustic_prosodic, warn but allow (will be skipped)
+            if categories == 'acoustic_prosodic':
+                logger.warning(
+                    "Acoustic & Prosodic features are temporarily disabled. "
+                    "This category will be skipped."
+                )
             self.active_categories = [categories]
         else:
-            self.active_categories = categories
+            # Filter out acoustic_prosodic from list if present
+            filtered = []
+            for cat in categories:
+                if cat == 'acoustic_prosodic':
+                    logger.warning(
+                        "Acoustic & Prosodic features are temporarily disabled. "
+                        "Skipping this category."
+                    )
+                else:
+                    filtered.append(cat)
+            self.active_categories = filtered
         
         # Initialize extractors
         self._initialize_extractors()
@@ -169,13 +199,24 @@ class FeatureExtractor:
         """Initialize all feature extractors based on active categories."""
         self.extractors = {}
         
-        # CATEGORY 1: Acoustic & Prosodic (PLACEHOLDER)
+        # CATEGORY 1: Acoustic & Prosodic (TEMPORARILY DISABLED)
+        # Note: This should not be in active_categories due to filtering in __init__,
+        # but keeping as safety check
         if 'acoustic_prosodic' in self.active_categories:
-            self.extractors['acoustic_prosodic'] = AcousticProsodicFeatures()
+            logger.warning(
+                "Acoustic & Prosodic features are temporarily disabled. "
+                "Skipping initialization."
+            )
+            # Temporarily disabled - AcousticProsodicFeatures class not implemented
         
         # CATEGORY 2: Syntactic & Semantic (PLACEHOLDER)
         if 'syntactic_semantic' in self.active_categories:
-            self.extractors['syntactic_semantic'] = SyntacticSemanticFeatures()
+            if SyntacticSemanticFeatures is not None:
+                self.extractors['syntactic_semantic'] = SyntacticSemanticFeatures()
+            else:
+                logger.warning(
+                    "SyntacticSemanticFeatures not available. Skipping this category."
+                )
         
         # CATEGORY 3: Pragmatic & Conversational (FULLY IMPLEMENTED)
         if 'pragmatic_conversational' in self.active_categories:
