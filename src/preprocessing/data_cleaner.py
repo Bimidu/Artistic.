@@ -104,13 +104,13 @@ class DataCleaner:
         # Handle outliers
         df_clean = self._handle_outliers(df_clean, feature_columns)
         
-        # Remove any remaining NaN rows
+        # Remove any remaining NaN rows (only in feature columns)
         initial_rows = len(df_clean)
-        df_clean = df_clean.dropna()
+        df_clean = df_clean.dropna(subset=feature_columns)
         removed_rows = initial_rows - len(df_clean)
         
         if removed_rows > 0:
-            self.logger.warning(f"Removed {removed_rows} rows with remaining NaN values")
+            self.logger.warning(f"Removed {removed_rows} rows with NaN in feature columns")
         
         self.logger.info(f"Cleaning complete - Final shape: {df_clean.shape}")
         
@@ -187,6 +187,13 @@ class DataCleaner:
                 # Clip to threshold
                 lower_bound = mean - (self.outlier_std_threshold * std)
                 upper_bound = mean + (self.outlier_std_threshold * std)
+                
+                # Skip if bounds are invalid
+                if np.isnan(lower_bound) or np.isnan(upper_bound):
+                    continue
+                if np.isinf(lower_bound) or np.isinf(upper_bound):
+                    continue
+                    
                 df_clean[col] = df_clean[col].clip(lower_bound, upper_bound)
             
             elif self.outlier_method == 'winsorize':

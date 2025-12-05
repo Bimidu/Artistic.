@@ -6169,3 +6169,306 @@ Parsed %mor tier --
 2025-12-04 09:20:07 | INFO     | src.features.feature_extractor:extract_from_directory - Features saved to: output/rollins_features.csv
 2025-12-04 09:20:07 | INFO     | src.utils.helpers:wrapper - Function 'extract_from_directory' executed in 39.8879 seconds
 2025-12-04 09:26:16 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:32:41 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:33:06 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-12-05 08:33:08 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-12-05 08:33:08 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-12-05 08:33:08 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (224, 190)
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_validator:validate - Starting validation for dataset with shape (224, 190)
+2025-12-05 08:33:08 | WARNING  | src.preprocessing.data_validator:_check_missing_values - Found 1 features with missing values
+2025-12-05 08:33:08 | WARNING  | src.preprocessing.data_validator:_check_data_types - Found 3 features with non-numeric types
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_validator:_check_outliers - Detected 399 outliers across 91 features
+2025-12-05 08:33:08 | WARNING  | src.preprocessing.data_validator:_check_class_balance - Class imbalance ratio: 6.81
+2025-12-05 08:33:08 | WARNING  | src.preprocessing.data_validator:_check_feature_correlation - Found 70 highly correlated pairs
+2025-12-05 08:33:08 | WARNING  | src.preprocessing.data_validator:_check_feature_variance - Found 78 low-variance features
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_validator:validate - Validation complete - Valid: True, Warnings: 7, Errors: 0
+2025-12-05 08:33:08 | INFO     | src.preprocessing.preprocessor:fit_transform - Data validation passed
+2025-12-05 08:33:08 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 187 feature columns
+2025-12-05 08:33:08 | INFO     | src.preprocessing.preprocessor:fit_transform - Initial split on raw data - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (179, 190)
+2025-12-05 08:33:08 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - Found missing values in 1 features
+2025-12-05 08:33:52 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-12-05 08:33:54 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-12-05 08:33:54 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-12-05 08:33:54 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (224, 190)
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_validator:validate - Starting validation for dataset with shape (224, 190)
+2025-12-05 08:33:54 | WARNING  | src.preprocessing.data_validator:_check_missing_values - Found 1 features with missing values
+2025-12-05 08:33:54 | WARNING  | src.preprocessing.data_validator:_check_data_types - Found 3 features with non-numeric types
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_validator:_check_outliers - Detected 399 outliers across 91 features
+2025-12-05 08:33:54 | WARNING  | src.preprocessing.data_validator:_check_class_balance - Class imbalance ratio: 6.81
+2025-12-05 08:33:54 | WARNING  | src.preprocessing.data_validator:_check_feature_correlation - Found 70 highly correlated pairs
+2025-12-05 08:33:54 | WARNING  | src.preprocessing.data_validator:_check_feature_variance - Found 78 low-variance features
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_validator:validate - Validation complete - Valid: True, Warnings: 7, Errors: 0
+2025-12-05 08:33:54 | INFO     | src.preprocessing.preprocessor:fit_transform - Data validation passed
+2025-12-05 08:33:54 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 185 feature columns
+2025-12-05 08:33:54 | INFO     | src.preprocessing.preprocessor:fit_transform - Initial split on raw data - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (179, 190)
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 328 outliers using method: clip
+2025-12-05 08:33:54 | WARNING  | src.preprocessing.data_cleaner:clean - Removed 179 rows with remaining NaN values
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (0, 190)
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (45, 190)
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 89 outliers using method: clip
+2025-12-05 08:33:54 | WARNING  | src.preprocessing.data_cleaner:clean - Removed 45 rows with remaining NaN values
+2025-12-05 08:33:54 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (0, 190)
+2025-12-05 08:33:54 | INFO     | src.preprocessing.preprocessor:fit_transform - Data cleaned - Train: (0, 190), Test: (0, 190)
+2025-12-05 08:33:54 | INFO     | src.preprocessing.preprocessor:fit_transform - Performing feature selection
+2025-12-05 08:33:54 | INFO     | src.preprocessing.feature_selector:select_from_model - Selecting features from model with threshold=median
+2025-12-05 08:34:38 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-12-05 08:34:40 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-12-05 08:34:40 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-12-05 08:34:40 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (224, 190)
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_validator:validate - Starting validation for dataset with shape (224, 190)
+2025-12-05 08:34:40 | WARNING  | src.preprocessing.data_validator:_check_missing_values - Found 1 features with missing values
+2025-12-05 08:34:40 | WARNING  | src.preprocessing.data_validator:_check_data_types - Found 3 features with non-numeric types
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_validator:_check_outliers - Detected 399 outliers across 91 features
+2025-12-05 08:34:40 | WARNING  | src.preprocessing.data_validator:_check_class_balance - Class imbalance ratio: 6.81
+2025-12-05 08:34:40 | WARNING  | src.preprocessing.data_validator:_check_feature_correlation - Found 70 highly correlated pairs
+2025-12-05 08:34:40 | WARNING  | src.preprocessing.data_validator:_check_feature_variance - Found 78 low-variance features
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_validator:validate - Validation complete - Valid: True, Warnings: 7, Errors: 0
+2025-12-05 08:34:40 | INFO     | src.preprocessing.preprocessor:fit_transform - Data validation passed
+2025-12-05 08:34:40 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 185 feature columns
+2025-12-05 08:34:40 | INFO     | src.preprocessing.preprocessor:fit_transform - Initial split on raw data - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (179, 190)
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 328 outliers using method: clip
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (179, 190)
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (45, 190)
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 89 outliers using method: clip
+2025-12-05 08:34:40 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (45, 190)
+2025-12-05 08:34:40 | INFO     | src.preprocessing.preprocessor:fit_transform - Data cleaned - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:34:40 | INFO     | src.preprocessing.preprocessor:fit_transform - Performing feature selection
+2025-12-05 08:34:40 | INFO     | src.preprocessing.feature_selector:select_from_model - Selecting features from model with threshold=median
+2025-12-05 08:34:41 | INFO     | src.preprocessing.feature_selector:select_from_model - Selected 30 features
+2025-12-05 08:34:41 | INFO     | src.preprocessing.preprocessor:fit_transform - Selected 30 features
+2025-12-05 08:34:41 | INFO     | src.preprocessing.data_cleaner:fit_transform - Scaled 30 features using standard
+2025-12-05 08:34:41 | INFO     | src.preprocessing.preprocessor:fit_transform - Features scaled
+2025-12-05 08:34:41 | INFO     | src.preprocessing.preprocessor:fit_transform - Preprocessing pipeline complete
+2025-12-05 08:35:03 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-12-05 08:35:05 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (224, 190)
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_validator:validate - Starting validation for dataset with shape (224, 190)
+2025-12-05 08:35:05 | WARNING  | src.preprocessing.data_validator:_check_missing_values - Found 1 features with missing values
+2025-12-05 08:35:05 | WARNING  | src.preprocessing.data_validator:_check_data_types - Found 3 features with non-numeric types
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_validator:_check_outliers - Detected 399 outliers across 91 features
+2025-12-05 08:35:05 | WARNING  | src.preprocessing.data_validator:_check_class_balance - Class imbalance ratio: 6.81
+2025-12-05 08:35:05 | WARNING  | src.preprocessing.data_validator:_check_feature_correlation - Found 70 highly correlated pairs
+2025-12-05 08:35:05 | WARNING  | src.preprocessing.data_validator:_check_feature_variance - Found 78 low-variance features
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_validator:validate - Validation complete - Valid: True, Warnings: 7, Errors: 0
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Data validation passed
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 185 feature columns
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Initial split on raw data - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (179, 190)
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 328 outliers using method: clip
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (179, 190)
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (45, 190)
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 89 outliers using method: clip
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (45, 190)
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Data cleaned - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Performing feature selection
+2025-12-05 08:35:05 | INFO     | src.preprocessing.feature_selector:select_from_model - Selecting features from model with threshold=median
+2025-12-05 08:35:05 | INFO     | src.preprocessing.feature_selector:select_from_model - Selected 30 features
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Selected 30 features
+2025-12-05 08:35:05 | INFO     | src.preprocessing.data_cleaner:fit_transform - Scaled 30 features using standard
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Features scaled
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:fit_transform - Preprocessing pipeline complete
+2025-12-05 08:35:05 | INFO     | src.preprocessing.preprocessor:save - Preprocessor saved to models/preprocessor.joblib
+2025-12-05 08:35:05 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer initialized.
+2025-12-05 08:35:05 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:35:05 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer initialized (IMPLEMENTED)
+2025-12-05 08:35:05 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:35:05 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-12-05 08:35:05 | INFO     | src.models.model_trainer:__init__ - ModelTrainer initialized with component trainers
+2025-12-05 08:35:05 | INFO     | src.models.model_trainer:train_multiple_models - Training multiple models for comparison
+2025-12-05 08:35:05 | INFO     | src.models.model_trainer:train_model - Training random_forest model...
+2025-12-05 08:35:05 | INFO     | src.models.model_trainer:train_model - random_forest training complete
+2025-12-05 08:35:05 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0663 seconds
+2025-12-05 08:35:05 | INFO     | src.models.model_trainer:train_model - Training xgboost model...
+2025-12-05 08:35:05 | ERROR    | src.models.model_trainer:train_multiple_models - Error training xgboost: Invalid classes inferred from unique values of `y`.  Expected: [0 1 2 3], got ['AAC' 'ASD' 'DD' 'TD']
+2025-12-05 08:35:05 | INFO     | src.models.model_trainer:train_model - Training lightgbm model...
+2025-12-05 08:35:06 | INFO     | src.models.model_trainer:train_model - lightgbm training complete
+2025-12-05 08:35:06 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.4010 seconds
+2025-12-05 08:35:06 | INFO     | src.models.model_trainer:train_model - Training logistic model...
+2025-12-05 08:35:07 | INFO     | src.models.model_trainer:train_model - logistic training complete
+2025-12-05 08:35:07 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 1.3650 seconds
+2025-12-05 08:35:07 | INFO     | src.models.model_trainer:train_multiple_models - Successfully trained 3 models
+2025-12-05 08:35:07 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:35:07 | INFO     | src.models.model_evaluator:evaluate_multiple - Evaluating 3 models
+2025-12-05 08:35:07 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: random_forest
+2025-12-05 08:35:08 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8667, F1: 0.8524
+2025-12-05 08:35:08 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: lightgbm
+2025-12-05 08:35:09 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8000, F1: 0.7892
+2025-12-05 08:35:09 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: logistic
+2025-12-05 08:35:11 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8444, F1: 0.8490
+2025-12-05 08:35:11 | INFO     | src.models.model_registry:_load_registry - No existing registry found, starting fresh
+2025-12-05 08:35:11 | INFO     | src.models.model_registry:__init__ - ModelRegistry initialized - Directory: models
+2025-12-05 08:35:11 | INFO     | src.models.model_registry:register_model - Registering model: random_forest
+2025-12-05 08:35:11 | INFO     | src.models.model_registry:register_model - Model saved to models/random_forest/model.joblib
+2025-12-05 08:35:25 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-12-05 08:35:27 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (224, 190)
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_validator:validate - Starting validation for dataset with shape (224, 190)
+2025-12-05 08:35:27 | WARNING  | src.preprocessing.data_validator:_check_missing_values - Found 1 features with missing values
+2025-12-05 08:35:27 | WARNING  | src.preprocessing.data_validator:_check_data_types - Found 3 features with non-numeric types
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_validator:_check_outliers - Detected 399 outliers across 91 features
+2025-12-05 08:35:27 | WARNING  | src.preprocessing.data_validator:_check_class_balance - Class imbalance ratio: 6.81
+2025-12-05 08:35:27 | WARNING  | src.preprocessing.data_validator:_check_feature_correlation - Found 70 highly correlated pairs
+2025-12-05 08:35:27 | WARNING  | src.preprocessing.data_validator:_check_feature_variance - Found 78 low-variance features
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_validator:validate - Validation complete - Valid: True, Warnings: 7, Errors: 0
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Data validation passed
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 185 feature columns
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Initial split on raw data - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (179, 190)
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 328 outliers using method: clip
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (179, 190)
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (45, 190)
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 89 outliers using method: clip
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (45, 190)
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Data cleaned - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Performing feature selection
+2025-12-05 08:35:27 | INFO     | src.preprocessing.feature_selector:select_from_model - Selecting features from model with threshold=median
+2025-12-05 08:35:27 | INFO     | src.preprocessing.feature_selector:select_from_model - Selected 30 features
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Selected 30 features
+2025-12-05 08:35:27 | INFO     | src.preprocessing.data_cleaner:fit_transform - Scaled 30 features using standard
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Features scaled
+2025-12-05 08:35:27 | INFO     | src.preprocessing.preprocessor:fit_transform - Preprocessing pipeline complete
+2025-12-05 08:35:27 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer initialized.
+2025-12-05 08:35:27 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:35:27 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer initialized (IMPLEMENTED)
+2025-12-05 08:35:27 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:35:27 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-12-05 08:35:27 | INFO     | src.models.model_trainer:__init__ - ModelTrainer initialized with component trainers
+2025-12-05 08:35:27 | INFO     | src.models.model_trainer:train_multiple_models - Training multiple models for comparison
+2025-12-05 08:35:27 | INFO     | src.models.model_trainer:train_model - Training random_forest model...
+2025-12-05 08:35:27 | INFO     | src.models.model_trainer:train_model - random_forest training complete
+2025-12-05 08:35:27 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0689 seconds
+2025-12-05 08:35:27 | INFO     | src.models.model_trainer:train_model - Training xgboost model...
+2025-12-05 08:35:27 | ERROR    | src.models.model_trainer:train_multiple_models - Error training xgboost: Invalid classes inferred from unique values of `y`.  Expected: [0 1 2 3], got ['AAC' 'ASD' 'DD' 'TD']
+2025-12-05 08:35:27 | INFO     | src.models.model_trainer:train_model - Training lightgbm model...
+2025-12-05 08:35:28 | INFO     | src.models.model_trainer:train_model - lightgbm training complete
+2025-12-05 08:35:28 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.3095 seconds
+2025-12-05 08:35:28 | INFO     | src.models.model_trainer:train_model - Training logistic model...
+2025-12-05 08:35:29 | INFO     | src.models.model_trainer:train_model - logistic training complete
+2025-12-05 08:35:29 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 1.3084 seconds
+2025-12-05 08:35:29 | INFO     | src.models.model_trainer:train_multiple_models - Successfully trained 3 models
+2025-12-05 08:35:29 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:35:29 | INFO     | src.models.model_evaluator:evaluate_multiple - Evaluating 3 models
+2025-12-05 08:35:29 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: random_forest
+2025-12-05 08:35:30 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8667, F1: 0.8524
+2025-12-05 08:35:30 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: lightgbm
+2025-12-05 08:35:31 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8000, F1: 0.7892
+2025-12-05 08:35:31 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: logistic
+2025-12-05 08:35:35 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8444, F1: 0.8490
+2025-12-05 08:35:35 | INFO     | src.models.model_registry:_load_registry - No existing registry found, starting fresh
+2025-12-05 08:35:35 | INFO     | src.models.model_registry:__init__ - ModelRegistry initialized - Directory: models
+2025-12-05 08:35:35 | INFO     | src.models.model_registry:register_model - Registering model: random_forest
+2025-12-05 08:35:35 | INFO     | src.models.model_registry:register_model - Model saved to models/random_forest/model.joblib
+2025-12-05 08:36:00 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-12-05 08:36:03 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (224, 190)
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_validator:validate - Starting validation for dataset with shape (224, 190)
+2025-12-05 08:36:03 | WARNING  | src.preprocessing.data_validator:_check_missing_values - Found 1 features with missing values
+2025-12-05 08:36:03 | WARNING  | src.preprocessing.data_validator:_check_data_types - Found 3 features with non-numeric types
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_validator:_check_outliers - Detected 399 outliers across 91 features
+2025-12-05 08:36:03 | WARNING  | src.preprocessing.data_validator:_check_class_balance - Class imbalance ratio: 6.81
+2025-12-05 08:36:03 | WARNING  | src.preprocessing.data_validator:_check_feature_correlation - Found 70 highly correlated pairs
+2025-12-05 08:36:03 | WARNING  | src.preprocessing.data_validator:_check_feature_variance - Found 78 low-variance features
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_validator:validate - Validation complete - Valid: True, Warnings: 7, Errors: 0
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Data validation passed
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 185 feature columns
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Initial split on raw data - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (179, 190)
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 328 outliers using method: clip
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (179, 190)
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (45, 190)
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 89 outliers using method: clip
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (45, 190)
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Data cleaned - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Performing feature selection
+2025-12-05 08:36:03 | INFO     | src.preprocessing.feature_selector:select_from_model - Selecting features from model with threshold=median
+2025-12-05 08:36:03 | INFO     | src.preprocessing.feature_selector:select_from_model - Selected 30 features
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Selected 30 features
+2025-12-05 08:36:03 | INFO     | src.preprocessing.data_cleaner:fit_transform - Scaled 30 features using standard
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Features scaled
+2025-12-05 08:36:03 | INFO     | src.preprocessing.preprocessor:fit_transform - Preprocessing pipeline complete
+2025-12-05 08:36:03 | INFO     | src.models.acoustic_prosodic.model_trainer:__init__ - AcousticProsodicTrainer initialized.
+2025-12-05 08:36:03 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:36:03 | INFO     | src.models.syntactic_semantic.model_trainer:__init__ - SyntacticSemanticTrainer initialized (IMPLEMENTED)
+2025-12-05 08:36:03 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:36:03 | INFO     | src.models.pragmatic_conversational.model_trainer:__init__ - PragmaticConversationalTrainer initialized (IMPLEMENTED)
+2025-12-05 08:36:03 | INFO     | src.models.model_trainer:__init__ - ModelTrainer initialized with component trainers
+2025-12-05 08:36:03 | INFO     | src.models.model_trainer:train_multiple_models - Training multiple models for comparison
+2025-12-05 08:36:03 | INFO     | src.models.model_trainer:train_model - Training random_forest model...
+2025-12-05 08:36:03 | INFO     | src.models.model_trainer:train_model - random_forest training complete
+2025-12-05 08:36:03 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.0670 seconds
+2025-12-05 08:36:03 | INFO     | src.models.model_trainer:train_model - Training xgboost model...
+2025-12-05 08:36:03 | ERROR    | src.models.model_trainer:train_multiple_models - Error training xgboost: Invalid classes inferred from unique values of `y`.  Expected: [0 1 2 3], got ['AAC' 'ASD' 'DD' 'TD']
+2025-12-05 08:36:03 | INFO     | src.models.model_trainer:train_model - Training lightgbm model...
+2025-12-05 08:36:04 | INFO     | src.models.model_trainer:train_model - lightgbm training complete
+2025-12-05 08:36:04 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 0.3940 seconds
+2025-12-05 08:36:04 | INFO     | src.models.model_trainer:train_model - Training logistic model...
+2025-12-05 08:36:05 | INFO     | src.models.model_trainer:train_model - logistic training complete
+2025-12-05 08:36:05 | INFO     | src.utils.helpers:wrapper - Function 'train_model' executed in 1.3420 seconds
+2025-12-05 08:36:05 | INFO     | src.models.model_trainer:train_multiple_models - Successfully trained 3 models
+2025-12-05 08:36:05 | INFO     | src.models.model_evaluator:__init__ - ModelEvaluator initialized
+2025-12-05 08:36:05 | INFO     | src.models.model_evaluator:evaluate_multiple - Evaluating 3 models
+2025-12-05 08:36:05 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: random_forest
+2025-12-05 08:36:06 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8667, F1: 0.8524
+2025-12-05 08:36:06 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: lightgbm
+2025-12-05 08:36:07 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8000, F1: 0.7892
+2025-12-05 08:36:07 | INFO     | src.models.model_evaluator:evaluate - Evaluating model: logistic
+2025-12-05 08:36:09 | INFO     | src.models.model_evaluator:evaluate - Evaluation complete - Accuracy: 0.8444, F1: 0.8490
+2025-12-05 08:36:22 | INFO     | src.utils.logger:setup_logger - Logger initialized - Level: INFO, File: logs/asd_detection.log
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_validator:__init__ - DataValidator initialized - min_samples=10, max_missing=0.3, corr_threshold=0.95
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:__init__ - DataCleaner initialized - missing_strategy=median, outlier_method=clip
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:__init__ - FeatureScaler initialized with method: standard
+2025-12-05 08:36:23 | INFO     | src.preprocessing.feature_selector:__init__ - FeatureSelector initialized
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:__init__ - DataPreprocessor initialized
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Starting preprocessing pipeline for data with shape (224, 190)
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Identified 185 feature columns
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Initial split on raw data - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (179, 190)
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 328 outliers using method: clip
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (179, 190)
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:clean - Starting data cleaning for dataset with shape (45, 190)
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:_handle_missing_values - No missing values found
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:_handle_outliers - Handled 89 outliers using method: clip
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:clean - Cleaning complete - Final shape: (45, 190)
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Data cleaned - Train: (179, 190), Test: (45, 190)
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Performing feature selection
+2025-12-05 08:36:23 | INFO     | src.preprocessing.feature_selector:select_from_model - Selecting features from model with threshold=median
+2025-12-05 08:36:23 | INFO     | src.preprocessing.feature_selector:select_from_model - Selected 30 features
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Selected 30 features
+2025-12-05 08:36:23 | INFO     | src.preprocessing.data_cleaner:fit_transform - Scaled 30 features using standard
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Features scaled
+2025-12-05 08:36:23 | INFO     | src.preprocessing.preprocessor:fit_transform - Preprocessing pipeline complete
