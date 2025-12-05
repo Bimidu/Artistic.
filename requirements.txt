@@ -7,7 +7,7 @@
 pylangacq>=0.19.1          # CHAT/CHILDES file parsing and analysis
 pandas>=2.0.0              # Data manipulation and analysis
 numpy>=1.24.0              # Numerical computing
-scipy>=1.10.0              # Scientific computing
+scipy>=1.11.0              # Scientific computing (1.11+ fixes numpy compatibility)
 
 # ============================================================================
 # Natural Language Processing
