@@ -103,7 +103,7 @@ class FeatureExtractor:
     
     Coordinates extraction from 5 categories:
     
-    PRIMARY (Methodology-aligned):
+    PRIMARY:
     - Section 3.3.1: Turn-Taking Metrics
     - Section 3.3.2: Topic Maintenance and Semantic Coherence
     - Section 3.3.3: Pause and Latency Analysis
@@ -122,7 +122,7 @@ class FeatureExtractor:
         >>> feature_set = extractor.extract_from_transcript(transcript)
     """
     
-    # Feature categories (5 total: 4 methodology + 1 supporting)
+    # Feature categories
     FEATURE_CATEGORIES = {
         # Primary methodology sections
         'turn_taking': {
