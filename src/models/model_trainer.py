@@ -18,7 +18,7 @@ Author: Bimidu Gunathilake
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Any, Literal
+from typing import Dict, List, Tuple, Optional, Any, Literal, Union
 from dataclasses import dataclass, field
 from pathlib import Path
 import joblib
@@ -492,7 +492,7 @@ class ModelTrainer:
     def save_model(
         self,
         model_name: str,
-        save_path: str | Path
+        save_path: Union[str, Path]
     ):
         """
         Save trained model to disk.
@@ -515,7 +515,7 @@ class ModelTrainer:
     def load_model(
         self,
         model_name: str,
-        load_path: str | Path
+        load_path: Union[str, Path]
     ):
         """
         Load trained model from disk.

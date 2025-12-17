@@ -197,7 +197,15 @@ class CHATParser:
             
             # Extract participant information
             participants = self._extract_participants(reader)
-            
+
+            # Extract diagnosis, age, and gender from participants
+            if '_diagnosis' in participants:
+                metadata['diagnosis'] = participants['_diagnosis']
+            if '_age_months' in participants:
+                metadata['age_months'] = participants['_age_months']
+            if '_gender' in participants:
+                metadata['gender'] = participants['_gender']
+
             # Create TranscriptData object
             transcript = TranscriptData(
                 file_path=file_path,
@@ -324,38 +332,35 @@ class CHATParser:
     ) -> Dict[str, Dict[str, str]]:
         """
         Extract participant information from @ID headers.
-        
+
         @ID format: lang|corpus|code|age|sex|group|SES|role|education|custom
-        
+
         Args:
             reader: pylangacq Reader object
-            
+
         Returns:
             Dictionary mapping speaker codes to participant info
         """
         participants = {}
-        
-        # Get participant information
-        participant_data = reader.participants()
-        
-        if not participant_data:
-            logger.warning("No participant data found")
+
+        # Access participant data from the internal file structure
+        if not reader._files:
+            logger.warning("No files in reader")
             return participants
-        
-        # Extract from first file
-        # Handle different formats from pylangacq
-        if isinstance(participant_data, dict):
-            file_participants = list(participant_data.values())[0] if participant_data else {}
-        elif isinstance(participant_data, (set, list)) and participant_data:
-            file_participants = list(participant_data)[0] if participant_data else {}
-        else:
-            file_participants = {}
-        
-        # Ensure file_participants is a dictionary before iterating
+
+        first_file = reader._files[0]
+
+        # Get participant data from header
+        if 'Participants' not in first_file.header:
+            logger.warning("No Participants in file header")
+            return participants
+
+        file_participants = first_file.header['Participants']
+
         if not isinstance(file_participants, dict):
-            logger.warning(f"Participant data is not in expected format: {type(file_participants)}")
+            logger.warning(f"Participants data is not a dict: {type(file_participants)}")
             return participants
-        
+
         for speaker_code, info in file_participants.items():
             participants[speaker_code] = {
                 'code': speaker_code,

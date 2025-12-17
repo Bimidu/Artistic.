@@ -9,6 +9,7 @@ Modules:
     - data_cleaner: Data cleaning and outlier handling
     - preprocessor: Complete preprocessing pipeline
     - feature_selector: Feature selection methods
+    - chat_converter: CHAT file format converter
 
 Author: Bimidu Gunathilake
 """
@@ -17,12 +18,15 @@ from .data_validator import DataValidator
 from .data_cleaner import DataCleaner
 from .preprocessor import DataPreprocessor
 from .feature_selector import FeatureSelector
+from .chat_converter import CHATConverter, convert_chat_files
 
 __all__ = [
     "DataValidator",
     "DataCleaner",
     "DataPreprocessor",
     "FeatureSelector",
+    "CHATConverter",
+    "convert_chat_files",
 ]
 
 __version__ = "1.0.0"

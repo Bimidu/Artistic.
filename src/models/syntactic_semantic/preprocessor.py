@@ -147,13 +147,7 @@ class SyntacticSemanticPreprocessor:
             stratify=y
         )
 
-        # Clean training data
-        X_train = self.cleaner.fit_transform(X_train, self.feature_columns_)
-
-        # Clean test data (using fitted cleaner)
-        X_test = self.cleaner.transform(X_test, self.feature_columns_)
-
-        # Scale features
+        # Scale features (data already cleaned above)
         X_train = self.scaler.fit_transform(X_train, self.feature_columns_)
         X_test = self.scaler.transform(X_test, self.feature_columns_)
 
@@ -191,7 +185,7 @@ class SyntacticSemanticPreprocessor:
         self.logger.info("Validating syntactic/semantic features (IMPLEMENTED)")
 
         # Basic validation
-        basic_validation = self.validator.validate_data(df, self.target_column)
+        basic_validation = self.validator.validate(df, self.target_column).to_dict()
 
         # Syntactic/semantic-specific validation
         syntactic_semantic_validation = {
@@ -210,9 +204,9 @@ class SyntacticSemanticPreprocessor:
                 'vocabulary': len([c for c in df.columns if any(x in c.lower() for x in ['vocabulary', 'word', 'lexical'])]),
             },
             'data_quality': {
-                'missing_values': df.isnull().sum().sum(),
-                'infinite_values': np.isinf(df.select_dtypes(include=[np.number])).sum().sum(),
-                'feature_variance': df.select_dtypes(include=[np.number]).var().describe(),
+                'missing_values': int(df.isnull().sum().sum()),
+                'infinite_values': int(np.isinf(df.select_dtypes(include=[np.number])).sum().sum()),
+                'feature_variance': df.select_dtypes(include=[np.number]).var().describe().to_dict(),
                 'feature_ranges': self._get_syntactic_semantic_feature_ranges(df),
             }
         }
@@ -347,12 +341,8 @@ class SyntacticSemanticPreprocessor:
 
         df_clean = df.copy()
 
-        # Handle missing values
-        df_clean = self.cleaner.handle_missing_values(df_clean)
-
-        # Handle outliers
-        numeric_cols = df_clean.select_dtypes(include=[np.number]).columns
-        df_clean = self.cleaner.handle_outliers(df_clean, numeric_cols)
+        # Use the cleaner's clean method for missing values and outliers
+        df_clean = self.cleaner.clean(df_clean, target_column=self.target_column)
 
         # Syntactic/semantic-specific cleaning
         df_clean = self._clean_complexity_features(df_clean)
@@ -456,16 +446,41 @@ class SyntacticSemanticPreprocessor:
         save_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Save preprocessor state with syntactic/semantic metadata
+        # Note: We need to remove loggers from objects to avoid pickle errors
+
+        def remove_logger(obj):
+            """Recursively remove logger attributes from an object."""
+            if obj is None:
+                return None
+
+            # Remove logger from the object itself
+            if hasattr(obj, 'logger'):
+                obj.logger = None
+
+            # Remove loggers from nested objects
+            for attr_name in ['validator', 'scaler', 'cleaner']:
+                if hasattr(obj, attr_name):
+                    nested_obj = getattr(obj, attr_name)
+                    if nested_obj and hasattr(nested_obj, 'logger'):
+                        nested_obj.logger = None
+
+            return obj
+
+        # Create safe copies of objects
+        scaler_safe = remove_logger(self.scaler)
+        cleaner_safe = remove_logger(self.cleaner)
+        selector_safe = remove_logger(self.selector)
+
         state = {
             'feature_columns': self.feature_columns_,
             'selected_features': self.selected_features_,
-            'scaler': self.scaler,
-            'cleaner': self.cleaner,
-            'selector': self.selector,
+            'scaler': scaler_safe,
+            'cleaner': cleaner_safe,
+            'selector': selector_safe,
             'target_column': self.target_column,
             'handle_complexity_features': self.handle_complexity_features,
             'normalize_dependency_features': self.normalize_dependency_features,
-            'validation_report': self.validation_report_,
+            'validation_report': self.validation_report_ if isinstance(self.validation_report_, dict) else None,
             'metadata': {
                 'type': 'syntactic_semantic',
                 'team': 'Bimidu Gunathilake',
@@ -503,6 +518,22 @@ class SyntacticSemanticPreprocessor:
         preprocessor.handle_complexity_features = state.get('handle_complexity_features', True)
         preprocessor.normalize_dependency_features = state.get('normalize_dependency_features', True)
         preprocessor.validation_report_ = state.get('validation_report')
+
+        # Reinitialize loggers for loaded objects (they were removed before saving)
+        if preprocessor.scaler and not hasattr(preprocessor.scaler, 'logger'):
+            preprocessor.scaler.logger = get_logger('src.preprocessing.data_cleaner')
+        if preprocessor.cleaner:
+            if not hasattr(preprocessor.cleaner, 'logger'):
+                preprocessor.cleaner.logger = get_logger('src.preprocessing.data_cleaner')
+            # Reinitialize nested loggers
+            if hasattr(preprocessor.cleaner, 'validator') and preprocessor.cleaner.validator:
+                if not hasattr(preprocessor.cleaner.validator, 'logger'):
+                    preprocessor.cleaner.validator.logger = get_logger('src.preprocessing.data_validator')
+            if hasattr(preprocessor.cleaner, 'scaler') and preprocessor.cleaner.scaler:
+                if not hasattr(preprocessor.cleaner.scaler, 'logger'):
+                    preprocessor.cleaner.scaler.logger = get_logger('src.preprocessing.data_cleaner')
+        if preprocessor.selector and not hasattr(preprocessor.selector, 'logger'):
+            preprocessor.selector.logger = get_logger('src.preprocessing.feature_selector')
 
         logger.info(f"Syntactic/semantic preprocessor loaded from {load_path}")
 
