@@ -125,10 +125,14 @@ class DataPreprocessor:
             
             self.logger.info("Data validation passed")
         
-        # Step 2: Identify feature columns
+        # Step 2: Identify feature columns (exclude metadata and target)
+        metadata_columns = [
+            self.target_column, 'participant_id', 'file_path', 'dataset', 
+            'age_months', 'session', 'date'
+        ]
         self.feature_columns_ = [
             col for col in df.columns
-            if col not in [self.target_column, 'participant_id', 'file_path']
+            if col not in metadata_columns and df[col].dtype in ['int64', 'float64']
         ]
         self.logger.info(f"Identified {len(self.feature_columns_)} feature columns")
 
@@ -236,9 +240,13 @@ class DataPreprocessor:
 
         # Ensure feature columns are identified
         if self.feature_columns_ is None:
+            metadata_columns = [
+                self.target_column, 'participant_id', 'file_path', 'dataset',
+                'age_months', 'session', 'date'
+            ]
             self.feature_columns_ = [
                 col for col in df.columns
-                if col not in [self.target_column, 'participant_id', 'file_path']
+                if col not in metadata_columns and df[col].dtype in ['int64', 'float64']
             ]
             self.logger.info(
                 f"Identified {len(self.feature_columns_)} feature columns for K-fold"
@@ -396,17 +404,38 @@ class DataPreprocessor:
         save_path = Path(save_path)
         save_path.parent.mkdir(parents=True, exist_ok=True)
         
-        # Save preprocessor state
-        state = {
-            'feature_columns': self.feature_columns_,
-            'selected_features': self.selected_features_,
-            'scaler': self.scaler,
-            'cleaner': self.cleaner,
-            'target_column': self.target_column,
-        }
+        # Temporarily remove loggers to allow pickling
+        scaler_logger = getattr(self.scaler, 'logger', None)
+        cleaner_logger = getattr(self.cleaner, 'logger', None)
+        selector_logger = getattr(self.selector, 'logger', None) if self.selector else None
         
-        joblib.dump(state, save_path)
-        self.logger.info(f"Preprocessor saved to {save_path}")
+        if scaler_logger:
+            self.scaler.logger = None
+        if cleaner_logger:
+            self.cleaner.logger = None
+        if selector_logger:
+            self.selector.logger = None
+        
+        try:
+            # Save preprocessor state
+            state = {
+                'feature_columns': self.feature_columns_,
+                'selected_features': self.selected_features_,
+                'scaler': self.scaler,
+                'cleaner': self.cleaner,
+                'target_column': self.target_column,
+            }
+            
+            joblib.dump(state, save_path)
+            self.logger.info(f"Preprocessor saved to {save_path}")
+        finally:
+            # Restore loggers
+            if scaler_logger:
+                self.scaler.logger = scaler_logger
+            if cleaner_logger:
+                self.cleaner.logger = cleaner_logger
+            if selector_logger:
+                self.selector.logger = selector_logger
     
     @classmethod
     def load(cls, load_path: str | Path) -> 'DataPreprocessor':

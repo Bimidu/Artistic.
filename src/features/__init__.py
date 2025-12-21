@@ -30,10 +30,11 @@ Modules:
         - syntactic_semantic.py: Placeholder implementation
         
     Category 3 - pragmatic_conversational/: Pragmatic & conversational features (Implemented)
-        - turn_taking.py: Turn-taking pattern features
-        - linguistic.py: Linguistic complexity features
-        - pragmatic.py: Pragmatic language features
-        - conversational.py: Conversational management features
+        - turn_taking.py: Turn-taking metrics (3.3.1)
+        - topic_coherence.py: Topic maintenance & semantic coherence (3.3.2)
+        - pause_latency.py: Pause and latency analysis (3.3.3)
+        - repair_detection.py: Conversational repair detection (3.3.4)
+        - pragmatic_linguistic.py: General pragmatic & linguistic features
 """
 
 from .feature_extractor import FeatureExtractor, FeatureSet
@@ -49,9 +50,10 @@ except ImportError:
 
 from .pragmatic_conversational import (
     TurnTakingFeatures,
-    LinguisticFeatures,
-    PragmaticFeatures,
-    ConversationalFeatures,
+    TopicCoherenceFeatures,
+    PauseLatencyFeatures,
+    RepairDetectionFeatures,
+    PragmaticLinguisticFeatures,
 )
 
 __all__ = [
@@ -60,7 +62,8 @@ __all__ = [
     # "AcousticProsodicFeatures",  # Temporarily disabled
     "SyntacticSemanticFeatures",
     "TurnTakingFeatures",
-    "LinguisticFeatures",
-    "PragmaticFeatures",
-    "ConversationalFeatures",
+    "TopicCoherenceFeatures",
+    "PauseLatencyFeatures",
+    "RepairDetectionFeatures",
+    "PragmaticLinguisticFeatures",
 ]
