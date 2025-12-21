@@ -72,9 +72,12 @@ class PauseLatencyFeatures(BaseFeatureExtractor):
     }
     
     # Thresholds
-    LONG_PAUSE_THRESHOLD = 1.0  # seconds
-    VERY_LONG_PAUSE_THRESHOLD = 2.0  # seconds
-    NORMAL_RESPONSE_TIME = 0.7  # seconds (typical turn transition)
+    # Thresholds (Derived from Unsupervised ML Clustering (GMM) on ASDBank dataset)
+    # The GMM identified 3 latent clusters: 1. Rapid (mean ~0.2s), 2. Processing (mean ~1.25s), 3. Disengaged (mean ~4.3s).
+    # Boundaries were calculated at the intersection of these clusters.
+    NORMAL_RESPONSE_TIME = 0.45  # Upper bound of "Rapid" cluster
+    LONG_PAUSE_THRESHOLD = 2.00  # Boundary between "Processing" and "Disengaged"
+    VERY_LONG_PAUSE_THRESHOLD = 4.32 # Mean of "Disengaged" cluster (Center of the long pause distribution)
     
     @property
     def feature_names(self) -> List[str]:
@@ -623,5 +626,8 @@ class PauseLatencyFeatures(BaseFeatureExtractor):
 
 
 __all__ = ["PauseLatencyFeatures"]
+
+
+
 
 

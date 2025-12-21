@@ -51,6 +51,7 @@ class Utterance:
     morphology: Optional[str] = None
     grammar: Optional[str] = None
     timing: Optional[float] = None
+    end_timing: Optional[float] = None
     actions: Optional[str] = None
     comments: Optional[str] = None
     is_valid: bool = True
@@ -198,11 +199,16 @@ class CHATParser:
             # Extract participant information
             participants = self._extract_participants(reader)
             
+            # Resolve diagnosis
+            diagnosis = metadata.get('diagnosis')
+            if not diagnosis and '_diagnosis' in participants:
+                diagnosis = participants['_diagnosis']
+
             # Create TranscriptData object
             transcript = TranscriptData(
                 file_path=file_path,
                 participant_id=metadata.get('participant_id', file_path.stem),
-                diagnosis=metadata.get('diagnosis'),
+                diagnosis=diagnosis,
                 age_months=metadata.get('age_months'),
                 gender=metadata.get('gender'),
                 session_date=metadata.get('session_date'),
@@ -335,28 +341,33 @@ class CHATParser:
         """
         participants = {}
         
-        # Get participant information
-        participant_data = reader.participants()
+        # Get headers
+        headers = reader.headers()
+        if not headers:
+            return participants
+            
+        # Get first file headers
+        if isinstance(headers, list) and headers:
+            file_headers = headers[0]
+        elif isinstance(headers, dict):
+            file_headers = list(headers.values())[0] if headers else {}
+        else:
+            file_headers = {}
+            
+        # Extract participants dict from headers
+        # key 'Participants' usually corresponds to @ID fields in pylangacq
+        participant_data = file_headers.get('Participants', {})
         
         if not participant_data:
-            logger.warning("No participant data found")
+            # Fallback to reader.participants() which might just be codes
+            # But we can't get metadata from that
+            logger.debug("No detailed participant data in headers")
             return participants
-        
-        # Extract from first file
-        # Handle different formats from pylangacq
-        if isinstance(participant_data, dict):
-            file_participants = list(participant_data.values())[0] if participant_data else {}
-        elif isinstance(participant_data, (set, list)) and participant_data:
-            file_participants = list(participant_data)[0] if participant_data else {}
-        else:
-            file_participants = {}
-        
-        # Ensure file_participants is a dictionary before iterating
-        if not isinstance(file_participants, dict):
-            logger.warning(f"Participant data is not in expected format: {type(file_participants)}")
-            return participants
-        
-        for speaker_code, info in file_participants.items():
+            
+        for speaker_code, info in participant_data.items():
+            if not isinstance(info, dict):
+                continue
+                
             participants[speaker_code] = {
                 'code': speaker_code,
                 'language': info.get('language', ''),
@@ -364,7 +375,7 @@ class CHATParser:
                 'age': info.get('age', ''),
                 'sex': info.get('sex', ''),
                 'group': info.get('group', ''),
-                'SES': info.get('SES', ''),
+                'SES': info.get('ses', ''),  # Note: lower case in dict
                 'role': info.get('role', ''),
                 'education': info.get('education', ''),
                 'custom': info.get('custom', ''),
@@ -445,11 +456,21 @@ class CHATParser:
                 # Extract grammar (%gra)
                 grammar = tiers.get('gra')
                 
-                # Extract timing (%tim)
+                # Extract timing
                 timing = None
-                timing_str = tiers.get('tim')
-                if timing_str:
-                    timing = extract_timing_info(timing_str)
+                end_timing = None
+                
+                # Try getting timing from time_marks first (most reliable for bullets)
+                if hasattr(utterance, 'time_marks') and utterance.time_marks:
+                    start_ms, end_ms = utterance.time_marks
+                    timing = float(start_ms) / 1000.0
+                    end_timing = float(end_ms) / 1000.0
+                
+                # Fallback to %tim tier if time_marks not available
+                if timing is None:
+                    timing_str = tiers.get('tim')
+                    if timing_str:
+                        timing = extract_timing_info(timing_str)
                 
                 # Extract actions (%act)
                 actions = tiers.get('act')
@@ -465,6 +486,7 @@ class CHATParser:
                     morphology=morphology,
                     grammar=grammar,
                     timing=timing,
+                    end_timing=end_timing,
                     actions=actions,
                     comments=comments,
                     is_valid=True,  # Will be validated below
