@@ -112,6 +112,15 @@ class AnnotatedPredictionResponse(BaseModel):
     annotation_summary: Dict[str, int]
 
 
+class FeatureExtractionRequest(BaseModel):
+    """Request for feature extraction."""
+    dataset_paths: List[str] = Field(..., description="Paths to dataset folders")
+    output_filename: str = Field(
+        default="training_features.csv",
+        description="Output CSV filename"
+    )
+
+
 class TrainingRequest(BaseModel):
     """Request for model training."""
     dataset_paths: List[str] = Field(..., description="Paths to dataset folders")
@@ -473,20 +482,17 @@ async def list_datasets():
 
 
 @app.post("/training/extract-features", tags=["Training Mode"])
-async def extract_features_for_training(
-    dataset_paths: List[str],
-    output_filename: str = "training_features.csv"
-):
+async def extract_features_for_training(request: FeatureExtractionRequest):
     """
     Extract features from specified datasets for training.
     
     Returns the path to the generated feature CSV file.
     """
-    logger.info(f"Feature extraction request for {len(dataset_paths)} datasets")
+    logger.info(f"Feature extraction request for {len(request.dataset_paths)} datasets")
     
     all_dfs = []
     
-    for dataset_path in dataset_paths:
+    for dataset_path in request.dataset_paths:
         path = Path(dataset_path)
         if not path.exists():
             path = config.paths.data_dir / dataset_path
@@ -513,7 +519,7 @@ async def extract_features_for_training(
     combined_df = pd.concat(all_dfs, ignore_index=True)
     
     # Save to output
-    output_path = config.paths.output_dir / output_filename
+    output_path = config.paths.output_dir / request.output_filename
     combined_df.to_csv(output_path, index=False)
     
     return {
