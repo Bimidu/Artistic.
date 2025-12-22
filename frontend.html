@@ -4,441 +4,1135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASD Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-red: #f85149;
+            --accent-orange: #d29922;
+            --accent-purple: #a371f7;
+            --accent-pink: #db61a2;
         }
         
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        
-        .section h2 {
-            color: #444;
-            margin-top: 0;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
         
-        textarea {
-            height: 100px;
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .mode-switcher {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-tertiary);
+            padding: 4px;
+            border-radius: 8px;
+        }
+        
+        .mode-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .mode-btn.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        .mode-btn:hover:not(.active) {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        /* Mode content */
+        .mode-content {
+            display: none;
+        }
+        
+        .mode-content.active {
+            display: block;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .card-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .badge-implemented {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--accent-green);
+        }
+        
+        .badge-placeholder {
+            background: rgba(210, 153, 34, 0.15);
+            color: var(--accent-orange);
+        }
+        
+        /* Form elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+        
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
             resize: vertical;
         }
         
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
+        /* Upload area */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.05);
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--accent-green);
+            background: rgba(63, 185, 80, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .upload-text {
             font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
         }
         
-        button:hover {
-            background-color: #0056b3;
+        .upload-hint {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
         
-        button:disabled {
-            background-color: #ccc;
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #4c9aed;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border-color);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
         }
         
-        .result {
-            margin-top: 15px;
-            padding: 15px;
+        /* Results area */
+        .result-area {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .prediction-badge {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .prediction-asd {
+            background: rgba(248, 81, 73, 0.15);
+            color: var(--accent-red);
+        }
+        
+        .prediction-td {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--accent-green);
+        }
+        
+        .confidence-bar {
+            height: 8px;
+            background: var(--bg-primary);
             border-radius: 4px;
-            white-space: pre-wrap;
-            font-family: monospace;
-            font-size: 14px;
+            overflow: hidden;
+            margin: 12px 0;
         }
         
-        .success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
+        .confidence-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
         }
         
-        .error {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+        /* Annotated transcript */
+        .annotated-transcript {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.8;
         }
         
-        .info {
-            background-color: #d1ecf1;
-            border: 1px solid #bee5eb;
-            color: #0c5460;
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
         }
         
-        .loading {
-            color: #666;
-            font-style: italic;
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
         }
         
-        .feature-list {
+        @media (max-width: 900px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Dataset list */
+        .dataset-list {
             max-height: 300px;
             overflow-y: auto;
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 4px;
         }
         
-        .feature-item {
-            padding: 5px 0;
-            border-bottom: 1px solid #eee;
+        .dataset-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            gap: 12px;
         }
         
-        .feature-item:last-child {
+        .dataset-item:last-child {
             border-bottom: none;
         }
         
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
+        .dataset-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-blue);
+        }
+        
+        .dataset-info {
+            flex: 1;
+        }
+        
+        .dataset-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .dataset-stats {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* Feature list */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px;
+        }
+        
+        .feature-item {
+            padding: 8px 12px;
+            background: var(--bg-primary);
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+        }
+        
+        /* Status indicators */
+        .status-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
+            display: inline-block;
             margin-right: 8px;
         }
         
-        .status-implemented {
-            background-color: #28a745;
+        .status-connected {
+            background: var(--accent-green);
         }
         
-        .status-placeholder {
-            background-color: #ffc107;
+        .status-disconnected {
+            background: var(--accent-red);
         }
         
-        .api-url {
-            font-family: monospace;
-            background-color: #f8f9fa;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 12px;
+        /* Connection status in header */
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
         }
         
-        .info-tip {
-            background-color: #e7f3ff;
-            border: 1px solid #b3d9ff;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 10px 0;
+        /* Loading spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
             font-size: 14px;
-            color: #0066cc;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s ease;
         }
         
-        .info-tip strong {
-            color: #004499;
+        .tab.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
         }
         
-        .tip-icon {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background-color: #0066cc;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 16px;
-            font-size: 12px;
-            margin-right: 8px;
-            font-weight: bold;
+        .tab:hover:not(.active) {
+            color: var(--text-primary);
+        }
+        
+        /* Component status cards */
+        .component-card {
+            padding: 16px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border-left: 3px solid var(--border-color);
+        }
+        
+        .component-card.implemented {
+            border-left-color: var(--accent-green);
+        }
+        
+        .component-card.placeholder {
+            border-left-color: var(--accent-orange);
+        }
+        
+        .component-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .component-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Hidden file input */
+        .file-input-hidden {
+            display: none;
+        }
+        
+        /* API URL input area */
+        .api-config {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .api-config .form-input {
+            flex: 1;
+            max-width: 300px;
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">ASD Detection System</div>
+        
+        <div class="mode-switcher">
+            <button class="mode-btn active" data-mode="user">User Mode</button>
+            <button class="mode-btn" data-mode="training">Training Mode</button>
+        </div>
+        
+        <div class="connection-status">
+            <span class="status-dot status-disconnected" id="statusDot"></span>
+            <span id="statusText">Disconnected</span>
+        </div>
+    </header>
+    
     <div class="container">
-        <h1>ASD Detection System</h1>
-        
-        <div class="info-tip">
-            <span class="tip-icon">i</span>
-            <strong>Getting Started:</strong> This interface allows you to interact with the ASD Detection System API. First, ensure the API server is running (python run_api.py), then test the connection. You can make predictions on child speech transcripts, explore available features, check system status, and view trained models.
-        </div>
-        
         <!-- API Configuration -->
-        <div class="section">
-            <h2>API Configuration</h2>
-            <div class="info-tip">
-                <span class="tip-icon">i</span>
-                <strong>Tip:</strong> Make sure the API server is running before testing the connection. The default URL assumes you're running the API on localhost port 8000. If your API is running on a different address or port, update the URL accordingly.
+        <div class="card">
+            <div class="api-config">
+                <label class="form-label" style="margin-bottom: 0;">API URL:</label>
+                <input type="text" class="form-input" id="apiUrl" value="http://localhost:8000">
+                <button class="btn btn-secondary" onclick="testConnection()">Test Connection</button>
             </div>
-            <div class="form-group">
-                <label for="apiUrl">API Base URL:</label>
-                <input type="text" id="apiUrl" value="http://localhost:8000" placeholder="http://localhost:8000">
-            </div>
-            <button onclick="testConnection()">Test Connection</button>
-            <div id="connectionResult"></div>
         </div>
         
-        <!-- Prediction -->
-        <div class="section">
-            <h2>Make Prediction</h2>
-            <div class="info-tip">
-                <span class="tip-icon">i</span>
-                <strong>Tip:</strong> Enter a conversation transcript from a child to get an ASD/TD prediction. The system analyzes pragmatic and conversational features. Example: "hello there how are you doing today". Different models may give slightly different results - try multiple models for comparison.
+        <!-- User Mode -->
+        <div class="mode-content active" id="userMode">
+            <div class="grid-2">
+                <!-- Input Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Analyze Speech</h2>
+                    </div>
+                    
+                    <div class="tabs">
+                        <button class="tab active" data-input="audio">Audio Upload</button>
+                        <button class="tab" data-input="text">Text Input</button>
+                        <button class="tab" data-input="file">CHAT File</button>
+                    </div>
+                    
+                    <!-- Audio Upload -->
+                    <div class="input-panel active" id="audioPanel">
+                        <div class="upload-area" id="audioUploadArea">
+                            <div class="upload-icon">*</div>
+                            <div class="upload-text">Drop audio file here or click to browse</div>
+                            <div class="upload-hint">Supports: WAV, MP3, FLAC</div>
+                        </div>
+                        <input type="file" class="file-input-hidden" id="audioFileInput" accept=".wav,.mp3,.flac">
+                        <div id="selectedAudioFile" style="margin-top: 12px; color: var(--accent-blue);"></div>
+                        
+                        <div class="form-group" style="margin-top: 16px;">
+                            <label class="form-label">Participant ID (optional)</label>
+                            <input type="text" class="form-input" id="audioParticipantId" placeholder="CHI">
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="predictFromAudio()" id="predictAudioBtn" disabled>
+                            Analyze Audio
+                        </button>
+                    </div>
+                    
+                    <!-- Text Input -->
+                    <div class="input-panel" id="textPanel" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">Speech Transcript</label>
+                            <textarea class="form-textarea" id="textInput" placeholder="Enter or paste the speech transcript here..."></textarea>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="predictFromText()">
+                            Analyze Text
+                        </button>
+                    </div>
+                    
+                    <!-- CHAT File Upload -->
+                    <div class="input-panel" id="filePanel" style="display: none;">
+                        <div class="upload-area" id="chaUploadArea">
+                            <div class="upload-icon">#</div>
+                            <div class="upload-text">Drop CHAT file here or click to browse</div>
+                            <div class="upload-hint">Supports: .cha files</div>
+                        </div>
+                        <input type="file" class="file-input-hidden" id="chaFileInput" accept=".cha">
+                        <div id="selectedChaFile" style="margin-top: 12px; color: var(--accent-blue);"></div>
+                        
+                        <button class="btn btn-primary" onclick="predictFromChatFile()" id="predictChaBtn" disabled style="margin-top: 16px;">
+                            Analyze File
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Analysis Results</h2>
+                    </div>
+                    
+                    <div id="resultsArea">
+                        <div style="text-align: center; color: var(--text-secondary); padding: 40px;">
+                            Upload an audio file or enter text to see analysis results
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="participantId">Participant ID:</label>
-                <input type="text" id="participantId" placeholder="ASD_001">
+            
+            <!-- Annotated Transcript -->
+            <div class="card" id="annotationCard" style="display: none;">
+                <div class="card-header">
+                    <h2 class="card-title">Annotated Transcript</h2>
+                    <span class="card-badge badge-implemented">Feature Locations Marked</span>
+                </div>
+                <div id="annotatedTranscript" class="annotated-transcript"></div>
             </div>
-            <div class="form-group">
-                <label for="transcript">Transcript:</label>
-                <textarea id="transcript" placeholder="Enter conversation transcript here..."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="modelType">Model Type:</label>
-                <select id="modelType">
-                    <option value="random_forest">Random Forest</option>
-                    <option value="xgboost">XGBoost</option>
-                    <option value="lightgbm">LightGBM</option>
-                    <option value="svm">SVM</option>
-                    <option value="logistic">Logistic Regression</option>
-                </select>
-            </div>
-            <button onclick="makePrediction()">Make Prediction</button>
-            <div id="predictionResult"></div>
         </div>
         
-        <!-- Features -->
-        <div class="section">
-            <h2>Available Features</h2>
-            <div class="info-tip">
-                <span class="tip-icon">i</span>
-                <strong>Tip:</strong> This shows all 61 pragmatic and conversational features that the system can extract from transcripts. These include turn-taking patterns, linguistic complexity measures, pragmatic markers, and conversational management features. The features are used to train the machine learning models.
+        <!-- Training Mode -->
+        <div class="mode-content" id="trainingMode">
+            <div class="grid-2">
+                <!-- Dataset Selection -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Dataset Selection</h2>
+                        <button class="btn btn-secondary" onclick="loadDatasets()">Refresh</button>
+                    </div>
+                    
+                    <div class="dataset-list" id="datasetList">
+                        <div style="text-align: center; color: var(--text-secondary); padding: 20px;">
+                            Click Refresh to load available datasets
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Training Controls -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Training Controls</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Component</label>
+                        <select class="form-select" id="trainingComponent">
+                            <option value="pragmatic_conversational">Pragmatic & Conversational (Implemented)</option>
+                            <option value="acoustic_prosodic" disabled>Acoustic & Prosodic (Placeholder)</option>
+                            <option value="syntactic_semantic" disabled>Syntactic & Semantic (Placeholder)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Model Types</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                            <label><input type="checkbox" value="random_forest" checked> Random Forest</label>
+                            <label><input type="checkbox" value="xgboost" checked> XGBoost</label>
+                            <label><input type="checkbox" value="lightgbm"> LightGBM</label>
+                            <label><input type="checkbox" value="svm"> SVM</label>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-primary" onclick="extractFeatures()">Extract Features</button>
+                        <button class="btn btn-primary" onclick="startTraining()">Start Training</button>
+                    </div>
+                    
+                    <div class="result-area" id="trainingStatus" style="margin-top: 16px; display: none;">
+                        <div id="trainingStatusContent"></div>
+                    </div>
+                </div>
             </div>
-            <button onclick="loadFeatures()">Load Features</button>
-            <div id="featuresResult"></div>
-        </div>
-        
-        <!-- Categories -->
-        <div class="section">
-            <h2>Feature Categories</h2>
-            <div class="info-tip">
-                <span class="tip-icon">i</span>
-                <strong>Tip:</strong> The system is designed for three types of features. Green dots indicate implemented components, yellow dots show placeholders ready for team development. Currently, only pragmatic/conversational features are fully implemented and production-ready.
+            
+            <!-- Feature Inspection -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Feature Inspection</h2>
+                    <span class="card-badge badge-implemented">Debug Mode</span>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                    Upload a file to see where each feature is extracted from. Useful for verifying feature extraction algorithms.
+                </p>
+                
+                <div class="upload-area" id="inspectUploadArea" style="max-width: 400px;">
+                    <div class="upload-text">Drop file to inspect</div>
+                    <div class="upload-hint">Supports: .wav, .cha, .txt</div>
+                </div>
+                <input type="file" class="file-input-hidden" id="inspectFileInput" accept=".wav,.cha,.txt">
+                
+                <div id="inspectionResults" style="margin-top: 16px;"></div>
             </div>
-            <button onclick="loadCategories()">Load Categories</button>
-            <div id="categoriesResult"></div>
-        </div>
-        
-        <!-- Models -->
-        <div class="section">
-            <h2>Available Models</h2>
-            <div class="info-tip">
-                <span class="tip-icon">i</span>
-                <strong>Tip:</strong> This shows all trained machine learning models available for predictions. If no models appear, you need to train them first using the training scripts. Each model uses different algorithms and may perform differently on various types of speech patterns.
+            
+            <!-- Component Status -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Component Status</h2>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="component-card implemented">
+                        <div class="component-name">Pragmatic & Conversational</div>
+                        <div class="component-desc">Turn-taking, topic coherence, pause analysis, repair detection, pragmatic markers</div>
+                        <div style="margin-top: 8px;">
+                            <span class="card-badge badge-implemented">Implemented</span>
+                        </div>
+                    </div>
+                    
+                    <div class="component-card placeholder">
+                        <div class="component-name">Acoustic & Prosodic</div>
+                        <div class="component-desc">Pitch, prosody, voice quality, spectral features (Team Member A)</div>
+                        <div style="margin-top: 8px;">
+                            <span class="card-badge badge-placeholder">Placeholder</span>
+                        </div>
+                    </div>
+                    
+                    <div class="component-card placeholder">
+                        <div class="component-name">Syntactic & Semantic</div>
+                        <div class="component-desc">POS analysis, dependency parsing, semantic coherence (Team Member B)</div>
+                        <div style="margin-top: 8px;">
+                            <span class="card-badge badge-placeholder">Placeholder</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button onclick="loadModels()">Load Models</button>
-            <div id="modelsResult"></div>
+            
+            <!-- Available Features -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Available Features</h2>
+                    <button class="btn btn-secondary" onclick="loadFeatures()">Load Features</button>
+                </div>
+                <div class="feature-grid" id="featureGrid">
+                    <div style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary); padding: 20px;">
+                        Click Load Features to view all available features
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
+    
     <script>
+        // API URL
         function getApiUrl() {
             return document.getElementById('apiUrl').value.replace(/\/$/, '');
         }
         
-        function showResult(elementId, content, type = 'info') {
-            const element = document.getElementById(elementId);
-            element.innerHTML = `<div class="result ${type}">${content}</div>`;
+        // Mode switching
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const mode = btn.dataset.mode;
+                document.querySelectorAll('.mode-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(mode + 'Mode').classList.add('active');
+            });
+        });
+        
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const inputType = tab.dataset.input;
+                document.querySelectorAll('.input-panel').forEach(p => p.style.display = 'none');
+                document.getElementById(inputType + 'Panel').style.display = 'block';
+            });
+        });
+        
+        // File upload handling
+        function setupUploadArea(areaId, inputId, selectedId, allowedExtensions) {
+            const area = document.getElementById(areaId);
+            const input = document.getElementById(inputId);
+            const selected = document.getElementById(selectedId);
+            
+            area.addEventListener('click', () => input.click());
+            
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.classList.add('dragover');
+            });
+            
+            area.addEventListener('dragleave', () => {
+                area.classList.remove('dragover');
+            });
+            
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                area.classList.remove('dragover');
+                
+                const file = e.dataTransfer.files[0];
+                if (file) {
+                    handleFileSelect(file, input, selected, allowedExtensions);
+                }
+            });
+            
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    handleFileSelect(file, input, selected, allowedExtensions);
+                }
+            });
         }
         
-        function showLoading(elementId) {
-            const element = document.getElementById(elementId);
-            element.innerHTML = '<div class="result loading">Loading...</div>';
+        function handleFileSelect(file, input, selected, allowedExtensions) {
+            const ext = '.' + file.name.split('.').pop().toLowerCase();
+            if (!allowedExtensions.includes(ext)) {
+                alert('Invalid file type. Allowed: ' + allowedExtensions.join(', '));
+                return;
+            }
+            
+            selected.textContent = 'Selected: ' + file.name;
+            
+            // Enable the corresponding predict button
+            if (input.id === 'audioFileInput') {
+                document.getElementById('predictAudioBtn').disabled = false;
+            } else if (input.id === 'chaFileInput') {
+                document.getElementById('predictChaBtn').disabled = false;
+            }
         }
         
+        setupUploadArea('audioUploadArea', 'audioFileInput', 'selectedAudioFile', ['.wav', '.mp3', '.flac']);
+        setupUploadArea('chaUploadArea', 'chaFileInput', 'selectedChaFile', ['.cha']);
+        setupUploadArea('inspectUploadArea', 'inspectFileInput', 'inspectionResults', ['.wav', '.cha', '.txt']);
+        
+        // API calls
         async function testConnection() {
-            showLoading('connectionResult');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
             
             try {
                 const response = await fetch(`${getApiUrl()}/health`);
                 if (response.ok) {
-                    showResult('connectionResult', 'Connection successful! API is running.', 'success');
+                    const data = await response.json();
+                    statusDot.className = 'status-dot status-connected';
+                    statusText.textContent = `Connected (${data.models_available} models, ${data.features_supported} features)`;
                 } else {
-                    showResult('connectionResult', `Connection failed. Status: ${response.status}`, 'error');
+                    throw new Error('Not healthy');
                 }
             } catch (error) {
-                showResult('connectionResult', `Connection error: ${error.message}`, 'error');
+                statusDot.className = 'status-dot status-disconnected';
+                statusText.textContent = 'Disconnected';
             }
         }
         
-        async function makePrediction() {
-            const participantId = document.getElementById('participantId').value;
-            const transcript = document.getElementById('transcript').value;
-            const modelType = document.getElementById('modelType').value;
+        async function predictFromAudio() {
+            const fileInput = document.getElementById('audioFileInput');
+            const participantId = document.getElementById('audioParticipantId').value || 'CHI';
             
-            if (!participantId || !transcript) {
-                showResult('predictionResult', 'Please fill in Participant ID and Transcript.', 'error');
+            if (!fileInput.files[0]) {
+                alert('Please select an audio file');
                 return;
             }
             
-            showLoading('predictionResult');
+            showLoading('resultsArea');
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('participant_id', participantId);
             
             try {
-                const response = await fetch(`${getApiUrl()}/predict`, {
+                const response = await fetch(`${getApiUrl()}/predict/audio`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        participant_id: participantId,
-                        transcript: transcript,
-                        model_type: modelType
-                    })
+                    body: formData
                 });
                 
                 const data = await response.json();
                 
                 if (response.ok) {
-                    const result = `Prediction: ${data.prediction}\nConfidence: ${(data.confidence * 100).toFixed(2)}%\nModel: ${data.model_type}\nFeatures used: ${data.features_count}`;
-                    showResult('predictionResult', result, 'success');
+                    displayResults(data);
                 } else {
-                    showResult('predictionResult', `Error: ${data.detail || 'Unknown error'}`, 'error');
+                    displayError(data.detail || 'Prediction failed');
                 }
             } catch (error) {
-                showResult('predictionResult', `Request error: ${error.message}`, 'error');
+                displayError('Connection error: ' + error.message);
             }
         }
         
+        async function predictFromText() {
+            const text = document.getElementById('textInput').value;
+            
+            if (!text.trim()) {
+                alert('Please enter some text');
+                return;
+            }
+            
+            showLoading('resultsArea');
+            
+            try {
+                const response = await fetch(`${getApiUrl()}/predict/text`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: text, participant_id: 'CHI' })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults(data);
+                } else {
+                    displayError(data.detail || 'Prediction failed');
+                }
+            } catch (error) {
+                displayError('Connection error: ' + error.message);
+            }
+        }
+        
+        async function predictFromChatFile() {
+            const fileInput = document.getElementById('chaFileInput');
+            
+            if (!fileInput.files[0]) {
+                alert('Please select a CHAT file');
+                return;
+            }
+            
+            showLoading('resultsArea');
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            
+            try {
+                const response = await fetch(`${getApiUrl()}/predict/transcript`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults(data);
+                } else {
+                    displayError(data.detail || 'Prediction failed');
+                }
+            } catch (error) {
+                displayError('Connection error: ' + error.message);
+            }
+        }
+        
+        function showLoading(elementId) {
+            document.getElementById(elementId).innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <div class="spinner" style="margin: 0 auto 16px;"></div>
+                    <div style="color: var(--text-secondary);">Analyzing...</div>
+                </div>
+            `;
+        }
+        
+        function displayResults(data) {
+            const isAsd = data.prediction === 'ASD';
+            const confidence = (data.confidence * 100).toFixed(1);
+            
+            document.getElementById('resultsArea').innerHTML = `
+                <div class="result-header">
+                    <span class="prediction-badge ${isAsd ? 'prediction-asd' : 'prediction-td'}">
+                        ${data.prediction}
+                    </span>
+                    <span style="color: var(--text-secondary);">
+                        ${data.features_extracted} features analyzed
+                    </span>
+                </div>
+                
+                <div style="margin: 16px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span>Confidence</span>
+                        <span>${confidence}%</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${confidence}%; background: ${isAsd ? 'var(--accent-red)' : 'var(--accent-green)'};"></div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 16px; margin-top: 16px;">
+                    <div style="flex: 1; text-align: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
+                        <div style="font-size: 20px; font-weight: 600; color: var(--accent-red);">
+                            ${(data.probabilities.ASD * 100).toFixed(1)}%
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">ASD Probability</div>
+                    </div>
+                    <div style="flex: 1; text-align: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
+                        <div style="font-size: 20px; font-weight: 600; color: var(--accent-green);">
+                            ${(data.probabilities.TD * 100).toFixed(1)}%
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">TD Probability</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 16px; font-size: 12px; color: var(--text-secondary);">
+                    Model: ${data.model_used} | Input: ${data.input_type}
+                    ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
+                </div>
+            `;
+            
+            // Show annotated transcript
+            if (data.annotated_transcript_html) {
+                document.getElementById('annotationCard').style.display = 'block';
+                document.getElementById('annotatedTranscript').innerHTML = data.annotated_transcript_html;
+            }
+        }
+        
+        function displayError(message) {
+            document.getElementById('resultsArea').innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--accent-red);">
+                    <div style="font-size: 24px; margin-bottom: 8px;">!</div>
+                    <div>${message}</div>
+                </div>
+            `;
+        }
+        
+        // Training mode functions
+        async function loadDatasets() {
+            const listEl = document.getElementById('datasetList');
+            listEl.innerHTML = '<div style="text-align: center; padding: 20px;"><div class="spinner" style="margin: 0 auto;"></div></div>';
+            
+            try {
+                const response = await fetch(`${getApiUrl()}/training/datasets`);
+                const data = await response.json();
+                
+                if (data.datasets && data.datasets.length > 0) {
+                    listEl.innerHTML = data.datasets.map(ds => `
+                        <div class="dataset-item">
+                            <input type="checkbox" class="dataset-checkbox" value="${ds.path}">
+                            <div class="dataset-info">
+                                <div class="dataset-name">${ds.name}</div>
+                                <div class="dataset-stats">${ds.chat_files} CHAT files, ${ds.audio_files} audio files</div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    listEl.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">No datasets found</div>';
+                }
+            } catch (error) {
+                listEl.innerHTML = `<div style="color: var(--accent-red); padding: 20px;">Error loading datasets: ${error.message}</div>`;
+            }
+        }
+        
+        async function extractFeatures() {
+            const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
+            
+            if (selectedDatasets.length === 0) {
+                alert('Please select at least one dataset');
+                return;
+            }
+            
+            const statusEl = document.getElementById('trainingStatus');
+            const statusContent = document.getElementById('trainingStatusContent');
+            statusEl.style.display = 'block';
+            statusContent.innerHTML = '<div class="spinner" style="margin: 0 auto;"></div>';
+            
+            try {
+                const response = await fetch(`${getApiUrl()}/training/extract-features`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dataset_paths: selectedDatasets })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusContent.innerHTML = `
+                        <div style="color: var(--accent-green);">Feature extraction complete!</div>
+                        <div style="margin-top: 8px; color: var(--text-secondary);">
+                            ${data.total_samples} samples, ${data.features_count} features
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">
+                            Output: ${data.output_file}
+                        </div>
+                    `;
+                } else {
+                    statusContent.innerHTML = `<div style="color: var(--accent-red);">${data.detail}</div>`;
+                }
+            } catch (error) {
+                statusContent.innerHTML = `<div style="color: var(--accent-red);">Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function startTraining() {
+            alert('Training functionality will be available in a future update. For now, use the example training scripts.');
+        }
+        
         async function loadFeatures() {
-            showLoading('featuresResult');
+            const gridEl = document.getElementById('featureGrid');
+            gridEl.innerHTML = '<div style="grid-column: 1 / -1; text-align: center;"><div class="spinner" style="margin: 0 auto;"></div></div>';
             
             try {
                 const response = await fetch(`${getApiUrl()}/features`);
                 const data = await response.json();
                 
-                if (response.ok) {
-                    let html = `<h3>Total Features: ${data.count}</h3>`;
-                    html += '<div class="feature-list">';
-                    
-                    data.features.forEach(feature => {
-                        html += `<div class="feature-item">${feature}</div>`;
-                    });
-                    
-                    html += '</div>';
-                    
-                    document.getElementById('featuresResult').innerHTML = html;
+                if (data.features && data.features.length > 0) {
+                    gridEl.innerHTML = data.features.map(f => `<div class="feature-item">${f}</div>`).join('');
                 } else {
-                    showResult('featuresResult', `Error: ${data.detail || 'Unknown error'}`, 'error');
+                    gridEl.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary);">No features found</div>';
                 }
             } catch (error) {
-                showResult('featuresResult', `Request error: ${error.message}`, 'error');
+                gridEl.innerHTML = `<div style="grid-column: 1 / -1; color: var(--accent-red);">Error: ${error.message}</div>`;
             }
         }
         
-        async function loadCategories() {
-            showLoading('categoriesResult');
+        // Inspect file handling
+        document.getElementById('inspectFileInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const resultsEl = document.getElementById('inspectionResults');
+            resultsEl.innerHTML = '<div class="spinner" style="margin: 16px auto;"></div>';
+            
+            const formData = new FormData();
+            formData.append('file', file);
             
             try {
-                const response = await fetch(`${getApiUrl()}/categories`);
+                const response = await fetch(`${getApiUrl()}/training/inspect-features`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
                 const data = await response.json();
                 
                 if (response.ok) {
-                    let html = '<h3>Feature Categories Status:</h3>';
-                    
-                    Object.entries(data.categories).forEach(([key, category]) => {
-                        const statusClass = category.status === 'implemented' ? 'status-implemented' : 'status-placeholder';
-                        const statusText = category.status === 'implemented' ? 'Implemented' : 'Placeholder';
-                        
-                        html += `
-                            <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-                                <h4><span class="status-indicator ${statusClass}"></span>${category.name}</h4>
-                                <p><strong>Status:</strong> ${statusText}</p>
-                                <p><strong>Team:</strong> ${category.team}</p>
-                                <p><strong>Description:</strong> ${category.description}</p>
-                                <p><strong>Examples:</strong> ${category.examples.join(', ')}</p>
-                            </div>
-                        `;
-                    });
-                    
-                    document.getElementById('categoriesResult').innerHTML = html;
+                    resultsEl.innerHTML = `
+                        <div class="result-area">
+                            <div><strong>Participant:</strong> ${data.participant_id}</div>
+                            <div><strong>Input Type:</strong> ${data.input_type}</div>
+                            <div><strong>Features Extracted:</strong> ${data.total_features}</div>
+                            <div><strong>Utterances:</strong> ${data.utterance_count}</div>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <h4 style="margin-bottom: 8px;">Annotated Transcript:</h4>
+                            <div class="annotated-transcript">${data.annotated_transcript_html}</div>
+                        </div>
+                    `;
                 } else {
-                    showResult('categoriesResult', `Error: ${data.detail || 'Unknown error'}`, 'error');
+                    resultsEl.innerHTML = `<div style="color: var(--accent-red);">${data.detail}</div>`;
                 }
             } catch (error) {
-                showResult('categoriesResult', `Request error: ${error.message}`, 'error');
+                resultsEl.innerHTML = `<div style="color: var(--accent-red);">Error: ${error.message}</div>`;
             }
-        }
-        
-        async function loadModels() {
-            showLoading('modelsResult');
-            
-            try {
-                const response = await fetch(`${getApiUrl()}/models`);
-                const data = await response.json();
-                
-                if (response.ok) {
-                    let html = '<h3>Available Models:</h3>';
-                    
-                    if (data.models && data.models.length > 0) {
-                        data.models.forEach(model => {
-                            html += `
-                                <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-                                    <strong>${model.name}</strong><br>
-                                    Type: ${model.type}<br>
-                                    Status: ${model.status}<br>
-                                    Features: ${model.features_count}
-                                </div>
-                            `;
-                        });
-                    } else {
-                        html += '<p>No models available. Train models first using the API.</p>';
-                    }
-                    
-                    document.getElementById('modelsResult').innerHTML = html;
-                } else {
-                    showResult('modelsResult', `Error: ${data.detail || 'Unknown error'}`, 'error');
-                }
-            } catch (error) {
-                showResult('modelsResult', `Request error: ${error.message}`, 'error');
-            }
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Test connection on page load
-            setTimeout(testConnection, 500);
         });
+        
+        // Test connection on load
+        setTimeout(testConnection, 500);
     </script>
 </body>
 </html>

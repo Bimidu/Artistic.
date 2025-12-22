@@ -25,7 +25,7 @@ Section 3.3.4: Conversational Repair Detection (repair_detection.py)
   - Clarification requests
   - Repair success rate
 
-=== SUPPORTING EXTRACTOR ===
+=== SUPPORTING EXTRACTORS ===
 
 Pragmatic & Linguistic Features (pragmatic_linguistic.py)
   - MLU and vocabulary diversity
@@ -33,6 +33,12 @@ Pragmatic & Linguistic Features (pragmatic_linguistic.py)
   - Pronoun usage and reversal
   - Question usage, social language
   - Discourse markers, behavioral markers
+
+Audio Features (audio_features.py)
+  - Pause patterns from audio timing
+  - Response latency from audio
+  - Speaking rate from audio
+  - Turn-taking timing from audio segments
 
 Note: Syntactic/semantic features (POS analysis, dependency parsing) are 
 handled by the dedicated syntactic_semantic module.
@@ -46,8 +52,9 @@ from .topic_coherence import TopicCoherenceFeatures
 from .pause_latency import PauseLatencyFeatures
 from .repair_detection import RepairDetectionFeatures
 
-# Consolidated supporting extractor
+# Consolidated supporting extractors
 from .pragmatic_linguistic import PragmaticLinguisticFeatures
+from .audio_features import PragmaticAudioFeatures, PauseInfo
 
 __all__ = [
     # Methodology-aligned (Sections 3.3.1 - 3.3.4)
@@ -56,11 +63,13 @@ __all__ = [
     "PauseLatencyFeatures",       # Section 3.3.3
     "RepairDetectionFeatures",    # Section 3.3.4
     
-    # Consolidated supporting extractor
+    # Supporting extractors
     "PragmaticLinguisticFeatures",
+    "PragmaticAudioFeatures",     # Audio-derived pragmatic features
+    "PauseInfo",                  # Pause data structure
 ]
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __status__ = "implemented"
 __team__ = "ASD Detection Team"
 
@@ -70,7 +79,8 @@ FEATURE_COUNTS = {
     'topic_coherence': 28,       # Section 3.3.2
     'pause_latency': 34,         # Section 3.3.3
     'repair_detection': 35,      # Section 3.3.4
-    'pragmatic_linguistic': 35,  # Supporting (consolidated)
+    'pragmatic_linguistic': 35,  # Supporting (text)
+    'pragmatic_audio': 30,       # Supporting (audio)
 }
 
 __feature_count__ = sum(FEATURE_COUNTS.values())

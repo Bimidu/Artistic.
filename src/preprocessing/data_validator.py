@@ -78,7 +78,7 @@ class ValidationReport:
         print("DATA VALIDATION REPORT")
         print("="*70)
         
-        status = "✓ VALID" if self.is_valid else "✗ INVALID"
+        status = "[OK] VALID" if self.is_valid else "[X] INVALID"
         print(f"\nStatus: {status}")
         print(f"Total Samples: {self.total_samples}")
         print(f"Total Features: {self.total_features}")

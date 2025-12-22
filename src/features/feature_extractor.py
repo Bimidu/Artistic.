@@ -42,6 +42,7 @@ from .pragmatic_conversational import (
     PauseLatencyFeatures,        # Section 3.3.3
     RepairDetectionFeatures,     # Section 3.3.4
     PragmaticLinguisticFeatures, # Supporting
+    PragmaticAudioFeatures,      # Audio-derived features
 )
 
 # Placeholder modules for other team members
@@ -49,6 +50,11 @@ try:
     from .syntactic_semantic import SyntacticSemanticFeatures
 except ImportError:
     SyntacticSemanticFeatures = None
+
+try:
+    from .acoustic_prosodic.audio_features import AcousticAudioFeatures
+except ImportError:
+    AcousticAudioFeatures = None
 
 logger = get_logger(__name__)
 
@@ -145,10 +151,15 @@ class FeatureExtractor:
             'description': 'Conversational Repair Detection',
             'status': 'implemented',
         },
-        # Supporting category (consolidated)
+        # Supporting categories
         'pragmatic_linguistic': {
             'section': 'supporting',
             'description': 'Pragmatic & Linguistic Features (MLU, echolalia, pronouns, etc.)',
+            'status': 'implemented',
+        },
+        'pragmatic_audio': {
+            'section': 'supporting',
+            'description': 'Audio-derived pragmatic features (pauses, timing)',
             'status': 'implemented',
         },
         # Placeholder categories for other team members
@@ -170,7 +181,7 @@ class FeatureExtractor:
     METHODOLOGY_CATEGORIES = [
         'turn_taking', 'topic_coherence', 'pause_latency', 'repair_detection'
     ]
-    SUPPORTING_CATEGORIES = ['pragmatic_linguistic']
+    SUPPORTING_CATEGORIES = ['pragmatic_linguistic', 'pragmatic_audio']
     ALL_IMPLEMENTED = METHODOLOGY_CATEGORIES + SUPPORTING_CATEGORIES
     
     def __init__(
@@ -251,6 +262,11 @@ class FeatureExtractor:
         if 'pragmatic_linguistic' in self.active_categories:
             self.extractors['pragmatic_linguistic'] = PragmaticLinguisticFeatures()
             logger.debug("Initialized PragmaticLinguisticFeatures (Supporting)")
+        
+        # Supporting: Audio-derived pragmatic features
+        if 'pragmatic_audio' in self.active_categories:
+            self.extractors['pragmatic_audio'] = PragmaticAudioFeatures()
+            logger.debug("Initialized PragmaticAudioFeatures (Audio)")
         
         # Syntactic/Semantic (if available and requested)
         if 'syntactic_semantic' in self.active_categories:
@@ -351,6 +367,90 @@ class FeatureExtractor:
         logger.debug(
             f"Extracted {len(all_features)} total features from "
             f"{len(extracted_categories)} categories"
+        )
+        
+        return feature_set
+    
+    def extract_with_audio(
+        self,
+        transcript: TranscriptData,
+        audio_path: Optional[Path] = None,
+        transcription_result: Optional[Any] = None,
+        categories: Optional[List[str]] = None
+    ) -> FeatureSet:
+        """
+        Extract features with audio support.
+        
+        This method extracts both text-based and audio-based features.
+        Audio features are extracted by the pragmatic_audio extractor
+        when audio_path or transcription_result is provided.
+        
+        Args:
+            transcript: Parsed transcript data
+            audio_path: Optional path to audio file
+            transcription_result: Optional TranscriptionResult with timing
+            categories: Optional override of categories to extract
+            
+        Returns:
+            FeatureSet with all extracted features including audio features
+        """
+        extract_categories = categories or list(self.extractors.keys())
+        
+        all_features = {}
+        extraction_metadata = {}
+        extracted_categories = []
+        
+        logger.debug(f"Extracting features with audio from {transcript.participant_id}")
+        
+        # Extract from each category
+        for category in extract_categories:
+            if category not in self.extractors:
+                logger.warning(f"Category '{category}' not initialized, skipping")
+                continue
+            
+            try:
+                extractor = self.extractors[category]
+                
+                # Special handling for audio extractor
+                if category == 'pragmatic_audio':
+                    result = extractor.extract(
+                        transcript,
+                        audio_path=audio_path,
+                        transcription_result=transcription_result
+                    )
+                else:
+                    result = extractor.extract(transcript)
+                
+                all_features.update(result.features)
+                extraction_metadata[category] = result.metadata
+                extracted_categories.append(category)
+                
+                logger.debug(
+                    f"Extracted {len(result.features)} features from {category}"
+                )
+                
+            except Exception as e:
+                logger.error(f"Error extracting {category} features: {e}")
+        
+        # Create FeatureSet
+        feature_set = FeatureSet(
+            participant_id=transcript.participant_id,
+            file_path=transcript.file_path,
+            diagnosis=transcript.diagnosis,
+            age_months=transcript.age_months,
+            features=all_features,
+            metadata={
+                'total_utterances': transcript.total_utterances,
+                'extraction_metadata': extraction_metadata,
+                'audio_path': str(audio_path) if audio_path else None,
+                'has_audio': audio_path is not None,
+            },
+            feature_categories=extracted_categories
+        )
+        
+        logger.debug(
+            f"Extracted {len(all_features)} total features from "
+            f"{len(extracted_categories)} categories (with audio)"
         )
         
         return feature_set
