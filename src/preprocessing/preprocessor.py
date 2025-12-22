@@ -512,7 +512,7 @@ class DataPreprocessor:
         
         if 'validation' in summary:
             print(f"\nValidation:")
-            print(f"  Status: {'✓ Valid' if summary['validation']['is_valid'] else '✗ Invalid'}")
+            print(f"  Status: {'[OK] Valid' if summary['validation']['is_valid'] else '[X] Invalid'}")
             print(f"  Samples: {summary['validation']['total_samples']}")
             print(f"  Warnings: {summary['validation']['warnings']}")
             print(f"  Errors: {summary['validation']['errors']}")
