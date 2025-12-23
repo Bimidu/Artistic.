@@ -124,32 +124,38 @@ class DataCleaner:
     ) -> pd.DataFrame:
         """Handle missing values in features."""
         df_clean = df.copy()
-        
-        # Check for missing values
-        missing_counts = df_clean[feature_columns].isna().sum()
+
+        # Filter to only numeric feature columns for imputation
+        numeric_feature_columns = [
+            col for col in feature_columns
+            if col in df_clean.select_dtypes(include=[np.number]).columns
+        ]
+
+        # Check for missing values in numeric columns
+        missing_counts = df_clean[numeric_feature_columns].isna().sum()
         features_with_missing = missing_counts[missing_counts > 0]
-        
+
         if len(features_with_missing) == 0:
             self.logger.info("No missing values found")
             return df_clean
-        
+
         self.logger.info(
             f"Found missing values in {len(features_with_missing)} features"
         )
-        
+
         # Handle based on strategy
         if self.missing_strategy == 'drop':
             # Drop rows with any missing values
-            df_clean = df_clean.dropna(subset=feature_columns)
+            df_clean = df_clean.dropna(subset=numeric_feature_columns)
             self.logger.info(f"Dropped rows with missing values - New shape: {df_clean.shape}")
-        
+
         elif self.imputer is not None:
-            # Impute missing values
-            df_clean[feature_columns] = self.imputer.fit_transform(
-                df_clean[feature_columns]
+            # Impute missing values (only on numeric columns)
+            df_clean[numeric_feature_columns] = self.imputer.fit_transform(
+                df_clean[numeric_feature_columns]
             )
             self.logger.info(f"Imputed missing values using {self.missing_strategy}")
-        
+
         return df_clean
     
     def _handle_outliers(

@@ -120,10 +120,10 @@ class SyntacticSemanticPreprocessor:
         """
         self.logger.info(f"Preprocessing syntactic/semantic data (IMPLEMENTED)")
 
-        # Identify feature columns
+        # Identify feature columns (exclude metadata and target)
         self.feature_columns_ = [
             col for col in df.columns
-            if col not in [self.target_column, 'participant_id', 'file_path']
+            if col not in [self.target_column, 'participant_id', 'file_path', 'dataset', 'age_months']
         ]
 
         # Validate data if requested
@@ -133,6 +133,11 @@ class SyntacticSemanticPreprocessor:
 
         # Clean data
         df_clean = self.clean_syntactic_semantic_features(df)
+        
+        # Normalize diagnosis: TYP and TD both represent typically developing children
+        if self.target_column in df_clean.columns:
+            df_clean[self.target_column] = df_clean[self.target_column].replace('TYP', 'TD')
+            self.logger.info("Normalized diagnosis labels (TYP → TD)")
 
         # Prepare features and target
         X = df_clean[self.feature_columns_]
@@ -155,7 +160,7 @@ class SyntacticSemanticPreprocessor:
         if self.feature_selection and self.selector:
             # Select features using training data
             self.selected_features_ = self.select_syntactic_semantic_features(
-                X_train, y_train, self.feature_columns_
+                X_train, y_train
             )
 
             # Apply selection to both train and test
@@ -407,8 +412,7 @@ class SyntacticSemanticPreprocessor:
     def select_syntactic_semantic_features(
         self,
         X: pd.DataFrame,
-        y: pd.Series,
-        feature_names: List[str]
+        y: pd.Series
     ) -> List[str]:
         """
         Select optimal syntactic/semantic features (FULLY IMPLEMENTED).
@@ -416,16 +420,15 @@ class SyntacticSemanticPreprocessor:
         Args:
             X: Feature DataFrame
             y: Target Series
-            feature_names: List of feature names
 
         Returns:
             List of selected feature names
         """
         self.logger.info("Selecting syntactic/semantic features (IMPLEMENTED)")
 
-        # Use feature selector
-        selected_features = self.selector.select_features(
-            X, y, feature_names, self.n_features
+        # Use feature selector - select k best features
+        selected_features = self.selector.select_k_best(
+            X, y, k=self.n_features
         )
 
         self.logger.info(

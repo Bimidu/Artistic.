@@ -381,11 +381,16 @@ class FeatureExtractor:
             try:
                 # Parse transcript
                 transcript = parser.parse_file(file_path)
-                
+
+                # Skip transcripts with no utterances (e.g., due to alignment errors)
+                if transcript.total_utterances == 0:
+                    logger.warning(f"Skipping {file_path.name}: no utterances found")
+                    continue
+
                 # Extract features
                 feature_set = self.extract_from_transcript(transcript)
                 feature_sets.append(feature_set.to_dict())
-                
+
             except Exception as e:
                 logger.error(f"Error processing {file_path.name}: {e}")
                 errors.append((file_path, str(e)))

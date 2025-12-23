@@ -80,6 +80,11 @@ def extract_features_from_data():
 
     print(f"\nExtracted features from {len(df)} transcripts")
     print(f"Total features: {len([c for c in df.columns if c not in ['participant_id', 'file_path', 'diagnosis', 'age_months']])}")
+    
+    # Normalize diagnosis: TYP and TD both represent typically developing children
+    if 'diagnosis' in df.columns:
+        df['diagnosis'] = df['diagnosis'].replace('TYP', 'TD')
+        print(f"\nNormalized diagnosis labels (TYP → TD)")
 
     return df
 
