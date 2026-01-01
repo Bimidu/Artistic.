@@ -248,7 +248,6 @@ class InputHandler:
         return ProcessedInput(
             input_type=InputType.CHAT_FILE,
             transcript_data=transcript,
-            audio_features=None,
             raw_text=raw_text,
             source_path=chat_path,
             metadata={
@@ -311,7 +310,6 @@ class InputHandler:
         return ProcessedInput(
             input_type=InputType.TEXT,
             transcript_data=transcript,
-            audio_features=None,
             raw_text=text,
             source_path=source_path,
             metadata={'sentence_count': len(sentences)}
