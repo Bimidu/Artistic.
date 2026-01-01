@@ -4,598 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASD Detection System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --border-color: #30363d;
-            --text-primary: #c9d1d9;
-            --text-secondary: #8b949e;
-            --accent-blue: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-red: #f85149;
-            --accent-orange: #d29922;
-            --accent-purple: #a371f7;
-            --accent-pink: #db61a2;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-        }
-        
-        /* Header */
-        .header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .mode-switcher {
-            display: flex;
-            gap: 8px;
-            background: var(--bg-tertiary);
-            padding: 4px;
-            border-radius: 8px;
-        }
-        
-        .mode-btn {
-            padding: 8px 20px;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .mode-btn.active {
-            background: var(--accent-blue);
-            color: white;
-        }
-        
-        .mode-btn:hover:not(.active) {
-            background: var(--border-color);
-            color: var(--text-primary);
-        }
-        
-        /* Main container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 24px;
-        }
-        
-        /* Mode content */
-        .mode-content {
-            display: none;
-        }
-        
-        .mode-content.active {
-            display: block;
-        }
-        
-        /* Cards */
-        .card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .card-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .badge-implemented {
-            background: rgba(63, 185, 80, 0.15);
-            color: var(--accent-green);
-        }
-        
-        .badge-placeholder {
-            background: rgba(210, 153, 34, 0.15);
-            color: var(--accent-orange);
-        }
-        
-        /* Form elements */
-        .form-group {
-            margin-bottom: 16px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-        
-        .form-input, .form-textarea, .form-select {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 14px;
-            transition: border-color 0.2s ease;
-        }
-        
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-        }
-        
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        /* Upload area */
-        .upload-area {
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .upload-area:hover {
-            border-color: var(--accent-blue);
-            background: rgba(88, 166, 255, 0.05);
-        }
-        
-        .upload-area.dragover {
-            border-color: var(--accent-green);
-            background: rgba(63, 185, 80, 0.1);
-        }
-        
-        .upload-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        
-        .upload-text {
-            font-size: 16px;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-        
-        .upload-hint {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        
-        /* Buttons */
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn-primary {
-            background: var(--accent-blue);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #4c9aed;
-        }
-        
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--border-color);
-        }
-        
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        /* Results area */
-        .result-area {
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 16px;
-        }
-        
-        .result-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        
-        .prediction-badge {
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .prediction-asd {
-            background: rgba(248, 81, 73, 0.15);
-            color: var(--accent-red);
-        }
-        
-        .prediction-td {
-            background: rgba(63, 185, 80, 0.15);
-            color: var(--accent-green);
-        }
-        
-        .confidence-bar {
-            height: 8px;
-            background: var(--bg-primary);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 12px 0;
-        }
-        
-        .confidence-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-        
-        /* Annotated transcript */
-        .annotated-transcript {
-            background: var(--bg-primary);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 16px;
-            max-height: 400px;
-            overflow-y: auto;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-        
-        /* Grid layouts */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-        
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-        
-        @media (max-width: 900px) {
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
             }
         }
-        
-        /* Dataset list */
-        .dataset-list {
-            max-height: 300px;
-            overflow-y: auto;
+    </script>
+    <style>
+        .upload-area {
+            transition: all 0.2s ease;
         }
-        
-        .dataset-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid var(--border-color);
-            gap: 12px;
+        .upload-area.dragover {
+            border-color: #0ea5e9;
+            background-color: #f0f9ff;
         }
-        
-        .dataset-item:last-child {
-            border-bottom: none;
-        }
-        
-        .dataset-checkbox {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--accent-blue);
-        }
-        
-        .dataset-info {
-            flex: 1;
-        }
-        
-        .dataset-name {
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-        
-        .dataset-stats {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        
-        /* Feature list */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 8px;
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 8px;
-        }
-        
-        .feature-item {
-            padding: 8px 12px;
-            background: var(--bg-primary);
-            border-radius: 6px;
-            font-size: 12px;
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--text-secondary);
-        }
-        
-        /* Status indicators */
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-        }
-        
-        .status-connected {
-            background: var(--accent-green);
-        }
-        
-        .status-disconnected {
-            background: var(--accent-red);
-        }
-        
-        /* Connection status in header */
-        .connection-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        
-        /* Loading spinner */
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border-color);
-            border-top-color: var(--accent-blue);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .tab {
-            padding: 12px 20px;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -1px;
-            transition: all 0.2s ease;
-        }
-        
-        .tab.active {
-            color: var(--accent-blue);
-            border-bottom-color: var(--accent-blue);
-        }
-        
-        .tab:hover:not(.active) {
-            color: var(--text-primary);
-        }
-        
-        /* Component status cards */
-        .component-card {
-            padding: 16px;
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            border-left: 3px solid var(--border-color);
-        }
-        
-        .component-card.implemented {
-            border-left-color: var(--accent-green);
-        }
-        
-        .component-card.placeholder {
-            border-left-color: var(--accent-orange);
-        }
-        
-        .component-name {
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .component-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        
-        /* Hidden file input */
-        .file-input-hidden {
-            display: none;
-        }
-        
-        /* API URL input area */
-        .api-config {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        
-        .api-config .form-input {
-            flex: 1;
-            max-width: 300px;
+        .spinner {
+            border: 2px solid #e5e7eb;
+            border-top-color: #0ea5e9;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 0.8s linear infinite;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen font-sans">
     <!-- Header -->
-    <header class="header">
-        <div class="logo">ASD Detection System</div>
-        
-        <div class="mode-switcher">
-            <button class="mode-btn active" data-mode="user">User Mode</button>
-            <button class="mode-btn" data-mode="training">Training Mode</button>
-        </div>
-        
-        <div class="connection-status">
-            <span class="status-dot status-disconnected" id="statusDot"></span>
-            <span id="statusText">Disconnected</span>
+    <header class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="text-2xl font-semibold text-gray-900">Artistic</div>
+                    <div class="text-sm text-gray-500 hidden sm:block">ASD Detection System</div>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="flex gap-2 bg-gray-100 p-1 rounded-lg">
+                        <button class="mode-btn px-4 py-2 rounded-md text-sm font-medium transition-colors bg-white text-gray-900 shadow-sm" data-mode="user">User Mode</button>
+                        <button class="mode-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-900" data-mode="training">Training Mode</button>
+                    </div>
+                    
+                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                        <span class="w-2 h-2 rounded-full bg-red-500" id="statusDot"></span>
+                        <span id="statusText">Disconnected</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
     
-    <div class="container">
+    <div class="max-w-7xl mx-auto px-6 py-8">
         <!-- API Configuration -->
-        <div class="card">
-            <div class="api-config">
-                <label class="form-label" style="margin-bottom: 0;">API URL:</label>
-                <input type="text" class="form-input" id="apiUrl" value="http://localhost:8000">
-                <button class="btn btn-secondary" onclick="testConnection()">Test Connection</button>
+        <div class="bg-white rounded-lg border border-gray-200 p-4 mb-6 shadow-sm">
+            <div class="flex items-center gap-4">
+                <label class="text-sm font-medium text-gray-700 whitespace-nowrap">API URL:</label>
+                <input type="text" class="flex-1 max-w-xs px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" id="apiUrl" value="http://localhost:8000">
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors" onclick="testConnection()">Test Connection</button>
             </div>
         </div>
         
         <!-- User Mode -->
-        <div class="mode-content active" id="userMode">
-            <div class="grid-2">
+        <div class="mode-content" id="userMode">
+            <div class="grid lg:grid-cols-2 gap-6">
                 <!-- Input Section -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Analyze Speech</h2>
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-lg font-semibold text-gray-900">Analyze Speech</h2>
                     </div>
                     
-                    <div class="tabs">
-                        <button class="tab active" data-input="audio">Audio Upload</button>
-                        <button class="tab" data-input="text">Text Input</button>
-                        <button class="tab" data-input="file">CHAT File</button>
+                    <div class="border-b border-gray-200">
+                        <div class="flex px-6">
+                            <button class="tab px-4 py-3 text-sm font-medium border-b-2 border-primary-500 text-primary-600" data-input="audio">Audio Upload</button>
+                            <button class="tab px-4 py-3 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-gray-900" data-input="text">Text Input</button>
+                            <button class="tab px-4 py-3 text-sm font-medium border-b-2 border-transparent text-gray-600 hover:text-gray-900" data-input="file">CHAT File</button>
+                        </div>
                     </div>
                     
-                    <!-- Audio Upload -->
-                    <div class="input-panel active" id="audioPanel">
-                        <div class="upload-area" id="audioUploadArea">
-                            <div class="upload-icon">*</div>
-                            <div class="upload-text">Drop audio file here or click to browse</div>
-                            <div class="upload-hint">Supports: WAV, MP3, FLAC</div>
-                        </div>
-                        <input type="file" class="file-input-hidden" id="audioFileInput" accept=".wav,.mp3,.flac">
-                        <div id="selectedAudioFile" style="margin-top: 12px; color: var(--accent-blue);"></div>
-                        
-                        <div class="form-group" style="margin-top: 16px;">
-                            <label class="form-label">Participant ID (optional)</label>
-                            <input type="text" class="form-input" id="audioParticipantId" placeholder="CHI">
-                        </div>
-                        
-                        <button class="btn btn-primary" onclick="predictFromAudio()" id="predictAudioBtn" disabled>
-                            Analyze Audio
-                        </button>
-                    </div>
-                    
-                    <!-- Text Input -->
-                    <div class="input-panel" id="textPanel" style="display: none;">
-                        <div class="form-group">
-                            <label class="form-label">Speech Transcript</label>
-                            <textarea class="form-textarea" id="textInput" placeholder="Enter or paste the speech transcript here..."></textarea>
+                    <div class="p-6">
+                        <!-- Audio Upload -->
+                        <div class="input-panel" id="audioPanel">
+                            <div class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-10 text-center cursor-pointer hover:border-primary-400 hover:bg-gray-50" id="audioUploadArea">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <p class="mt-2 text-sm text-gray-700">Drop audio file here or click to browse</p>
+                                <p class="mt-1 text-xs text-gray-500">Supports: WAV, MP3, FLAC</p>
+                            </div>
+                            <input type="file" class="hidden" id="audioFileInput" accept=".wav,.mp3,.flac">
+                            <div id="selectedAudioFile" class="mt-3 text-sm text-primary-600"></div>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Participant ID (optional)</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" id="audioParticipantId" placeholder="CHI">
+                            </div>
+                            
+                            <button class="mt-4 w-full px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" onclick="predictFromAudio()" id="predictAudioBtn" disabled>
+                                Analyze Audio
+                            </button>
                         </div>
                         
-                        <button class="btn btn-primary" onclick="predictFromText()">
-                            Analyze Text
-                        </button>
-                    </div>
-                    
-                    <!-- CHAT File Upload -->
-                    <div class="input-panel" id="filePanel" style="display: none;">
-                        <div class="upload-area" id="chaUploadArea">
-                            <div class="upload-icon">#</div>
-                            <div class="upload-text">Drop CHAT file here or click to browse</div>
-                            <div class="upload-hint">Supports: .cha files</div>
+                        <!-- Text Input -->
+                        <div class="input-panel hidden" id="textPanel">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Speech Transcript</label>
+                                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" id="textInput" rows="6" placeholder="Enter or paste the speech transcript here..."></textarea>
+                            </div>
+                            
+                            <button class="mt-4 w-full px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700 transition-colors" onclick="predictFromText()">
+                                Analyze Text
+                            </button>
                         </div>
-                        <input type="file" class="file-input-hidden" id="chaFileInput" accept=".cha">
-                        <div id="selectedChaFile" style="margin-top: 12px; color: var(--accent-blue);"></div>
                         
-                        <button class="btn btn-primary" onclick="predictFromChatFile()" id="predictChaBtn" disabled style="margin-top: 16px;">
-                            Analyze File
-                        </button>
+                        <!-- CHAT File Upload -->
+                        <div class="input-panel hidden" id="filePanel">
+                            <div class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-10 text-center cursor-pointer hover:border-primary-400 hover:bg-gray-50" id="chaUploadArea">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <p class="mt-2 text-sm text-gray-700">Drop CHAT file here or click to browse</p>
+                                <p class="mt-1 text-xs text-gray-500">Supports: .cha files</p>
+                            </div>
+                            <input type="file" class="hidden" id="chaFileInput" accept=".cha">
+                            <div id="selectedChaFile" class="mt-3 text-sm text-primary-600"></div>
+                            
+                            <button class="mt-4 w-full px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" onclick="predictFromChatFile()" id="predictChaBtn" disabled>
+                                Analyze File
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Results Section -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Analysis Results</h2>
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-lg font-semibold text-gray-900">Analysis Results</h2>
                     </div>
                     
-                    <div id="resultsArea">
-                        <div style="text-align: center; color: var(--text-secondary); padding: 40px;">
+                    <div class="p-6" id="resultsArea">
+                        <div class="text-center py-12 text-gray-500 text-sm">
                             Upload an audio file or enter text to see analysis results
                         </div>
                     </div>
@@ -603,130 +174,152 @@
             </div>
             
             <!-- Annotated Transcript -->
-            <div class="card" id="annotationCard" style="display: none;">
-                <div class="card-header">
-                    <h2 class="card-title">Annotated Transcript</h2>
-                    <span class="card-badge badge-implemented">Feature Locations Marked</span>
+            <div class="mt-6 bg-white rounded-lg border border-gray-200 shadow-sm hidden" id="annotationCard">
+                <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900">Annotated Transcript</h2>
+                    <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">Feature Locations Marked</span>
                 </div>
-                <div id="annotatedTranscript" class="annotated-transcript"></div>
+                <div class="p-6">
+                    <div id="annotatedTranscript" class="bg-gray-50 rounded-lg p-4 max-h-96 overflow-y-auto font-mono text-sm leading-relaxed border border-gray-200"></div>
+                </div>
             </div>
         </div>
         
         <!-- Training Mode -->
-        <div class="mode-content" id="trainingMode">
-            <div class="grid-2">
+        <div class="mode-content hidden" id="trainingMode">
+            <div class="grid lg:grid-cols-2 gap-6">
                 <!-- Dataset Selection -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Dataset Selection</h2>
-                        <button class="btn btn-secondary" onclick="loadDatasets()">Refresh</button>
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                        <h2 class="text-lg font-semibold text-gray-900">Dataset Selection</h2>
+                        <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors" onclick="loadDatasets()">Refresh</button>
                     </div>
                     
-                    <div class="dataset-list" id="datasetList">
-                        <div style="text-align: center; color: var(--text-secondary); padding: 20px;">
-                            Click Refresh to load available datasets
+                    <div class="p-6">
+                        <div class="max-h-80 overflow-y-auto" id="datasetList">
+                            <div class="text-center py-8 text-gray-500 text-sm">
+                                Click Refresh to load available datasets
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Training Controls -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Training Controls</h2>
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <div class="border-b border-gray-200 px-6 py-4">
+                        <h2 class="text-lg font-semibold text-gray-900">Training Controls</h2>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="form-label">Component</label>
-                        <select class="form-select" id="trainingComponent">
-                            <option value="pragmatic_conversational">Pragmatic & Conversational (Implemented)</option>
-                            <option value="acoustic_prosodic" disabled>Acoustic & Prosodic (Placeholder)</option>
-                            <option value="syntactic_semantic" disabled>Syntactic & Semantic (Placeholder)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Model Types</label>
-                        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-                            <label><input type="checkbox" value="random_forest" checked> Random Forest</label>
-                            <label><input type="checkbox" value="xgboost" checked> XGBoost</label>
-                            <label><input type="checkbox" value="lightgbm"> LightGBM</label>
-                            <label><input type="checkbox" value="svm"> SVM</label>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Component</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" id="trainingComponent">
+                                <option value="pragmatic_conversational">Pragmatic & Conversational (Implemented)</option>
+                                <option value="acoustic_prosodic" disabled>Acoustic & Prosodic (Placeholder)</option>
+                                <option value="syntactic_semantic" disabled>Syntactic & Semantic (Placeholder)</option>
+                            </select>
                         </div>
-                    </div>
-                    
-                    <div style="display: flex; gap: 12px;">
-                        <button class="btn btn-primary" onclick="extractFeatures()">Extract Features</button>
-                        <button class="btn btn-primary" onclick="startTraining()">Start Training</button>
-                    </div>
-                    
-                    <div class="result-area" id="trainingStatus" style="margin-top: 16px; display: none;">
-                        <div id="trainingStatusContent"></div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Model Types</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="random_forest" checked class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                    <span class="ml-2 text-sm text-gray-700">Random Forest</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="xgboost" checked class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                    <span class="ml-2 text-sm text-gray-700">XGBoost</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="lightgbm" class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                    <span class="ml-2 text-sm text-gray-700">LightGBM</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="svm" class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                    <span class="ml-2 text-sm text-gray-700">SVM</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-3">
+                            <button class="flex-1 px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700 transition-colors" onclick="extractFeatures()">Extract Features</button>
+                            <button class="flex-1 px-4 py-2 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700 transition-colors" onclick="startTraining()">Start Training</button>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-50 rounded-lg p-4 border border-gray-200 hidden" id="trainingStatus">
+                            <div id="trainingStatusContent"></div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Feature Inspection -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Feature Inspection</h2>
-                    <span class="card-badge badge-implemented">Debug Mode</span>
+            <div class="mt-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+                <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900">Feature Inspection</h2>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">Debug Mode</span>
                 </div>
                 
-                <p style="color: var(--text-secondary); margin-bottom: 16px;">
-                    Upload a file to see where each feature is extracted from. Useful for verifying feature extraction algorithms.
-                </p>
-                
-                <div class="upload-area" id="inspectUploadArea" style="max-width: 400px;">
-                    <div class="upload-text">Drop file to inspect</div>
-                    <div class="upload-hint">Supports: .wav, .cha, .txt</div>
+                <div class="p-6">
+                    <p class="text-sm text-gray-600 mb-4">
+                        Upload a file to see where each feature is extracted from. Useful for verifying feature extraction algorithms.
+                    </p>
+                    
+                    <div class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-primary-400 hover:bg-gray-50 max-w-md" id="inspectUploadArea">
+                        <svg class="mx-auto h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <p class="mt-2 text-sm text-gray-700">Drop file to inspect</p>
+                        <p class="mt-1 text-xs text-gray-500">Supports: .wav, .cha, .txt</p>
+                    </div>
+                    <input type="file" class="hidden" id="inspectFileInput" accept=".wav,.cha,.txt">
+                    
+                    <div id="inspectionResults" class="mt-4"></div>
                 </div>
-                <input type="file" class="file-input-hidden" id="inspectFileInput" accept=".wav,.cha,.txt">
-                
-                <div id="inspectionResults" style="margin-top: 16px;"></div>
             </div>
             
             <!-- Component Status -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Component Status</h2>
+            <div class="mt-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+                <div class="border-b border-gray-200 px-6 py-4">
+                    <h2 class="text-lg font-semibold text-gray-900">Component Status</h2>
                 </div>
                 
-                <div class="grid-3">
-                    <div class="component-card implemented">
-                        <div class="component-name">Pragmatic & Conversational</div>
-                        <div class="component-desc">Turn-taking, topic coherence, pause analysis, repair detection, pragmatic markers</div>
-                        <div style="margin-top: 8px;">
-                            <span class="card-badge badge-implemented">Implemented</span>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-green-500">
+                            <div class="font-semibold text-gray-900 mb-2">Pragmatic & Conversational</div>
+                            <p class="text-sm text-gray-600 mb-3">Turn-taking, topic coherence, pause analysis, repair detection, pragmatic markers</p>
+                            <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">Implemented</span>
                         </div>
-                    </div>
-                    
-                    <div class="component-card placeholder">
-                        <div class="component-name">Acoustic & Prosodic</div>
-                        <div class="component-desc">Pitch, prosody, voice quality, spectral features (Team Member A)</div>
-                        <div style="margin-top: 8px;">
-                            <span class="card-badge badge-placeholder">Placeholder</span>
+                        
+                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-yellow-500">
+                            <div class="font-semibold text-gray-900 mb-2">Acoustic & Prosodic</div>
+                            <p class="text-sm text-gray-600 mb-3">Pitch, prosody, voice quality, spectral features (Team Member A)</p>
+                            <span class="px-3 py-1 bg-yellow-50 text-yellow-700 text-xs font-medium rounded-full">Placeholder</span>
                         </div>
-                    </div>
-                    
-                    <div class="component-card placeholder">
-                        <div class="component-name">Syntactic & Semantic</div>
-                        <div class="component-desc">POS analysis, dependency parsing, semantic coherence (Team Member B)</div>
-                        <div style="margin-top: 8px;">
-                            <span class="card-badge badge-placeholder">Placeholder</span>
+                        
+                        <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-yellow-500">
+                            <div class="font-semibold text-gray-900 mb-2">Syntactic & Semantic</div>
+                            <p class="text-sm text-gray-600 mb-3">POS analysis, dependency parsing, semantic coherence (Team Member B)</p>
+                            <span class="px-3 py-1 bg-yellow-50 text-yellow-700 text-xs font-medium rounded-full">Placeholder</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <!-- Available Features -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Available Features</h2>
-                    <button class="btn btn-secondary" onclick="loadFeatures()">Load Features</button>
+            <div class="mt-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+                <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900">Available Features</h2>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors" onclick="loadFeatures()">Load Features</button>
                 </div>
-                <div class="feature-grid" id="featureGrid">
-                    <div style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary); padding: 20px;">
-                        Click Load Features to view all available features
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 max-h-80 overflow-y-auto" id="featureGrid">
+                        <div class="col-span-full text-center py-8 text-gray-500 text-sm">
+                            Click Load Features to view all available features
+                        </div>
                     </div>
                 </div>
             </div>
@@ -742,24 +335,34 @@
         // Mode switching
         document.querySelectorAll('.mode-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+                document.querySelectorAll('.mode-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+                    b.classList.add('text-gray-600', 'hover:text-gray-900');
+                });
+                btn.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+                btn.classList.remove('text-gray-600', 'hover:text-gray-900');
                 
                 const mode = btn.dataset.mode;
-                document.querySelectorAll('.mode-content').forEach(c => c.classList.remove('active'));
-                document.getElementById(mode + 'Mode').classList.add('active');
+                document.querySelectorAll('.mode-content').forEach(c => {
+                    c.classList.add('hidden');
+                });
+                document.getElementById(mode + 'Mode').classList.remove('hidden');
             });
         });
         
         // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('border-primary-500', 'text-primary-600');
+                    t.classList.add('border-transparent', 'text-gray-600');
+                });
+                tab.classList.add('border-primary-500', 'text-primary-600');
+                tab.classList.remove('border-transparent', 'text-gray-600');
                 
                 const inputType = tab.dataset.input;
-                document.querySelectorAll('.input-panel').forEach(p => p.style.display = 'none');
-                document.getElementById(inputType + 'Panel').style.display = 'block';
+                document.querySelectorAll('.input-panel').forEach(p => p.classList.add('hidden'));
+                document.getElementById(inputType + 'Panel').classList.remove('hidden');
             });
         });
         
@@ -767,7 +370,7 @@
         function setupUploadArea(areaId, inputId, selectedId, allowedExtensions) {
             const area = document.getElementById(areaId);
             const input = document.getElementById(inputId);
-            const selected = document.getElementById(selectedId);
+            const selected = selectedId ? document.getElementById(selectedId) : null;
             
             area.addEventListener('click', () => input.click());
             
@@ -805,7 +408,9 @@
                 return;
             }
             
-            selected.textContent = 'Selected: ' + file.name;
+            if (selected) {
+                selected.textContent = 'Selected: ' + file.name;
+            }
             
             // Enable the corresponding predict button
             if (input.id === 'audioFileInput') {
@@ -817,7 +422,7 @@
         
         setupUploadArea('audioUploadArea', 'audioFileInput', 'selectedAudioFile', ['.wav', '.mp3', '.flac']);
         setupUploadArea('chaUploadArea', 'chaFileInput', 'selectedChaFile', ['.cha']);
-        setupUploadArea('inspectUploadArea', 'inspectFileInput', 'inspectionResults', ['.wav', '.cha', '.txt']);
+        setupUploadArea('inspectUploadArea', 'inspectFileInput', null, ['.wav', '.cha', '.txt']);
         
         // API calls
         async function testConnection() {
@@ -828,13 +433,13 @@
                 const response = await fetch(`${getApiUrl()}/health`);
                 if (response.ok) {
                     const data = await response.json();
-                    statusDot.className = 'status-dot status-connected';
+                    statusDot.className = 'w-2 h-2 rounded-full bg-green-500';
                     statusText.textContent = `Connected (${data.models_available} models, ${data.features_supported} features)`;
                 } else {
                     throw new Error('Not healthy');
                 }
             } catch (error) {
-                statusDot.className = 'status-dot status-disconnected';
+                statusDot.className = 'w-2 h-2 rounded-full bg-red-500';
                 statusText.textContent = 'Disconnected';
             }
         }
@@ -934,9 +539,9 @@
         
         function showLoading(elementId) {
             document.getElementById(elementId).innerHTML = `
-                <div style="text-align: center; padding: 40px;">
-                    <div class="spinner" style="margin: 0 auto 16px;"></div>
-                    <div style="color: var(--text-secondary);">Analyzing...</div>
+                <div class="text-center py-12">
+                    <div class="spinner mx-auto mb-4"></div>
+                    <div class="text-sm text-gray-500">Analyzing...</div>
                 </div>
             `;
         }
@@ -946,41 +551,41 @@
             const confidence = (data.confidence * 100).toFixed(1);
             
             document.getElementById('resultsArea').innerHTML = `
-                <div class="result-header">
-                    <span class="prediction-badge ${isAsd ? 'prediction-asd' : 'prediction-td'}">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-4 py-2 rounded-lg text-base font-semibold ${isAsd ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}">
                         ${data.prediction}
                     </span>
-                    <span style="color: var(--text-secondary);">
+                    <span class="text-sm text-gray-600">
                         ${data.features_extracted} features analyzed
                     </span>
                 </div>
                 
-                <div style="margin: 16px 0;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                        <span>Confidence</span>
-                        <span>${confidence}%</span>
+                <div class="mb-4">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-gray-700">Confidence</span>
+                        <span class="font-medium text-gray-900">${confidence}%</span>
                     </div>
-                    <div class="confidence-bar">
-                        <div class="confidence-fill" style="width: ${confidence}%; background: ${isAsd ? 'var(--accent-red)' : 'var(--accent-green)'};"></div>
+                    <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="h-full transition-all duration-500 ${isAsd ? 'bg-red-500' : 'bg-green-500'}" style="width: ${confidence}%"></div>
                     </div>
                 </div>
                 
-                <div style="display: flex; gap: 16px; margin-top: 16px;">
-                    <div style="flex: 1; text-align: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
-                        <div style="font-size: 20px; font-weight: 600; color: var(--accent-red);">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="text-2xl font-semibold text-red-600">
                             ${(data.probabilities.ASD * 100).toFixed(1)}%
                         </div>
-                        <div style="font-size: 12px; color: var(--text-secondary);">ASD Probability</div>
+                        <div class="text-xs text-gray-600 mt-1">ASD Probability</div>
                     </div>
-                    <div style="flex: 1; text-align: center; padding: 12px; background: var(--bg-primary); border-radius: 8px;">
-                        <div style="font-size: 20px; font-weight: 600; color: var(--accent-green);">
+                    <div class="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="text-2xl font-semibold text-green-600">
                             ${(data.probabilities.TD * 100).toFixed(1)}%
                         </div>
-                        <div style="font-size: 12px; color: var(--text-secondary);">TD Probability</div>
+                        <div class="text-xs text-gray-600 mt-1">TD Probability</div>
                     </div>
                 </div>
                 
-                <div style="margin-top: 16px; font-size: 12px; color: var(--text-secondary);">
+                <div class="text-xs text-gray-500 pt-3 border-t border-gray-200">
                     Model: ${data.model_used} | Input: ${data.input_type}
                     ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
                 </div>
@@ -988,16 +593,16 @@
             
             // Show annotated transcript
             if (data.annotated_transcript_html) {
-                document.getElementById('annotationCard').style.display = 'block';
+                document.getElementById('annotationCard').classList.remove('hidden');
                 document.getElementById('annotatedTranscript').innerHTML = data.annotated_transcript_html;
             }
         }
         
         function displayError(message) {
             document.getElementById('resultsArea').innerHTML = `
-                <div style="text-align: center; padding: 40px; color: var(--accent-red);">
-                    <div style="font-size: 24px; margin-bottom: 8px;">!</div>
-                    <div>${message}</div>
+                <div class="text-center py-12">
+                    <div class="text-4xl text-red-500 mb-2">⚠</div>
+                    <div class="text-sm text-gray-700">${message}</div>
                 </div>
             `;
         }
@@ -1005,7 +610,7 @@
         // Training mode functions
         async function loadDatasets() {
             const listEl = document.getElementById('datasetList');
-            listEl.innerHTML = '<div style="text-align: center; padding: 20px;"><div class="spinner" style="margin: 0 auto;"></div></div>';
+            listEl.innerHTML = '<div class="text-center py-8"><div class="spinner mx-auto"></div></div>';
             
             try {
                 const response = await fetch(`${getApiUrl()}/training/datasets`);
@@ -1013,19 +618,19 @@
                 
                 if (data.datasets && data.datasets.length > 0) {
                     listEl.innerHTML = data.datasets.map(ds => `
-                        <div class="dataset-item">
-                            <input type="checkbox" class="dataset-checkbox" value="${ds.path}">
-                            <div class="dataset-info">
-                                <div class="dataset-name">${ds.name}</div>
-                                <div class="dataset-stats">${ds.chat_files} CHAT files, ${ds.audio_files} audio files</div>
+                        <div class="flex items-center p-3 border-b border-gray-200 last:border-b-0 gap-3">
+                            <input type="checkbox" class="dataset-checkbox w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500" value="${ds.path}">
+                            <div class="flex-1">
+                                <div class="font-medium text-gray-900 text-sm">${ds.name}</div>
+                                <div class="text-xs text-gray-500">${ds.chat_files} CHAT files, ${ds.audio_files} audio files</div>
                             </div>
                         </div>
                     `).join('');
                 } else {
-                    listEl.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">No datasets found</div>';
+                    listEl.innerHTML = '<div class="text-center py-8 text-gray-500 text-sm">No datasets found</div>';
                 }
             } catch (error) {
-                listEl.innerHTML = `<div style="color: var(--accent-red); padding: 20px;">Error loading datasets: ${error.message}</div>`;
+                listEl.innerHTML = `<div class="text-red-600 text-sm p-4">Error loading datasets: ${error.message}</div>`;
             }
         }
         
@@ -1039,8 +644,8 @@
             
             const statusEl = document.getElementById('trainingStatus');
             const statusContent = document.getElementById('trainingStatusContent');
-            statusEl.style.display = 'block';
-            statusContent.innerHTML = '<div class="spinner" style="margin: 0 auto;"></div>';
+            statusEl.classList.remove('hidden');
+            statusContent.innerHTML = '<div class="spinner mx-auto"></div>';
             
             try {
                 const response = await fetch(`${getApiUrl()}/training/extract-features`, {
@@ -1053,19 +658,19 @@
                 
                 if (response.ok) {
                     statusContent.innerHTML = `
-                        <div style="color: var(--accent-green);">Feature extraction complete!</div>
-                        <div style="margin-top: 8px; color: var(--text-secondary);">
+                        <div class="text-green-700 font-medium">Feature extraction complete!</div>
+                        <div class="text-sm text-gray-600 mt-2">
                             ${data.total_samples} samples, ${data.features_count} features
                         </div>
-                        <div style="font-size: 12px; color: var(--text-secondary);">
+                        <div class="text-xs text-gray-500 mt-1">
                             Output: ${data.output_file}
                         </div>
                     `;
                 } else {
-                    statusContent.innerHTML = `<div style="color: var(--accent-red);">${data.detail}</div>`;
+                    statusContent.innerHTML = `<div class="text-red-600">${data.detail}</div>`;
                 }
             } catch (error) {
-                statusContent.innerHTML = `<div style="color: var(--accent-red);">Error: ${error.message}</div>`;
+                statusContent.innerHTML = `<div class="text-red-600">Error: ${error.message}</div>`;
             }
         }
         
@@ -1075,19 +680,19 @@
         
         async function loadFeatures() {
             const gridEl = document.getElementById('featureGrid');
-            gridEl.innerHTML = '<div style="grid-column: 1 / -1; text-align: center;"><div class="spinner" style="margin: 0 auto;"></div></div>';
+            gridEl.innerHTML = '<div class="col-span-full text-center"><div class="spinner mx-auto"></div></div>';
             
             try {
                 const response = await fetch(`${getApiUrl()}/features`);
                 const data = await response.json();
                 
                 if (data.features && data.features.length > 0) {
-                    gridEl.innerHTML = data.features.map(f => `<div class="feature-item">${f}</div>`).join('');
+                    gridEl.innerHTML = data.features.map(f => `<div class="px-3 py-2 bg-gray-50 rounded border border-gray-200 text-xs font-mono text-gray-700">${f}</div>`).join('');
                 } else {
-                    gridEl.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary);">No features found</div>';
+                    gridEl.innerHTML = '<div class="col-span-full text-center text-gray-500 text-sm">No features found</div>';
                 }
             } catch (error) {
-                gridEl.innerHTML = `<div style="grid-column: 1 / -1; color: var(--accent-red);">Error: ${error.message}</div>`;
+                gridEl.innerHTML = `<div class="col-span-full text-red-600 text-sm">Error: ${error.message}</div>`;
             }
         }
         
@@ -1097,7 +702,7 @@
             if (!file) return;
             
             const resultsEl = document.getElementById('inspectionResults');
-            resultsEl.innerHTML = '<div class="spinner" style="margin: 16px auto;"></div>';
+            resultsEl.innerHTML = '<div class="spinner mx-auto mt-4"></div>';
             
             const formData = new FormData();
             formData.append('file', file);
@@ -1112,22 +717,24 @@
                 
                 if (response.ok) {
                     resultsEl.innerHTML = `
-                        <div class="result-area">
-                            <div><strong>Participant:</strong> ${data.participant_id}</div>
-                            <div><strong>Input Type:</strong> ${data.input_type}</div>
-                            <div><strong>Features Extracted:</strong> ${data.total_features}</div>
-                            <div><strong>Utterances:</strong> ${data.utterance_count}</div>
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <div class="text-sm space-y-1">
+                                <div><span class="font-medium text-gray-700">Participant:</span> <span class="text-gray-900">${data.participant_id}</span></div>
+                                <div><span class="font-medium text-gray-700">Input Type:</span> <span class="text-gray-900">${data.input_type}</span></div>
+                                <div><span class="font-medium text-gray-700">Features Extracted:</span> <span class="text-gray-900">${data.total_features}</span></div>
+                                <div><span class="font-medium text-gray-700">Utterances:</span> <span class="text-gray-900">${data.utterance_count}</span></div>
+                            </div>
                         </div>
-                        <div style="margin-top: 16px;">
-                            <h4 style="margin-bottom: 8px;">Annotated Transcript:</h4>
-                            <div class="annotated-transcript">${data.annotated_transcript_html}</div>
+                        <div class="mt-4">
+                            <h4 class="text-sm font-semibold text-gray-900 mb-2">Annotated Transcript:</h4>
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 max-h-96 overflow-y-auto font-mono text-sm leading-relaxed">${data.annotated_transcript_html}</div>
                         </div>
                     `;
                 } else {
-                    resultsEl.innerHTML = `<div style="color: var(--accent-red);">${data.detail}</div>`;
+                    resultsEl.innerHTML = `<div class="text-red-600 text-sm">${data.detail}</div>`;
                 }
             } catch (error) {
-                resultsEl.innerHTML = `<div style="color: var(--accent-red);">Error: ${error.message}</div>`;
+                resultsEl.innerHTML = `<div class="text-red-600 text-sm">Error: ${error.message}</div>`;
             }
         });
         
