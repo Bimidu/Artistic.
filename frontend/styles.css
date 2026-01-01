@@ -296,6 +296,35 @@ input:focus, textarea:focus, select:focus {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.status-training {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Progress bar animation */
+@keyframes progress-shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: 200px 0; }
+}
+
+.progress-bar-animated {
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.3) 50%, 
+        rgba(255,255,255,0) 100%);
+    background-size: 200px 100%;
+    animation: progress-shimmer 2s linear infinite;
+}
+
+/* Model card hover effect */
+.model-card {
+    transition: all 0.3s ease;
+}
+
+.model-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
 /* Clean Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

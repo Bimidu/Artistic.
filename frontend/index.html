@@ -86,6 +86,13 @@
                                 <input type="text" class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="audioParticipantId" placeholder="CHI">
                             </div>
                             
+                            <div class="mt-6 flex items-center gap-3">
+                                <input type="checkbox" id="audioUseFusion" class="w-5 h-5 text-primary-600 rounded">
+                                <label for="audioUseFusion" class="text-base text-primary-700">
+                                    Use multi-component fusion (if available)
+                                </label>
+                            </div>
+                            
                             <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onclick="predictFromAudio()" id="predictAudioBtn" disabled>
                                 Analyze Audio
                             </button>
@@ -114,6 +121,13 @@
                             </div>
                             <input type="file" class="hidden" id="chaFileInput" accept=".cha,.CHA,text/plain">
                             <div id="selectedChaFile" class="mt-4 text-base text-accent-600"></div>
+                            
+                            <div class="mt-6 flex items-center gap-3">
+                                <input type="checkbox" id="chaUseFusion" class="w-5 h-5 text-primary-600 rounded">
+                                <label for="chaUseFusion" class="text-base text-primary-700">
+                                    Use multi-component fusion (if available)
+                                </label>
+                            </div>
                             
                             <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onclick="predictFromChatFile()" id="predictChaBtn" disabled>
                                 Analyze File
@@ -177,10 +191,11 @@
                         <div class="mb-8">
                             <label class="block text-xl text-primary-900 mb-4">Component</label>
                             <select class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="trainingComponent">
-                                <option value="pragmatic_conversational">Pragmatic & Conversational (Implemented)</option>
-                                <option value="acoustic_prosodic" disabled>Acoustic & Prosodic (Placeholder)</option>
-                                <option value="syntactic_semantic" disabled>Syntactic & Semantic (Placeholder)</option>
+                                <option value="pragmatic_conversational">Pragmatic & Conversational</option>
+                                <option value="acoustic_prosodic">Acoustic & Prosodic (Dummy Features)</option>
+                                <option value="syntactic_semantic">Syntactic & Semantic (Dummy Features)</option>
                             </select>
+                            <p class="text-sm text-primary-500 mt-2">Note: Acoustic & Syntactic use placeholder features for testing</p>
                         </div>
                         
                         <div class="mb-8">
@@ -252,20 +267,20 @@
                     <div class="grid md:grid-cols-3 gap-8">
                         <div class="p-8 bg-green-50 rounded-3xl">
                             <div class="text-2xl font-medium text-primary-900 mb-4">Pragmatic & Conversational</div>
-                            <p class="text-base text-primary-600 mb-6 leading-relaxed">Turn-taking, topic coherence, pause analysis, repair detection, pragmatic markers</p>
+                            <p class="text-base text-primary-600 mb-6 leading-relaxed">Turn-taking, topic coherence, pause analysis, repair detection, pragmatic markers (218 features)</p>
                             <span class="px-5 py-2 bg-green-500 text-white text-sm rounded-full">Implemented</span>
                         </div>
                         
-                        <div class="p-8 bg-yellow-50 rounded-3xl">
+                        <div class="p-8 bg-blue-50 rounded-3xl">
                             <div class="text-2xl font-medium text-primary-900 mb-4">Acoustic & Prosodic</div>
-                            <p class="text-base text-primary-600 mb-6 leading-relaxed">Pitch, prosody, voice quality, spectral features (Team Member A)</p>
-                            <span class="px-5 py-2 bg-yellow-500 text-white text-sm rounded-full">Placeholder</span>
+                            <p class="text-base text-primary-600 mb-6 leading-relaxed">Pitch, prosody, voice quality, spectral features (20 dummy features for testing)</p>
+                            <span class="px-5 py-2 bg-blue-500 text-white text-sm rounded-full">Dummy Features</span>
                         </div>
                         
-                        <div class="p-8 bg-orange-50 rounded-3xl">
+                        <div class="p-8 bg-purple-50 rounded-3xl">
                             <div class="text-2xl font-medium text-primary-900 mb-4">Syntactic & Semantic</div>
-                            <p class="text-base text-primary-600 mb-6 leading-relaxed">POS analysis, dependency parsing, semantic coherence (Team Member B)</p>
-                            <span class="px-5 py-2 bg-orange-500 text-white text-sm rounded-full">Placeholder</span>
+                            <p class="text-base text-primary-600 mb-6 leading-relaxed">POS analysis, dependency parsing, semantic coherence (20 dummy features for testing)</p>
+                            <span class="px-5 py-2 bg-purple-500 text-white text-sm rounded-full">Dummy Features</span>
                         </div>
                     </div>
                 </div>
@@ -282,6 +297,22 @@
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-h-96 overflow-y-auto" id="featureGrid">
                         <div class="col-span-full text-center py-16 text-primary-400 text-xl">
                             Click Load Features to view all
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Available Models -->
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                <div class="px-10 py-8 bg-white flex items-center justify-between">
+                    <h2 class="text-5xl text-primary-900">Trained Models</h2>
+                    <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadAvailableModels()">Refresh</button>
+                </div>
+                
+                <div class="p-10">
+                    <div id="availableModelsContainer">
+                        <div class="text-center py-16 text-primary-400 text-xl">
+                            Click Refresh to load trained models
                         </div>
                     </div>
                 </div>

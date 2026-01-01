@@ -36,6 +36,10 @@ toggleOptions.forEach(option => {
         const apiConfigBar = document.getElementById('apiConfigBar');
         if (mode === 'training') {
             apiConfigBar.classList.remove('hidden');
+            // Auto-load models when entering training mode
+            setTimeout(() => {
+                loadAvailableModels();
+            }, 100);
         } else {
             apiConfigBar.classList.add('hidden');
         }
@@ -219,17 +223,19 @@ async function predictFromText() {
 
 async function predictFromChatFile() {
     const fileInput = document.getElementById('chaFileInput');
+    const useFusion = document.getElementById('chaUseFusion').checked;
     
     if (!fileInput.files[0]) {
         alert('Please select a CHAT file');
         return;
     }
     
-    console.log('Uploading CHAT file:', fileInput.files[0].name);
+    console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion);
     showLoading('resultsArea');
     
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
+    formData.append('use_fusion', useFusion);
     
     try {
         const response = await fetch(`${getApiUrl()}/predict/transcript`, {
@@ -268,6 +274,50 @@ function displayResults(data) {
     const isAsd = data.prediction === 'ASD';
     const confidence = (data.confidence * 100).toFixed(1);
     
+    // Component breakdown if fusion was used
+    let componentBreakdown = '';
+    if (data.component_breakdown && data.component_breakdown.length > 1) {
+        const componentNames = {
+            'pragmatic_conversational': 'Pragmatic & Conversational',
+            'acoustic_prosodic': 'Acoustic & Prosodic',
+            'syntactic_semantic': 'Syntactic & Semantic'
+        };
+        const componentColors = {
+            'pragmatic_conversational': 'green',
+            'acoustic_prosodic': 'blue',
+            'syntactic_semantic': 'purple'
+        };
+        
+        componentBreakdown = '<div class="mt-6 pt-6 border-t border-primary-200"><div class="text-lg font-medium text-primary-900 mb-4">Component Breakdown</div><div class="space-y-3">';
+        
+        for (const comp of data.component_breakdown) {
+            const compName = componentNames[comp.component] || comp.component;
+            const color = componentColors[comp.component] || 'gray';
+            const compIsAsd = comp.prediction === 'ASD';
+            const compConf = (comp.confidence * 100).toFixed(1);
+            const asdProb = ((comp.probabilities.ASD || 0) * 100).toFixed(1);
+            const tdProb = ((comp.probabilities.TD || 0) * 100).toFixed(1);
+            
+            componentBreakdown += `
+                <div class="p-4 bg-${color}-50 rounded-xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-base font-medium text-primary-900">${compName}</span>
+                            <span class="px-2 py-1 text-xs rounded-full ${compIsAsd ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">${comp.prediction}</span>
+                        </div>
+                        <span class="text-sm text-primary-600">${compConf}% confidence</span>
+                    </div>
+                    <div class="flex gap-2 text-xs">
+                        <span class="text-primary-600">ASD: ${asdProb}%</span>
+                        <span class="text-primary-600">TD: ${tdProb}%</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        componentBreakdown += '</div></div>';
+    }
+    
     document.getElementById('resultsArea').innerHTML = `
         <div class="flex items-center justify-between mb-8">
             <span class="px-10 py-4 rounded-full text-3xl ${isAsd ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}">
@@ -302,6 +352,8 @@ function displayResults(data) {
                 <div class="text-base text-primary-600 mt-3">TD Probability</div>
             </div>
         </div>
+        
+        ${componentBreakdown}
         
         <div class="text-sm text-primary-500 pt-6">
             Model: ${data.model_used} | Input: ${data.input_type}
@@ -412,7 +464,184 @@ async function extractFeatures() {
 }
 
 async function startTraining() {
-    alert('Training functionality will be available in a future update. For now, use the example training scripts.');
+    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
+    
+    if (selectedDatasets.length === 0) {
+        alert('Please select at least one dataset');
+        return;
+    }
+    
+    // Get selected model types
+    const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
+        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm'].includes(cb.value))
+        .map(cb => cb.value);
+    
+    if (selectedModels.length === 0) {
+        alert('Please select at least one model type');
+        return;
+    }
+    
+    const component = document.getElementById('trainingComponent').value;
+    
+    const statusEl = document.getElementById('trainingStatus');
+    const statusContent = document.getElementById('trainingStatusContent');
+    statusEl.classList.remove('hidden');
+    statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-4 text-base text-primary-600">Initializing training...</div>';
+    
+    try {
+        const response = await fetch(`${getApiUrl()}/training/train`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                dataset_paths: selectedDatasets,
+                model_types: selectedModels,
+                component: component
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Start polling for progress
+            pollTrainingProgress();
+        } else {
+            statusContent.innerHTML = `<div class="text-red-500 text-base">${data.detail || 'Failed to start training'}</div>`;
+        }
+    } catch (error) {
+        statusContent.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
+    }
+}
+
+let trainingPollInterval = null;
+
+function pollTrainingProgress() {
+    // Clear any existing interval
+    if (trainingPollInterval) {
+        clearInterval(trainingPollInterval);
+    }
+    
+    const statusContent = document.getElementById('trainingStatusContent');
+    
+    // Poll every 2 seconds
+    trainingPollInterval = setInterval(async () => {
+        try {
+            const response = await fetch(`${getApiUrl()}/training/status`);
+            const status = await response.json();
+            
+            updateTrainingUI(status);
+            
+            // Stop polling if training is complete or errored
+            if (status.status === 'completed' || status.status === 'error' || status.status === 'idle') {
+                clearInterval(trainingPollInterval);
+                trainingPollInterval = null;
+                
+                // Reload models list
+                if (status.status === 'completed') {
+                    setTimeout(() => {
+                        loadAvailableModels();
+                    }, 1000);
+                }
+            }
+        } catch (error) {
+            console.error('Error polling training status:', error);
+        }
+    }, 2000);
+    
+    // Initial update
+    updateTrainingUI({ status: 'training', progress: 0, message: 'Starting...' });
+}
+
+function updateTrainingUI(status) {
+    const statusContent = document.getElementById('trainingStatusContent');
+    
+    if (status.status === 'training') {
+        const progressPercent = status.progress || 0;
+        const currentModel = status.current_model ? ` - ${status.current_model}` : '';
+        
+        statusContent.innerHTML = `
+            <div class="mb-4">
+                <div class="flex justify-between text-sm text-primary-600 mb-2">
+                    <span>${status.message}${currentModel}</span>
+                    <span>${progressPercent}%</span>
+                </div>
+                <div class="w-full h-3 bg-primary-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary-600 transition-all duration-500" style="width: ${progressPercent}%"></div>
+                </div>
+            </div>
+            <div class="text-sm text-primary-500">
+                Training ${status.total_models || 0} models for ${status.component || 'component'}...
+            </div>
+        `;
+    } else if (status.status === 'completed') {
+        let resultsHtml = '';
+        if (status.results && Object.keys(status.results).length > 0) {
+            resultsHtml = '<div class="mt-4 space-y-2">';
+            for (const [model, metrics] of Object.entries(status.results)) {
+                resultsHtml += `
+                    <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                        <span class="font-medium text-primary-900">${model}</span>
+                        <div class="flex gap-4 text-sm">
+                            <span class="text-primary-600">Acc: ${(metrics.accuracy * 100).toFixed(1)}%</span>
+                            <span class="text-primary-600">F1: ${(metrics.f1_score * 100).toFixed(1)}%</span>
+                        </div>
+                    </div>
+                `;
+            }
+            resultsHtml += '</div>';
+        }
+        
+        statusContent.innerHTML = `
+            <div class="text-green-600 text-lg mb-3 flex items-center gap-2">
+                <span class="text-2xl">✓</span>
+                <span>${status.message}</span>
+            </div>
+            ${resultsHtml}
+        `;
+    } else if (status.status === 'error') {
+        let errorDetails = '';
+        const errorMsg = status.error || status.message;
+        
+        // Parse common errors and provide helpful solutions
+        if (errorMsg.includes('missing diagnosis') || errorMsg.includes('Insufficient samples')) {
+            errorDetails = `
+                <div class="mt-4 p-4 bg-yellow-50 rounded-lg text-sm">
+                    <div class="font-medium text-primary-900 mb-2">💡 Possible Solutions:</div>
+                    <ul class="list-disc list-inside space-y-1 text-primary-700">
+                        <li>Some CHAT files may be missing diagnosis labels</li>
+                        <li>Try selecting different datasets</li>
+                        <li>Ensure datasets have proper CHAT format with diagnosis codes</li>
+                        <li>Check that files contain participant diagnosis information</li>
+                    </ul>
+                </div>
+            `;
+        } else if (errorMsg.includes('No features extracted')) {
+            errorDetails = `
+                <div class="mt-4 p-4 bg-yellow-50 rounded-lg text-sm">
+                    <div class="font-medium text-primary-900 mb-2">💡 Possible Solutions:</div>
+                    <ul class="list-disc list-inside space-y-1 text-primary-700">
+                        <li>Check that selected datasets contain .cha files</li>
+                        <li>Verify CHAT files are properly formatted</li>
+                        <li>Try extracting features first to diagnose issues</li>
+                    </ul>
+                </div>
+            `;
+        }
+        
+        statusContent.innerHTML = `
+            <div class="text-red-500 text-base">
+                <div class="text-lg mb-2 flex items-center gap-2">
+                    <span class="text-2xl">✗</span>
+                    <span>Training Failed</span>
+                </div>
+                <div class="text-sm mt-2 p-3 bg-red-50 rounded-lg text-red-700">
+                    ${errorMsg}
+                </div>
+                ${errorDetails}
+            </div>
+        `;
+    } else {
+        statusContent.innerHTML = `<div class="text-primary-500 text-base">${status.message}</div>`;
+    }
 }
 
 async function loadFeatures() {
@@ -430,6 +659,141 @@ async function loadFeatures() {
         }
     } catch (error) {
         gridEl.innerHTML = `<div class="col-span-full text-red-500 text-base">Error: ${error.message}</div>`;
+    }
+}
+
+async function loadAvailableModels() {
+    const container = document.getElementById('availableModelsContainer');
+    if (!container) return;
+    
+    container.innerHTML = '<div class="text-center py-8"><div class="spinner mx-auto"></div></div>';
+    
+    try {
+        const response = await fetch(`${getApiUrl()}/models`);
+        const data = await response.json();
+        
+        if (data.models && data.models.length > 0) {
+            // Group models by component
+            const modelsByComponent = {};
+            for (const model of data.models) {
+                const component = model.name.split('_')[0] + '_' + model.name.split('_')[1] || 'pragmatic_conversational';
+                if (!modelsByComponent[component]) {
+                    modelsByComponent[component] = [];
+                }
+                modelsByComponent[component].push(model);
+            }
+            
+            let modelsHtml = '';
+            
+            // Display models grouped by component
+            for (const [component, models] of Object.entries(modelsByComponent)) {
+                const componentNames = {
+                    'pragmatic_conversational': 'Pragmatic & Conversational',
+                    'acoustic_prosodic': 'Acoustic & Prosodic',
+                    'syntactic_semantic': 'Syntactic & Semantic'
+                };
+                const componentColors = {
+                    'pragmatic_conversational': 'green',
+                    'acoustic_prosodic': 'blue',
+                    'syntactic_semantic': 'purple'
+                };
+                
+                const componentName = componentNames[component] || component;
+                const color = componentColors[component] || 'gray';
+                
+                modelsHtml += `
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-medium text-primary-900 mb-4 flex items-center gap-3">
+                            ${componentName}
+                            <span class="px-3 py-1 bg-${color}-100 text-${color}-700 text-sm rounded-full">${models.length} model${models.length > 1 ? 's' : ''}</span>
+                        </h3>
+                        <div class="space-y-4">
+                `;
+                
+                for (const model of models) {
+                    const isBest = model.name === data.best_model;
+                    const accuracy = (model.accuracy * 100).toFixed(1);
+                    const f1 = (model.f1_score * 100).toFixed(1);
+                    const date = new Date(model.created_at).toLocaleDateString();
+                    
+                    modelsHtml += `
+                        <div class="p-6 bg-white rounded-2xl hover:bg-primary-50 transition-colors ${isBest ? 'ring-2 ring-primary-600' : ''}">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h4 class="text-xl font-medium text-primary-900">${model.type}</h4>
+                                        ${isBest ? '<span class="px-3 py-1 bg-primary-600 text-white text-xs rounded-full">Best Overall</span>' : ''}
+                                    </div>
+                                    <div class="text-sm text-primary-500">Created: ${date}</div>
+                                </div>
+                                <button class="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-sm" onclick="deleteModel('${model.name}')">
+                                    Delete
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                                    <div class="text-2xl font-medium text-primary-900">${accuracy}%</div>
+                                    <div class="text-xs text-primary-600 mt-1">Accuracy</div>
+                                </div>
+                                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                                    <div class="text-2xl font-medium text-primary-900">${f1}%</div>
+                                    <div class="text-xs text-primary-600 mt-1">F1 Score</div>
+                                </div>
+                                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                                    <div class="text-2xl font-medium text-primary-900">${model.n_features}</div>
+                                    <div class="text-xs text-primary-600 mt-1">Features</div>
+                                </div>
+                                <div class="text-center p-3 bg-primary-50 rounded-xl">
+                                    <div class="text-2xl font-medium text-primary-900">${model.training_samples}</div>
+                                    <div class="text-xs text-primary-600 mt-1">Samples</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                modelsHtml += `
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = modelsHtml;
+        } else {
+            container.innerHTML = `
+                <div class="text-center py-16">
+                    <div class="text-6xl mb-4">📦</div>
+                    <div class="text-xl text-primary-600 mb-2">No models trained yet</div>
+                    <div class="text-base text-primary-500">Train your first model to get started</div>
+                </div>
+            `;
+        }
+    } catch (error) {
+        container.innerHTML = `<div class="text-red-500 text-base p-6">Error loading models: ${error.message}</div>`;
+    }
+}
+
+async function deleteModel(modelName) {
+    if (!confirm(`Are you sure you want to delete the model "${modelName}"? This action cannot be undone.`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${getApiUrl()}/models/${modelName}`, {
+            method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            alert(`Model "${modelName}" deleted successfully`);
+            loadAvailableModels();
+        } else {
+            alert(`Error deleting model: ${data.detail || 'Unknown error'}`);
+        }
+    } catch (error) {
+        alert(`Error deleting model: ${error.message}`);
     }
 }
 
