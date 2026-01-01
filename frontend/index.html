@@ -199,6 +199,21 @@
                         </div>
                         
                         <div class="mb-8">
+                            <label class="block text-xl text-primary-900 mb-4">Feature Selection</label>
+                            <div class="space-y-4">
+                                <label class="flex items-center cursor-pointer p-5 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" id="featureSelectionEnabled" checked class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-4 text-lg text-primary-900">Enable feature selection</span>
+                                </label>
+                                <div id="featureCountSection">
+                                    <label class="block text-base text-primary-700 mb-2">Number of features to select</label>
+                                    <input type="number" id="nFeatures" value="30" min="1" max="218" class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all">
+                                    <p class="text-sm text-primary-500 mt-2">Default: 30 (max: 218 for pragmatic, 20 for others)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
                             <label class="block text-xl text-primary-900 mb-4">Model Types</label>
                             <div class="space-y-3">
                                 <label class="flex items-center cursor-pointer p-5 bg-white rounded-2xl hover:bg-primary-100 transition-colors">

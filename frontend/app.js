@@ -482,6 +482,8 @@ async function startTraining() {
     }
     
     const component = document.getElementById('trainingComponent').value;
+    const featureSelectionEnabled = document.getElementById('featureSelectionEnabled').checked;
+    const nFeatures = parseInt(document.getElementById('nFeatures').value) || 30;
     
     const statusEl = document.getElementById('trainingStatus');
     const statusContent = document.getElementById('trainingStatusContent');
@@ -495,7 +497,9 @@ async function startTraining() {
             body: JSON.stringify({
                 dataset_paths: selectedDatasets,
                 model_types: selectedModels,
-                component: component
+                component: component,
+                feature_selection: featureSelectionEnabled,
+                n_features: featureSelectionEnabled ? nFeatures : null
             })
         });
         
@@ -511,6 +515,24 @@ async function startTraining() {
         statusContent.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
     }
 }
+
+// Toggle feature count input based on checkbox
+document.addEventListener('DOMContentLoaded', () => {
+    const featureSelectionCheckbox = document.getElementById('featureSelectionEnabled');
+    const featureCountSection = document.getElementById('featureCountSection');
+    
+    if (featureSelectionCheckbox && featureCountSection) {
+        featureSelectionCheckbox.addEventListener('change', () => {
+            if (featureSelectionCheckbox.checked) {
+                featureCountSection.style.opacity = '1';
+                featureCountSection.style.pointerEvents = 'auto';
+            } else {
+                featureCountSection.style.opacity = '0.5';
+                featureCountSection.style.pointerEvents = 'none';
+            }
+        });
+    }
+});
 
 let trainingPollInterval = null;
 

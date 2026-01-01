@@ -25,6 +25,7 @@ import pylangacq
 import pandas as pd
 from src.utils.logger import get_logger
 from src.utils.helpers import extract_timing_info, get_age_in_months, is_valid_utterance
+from src.parsers.diagnosis_mapper import DiagnosisMapper
 
 logger = get_logger(__name__)
 
@@ -162,6 +163,7 @@ class CHATParser:
             min_words: Minimum words required for valid utterance (default: 1)
         """
         self.min_words = min_words
+        self.diagnosis_mapper = DiagnosisMapper()
         logger.info(f"CHATParser initialized with min_words={min_words}")
     
     def parse_file(self, file_path: str | Path) -> TranscriptData:
@@ -199,10 +201,13 @@ class CHATParser:
             # Extract participant information
             participants = self._extract_participants(reader)
             
-            # Resolve diagnosis
+            # Resolve diagnosis using the diagnosis mapper
             diagnosis = metadata.get('diagnosis')
             if not diagnosis and '_diagnosis' in participants:
                 diagnosis = participants['_diagnosis']
+            
+            # Use diagnosis mapper to infer/normalize diagnosis
+            diagnosis = self.diagnosis_mapper.infer_diagnosis(file_path, diagnosis)
 
             # Create TranscriptData object
             transcript = TranscriptData(

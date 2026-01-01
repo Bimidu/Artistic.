@@ -133,6 +133,14 @@ class TrainingRequest(BaseModel):
         default='pragmatic_conversational',
         description="Component to train"
     )
+    n_features: Optional[int] = Field(
+        default=30,
+        description="Number of features to select (None = use all)"
+    )
+    feature_selection: bool = Field(
+        default=True,
+        description="Whether to perform feature selection"
+    )
 
 
 class TrainingStatus(BaseModel):
@@ -262,21 +270,39 @@ def make_prediction(
     try:
         prediction = model.predict(features)[0]
         
+        # Convert numeric prediction back to string labels if needed
+        if isinstance(prediction, (int, np.integer)):
+            label_map = {0: 'TD', 1: 'ASD'}
+            prediction_label = label_map.get(prediction, str(prediction))
+        else:
+            prediction_label = str(prediction)
+        
         if hasattr(model, 'predict_proba'):
             proba = model.predict_proba(features)[0]
             confidence = float(np.max(proba))
             
-            classes = model.classes_ if hasattr(model, 'classes_') else ['ASD', 'TD']
+            # Get class labels
+            if hasattr(model, 'classes_'):
+                classes = model.classes_
+                # Convert numeric classes to string labels
+                if isinstance(classes[0], (int, np.integer)):
+                    label_map = {0: 'TD', 1: 'ASD'}
+                    class_labels = [label_map.get(c, str(c)) for c in classes]
+                else:
+                    class_labels = [str(c) for c in classes]
+            else:
+                class_labels = ['ASD', 'TD']
+            
             probabilities = {
                 str(cls): float(prob)
-                for cls, prob in zip(classes, proba)
+                for cls, prob in zip(class_labels, proba)
             }
         else:
             confidence = 1.0
-            probabilities = {str(prediction): 1.0}
+            probabilities = {prediction_label: 1.0}
         
         return {
-            'prediction': str(prediction),
+            'prediction': prediction_label,
             'confidence': confidence,
             'probabilities': probabilities,
             'model_used': model_name
@@ -731,7 +757,7 @@ training_state = {
 }
 
 
-def run_training_task(dataset_paths: List[str], model_types: List[str], component: str):
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True):
     """Background task for model training."""
     global training_state
     
@@ -745,7 +771,7 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
         training_state['results'] = {}
         training_state['error'] = None
         
-        logger.info(f"Starting training: component={component}, models={model_types}")
+        logger.info(f"Starting training: component={component}, models={model_types}, n_features={n_features}, feature_selection={feature_selection}")
         
         # Select appropriate feature extractor based on component
         if component == 'acoustic_prosodic':
@@ -817,6 +843,11 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
                 combined_df = combined_df[combined_df['diagnosis'].isin(['ASD', 'TD'])]
                 training_state['message'] = 'Filtered to binary classification: ASD vs TD'
             
+            # Convert string labels to numeric for XGBoost/LightGBM compatibility
+            # ASD = 1, TD = 0
+            label_map = {'TD': 0, 'ASD': 1}
+            combined_df['diagnosis'] = combined_df['diagnosis'].map(label_map)
+            
             logger.info(f"After cleaning: {len(combined_df)} samples with labels {combined_df['diagnosis'].unique()}")
         
         if len(combined_df) < 10:
@@ -831,13 +862,14 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
             target_column='diagnosis',
             test_size=0.2,
             random_state=42,
-            feature_selection=True,
-            n_features=30
+            feature_selection=feature_selection,
+            n_features=n_features if n_features else 218  # Use all if None
         )
         
         # Fit and transform - skip validation since we already cleaned the data
         X_train, X_test, y_train, y_test = preprocessor.fit_transform(combined_df, validate=False)
         logger.info(f"Training set: {X_train.shape}, Test set: {X_test.shape}")
+        logger.info(f"Feature selection: {feature_selection}, Features used: {X_train.shape[1]}")
         
         # Save preprocessor as dict to avoid pickling issues
         # Remove logger references to make it picklable
@@ -960,7 +992,9 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         run_training_task,
         request.dataset_paths,
         request.model_types,
-        request.component
+        request.component,
+        request.n_features,
+        request.feature_selection
     )
     
     return {
