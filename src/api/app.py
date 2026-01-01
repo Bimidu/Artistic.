@@ -153,6 +153,62 @@ class HealthResponse(BaseModel):
 
 
 # Helper functions
+def preprocess_with_dict(df: pd.DataFrame, preprocessor_dict: Dict) -> pd.DataFrame:
+    """
+    Apply preprocessing using dict format preprocessor.
+    
+    Args:
+        df: Input DataFrame with features
+        preprocessor_dict: Dict with 'selected_features', 'cleaner', 'scaler'
+    
+    Returns:
+        Preprocessed DataFrame with selected features
+    """
+    try:
+        # Get selected features
+        selected_features = preprocessor_dict.get('selected_features', [])
+        feature_columns = preprocessor_dict.get('feature_columns', [])
+        
+        if not selected_features:
+            logger.warning("No selected features in preprocessor, returning all features")
+            return df
+        
+        # Clean data
+        cleaner = preprocessor_dict.get('cleaner')
+        if cleaner:
+            # Fix logger if it's None (can happen after unpickling)
+            if not hasattr(cleaner, 'logger') or cleaner.logger is None:
+                cleaner.logger = logger
+            df = cleaner.clean(df, target_column=None, feature_columns=feature_columns)
+        
+        # Select only the features the model was trained on
+        available_features = [f for f in selected_features if f in df.columns]
+        missing_features = [f for f in selected_features if f not in df.columns]
+        
+        if missing_features:
+            logger.warning(f"Missing {len(missing_features)} features: {missing_features[:5]}...")
+            # Add missing features with zeros
+            for feature in missing_features:
+                df[feature] = 0.0
+        
+        df_selected = df[selected_features]
+        
+        # Scale features
+        scaler = preprocessor_dict.get('scaler')
+        if scaler:
+            # Fix logger if it's None (can happen after unpickling)
+            if not hasattr(scaler, 'logger') or scaler.logger is None:
+                scaler.logger = logger
+            df_selected = scaler.transform(df_selected, feature_columns=selected_features)
+        
+        logger.info(f"Preprocessed to {len(selected_features)} selected features")
+        return df_selected
+        
+    except Exception as e:
+        logger.error(f"Error in dict preprocessing: {e}", exc_info=True)
+        raise
+
+
 def get_model_and_preprocessor(model_name: Optional[str] = None):
     """Get model and preprocessor from registry."""
     try:
@@ -168,7 +224,7 @@ def get_model_and_preprocessor(model_name: Optional[str] = None):
         return model, preprocessor, model_name
     
     except Exception as e:
-        logger.error(f"Error loading model: {e}")
+        logger.error(f"Error loading model: {e}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error loading model: {str(e)}"
@@ -307,7 +363,10 @@ async def predict_from_audio(
         model, preprocessor, model_name = get_model_and_preprocessor()
         
         if preprocessor is not None:
-            features_df = preprocessor.transform(features_df)
+            if isinstance(preprocessor, dict):
+                features_df = preprocess_with_dict(features_df, preprocessor)
+            else:
+                features_df = preprocessor.transform(features_df)
         
         result = make_prediction(model, features_df, model_name)
         
@@ -363,7 +422,10 @@ async def predict_from_text(request: TextPredictionRequest):
         model, preprocessor, model_name = get_model_and_preprocessor()
         
         if preprocessor is not None:
-            features_df = preprocessor.transform(features_df)
+            if isinstance(preprocessor, dict):
+                features_df = preprocess_with_dict(features_df, preprocessor)
+            else:
+                features_df = preprocessor.transform(features_df)
         
         result = make_prediction(model, features_df, model_name)
         
@@ -398,7 +460,7 @@ async def predict_from_transcript(
     """
     logger.info(f"Transcript prediction request: {file.filename}")
     
-    if not file.filename.endswith('.cha'):
+    if not file.filename.lower().endswith('.cha'):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Only .cha (CHAT) files are supported"
@@ -422,7 +484,10 @@ async def predict_from_transcript(
         model, preprocessor, model_name = get_model_and_preprocessor()
         
         if preprocessor is not None:
-            features_df = preprocessor.transform(features_df)
+            if isinstance(preprocessor, dict):
+                features_df = preprocess_with_dict(features_df, preprocessor)
+            else:
+                features_df = preprocessor.transform(features_df)
         
         result = make_prediction(model, features_df, model_name)
         

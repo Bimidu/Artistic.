@@ -32,6 +32,14 @@ toggleOptions.forEach(option => {
         });
         document.getElementById(mode + 'Mode').classList.remove('hidden');
         
+        // Toggle API config bar visibility
+        const apiConfigBar = document.getElementById('apiConfigBar');
+        if (mode === 'training') {
+            apiConfigBar.classList.remove('hidden');
+        } else {
+            apiConfigBar.classList.add('hidden');
+        }
+        
         updateToggleSlider();
     });
 });
@@ -92,9 +100,22 @@ function setupUploadArea(areaId, inputId, selectedId, allowedExtensions) {
 }
 
 function handleFileSelect(file, input, selected, allowedExtensions) {
+    console.log('File selected:', file.name);
+    console.log('Input ID:', input.id);
+    console.log('Allowed extensions:', allowedExtensions);
+    
     const ext = '.' + file.name.split('.').pop().toLowerCase();
+    console.log('Detected extension:', ext);
+    
     if (!allowedExtensions.includes(ext)) {
-        alert('Invalid file type. Allowed: ' + allowedExtensions.join(', '));
+        let errorMsg = `Invalid file type "${ext}". Allowed: ${allowedExtensions.join(', ')}\n\n`;
+        if (ext === '.cha') {
+            errorMsg += 'Tip: Use the "CHAT File" tab for .cha files';
+        } else if (['.wav', '.mp3', '.flac'].includes(ext)) {
+            errorMsg += 'Tip: Use the "Audio Upload" tab for audio files';
+        }
+        errorMsg += `\n\nFile: ${file.name}`;
+        alert(errorMsg);
         return;
     }
     
@@ -204,6 +225,7 @@ async function predictFromChatFile() {
         return;
     }
     
+    console.log('Uploading CHAT file:', fileInput.files[0].name);
     showLoading('resultsArea');
     
     const formData = new FormData();
@@ -215,14 +237,20 @@ async function predictFromChatFile() {
             body: formData
         });
         
+        console.log('Response status:', response.status);
+        
         const data = await response.json();
+        console.log('Response data:', data);
         
         if (response.ok) {
             displayResults(data);
         } else {
-            displayError(data.detail || 'Prediction failed');
+            const errorMsg = data.detail || data.error || JSON.stringify(data);
+            console.error('Prediction error:', errorMsg);
+            displayError(errorMsg);
         }
     } catch (error) {
+        console.error('Request error:', error);
         displayError('Connection error: ' + error.message);
     }
 }
@@ -289,10 +317,29 @@ function displayResults(data) {
 }
 
 function displayError(message) {
+    let additionalHelp = '';
+    
+    if (message.includes('No models in registry') || message.includes('No models')) {
+        additionalHelp = `
+            <div class="mt-6 p-6 bg-yellow-50 rounded-2xl text-left">
+                <div class="text-base text-primary-900 font-medium mb-3">💡 How to fix:</div>
+                <div class="text-sm text-primary-700 space-y-2">
+                    <div>1. Switch to <strong>Training Mode</strong></div>
+                    <div>2. Click <strong>Refresh</strong> to load datasets</div>
+                    <div>3. Select one or more datasets</div>
+                    <div>4. Click <strong>Extract Features</strong></div>
+                    <div>5. Train a model using the training scripts</div>
+                    <div class="mt-3 pt-3 border-t border-primary-200">Or restart the API server to reload existing models</div>
+                </div>
+            </div>
+        `;
+    }
+    
     document.getElementById('resultsArea').innerHTML = `
         <div class="text-center py-24">
             <div class="text-6xl mb-6">⚠️</div>
-            <div class="text-xl text-primary-900">${message}</div>
+            <div class="text-xl text-primary-900 mb-4">${message}</div>
+            ${additionalHelp}
         </div>
     `;
 }

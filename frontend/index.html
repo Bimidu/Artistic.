@@ -34,7 +34,7 @@
         </div>
         
         <!-- API Configuration Bar -->
-        <div class="bg-white">
+        <div class="bg-white hidden" id="apiConfigBar">
             <div class="max-w-7xl mx-auto px-12 py-2">
                 <div class="flex items-center gap-6 justify-between">
                     <div class="flex items-center gap-4 flex-1">
@@ -55,7 +55,7 @@
         <div class="mode-content" id="userMode">
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Input Section -->
-                <div class="bg-primary-50  rounded-3xl overflow-hidden">
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                     <div class="px-10 py-8  bg-white">
                         <h2 class="text-5xl text-primary-900">Analyze Speech</h2>
                     </div>
@@ -112,7 +112,7 @@
                                 <p class="mt-6 text-2xl text-primary-900">Drop CHAT file here</p>
                                 <p class="mt-3 text-base text-primary-500">Supports .cha files</p>
                             </div>
-                            <input type="file" class="hidden" id="chaFileInput" accept=".cha">
+                            <input type="file" class="hidden" id="chaFileInput" accept=".cha,.CHA,text/plain">
                             <div id="selectedChaFile" class="mt-4 text-base text-accent-600"></div>
                             
                             <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onclick="predictFromChatFile()" id="predictChaBtn" disabled>
@@ -123,7 +123,7 @@
                 </div>
                 
                 <!-- Results Section -->
-                <div class="bg-primary-50 rounded-3xl overflow-hidden">
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                     <div class="px-10 py-8 bg-white">
                         <h2 class="text-5xl text-primary-900">Analysis Results</h2>
                     </div>
@@ -152,7 +152,7 @@
         <div class="mode-content hidden" id="trainingMode">
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Dataset Selection -->
-                <div class="bg-primary-50 rounded-3xl overflow-hidden">
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                     <div class="px-10 py-8 bg-white flex items-center justify-between">
                         <h2 class="text-5xl text-primary-900">Dataset Selection</h2>
                         <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadDatasets()">Refresh</button>
@@ -168,7 +168,7 @@
                 </div>
                 
                 <!-- Training Controls -->
-                <div class="bg-primary-50 rounded-3xl overflow-hidden">
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                     <div class="px-10 py-8 bg-white">
                         <h2 class="text-5xl text-primary-900">Training Controls</h2>
                     </div>
@@ -218,7 +218,7 @@
             </div>
             
             <!-- Feature Inspection -->
-            <div class="mt-12 bg-primary-50 rounded-3xl overflow-hidden">
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                 <div class="px-10 py-8 bg-white flex items-center justify-between">
                     <h2 class="text-5xl text-primary-900">Feature Inspection</h2>
                     <span class="px-6 py-3 bg-accent-100 text-accent-700 text-base rounded-full">Debug Mode</span>
@@ -243,7 +243,7 @@
             </div>
             
             <!-- Component Status -->
-            <div class="mt-12 bg-primary-50 rounded-3xl overflow-hidden">
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                 <div class="px-10 py-8 bg-white">
                     <h2 class="text-5xl text-primary-900">Component Status</h2>
                 </div>
@@ -272,7 +272,7 @@
             </div>
             
             <!-- Available Features -->
-            <div class="mt-12 bg-primary-50 rounded-3xl overflow-hidden">
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                 <div class="px-10 py-8 bg-white flex items-center justify-between">
                     <h2 class="text-5xl text-primary-900">Available Features</h2>
                     <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadFeatures()">Load Features</button>
