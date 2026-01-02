@@ -28,8 +28,9 @@ from pathlib import Path
 import tempfile
 import io
 import json
+import shutil
 
-from src.models.model_registry import ModelRegistry
+from src.models.model_registry import ModelRegistry, ModelMetadata
 from src.parsers.chat_parser import CHATParser
 from src.features.feature_extractor import FeatureExtractor
 from src.pipeline.input_handler import InputHandler, InputType
@@ -132,6 +133,14 @@ class TrainingRequest(BaseModel):
         default='pragmatic_conversational',
         description="Component to train"
     )
+    n_features: Optional[int] = Field(
+        default=30,
+        description="Number of features to select (None = use all)"
+    )
+    feature_selection: bool = Field(
+        default=True,
+        description="Whether to perform feature selection"
+    )
 
 
 class TrainingStatus(BaseModel):
@@ -153,11 +162,88 @@ class HealthResponse(BaseModel):
 
 
 # Helper functions
-def get_model_and_preprocessor(model_name: Optional[str] = None):
+def preprocess_with_dict(df: pd.DataFrame, preprocessor_dict: Dict) -> pd.DataFrame:
+    """
+    Apply preprocessing using dict format preprocessor.
+    
+    Args:
+        df: Input DataFrame with features
+        preprocessor_dict: Dict with 'selected_features', 'cleaner', 'scaler'
+    
+    Returns:
+        Preprocessed DataFrame with selected features
+    """
+    try:
+        # Get selected features
+        selected_features = preprocessor_dict.get('selected_features', [])
+        feature_columns = preprocessor_dict.get('feature_columns', [])
+        
+        if not selected_features:
+            logger.warning("No selected features in preprocessor, returning all features")
+            return df
+        
+        # Clean data
+        cleaner = preprocessor_dict.get('cleaner')
+        if cleaner:
+            # Fix logger if it's None (can happen after unpickling)
+            if not hasattr(cleaner, 'logger') or cleaner.logger is None:
+                cleaner.logger = logger
+            df = cleaner.clean(df, target_column=None, feature_columns=feature_columns)
+        
+        # Select only the features the model was trained on
+        available_features = [f for f in selected_features if f in df.columns]
+        missing_features = [f for f in selected_features if f not in df.columns]
+        
+        if missing_features:
+            logger.warning(f"Missing {len(missing_features)} features: {missing_features[:5]}...")
+            # Add missing features with zeros
+            for feature in missing_features:
+                df[feature] = 0.0
+        
+        df_selected = df[selected_features]
+        
+        # Scale features
+        scaler = preprocessor_dict.get('scaler')
+        if scaler:
+            # Fix logger if it's None (can happen after unpickling)
+            if not hasattr(scaler, 'logger') or scaler.logger is None:
+                scaler.logger = logger
+            df_selected = scaler.transform(df_selected, feature_columns=selected_features)
+        
+        logger.info(f"Preprocessed to {len(selected_features)} selected features")
+        return df_selected
+        
+    except Exception as e:
+        logger.error(f"Error in dict preprocessing: {e}", exc_info=True)
+        raise
+
+
+def get_model_and_preprocessor(model_name: Optional[str] = None, component: Optional[str] = None):
     """Get model and preprocessor from registry."""
     try:
         if model_name is None:
-            model_name, _ = model_registry.get_best_model()
+            # Get best model, optionally filtered by component
+            if component:
+                # Find best model for specific component
+                models = model_registry.list_models()
+                component_models = [m for m in models if m.startswith(component)]
+                if component_models:
+                    # Get metadata for each and find best F1
+                    best_f1 = -1
+                    best_model = None
+                    for m in component_models:
+                        try:
+                            metadata = model_registry.get_model_metadata(m)
+                            if metadata.f1_score > best_f1:
+                                best_f1 = metadata.f1_score
+                                best_model = m
+                        except:
+                            pass
+                    model_name = best_model if best_model else component_models[0]
+                else:
+                    model_name, _ = model_registry.get_best_model()
+            else:
+                model_name, _ = model_registry.get_best_model()
             logger.info(f"Using best model: {model_name}")
         
         model, preprocessor = model_registry.load_model(
@@ -168,7 +254,7 @@ def get_model_and_preprocessor(model_name: Optional[str] = None):
         return model, preprocessor, model_name
     
     except Exception as e:
-        logger.error(f"Error loading model: {e}")
+        logger.error(f"Error loading model: {e}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error loading model: {str(e)}"
@@ -184,21 +270,39 @@ def make_prediction(
     try:
         prediction = model.predict(features)[0]
         
+        # Convert numeric prediction back to string labels if needed
+        if isinstance(prediction, (int, np.integer)):
+            label_map = {0: 'TD', 1: 'ASD'}
+            prediction_label = label_map.get(prediction, str(prediction))
+        else:
+            prediction_label = str(prediction)
+        
         if hasattr(model, 'predict_proba'):
             proba = model.predict_proba(features)[0]
             confidence = float(np.max(proba))
             
-            classes = model.classes_ if hasattr(model, 'classes_') else ['ASD', 'TD']
+            # Get class labels
+            if hasattr(model, 'classes_'):
+                classes = model.classes_
+                # Convert numeric classes to string labels
+                if isinstance(classes[0], (int, np.integer)):
+                    label_map = {0: 'TD', 1: 'ASD'}
+                    class_labels = [label_map.get(c, str(c)) for c in classes]
+                else:
+                    class_labels = [str(c) for c in classes]
+            else:
+                class_labels = ['ASD', 'TD']
+            
             probabilities = {
                 str(cls): float(prob)
-                for cls, prob in zip(classes, proba)
+                for cls, prob in zip(class_labels, proba)
             }
         else:
             confidence = 1.0
-            probabilities = {str(prediction): 1.0}
+            probabilities = {prediction_label: 1.0}
         
         return {
-            'prediction': str(prediction),
+            'prediction': prediction_label,
             'confidence': confidence,
             'probabilities': probabilities,
             'model_used': model_name
@@ -307,7 +411,10 @@ async def predict_from_audio(
         model, preprocessor, model_name = get_model_and_preprocessor()
         
         if preprocessor is not None:
-            features_df = preprocessor.transform(features_df)
+            if isinstance(preprocessor, dict):
+                features_df = preprocess_with_dict(features_df, preprocessor)
+            else:
+                features_df = preprocessor.transform(features_df)
         
         result = make_prediction(model, features_df, model_name)
         
@@ -363,7 +470,10 @@ async def predict_from_text(request: TextPredictionRequest):
         model, preprocessor, model_name = get_model_and_preprocessor()
         
         if preprocessor is not None:
-            features_df = preprocessor.transform(features_df)
+            if isinstance(preprocessor, dict):
+                features_df = preprocess_with_dict(features_df, preprocessor)
+            else:
+                features_df = preprocessor.transform(features_df)
         
         result = make_prediction(model, features_df, model_name)
         
@@ -391,14 +501,19 @@ async def predict_from_text(request: TextPredictionRequest):
 
 @app.post("/predict/transcript", tags=["User Mode"])
 async def predict_from_transcript(
-    file: UploadFile = File(...)
+    file: UploadFile = File(...),
+    use_fusion: bool = Form(False)
 ):
     """
     Predict ASD from uploaded CHAT transcript file (.cha).
-    """
-    logger.info(f"Transcript prediction request: {file.filename}")
     
-    if not file.filename.endswith('.cha'):
+    Args:
+        file: CHAT file
+        use_fusion: If True, use all available components and fuse predictions
+    """
+    logger.info(f"Transcript prediction request: {file.filename} (fusion={use_fusion})")
+    
+    if not file.filename.lower().endswith('.cha'):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Only .cha (CHAT) files are supported"
@@ -414,35 +529,132 @@ async def predict_from_transcript(
         # Parse transcript
         transcript = chat_parser.parse_file(tmp_path)
         
-        # Extract features
-        feature_set = feature_extractor.extract_from_transcript(transcript)
-        features_df = pd.DataFrame([feature_set.features])
+        if use_fusion:
+            # Multi-component prediction with fusion
+            component_predictions = []
+            
+            # Try each component
+            for component in ['pragmatic_conversational', 'acoustic_prosodic', 'syntactic_semantic']:
+                try:
+                    # Select feature extractor
+                    if component == 'acoustic_prosodic':
+                        from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
+                        extractor = AcousticFeatureExtractor()
+                        features = extractor.extract_from_transcript(transcript)
+                    elif component == 'syntactic_semantic':
+                        from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
+                        extractor = SyntacticFeatureExtractor()
+                        features = extractor.extract_from_transcript(transcript)
+                    else:
+                        features = feature_extractor.extract_from_transcript(transcript).features
+                    
+                    features_df = pd.DataFrame([features])
+                    
+                    # Get best model for this component
+                    model, preprocessor, model_name = get_model_and_preprocessor(component=component)
+                    
+                    if preprocessor is not None:
+                        if isinstance(preprocessor, dict):
+                            features_df = preprocess_with_dict(features_df, preprocessor)
+                        else:
+                            features_df = preprocessor.transform(features_df)
+                    
+                    # Make prediction
+                    prediction = model.predict(features_df)[0]
+                    proba = model.predict_proba(features_df)[0] if hasattr(model, 'predict_proba') else None
+                    
+                    if proba is not None:
+                        classes = model.classes_ if hasattr(model, 'classes_') else ['ASD', 'TD']
+                        probabilities = {str(cls): float(prob) for cls, prob in zip(classes, proba)}
+                        confidence = float(np.max(proba))
+                    else:
+                        probabilities = {str(prediction): 1.0}
+                        confidence = 1.0
+                    
+                    component_predictions.append(ComponentPrediction(
+                        component=component,
+                        prediction=str(prediction),
+                        probabilities=probabilities,
+                        confidence=confidence,
+                        model_name=model_name
+                    ))
+                    
+                    logger.info(f"{component}: {prediction} ({confidence:.2f})")
+                
+                except Exception as e:
+                    logger.warning(f"Component {component} failed: {e}")
+                    continue
+            
+            if not component_predictions:
+                raise ValueError("No components available for prediction")
+            
+            # Fuse predictions
+            fused = model_fusion.fuse(component_predictions)
+            
+            # Generate annotated transcript (from pragmatic component)
+            annotated = transcript_annotator.annotate(
+                transcript,
+                features=feature_extractor.extract_from_transcript(transcript).features
+            )
+            
+            # Clean up temp file
+            tmp_path.unlink()
+            
+            return {
+                'prediction': fused.prediction,
+                'confidence': fused.confidence,
+                'probabilities': fused.probabilities,
+                'model_used': 'fusion',
+                'component_breakdown': [
+                    {
+                        'component': cp.component,
+                        'prediction': cp.prediction,
+                        'confidence': cp.confidence,
+                        'probabilities': cp.probabilities,
+                        'model_name': cp.model_name
+                    }
+                    for cp in component_predictions
+                ],
+                'participant_id': transcript.participant_id,
+                'features_extracted': sum(len(cp.probabilities) for cp in component_predictions),
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'chat_file',
+            }
         
-        # Get model and make prediction
-        model, preprocessor, model_name = get_model_and_preprocessor()
-        
-        if preprocessor is not None:
-            features_df = preprocessor.transform(features_df)
-        
-        result = make_prediction(model, features_df, model_name)
-        
-        # Generate annotated transcript
-        annotated = transcript_annotator.annotate(
-            transcript,
-            features=feature_set.features
-        )
-        
-        # Clean up temp file
-        tmp_path.unlink()
-        
-        return {
-            **result,
-            'participant_id': transcript.participant_id,
-            'features_extracted': len(feature_set.features),
-            'annotated_transcript_html': annotated.to_html(),
-            'annotation_summary': annotated._get_annotation_summary(),
-            'input_type': 'chat_file',
-        }
+        else:
+            # Single component prediction (original logic)
+            feature_set = feature_extractor.extract_from_transcript(transcript)
+            features_df = pd.DataFrame([feature_set.features])
+            
+            # Get model and make prediction
+            model, preprocessor, model_name = get_model_and_preprocessor()
+            
+            if preprocessor is not None:
+                if isinstance(preprocessor, dict):
+                    features_df = preprocess_with_dict(features_df, preprocessor)
+                else:
+                    features_df = preprocessor.transform(features_df)
+            
+            result = make_prediction(model, features_df, model_name)
+            
+            # Generate annotated transcript
+            annotated = transcript_annotator.annotate(
+                transcript,
+                features=feature_set.features
+            )
+            
+            # Clean up temp file
+            tmp_path.unlink()
+            
+            return {
+                **result,
+                'participant_id': transcript.participant_id,
+                'features_extracted': len(feature_set.features),
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'chat_file',
+            }
         
     except Exception as e:
         logger.error(f"Transcript prediction failed: {e}")
@@ -531,6 +743,233 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
     }
 
 
+# Global training state
+training_state = {
+    'status': 'idle',  # idle, training, completed, error
+    'component': None,
+    'model_types': [],
+    'progress': 0,
+    'current_model': None,
+    'total_models': 0,
+    'message': 'No training in progress',
+    'results': {},
+    'error': None
+}
+
+
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True):
+    """Background task for model training."""
+    global training_state
+    
+    try:
+        training_state['status'] = 'training'
+        training_state['component'] = component
+        training_state['model_types'] = model_types
+        training_state['total_models'] = len(model_types)
+        training_state['progress'] = 0
+        training_state['message'] = 'Loading feature data...'
+        training_state['results'] = {}
+        training_state['error'] = None
+        
+        logger.info(f"Starting training: component={component}, models={model_types}, n_features={n_features}, feature_selection={feature_selection}")
+        
+        # Select appropriate feature extractor based on component
+        if component == 'acoustic_prosodic':
+            from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
+            extractor = AcousticFeatureExtractor()
+        elif component == 'syntactic_semantic':
+            from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
+            extractor = SyntacticFeatureExtractor()
+        else:  # pragmatic_conversational (default)
+            extractor = feature_extractor
+        
+        # Step 1: Load or extract features
+        all_dfs = []
+        for i, dataset_path in enumerate(dataset_paths):
+            path = Path(dataset_path)
+            if not path.exists():
+                path = config.paths.data_dir / dataset_path
+            
+            if not path.exists():
+                logger.warning(f"Dataset path not found: {dataset_path}")
+                continue
+            
+            training_state['message'] = f'Extracting {component} features from dataset {i+1}/{len(dataset_paths)}...'
+            df = extractor.extract_from_directory(path)
+            if not df.empty:
+                df['dataset'] = path.name
+                all_dfs.append(df)
+        
+        if not all_dfs:
+            raise ValueError("No features extracted from any dataset")
+        
+        combined_df = pd.concat(all_dfs, ignore_index=True)
+        logger.info(f"Combined features: {len(combined_df)} samples")
+        
+        # Clean up the data before preprocessing
+        # 1. Drop non-numeric columns that aren't needed for training
+        cols_to_drop = ['participant_id', 'file_path', 'age_months', 'dataset']
+        combined_df = combined_df.drop(columns=[col for col in cols_to_drop if col in combined_df.columns])
+        
+        # 2. Filter out samples with missing diagnosis
+        if 'diagnosis' in combined_df.columns:
+            before_count = len(combined_df)
+            combined_df = combined_df[combined_df['diagnosis'].notna()]
+            after_count = len(combined_df)
+            dropped = before_count - after_count
+            if dropped > 0:
+                logger.warning(f"Dropped {dropped} samples with missing diagnosis")
+                training_state['message'] = f'Filtered data: removed {dropped} samples without labels'
+            
+            # 3. Filter out samples where diagnosis looks like age (contains : or .)
+            combined_df = combined_df[~combined_df['diagnosis'].astype(str).str.contains(r'[:\.]', na=False)]
+            
+            # 4. Normalize diagnosis values
+            # Common variations: ASD, TD, TYP (typically developing)
+            diagnosis_map = {
+                'TYP': 'TD',  # Map TYP to TD for consistency
+                'TYPICAL': 'TD',
+                'CONTROL': 'TD',
+            }
+            combined_df['diagnosis'] = combined_df['diagnosis'].replace(diagnosis_map)
+            
+            # 5. For binary classification, keep only ASD and TD/TYP
+            unique_diagnoses = combined_df['diagnosis'].unique()
+            logger.info(f"Diagnosis labels found: {unique_diagnoses}")
+            
+            # If we have multiple classes, filter to binary (ASD vs TD)
+            if len(unique_diagnoses) > 2:
+                logger.info("Multiple diagnosis labels found, filtering to binary classification (ASD vs TD)")
+                combined_df = combined_df[combined_df['diagnosis'].isin(['ASD', 'TD'])]
+                training_state['message'] = 'Filtered to binary classification: ASD vs TD'
+            
+            # Convert string labels to numeric for XGBoost/LightGBM compatibility
+            # ASD = 1, TD = 0
+            label_map = {'TD': 0, 'ASD': 1}
+            combined_df['diagnosis'] = combined_df['diagnosis'].map(label_map)
+            
+            logger.info(f"After cleaning: {len(combined_df)} samples with labels {combined_df['diagnosis'].unique()}")
+        
+        if len(combined_df) < 10:
+            raise ValueError(f"Insufficient samples after filtering: {len(combined_df)} (need at least 10)")
+        
+        # Step 2: Preprocess data
+        training_state['progress'] = 10
+        training_state['message'] = 'Preprocessing data...'
+        
+        from src.preprocessing import DataPreprocessor
+        preprocessor = DataPreprocessor(
+            target_column='diagnosis',
+            test_size=0.2,
+            random_state=42,
+            feature_selection=feature_selection,
+            n_features=n_features if n_features else 218  # Use all if None
+        )
+        
+        # Fit and transform - skip validation since we already cleaned the data
+        X_train, X_test, y_train, y_test = preprocessor.fit_transform(combined_df, validate=False)
+        logger.info(f"Training set: {X_train.shape}, Test set: {X_test.shape}")
+        logger.info(f"Feature selection: {feature_selection}, Features used: {X_train.shape[1]}")
+        
+        # Save preprocessor as dict to avoid pickling issues
+        # Remove logger references to make it picklable
+        preprocessor_dict = {
+            'feature_columns': preprocessor.feature_columns_,
+            'selected_features': preprocessor.selected_features_,
+            'scaler': preprocessor.scaler,
+            'cleaner': preprocessor.cleaner,
+            'target_column': preprocessor.target_column
+        }
+        
+        # Remove logger attributes to make objects picklable
+        if hasattr(preprocessor_dict['cleaner'], 'logger'):
+            preprocessor_dict['cleaner'].logger = None
+        if hasattr(preprocessor_dict['scaler'], 'logger'):
+            preprocessor_dict['scaler'].logger = None
+        
+        # Step 3: Train models
+        from src.models import ModelTrainer, ModelConfig, ModelEvaluator
+        trainer = ModelTrainer()
+        evaluator = ModelEvaluator()
+        
+        trained_models = {}
+        model_reports = {}
+        
+        for i, model_type in enumerate(model_types):
+            training_state['current_model'] = model_type
+            training_state['progress'] = 10 + int((i / len(model_types)) * 80)
+            training_state['message'] = f'Training {model_type}...'
+            
+            logger.info(f"Training model: {model_type}")
+            
+            config_obj = ModelConfig(
+                model_type=model_type,
+                tune_hyperparameters=False
+            )
+            
+            model = trainer.train_model(X_train, y_train, config_obj)
+            trained_models[model_type] = model
+            
+            # Evaluate
+            training_state['message'] = f'Evaluating {model_type}...'
+            report = evaluator.evaluate(
+                model,
+                X_test,
+                y_test,
+                model_name=model_type,
+                X_train=X_train,
+                y_train=y_train
+            )
+            model_reports[model_type] = report
+            
+            logger.info(f"{model_type} - Accuracy: {report.accuracy:.4f}, F1: {report.f1_score:.4f}")
+        
+        # Step 4: Save models to registry
+        training_state['progress'] = 90
+        training_state['message'] = 'Saving models...'
+        
+        for model_type, model in trained_models.items():
+            report = model_reports[model_type]
+            
+            # Create model name with component prefix
+            model_name = f"{component}_{model_type}"
+            
+            metadata = ModelMetadata(
+                model_name=model_name,
+                model_type=model_type,
+                accuracy=float(report.accuracy),
+                f1_score=float(report.f1_score),
+                n_features=len(preprocessor.selected_features_),
+                training_samples=len(X_train),
+                feature_names=preprocessor.selected_features_,
+                description=f"{component} component - {model_type}"
+            )
+            
+            model_registry.register_model(model, metadata, preprocessor=preprocessor_dict)
+            
+            training_state['results'][model_name] = {
+                'accuracy': float(report.accuracy),
+                'f1_score': float(report.f1_score),
+                'precision': float(report.precision),
+                'recall': float(report.recall),
+                'component': component
+            }
+        
+        # Complete
+        training_state['status'] = 'completed'
+        training_state['progress'] = 100
+        training_state['message'] = f'Training completed! Trained {len(trained_models)} models.'
+        training_state['current_model'] = None
+        
+        logger.info("Training completed successfully")
+        
+    except Exception as e:
+        logger.error(f"Training failed: {e}", exc_info=True)
+        training_state['status'] = 'error'
+        training_state['error'] = str(e)
+        training_state['message'] = f'Training failed: {str(e)}'
+
+
 @app.post("/training/train", tags=["Training Mode"])
 async def train_models(request: TrainingRequest, background_tasks: BackgroundTasks):
     """
@@ -538,10 +977,25 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
     
     Training runs in the background. Check status with /training/status.
     """
+    global training_state
+    
+    if training_state['status'] == 'training':
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Training already in progress"
+        )
+    
     logger.info(f"Training request for component: {request.component}")
     
-    # This would typically start a background training task
-    # For now, return a placeholder response
+    # Start training in background
+    background_tasks.add_task(
+        run_training_task,
+        request.dataset_paths,
+        request.model_types,
+        request.component,
+        request.n_features,
+        request.feature_selection
+    )
     
     return {
         'status': 'training_initiated',
@@ -555,13 +1009,7 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
 @app.get("/training/status", tags=["Training Mode"])
 async def training_status():
     """Get current training status."""
-    return {
-        'status': 'idle',
-        'component': None,
-        'models_training': [],
-        'progress': 0,
-        'message': 'No training in progress'
-    }
+    return training_state
 
 
 @app.post("/training/inspect-features", tags=["Training Mode"])
@@ -686,19 +1134,66 @@ async def list_models():
                     'accuracy': metadata.accuracy,
                     'f1_score': metadata.f1_score,
                     'version': metadata.version,
+                    'n_features': metadata.n_features,
+                    'training_samples': metadata.training_samples,
+                    'created_at': metadata.created_at,
                 })
             except:
                 model_info.append({'name': model_name, 'type': 'unknown'})
         
+        # Get best model
+        best_model_name = None
+        if model_info:
+            best_model_name = max(model_info, key=lambda x: x.get('f1_score', 0))['name']
+        
         return {
             "models": model_info,
-            "count": len(models)
+            "count": len(models),
+            "best_model": best_model_name
         }
     except Exception as e:
         logger.error(f"Error listing models: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error listing models: {str(e)}"
+        )
+
+
+@app.delete("/models/{model_name}", tags=["Information"])
+async def delete_model(model_name: str):
+    """Delete a trained model."""
+    try:
+        models = model_registry.list_models()
+        if model_name not in models:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Model '{model_name}' not found"
+            )
+        
+        # Delete model directory
+        model_dir = model_registry.registry_dir / model_name
+        if model_dir.exists():
+            import shutil
+            shutil.rmtree(model_dir)
+        
+        # Remove from registry
+        model_registry.models_.pop(model_name, None)
+        model_registry._save_registry()
+        
+        logger.info(f"Deleted model: {model_name}")
+        
+        return {
+            "status": "success",
+            "message": f"Model '{model_name}' deleted successfully"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error deleting model: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error deleting model: {str(e)}"
         )
 
 
