@@ -162,12 +162,16 @@ class FeatureExtractor:
             'description': 'Audio-derived pragmatic features (pauses, timing)',
             'status': 'implemented',
         },
-        # Placeholder categories for other team members
+        # Acoustic & Prosodic features (implemented)
         'acoustic_prosodic': {
             'section': 'audio',
             'description': 'Acoustic and prosodic features from audio',
-            'status': 'placeholder',
-            'team': 'Team Member A',
+            'status': 'implemented',
+        },
+        'acoustic_audio': {
+            'section': 'audio',
+            'description': 'Acoustic and prosodic features from audio (alias)',
+            'status': 'implemented',
         },
         'syntactic_semantic': {
             'section': 'text',
@@ -267,6 +271,18 @@ class FeatureExtractor:
         if 'pragmatic_audio' in self.active_categories:
             self.extractors['pragmatic_audio'] = PragmaticAudioFeatures()
             logger.debug("Initialized PragmaticAudioFeatures (Audio)")
+        
+        # Acoustic & Prosodic audio features (if available and requested)
+        if 'acoustic_audio' in self.active_categories or 'acoustic_prosodic' in self.active_categories:
+            if AcousticAudioFeatures is not None:
+                # Use 'acoustic_audio' as the key for consistency
+                self.extractors['acoustic_audio'] = AcousticAudioFeatures()
+                # Also map 'acoustic_prosodic' to the same extractor for API compatibility
+                if 'acoustic_prosodic' in self.active_categories:
+                    self.extractors['acoustic_prosodic'] = self.extractors['acoustic_audio']
+                logger.debug("Initialized AcousticAudioFeatures")
+            else:
+                logger.warning("AcousticAudioFeatures not available")
         
         # Syntactic/Semantic (if available and requested)
         if 'syntactic_semantic' in self.active_categories:
@@ -411,8 +427,14 @@ class FeatureExtractor:
             try:
                 extractor = self.extractors[category]
                 
-                # Special handling for audio extractor
+                # Special handling for audio extractors
                 if category == 'pragmatic_audio':
+                    result = extractor.extract(
+                        transcript,
+                        audio_path=audio_path,
+                        transcription_result=transcription_result
+                    )
+                elif category in ('acoustic_audio', 'acoustic_prosodic'):
                     result = extractor.extract(
                         transcript,
                         audio_path=audio_path,
