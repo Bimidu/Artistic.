@@ -438,8 +438,20 @@ class CHATParser:
                 speaker = utterance.participant
                 text = utterance.tiers.get('utterance', '')
                 
-                # Get tokens (words)
-                tokens = utterance.tokens or []
+                # Clean text: remove 0-prefixed words (CHAT convention for omitted/null elements)
+                # Example: "0do you know" -> "you know"
+                if text:
+                    import re
+                    text = re.sub(r'\b0\w+\b', '', text)  # Remove words starting with 0
+                    text = re.sub(r'\s+', ' ', text).strip()  # Clean up extra spaces
+                
+                # Get tokens (words) - this can fail for malformed utterances
+                try:
+                    tokens = utterance.tokens or []
+                except Exception as token_error:
+                    # If token alignment fails, we'll work with cleaned text only
+                    logger.debug(f"Token alignment error (using cleaned text): {token_error}")
+                    tokens = []
                 
                 # If text is empty but we have tokens, reconstruct text from tokens
                 if not text and tokens:

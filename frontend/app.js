@@ -473,7 +473,7 @@ async function startTraining() {
     
     // Get selected model types
     const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
-        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm'].includes(cb.value))
+        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value))
         .map(cb => cb.value);
     
     if (selectedModels.length === 0) {
@@ -484,6 +484,9 @@ async function startTraining() {
     const component = document.getElementById('trainingComponent').value;
     const featureSelectionEnabled = document.getElementById('featureSelectionEnabled').checked;
     const nFeatures = parseInt(document.getElementById('nFeatures').value) || 30;
+    const testSize = parseFloat(document.getElementById('testSize').value) / 100 || 0.2;
+    const randomState = parseInt(document.getElementById('randomState').value) || 42;
+    const customHyperparams = getCustomHyperparameters();
     
     const statusEl = document.getElementById('trainingStatus');
     const statusContent = document.getElementById('trainingStatusContent');
@@ -499,7 +502,10 @@ async function startTraining() {
                 model_types: selectedModels,
                 component: component,
                 feature_selection: featureSelectionEnabled,
-                n_features: featureSelectionEnabled ? nFeatures : null
+                n_features: featureSelectionEnabled ? nFeatures : null,
+                test_size: testSize,
+                random_state: randomState,
+                custom_hyperparameters: customHyperparams
             })
         });
         
@@ -736,41 +742,58 @@ async function loadAvailableModels() {
                     const isBest = model.name === data.best_model;
                     const accuracy = (model.accuracy * 100).toFixed(1);
                     const f1 = (model.f1_score * 100).toFixed(1);
+                    const precision = (model.precision * 100).toFixed(1);
+                    const recall = (model.recall * 100).toFixed(1);
+                    const rocAuc = model.roc_auc ? (model.roc_auc * 100).toFixed(1) : null;
+                    const matthews = model.matthews_corr ? model.matthews_corr.toFixed(3) : 'N/A';
                     const date = new Date(model.created_at).toLocaleDateString();
+                    const time = new Date(model.created_at).toLocaleTimeString();
                     
                     modelsHtml += `
-                        <div class="p-6 bg-white rounded-2xl hover:bg-primary-50 transition-colors ${isBest ? 'ring-2 ring-primary-600' : ''}">
-                            <div class="flex items-start justify-between mb-4">
+                        <div class="p-5 bg-white rounded-2xl hover:bg-primary-50 transition-colors ${isBest ? 'ring-2 ring-primary-600' : ''}">
+                            <div class="flex items-start justify-between mb-3">
                                 <div class="flex-1">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <h4 class="text-xl font-medium text-primary-900">${model.type}</h4>
-                                        ${isBest ? '<span class="px-3 py-1 bg-primary-600 text-white text-xs rounded-full">Best Overall</span>' : ''}
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h4 class="text-lg font-medium text-primary-900">${model.type}</h4>
+                                        ${isBest ? '<span class="px-2 py-0.5 bg-primary-600 text-white text-xs rounded-full">Best</span>' : ''}
                                     </div>
-                                    <div class="text-sm text-primary-500">Created: ${date}</div>
+                                    <div class="text-xs text-primary-500">${date} at ${time}</div>
                                 </div>
-                                <button class="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-sm" onclick="deleteModel('${model.name}')">
+                                <button class="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-xs" onclick="deleteModel('${model.name}')">
                                     Delete
                                 </button>
                             </div>
                             
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div class="text-center p-3 bg-primary-50 rounded-xl">
-                                    <div class="text-2xl font-medium text-primary-900">${accuracy}%</div>
-                                    <div class="text-xs text-primary-600 mt-1">Accuracy</div>
+                            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 mb-3">
+                                <div class="text-center p-2 bg-primary-50 rounded-lg">
+                                    <div class="text-lg font-medium text-primary-900">${accuracy}%</div>
+                                    <div class="text-xs text-primary-600">Accuracy</div>
                                 </div>
-                                <div class="text-center p-3 bg-primary-50 rounded-xl">
-                                    <div class="text-2xl font-medium text-primary-900">${f1}%</div>
-                                    <div class="text-xs text-primary-600 mt-1">F1 Score</div>
+                                <div class="text-center p-2 bg-primary-50 rounded-lg">
+                                    <div class="text-lg font-medium text-primary-900">${f1}%</div>
+                                    <div class="text-xs text-primary-600">F1</div>
                                 </div>
-                                <div class="text-center p-3 bg-primary-50 rounded-xl">
-                                    <div class="text-2xl font-medium text-primary-900">${model.n_features}</div>
-                                    <div class="text-xs text-primary-600 mt-1">Features</div>
+                                <div class="text-center p-2 bg-primary-50 rounded-lg">
+                                    <div class="text-lg font-medium text-primary-900">${precision}%</div>
+                                    <div class="text-xs text-primary-600">Precision</div>
                                 </div>
-                                <div class="text-center p-3 bg-primary-50 rounded-xl">
-                                    <div class="text-2xl font-medium text-primary-900">${model.training_samples}</div>
-                                    <div class="text-xs text-primary-600 mt-1">Samples</div>
+                                <div class="text-center p-2 bg-primary-50 rounded-lg">
+                                    <div class="text-lg font-medium text-primary-900">${recall}%</div>
+                                    <div class="text-xs text-primary-600">Recall</div>
+                                </div>
+                                <div class="text-center p-2 bg-primary-50 rounded-lg">
+                                    <div class="text-lg font-medium text-primary-900">${model.n_features}</div>
+                                    <div class="text-xs text-primary-600">Features</div>
+                                </div>
+                                <div class="text-center p-2 bg-primary-50 rounded-lg">
+                                    <div class="text-lg font-medium text-primary-900">${model.training_samples}</div>
+                                    <div class="text-xs text-primary-600">Samples</div>
                                 </div>
                             </div>
+                            ${rocAuc ? `<div class="mb-3 flex gap-2 items-center justify-center"><span class="text-xs text-primary-600">ROC-AUC:</span><span class="font-medium text-sm">${rocAuc}%</span><span class="text-xs text-primary-600 ml-3">Matthews:</span><span class="font-medium text-sm">${matthews}</span></div>` : ''}
+                            <button class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm" onclick='showModelDetails(${JSON.stringify(model)})'>
+                                View Detailed Metrics & Graphs
+                            </button>
                         </div>
                     `;
                 }
@@ -860,6 +883,467 @@ document.getElementById('inspectFileInput').addEventListener('change', async (e)
         resultsEl.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
     }
 });
+
+// Model Details Modal Functions
+function showModelDetails(model) {
+    const modal = document.getElementById('modelDetailsModal');
+    const content = document.getElementById('modalContent');
+    
+    // Render confusion matrix
+    const confusionMatrixHtml = renderConfusionMatrix(model.confusion_matrix);
+    
+    // Render metrics
+    const accuracy = (model.accuracy * 100).toFixed(2);
+    const f1 = (model.f1_score * 100).toFixed(2);
+    const precision = (model.precision * 100).toFixed(2);
+    const recall = (model.recall * 100).toFixed(2);
+    const rocAuc = model.roc_auc ? (model.roc_auc * 100).toFixed(2) : 'N/A';
+    const matthews = model.matthews_corr ? model.matthews_corr.toFixed(4) : 'N/A';
+    
+    content.innerHTML = `
+        <div class="space-y-8">
+            <!-- Model Info -->
+            <div class="bg-primary-50 rounded-2xl p-6">
+                <h3 class="text-2xl font-medium text-primary-900 mb-4">${model.type} Model</h3>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div><span class="text-primary-600">Component:</span> <span class="font-medium">${model.component || 'pragmatic_conversational'}</span></div>
+                    <div><span class="text-primary-600">Features:</span> <span class="font-medium">${model.n_features}</span></div>
+                    <div><span class="text-primary-600">Training Samples:</span> <span class="font-medium">${model.training_samples}</span></div>
+                    <div><span class="text-primary-600">Created:</span> <span class="font-medium">${new Date(model.created_at).toLocaleString()}</span></div>
+                </div>
+            </div>
+            
+            <!-- Performance Metrics -->
+            <div>
+                <h3 class="text-xl font-medium text-primary-900 mb-3">Performance Metrics</h3>
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
+                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                        <div class="text-xl font-semibold text-primary-900">${accuracy}%</div>
+                        <div class="text-xs text-primary-600 mt-1">Accuracy</div>
+                    </div>
+                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                        <div class="text-xl font-semibold text-primary-900">${f1}%</div>
+                        <div class="text-xs text-primary-600 mt-1">F1 Score</div>
+                    </div>
+                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                        <div class="text-xl font-semibold text-primary-900">${precision}%</div>
+                        <div class="text-xs text-primary-600 mt-1">Precision</div>
+                    </div>
+                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                        <div class="text-xl font-semibold text-primary-900">${recall}%</div>
+                        <div class="text-xs text-primary-600 mt-1">Recall</div>
+                    </div>
+                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                        <div class="text-xl font-semibold text-primary-900">${rocAuc}${rocAuc !== 'N/A' ? '%' : ''}</div>
+                        <div class="text-xs text-primary-600 mt-1">ROC-AUC</div>
+                    </div>
+                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                        <div class="text-xl font-semibold text-primary-900">${matthews}</div>
+                        <div class="text-xs text-primary-600 mt-1">Matthews</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Confusion Matrix -->
+            <div>
+                <h3 class="text-xl font-medium text-primary-900 mb-3">Confusion Matrix</h3>
+                ${confusionMatrixHtml}
+            </div>
+        </div>
+    `;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeModelDetails(event) {
+    const modal = document.getElementById('modelDetailsModal');
+    if (!event || event.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+}
+
+// Hyperparameter Management
+const DEFAULT_HYPERPARAMS = {
+    'random_forest': {
+        'n_estimators': {
+            value: 100, type: 'number', min: 10, max: 500,
+            description: 'Number of decision trees in the forest',
+            range: 'Typical: 50-300',
+            effect: 'Higher = better performance but slower training. Too high can overfit.'
+        },
+        'max_depth': {
+            value: 10, type: 'number', min: 2, max: 50,
+            description: 'Maximum depth of each decision tree',
+            range: 'Typical: 5-20',
+            effect: 'Higher = more complex patterns, but can overfit. Lower = simpler, faster.'
+        },
+        'min_samples_split': {
+            value: 5, type: 'number', min: 2, max: 20,
+            description: 'Minimum samples required to split a node',
+            range: 'Typical: 2-10',
+            effect: 'Higher = prevents overfitting, simpler trees. Lower = more detailed splits.'
+        },
+        'min_samples_leaf': {
+            value: 2, type: 'number', min: 1, max: 10,
+            description: 'Minimum samples required in a leaf node',
+            range: 'Typical: 1-5',
+            effect: 'Higher = smoother predictions, less overfitting. Lower = more granular.'
+        }
+    },
+    'xgboost': {
+        'n_estimators': {
+            value: 100, type: 'number', min: 10, max: 500,
+            description: 'Number of gradient boosting rounds',
+            range: 'Typical: 50-300',
+            effect: 'Higher = better performance but slower. Use with lower learning_rate.'
+        },
+        'max_depth': {
+            value: 6, type: 'number', min: 2, max: 15,
+            description: 'Maximum depth of each tree',
+            range: 'Typical: 3-10',
+            effect: 'Higher = captures complex patterns, risk of overfitting. Lower = faster, simpler.'
+        },
+        'learning_rate': {
+            value: 0.1, type: 'number', min: 0.001, max: 1, step: 0.001,
+            description: 'Step size shrinkage for each boosting step',
+            range: 'Typical: 0.01-0.3',
+            effect: 'Lower = more conservative, needs more trees. Higher = faster but may overfit.'
+        },
+        'subsample': {
+            value: 0.8, type: 'number', min: 0.1, max: 1, step: 0.1,
+            description: 'Fraction of samples used for each tree',
+            range: 'Typical: 0.6-1.0',
+            effect: 'Lower = reduces overfitting, adds randomness. Higher = uses more data per tree.'
+        }
+    },
+    'lightgbm': {
+        'n_estimators': {
+            value: 100, type: 'number', min: 10, max: 500,
+            description: 'Number of boosting iterations',
+            range: 'Typical: 50-300',
+            effect: 'Higher = better performance but slower. LightGBM is faster than XGBoost.'
+        },
+        'max_depth': {
+            value: 6, type: 'number', min: 2, max: 15,
+            description: 'Maximum tree depth',
+            range: 'Typical: 3-10',
+            effect: 'Higher = more complex patterns. Lower = faster training, less overfitting.'
+        },
+        'learning_rate': {
+            value: 0.1, type: 'number', min: 0.001, max: 1, step: 0.001,
+            description: 'Boosting learning rate',
+            range: 'Typical: 0.01-0.3',
+            effect: 'Lower = more stable, needs more trees. Higher = faster convergence.'
+        },
+        'subsample': {
+            value: 0.8, type: 'number', min: 0.1, max: 1, step: 0.1,
+            description: 'Fraction of data to use for training',
+            range: 'Typical: 0.6-1.0',
+            effect: 'Lower = prevents overfitting. Higher = uses more training data.'
+        }
+    },
+    'gradient_boosting': {
+        'n_estimators': {
+            value: 100, type: 'number', min: 10, max: 500,
+            description: 'Number of boosting stages',
+            range: 'Typical: 50-300',
+            effect: 'Higher = better fit but slower. Balance with learning_rate.'
+        },
+        'learning_rate': {
+            value: 0.1, type: 'number', min: 0.001, max: 1, step: 0.001,
+            description: 'Learning rate for each boosting stage',
+            range: 'Typical: 0.01-0.3',
+            effect: 'Lower = more conservative, requires more trees. Higher = faster but may overfit.'
+        },
+        'max_depth': {
+            value: 5, type: 'number', min: 2, max: 15,
+            description: 'Maximum depth of individual trees',
+            range: 'Typical: 3-8',
+            effect: 'Higher = captures complex interactions. Lower = simpler, faster, less overfitting.'
+        },
+        'min_samples_split': {
+            value: 5, type: 'number', min: 2, max: 20,
+            description: 'Minimum samples to split a node',
+            range: 'Typical: 2-10',
+            effect: 'Higher = prevents overfitting. Lower = more detailed splits.'
+        }
+    },
+    'adaboost': {
+        'n_estimators': {
+            value: 100, type: 'number', min: 10, max: 500,
+            description: 'Number of weak learners (estimators)',
+            range: 'Typical: 50-200',
+            effect: 'Higher = better performance but slower. Too high can overfit.'
+        },
+        'learning_rate': {
+            value: 1.0, type: 'number', min: 0.01, max: 2, step: 0.01,
+            description: 'Weight applied to each classifier',
+            range: 'Typical: 0.5-2.0',
+            effect: 'Lower = more conservative updates. Higher = faster adaptation, risk of overfitting.'
+        }
+    },
+    'logistic': {
+        'C': {
+            value: 1.0, type: 'number', min: 0.001, max: 100, step: 0.001,
+            description: 'Inverse regularization strength',
+            range: 'Typical: 0.01-10',
+            effect: 'Higher = less regularization, more complex model. Lower = more regularization, simpler model.'
+        },
+        'max_iter': {
+            value: 1000, type: 'number', min: 100, max: 5000,
+            description: 'Maximum iterations for solver convergence',
+            range: 'Typical: 100-2000',
+            effect: 'Higher = more attempts to converge. Too low may not converge. Too high wastes time.'
+        }
+    },
+    'svm': {
+        'C': {
+            value: 1.0, type: 'number', min: 0.001, max: 100, step: 0.001,
+            description: 'Regularization parameter (penalty for misclassification)',
+            range: 'Typical: 0.1-10',
+            effect: 'Higher = harder margin, less tolerance for errors. Lower = softer margin, more tolerance.'
+        },
+        'kernel': {
+            value: 'rbf', type: 'select', options: ['rbf', 'linear', 'poly', 'sigmoid'],
+            description: 'Kernel function type for non-linear classification',
+            range: 'Options: rbf, linear, poly, sigmoid',
+            effect: 'rbf=non-linear (default), linear=fast but limited, poly=polynomial, sigmoid=neural network-like.'
+        },
+        'gamma': {
+            value: 'scale', type: 'select', options: ['scale', 'auto'],
+            description: 'Kernel coefficient for rbf, poly, sigmoid',
+            range: 'Options: scale (default), auto',
+            effect: 'scale=1/(n_features*X.var()), auto=1/n_features. Lower = smoother decision boundary.'
+        }
+    }
+};
+
+function toggleHyperparameters() {
+    const section = document.getElementById('hyperparamSection');
+    const chevron = document.getElementById('hyperparamChevron');
+    const isHidden = section.classList.contains('hidden');
+    
+    if (isHidden) {
+        section.classList.remove('hidden');
+        chevron.style.transform = 'rotate(180deg)';
+        updateHyperparamControls();
+    } else {
+        section.classList.add('hidden');
+        chevron.style.transform = 'rotate(0deg)';
+    }
+}
+
+function updateHyperparamControls() {
+    const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
+        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value))
+        .map(cb => cb.value);
+    
+    const container = document.getElementById('hyperparamControls');
+    
+    if (selectedModels.length === 0) {
+        container.innerHTML = '<p class="text-primary-500 text-center py-4">Select at least one model type above</p>';
+        return;
+    }
+    
+    let html = '';
+    selectedModels.forEach(modelType => {
+        const params = DEFAULT_HYPERPARAMS[modelType];
+        const modelNames = {
+            'random_forest': 'Random Forest',
+            'xgboost': 'XGBoost',
+            'lightgbm': 'LightGBM',
+            'gradient_boosting': 'Gradient Boosting',
+            'adaboost': 'AdaBoost',
+            'logistic': 'Logistic Regression',
+            'svm': 'SVM'
+        };
+        
+        html += `
+            <div class="border border-primary-200 rounded-xl p-5 bg-white">
+                <h4 class="text-lg font-semibold text-primary-900 mb-4">${modelNames[modelType]}</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        `;
+        
+        for (const [paramName, paramConfig] of Object.entries(params)) {
+            const inputId = `hyperparam_${modelType}_${paramName}`;
+            const tooltipId = `tooltip_${modelType}_${paramName}`;
+            html += `
+                <div class="space-y-1">
+                    <label class="flex items-center gap-1.5 text-sm font-medium text-primary-900">
+                        ${paramName}
+                        <div class="group relative">
+                            <svg class="w-4 h-4 text-primary-400 hover:text-primary-600 cursor-help transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div id="${tooltipId}" class="hidden group-hover:block absolute z-50 w-80 p-3 mt-2 bg-primary-900 text-white text-xs rounded-lg shadow-xl left-0 top-full mb-1 pointer-events-none">
+                                <div class="font-semibold mb-2 text-primary-50">${paramConfig.description}</div>
+                                <div class="text-primary-200 mb-1.5"><span class="font-medium">Range:</span> ${paramConfig.range}</div>
+                                <div class="text-primary-200"><span class="font-medium">Effect:</span> ${paramConfig.effect}</div>
+                                <div class="absolute -top-1 left-4 w-2 h-2 bg-primary-900 rotate-45"></div>
+                            </div>
+                        </div>
+                    </label>
+            `;
+            
+            if (paramConfig.type === 'select') {
+                html += `<select id="${inputId}" class="w-full px-3 py-2 bg-primary-50 border border-primary-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">`;
+                paramConfig.options.forEach(opt => {
+                    html += `<option value="${opt}" ${opt === paramConfig.value ? 'selected' : ''}>${opt}</option>`;
+                });
+                html += `</select>`;
+            } else {
+                const step = paramConfig.step || 1;
+                html += `<input type="number" id="${inputId}" value="${paramConfig.value}" 
+                    min="${paramConfig.min}" max="${paramConfig.max}" step="${step}"
+                    class="w-full px-3 py-2 bg-primary-50 border border-primary-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">`;
+            }
+            
+            html += `
+                    <div class="text-xs text-primary-600 space-y-0.5">
+                        <div class="font-medium">${paramConfig.description}</div>
+                        <div class="text-primary-500">${paramConfig.range} • ${paramConfig.effect}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += `
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function getCustomHyperparameters() {
+    const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
+        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value))
+        .map(cb => cb.value);
+    
+    const customParams = {};
+    
+    selectedModels.forEach(modelType => {
+        const params = DEFAULT_HYPERPARAMS[modelType];
+        customParams[modelType] = {};
+        
+        for (const paramName of Object.keys(params)) {
+            const inputId = `hyperparam_${modelType}_${paramName}`;
+            const input = document.getElementById(inputId);
+            if (input) {
+                const value = input.type === 'number' ? parseFloat(input.value) : input.value;
+                customParams[modelType][paramName] = value;
+            }
+        }
+    });
+    
+    return customParams;
+}
+
+// Update model checkboxes to refresh hyperparam controls
+document.addEventListener('DOMContentLoaded', () => {
+    const modelCheckboxes = document.querySelectorAll('input[type="checkbox"][value]');
+    modelCheckboxes.forEach(cb => {
+        if (['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value)) {
+            cb.addEventListener('change', () => {
+                const section = document.getElementById('hyperparamSection');
+                if (!section.classList.contains('hidden')) {
+                    updateHyperparamControls();
+                }
+            });
+        }
+    });
+});
+
+function renderConfusionMatrix(matrix) {
+    if (!matrix || matrix.length === 0) {
+        return '<div class="text-primary-500 text-center py-8">Confusion matrix not available</div>';
+    }
+    
+    const labels = ['TD (Negative)', 'ASD (Positive)'];
+    const total = matrix.flat().reduce((a, b) => a + b, 0);
+    
+    // Calculate percentages and colors
+    const getColor = (value, maxValue) => {
+        const intensity = Math.round((value / maxValue) * 255);
+        return `rgb(${255 - intensity}, ${255 - intensity * 0.5}, 255)`;
+    };
+    
+    const maxValue = Math.max(...matrix.flat());
+    
+    let html = `
+        <div class="bg-white rounded-xl p-6 shadow-lg">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="p-3"></th>
+                            <th class="p-3"></th>
+                            <th class="p-3 text-center font-medium text-primary-900" colspan="2">Predicted</th>
+                        </tr>
+                        <tr>
+                            <th class="p-3"></th>
+                            <th class="p-3"></th>
+                            ${labels.map(label => `<th class="p-3 text-center text-sm font-medium text-primary-700">${label}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+    `;
+    
+    matrix.forEach((row, i) => {
+        html += `<tr>`;
+        // Add "Actual" label only for first row
+        if (i === 0) {
+            html += `<th rowspan="${matrix.length}" class="p-3 text-center font-medium text-primary-900 align-middle border-r border-primary-300" style="vertical-align: middle;">
+                <div style="writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap;">Actual</div>
+            </th>`;
+        }
+        html += `<th class="p-3 text-left text-sm font-medium text-primary-700 align-middle">${labels[i]}</th>`;
+        
+        row.forEach((value, j) => {
+            const percentage = ((value / total) * 100).toFixed(1);
+            const bgColor = getColor(value, maxValue);
+            const borderClass = j < row.length - 1 ? 'border-r border-primary-200' : '';
+            html += `
+                <td class="p-6 text-center border border-primary-200 align-middle ${borderClass}" style="background-color: ${bgColor}">
+                    <div class="text-2xl font-bold text-primary-900">${value}</div>
+                    <div class="text-xs text-primary-600 mt-1">${percentage}%</div>
+                </td>
+            `;
+        });
+        
+        html += `</tr>`;
+    });
+    
+    html += `
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <div class="font-medium text-green-900">True Negatives (TN)</div>
+                    <div class="text-green-700">Correctly predicted TD: ${matrix[0][0]}</div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg">
+                    <div class="font-medium text-red-900">False Positives (FP)</div>
+                    <div class="text-red-700">Wrongly predicted ASD: ${matrix[0][1]}</div>
+                </div>
+                <div class="bg-orange-50 p-4 rounded-lg">
+                    <div class="font-medium text-orange-900">False Negatives (FN)</div>
+                    <div class="text-orange-700">Missed ASD cases: ${matrix[1][0]}</div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="font-medium text-blue-900">True Positives (TP)</div>
+                    <div class="text-blue-700">Correctly predicted ASD: ${matrix[1][1]}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
 
 // Test connection on load
 setTimeout(testConnection, 500);

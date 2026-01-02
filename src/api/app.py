@@ -141,6 +141,18 @@ class TrainingRequest(BaseModel):
         default=True,
         description="Whether to perform feature selection"
     )
+    test_size: float = Field(
+        default=0.2,
+        description="Fraction of data for test set (0.1 to 0.4)"
+    )
+    random_state: int = Field(
+        default=42,
+        description="Random seed for reproducibility"
+    )
+    custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None,
+        description="Custom hyperparameters for each model type"
+    )
 
 
 class TrainingStatus(BaseModel):
@@ -757,7 +769,7 @@ training_state = {
 }
 
 
-def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True):
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None):
     """Background task for model training."""
     global training_state
     
@@ -860,8 +872,8 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
         from src.preprocessing import DataPreprocessor
         preprocessor = DataPreprocessor(
             target_column='diagnosis',
-            test_size=0.2,
-            random_state=42,
+            test_size=test_size,
+            random_state=random_state,
             feature_selection=feature_selection,
             n_features=n_features if n_features else 218  # Use all if None
         )
@@ -902,8 +914,15 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
             
             logger.info(f"Training model: {model_type}")
             
+            # Get custom hyperparameters if provided
+            hyperparams = {}
+            if custom_hyperparameters and model_type in custom_hyperparameters:
+                hyperparams = custom_hyperparameters[model_type]
+                logger.info(f"Using custom hyperparameters for {model_type}: {hyperparams}")
+            
             config_obj = ModelConfig(
                 model_type=model_type,
+                hyperparameters=hyperparams,
                 tune_hyperparameters=False
             )
             
@@ -939,10 +958,16 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
                 model_type=model_type,
                 accuracy=float(report.accuracy),
                 f1_score=float(report.f1_score),
+                precision=float(report.precision),
+                recall=float(report.recall),
+                roc_auc=float(report.roc_auc) if report.roc_auc is not None else None,
+                matthews_corr=float(report.matthews_corr),
+                confusion_matrix=report.confusion_matrix.tolist() if len(report.confusion_matrix) > 0 else [],
                 n_features=len(preprocessor.selected_features_),
                 training_samples=len(X_train),
                 feature_names=preprocessor.selected_features_,
-                description=f"{component} component - {model_type}"
+                description=f"{component} component - {model_type}",
+                component=component
             )
             
             model_registry.register_model(model, metadata, preprocessor=preprocessor_dict)
@@ -994,7 +1019,10 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         request.model_types,
         request.component,
         request.n_features,
-        request.feature_selection
+        request.feature_selection,
+        request.test_size,
+        request.random_state,
+        request.custom_hyperparameters
     )
     
     return {
@@ -1133,9 +1161,15 @@ async def list_models():
                     'type': metadata.model_type,
                     'accuracy': metadata.accuracy,
                     'f1_score': metadata.f1_score,
+                    'precision': metadata.precision,
+                    'recall': metadata.recall,
+                    'roc_auc': metadata.roc_auc,
+                    'matthews_corr': metadata.matthews_corr,
+                    'confusion_matrix': metadata.confusion_matrix,
                     'version': metadata.version,
                     'n_features': metadata.n_features,
                     'training_samples': metadata.training_samples,
+                    'component': metadata.component,
                     'created_at': metadata.created_at,
                 })
             except:
