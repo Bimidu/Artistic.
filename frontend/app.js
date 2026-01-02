@@ -10,12 +10,12 @@ const toggleSlider = document.getElementById('toggleSlider');
 function updateToggleSlider() {
     const activeOption = document.querySelector('.toggle-option.active');
     const toggleSwitch = document.getElementById('modeToggle');
-    
+
     if (activeOption && toggleSwitch) {
         const optionRect = activeOption.getBoundingClientRect();
         const switchRect = toggleSwitch.getBoundingClientRect();
         const relativeLeft = optionRect.left - switchRect.left;
-        
+
         toggleSlider.style.width = `${optionRect.width}px`;
         toggleSlider.style.transform = `translateX(${relativeLeft - 4}px)`;
     }
@@ -25,13 +25,13 @@ toggleOptions.forEach(option => {
     option.addEventListener('click', () => {
         toggleOptions.forEach(opt => opt.classList.remove('active'));
         option.classList.add('active');
-        
+
         const mode = option.dataset.mode;
         document.querySelectorAll('.mode-content').forEach(c => {
             c.classList.add('hidden');
         });
         document.getElementById(mode + 'Mode').classList.remove('hidden');
-        
+
         // Toggle API config bar visibility
         const apiConfigBar = document.getElementById('apiConfigBar');
         if (mode === 'training') {
@@ -43,7 +43,7 @@ toggleOptions.forEach(option => {
         } else {
             apiConfigBar.classList.add('hidden');
         }
-        
+
         updateToggleSlider();
     });
 });
@@ -61,7 +61,7 @@ document.querySelectorAll('.tab').forEach(tab => {
         });
         tab.classList.add('border-primary-900', 'text-primary-900');
         tab.classList.remove('border-transparent', 'text-primary-500');
-        
+
         const inputType = tab.dataset.input;
         document.querySelectorAll('.input-panel').forEach(p => p.classList.add('hidden'));
         document.getElementById(inputType + 'Panel').classList.remove('hidden');
@@ -73,28 +73,28 @@ function setupUploadArea(areaId, inputId, selectedId, allowedExtensions) {
     const area = document.getElementById(areaId);
     const input = document.getElementById(inputId);
     const selected = selectedId ? document.getElementById(selectedId) : null;
-    
+
     area.addEventListener('click', () => input.click());
-    
+
     area.addEventListener('dragover', (e) => {
         e.preventDefault();
         area.classList.add('dragover');
     });
-    
+
     area.addEventListener('dragleave', () => {
         area.classList.remove('dragover');
     });
-    
+
     area.addEventListener('drop', (e) => {
         e.preventDefault();
         area.classList.remove('dragover');
-        
+
         const file = e.dataTransfer.files[0];
         if (file) {
             handleFileSelect(file, input, selected, allowedExtensions);
         }
     });
-    
+
     input.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -107,10 +107,10 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
     console.log('File selected:', file.name);
     console.log('Input ID:', input.id);
     console.log('Allowed extensions:', allowedExtensions);
-    
+
     const ext = '.' + file.name.split('.').pop().toLowerCase();
     console.log('Detected extension:', ext);
-    
+
     if (!allowedExtensions.includes(ext)) {
         let errorMsg = `Invalid file type "${ext}". Allowed: ${allowedExtensions.join(', ')}\n\n`;
         if (ext === '.cha') {
@@ -122,11 +122,11 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
         alert(errorMsg);
         return;
     }
-    
+
     if (selected) {
         selected.textContent = 'Selected: ' + file.name;
     }
-    
+
     // Enable the corresponding predict button
     if (input.id === 'audioFileInput') {
         document.getElementById('predictAudioBtn').disabled = false;
@@ -143,7 +143,7 @@ setupUploadArea('inspectUploadArea', 'inspectFileInput', null, ['.wav', '.cha', 
 async function testConnection() {
     const statusDot = document.getElementById('statusDot');
     const statusText = document.getElementById('statusText');
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/health`);
         if (response.ok) {
@@ -162,26 +162,26 @@ async function testConnection() {
 async function predictFromAudio() {
     const fileInput = document.getElementById('audioFileInput');
     const participantId = document.getElementById('audioParticipantId').value || 'CHI';
-    
+
     if (!fileInput.files[0]) {
         alert('Please select an audio file');
         return;
     }
-    
+
     showLoading('resultsArea');
-    
+
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('participant_id', participantId);
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/predict/audio`, {
             method: 'POST',
             body: formData
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             displayResults(data);
         } else {
@@ -194,23 +194,23 @@ async function predictFromAudio() {
 
 async function predictFromText() {
     const text = document.getElementById('textInput').value;
-    
+
     if (!text.trim()) {
         alert('Please enter some text');
         return;
     }
-    
+
     showLoading('resultsArea');
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/predict/text`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: text, participant_id: 'CHI' })
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             displayResults(data);
         } else {
@@ -224,30 +224,30 @@ async function predictFromText() {
 async function predictFromChatFile() {
     const fileInput = document.getElementById('chaFileInput');
     const useFusion = document.getElementById('chaUseFusion').checked;
-    
+
     if (!fileInput.files[0]) {
         alert('Please select a CHAT file');
         return;
     }
-    
+
     console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion);
     showLoading('resultsArea');
-    
+
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('use_fusion', useFusion);
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/predict/transcript`, {
             method: 'POST',
             body: formData
         });
-        
+
         console.log('Response status:', response.status);
-        
+
         const data = await response.json();
         console.log('Response data:', data);
-        
+
         if (response.ok) {
             displayResults(data);
         } else {
@@ -273,7 +273,7 @@ function showLoading(elementId) {
 function displayResults(data) {
     const isAsd = data.prediction === 'ASD';
     const confidence = (data.confidence * 100).toFixed(1);
-    
+
     // Component breakdown if fusion was used
     let componentBreakdown = '';
     if (data.component_breakdown && data.component_breakdown.length > 1) {
@@ -287,9 +287,9 @@ function displayResults(data) {
             'acoustic_prosodic': 'blue',
             'syntactic_semantic': 'purple'
         };
-        
+
         componentBreakdown = '<div class="mt-6 pt-6 border-t border-primary-200"><div class="text-lg font-medium text-primary-900 mb-4">Component Breakdown</div><div class="space-y-3">';
-        
+
         for (const comp of data.component_breakdown) {
             const compName = componentNames[comp.component] || comp.component;
             const color = componentColors[comp.component] || 'gray';
@@ -297,7 +297,7 @@ function displayResults(data) {
             const compConf = (comp.confidence * 100).toFixed(1);
             const asdProb = ((comp.probabilities.ASD || 0) * 100).toFixed(1);
             const tdProb = ((comp.probabilities.TD || 0) * 100).toFixed(1);
-            
+
             componentBreakdown += `
                 <div class="p-4 bg-${color}-50 rounded-xl">
                     <div class="flex items-center justify-between mb-2">
@@ -314,10 +314,10 @@ function displayResults(data) {
                 </div>
             `;
         }
-        
+
         componentBreakdown += '</div></div>';
     }
-    
+
     document.getElementById('resultsArea').innerHTML = `
         <div class="flex items-center justify-between mb-8">
             <span class="px-10 py-4 rounded-full text-3xl ${isAsd ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}">
@@ -360,7 +360,7 @@ function displayResults(data) {
             ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
         </div>
     `;
-    
+
     // Show annotated transcript
     if (data.annotated_transcript_html) {
         document.getElementById('annotationCard').classList.remove('hidden');
@@ -370,7 +370,7 @@ function displayResults(data) {
 
 function displayError(message) {
     let additionalHelp = '';
-    
+
     if (message.includes('No models in registry') || message.includes('No models')) {
         additionalHelp = `
             <div class="mt-6 p-6 bg-yellow-50 rounded-2xl text-left">
@@ -386,7 +386,7 @@ function displayError(message) {
             </div>
         `;
     }
-    
+
     document.getElementById('resultsArea').innerHTML = `
         <div class="text-center py-24">
             <div class="text-6xl mb-6">⚠️</div>
@@ -400,51 +400,63 @@ function displayError(message) {
 async function loadDatasets() {
     const listEl = document.getElementById('datasetList');
     listEl.innerHTML = '<div class="text-center py-16"><div class="spinner mx-auto"></div></div>';
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/training/datasets`);
         const data = await response.json();
-        
+
         if (data.datasets && data.datasets.length > 0) {
             listEl.innerHTML = data.datasets.map(ds => `
-                <div class="flex items-center p-6 bg-white rounded-2xl mb-4 hover:bg-primary-100 transition-colors">
-                    <input type="checkbox" class="dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.path}">
-                    <div class="flex-1 ml-5">
-                        <div class="text-lg text-primary-900">${ds.name}</div>
-                        <div class="text-base text-primary-500 mt-1">${ds.chat_files} CHAT files, ${ds.audio_files} audio files</div>
+                <div class="flex flex-col p-6 bg-white rounded-2xl border border-primary-100 hover:border-primary-300 hover:shadow-lg transition-all h-full">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="p-3 bg-primary-100 rounded-xl text-primary-600">
+                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <input type="checkbox" class="dataset-checkbox w-6 h-6 text-primary-600 rounded border-primary-300 focus:ring-primary-500 transition-colors cursor-pointer" value="${ds.path}">
+                    </div>
+                    <div class="text-lg font-medium text-primary-900 mb-2 truncate" title="${ds.name}">${ds.name}</div>
+                    <div class="text-sm text-primary-500 mt-auto flex items-center gap-4">
+                        <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            ${ds.chat_files}
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                            ${ds.audio_files}
+                        </span>
                     </div>
                 </div>
             `).join('');
         } else {
-            listEl.innerHTML = '<div class="text-center py-16 text-primary-400 text-xl">No datasets found</div>';
+            listEl.innerHTML = '<div class="col-span-full text-center py-16 text-primary-400 text-xl">No datasets found</div>';
         }
     } catch (error) {
-        listEl.innerHTML = `<div class="text-red-500 text-base p-6">Error loading datasets: ${error.message}</div>`;
+        listEl.innerHTML = `<div class="col-span-full text-red-500 text-base p-6">Error loading datasets: ${error.message}</div>`;
     }
 }
 
 async function extractFeatures() {
     const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
-    
+
     if (selectedDatasets.length === 0) {
         alert('Please select at least one dataset');
         return;
     }
-    
+
     const statusEl = document.getElementById('trainingStatus');
     const statusContent = document.getElementById('trainingStatusContent');
     statusEl.classList.remove('hidden');
     statusContent.innerHTML = '<div class="spinner mx-auto"></div>';
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/training/extract-features`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ dataset_paths: selectedDatasets })
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             statusContent.innerHTML = `
                 <div class="text-green-600 text-lg mb-3">✓ Feature extraction complete</div>
@@ -464,47 +476,92 @@ async function extractFeatures() {
 }
 
 async function startTraining() {
-    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
-    
+    const selectedDatasets = Array.from(document.querySelectorAll('#datasetList input[type="checkbox"]:checked'))
+        .map(cb => cb.value);
+
     if (selectedDatasets.length === 0) {
         alert('Please select at least one dataset');
         return;
     }
-    
-    // Get selected model types
-    const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
-        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm'].includes(cb.value))
+
+    const selectedModels = Array.from(document.querySelectorAll('#modelSelection input[type="checkbox"]:checked'))
         .map(cb => cb.value);
-    
+
     if (selectedModels.length === 0) {
         alert('Please select at least one model type');
         return;
     }
-    
+
     const component = document.getElementById('trainingComponent').value;
-    const featureSelectionEnabled = document.getElementById('featureSelectionEnabled').checked;
     const nFeatures = parseInt(document.getElementById('nFeatures').value) || 30;
-    
+    const featureSelection = document.getElementById('featureSelectionEnabled').checked;
+
+    // Validate inputs before proceeding
+    if (!validateInputs()) {
+        return;
+    }
+
+    // Collect advanced parameters
+    const tuneHyperparameters = document.getElementById('tuneHyperparameters').checked;
+    const cvFolds = parseInt(document.getElementById('cvFolds').value) || 5;
+    const randomState = parseInt(document.getElementById('randomState').value) || 42;
+
+    // Helper function to get numeric value or null
+    const getNumericValue = (id) => {
+        const val = document.getElementById(id).value;
+        return val === '' ? null : parseFloat(val);
+    };
+
+    // Helper function to get string value or null
+    const getStringValue = (id) => {
+        const val = document.getElementById(id).value;
+        return val === '' ? null : val;
+    };
+
+    // Build request body with all parameters
+    const requestBody = {
+        dataset_paths: selectedDatasets,
+        model_types: selectedModels,
+        component: component,
+        n_features: featureSelection ? nFeatures : null, // Only send n_features if feature selection is enabled
+        feature_selection: featureSelection,
+        // Hyperparameter tuning
+        tune_hyperparameters: tuneHyperparameters,
+        cv_folds: cvFolds,
+        // Common hyperparameters
+        learning_rate: getNumericValue('learningRate'),
+        n_estimators: getNumericValue('nEstimators'),
+        max_depth: getNumericValue('maxDepth'),
+        min_samples_split: getNumericValue('minSamplesSplit'),
+        min_samples_leaf: getNumericValue('minSamplesLeaf'),
+        // XGBoost/LightGBM specific
+        subsample: getNumericValue('subsample'),
+        colsample_bytree: getNumericValue('colsampleBytree'),
+        // Regularization
+        reg_alpha: getNumericValue('regAlpha'),
+        reg_lambda: getNumericValue('regLambda'),
+        // SVM specific
+        svm_c: getNumericValue('svmC'),
+        svm_kernel: getStringValue('svmKernel'),
+        svm_gamma: getStringValue('svmGamma'),
+        // General
+        random_state: randomState
+    };
+
     const statusEl = document.getElementById('trainingStatus');
     const statusContent = document.getElementById('trainingStatusContent');
     statusEl.classList.remove('hidden');
     statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-4 text-base text-primary-600">Initializing training...</div>';
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/training/train`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                dataset_paths: selectedDatasets,
-                model_types: selectedModels,
-                component: component,
-                feature_selection: featureSelectionEnabled,
-                n_features: featureSelectionEnabled ? nFeatures : null
-            })
+            body: JSON.stringify(requestBody)
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             // Start polling for progress
             pollTrainingProgress();
@@ -520,7 +577,7 @@ async function startTraining() {
 document.addEventListener('DOMContentLoaded', () => {
     const featureSelectionCheckbox = document.getElementById('featureSelectionEnabled');
     const featureCountSection = document.getElementById('featureCountSection');
-    
+
     if (featureSelectionCheckbox && featureCountSection) {
         featureSelectionCheckbox.addEventListener('change', () => {
             if (featureSelectionCheckbox.checked) {
@@ -541,22 +598,22 @@ function pollTrainingProgress() {
     if (trainingPollInterval) {
         clearInterval(trainingPollInterval);
     }
-    
+
     const statusContent = document.getElementById('trainingStatusContent');
-    
+
     // Poll every 2 seconds
     trainingPollInterval = setInterval(async () => {
         try {
             const response = await fetch(`${getApiUrl()}/training/status`);
             const status = await response.json();
-            
+
             updateTrainingUI(status);
-            
+
             // Stop polling if training is complete or errored
             if (status.status === 'completed' || status.status === 'error' || status.status === 'idle') {
                 clearInterval(trainingPollInterval);
                 trainingPollInterval = null;
-                
+
                 // Reload models list
                 if (status.status === 'completed') {
                     setTimeout(() => {
@@ -568,18 +625,18 @@ function pollTrainingProgress() {
             console.error('Error polling training status:', error);
         }
     }, 2000);
-    
+
     // Initial update
     updateTrainingUI({ status: 'training', progress: 0, message: 'Starting...' });
 }
 
 function updateTrainingUI(status) {
     const statusContent = document.getElementById('trainingStatusContent');
-    
+
     if (status.status === 'training') {
         const progressPercent = status.progress || 0;
         const currentModel = status.current_model ? ` - ${status.current_model}` : '';
-        
+
         statusContent.innerHTML = `
             <div class="mb-4">
                 <div class="flex justify-between text-sm text-primary-600 mb-2">
@@ -611,7 +668,7 @@ function updateTrainingUI(status) {
             }
             resultsHtml += '</div>';
         }
-        
+
         statusContent.innerHTML = `
             <div class="text-green-600 text-lg mb-3 flex items-center gap-2">
                 <span class="text-2xl">✓</span>
@@ -622,7 +679,7 @@ function updateTrainingUI(status) {
     } else if (status.status === 'error') {
         let errorDetails = '';
         const errorMsg = status.error || status.message;
-        
+
         // Parse common errors and provide helpful solutions
         if (errorMsg.includes('missing diagnosis') || errorMsg.includes('Insufficient samples')) {
             errorDetails = `
@@ -648,7 +705,7 @@ function updateTrainingUI(status) {
                 </div>
             `;
         }
-        
+
         statusContent.innerHTML = `
             <div class="text-red-500 text-base">
                 <div class="text-lg mb-2 flex items-center gap-2">
@@ -669,11 +726,11 @@ function updateTrainingUI(status) {
 async function loadFeatures() {
     const gridEl = document.getElementById('featureGrid');
     gridEl.innerHTML = '<div class="col-span-full text-center"><div class="spinner mx-auto"></div></div>';
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/features`);
         const data = await response.json();
-        
+
         if (data.features && data.features.length > 0) {
             gridEl.innerHTML = data.features.map(f => `<div class="px-5 py-4 bg-white rounded-2xl text-sm font-mono text-primary-700 hover:bg-primary-100 transition-colors">${f}</div>`).join('');
         } else {
@@ -687,13 +744,13 @@ async function loadFeatures() {
 async function loadAvailableModels() {
     const container = document.getElementById('availableModelsContainer');
     if (!container) return;
-    
+
     container.innerHTML = '<div class="text-center py-8"><div class="spinner mx-auto"></div></div>';
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/models`);
         const data = await response.json();
-        
+
         if (data.models && data.models.length > 0) {
             // Group models by component
             const modelsByComponent = {};
@@ -704,9 +761,9 @@ async function loadAvailableModels() {
                 }
                 modelsByComponent[component].push(model);
             }
-            
+
             let modelsHtml = '';
-            
+
             // Display models grouped by component
             for (const [component, models] of Object.entries(modelsByComponent)) {
                 const componentNames = {
@@ -719,10 +776,10 @@ async function loadAvailableModels() {
                     'acoustic_prosodic': 'blue',
                     'syntactic_semantic': 'purple'
                 };
-                
+
                 const componentName = componentNames[component] || component;
                 const color = componentColors[component] || 'gray';
-                
+
                 modelsHtml += `
                     <div class="mb-8">
                         <h3 class="text-2xl font-medium text-primary-900 mb-4 flex items-center gap-3">
@@ -731,13 +788,13 @@ async function loadAvailableModels() {
                         </h3>
                         <div class="space-y-4">
                 `;
-                
+
                 for (const model of models) {
                     const isBest = model.name === data.best_model;
                     const accuracy = (model.accuracy * 100).toFixed(1);
                     const f1 = (model.f1_score * 100).toFixed(1);
                     const date = new Date(model.created_at).toLocaleDateString();
-                    
+
                     modelsHtml += `
                         <div class="p-6 bg-white rounded-2xl hover:bg-primary-50 transition-colors ${isBest ? 'ring-2 ring-primary-600' : ''}">
                             <div class="flex items-start justify-between mb-4">
@@ -774,13 +831,13 @@ async function loadAvailableModels() {
                         </div>
                     `;
                 }
-                
+
                 modelsHtml += `
                         </div>
                     </div>
                 `;
             }
-            
+
             container.innerHTML = modelsHtml;
         } else {
             container.innerHTML = `
@@ -800,14 +857,14 @@ async function deleteModel(modelName) {
     if (!confirm(`Are you sure you want to delete the model "${modelName}"? This action cannot be undone.`)) {
         return;
     }
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/models/${modelName}`, {
             method: 'DELETE'
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             alert(`Model "${modelName}" deleted successfully`);
             loadAvailableModels();
@@ -823,21 +880,21 @@ async function deleteModel(modelName) {
 document.getElementById('inspectFileInput').addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    
+
     const resultsEl = document.getElementById('inspectionResults');
     resultsEl.innerHTML = '<div class="spinner mx-auto mt-8"></div>';
-    
+
     const formData = new FormData();
     formData.append('file', file);
-    
+
     try {
         const response = await fetch(`${getApiUrl()}/training/inspect-features`, {
             method: 'POST',
             body: formData
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             resultsEl.innerHTML = `
                 <div class="bg-white rounded-2xl p-8">
@@ -863,3 +920,98 @@ document.getElementById('inspectFileInput').addEventListener('change', async (e)
 
 // Test connection on load
 setTimeout(testConnection, 500);
+
+// Toggle advanced parameters section
+// Toggle advanced parameters section
+function toggleAdvancedParams() {
+    const params = document.getElementById('advancedParams');
+    const toggle = document.querySelector('#advancedParamsToggle svg');
+
+    if (params.classList.contains('hidden')) {
+        params.classList.remove('hidden');
+        toggle.classList.add('rotate-180');
+    } else {
+        params.classList.add('hidden');
+        toggle.classList.remove('rotate-180');
+    }
+}
+
+// Validate numeric inputs
+function validateInputs() {
+    const numericInputs = document.querySelectorAll('#advancedParams input[type="number"]');
+    let isValid = true;
+    let firstInvalid = null;
+
+    numericInputs.forEach(input => {
+        const val = parseFloat(input.value);
+        const min = parseFloat(input.getAttribute('min'));
+        const max = parseFloat(input.getAttribute('max'));
+
+        // Reset styles
+        input.classList.remove('border-red-500', 'bg-red-50');
+        input.classList.add('border-primary-300');
+
+        // Remove existing error message
+        const nextEl = input.nextElementSibling;
+        if (nextEl && nextEl.classList.contains('text-red-500')) {
+            nextEl.remove();
+        }
+
+        if (input.value !== '') {
+            if ((!isNaN(min) && val < min) || (!isNaN(max) && val > max)) {
+                isValid = false;
+                if (!firstInvalid) firstInvalid = input;
+
+                input.classList.remove('border-primary-300');
+                input.classList.add('border-red-500', 'bg-red-50');
+
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'text-red-500 text-xs mt-1 absolute';
+                errorMsg.textContent = `Value must be between ${min} and ${max}`;
+                input.parentNode.appendChild(errorMsg);
+            }
+        }
+    });
+
+    if (firstInvalid) {
+        // Ensure advanced params is open
+        const params = document.getElementById('advancedParams');
+        if (params.classList.contains('hidden')) {
+            toggleAdvancedParams();
+        }
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalid.focus();
+    }
+
+    return isValid;
+}
+
+// Reset all parameters to defaults
+function resetToDefaults() {
+    document.getElementById('tuneHyperparameters').checked = false;
+    document.getElementById('cvFolds').value = '5';
+    document.getElementById('randomState').value = '42';
+    document.getElementById('learningRate').value = '';
+    document.getElementById('nEstimators').value = '';
+    document.getElementById('maxDepth').value = '';
+    document.getElementById('minSamplesSplit').value = '';
+    document.getElementById('minSamplesLeaf').value = '';
+    document.getElementById('subsample').value = '';
+    document.getElementById('colsampleBytree').value = '';
+    document.getElementById('regAlpha').value = '';
+    document.getElementById('regLambda').value = '';
+    document.getElementById('svmC').value = '';
+    document.getElementById('svmKernel').value = '';
+    document.getElementById('svmGamma').value = '';
+
+    // Clear validation errors
+    const inputs = document.querySelectorAll('#advancedParams input');
+    inputs.forEach(input => {
+        input.classList.remove('border-red-500', 'bg-red-50');
+        input.classList.add('border-primary-300');
+        const nextEl = input.nextElementSibling;
+        if (nextEl && nextEl.classList.contains('text-red-500')) {
+            nextEl.remove();
+        }
+    });
+}
