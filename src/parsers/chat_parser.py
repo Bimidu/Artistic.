@@ -166,72 +166,6 @@ class CHATParser:
         self.diagnosis_mapper = DiagnosisMapper()
         logger.info(f"CHATParser initialized with min_words={min_words}")
     
-    def _preprocess_chat_file(self, file_path: Path) -> Path:
-        """
-        Preprocess CHAT file to handle tokens that cause pylangacq alignment issues.
-        
-        The '0' prefix in CHAT format marks omitted words (e.g., '0do' means 'do' is omitted).
-        These tokens are correctly excluded from the %mor tier, but pylangacq's alignment
-        algorithm fails when it sees them in the utterance. We remove them to match the %mor tier.
-        
-        Args:
-            file_path: Path to original CHAT file
-            
-        Returns:
-            Path to preprocessed temporary file
-        """
-        import tempfile
-        import re
-        
-        # Read original file
-        with open(file_path, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-        
-        # Track preprocessing statistics
-        tokens_removed = 0
-        lines_modified = 0
-        
-        # Process line by line
-        processed_lines = []
-        
-        for line in lines:
-            # Only process utterance lines (start with *)
-            if line.startswith('*'):
-                original_line = line
-                # Remove '0' prefix tokens entirely (e.g., '0do you' -> 'you')
-                # This matches what the %mor tier already has
-                modified_line = re.sub(r'\s*\b0[a-zA-Z]+\b', '', line)
-                # Clean up any double spaces
-                modified_line = re.sub(r'  +', ' ', modified_line)
-                
-                if modified_line != original_line:
-                    lines_modified += 1
-                    # Count how many tokens were removed
-                    tokens_removed += len(re.findall(r'\b0[a-zA-Z]+\b', original_line))
-                
-                processed_lines.append(modified_line)
-            else:
-                processed_lines.append(line)
-        
-        # Log preprocessing statistics
-        if tokens_removed > 0:
-            logger.info(
-                f"Preprocessed {file_path.name}: removed {tokens_removed} '0' prefix tokens "
-                f"from {lines_modified} utterances"
-            )
-        
-        # Write to temporary file
-        temp_file = tempfile.NamedTemporaryFile(
-            mode='w',
-            suffix='.cha',
-            delete=False,
-            encoding='utf-8'
-        )
-        temp_file.writelines(processed_lines)
-        temp_file.close()
-        
-        return Path(temp_file.name)
-    
     def parse_file(self, file_path: str | Path) -> TranscriptData:
         """
         Parse a CHAT file and extract all information.
@@ -257,12 +191,9 @@ class CHATParser:
         
         logger.info(f"Parsing CHAT file: {file_path.name}")
         
-        # Preprocess file to handle '0' prefix tokens
-        preprocessed_path = self._preprocess_chat_file(file_path)
-        
         try:
-            # Use pylangacq to read the preprocessed file
-            reader = pylangacq.read_chat(str(preprocessed_path))
+            # Use pylangacq to read the file
+            reader = pylangacq.read_chat(str(file_path))
             
             # Extract metadata
             metadata = self._extract_metadata(reader, file_path)
@@ -305,13 +236,6 @@ class CHATParser:
         except Exception as e:
             logger.error(f"Error parsing file {file_path}: {e}")
             raise ValueError(f"Failed to parse {file_path}: {e}")
-        finally:
-            # Clean up temporary preprocessed file
-            if preprocessed_path and preprocessed_path.exists():
-                try:
-                    preprocessed_path.unlink()
-                except Exception:
-                    pass  # Ignore cleanup errors
     
     def _extract_metadata(
         self,
@@ -506,7 +430,6 @@ class CHATParser:
             List of Utterance objects
         """
         utterances = []
-        skipped_count = 0
         
         # Get utterances from reader
         for utterance in reader.utterances():
@@ -581,15 +504,8 @@ class CHATParser:
                 utterances.append(utt)
                 
             except Exception as e:
-                # Skip utterances that cause alignment or other errors
-                # This commonly happens with '0' prefix tokens in some CHAT files
-                skipped_count += 1
-                logger.debug(f"Skipped utterance due to error: {str(e)[:100]}")
+                logger.warning(f"Error extracting utterance: {e}")
                 continue
-        
-        # Log if any utterances were skipped
-        if skipped_count > 0:
-            logger.info(f"Skipped {skipped_count} utterances due to alignment or parsing errors")
         
         return utterances
     
