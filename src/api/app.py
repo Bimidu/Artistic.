@@ -159,6 +159,10 @@ class FeatureExtractionRequest(BaseModel):
         default="training_features.csv",
         description="Output CSV filename"
     )
+    max_samples_per_dataset: Optional[int] = Field(
+        default=None,
+        description="Maximum samples per dataset (for large datasets like TD)"
+    )
 
 
 class TrainingRequest(BaseModel):
@@ -187,6 +191,10 @@ class TrainingRequest(BaseModel):
     random_state: int = Field(
         default=42,
         description="Random seed for reproducibility"
+    )
+    max_samples_per_dataset: Optional[int] = Field(
+        default=None,
+        description="Maximum samples per dataset (useful for large datasets like TD with 4000+ files)"
     )
     custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = Field(
         default=None,
@@ -764,9 +772,13 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
     """
     Extract features from specified datasets for training.
     
+    Supports max_samples_per_dataset for large datasets (e.g., TD with 4000+ files).
+    
     Returns the path to the generated feature CSV file.
     """
     logger.info(f"Feature extraction request for {len(request.dataset_paths)} datasets")
+    if request.max_samples_per_dataset:
+        logger.info(f"Max samples per dataset: {request.max_samples_per_dataset}")
     
     all_dfs = []
     
@@ -780,7 +792,21 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
             continue
         
         try:
+            # Check if this is a large dataset (TD)
+            is_td_dataset = 'td' in path.name.lower()
+            
+            # Use request parameter, or fall back to config default
+            max_samples = request.max_samples_per_dataset or config.datasets.max_samples_td
+            
+            # Note: extract_from_directory doesn't support max_samples yet
+            # We'll handle it in the acoustic extractor
             df = feature_extractor.extract_from_directory(path)
+            
+            # If TD dataset and max_samples specified, sample the dataframe
+            if is_td_dataset and max_samples and len(df) > max_samples:
+                logger.info(f"Sampling {max_samples} from {len(df)} TD samples (config: max_samples_td={config.datasets.max_samples_td})")
+                df = df.sample(n=max_samples, random_state=42)
+            
             if not df.empty:
                 df['dataset'] = path.name
                 all_dfs.append(df)
@@ -827,7 +853,7 @@ training_state = {
 }
 
 
-def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None):
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
     """Background task for model training."""
     global training_state
     
@@ -866,6 +892,15 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
             
             training_state['message'] = f'Extracting {component} features from dataset {i+1}/{len(dataset_paths)}...'
             df = extractor.extract_from_directory(path)
+            
+            # Apply TD sampling if configured
+            is_td_dataset = 'td' in path.name.lower()
+            max_samples = max_samples_per_dataset or config.datasets.max_samples_td
+            
+            if is_td_dataset and max_samples and len(df) > max_samples:
+                logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
+                df = df.sample(n=max_samples, random_state=42)
+            
             if not df.empty:
                 df['dataset'] = path.name
                 all_dfs.append(df)
@@ -1080,7 +1115,8 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         request.feature_selection,
         request.test_size,
         request.random_state,
-        request.custom_hyperparameters
+        request.custom_hyperparameters,
+        request.max_samples_per_dataset
     )
     
     return {
