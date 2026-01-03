@@ -31,12 +31,31 @@ def main():
     print("Step 1: Loading feature data...")
     
     # Option A: Load pre-extracted features
-    features_file = config.paths.output_dir / "asd_vs_td_features.csv"
+    # Try multiple feature files
+    possible_files = [
+        config.paths.output_dir / "asd_vs_td_features.csv",
+        config.paths.output_dir / "all_asdbank_features.csv",
+    ]
     
-    if features_file.exists():
+    features_file = None
+    for file_path in possible_files:
+        if file_path.exists():
+            features_file = file_path
+            break
+    
+    if features_file:
         print(f"Loading features from: {features_file}")
         import pandas as pd
         df = pd.read_csv(features_file)
+        
+        # For multi-class datasets, optionally filter to binary classification
+        if 'diagnosis' in df.columns:
+            unique_labels = df['diagnosis'].unique()
+            print(f"Found diagnosis labels: {unique_labels}")
+            
+            # If we have ASD and TD, we can do binary classification
+            if len(unique_labels) > 2:
+                print("Multi-class dataset detected. Using all classes for training.")
     else:
         print("No features file found. Please run feature extraction first:")
         print("  python examples/example_usage.py")
@@ -66,10 +85,11 @@ def main():
     print(f"Test set: {X_test.shape}")
     preprocessor.print_summary()
     
-    # Save preprocessor
-    preprocessor_path = config.paths.models_dir / "preprocessor.joblib"
-    preprocessor.save(preprocessor_path)
-    print(f"Preprocessor saved to: {preprocessor_path}\n")
+    # Save preprocessor (temporarily disabled due to logger pickling issues)
+    # preprocessor_path = config.paths.models_dir / "preprocessor.joblib"
+    # preprocessor.save(preprocessor_path)
+    # print(f"Preprocessor saved to: {preprocessor_path}\n")
+    print("Preprocessor save temporarily disabled\n")
     
     # Step 3: Train multiple models
     print("Step 3: Training models...")
@@ -116,57 +136,23 @@ def main():
     comparison_df.to_csv(comparison_path, index=False)
     print(f"Comparison saved to: {comparison_path}\n")
     
-    # Step 5: Save best models to registry
-    print("Step 5: Saving models to registry...")
+    # Step 5: Select best model and test predictions
+    print("Step 5: Testing best model predictions...")
     
-    registry = ModelRegistry()
+    # Find best model by F1 score
+    best_model_name = max(reports.items(), key=lambda x: x[1].f1_score)[0]
+    best_model = models[best_model_name]
+    best_report = reports[best_model_name]
     
-    # Save each model with metadata
-    for model_name, model in models.items():
-        report = reports[model_name]
-        
-        metadata = ModelMetadata(
-            model_name=model_name,
-            model_type=model_name,
-            version="1.0.0",
-            accuracy=report.accuracy,
-            f1_score=report.f1_score,
-            feature_names=preprocessor.selected_features_,
-            n_features=len(preprocessor.selected_features_),
-            training_samples=len(X_train),
-            description=f"ASD detection model trained on pragmatic/conversational features"
-        )
-        
-        registry.register_model(
-            model=model,
-            metadata=metadata,
-            preprocessor=preprocessor
-        )
-        
-        print(f"  ✓ {model_name} registered")
+    print(f"\nBest Model: {best_model_name}")
+    print(f"  Accuracy: {best_report.accuracy:.4f}")
+    print(f"  F1-Score: {best_report.f1_score:.4f}")
+    print(f"  Features: {len(preprocessor.selected_features_)}")
     
-    print("\nAll models saved to registry\n")
-    
-    # Show registry summary
-    registry.print_summary()
-    
-    # Step 6: Show best model
-    print("Step 6: Best Model Selection...")
-    
-    best_name, best_metadata = registry.get_best_model()
-    
-    print(f"\nBest Model: {best_name}")
-    print(f"  Type: {best_metadata.model_type}")
-    print(f"  Accuracy: {best_metadata.accuracy:.4f}")
-    print(f"  F1-Score: {best_metadata.f1_score:.4f}")
-    print(f"  Features: {best_metadata.n_features}")
-    
-    # Step 7: Test prediction with best model
+    # Test predictions
     print("\n" + "="*70)
-    print("Testing Prediction with Best Model")
+    print("Testing Predictions")
     print("="*70 + "\n")
-    
-    best_model, best_preprocessor = registry.load_model(best_name, load_preprocessor=True)
     
     # Take first few test samples
     sample_X = X_test.head(5)
@@ -180,6 +166,8 @@ def main():
         match = "✓" if true_label == pred_label else "✗"
         prob_str = f" (conf: {probabilities[i].max():.2f})" if probabilities is not None else ""
         print(f"  {i+1}. True: {true_label}, Predicted: {pred_label}{prob_str} {match}")
+    
+    print("\nNote: Model registry save temporarily disabled due to logger pickling issues")
     
     print("\n" + "="*70)
     print("TRAINING COMPLETE!")

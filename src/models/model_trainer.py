@@ -24,7 +24,7 @@ from pathlib import Path
 import joblib
 
 # ML models
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
@@ -57,7 +57,7 @@ class ModelConfig:
     """
     model_type: Literal[
         'random_forest', 'xgboost', 'lightgbm', 'svm',
-        'logistic', 'mlp', 'gradient_boosting'
+        'logistic', 'mlp', 'gradient_boosting', 'adaboost'
     ]
     hyperparameters: Dict[str, Any] = field(default_factory=dict)
     tune_hyperparameters: bool = False
@@ -125,6 +125,11 @@ class ModelTrainer:
             'learning_rate': 0.1,
             'max_depth': 5,
             'min_samples_split': 5,
+            'random_state': 42,
+        },
+        'adaboost': {
+            'n_estimators': 100,
+            'learning_rate': 1.0,
             'random_state': 42,
         },
     }
@@ -216,6 +221,8 @@ class ModelTrainer:
             return MLPClassifier(**params)
         elif config.model_type == 'gradient_boosting':
             return GradientBoostingClassifier(**params)
+        elif config.model_type == 'adaboost':
+            return AdaBoostClassifier(**params)
         else:
             raise ValueError(f"Unknown model type: {config.model_type}")
     

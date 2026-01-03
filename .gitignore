@@ -1,0 +1,10 @@
+# Logs
+logs/
+*.log
+
+.idea/
+*.iml
+__pycache__/
+*.pyc
+.env
+

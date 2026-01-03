@@ -50,10 +50,16 @@ class ModelMetadata:
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
     accuracy: float = 0.0
     f1_score: float = 0.0
+    precision: float = 0.0
+    recall: float = 0.0
+    roc_auc: Optional[float] = None
+    matthews_corr: float = 0.0
+    confusion_matrix: List[List[int]] = field(default_factory=list)
     feature_names: List[str] = field(default_factory=list)
     n_features: int = 0
     hyperparameters: Dict[str, Any] = field(default_factory=dict)
     training_samples: int = 0
+    component: str = "pragmatic_conversational"
     description: str = ""
     
     def to_dict(self) -> Dict[str, Any]:

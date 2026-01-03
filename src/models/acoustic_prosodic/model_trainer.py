@@ -1,44 +1,50 @@
 """
-Acoustic & Prosodic Model Trainer - DUMMY/PLACEHOLDER
-
-This is a placeholder file for Team Member A to implement.
-Only basic interface is provided - no actual implementation.
-
-Author: Team Member A (Acoustic/Prosodic Specialist)
-Status: PLACEHOLDER - Not implemented
+Acoustic & Prosodic Trainer - FULL IMPLEMENTATION
+Author: Team Member A (Sanuthi)
+Status: IMPLEMENTED
 """
 
 import pandas as pd
-from typing import Dict, List, Tuple, Optional, Any
+from typing import Dict, Any
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, f1_score, classification_report
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-
 class AcousticProsodicTrainer:
-    """Placeholder trainer for acoustic/prosodic features."""
-    
+    """Trains multiple ML models on acoustic & prosodic features."""
+
     def __init__(self):
-        self.logger = logger
-        self.logger.info("AcousticProsodicTrainer - PLACEHOLDER (Team Member A)")
-    
-    def train_model(self, X_train, y_train, **kwargs):
-        """Placeholder - to be implemented by Team Member A."""
-        self.logger.warning("train_model() - PLACEHOLDER (Team Member A)")
-        return None
-    
-    def train_multiple_models(self, X_train, y_train, **kwargs):
-        """Placeholder - to be implemented by Team Member A."""
-        self.logger.warning("train_multiple_models() - PLACEHOLDER (Team Member A)")
-        return {}
-    
-    def print_implementation_guide(self):
-        """Print implementation guide for Team Member A."""
-        print("\n" + "="*50)
-        print("ACOUSTIC & PROSODIC TRAINER - PLACEHOLDER")
-        print("="*50)
-        print("[CLIPBOARD] For Team Member A:")
-        print("This is a placeholder file. Please implement your own trainer.")
-        print("Required libraries: librosa, praat-parselmouth, scikit-learn")
-        print("Focus on: pitch, spectral, temporal, prosodic features")
-        print("="*50 + "\n")
+        logger.info("AcousticProsodicTrainer initialized.")
+
+    def train_model(self, model, X_train, y_train, X_test, y_test):
+        model.fit(X_train, y_train)
+        preds = model.predict(X_test)
+
+        accuracy = accuracy_score(y_test, preds)
+        f1 = f1_score(y_test, preds, average="weighted")
+
+        return {
+            "model": model,
+            "accuracy": accuracy,
+            "f1": f1,
+            "report": classification_report(y_test, preds)
+        }
+
+    def train_multiple_models(self, X_train, y_train, X_test, y_test) -> Dict[str, Any]:
+        results = {}
+
+        models = {
+            "LogisticRegression": LogisticRegression(max_iter=200),
+            "RandomForest": RandomForestClassifier(n_estimators=200)
+        }
+
+        logger.info("Training multiple models (LR, RF)...")
+
+        for name, model in models.items():
+            logger.info(f"Training {name}...")
+            results[name] = self.train_model(model, X_train, y_train, X_test, y_test)
+
+        return results

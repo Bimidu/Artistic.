@@ -25,6 +25,7 @@ import pylangacq
 import pandas as pd
 from src.utils.logger import get_logger
 from src.utils.helpers import extract_timing_info, get_age_in_months, is_valid_utterance
+from src.parsers.diagnosis_mapper import DiagnosisMapper
 
 logger = get_logger(__name__)
 
@@ -51,6 +52,7 @@ class Utterance:
     morphology: Optional[str] = None
     grammar: Optional[str] = None
     timing: Optional[float] = None
+    end_timing: Optional[float] = None
     actions: Optional[str] = None
     comments: Optional[str] = None
     is_valid: bool = True
@@ -161,6 +163,7 @@ class CHATParser:
             min_words: Minimum words required for valid utterance (default: 1)
         """
         self.min_words = min_words
+        self.diagnosis_mapper = DiagnosisMapper()
         logger.info(f"CHATParser initialized with min_words={min_words}")
     
     def parse_file(self, file_path: Union[str, Path]) -> TranscriptData:
@@ -201,7 +204,6 @@ class CHATParser:
 
             # Extract participant information
             participants = self._extract_participants(reader)
-
             # Extract diagnosis, age, and gender from participants
             if '_diagnosis' in participants:
                 metadata['diagnosis'] = participants['_diagnosis']
@@ -210,11 +212,19 @@ class CHATParser:
             if '_gender' in participants:
                 metadata['gender'] = participants['_gender']
 
+            # Resolve diagnosis using the diagnosis mapper
+            diagnosis = metadata.get('diagnosis')
+            if not diagnosis and '_diagnosis' in participants:
+                diagnosis = participants['_diagnosis']
+            
+            # Use diagnosis mapper to infer/normalize diagnosis
+            diagnosis = self.diagnosis_mapper.infer_diagnosis(file_path, diagnosis)
+
             # Create TranscriptData object
             transcript = TranscriptData(
                 file_path=file_path,
                 participant_id=metadata.get('participant_id', file_path.stem),
-                diagnosis=metadata.get('diagnosis'),
+                diagnosis=diagnosis,
                 age_months=metadata.get('age_months'),
                 gender=metadata.get('gender'),
                 session_date=metadata.get('session_date'),
@@ -370,26 +380,33 @@ class CHATParser:
             Dictionary mapping speaker codes to participant info
         """
         participants = {}
-
-        # Access participant data from the internal file structure
-        if not reader._files:
-            logger.warning("No files in reader")
+        
+        # Get headers
+        headers = reader.headers()
+        if not headers:
             return participants
-
-        first_file = reader._files[0]
-
-        # Get participant data from header
-        if 'Participants' not in first_file.header:
-            logger.warning("No Participants in file header")
+            
+        # Get first file headers
+        if isinstance(headers, list) and headers:
+            file_headers = headers[0]
+        elif isinstance(headers, dict):
+            file_headers = list(headers.values())[0] if headers else {}
+        else:
+            file_headers = {}
+            
+        # Extract participants dict from headers
+        # key 'Participants' usually corresponds to @ID fields in pylangacq
+        participant_data = file_headers.get('Participants', {})
+        
+        if not participant_data:
+            # Fallback to reader.participants() which might just be codes
+            # But we can't get metadata from that
+            logger.debug("No detailed participant data in headers")
             return participants
-
-        file_participants = first_file.header['Participants']
-
-        if not isinstance(file_participants, dict):
-            logger.warning(f"Participants data is not a dict: {type(file_participants)}")
-            return participants
-
-        for speaker_code, info in file_participants.items():
+            
+        for speaker_code, info in participant_data.items():
+            if not isinstance(info, dict):
+                continue
             participants[speaker_code] = {
                 'code': speaker_code,
                 'language': info.get('language', ''),
@@ -397,7 +414,7 @@ class CHATParser:
                 'age': info.get('age', ''),
                 'sex': info.get('sex', ''),
                 'group': info.get('group', ''),
-                'SES': info.get('SES', ''),
+                'SES': info.get('ses', ''),  # Note: lower case in dict
                 'role': info.get('role', ''),
                 'education': info.get('education', ''),
                 'custom': info.get('custom', ''),
@@ -461,8 +478,20 @@ class CHATParser:
                 speaker = utterance.participant
                 text = utterance.tiers.get('utterance', '')
                 
-                # Get tokens (words)
-                tokens = utterance.tokens or []
+                # Clean text: remove 0-prefixed words (CHAT convention for omitted/null elements)
+                # Example: "0do you know" -> "you know"
+                if text:
+                    import re
+                    text = re.sub(r'\b0\w+\b', '', text)  # Remove words starting with 0
+                    text = re.sub(r'\s+', ' ', text).strip()  # Clean up extra spaces
+                
+                # Get tokens (words) - this can fail for malformed utterances
+                try:
+                    tokens = utterance.tokens or []
+                except Exception as token_error:
+                    # If token alignment fails, we'll work with cleaned text only
+                    logger.debug(f"Token alignment error (using cleaned text): {token_error}")
+                    tokens = []
                 
                 # If text is empty but we have tokens, reconstruct text from tokens
                 if not text and tokens:
@@ -484,11 +513,21 @@ class CHATParser:
                 # Extract grammar (%gra)
                 grammar = tiers.get('gra')
                 
-                # Extract timing (%tim)
+                # Extract timing
                 timing = None
-                timing_str = tiers.get('tim')
-                if timing_str:
-                    timing = extract_timing_info(timing_str)
+                end_timing = None
+                
+                # Try getting timing from time_marks first (most reliable for bullets)
+                if hasattr(utterance, 'time_marks') and utterance.time_marks:
+                    start_ms, end_ms = utterance.time_marks
+                    timing = float(start_ms) / 1000.0
+                    end_timing = float(end_ms) / 1000.0
+                
+                # Fallback to %tim tier if time_marks not available
+                if timing is None:
+                    timing_str = tiers.get('tim')
+                    if timing_str:
+                        timing = extract_timing_info(timing_str)
                 
                 # Extract actions (%act)
                 actions = tiers.get('act')
@@ -504,6 +543,7 @@ class CHATParser:
                     morphology=morphology,
                     grammar=grammar,
                     timing=timing,
+                    end_timing=end_timing,
                     actions=actions,
                     comments=comments,
                     is_valid=True,  # Will be validated below

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASD Detection System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="tailwind.config.js"></script>
+</head>
+<body class="bg-white min-h-screen font-sans antialiased">
+    <!-- Header -->
+    <header class="bg-lime-950">
+        <div class="max-w-7xl mx-auto px-12 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <div class="text-4xl  text-white">Artistic</div>
+                    <div class="text-lg text-primary-400 hidden sm:block">ASD Detection System</div>
+                </div>
+                
+                <div class="flex items-center gap-8">
+                    <div class="toggle-switch" id="modeToggle">
+                        <div class="toggle-option active" data-mode="user">User Mode</div>
+                        <div class="toggle-option" data-mode="training">Training Mode</div>
+                        <div class="toggle-slider" id="toggleSlider"></div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 text-base text-primary-600">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-400" id="statusDot"></span>
+                        <span id="statusText">Disconnected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- API Configuration Bar -->
+        <div class="bg-white hidden" id="apiConfigBar">
+            <div class="max-w-7xl mx-auto px-12 py-2">
+                <div class="flex items-center gap-6 justify-between">
+                    <div class="flex items-center gap-4 flex-1">
+                         <label class="text-sm text-primary-600 whitespace-nowrap">API URL</label>
+                    <input type="text" class="flex-1  px-4 py-2 bg-primary-50 rounded-full text-sm focus:outline-none focus:bg-primary-100 transition-all" id="apiUrl" value="http://localhost:8000">
+
+
+                    </div>
+
+                    <button class="px-6 py-2 bg-primary-900 text-white rounded-full text-sm hover:bg-primary-800 transition-all" onclick="testConnection()">Test Connection</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="max-w-7xl mx-auto px-12 py-12">
+        <!-- User Mode -->
+        <div class="mode-content" id="userMode">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Input Section -->
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                    <div class="px-10 py-8  bg-white">
+                        <h2 class="text-5xl text-primary-900">Analyze Speech</h2>
+                    </div>
+                    
+                    <div class="bg-primary-100">
+                        <div class="flex px-10 gap-4">
+                            <button class="tab px-8 py-5 text-lg border-b-2 border-primary-900 text-primary-900" data-input="audio">Audio Upload</button>
+                            <button class="tab px-8 py-5 text-lg border-b-2 border-transparent text-primary-500 hover:text-primary-900 transition-colors" data-input="text">Text Input</button>
+                            <button class="tab px-8 py-5 text-lg border-b-2 border-transparent text-primary-500 hover:text-primary-900 transition-colors" data-input="file">CHAT File</button>
+                        </div>
+                    </div>
+                    
+                    <div class="p-10">
+                        <!-- Audio Upload -->
+                        <div class="input-panel" id="audioPanel">
+                            <div class="upload-area bg-white rounded-3xl p-16 text-center cursor-pointer" id="audioUploadArea">
+                                <svg class="mx-auto h-20 w-20 text-primary-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <p class="mt-6 text-2xl text-primary-900">Drop audio file here</p>
+                                <p class="mt-3 text-base text-primary-500">Supports WAV, MP3, FLAC</p>
+                            </div>
+                            <input type="file" class="hidden" id="audioFileInput" accept=".wav,.mp3,.flac">
+                            <div id="selectedAudioFile" class="mt-4 text-base text-accent-600"></div>
+                            
+                            <div class="mt-8">
+                                <label class="block text-xl text-primary-900 mb-4">Participant ID <span class="text-primary-500">(optional)</span></label>
+                                <input type="text" class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="audioParticipantId" placeholder="CHI">
+                            </div>
+                            
+                            <div class="mt-6 flex items-center gap-3">
+                                <input type="checkbox" id="audioUseFusion" class="w-5 h-5 text-primary-600 rounded">
+                                <label for="audioUseFusion" class="text-base text-primary-700">
+                                    Use multi-component fusion (if available)
+                                </label>
+                            </div>
+                            
+                            <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onclick="predictFromAudio()" id="predictAudioBtn" disabled>
+                                Analyze Audio
+                            </button>
+                        </div>
+                        
+                        <!-- Text Input -->
+                        <div class="input-panel hidden" id="textPanel">
+                            <div>
+                                <label class="block text-xl text-primary-900 mb-4">Speech Transcript</label>
+                                <textarea class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all resize-none" id="textInput" rows="10" placeholder="Enter or paste the speech transcript here..."></textarea>
+                            </div>
+                            
+                            <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="predictFromText()">
+                                Analyze Text
+                            </button>
+                        </div>
+                        
+                        <!-- CHAT File Upload -->
+                        <div class="input-panel hidden" id="filePanel">
+                            <div class="upload-area bg-white rounded-3xl p-16 text-center cursor-pointer" id="chaUploadArea">
+                                <svg class="mx-auto h-20 w-20 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <p class="mt-6 text-2xl text-primary-900">Drop CHAT file here</p>
+                                <p class="mt-3 text-base text-primary-500">Supports .cha files</p>
+                            </div>
+                            <input type="file" class="hidden" id="chaFileInput" accept=".cha,.CHA,text/plain">
+                            <div id="selectedChaFile" class="mt-4 text-base text-accent-600"></div>
+                            
+                            <div class="mt-6 flex items-center gap-3">
+                                <input type="checkbox" id="chaUseFusion" class="w-5 h-5 text-primary-600 rounded">
+                                <label for="chaUseFusion" class="text-base text-primary-700">
+                                    Use multi-component fusion (if available)
+                                </label>
+                            </div>
+                            
+                            <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onclick="predictFromChatFile()" id="predictChaBtn" disabled>
+                                Analyze File
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Results Section -->
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                    <div class="px-10 py-8 bg-white">
+                        <h2 class="text-5xl text-primary-900">Analysis Results</h2>
+                    </div>
+                    
+                    <div class="p-10" id="resultsArea">
+                        <div class="text-center py-24 text-primary-400 text-xl">
+                            Upload an audio file or enter text to see results
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Annotated Transcript -->
+            <div class="mt-12 bg-primary-50 rounded-3xl overflow-hidden hidden" id="annotationCard">
+                <div class="px-10 py-8 bg-white flex items-center justify-between">
+                    <h2 class="text-5xl text-primary-900">Annotated Transcript</h2>
+                    <span class="px-6 py-3 bg-accent-100 text-accent-700 text-base rounded-full">Features Marked</span>
+                </div>
+                <div class="p-10">
+                    <div id="annotatedTranscript" class="bg-white rounded-2xl p-8 max-h-96 overflow-y-auto font-mono text-sm leading-loose"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Training Mode -->
+        <div class="mode-content hidden" id="trainingMode">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Dataset Selection -->
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                    <div class="px-10 py-8 bg-white flex items-center justify-between">
+                        <h2 class="text-5xl text-primary-900">Dataset Selection</h2>
+                        <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadDatasets()">Refresh</button>
+                    </div>
+                    
+                    <div class="p-10 flex flex-col" style="height: calc(100vh - 400px); min-height: 400px;">
+                        <div class="flex-1 overflow-y-auto" id="datasetList">
+                            <div class="text-center py-16 text-primary-400 text-xl">
+                                Click Refresh to load datasets
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Training Controls -->
+                <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                    <div class="px-10 py-8 bg-white">
+                        <h2 class="text-5xl text-primary-900">Training Controls</h2>
+                    </div>
+                    
+                    <div class="p-10">
+                        <div class="mb-8">
+                            <label class="block text-xl text-primary-900 mb-4">Component</label>
+                            <select class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="trainingComponent">
+                                <option value="pragmatic_conversational">Pragmatic & Conversational</option>
+                                <option value="acoustic_prosodic">Acoustic & Prosodic (Dummy Features)</option>
+                                <option value="syntactic_semantic">Syntactic & Semantic (Dummy Features)</option>
+                            </select>
+                            <p class="text-sm text-primary-500 mt-2">Note: Acoustic & Syntactic use placeholder features for testing</p>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <label class="block text-xl text-primary-900 mb-4">Feature Selection</label>
+                            <div class="space-y-4">
+                                <label class="flex items-center cursor-pointer p-5 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" id="featureSelectionEnabled" checked class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-4 text-lg text-primary-900">Enable feature selection</span>
+                                </label>
+                                <div id="featureCountSection">
+                                    <label class="block text-base text-primary-700 mb-2">Number of features to select</label>
+                                    <input type="number" id="nFeatures" value="30" min="1" max="218" class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all">
+                                    <p class="text-sm text-primary-500 mt-2">Default: 30 (max: 218 for pragmatic, 20 for others)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <label class="block text-xl text-primary-900 mb-4">Model Types</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" value="random_forest" checked class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-3 text-base text-primary-900">Random Forest</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" value="xgboost" checked class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-3 text-base text-primary-900">XGBoost</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" value="logistic" class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-3 text-base text-primary-900">Logistic Regression</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" value="gradient_boosting" class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-3 text-base text-primary-900">Gradient Boosting</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" value="adaboost" class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-3 text-base text-primary-900">AdaBoost</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" value="lightgbm" class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-3 text-base text-primary-900">LightGBM</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" value="svm" class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="ml-3 text-base text-primary-900">SVM</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <label class="block text-xl text-primary-900 mb-4">Training Parameters</label>
+                            <div class="space-y-4">
+                                <div class="bg-white rounded-2xl p-4">
+                                    <label class="block text-sm text-primary-700 mb-2">Test Set Size (%)</label>
+                                    <input type="number" id="testSize" value="20" min="10" max="40" step="5" class="w-full px-4 py-3 bg-primary-50 rounded-xl text-base focus:outline-none focus:bg-primary-100 transition-all">
+                                    <p class="text-xs text-primary-500 mt-1">Percentage of data reserved for testing</p>
+                                </div>
+                                <div class="bg-white rounded-2xl p-4">
+                                    <label class="block text-sm text-primary-700 mb-2">Random Seed</label>
+                                    <input type="number" id="randomState" value="42" min="0" max="999" class="w-full px-4 py-3 bg-primary-50 rounded-xl text-base focus:outline-none focus:bg-primary-100 transition-all">
+                                    <p class="text-xs text-primary-500 mt-1">For reproducible results</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Advanced Options -->
+                        <div class="mb-8">
+                            <button onclick="toggleHyperparameters()" class="w-full flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                <span class="text-xl text-primary-900">⚙️ Advanced Hyperparameters</span>
+                                <svg id="hyperparamChevron" class="w-6 h-6 text-primary-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="hyperparamSection" class="hidden mt-4 space-y-4">
+                                <div class="bg-white rounded-2xl p-4">
+                                    <p class="text-sm text-primary-600 mb-4">Customize hyperparameters for each selected model type. Leave default for recommended values.</p>
+                                    <div id="hyperparamControls" class="space-y-6">
+                                        <!-- Dynamically populated based on selected models -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <button class="flex-1 px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="extractFeatures()">Extract Features</button>
+                            <button class="flex-1 px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="startTraining()">Start Training</button>
+                        </div>
+                        
+                        <div class="mt-8 bg-white rounded-2xl p-6 hidden" id="trainingStatus">
+                            <div id="trainingStatusContent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature Inspection -->
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                <div class="px-10 py-8 bg-white flex items-center justify-between">
+                    <h2 class="text-5xl text-primary-900">Feature Inspection</h2>
+                    <span class="px-6 py-3 bg-accent-100 text-accent-700 text-base rounded-full">Debug Mode</span>
+                </div>
+                
+                <div class="p-10">
+                    <p class="text-lg text-primary-600 mb-8">
+                        Upload a file to see where each feature is extracted from
+                    </p>
+                    
+                    <div class="upload-area bg-white rounded-3xl p-12 text-center cursor-pointer max-w-2xl mx-auto" id="inspectUploadArea">
+                        <svg class="mx-auto h-16 w-16 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <p class="mt-4 text-xl text-primary-900">Drop file to inspect</p>
+                        <p class="mt-2 text-base text-primary-500">Supports .wav, .cha, .txt</p>
+                    </div>
+                    <input type="file" class="hidden" id="inspectFileInput" accept=".wav,.cha,.txt">
+                    
+                    <div id="inspectionResults" class="mt-8"></div>
+                </div>
+            </div>
+            
+            <!-- Component Status -->
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                <div class="px-10 py-8 bg-white">
+                    <h2 class="text-5xl text-primary-900">Component Status</h2>
+                </div>
+                
+                <div class="p-10">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="p-8 bg-green-50 rounded-3xl">
+                            <div class="text-2xl font-medium text-primary-900 mb-4">Pragmatic & Conversational</div>
+                            <p class="text-base text-primary-600 mb-6 leading-relaxed">Turn-taking, topic coherence, pause analysis, repair detection, pragmatic markers (218 features)</p>
+                            <span class="px-5 py-2 bg-green-500 text-white text-sm rounded-full">Implemented</span>
+                        </div>
+                        
+                        <div class="p-8 bg-blue-50 rounded-3xl">
+                            <div class="text-2xl font-medium text-primary-900 mb-4">Acoustic & Prosodic</div>
+                            <p class="text-base text-primary-600 mb-6 leading-relaxed">Pitch, prosody, voice quality, spectral features (20 dummy features for testing)</p>
+                            <span class="px-5 py-2 bg-blue-500 text-white text-sm rounded-full">Dummy Features</span>
+                        </div>
+                        
+                        <div class="p-8 bg-purple-50 rounded-3xl">
+                            <div class="text-2xl font-medium text-primary-900 mb-4">Syntactic & Semantic</div>
+                            <p class="text-base text-primary-600 mb-6 leading-relaxed">POS analysis, dependency parsing, semantic coherence (20 dummy features for testing)</p>
+                            <span class="px-5 py-2 bg-purple-500 text-white text-sm rounded-full">Dummy Features</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Available Features -->
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                <div class="px-10 py-8 bg-white flex items-center justify-between">
+                    <h2 class="text-5xl text-primary-900">Available Features</h2>
+                    <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadFeatures()">Load Features</button>
+                </div>
+                
+                <div class="p-10">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-h-96 overflow-y-auto" id="featureGrid">
+                        <div class="col-span-full text-center py-16 text-primary-400 text-xl">
+                            Click Load Features to view all
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Available Models -->
+            <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                <div class="px-10 py-8 bg-white flex items-center justify-between">
+                    <h2 class="text-5xl text-primary-900">Trained Models</h2>
+                    <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadAvailableModels()">Refresh</button>
+                </div>
+                
+                <div class="p-10">
+                    <div id="availableModelsContainer">
+                        <div class="text-center py-16 text-primary-400 text-xl">
+                            Click Refresh to load trained models
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Model Details Modal -->
+    <div id="modelDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="closeModelDetails(event)">
+        <div class="bg-white rounded-3xl max-w-5xl w-full mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <div class="sticky top-0 bg-white px-8 py-6 border-b border-primary-200 flex items-center justify-between">
+                <h2 class="text-3xl font-medium text-primary-900">Model Performance Details</h2>
+                <button onclick="closeModelDetails()" class="text-primary-600 hover:text-primary-900 transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="p-8" id="modalContent">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

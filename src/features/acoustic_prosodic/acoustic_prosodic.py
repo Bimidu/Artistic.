@@ -1,92 +1,133 @@
 """
-Basic Acoustic & Prosodic Feature Extractor
-Author: Team Member A
+Audio-only Acoustic & Prosodic Feature Extractor
 
-Current Status:
----------------
-Implemented Features:
- - Pitch mean & standard deviation (fundamental frequency, F0)
- - Energy mean & standard deviation (RMS)
- - Tempo (approximate speaking rate proxy)
- - MFCC mean & standard deviation (13 coefficients)
+This module extracts ONLY audio-derived features.
+NO transcript (.cha) features are used.
 
-To Be Implemented (Next Phase):
- - Pitch range and slope
- - Speaking rate, articulation rate, and pause rate
- - Intonation, stress, and rhythm measures
- - Pause duration and filled pause ratio
- - Advanced prosodic & temporal dynamics
+Reason:
+TD dataset contains only .wav files. Using transcript-based pause features
+would cause dataset leakage and unfair ASD vs TD classification.
 """
 
-import librosa
-import numpy as np
-import pandas as pd
 from pathlib import Path
+from typing import Dict, List, Optional
+import numpy as np
+import librosa
 
 
-def extract_basic_features(wav_path: Path):
-    """Extract basic acoustic & prosodic features from one audio file."""
-    try:
-        y, sr = librosa.load(wav_path, sr=16000)
+class AcousticProsodicFeatures:
+    """Extracts acoustic & prosodic features from a single .wav file."""
 
-        # --- Pitch (fundamental frequency) ---
-        f0, _, _ = librosa.pyin(y, fmin=50, fmax=400, sr=sr)
-        f0 = f0[~np.isnan(f0)]
-        pitch_mean = np.mean(f0) if len(f0) else 0
-        pitch_std = np.std(f0) if len(f0) else 0
+    @property
+    def feature_names(self) -> List[str]:
+        names = [
+            "duration_sec",
+            "pitch_mean",
+            "pitch_std",
+            "pitch_range",
+            "pitch_slope",
+            "energy_mean",
+            "energy_std",
+            "energy_iqr",
+            "energy_max",
+            "tempo",
+            "speaking_rate",
+            "articulation_rate",
+            "speech_time_sec",
+            "silence_time_sec",
+            "speech_ratio",
+            "rhythm_score",
+        ]
+        for i in range(1, 14):
+            names.append(f"mfcc{i}_mean")
+        for i in range(1, 14):
+            names.append(f"mfcc{i}_std")
+        return names
 
-        # --- Energy / RMS ---
-        rms = librosa.feature.rms(y=y)[0]
-        energy_mean = np.mean(rms)
-        energy_std = np.std(rms)
+    @staticmethod
+    def _safe(x: float) -> float:
+        return float(x) if x is not None and np.isfinite(x) else 0.0
 
-        # --- Tempo (rough speech rate proxy) ---
-        tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
-        tempo = tempo if np.isfinite(tempo) else 0
+    @staticmethod
+    def _pvi(values: np.ndarray) -> float:
+        if values.size < 2:
+            return 0.0
+        return float(np.mean(np.abs(np.diff(values))))
 
-        # --- MFCCs (Mel-Frequency Cepstral Coefficients) ---
-        mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
-        mfcc_means = np.mean(mfcc, axis=1)
-        mfcc_stds = np.std(mfcc, axis=1)
+    def extract_from_wav(self, wav_path: Path, sr: int = 16000) -> Optional[Dict[str, float]]:
+        """
+        Extract audio-only acoustic prosodic features from a wav file.
+        Returns None if extraction fails.
+        """
+        try:
+            y, sr = librosa.load(str(wav_path), sr=sr)
+            if y is None or len(y) == 0:
+                return None
 
-        # Combine everything
-        features = {
-            "file": wav_path.name,
-            "pitch_mean": pitch_mean,
-            "pitch_std": pitch_std,
-            "energy_mean": energy_mean,
-            "energy_std": energy_std,
-            "tempo": tempo,
-        }
+            y = y / (np.max(np.abs(y)) + 1e-9)
+            duration = len(y) / sr
 
-        for i, (m, s) in enumerate(zip(mfcc_means, mfcc_stds), start=1):
-            features[f"mfcc{i}_mean"] = m
-            features[f"mfcc{i}_std"] = s
+            # Pitch
+            f0, _, _ = librosa.pyin(y, fmin=50, fmax=400, sr=sr)
+            f0 = f0[~np.isnan(f0)] if f0 is not None else np.array([])
 
-        return features
+            pitch_mean = self._safe(np.mean(f0)) if f0.size else 0.0
+            pitch_std = self._safe(np.std(f0)) if f0.size else 0.0
+            pitch_range = self._safe(np.max(f0) - np.min(f0)) if f0.size else 0.0
+            pitch_slope = self._safe(np.polyfit(np.arange(len(f0)), f0, 1)[0]) if f0.size > 1 else 0.0
 
-    except Exception as e:
-        print(f"Error processing {wav_path.name}: {e}")
-        return {}
+            # Energy
+            rms = librosa.feature.rms(y=y)[0]
+            energy_mean = self._safe(np.mean(rms))
+            energy_std = self._safe(np.std(rms))
+            energy_iqr = self._safe(np.subtract(*np.percentile(rms, [75, 25])))
+            energy_max = self._safe(np.max(rms))
 
+            # Tempo & rate
+            tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
+            onset_env = librosa.onset.onset_strength(y=y, sr=sr)
+            onsets = librosa.onset.onset_detect(onset_envelope=onset_env, sr=sr)
 
-if __name__ == "__main__":
-    input_dir = Path("data/asdbank_aac/AAC/child_only")
-    output_csv = Path("output/audio/acoustic_features.csv")
+            intervals = librosa.effects.split(y, top_db=30)
+            speech_time = sum((e - s) for s, e in intervals) / sr if intervals.any() else 0.0
+            silence_time = max(duration - speech_time, 0.0)
 
-    rows = []
-    wav_files = list(input_dir.glob("*.wav"))
-    print(f"Found {len(wav_files)} child audio files to process.\n")
+            speaking_rate = self._safe(len(onsets) / duration) if duration > 0 else 0.0
+            articulation_rate = self._safe(len(onsets) / speech_time) if speech_time > 0 else 0.0
+            speech_ratio = self._safe(speech_time / duration) if duration > 0 else 0.0
 
-    for wav in wav_files:
-        feats = extract_basic_features(wav)
-        if feats:
-            rows.append(feats)
-            print(f"Extracted: {wav.name}")
+            # Rhythm
+            rhythm_score = self._safe(self._pvi(rms))
 
-    if rows:
-        df = pd.DataFrame(rows)
-        df.to_csv(output_csv, index=False)
-        print(f"\nAll features saved to → {output_csv}")
-    else:
-        print("No valid features extracted.")
+            # MFCC
+            mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+            mfcc_means = np.mean(mfcc, axis=1)
+            mfcc_stds = np.std(mfcc, axis=1)
+
+            features = {
+                "duration_sec": duration,
+                "pitch_mean": pitch_mean,
+                "pitch_std": pitch_std,
+                "pitch_range": pitch_range,
+                "pitch_slope": pitch_slope,
+                "energy_mean": energy_mean,
+                "energy_std": energy_std,
+                "energy_iqr": energy_iqr,
+                "energy_max": energy_max,
+                "tempo": self._safe(tempo),
+                "speaking_rate": speaking_rate,
+                "articulation_rate": articulation_rate,
+                "speech_time_sec": speech_time,
+                "silence_time_sec": silence_time,
+                "speech_ratio": speech_ratio,
+                "rhythm_score": rhythm_score,
+            }
+
+            for i, (m, s) in enumerate(zip(mfcc_means, mfcc_stds), start=1):
+                features[f"mfcc{i}_mean"] = self._safe(m)
+                features[f"mfcc{i}_std"] = self._safe(s)
+
+            return features
+
+        except Exception:
+            return None
