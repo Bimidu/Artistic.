@@ -949,6 +949,36 @@ function showModelDetails(model) {
                 <h3 class="text-xl font-medium text-primary-900 mb-3">Confusion Matrix</h3>
                 ${confusionMatrixHtml}
             </div>
+            <!-- SHAP Explanations -->
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-medium text-primary-900 mb-4">
+                            Global SHAP Explanations
+                        </h3>
+            
+                        <p class="text-sm text-primary-600 mb-6">
+                            Feature importance across the full training dataset
+                        </p>
+            
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Beeswarm</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.beeswarm}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
+            
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Mean |SHAP| Importance</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.bar}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                \`;
+            }
         </div>
     `;
     
