@@ -797,12 +797,12 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
             
             # Use request parameter, or fall back to config default
             max_samples = request.max_samples_per_dataset or config.datasets.max_samples_td
+            max_samples_for_extraction = max_samples if is_td_dataset else None
             
-            # Note: extract_from_directory doesn't support max_samples yet
-            # We'll handle it in the acoustic extractor
+            # Extract features - pragmatic extractor doesn't support max_samples param
             df = feature_extractor.extract_from_directory(path)
             
-            # If TD dataset and max_samples specified, sample the dataframe
+            # Sample after extraction for pragmatic features
             if is_td_dataset and max_samples and len(df) > max_samples:
                 logger.info(f"Sampling {max_samples} from {len(df)} TD samples (config: max_samples_td={config.datasets.max_samples_td})")
                 df = df.sample(n=max_samples, random_state=42)
@@ -890,16 +890,22 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
                 logger.warning(f"Dataset path not found: {dataset_path}")
                 continue
             
-            training_state['message'] = f'Extracting {component} features from dataset {i+1}/{len(dataset_paths)}...'
-            df = extractor.extract_from_directory(path)
-            
-            # Apply TD sampling if configured
+            # Check if this is TD dataset and apply sampling BEFORE extraction
             is_td_dataset = 'td' in path.name.lower()
             max_samples = max_samples_per_dataset or config.datasets.max_samples_td
+            max_samples_for_extraction = max_samples if is_td_dataset else None
             
-            if is_td_dataset and max_samples and len(df) > max_samples:
-                logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
-                df = df.sample(n=max_samples, random_state=42)
+            training_state['message'] = f'Extracting {component} features from dataset {i+1}/{len(dataset_paths)}...'
+            
+            # Pass max_samples to acoustic extractor to limit files BEFORE processing
+            if component == 'acoustic_prosodic' and hasattr(extractor, 'extract_from_directory'):
+                df = extractor.extract_from_directory(path, max_samples=max_samples_for_extraction)
+            else:
+                df = extractor.extract_from_directory(path)
+                # For other extractors, sample after extraction
+                if is_td_dataset and max_samples and len(df) > max_samples:
+                    logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
+                    df = df.sample(n=max_samples, random_state=42)
             
             if not df.empty:
                 df['dataset'] = path.name

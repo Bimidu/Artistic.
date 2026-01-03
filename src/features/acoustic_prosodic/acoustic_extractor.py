@@ -140,12 +140,15 @@ class AcousticFeatureExtractor:
                     continue
                 audio_files.append(audio_file)
         
+        total_files = len(audio_files)
+        logger.info(f"Found {total_files} audio files in {directory}")
+        
         # Random sampling if too many files
-        if max_samples and len(audio_files) > max_samples:
+        if max_samples and total_files > max_samples:
             import random
             random.seed(42)  # For reproducibility
             audio_files = random.sample(audio_files, max_samples)
-            logger.info(f"Randomly sampled {max_samples} files from {len(audio_files)} total files")
+            logger.info(f"Randomly sampled {max_samples} files from {total_files} total files")
         
         if not audio_files:
             logger.warning(f"No audio files found in {directory}")
