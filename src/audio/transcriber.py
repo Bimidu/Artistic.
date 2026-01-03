@@ -19,7 +19,7 @@ Author: Bimidu Gunathilake
 import os
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Union
 from dataclasses import dataclass, field
 import tempfile
 import json

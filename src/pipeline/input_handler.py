@@ -131,8 +131,6 @@ class InputHandler:
     
     def determine_input_type(self, input_path: str | Path) -> InputType:
         """
-        Determine the type of input file.
-        
         Args:
             input_path: Path to input file
             
