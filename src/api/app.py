@@ -24,11 +24,14 @@ from pydantic import BaseModel, Field
 from typing import Dict, List, Optional, Any
 import pandas as pd
 import numpy as np
+from src.interpretability.explainability.shap_manager import SHAPManager
 from pathlib import Path
 import tempfile
 import io
 import json
 import shutil
+import uuid
+from fastapi.staticfiles import StaticFiles
 
 from src.models.model_registry import ModelRegistry, ModelMetadata
 from src.parsers.chat_parser import CHATParser
@@ -40,6 +43,7 @@ from src.utils.logger import get_logger
 from config import config
 
 logger = get_logger(__name__)
+ASSETS_DIR = Path("assets")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -48,6 +52,12 @@ app = FastAPI(
     version="2.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
+)
+
+app.mount(
+    "/assets",
+    StaticFiles(directory=Path("assets")),
+    name="assets"
 )
 
 # Add CORS middleware
@@ -692,10 +702,36 @@ async def predict_from_transcript(
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
                     features_df = preprocess_with_dict(features_df, preprocessor)
+                    selected_features = preprocessor["selected_features"]
                 else:
                     features_df = preprocessor.transform(features_df)
+                    selected_features = preprocessor.selected_features_
             
             result = make_prediction(model, features_df, model_name)
+
+            #SHAP explanation
+            request_id = str(uuid.uuid4())
+            local_shap_dir = Path("assets/shap/local") / request_id
+
+            # Load background data saved during training
+            background = np.load(
+                Path("assets/shap") / model_name / "background.npy"
+            )
+
+            predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+            shap_manager = SHAPManager(
+                model=model,
+                background_data=background,
+                feature_names=selected_features,
+                model_type=model_name.split("_")[-1]
+            )
+
+            shap_manager.generate_local_waterfall(
+                X_instance=features_df.values,
+                save_dir=local_shap_dir,
+                predicted_class=predicted_class
+            )
             
             # Generate annotated transcript
             annotated = transcript_annotator.annotate(
@@ -713,6 +749,10 @@ async def predict_from_transcript(
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
                 'input_type': 'chat_file',
+                'local_shap': {
+                    'request_id': request_id,
+                    'waterfall': f"/assets/shap/local/{request_id}/waterfall.png"
+                },
             }
         
     except Exception as e:
@@ -838,6 +878,17 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
         'datasets_processed': len(all_dfs)
     }
 
+@app.get("/explain/shap/global/{model_name}", tags=["Interpretability"])
+async def get_global_shap(model_name: str):
+    shap_dir = Path("assets/shap") / model_name
+
+    if not shap_dir.exists():
+        raise HTTPException(404, "Global SHAP not found")
+
+    return {
+        "beeswarm": f"/static/shap/{model_name}/global_beeswarm.png",
+        "bar": f"/static/shap/{model_name}/global_bar.png"
+    }
 
 # Global training state
 training_state = {
@@ -852,11 +903,56 @@ training_state = {
     'error': None
 }
 
+def force_numeric_dataframe(X: pd.DataFrame) -> pd.DataFrame:
+    """
+    HARD sanitize dataframe → guarantees float values.
+    Handles:
+    - "[0.77]"
+    - "[7.7227724E-1]"
+    - "['0.77']"
+    - numpy arrays
+    - lists / tuples
+    """
+
+    X = X.copy()
+
+    def sanitize(v):
+        # Already numeric
+        if isinstance(v, (int, float, np.number)):
+            return float(v)
+
+        # numpy array / list / tuple
+        if isinstance(v, (list, tuple, np.ndarray)):
+            return float(v[0])
+
+        # string case
+        if isinstance(v, str):
+            try:
+                parsed = ast.literal_eval(v)
+                if isinstance(parsed, (list, tuple, np.ndarray)):
+                    return float(parsed[0])
+                return float(parsed)
+            except Exception:
+                return float(v)
+
+        # fallback
+        return float(v)
+
+    for col in X.columns:
+        try:
+            X[col] = X[col].apply(sanitize)
+        except Exception as e:
+            bad_vals = X[col][~X[col].apply(lambda x: isinstance(x, (int, float, np.number)))].head(5)
+            raise ValueError(
+                f"❌ Non-numeric values remain in column '{col}': {bad_vals.tolist()}"
+            ) from e
+
+    return X
 
 def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
     """Background task for model training."""
     global training_state
-    
+
     try:
         training_state['status'] = 'training'
         training_state['component'] = component
@@ -1051,6 +1147,60 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
             
             # Create model name with component prefix
             model_name = f"{component}_{model_type}"
+
+            SHAP_SUPPORTED_MODELS = {
+                "random_forest",
+                "gradient_boosting",
+                "adaboost",
+                "svm",
+                "lightgbm"
+            }
+
+            logger.warning(f"Calling SHAP for model {model_name}, X_train shape: {X_train.shape}")
+
+            # ================================
+            # 🔍 GLOBAL SHAP (TRAINING TIME)
+            # ================================
+
+            if model_type in SHAP_SUPPORTED_MODELS:
+                try:
+                    shap_dir = config.paths.shap_dir / model_name
+                    shap_dir.mkdir(parents=True, exist_ok=True)
+
+                    # Small, safe background (important for Kernel SHAP)
+                    background = X_train.sample(
+                        n=min(50, len(X_train)),
+                        random_state=42
+                    )
+
+                    np.save(shap_dir / "background.npy", background.values)
+
+                    logger.info(f"Saving global SHAP to: {shap_dir}")
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=X_train,
+                        feature_names=preprocessor.selected_features_,
+                        model_type=model_type
+                    )
+
+                    shap_manager.generate_global_explanations(
+                        X_train=X_train,
+                        save_dir=shap_dir
+                    )
+
+                    logger.info(f" SHAP generated for {model_name}")
+
+                except Exception as shap_error:
+                    logger.warning(
+                        f" SHAP failed for {model_name}: {shap_error}"
+                    )
+
+            else:
+                logger.info(
+                    f" Skipping SHAP for model {model_name} "
+                    f"(unsupported model type: {model_type})"
+                )
             
             metadata = ModelMetadata(
                 model_name=model_name,
@@ -1246,6 +1396,22 @@ async def list_features():
             detail=f"Error listing features: {str(e)}"
         )
 
+def get_shap_assets(model_name: str):
+    shap_dir = Path("assets/shap") / model_name
+
+    if not shap_dir.exists():
+        return None
+
+    beeswarm = shap_dir / "global_beeswarm.png"
+    bar = shap_dir / "global_bar.png"
+
+    if not beeswarm.exists() or not bar.exists():
+        return None
+
+    return {
+        "beeswarm": f"/assets/shap/{model_name}/global_beeswarm.png",
+        "bar": f"/assets/shap/{model_name}/global_bar.png"
+    }
 
 @app.get("/models", tags=["Information"])
 async def list_models():
@@ -1257,6 +1423,7 @@ async def list_models():
         for model_name in models:
             try:
                 metadata = model_registry.get_model_metadata(model_name)
+                shap_assets = get_shap_assets(model_name)
                 model_info.append({
                     'name': model_name,
                     'type': metadata.model_type,
@@ -1272,6 +1439,7 @@ async def list_models():
                     'training_samples': metadata.training_samples,
                     'component': metadata.component,
                     'created_at': metadata.created_at,
+                    'shap': shap_assets
                 })
             except:
                 model_info.append({'name': model_name, 'type': 'unknown'})

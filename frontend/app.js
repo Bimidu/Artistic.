@@ -360,12 +360,28 @@ function displayResults(data) {
             ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
         </div>
     `;
-    
+
+    // ==============================
+    // Local SHAP Waterfall
+    // ==============================
+    const localShapSection = document.getElementById('localShapSection');
+    const localShapImg = document.getElementById('localShapWaterfall');
+
+    if (data.local_shap && data.local_shap.waterfall) {
+        localShapImg.src =
+            getApiUrl() + data.local_shap.waterfall + '?t=' + Date.now();
+        localShapSection.classList.remove('hidden');
+    } else {
+        localShapSection.classList.add('hidden');
+    }
+
     // Show annotated transcript
     if (data.annotated_transcript_html) {
         document.getElementById('annotationCard').classList.remove('hidden');
         document.getElementById('annotatedTranscript').innerHTML = data.annotated_transcript_html;
     }
+
+
 }
 
 function displayError(message) {
@@ -949,6 +965,36 @@ function showModelDetails(model) {
                 <h3 class="text-xl font-medium text-primary-900 mb-3">Confusion Matrix</h3>
                 ${confusionMatrixHtml}
             </div>
+            <!-- SHAP Explanations -->
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-medium text-primary-900 mb-4">
+                            Global SHAP Explanations
+                        </h3>
+            
+                        <p class="text-sm text-primary-600 mb-6">
+                            Feature importance across the full training dataset
+                        </p>
+            
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Beeswarm</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.beeswarm}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
+            
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Mean |SHAP| Importance</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.bar}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                \`;
+            }
         </div>
     `;
     

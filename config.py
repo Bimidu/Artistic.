@@ -35,11 +35,16 @@ class PathConfig:
     models_dir: Path = field(default_factory=lambda: Path(os.getenv("MODELS_DIR", "./models")))
     logs_dir: Path = field(default_factory=lambda: Path(os.getenv("LOGS_DIR", "./logs")))
     cache_dir: Path = field(default_factory=lambda: Path(os.getenv("CACHE_DIR", "./cache")))
+    assets_dir: Path = field(default_factory=lambda: Path(os.getenv("ASSETS_DIR", "./assets")))
+    shap_dir: Path = field(init=False)
     
     def __post_init__(self):
         """Create directories if they don't exist."""
-        for dir_path in [self.output_dir, self.models_dir, self.logs_dir, self.cache_dir]:
+        for dir_path in [self.output_dir, self.models_dir, self.logs_dir, self.cache_dir, self.assets_dir,]:
             dir_path.mkdir(parents=True, exist_ok=True)
+
+        self.shap_dir = self.assets_dir / "shap"
+        self.shap_dir.mkdir(parents=True, exist_ok=True)
 
 
 @dataclass
