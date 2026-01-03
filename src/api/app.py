@@ -30,6 +30,7 @@ import tempfile
 import io
 import json
 import shutil
+import uuid
 from fastapi.staticfiles import StaticFiles
 
 from src.models.model_registry import ModelRegistry, ModelMetadata
@@ -693,10 +694,36 @@ async def predict_from_transcript(
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
                     features_df = preprocess_with_dict(features_df, preprocessor)
+                    selected_features = preprocessor["selected_features"]
                 else:
                     features_df = preprocessor.transform(features_df)
+                    selected_features = preprocessor.selected_features_
             
             result = make_prediction(model, features_df, model_name)
+
+            #SHAP explanation
+            request_id = str(uuid.uuid4())
+            local_shap_dir = Path("assets/shap/local") / request_id
+
+            # Load background data saved during training
+            background = np.load(
+                Path("assets/shap") / model_name / "background.npy"
+            )
+
+            predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+            shap_manager = SHAPManager(
+                model=model,
+                background_data=background,
+                feature_names=selected_features,
+                model_type=model_name.split("_")[-1]
+            )
+
+            shap_manager.generate_local_waterfall(
+                X_instance=features_df.values,
+                save_dir=local_shap_dir,
+                predicted_class=predicted_class
+            )
             
             # Generate annotated transcript
             annotated = transcript_annotator.annotate(
@@ -714,6 +741,10 @@ async def predict_from_transcript(
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
                 'input_type': 'chat_file',
+                'local_shap': {
+                    'request_id': request_id,
+                    'waterfall': f"/assets/shap/local/{request_id}/waterfall.png"
+                },
             }
         
     except Exception as e:
@@ -1095,6 +1126,14 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
                     shap_dir = config.paths.shap_dir / model_name
                     shap_dir.mkdir(parents=True, exist_ok=True)
 
+                    # Small, safe background (important for Kernel SHAP)
+                    background = X_train.sample(
+                        n=min(50, len(X_train)),
+                        random_state=42
+                    )
+
+                    np.save(shap_dir / "background.npy", background.values)
+
                     logger.info(f"Saving global SHAP to: {shap_dir}")
 
                     shap_manager = SHAPManager(
@@ -1118,7 +1157,7 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
 
             else:
                 logger.info(
-                    f"⏭️ Skipping SHAP for model {model_name} "
+                    f" Skipping SHAP for model {model_name} "
                     f"(unsupported model type: {model_type})"
                 )
             

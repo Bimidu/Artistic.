@@ -360,12 +360,28 @@ function displayResults(data) {
             ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
         </div>
     `;
-    
+
+    // ==============================
+    // Local SHAP Waterfall
+    // ==============================
+    const localShapSection = document.getElementById('localShapSection');
+    const localShapImg = document.getElementById('localShapWaterfall');
+
+    if (data.local_shap && data.local_shap.waterfall) {
+        localShapImg.src =
+            getApiUrl() + data.local_shap.waterfall + '?t=' + Date.now();
+        localShapSection.classList.remove('hidden');
+    } else {
+        localShapSection.classList.add('hidden');
+    }
+
     // Show annotated transcript
     if (data.annotated_transcript_html) {
         document.getElementById('annotationCard').classList.remove('hidden');
         document.getElementById('annotatedTranscript').innerHTML = data.annotated_transcript_html;
     }
+
+
 }
 
 function displayError(message) {
