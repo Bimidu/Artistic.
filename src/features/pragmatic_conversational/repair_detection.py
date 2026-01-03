@@ -140,6 +140,7 @@ class RepairDetectionFeatures(BaseFeatureExtractor):
         # Try models in order: lg (best) -> md (good) -> sm (fallback)
         model_preferences = ["en_core_web_lg", "en_core_web_md", "en_core_web_sm"]
         
+        last_error = None
         for model_name in model_preferences:
             try:
                 self._nlp = spacy.load(model_name)
@@ -157,11 +158,17 @@ class RepairDetectionFeatures(BaseFeatureExtractor):
                 
                 return  # Successfully loaded, exit
                 
-            except OSError:
+            except OSError as e:
+                last_error = str(e)
+                logger.debug(f"Failed to load {model_name}: {last_error}")
                 continue  # Try next model
         
-        # If all models failed
-        logger.warning("No spaCy model available for repair analysis")
+        # If all models failed, provide helpful error message
+        logger.warning(
+            f"No spaCy model available for repair analysis.\n"
+            f"To install a model, run: python -m spacy download en_core_web_lg\n"
+            f"Last error: {last_error if last_error else 'Model not found'}"
+        )
         self._nlp = None
     
     @property

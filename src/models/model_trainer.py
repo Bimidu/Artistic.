@@ -387,20 +387,20 @@ class ModelTrainer:
             
             # Delegate to appropriate component trainer
             if category == 'acoustic_prosodic':
-                # Use acoustic trainer (placeholder)
-                self.logger.info("Acoustic/Prosodic training - PLACEHOLDER")
+                # Use acoustic trainer (IMPLEMENTED - child-only audio extraction)
+                self.logger.info("Training Acoustic/Prosodic models (60 features)")
                 try:
                     models = self.acoustic_trainer.train_multiple_models(X_cat, y_train)
                     category_models[category] = {
-                        'status': 'placeholder',
+                        'status': 'implemented',
                         'models': models,
                         'features_count': X_cat.shape[1],
-                        'message': 'Acoustic/Prosodic feature training - PLACEHOLDER (Team Member A)'
+                        'message': 'Acoustic/Prosodic feature training complete'
                     }
                 except Exception as e:
                     category_models[category] = {
-                        'status': 'placeholder',
-                        'message': f'Acoustic training placeholder: {str(e)}',
+                        'status': 'error',
+                        'message': f'Acoustic training error: {str(e)}',
                         'features_count': X_cat.shape[1]
                     }
                 

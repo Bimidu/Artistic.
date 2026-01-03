@@ -11,26 +11,21 @@ Section 3.3.2 - Topic Maintenance and Semantic Coherence
 Section 3.3.3 - Pause and Latency Analysis
 Section 3.3.4 - Conversational Repair Detection
 
-=== SUPPORTING CATEGORIES ===
+=== SUPPORTING CATEGORY ===
 
-1. Syntactic & Semantic Features (Fully Implemented - Randil Haturusinghe)
-   - Syntactic complexity (dependency depth, clause complexity, subordination)
-   - Grammatical accuracy (error rates, tense consistency, structure diversity)
-   - Semantic features (coherence, density, thematic consistency)
-   - Vocabulary semantic features (abstractness, semantic fields, word senses)
-
-2. Pragmatic & Linguistic Features
-   - MLU, vocabulary diversity, echolalia, pronouns, questions, social language
+Pragmatic & Linguistic Features
+  - MLU, vocabulary diversity, echolalia, pronouns, questions, social language
 
 === OTHER MODULES (Placeholders) ===
 
 Acoustic & Prosodic Features (Team Member A)
+Syntactic & Semantic Features (Team Member B)
 
-Author: Bimidu Gunathilake & Randil Haturusinghe
+Author: Bimidu Gunathilake
 """
 
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Union
+from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 import pandas as pd
 import numpy as np
@@ -74,7 +69,6 @@ class FeatureSet:
     - 3.3.2 Topic Maintenance and Semantic Coherence
     - 3.3.3 Pause and Latency Analysis
     - 3.3.4 Conversational Repair Detection
-    - Syntactic & Semantic Features
     - Supporting: Pragmatic & Linguistic Features
     
     Attributes:
@@ -113,7 +107,7 @@ class FeatureExtractor:
     """
     Main feature extraction orchestrator.
     
-    Coordinates extraction from all categories:
+    Coordinates extraction from 5 categories:
     
     PRIMARY:
     - Section 3.3.1: Turn-Taking Metrics
@@ -122,7 +116,6 @@ class FeatureExtractor:
     - Section 3.3.4: Conversational Repair Detection
     
     SUPPORTING:
-    - Syntactic & Semantic Features (26 features)
     - Pragmatic & Linguistic Features (MLU, echolalia, pronouns, etc.)
     
     Example:
@@ -132,11 +125,7 @@ class FeatureExtractor:
         
         >>> # Extract only methodology sections
         >>> extractor = FeatureExtractor(categories='methodology')
-        
-        >>> # Specific categories
-        >>> extractor = FeatureExtractor(
-        ...     categories=['turn_taking', 'syntactic_semantic']
-        ... )
+        >>> feature_set = extractor.extract_from_transcript(transcript)
     """
     
     # Feature categories
@@ -173,18 +162,22 @@ class FeatureExtractor:
             'description': 'Audio-derived pragmatic features (pauses, timing)',
             'status': 'implemented',
         },
-        'syntactic_semantic': {
-            'section': 'text',
-            'description': 'Syntactic complexity, grammatical accuracy, and semantic features',
-            'status': 'implemented',
-            'team': 'Randil Haturusinghe',
-        },
-        # Placeholder categories for other team members
+        # Acoustic & Prosodic features (implemented)
         'acoustic_prosodic': {
             'section': 'audio',
             'description': 'Acoustic and prosodic features from audio',
+            'status': 'implemented',
+        },
+        'acoustic_audio': {
+            'section': 'audio',
+            'description': 'Acoustic and prosodic features from audio (alias)',
+            'status': 'implemented',
+        },
+        'syntactic_semantic': {
+            'section': 'text',
+            'description': 'Syntactic and semantic features (POS, dependencies)',
             'status': 'placeholder',
-            'team': 'Team Member A',
+            'team': 'Team Member B',
         },
     }
     
@@ -193,12 +186,11 @@ class FeatureExtractor:
         'turn_taking', 'topic_coherence', 'pause_latency', 'repair_detection'
     ]
     SUPPORTING_CATEGORIES = ['pragmatic_linguistic', 'pragmatic_audio']
-    # Add syntactic_semantic to a general "all" list or keep separate
-    ALL_IMPLEMENTED = METHODOLOGY_CATEGORIES + SUPPORTING_CATEGORIES + ['syntactic_semantic']
+    ALL_IMPLEMENTED = METHODOLOGY_CATEGORIES + SUPPORTING_CATEGORIES
     
     def __init__(
         self,
-        categories: Optional[Union[List[str], str]] = 'all',
+        categories: Optional[List[str] | str] = 'all',
         include_supporting: bool = True
     ):
         """
@@ -206,11 +198,23 @@ class FeatureExtractor:
         
         Args:
             categories: Which feature categories to extract:
-                - 'all': All implemented categories (default)
+                - 'all': All 5 implemented categories (default)
                 - 'methodology': Only sections 3.3.1-3.3.4
                 - 'pragmatic_conversational': Alias for 'all' (backward compat)
                 - List of specific category names
             include_supporting: If True, include pragmatic_linguistic with methodology
+        
+        Example:
+            >>> # All features (recommended)
+            >>> extractor = FeatureExtractor()
+            
+            >>> # Only methodology sections
+            >>> extractor = FeatureExtractor(categories='methodology')
+            
+            >>> # Specific categories
+            >>> extractor = FeatureExtractor(
+            ...     categories=['turn_taking', 'topic_coherence']
+            ... )
         """
         self.include_supporting = include_supporting
         
@@ -268,7 +272,20 @@ class FeatureExtractor:
             self.extractors['pragmatic_audio'] = PragmaticAudioFeatures()
             logger.debug("Initialized PragmaticAudioFeatures (Audio)")
         
-        # Syntactic & Semantic Features
+        # Acoustic & Prosodic audio features (if available and requested)
+        if 'acoustic_audio' in self.active_categories or 'acoustic_prosodic' in self.active_categories:
+            if AcousticAudioFeatures is not None:
+                # Use 'acoustic_audio' as the key for consistency
+                # extract_child_only=True to extract only child speech segments
+                self.extractors['acoustic_audio'] = AcousticAudioFeatures(extract_child_only=True)
+                # Also map 'acoustic_prosodic' to the same extractor for API compatibility
+                if 'acoustic_prosodic' in self.active_categories:
+                    self.extractors['acoustic_prosodic'] = self.extractors['acoustic_audio']
+                logger.debug("Initialized AcousticAudioFeatures (child-only extraction enabled)")
+            else:
+                logger.warning("AcousticAudioFeatures not available")
+        
+        # Syntactic/Semantic (if available and requested)
         if 'syntactic_semantic' in self.active_categories:
             if SyntacticSemanticFeatures is not None:
                 self.extractors['syntactic_semantic'] = SyntacticSemanticFeatures()
@@ -316,6 +333,10 @@ class FeatureExtractor:
         
         Returns:
             FeatureSet with all extracted features
+            
+        Example:
+            >>> features = extractor.extract_from_transcript(transcript)
+            >>> print(f"Extracted {len(features.features)} features")
         """
         extract_categories = categories or list(self.extractors.keys())
         
@@ -344,8 +365,7 @@ class FeatureExtractor:
                 )
                 
             except Exception as e:
-                import traceback
-                logger.error(f"Error extracting {category} features: {e}\n{traceback.format_exc()}")
+                logger.error(f"Error extracting {category} features: {e}")
         
         # Create FeatureSet
         feature_set = FeatureSet(
@@ -408,8 +428,14 @@ class FeatureExtractor:
             try:
                 extractor = self.extractors[category]
                 
-                # Special handling for audio extractor
+                # Special handling for audio extractors
                 if category == 'pragmatic_audio':
+                    result = extractor.extract(
+                        transcript,
+                        audio_path=audio_path,
+                        transcription_result=transcription_result
+                    )
+                elif category in ('acoustic_audio', 'acoustic_prosodic'):
                     result = extractor.extract(
                         transcript,
                         audio_path=audio_path,
@@ -482,12 +508,6 @@ class FeatureExtractor:
         for file_path in iterator:
             try:
                 transcript = parser.parse_file(file_path)
-
-                # Skip transcripts with no utterances (e.g., due to alignment errors)
-                if transcript.total_utterances == 0:
-                    logger.warning(f"Skipping {file_path.name}: no utterances found")
-                    continue
-
                 feature_set = self.extract_from_transcript(transcript)
                 feature_sets.append(feature_set.to_dict())
             except Exception as e:
@@ -513,32 +533,308 @@ class FeatureExtractor:
     @timing_decorator
     def extract_from_directory(
         self,
-        directory: Union[str, Path],
+        directory: str | Path,
         pattern: str = "**/*.cha",
         output_file: Optional[Path] = None
     ) -> pd.DataFrame:
         """
         Extract features from all transcripts in a directory.
         
+        Supports both:
+        - CHAT files (.cha) - parsed directly
+        - Audio files (.wav, .mp3, etc.) - transcribed with Whisper first
+        
         Args:
-            directory: Directory containing .cha files
-            pattern: Glob pattern for finding files
+            directory: Directory containing .cha files or audio files
+            pattern: Glob pattern for finding files (default: "**/*.cha")
             output_file: Optional path to save CSV output
             
         Returns:
             DataFrame with all extracted features
         """
         directory = Path(directory)
-        file_paths = list(directory.glob(pattern))
-        logger.info(f"Found {len(file_paths)} transcript files in {directory}")
         
-        df = self.extract_from_files(file_paths)
+        # First, try to find .cha files
+        cha_files = list(directory.glob("**/*.cha"))
+        
+        # If no .cha files, look for audio files
+        audio_files = []
+        if not cha_files:
+            audio_extensions = {'.wav', '.mp3', '.flac', '.ogg', '.m4a', '.aac'}
+            audio_files = [
+                f for f in directory.rglob("*")
+                if f.is_file() and f.suffix.lower() in audio_extensions
+            ]
+            logger.info(f"Found {len(audio_files)} audio files in {directory} (no .cha files)")
+        else:
+            logger.info(f"Found {len(cha_files)} transcript files in {directory}")
+        
+        # Process .cha files if available
+        if cha_files:
+            df = self.extract_from_files(cha_files)
+        elif audio_files:
+            # Process audio files - transcribe and extract features
+            # Pass directory name for diagnosis detection
+            # Save transcriptions next to audio files
+            df = self.extract_from_audio_files(
+                audio_files, 
+                dataset_dir=directory,
+                save_transcriptions=True,
+                transcription_output_dir=directory  # Save .cha files in same directory as audio
+            )
+        else:
+            logger.warning(f"No .cha or audio files found in {directory}")
+            return pd.DataFrame()
         
         if output_file and not df.empty:
             output_file = Path(output_file)
             output_file.parent.mkdir(parents=True, exist_ok=True)
             df.to_csv(output_file, index=False)
             logger.info(f"Features saved to: {output_file}")
+        
+        return df
+    
+    def extract_from_audio_files(
+        self,
+        audio_paths: List[Path],
+        dataset_dir: Optional[Path] = None,
+        show_progress: bool = True,
+        save_transcriptions: bool = True,
+        transcription_output_dir: Optional[Path] = None
+    ) -> pd.DataFrame:
+        """
+        Extract features from audio files by transcribing them first.
+        
+        This method:
+        1. Transcribes each audio file using faster-whisper/Whisper/Google
+        2. Converts transcription to TranscriptData format
+        3. Optionally saves transcriptions as .cha files
+        4. Extracts features using extract_with_audio (includes audio-based features)
+        
+        Args:
+            audio_paths: List of paths to audio files
+            dataset_dir: Optional dataset directory path (for diagnosis detection)
+            show_progress: Whether to show progress bar
+            save_transcriptions: If True, save transcriptions as .cha files
+            transcription_output_dir: Directory to save .cha files (default: same as audio files)
+            
+        Returns:
+            DataFrame with one row per audio file
+        """
+        from src.audio.audio_processor import AudioProcessor
+        
+        # Initialize audio processor with error handling
+        # On macOS, Whisper often crashes with PyTorch segfault
+        import platform
+        is_macos = platform.system() == 'Darwin'
+        
+        logger.info("Initializing audio processor for transcription...")
+        audio_processor = None
+        
+        # Priority order: faster-whisper > vosk > google > whisper (last due to crashes)
+        # faster-whisper uses CTranslate2 instead of PyTorch, avoids macOS crashes
+        backends_to_try = []
+        
+        if is_macos:
+            logger.info("macOS detected: Preferring faster-whisper (avoids PyTorch crashes)")
+            backends_to_try = [
+                ('faster-whisper', 'tiny'),
+                ('vosk', None),
+                ('google', None)
+            ]
+        else:
+            backends_to_try = [
+                ('faster-whisper', 'tiny'),
+                ('whisper', 'tiny'),
+                ('vosk', None),
+                ('google', None)
+            ]
+        
+        for backend, model_size in backends_to_try:
+            try:
+                logger.info(f"Trying {backend} backend...")
+                if backend in ('faster-whisper', 'whisper'):
+                    audio_processor = AudioProcessor(
+                        transcriber_backend=backend,
+                        whisper_model_size=model_size or 'tiny',
+                        device='cpu',
+                        language='en'
+                    )
+                else:
+                    audio_processor = AudioProcessor(
+                        transcriber_backend=backend,
+                        language='en'
+                    )
+                
+                if audio_processor.transcriber_available:
+                    logger.info(f"✓ Audio processor initialized with {backend}")
+                    if backend == 'google':
+                        logger.info("Note: Google Speech-to-Text requires internet connection")
+                    break
+            except (RuntimeError, OSError, ImportError) as e:
+                logger.debug(f"{backend} failed: {e}")
+                continue
+            except Exception as e:
+                logger.debug(f"{backend} error: {e}")
+                continue
+        
+        if audio_processor is None or not audio_processor.transcriber_available:
+            logger.error("All transcription backends failed!")
+            logger.error(
+                "Install one of:\n"
+                "1. faster-whisper (recommended for macOS): pip install faster-whisper\n"
+                "2. Vosk: pip install vosk (also download model from https://alphacephei.com/vosk/models)\n"
+                "3. Google: pip install SpeechRecognition\n"
+                "4. Whisper: pip install openai-whisper (may crash on macOS)"
+            )
+            return pd.DataFrame()
+        
+        feature_sets = []
+        errors = []
+        
+        iterator = tqdm(audio_paths, desc="Transcribing and extracting features") if show_progress else audio_paths
+        
+        for audio_path in iterator:
+            try:
+                # Extract participant ID and diagnosis from path if possible
+                # Try to infer from directory structure (e.g., data/td/ASD/audio.wav)
+                participant_id = "CHI"
+                diagnosis = None
+                
+                # First, check if dataset directory name is a diagnosis label
+                if dataset_dir:
+                    dataset_name = dataset_dir.name.upper()
+                    if dataset_name in ['ASD', 'TD', 'DD', 'HR', 'LR', 'TYP']:
+                        diagnosis = dataset_name
+                        if diagnosis == 'TYP':
+                            diagnosis = 'TD'
+                    elif dataset_dir.name.lower() in ['td', 'asd', 'dd', 'hr', 'lr']:
+                        diagnosis = dataset_dir.name.upper()
+                
+                # If not found, check parent directories for diagnosis labels
+                if not diagnosis:
+                    path_parts = audio_path.parts
+                    for part in reversed(path_parts):
+                        part_upper = part.upper()
+                        # Check if directory name is a diagnosis label
+                        if part_upper in ['ASD', 'TD', 'DD', 'HR', 'LR', 'TYP']:
+                            diagnosis = part_upper
+                            if diagnosis == 'TYP':
+                                diagnosis = 'TD'
+                            break
+                        # Also check lowercase directory names
+                        elif part.lower() in ['td', 'asd', 'dd', 'hr', 'lr']:
+                            diagnosis = part.upper()
+                            break
+                
+                # Use filename as participant ID if no better option
+                if not participant_id or participant_id == "CHI":
+                    participant_id = audio_path.stem
+                
+                # Step 1: Transcribe audio
+                logger.debug(f"Transcribing {audio_path.name}...")
+                audio_result = None
+                transcription_failed = False
+                
+                try:
+                    audio_result = audio_processor.process(
+                        audio_path,
+                        participant_id=participant_id,
+                        diagnosis=diagnosis
+                    )
+                    
+                    if not audio_result.success:
+                        logger.warning(f"Transcription failed for {audio_path.name}")
+                        transcription_failed = True
+                except (RuntimeError, OSError) as transcribe_error:
+                    # If Whisper crashes during model loading (segfault), try Google fallback
+                    error_msg = str(transcribe_error).lower()
+                    if 'whisper' in error_msg or 'model' in error_msg or 'pytorch' in error_msg:
+                        logger.warning(
+                            f"Whisper failed for {audio_path.name}: {transcribe_error}. "
+                            f"Switching to Google Speech-to-Text fallback..."
+                        )
+                        # Try Google Speech-to-Text as fallback
+                        try:
+                            google_processor = AudioProcessor(
+                                transcriber_backend='google',
+                                language='en'
+                            )
+                            audio_result = google_processor.process(
+                                audio_path,
+                                participant_id=participant_id,
+                                diagnosis=diagnosis
+                            )
+                            logger.info(f"✓ Google Speech-to-Text succeeded for {audio_path.name}")
+                            # Update audio_processor for future files
+                            audio_processor = google_processor
+                        except Exception as google_error:
+                            logger.error(f"Google fallback also failed: {google_error}")
+                            errors.append((audio_path, f"Both Whisper and Google failed"))
+                            continue
+                    else:
+                        logger.error(f"Transcription error for {audio_path.name}: {transcribe_error}")
+                        errors.append((audio_path, f"Transcription error: {transcribe_error}"))
+                        continue
+                except Exception as transcribe_error:
+                    # Other unexpected errors
+                    logger.error(f"Unexpected transcription error for {audio_path.name}: {transcribe_error}")
+                    errors.append((audio_path, f"Unexpected error: {transcribe_error}"))
+                    continue
+                
+                if transcription_failed or audio_result is None:
+                    continue
+                
+                # Step 2: Save transcription as .cha file (optional)
+                if save_transcriptions:
+                    try:
+                        # Determine output path for transcription
+                        if transcription_output_dir:
+                            output_dir = Path(transcription_output_dir)
+                        elif dataset_dir:
+                            # Save in same directory as audio files
+                            output_dir = audio_path.parent
+                        else:
+                            # Save next to audio file
+                            output_dir = audio_path.parent
+                        
+                        output_dir.mkdir(parents=True, exist_ok=True)
+                        chat_file_path = output_dir / f"{audio_path.stem}.cha"
+                        audio_processor.save_chat_file(audio_result, chat_file_path)
+                        logger.debug(f"Saved transcription to {chat_file_path}")
+                    except Exception as save_error:
+                        logger.warning(f"Failed to save transcription for {audio_path.name}: {save_error}")
+                
+                # Step 3: Extract features with audio
+                feature_set = self.extract_with_audio(
+                    transcript=audio_result.transcript_data,
+                    audio_path=audio_path,
+                    transcription_result=audio_result.transcription
+                )
+                
+                feature_sets.append(feature_set.to_dict())
+                
+                logger.debug(
+                    f"Extracted {len(feature_set.features)} features from {audio_path.name}"
+                )
+                
+            except Exception as e:
+                logger.error(f"Error processing {audio_path.name}: {e}")
+                errors.append((audio_path, str(e)))
+        
+        if not feature_sets:
+            logger.warning("No features extracted successfully from audio files")
+            return pd.DataFrame()
+        
+        df = pd.DataFrame(feature_sets)
+        
+        logger.info(
+            f"Extracted features from {len(feature_sets)}/{len(audio_paths)} audio files "
+            f"({len(errors)} errors)"
+        )
+        
+        if errors:
+            logger.warning(f"Failed files: {[str(f[0].name) for f in errors[:5]]}")
         
         return df
     
@@ -618,11 +914,7 @@ class FeatureExtractor:
         print("\n📚 SUPPORTING FEATURES")
         print("-" * 50)
         
-        # Add syntactic_semantic to supporting list for printing if not in categories
-        all_supporting = self.SUPPORTING_CATEGORIES + ['syntactic_semantic']
-        
-        for category in all_supporting:
-            if category not in self.FEATURE_CATEGORIES: continue
+        for category in self.SUPPORTING_CATEGORIES:
             info = self.FEATURE_CATEGORIES[category]
             active = "●" if category in self.extractors else "○"
             count = len(self.extractors[category].feature_names) if category in self.extractors else 0
@@ -635,3 +927,6 @@ class FeatureExtractor:
         print(f"Total Active Categories: {len(self.extractors)}")
         print(f"Total Features: {self.total_features}")
         print("=" * 70 + "\n")
+
+
+__all__ = ["FeatureExtractor", "FeatureSet"]

@@ -4,24 +4,25 @@ Acoustic & Prosodic Feature Extractors
 This module contains feature extractors for acoustic and prosodic analysis.
 These features analyze audio characteristics like pitch, speech rate, prosody, and pauses.
 
-Status: Temporarily disabled - Module not fully implemented
+Status: Implemented
 
-Features (12 total):
-- Pitch features (mean, std, range, slope)
-- Speech rate features (speaking rate, articulation rate)
-- Prosodic features (intonation, stress, rhythm)
-- Pause features (pause rate, duration, filled pauses)
+Features (60+ total):
+- Pitch features (F0 mean, std, range, slope, contour)
+- Prosody features (intonation, rhythm, stress variability)
+- Voice quality (jitter, shimmer, HNR)
+- Spectral features (MFCCs, spectral centroid, rolloff, bandwidth)
+- Energy/intensity patterns
+- Formant-like features
 
-Author: Team Member A (Acoustic/Prosodic Specialist)
+Author: Implementation based on pragmatic features pattern
 """
 
-# Temporarily disabled - AcousticProsodicFeatures class not implemented yet
-# The acoustic_prosodic.py file currently only contains extract_basic_features() function
-# from .acoustic_prosodic import AcousticProsodicFeatures
+from .audio_features import AcousticAudioFeatures
+from .acoustic_extractor import AcousticFeatureExtractor
+from .child_audio_extractor import ChildAudioExtractor
 
-# __all__ = ["AcousticProsodicFeatures"]
+__all__ = ["AcousticAudioFeatures", "AcousticFeatureExtractor", "ChildAudioExtractor"]
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 __status__ = "implemented"
-__team__ = "Team Member A"
-__feature_count__ = 12
+__feature_count__ = 60

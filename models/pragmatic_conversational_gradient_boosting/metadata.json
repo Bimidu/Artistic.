@@ -2,21 +2,21 @@
   "model_name": "pragmatic_conversational_gradient_boosting",
   "model_type": "gradient_boosting",
   "version": "1.0.0",
-  "created_at": "2026-01-02T15:54:35.907048",
-  "accuracy": 0.7903225806451613,
-  "f1_score": 0.7819162694453683,
-  "precision": 0.7779032258064515,
-  "recall": 0.7903225806451613,
-  "roc_auc": 0.8312056737588652,
-  "matthews_corr": 0.39053821139889466,
+  "created_at": "2026-01-03T10:11:53.373193",
+  "accuracy": 0.8627450980392157,
+  "f1_score": 0.8648601983446101,
+  "precision": 0.8677727501256914,
+  "recall": 0.8627450980392157,
+  "roc_auc": 0.8363636363636364,
+  "matthews_corr": 0.6082187681501369,
   "confusion_matrix": [
     [
-      7,
-      8
+      8,
+      3
     ],
     [
-      5,
-      42
+      4,
+      36
     ]
   ],
   "feature_names": [
@@ -237,7 +237,7 @@
   ],
   "n_features": 214,
   "hyperparameters": {},
-  "training_samples": 247,
+  "training_samples": 202,
   "component": "pragmatic_conversational",
   "description": "pragmatic_conversational component - gradient_boosting"
 }

@@ -89,8 +89,8 @@ class AudioProcessor:
         Initialize the audio processor.
         
         Args:
-            transcriber_backend: Backend for transcription ('whisper' or 'google')
-            whisper_model_size: Whisper model size if using whisper
+            transcriber_backend: Backend for transcription ('faster-whisper', 'whisper', 'vosk', 'google')
+            whisper_model_size: Model size if using whisper/faster-whisper
             device: Device for processing ('cpu' or 'cuda')
             language: Target language for transcription
         """

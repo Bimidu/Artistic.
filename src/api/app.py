@@ -79,10 +79,49 @@ def get_syntactic_semantic_extractor():
 
 
 def get_input_handler():
-    """Lazy-load input handler."""
+    """Lazy-load input handler with smart backend selection."""
     global input_handler
     if input_handler is None:
-        input_handler = InputHandler()
+        import platform
+        is_macos = platform.system() == 'Darwin'
+        
+        # Use faster-whisper on macOS to avoid PyTorch crashes
+        # On other platforms, try faster-whisper first, fallback to whisper
+        if is_macos:
+            logger.info("macOS detected: Using faster-whisper for audio transcription (avoids PyTorch crashes)")
+            backend = 'faster-whisper'
+        else:
+            backend = 'faster-whisper'  # Prefer faster-whisper everywhere
+        
+        try:
+            input_handler = InputHandler(
+                transcriber_backend=backend,
+                whisper_model_size='tiny',  # Use tiny for faster loading
+                device='cpu',
+                language='en'
+            )
+        except Exception as e:
+            logger.warning(f"Failed to initialize {backend}, trying fallback backends: {e}")
+            # Try fallback backends
+            for fallback_backend in ['google', 'vosk']:
+                try:
+                    logger.info(f"Trying {fallback_backend} as fallback...")
+                    input_handler = InputHandler(
+                        transcriber_backend=fallback_backend,
+                        language='en'
+                    )
+                    logger.info(f"✓ Initialized with {fallback_backend}")
+                    break
+                except Exception as fallback_error:
+                    logger.debug(f"{fallback_backend} failed: {fallback_error}")
+                    continue
+            
+            if input_handler is None:
+                logger.error("All transcription backends failed!")
+                raise RuntimeError(
+                    "Could not initialize any transcription backend. "
+                    "Install faster-whisper: pip install faster-whisper"
+                )
     return input_handler
 
 
@@ -702,26 +741,41 @@ async def predict_from_transcript(
 @app.get("/training/datasets", tags=["Training Mode"])
 async def list_datasets():
     """List available dataset folders for training."""
+
     data_dir = config.paths.data_dir
-    
     datasets = []
+
+    allowed_names = set(config.datasets.datasets)
+    allowed_prefixes = ("asdbank", "td", "child")
+
     for item in data_dir.iterdir():
-        if item.is_dir() and item.name.startswith('asdbank'):
-            cha_files = list(item.rglob('*.cha'))
-            wav_files = list(item.rglob('*.wav'))
-            
-            datasets.append({
-                'name': item.name,
-                'path': str(item),
-                'chat_files': len(cha_files),
-                'audio_files': len(wav_files),
-            })
-    
+        if not item.is_dir():
+            continue
+
+        name_matches = (
+            item.name in allowed_names
+            or any(item.name.startswith(prefix) for prefix in allowed_prefixes)
+        )
+
+        if not name_matches:
+            continue
+
+        cha_files = list(item.rglob("*.cha"))
+        wav_files = list(item.rglob("*.wav"))
+
+        datasets.append({
+            "name": item.name,
+            "path": str(item),
+            "chat_files": len(cha_files),
+            "audio_files": len(wav_files),
+        })
+
     return {
-        'data_directory': str(data_dir),
-        'datasets': datasets,
-        'total_datasets': len(datasets)
+        "data_directory": str(data_dir),
+        "datasets": datasets,
+        "total_datasets": len(datasets),
     }
+
 
 
 @app.post("/training/extract-features", tags=["Training Mode"])
@@ -765,11 +819,15 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
     output_path = config.paths.output_dir / request.output_filename
     combined_df.to_csv(output_path, index=False)
     
+    # Count actual features in the dataframe (exclude metadata columns)
+    metadata_cols = ['participant_id', 'file_path', 'diagnosis', 'age_months', 'dataset']
+    actual_feature_cols = [col for col in combined_df.columns if col not in metadata_cols]
+    
     return {
         'status': 'success',
         'output_file': str(output_path),
         'total_samples': len(combined_df),
-        'features_count': len(feature_extractor.all_feature_names),
+        'features_count': len(actual_feature_cols),  # ← FIXED: Count actual features
         'datasets_processed': len(all_dfs)
     }
 
@@ -1148,8 +1206,9 @@ async def list_features():
                     "includes_audio": True
                 },
                 "acoustic_prosodic": {
-                    "status": "placeholder",
-                    "description": "Acoustic and prosodic features from audio (Team Member A)"
+                    "status": "implemented",
+                    "description": "Acoustic and prosodic features from audio (child-only extraction)",
+                    "includes_audio": True
                 },
                 "syntactic_semantic": {
                     "status": "placeholder", 
@@ -1270,9 +1329,12 @@ async def list_components():
             },
             "acoustic_prosodic": {
                 "name": "Acoustic & Prosodic",
-                "status": "placeholder",
-                "team": "Team Member A",
-                "audio_support": True
+                "status": "implemented",
+                "features": {
+                    "acoustic_audio": 60
+                },
+                "audio_support": True,
+                "child_only_extraction": True
             },
             "syntactic_semantic": {
                 "name": "Syntactic & Semantic",

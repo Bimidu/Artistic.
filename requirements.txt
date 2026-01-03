@@ -14,6 +14,9 @@ scipy>=1.11.0              # Scientific computing (1.11+ fixes numpy compatibili
 # ============================================================================
 nltk>=3.8.0                # Natural Language Toolkit
 spacy>=3.7.0               # Advanced NLP library
+# NOTE: After installing spacy, download the language model:
+#       python -m spacy download en_core_web_lg
+#       Models are saved in your Python environment and persist until you delete the environment
 textstat>=0.7.0            # Text statistics and readability metrics
 
 # ============================================================================
@@ -59,11 +62,12 @@ flake8>=6.0.0              # Linting
 mypy>=1.5.0                # Static type checking
 librosa~=0.11.0
 pydub~=0.25.1
-pip~=23.2.1
-wheel~=0.41.2
+faster-whisper>=0.10.0  # Recommended: Audio transcription using CTranslate2 (avoids PyTorch crashes on macOS)
+openai-whisper>=20231117  # Alternative: Audio transcription (may crash on macOS due to PyTorch)
+vosk>=0.3.44  # Alternative: Lightweight offline transcription (no PyTorch)
+SpeechRecognition>=3.10.0  # Alternative: Google Speech-to-Text (requires internet)
 pillow~=10.4.0
 cffi~=1.17.1
-setuptools~=68.2.0
 pytz~=2025.2
 zipp~=3.20.2
 numba~=0.58.1
