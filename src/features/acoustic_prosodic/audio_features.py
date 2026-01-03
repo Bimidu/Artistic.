@@ -23,6 +23,7 @@ from src.parsers.chat_parser import TranscriptData
 from src.utils.logger import get_logger
 from src.utils.helpers import safe_divide
 from ..base_features import BaseFeatureExtractor, FeatureResult
+from .child_audio_extractor import ChildAudioExtractor
 
 logger = get_logger(__name__)
 
@@ -128,20 +129,23 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             'acoustic_formant_3_std',
         ]
     
-    def __init__(self, sample_rate: int = 16000):
+    def __init__(self, sample_rate: int = 16000, extract_child_only: bool = True):
         """
         Initialize the acoustic audio feature extractor.
         
         Args:
             sample_rate: Target sample rate for audio processing
+            extract_child_only: If True, extract only child speech segments from audio
         """
         super().__init__()
         self.sample_rate = sample_rate
+        self.extract_child_only = extract_child_only
+        self.child_audio_extractor = ChildAudioExtractor() if extract_child_only else None
         
         if not LIBROSA_AVAILABLE:
             logger.warning("Librosa not available - acoustic features will be limited")
         
-        logger.info("AcousticAudioFeatures initialized")
+        logger.info(f"AcousticAudioFeatures initialized (child_only={extract_child_only})")
     
     def extract(
         self,
@@ -153,6 +157,9 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
         """
         Extract acoustic/prosodic features from audio.
         
+        If extract_child_only is True, this will extract only child speech segments
+        from the audio before analyzing acoustic features.
+        
         Args:
             transcript: Parsed transcript data
             audio_path: Path to audio file for direct analysis
@@ -163,14 +170,44 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             FeatureResult with acoustic/prosodic features
         """
         features = {}
+        child_audio_extracted = False
+        temp_audio_path = None
         
         logger.debug(f"Extracting acoustic features for {transcript.participant_id}")
         
         # If audio file provided, extract real features
         if audio_path and LIBROSA_AVAILABLE:
             try:
+                # Extract child-only audio if enabled
+                if self.extract_child_only and self.child_audio_extractor:
+                    logger.debug("Extracting child-only audio segments...")
+                    child_audio_path = self.child_audio_extractor.extract_child_audio(
+                        audio_path=Path(audio_path),
+                        transcript=transcript,
+                        transcription_result=transcription_result
+                    )
+                    
+                    if child_audio_path and child_audio_path != Path(audio_path):
+                        # Successfully extracted child audio
+                        audio_path = child_audio_path
+                        child_audio_extracted = True
+                        temp_audio_path = child_audio_path
+                        logger.debug(f"Using child-only audio: {child_audio_path.name}")
+                    else:
+                        logger.debug("Using full audio (child extraction not possible)")
+                
+                # Extract features from audio (child-only or full)
                 audio_features = self._extract_from_audio_file(audio_path)
                 features.update(audio_features)
+                
+                # Clean up temporary child audio file
+                if temp_audio_path and temp_audio_path.exists():
+                    try:
+                        temp_audio_path.unlink()
+                        logger.debug(f"Cleaned up temporary file: {temp_audio_path.name}")
+                    except Exception as e:
+                        logger.warning(f"Could not delete temp file: {e}")
+                
             except Exception as e:
                 logger.error(f"Error extracting from audio file: {e}")
                 # Fall back to default features
@@ -186,6 +223,7 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             feature_type='acoustic_audio',
             metadata={
                 'has_audio': audio_path is not None,
+                'child_audio_extracted': child_audio_extracted,
                 'librosa_available': LIBROSA_AVAILABLE,
                 'sample_rate': self.sample_rate,
             }

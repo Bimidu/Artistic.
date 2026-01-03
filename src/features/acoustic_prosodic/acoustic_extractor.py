@@ -34,11 +34,19 @@ class AcousticFeatureExtractor:
     Provides compatibility interface for API usage.
     """
     
-    def __init__(self):
-        """Initialize acoustic feature extractor."""
-        self.audio_feature_extractor = AcousticAudioFeatures()
+    def __init__(self, extract_child_only: bool = True):
+        """
+        Initialize acoustic feature extractor.
+        
+        Args:
+            extract_child_only: If True, extract only child speech from audio
+        """
+        self.audio_feature_extractor = AcousticAudioFeatures(extract_child_only=extract_child_only)
         self.feature_names = self.audio_feature_extractor.feature_names
-        logger.info(f"AcousticFeatureExtractor initialized with {len(self.feature_names)} features")
+        logger.info(
+            f"AcousticFeatureExtractor initialized with {len(self.feature_names)} features "
+            f"(child_only={extract_child_only})"
+        )
     
     def extract_from_audio(self, audio_path: Path) -> Dict[str, float]:
         """

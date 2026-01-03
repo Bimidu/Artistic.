@@ -19,8 +19,9 @@ Author: Implementation based on pragmatic features pattern
 
 from .audio_features import AcousticAudioFeatures
 from .acoustic_extractor import AcousticFeatureExtractor
+from .child_audio_extractor import ChildAudioExtractor
 
-__all__ = ["AcousticAudioFeatures", "AcousticFeatureExtractor"]
+__all__ = ["AcousticAudioFeatures", "AcousticFeatureExtractor", "ChildAudioExtractor"]
 
 __version__ = "2.0.0"
 __status__ = "implemented"

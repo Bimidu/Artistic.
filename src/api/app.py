@@ -1183,8 +1183,9 @@ async def list_features():
                     "includes_audio": True
                 },
                 "acoustic_prosodic": {
-                    "status": "placeholder",
-                    "description": "Acoustic and prosodic features from audio (Team Member A)"
+                    "status": "implemented",
+                    "description": "Acoustic and prosodic features from audio (child-only extraction)",
+                    "includes_audio": True
                 },
                 "syntactic_semantic": {
                     "status": "placeholder", 
@@ -1305,9 +1306,12 @@ async def list_components():
             },
             "acoustic_prosodic": {
                 "name": "Acoustic & Prosodic",
-                "status": "placeholder",
-                "team": "Team Member A",
-                "audio_support": True
+                "status": "implemented",
+                "features": {
+                    "acoustic_audio": 60
+                },
+                "audio_support": True,
+                "child_only_extraction": True
             },
             "syntactic_semantic": {
                 "name": "Syntactic & Semantic",

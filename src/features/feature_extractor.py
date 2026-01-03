@@ -276,11 +276,12 @@ class FeatureExtractor:
         if 'acoustic_audio' in self.active_categories or 'acoustic_prosodic' in self.active_categories:
             if AcousticAudioFeatures is not None:
                 # Use 'acoustic_audio' as the key for consistency
-                self.extractors['acoustic_audio'] = AcousticAudioFeatures()
+                # extract_child_only=True to extract only child speech segments
+                self.extractors['acoustic_audio'] = AcousticAudioFeatures(extract_child_only=True)
                 # Also map 'acoustic_prosodic' to the same extractor for API compatibility
                 if 'acoustic_prosodic' in self.active_categories:
                     self.extractors['acoustic_prosodic'] = self.extractors['acoustic_audio']
-                logger.debug("Initialized AcousticAudioFeatures")
+                logger.debug("Initialized AcousticAudioFeatures (child-only extraction enabled)")
             else:
                 logger.warning("AcousticAudioFeatures not available")
         
