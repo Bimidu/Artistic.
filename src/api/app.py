@@ -69,10 +69,49 @@ model_fusion = ModelFusion(method='weighted')
 
 
 def get_input_handler():
-    """Lazy-load input handler."""
+    """Lazy-load input handler with smart backend selection."""
     global input_handler
     if input_handler is None:
-        input_handler = InputHandler()
+        import platform
+        is_macos = platform.system() == 'Darwin'
+        
+        # Use faster-whisper on macOS to avoid PyTorch crashes
+        # On other platforms, try faster-whisper first, fallback to whisper
+        if is_macos:
+            logger.info("macOS detected: Using faster-whisper for audio transcription (avoids PyTorch crashes)")
+            backend = 'faster-whisper'
+        else:
+            backend = 'faster-whisper'  # Prefer faster-whisper everywhere
+        
+        try:
+            input_handler = InputHandler(
+                transcriber_backend=backend,
+                whisper_model_size='tiny',  # Use tiny for faster loading
+                device='cpu',
+                language='en'
+            )
+        except Exception as e:
+            logger.warning(f"Failed to initialize {backend}, trying fallback backends: {e}")
+            # Try fallback backends
+            for fallback_backend in ['google', 'vosk']:
+                try:
+                    logger.info(f"Trying {fallback_backend} as fallback...")
+                    input_handler = InputHandler(
+                        transcriber_backend=fallback_backend,
+                        language='en'
+                    )
+                    logger.info(f"✓ Initialized with {fallback_backend}")
+                    break
+                except Exception as fallback_error:
+                    logger.debug(f"{fallback_backend} failed: {fallback_error}")
+                    continue
+            
+            if input_handler is None:
+                logger.error("All transcription backends failed!")
+                raise RuntimeError(
+                    "Could not initialize any transcription backend. "
+                    "Install faster-whisper: pip install faster-whisper"
+                )
     return input_handler
 
 
@@ -685,40 +724,41 @@ async def list_datasets():
     """
     List ALL datasets for ALL modules.
     Backend is component-agnostic.
+    Only top-level directories in data_dir are treated as datasets.
+    Files are searched recursively within each dataset directory.
     """
     data_dir = config.paths.data_dir
     datasets = []
 
-    for root in data_dir.iterdir():
-        if not root.is_dir():
+    for dataset_dir in data_dir.iterdir():
+        if not dataset_dir.is_dir():
             continue
 
-        # Scan root and subfolders
-        for item in [root] + [p for p in root.rglob("*") if p.is_dir()]:
-            cha_files = list(item.rglob("*.cha"))
-            wav_files = list(item.rglob("*.wav"))
+        # Search recursively for files within this dataset directory
+        cha_files = list(dataset_dir.rglob("*.cha"))
+        wav_files = list(dataset_dir.rglob("*.wav"))
 
-            supported_components = []
+        supported_components = []
 
-            if cha_files:
-                supported_components.extend([
-                    "pragmatic_conversational",
-                    "syntactic_semantic"
-                ])
+        if cha_files:
+            supported_components.extend([
+                "pragmatic_conversational",
+                "syntactic_semantic"
+            ])
 
-            if wav_files:
-                supported_components.append("acoustic_prosodic")
+        if wav_files:
+            supported_components.append("acoustic_prosodic")
 
-            if not supported_components:
-                continue
+        if not supported_components:
+            continue
 
-            datasets.append({
-                "name": item.relative_to(data_dir).as_posix(),
-                "path": str(item),
-                "chat_files": len(cha_files),
-                "audio_files": len(wav_files),
-                "supported_components": supported_components
-            })
+        datasets.append({
+            "name": dataset_dir.name,
+            "path": str(dataset_dir),
+            "chat_files": len(cha_files),
+            "audio_files": len(wav_files),
+            "supported_components": supported_components
+        })
 
     return {
         "data_directory": str(data_dir),
