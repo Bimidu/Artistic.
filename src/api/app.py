@@ -800,11 +800,15 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
     output_path = config.paths.output_dir / request.output_filename
     combined_df.to_csv(output_path, index=False)
     
+    # Count actual features in the dataframe (exclude metadata columns)
+    metadata_cols = ['participant_id', 'file_path', 'diagnosis', 'age_months', 'dataset']
+    actual_feature_cols = [col for col in combined_df.columns if col not in metadata_cols]
+    
     return {
         'status': 'success',
         'output_file': str(output_path),
         'total_samples': len(combined_df),
-        'features_count': len(feature_extractor.all_feature_names),
+        'features_count': len(actual_feature_cols),  # ← FIXED: Count actual features
         'datasets_processed': len(all_dfs)
     }
 
