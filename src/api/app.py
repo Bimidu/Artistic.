@@ -721,49 +721,40 @@ async def predict_from_transcript(
 
 @app.get("/training/datasets", tags=["Training Mode"])
 async def list_datasets():
-    """
-    List ALL datasets for ALL modules.
-    Backend is component-agnostic.
-    Only top-level directories in data_dir are treated as datasets.
-    Files are searched recursively within each dataset directory.
-    """
+    """List available dataset folders for training."""
+
     data_dir = config.paths.data_dir
     datasets = []
 
-    for dataset_dir in data_dir.iterdir():
-        if not dataset_dir.is_dir():
+    allowed_names = set(config.datasets.datasets)
+    allowed_prefixes = ("asdbank", "td", "child")
+
+    for item in data_dir.iterdir():
+        if not item.is_dir():
             continue
 
-        # Search recursively for files within this dataset directory
-        cha_files = list(dataset_dir.rglob("*.cha"))
-        wav_files = list(dataset_dir.rglob("*.wav"))
+        name_matches = (
+            item.name in allowed_names
+            or any(item.name.startswith(prefix) for prefix in allowed_prefixes)
+        )
 
-        supported_components = []
-
-        if cha_files:
-            supported_components.extend([
-                "pragmatic_conversational",
-                "syntactic_semantic"
-            ])
-
-        if wav_files:
-            supported_components.append("acoustic_prosodic")
-
-        if not supported_components:
+        if not name_matches:
             continue
+
+        cha_files = list(item.rglob("*.cha"))
+        wav_files = list(item.rglob("*.wav"))
 
         datasets.append({
-            "name": dataset_dir.name,
-            "path": str(dataset_dir),
+            "name": item.name,
+            "path": str(item),
             "chat_files": len(cha_files),
             "audio_files": len(wav_files),
-            "supported_components": supported_components
         })
 
     return {
         "data_directory": str(data_dir),
         "datasets": datasets,
-        "total_datasets": len(datasets)
+        "total_datasets": len(datasets),
     }
 
 

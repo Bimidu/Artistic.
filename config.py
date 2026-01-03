@@ -117,7 +117,9 @@ class DatasetConfig:
         "asdbank_flusberg",
         "asdbank_nadig",
         "asdbank_quigley_mcnalley",
-        "asdbank_rollins"
+        "asdbank_rollins",
+        "typical_dev",
+        "asdbank_child_only"
     ])
     
     # Standardize diagnosis labels across datasets
