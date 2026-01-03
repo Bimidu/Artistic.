@@ -20,7 +20,7 @@ from typing import Dict, Any, Optional
 from pathlib import Path
 
 from src.utils.logger import get_logger
-from src.parsers.chat_parser import TranscriptData
+from src.parsers.chat_parser import TranscriptData, CHATParser
 from .audio_features import AcousticAudioFeatures
 
 logger = get_logger(__name__)
@@ -34,11 +34,20 @@ class AcousticFeatureExtractor:
     Provides compatibility interface for API usage.
     """
     
-    def __init__(self):
-        """Initialize acoustic feature extractor."""
-        self.audio_feature_extractor = AcousticAudioFeatures()
+    def __init__(self, extract_child_only: bool = True):
+        """
+        Initialize acoustic feature extractor.
+        
+        Args:
+            extract_child_only: If True, extract only child speech from audio
+        """
+        self.audio_feature_extractor = AcousticAudioFeatures(extract_child_only=extract_child_only)
+        self.parser = CHATParser()
         self.feature_names = self.audio_feature_extractor.feature_names
-        logger.info(f"AcousticFeatureExtractor initialized with {len(self.feature_names)} features")
+        logger.info(
+            f"AcousticFeatureExtractor initialized with {len(self.feature_names)} features "
+            f"(child_only={extract_child_only})"
+        )
     
     def extract_from_audio(self, audio_path: Path) -> Dict[str, float]:
         """
@@ -139,16 +148,35 @@ class AcousticFeatureExtractor:
         data = []
         for audio_file in audio_files:
             try:
-                features = self.extract_from_audio(audio_file)
+                # Try to find corresponding transcript file
+                transcript = None
+                cha_file = audio_file.with_suffix('.cha')
                 
-                # Try to infer diagnosis from directory structure or filename
-                path_str = str(audio_file).upper()
-                if '/ASD/' in path_str or '_ASD_' in path_str or '\\ASD\\' in path_str:
-                    features['diagnosis'] = 'ASD'
-                elif '/TD/' in path_str or '/TYP/' in path_str or '_TD_' in path_str or '\\TD\\' in path_str or '\\TYP\\' in path_str:
-                    features['diagnosis'] = 'TD'
+                if cha_file.exists():
+                    try:
+                        transcript = self.parser.parse_file(cha_file)
+                        logger.debug(f"Found transcript for {audio_file.name}")
+                    except Exception as e:
+                        logger.warning(f"Could not parse transcript {cha_file.name}: {e}")
+                
+                # Extract features (with transcript if available)
+                if transcript:
+                    features = self.extract_from_transcript(transcript)
                 else:
-                    features['diagnosis'] = None
+                    features = self.extract_from_audio(audio_file)
+                
+                # Try to infer diagnosis from transcript first, then path
+                if transcript and transcript.diagnosis:
+                    features['diagnosis'] = transcript.diagnosis
+                else:
+                    # Try to infer from directory structure or filename
+                    path_str = str(audio_file).upper()
+                    if '/ASD/' in path_str or '_ASD_' in path_str or '\\ASD\\' in path_str:
+                        features['diagnosis'] = 'ASD'
+                    elif '/TD/' in path_str or '/TYP/' in path_str or '_TD_' in path_str or '\\TD\\' in path_str or '\\TYP\\' in path_str:
+                        features['diagnosis'] = 'TD'
+                    else:
+                        features['diagnosis'] = None
                 
                 features['file_path'] = str(audio_file)
                 features['participant_id'] = audio_file.stem
