@@ -1,22 +1,22 @@
 {
-  "model_name": "syntactic_semantic_random_forest",
-  "model_type": "random_forest",
+  "model_name": "syntactic_semantic_adaboost",
+  "model_type": "adaboost",
   "version": "1.0.0",
-  "created_at": "2026-01-03T22:44:59.160756",
-  "accuracy": 0.4782608695652174,
-  "f1_score": 0.4702341137123746,
-  "precision": 0.475149723885821,
-  "recall": 0.4782608695652174,
-  "roc_auc": 0.5268907563025209,
-  "matthews_corr": -0.048550493031134526,
+  "created_at": "2026-01-03T22:44:59.343139",
+  "accuracy": 0.4927536231884058,
+  "f1_score": 0.49254036004911145,
+  "precision": 0.4925340360122969,
+  "recall": 0.4927536231884058,
+  "roc_auc": 0.47647058823529415,
+  "matthews_corr": -0.01513877743160783,
   "confusion_matrix": [
     [
-      21,
-      14
+      18,
+      17
     ],
     [
-      22,
-      12
+      18,
+      16
     ]
   ],
   "feature_names": [
@@ -35,5 +35,5 @@
   "hyperparameters": {},
   "training_samples": 388,
   "component": "syntactic_semantic",
-  "description": "syntactic_semantic component - random_forest"
+  "description": "syntactic_semantic component - adaboost"
 }

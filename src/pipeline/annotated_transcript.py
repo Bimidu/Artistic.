@@ -57,6 +57,14 @@ class AnnotationType(Enum):
     FILLED_PAUSE = "filled_pause"
     DISCOURSE_MARKER = "discourse_marker"
     
+    # Syntactic Semantic features
+    COMPLEX_SYNTAX = "complex_syntax"
+    DEEP_DEPENDENCY = "deep_dependency"
+    GRAMMATICAL_ERROR = "grammatical_error"
+    TENSE_INCONSISTENCY = "tense_inconsistency"
+    RICH_VOCABULARY = "rich_vocabulary"
+    SEMANTIC_COHERENCE = "semantic_coherence"
+    
     # General
     FEATURE_REGION = "feature_region"
 
@@ -127,6 +135,14 @@ ANNOTATION_COLORS = {
     AnnotationType.SIMPLE_SENTENCE: "#E1BEE7",
     AnnotationType.FILLED_PAUSE: "#7B1FA2",
     AnnotationType.DISCOURSE_MARKER: "#AB47BC",
+    
+    # Syntactic Semantic (deep purples/violets)
+    AnnotationType.COMPLEX_SYNTAX: "#6A1B9A",
+    AnnotationType.DEEP_DEPENDENCY: "#4A148C",
+    AnnotationType.GRAMMATICAL_ERROR: "#D32F2F",
+    AnnotationType.TENSE_INCONSISTENCY: "#F57C00",
+    AnnotationType.RICH_VOCABULARY: "#1976D2",
+    AnnotationType.SEMANTIC_COHERENCE: "#388E3C",
     
     # General
     AnnotationType.FEATURE_REGION: "#607D8B",

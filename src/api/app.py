@@ -63,9 +63,19 @@ app.add_middleware(
 model_registry = ModelRegistry()
 chat_parser = CHATParser()
 feature_extractor = FeatureExtractor(categories='pragmatic_conversational')
+syntactic_semantic_extractor = None  # Lazy-loaded
 input_handler = None  # Lazy-loaded due to heavy model loading
 transcript_annotator = TranscriptAnnotator()
 model_fusion = ModelFusion(method='weighted')
+
+
+def get_syntactic_semantic_extractor():
+    """Lazy-load syntactic semantic feature extractor."""
+    global syntactic_semantic_extractor
+    if syntactic_semantic_extractor is None:
+        from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+        syntactic_semantic_extractor = SyntacticSemanticFeatures()
+    return syntactic_semantic_extractor
 
 
 def get_input_handler():
@@ -217,10 +227,20 @@ def preprocess_with_dict(df: pd.DataFrame, preprocessor_dict: Dict) -> pd.DataFr
         # Scale features
         scaler = preprocessor_dict.get('scaler')
         if scaler:
-            # Fix logger if it's None (can happen after unpickling)
-            if not hasattr(scaler, 'logger') or scaler.logger is None:
-                scaler.logger = logger
-            df_selected = scaler.transform(df_selected, feature_columns=selected_features)
+            # Check if it's a custom scaler or standard sklearn scaler
+            if hasattr(scaler, 'logger'):
+                # Custom scaler with logger
+                if scaler.logger is None:
+                    scaler.logger = logger
+                df_selected = scaler.transform(df_selected, feature_columns=selected_features)
+            else:
+                # Standard sklearn scaler (e.g., StandardScaler)
+                scaled_values = scaler.transform(df_selected)
+                df_selected = pd.DataFrame(
+                    scaled_values,
+                    columns=selected_features,
+                    index=df_selected.index
+                )
         
         logger.info(f"Preprocessed to {len(selected_features)} selected features")
         return df_selected
@@ -462,9 +482,9 @@ async def predict_from_text(request: TextPredictionRequest):
     """
     Predict ASD from text input.
     
-    Analyzes the provided text and returns prediction with annotations.
+    Analyzes the provided text using SYNTACTIC SEMANTIC features and returns prediction.
     """
-    logger.info("Text prediction request")
+    logger.info("Text prediction request (using syntactic semantic features)")
     
     try:
         # Process text
@@ -474,12 +494,13 @@ async def predict_from_text(request: TextPredictionRequest):
             participant_id=request.participant_id
         )
         
-        # Extract features
-        feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
-        features_df = pd.DataFrame([feature_set.features])
+        # Extract SYNTACTIC SEMANTIC features
+        extractor = get_syntactic_semantic_extractor()
+        feature_result = extractor.extract(processed.transcript_data)
+        features_df = pd.DataFrame([feature_result.features])
         
-        # Get model and make prediction
-        model, preprocessor, model_name = get_model_and_preprocessor()
+        # Get best SYNTACTIC SEMANTIC model
+        model, preprocessor, model_name = get_model_and_preprocessor(component='syntactic_semantic')
         
         if preprocessor is not None:
             if isinstance(preprocessor, dict):
@@ -489,18 +510,19 @@ async def predict_from_text(request: TextPredictionRequest):
         
         result = make_prediction(model, features_df, model_name)
         
-        # Generate annotated transcript
+        # Generate annotated transcript (using pragmatic annotator for now)
         annotated = transcript_annotator.annotate(
             processed.transcript_data,
-            features=feature_set.features
+            features=feature_result.features
         )
         
         return {
             **result,
-            'features_extracted': len(feature_set.features),
+            'features_extracted': len(feature_result.features),
             'annotated_transcript_html': annotated.to_html(),
             'annotation_summary': annotated._get_annotation_summary(),
             'input_type': 'text',
+            'component_used': 'syntactic_semantic'  # Indicate which component was used
         }
         
     except Exception as e:
@@ -546,19 +568,16 @@ async def predict_from_transcript(
             component_predictions = []
             
             # Try each component
-            for component in ['pragmatic_conversational', 'acoustic_prosodic', 'syntactic_semantic']:
+            for component in ['pragmatic_conversational', 'syntactic_semantic']:
                 try:
-                    # Select feature extractor
-                    if component == 'acoustic_prosodic':
-                        from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
-                        extractor = AcousticFeatureExtractor()
-                        features = extractor.extract_from_transcript(transcript)
-                    elif component == 'syntactic_semantic':
-                        from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
-                        extractor = SyntacticFeatureExtractor()
-                        features = extractor.extract_from_transcript(transcript)
-                    else:
-                        features = feature_extractor.extract_from_transcript(transcript).features
+                    # Select feature extractor and extract features
+                    if component == 'syntactic_semantic':
+                        extractor = get_syntactic_semantic_extractor()
+                        feature_result = extractor.extract(transcript)
+                        features = feature_result.features
+                    else:  # pragmatic_conversational
+                        feature_result = feature_extractor.extract_from_transcript(transcript)
+                        features = feature_result.features
                     
                     features_df = pd.DataFrame([features])
                     

@@ -1,22 +1,22 @@
 {
-  "model_name": "syntactic_semantic_random_forest",
-  "model_type": "random_forest",
+  "model_name": "syntactic_semantic_svm",
+  "model_type": "svm",
   "version": "1.0.0",
-  "created_at": "2026-01-03T22:44:59.160756",
+  "created_at": "2026-01-03T22:44:59.472390",
   "accuracy": 0.4782608695652174,
-  "f1_score": 0.4702341137123746,
-  "precision": 0.475149723885821,
+  "f1_score": 0.47804165144318594,
+  "precision": 0.4786268481920656,
   "recall": 0.4782608695652174,
-  "roc_auc": 0.5268907563025209,
-  "matthews_corr": -0.048550493031134526,
+  "roc_auc": 0.48067226890756304,
+  "matthews_corr": -0.04289320272288885,
   "confusion_matrix": [
     [
-      21,
-      14
+      16,
+      19
     ],
     [
-      22,
-      12
+      17,
+      17
     ]
   ],
   "feature_names": [
@@ -35,5 +35,5 @@
   "hyperparameters": {},
   "training_samples": 388,
   "component": "syntactic_semantic",
-  "description": "syntactic_semantic component - random_forest"
+  "description": "syntactic_semantic component - svm"
 }
