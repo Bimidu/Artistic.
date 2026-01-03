@@ -123,7 +123,7 @@ class FeatureExtractionRequest(BaseModel):
 
 
 class TrainingRequest(BaseModel):
-    """Request for model training with comprehensive hyperparameter control."""
+    """Request for model training."""
     dataset_paths: List[str] = Field(..., description="Paths to dataset folders")
     model_types: List[str] = Field(
         default=['random_forest', 'xgboost'],
@@ -133,8 +133,6 @@ class TrainingRequest(BaseModel):
         default='pragmatic_conversational',
         description="Component to train"
     )
-    
-    # Feature selection
     n_features: Optional[int] = Field(
         default=30,
         description="Number of features to select (None = use all)"
@@ -143,77 +141,17 @@ class TrainingRequest(BaseModel):
         default=True,
         description="Whether to perform feature selection"
     )
-    
-    # Hyperparameter tuning
-    tune_hyperparameters: bool = Field(
-        default=False,
-        description="Enable hyperparameter tuning via grid search"
+    test_size: float = Field(
+        default=0.2,
+        description="Fraction of data for test set (0.1 to 0.4)"
     )
-    cv_folds: Optional[int] = Field(
-        default=5,
-        description="Number of cross-validation folds for tuning"
-    )
-    
-    # Common hyperparameters (applicable to multiple models)
-    learning_rate: Optional[float] = Field(
-        default=None,
-        description="Learning rate for gradient boosting models (XGBoost, LightGBM, AdaBoost)"
-    )
-    n_estimators: Optional[int] = Field(
-        default=None,
-        description="Number of estimators/trees for ensemble models"
-    )
-    max_depth: Optional[int] = Field(
-        default=None,
-        description="Maximum depth of trees for tree-based models"
-    )
-    min_samples_split: Optional[int] = Field(
-        default=None,
-        description="Minimum samples required to split a node (Random Forest, Extra Trees)"
-    )
-    min_samples_leaf: Optional[int] = Field(
-        default=None,
-        description="Minimum samples required at a leaf node (Random Forest, Extra Trees)"
-    )
-    
-    # XGBoost/LightGBM specific
-    subsample: Optional[float] = Field(
-        default=None,
-        description="Subsample ratio of training instances (0.0-1.0)"
-    )
-    colsample_bytree: Optional[float] = Field(
-        default=None,
-        description="Subsample ratio of columns when constructing each tree (0.0-1.0)"
-    )
-    
-    # Regularization
-    reg_alpha: Optional[float] = Field(
-        default=None,
-        description="L1 regularization term (XGBoost, LightGBM)"
-    )
-    reg_lambda: Optional[float] = Field(
-        default=None,
-        description="L2 regularization term (XGBoost, LightGBM)"
-    )
-    
-    # SVM specific
-    svm_c: Optional[float] = Field(
-        default=None,
-        description="Regularization parameter C for SVM"
-    )
-    svm_kernel: Optional[str] = Field(
-        default=None,
-        description="Kernel type for SVM (linear, rbf, poly, sigmoid)"
-    )
-    svm_gamma: Optional[str] = Field(
-        default=None,
-        description="Kernel coefficient for SVM (scale, auto, or float)"
-    )
-    
-    # General
-    random_state: Optional[int] = Field(
+    random_state: int = Field(
         default=42,
-        description="Random state for reproducibility"
+        description="Random seed for reproducibility"
+    )
+    custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None,
+        description="Custom hyperparameters for each model type"
     )
 
 
@@ -854,35 +792,8 @@ training_state = {
 }
 
 
-def run_training_task(
-    dataset_paths: List[str], 
-    model_types: List[str], 
-    component: str, 
-    n_features: int = 30, 
-    feature_selection: bool = True,
-    # Hyperparameter tuning
-    tune_hyperparameters: bool = False,
-    cv_folds: int = 5,
-    # Common hyperparameters
-    learning_rate: float = None,
-    n_estimators: int = None,
-    max_depth: int = None,
-    min_samples_split: int = None,
-    min_samples_leaf: int = None,
-    # XGBoost/LightGBM specific
-    subsample: float = None,
-    colsample_bytree: float = None,
-    # Regularization
-    reg_alpha: float = None,
-    reg_lambda: float = None,
-    # SVM specific
-    svm_c: float = None,
-    svm_kernel: str = None,
-    svm_gamma: str = None,
-    # General
-    random_state: int = 42
-):
-    """Background task for model training with custom hyperparameters."""
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None):
+    """Background task for model training."""
     global training_state
     
     try:
@@ -895,7 +806,7 @@ def run_training_task(
         training_state['results'] = {}
         training_state['error'] = None
         
-        logger.info(f"Starting training: component={component}, models={model_types}, n_features={n_features}, feature_selection={feature_selection}, tune_hyperparameters={tune_hyperparameters}, cv_folds={cv_folds}, learning_rate={learning_rate}, n_estimators={n_estimators}, max_depth={max_depth}, random_state={random_state}")
+        logger.info(f"Starting training: component={component}, models={model_types}, n_features={n_features}, feature_selection={feature_selection}")
         
         # Select appropriate feature extractor based on component
         if component == 'acoustic_prosodic':
@@ -984,8 +895,8 @@ def run_training_task(
         from src.preprocessing import DataPreprocessor
         preprocessor = DataPreprocessor(
             target_column='diagnosis',
-            test_size=0.2,
-            random_state=42,
+            test_size=test_size,
+            random_state=random_state,
             feature_selection=feature_selection,
             n_features=n_features if n_features else 218  # Use all if None
         )
@@ -1026,51 +937,16 @@ def run_training_task(
             
             logger.info(f"Training model: {model_type}")
             
-            # Build custom hyperparameters dict from request
-            custom_params = {}
-            if learning_rate is not None:
-                custom_params['learning_rate'] = learning_rate
-            if n_estimators is not None:
-                custom_params['n_estimators'] = n_estimators
-            if max_depth is not None:
-                custom_params['max_depth'] = max_depth
-            if min_samples_split is not None:
-                custom_params['min_samples_split'] = min_samples_split
-            if min_samples_leaf is not None:
-                custom_params['min_samples_leaf'] = min_samples_leaf
-            if subsample is not None:
-                custom_params['subsample'] = subsample
-            if colsample_bytree is not None:
-                custom_params['colsample_bytree'] = colsample_bytree
-            if reg_alpha is not None:
-                custom_params['reg_alpha'] = reg_alpha
-            if reg_lambda is not None:
-                custom_params['reg_lambda'] = reg_lambda
-            if random_state is not None:
-                custom_params['random_state'] = random_state
-            
-            # SVM-specific parameters
-            if model_type == 'svm':
-                if svm_c is not None:
-                    custom_params['C'] = svm_c
-                if svm_kernel is not None:
-                    custom_params['kernel'] = svm_kernel
-                if svm_gamma is not None:
-                    custom_params['gamma'] = svm_gamma
-            
-            # CatBoost uses 'iterations' instead of 'n_estimators' and 'depth' instead of 'max_depth'
-            if model_type == 'catboost':
-                if n_estimators is not None:
-                    custom_params['iterations'] = custom_params.pop('n_estimators', n_estimators)
-                if max_depth is not None:
-                    custom_params['depth'] = custom_params.pop('max_depth', max_depth)
+            # Get custom hyperparameters if provided
+            hyperparams = {}
+            if custom_hyperparameters and model_type in custom_hyperparameters:
+                hyperparams = custom_hyperparameters[model_type]
+                logger.info(f"Using custom hyperparameters for {model_type}: {hyperparams}")
             
             config_obj = ModelConfig(
                 model_type=model_type,
-                hyperparameters=custom_params,
-                tune_hyperparameters=tune_hyperparameters,
-                cv_folds=cv_folds,
-                random_state=random_state
+                hyperparameters=hyperparams,
+                tune_hyperparameters=False
             )
             
             model = trainer.train_model(X_train, y_train, config_obj)
@@ -1105,10 +981,16 @@ def run_training_task(
                 model_type=model_type,
                 accuracy=float(report.accuracy),
                 f1_score=float(report.f1_score),
+                precision=float(report.precision),
+                recall=float(report.recall),
+                roc_auc=float(report.roc_auc) if report.roc_auc is not None else None,
+                matthews_corr=float(report.matthews_corr),
+                confusion_matrix=report.confusion_matrix.tolist() if len(report.confusion_matrix) > 0 else [],
                 n_features=len(preprocessor.selected_features_),
                 training_samples=len(X_train),
                 feature_names=preprocessor.selected_features_,
-                description=f"{component} component - {model_type}"
+                description=f"{component} component - {model_type}",
+                component=component
             )
             
             model_registry.register_model(model, metadata, preprocessor=preprocessor_dict)
@@ -1161,27 +1043,9 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         request.component,
         request.n_features,
         request.feature_selection,
-        # Hyperparameter tuning
-        request.tune_hyperparameters,
-        request.cv_folds,
-        # Common hyperparameters
-        request.learning_rate,
-        request.n_estimators,
-        request.max_depth,
-        request.min_samples_split,
-        request.min_samples_leaf,
-        # XGBoost/LightGBM specific
-        request.subsample,
-        request.colsample_bytree,
-        # Regularization
-        request.reg_alpha,
-        request.reg_lambda,
-        # SVM specific
-        request.svm_c,
-        request.svm_kernel,
-        request.svm_gamma,
-        # General
-        request.random_state
+        request.test_size,
+        request.random_state,
+        request.custom_hyperparameters
     )
     
     return {
@@ -1320,9 +1184,15 @@ async def list_models():
                     'type': metadata.model_type,
                     'accuracy': metadata.accuracy,
                     'f1_score': metadata.f1_score,
+                    'precision': metadata.precision,
+                    'recall': metadata.recall,
+                    'roc_auc': metadata.roc_auc,
+                    'matthews_corr': metadata.matthews_corr,
+                    'confusion_matrix': metadata.confusion_matrix,
                     'version': metadata.version,
                     'n_features': metadata.n_features,
                     'training_samples': metadata.training_samples,
+                    'component': metadata.component,
                     'created_at': metadata.created_at,
                 })
             except:

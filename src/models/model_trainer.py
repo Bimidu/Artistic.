@@ -24,20 +24,13 @@ from pathlib import Path
 import joblib
 
 # ML models
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier, ExtraTreesClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
-
-try:
-    from catboost import CatBoostClassifier
-    CATBOOST_AVAILABLE = True
-except ImportError:
-    CATBOOST_AVAILABLE = False
-    logger.warning("CatBoost not available. Install with: pip install catboost")
 
 from src.utils.logger import get_logger
 from src.utils.helpers import timing_decorator
@@ -64,8 +57,7 @@ class ModelConfig:
     """
     model_type: Literal[
         'random_forest', 'xgboost', 'lightgbm', 'svm',
-        'logistic', 'mlp', 'gradient_boosting', 'adaboost',
-        'extra_trees', 'catboost'
+        'logistic', 'mlp', 'gradient_boosting', 'adaboost'
     ]
     hyperparameters: Dict[str, Any] = field(default_factory=dict)
     tune_hyperparameters: bool = False
@@ -140,21 +132,6 @@ class ModelTrainer:
             'learning_rate': 1.0,
             'random_state': 42,
         },
-        'extra_trees': {
-            'n_estimators': 100,
-            'max_depth': 10,
-            'min_samples_split': 5,
-            'min_samples_leaf': 2,
-            'random_state': 42,
-            'n_jobs': -1,
-        },
-        'catboost': {
-            'iterations': 100,
-            'learning_rate': 0.1,
-            'depth': 6,
-            'random_state': 42,
-            'verbose': False,
-        },
     }
     
     # Hyperparameter search spaces for tuning
@@ -199,21 +176,6 @@ class ModelTrainer:
             'learning_rate': [0.01, 0.1, 0.3],
             'max_depth': [3, 5, 7],
             'min_samples_split': [2, 5, 10],
-        },
-        'adaboost': {
-            'n_estimators': [50, 100, 200],
-            'learning_rate': [0.5, 1.0, 1.5],
-        },
-        'extra_trees': {
-            'n_estimators': [50, 100, 200],
-            'max_depth': [5, 10, 15, None],
-            'min_samples_split': [2, 5, 10],
-            'min_samples_leaf': [1, 2, 4],
-        },
-        'catboost': {
-            'iterations': [50, 100, 200],
-            'learning_rate': [0.01, 0.1, 0.3],
-            'depth': [4, 6, 8],
         },
     }
     
@@ -261,12 +223,6 @@ class ModelTrainer:
             return GradientBoostingClassifier(**params)
         elif config.model_type == 'adaboost':
             return AdaBoostClassifier(**params)
-        elif config.model_type == 'extra_trees':
-            return ExtraTreesClassifier(**params)
-        elif config.model_type == 'catboost':
-            if not CATBOOST_AVAILABLE:
-                raise ValueError("CatBoost is not installed. Install with: pip install catboost")
-            return CatBoostClassifier(**params)
         else:
             raise ValueError(f"Unknown model type: {config.model_type}")
     

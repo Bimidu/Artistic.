@@ -2,9 +2,23 @@
   "model_name": "pragmatic_conversational_lightgbm",
   "model_type": "lightgbm",
   "version": "1.0.0",
-  "created_at": "2026-01-01T23:46:16.669831",
-  "accuracy": 0.8064516129032258,
-  "f1_score": 0.8015552995391705,
+  "created_at": "2026-01-03T10:11:53.410212",
+  "accuracy": 0.9019607843137255,
+  "f1_score": 0.9059332824038707,
+  "precision": 0.9171776818835643,
+  "recall": 0.9019607843137255,
+  "roc_auc": 0.9568181818181819,
+  "matthews_corr": 0.7456907911827503,
+  "confusion_matrix": [
+    [
+      10,
+      1
+    ],
+    [
+      4,
+      36
+    ]
+  ],
   "feature_names": [
     "total_turns",
     "child_turns",
@@ -223,6 +237,7 @@
   ],
   "n_features": 214,
   "hyperparameters": {},
-  "training_samples": 247,
+  "training_samples": 202,
+  "component": "pragmatic_conversational",
   "description": "pragmatic_conversational component - lightgbm"
 }

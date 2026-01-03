@@ -127,20 +127,42 @@ class RepairDetectionFeatures(BaseFeatureExtractor):
         self._initialize_nlp()
     
     def _initialize_nlp(self):
-        """Initialize spaCy for semantic analysis of repair effectiveness."""
+        """Initialize spaCy for semantic analysis of repair effectiveness.
+        
+        Tries models in order of preference:
+        1. en_core_web_lg (large, 300D vectors, best quality)
+        2. en_core_web_md (medium, 300D vectors, good quality)
+        3. en_core_web_sm (small, no vectors, fallback only)
+        """
         if not SPACY_AVAILABLE:
             return
         
-        try:
-            self._nlp = spacy.load("en_core_web_md")
-            logger.info("Loaded spaCy model for repair effectiveness analysis")
-        except OSError:
+        # Try models in order: lg (best) -> md (good) -> sm (fallback)
+        model_preferences = ["en_core_web_lg", "en_core_web_md", "en_core_web_sm"]
+        
+        for model_name in model_preferences:
             try:
-                self._nlp = spacy.load("en_core_web_sm")
-                logger.info("Loaded spaCy en_core_web_sm (limited semantic analysis)")
+                self._nlp = spacy.load(model_name)
+                has_vectors = self._nlp.vocab.vectors.size > 0
+                
+                if model_name == "en_core_web_lg":
+                    logger.info(f"Loaded spaCy {model_name} model (large, 300D vectors) for repair effectiveness analysis")
+                elif model_name == "en_core_web_md":
+                    logger.info(f"Loaded spaCy {model_name} model (medium, 300D vectors) for repair effectiveness analysis")
+                else:
+                    if has_vectors:
+                        logger.info(f"Loaded spaCy {model_name} model for repair effectiveness analysis")
+                    else:
+                        logger.warning(f"Loaded spaCy {model_name} model (no word vectors - similarity may be limited)")
+                
+                return  # Successfully loaded, exit
+                
             except OSError:
-                logger.warning("No spaCy model available for repair analysis")
-                self._nlp = None
+                continue  # Try next model
+        
+        # If all models failed
+        logger.warning("No spaCy model available for repair analysis")
+        self._nlp = None
     
     @property
     def feature_names(self) -> List[str]:
