@@ -744,27 +744,50 @@ async def predict_from_transcript(
 
 @app.get("/training/datasets", tags=["Training Mode"])
 async def list_datasets():
-    """List available dataset folders for training."""
+    """
+    List ALL datasets for ALL modules.
+    Backend is component-agnostic.
+    """
     data_dir = config.paths.data_dir
-    
     datasets = []
-    for item in data_dir.iterdir():
-        if item.is_dir() and item.name.startswith('asdbank'):
-            cha_files = list(item.rglob('*.cha'))
-            wav_files = list(item.rglob('*.wav'))
-            
+
+    for root in data_dir.iterdir():
+        if not root.is_dir():
+            continue
+
+        # Scan root and subfolders
+        for item in [root] + [p for p in root.rglob("*") if p.is_dir()]:
+            cha_files = list(item.rglob("*.cha"))
+            wav_files = list(item.rglob("*.wav"))
+
+            supported_components = []
+
+            if cha_files:
+                supported_components.extend([
+                    "pragmatic_conversational",
+                    "syntactic_semantic"
+                ])
+
+            if wav_files:
+                supported_components.append("acoustic_prosodic")
+
+            if not supported_components:
+                continue
+
             datasets.append({
-                'name': item.name,
-                'path': str(item),
-                'chat_files': len(cha_files),
-                'audio_files': len(wav_files),
+                "name": item.relative_to(data_dir).as_posix(),
+                "path": str(item),
+                "chat_files": len(cha_files),
+                "audio_files": len(wav_files),
+                "supported_components": supported_components
             })
-    
+
     return {
-        'data_directory': str(data_dir),
-        'datasets': datasets,
-        'total_datasets': len(datasets)
+        "data_directory": str(data_dir),
+        "datasets": datasets,
+        "total_datasets": len(datasets)
     }
+
 
 
 @app.post("/training/extract-features", tags=["Training Mode"])

@@ -71,6 +71,15 @@ class DiagnosisMapper:
             },
             'description': 'Longitudinal study: HR (high risk ASD) vs LR (low risk, TD)'
         },
+        'td': {
+            'default_diagnosis': 'TD',
+            'description': 'Typically Developing children (audio-only dataset)'
+        },
+        'asdbank_aac_childonly': {
+            'default_diagnosis': 'ASD',
+            'description': 'Child-only audio extracted from ASD Bank AAC'
+        },
+
     }
     
     def __init__(self):
@@ -141,31 +150,38 @@ class DiagnosisMapper:
             f"Could not infer diagnosis for {file_path.name} in {dataset_name}"
         )
         return None
-    
+
     def _identify_dataset(self, file_path: Path) -> Optional[str]:
         """
         Identify dataset name from file path.
-        
+
         Args:
             file_path: Path to CHAT file
-        
+
         Returns:
             Dataset name (e.g., 'asdbank_rollins') or None
         """
+        path_parts = file_path.parts
         path_str = str(file_path)
-        
+
+        if "asdbank_aac" in path_str and "child_only" in path_str:
+            return "asdbank_aac_childonly"
+
         # Look for asdbank_* directory in path
         match = re.search(r'asdbank_[a-z_]+', path_str)
         if match:
             return match.group(0)
-        
+
         # Try to identify from parent directories
         for part in file_path.parts:
             if part.startswith('asdbank_'):
                 return part
-        
+
+        if "td" in path_parts:
+            return "td"
+
         return None
-    
+
     def _normalize_diagnosis(self, diagnosis: str) -> Optional[str]:
         """
         Normalize diagnosis label to 'ASD' or 'TD'.
