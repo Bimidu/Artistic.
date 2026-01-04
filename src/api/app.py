@@ -40,6 +40,8 @@ from src.pipeline.input_handler import InputHandler, InputType
 from src.pipeline.annotated_transcript import TranscriptAnnotator
 from src.pipeline.model_fusion import ModelFusion, ComponentPrediction
 from src.utils.logger import get_logger
+from src.interpretability.counterfactuals.cf_service import generate_counterfactual
+from src.interpretability.counterfactuals.train_autoencoder import train_autoencoder
 from config import config
 
 logger = get_logger(__name__)
@@ -924,10 +926,51 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
                     features_df = preprocess_with_dict(features_df, preprocessor)
+                    selected_features = preprocessor["selected_features"]
                 else:
                     features_df = preprocessor.transform(features_df)
+                    selected_features = preprocessor.selected_features_
 
             result = make_prediction(model, features_df, used_model_name)
+
+            # ============================
+            # LOCAL SHAP
+            # ============================
+            request_id = str(uuid.uuid4())
+            local_shap_dir = Path("assets/shap/local") / request_id
+            local_shap_dir.mkdir(parents=True, exist_ok=True)
+
+            background = np.load(
+                Path("assets/shap") / model_name / "background.npy"
+            )
+
+            predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+            shap_manager = SHAPManager(
+                model=model,
+                background_data=background,
+                feature_names=list(features_df.columns),
+                model_type=model_name.split("_")[-1]
+            )
+
+            shap_manager.generate_local_waterfall(
+                X_instance=features_df.values[0],
+                save_dir=local_shap_dir,
+                predicted_class=predicted_class
+            )
+
+            # ============================
+            # COUNTERFACTUAL
+            # ============================
+            component = "_".join(model_name.split("_")[:-1])
+
+            cf_result = generate_counterfactual(
+                model=model,
+                x_instance=features_df.values[0],
+                feature_names=selected_features,
+                component=component,
+                predicted_class=predicted_class
+            )
 
             # Generate annotated transcript
             annotated = transcript_annotator.annotate(
@@ -943,65 +986,12 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                 'input_type': 'text',
                 'model_used': used_model_name,  # Explicitly state which model was used
                 'component': get_model_component(used_model_name),
+                "local_shap": {
+                    "request_id": request_id,
+                    "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
+                },
+                "counterfactual": cf_result,
             }
-        # Extract features
-        feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
-        features_df = pd.DataFrame([feature_set.features])
-
-        # Get model and make prediction
-        model, preprocessor, model_name = get_model_and_preprocessor()
-
-        if preprocessor is not None:
-            if isinstance(preprocessor, dict):
-                features_df = preprocess_with_dict(features_df, preprocessor)
-            else:
-                features_df = preprocessor.transform(features_df)
-
-        result = make_prediction(model, features_df, model_name)
-
-        # ============================
-        # 🔥 LOCAL SHAP (SAME AS TRANSCRIPT)
-        # ============================
-        request_id = str(uuid.uuid4())
-        local_shap_dir = Path("assets/shap/local") / request_id
-        local_shap_dir.mkdir(parents=True, exist_ok=True)
-
-        background = np.load(
-            Path("assets/shap") / model_name / "background.npy"
-        )
-
-        predicted_class = 1 if result["prediction"] == "ASD" else 0
-
-        shap_manager = SHAPManager(
-            model=model,
-            background_data=background,
-            feature_names=list(features_df.columns),
-            model_type=model_name.split("_")[-1]
-        )
-
-        shap_manager.generate_local_waterfall(
-            X_instance=features_df.values[0],
-            save_dir=local_shap_dir,
-            predicted_class=predicted_class
-        )
-
-        # Generate annotated transcript
-        annotated = transcript_annotator.annotate(
-            processed.transcript_data,
-            features=feature_set.features
-        )
-
-        return {
-            **result,
-            'features_extracted': len(feature_set.features),
-            'annotated_transcript_html': annotated.to_html(),
-            'annotation_summary': annotated._get_annotation_summary(),
-            'input_type': 'text',
-            "local_shap": {
-                "request_id": request_id,
-                "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
-            },
-        }
 
     except Exception as e:
         logger.error(f"Text prediction failed: {e}")
@@ -1322,7 +1312,17 @@ async def predict_from_transcript(
             except Exception as shap_error:
                 logger.warning(f"SHAP explanation not available: {shap_error}")
                 # Continue without SHAP
-            
+
+            #Generate Counterfactuals
+            component = "_".join(model_name.split("_")[:-1])
+            cf_result = generate_counterfactual(
+                model=model,
+                x_instance=features_df.values[0],
+                feature_names=selected_features,
+                component=component,
+                predicted_class=predicted_class
+            )
+
             # Generate annotated transcript
             annotated = transcript_annotator.annotate(
                 transcript,
@@ -1346,6 +1346,9 @@ async def predict_from_transcript(
             # Add SHAP data if available
             if local_shap_data:
                 response_data['local_shap'] = local_shap_data
+
+            if cf_result:
+                response_data['counterfactual'] = cf_result
 
             return response_data
 
@@ -1709,6 +1712,27 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
             preprocessor_dict['cleaner'].logger = None
         if hasattr(preprocessor_dict['scaler'], 'logger'):
             preprocessor_dict['scaler'].logger = None
+
+        # =====================================================
+        # TRAIN COUNTERFACTUAL AUTOENCODER (ONCE PER COMPONENT)
+        # =====================================================
+
+
+        ae_dir = Path("models/counterfactuals")
+        ae_dir.mkdir(parents=True, exist_ok=True)
+
+        ae_path = ae_dir / f"{component}_ae.pt"
+
+        # Train only if not already trained
+        if not ae_path.exists():
+            logger.info(f"Training counterfactual autoencoder for {component}")
+            train_autoencoder(
+                X_train.values,  # IMPORTANT: already preprocessed + feature-selected
+                component,
+                ae_dir
+            )
+        else:
+            logger.info(f"Autoencoder already exists for {component}, skipping training")
         
         # Step 3: Train models
         from src.models import ModelTrainer, ModelConfig, ModelEvaluator

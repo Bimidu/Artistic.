@@ -214,6 +214,64 @@
                     <div id="annotatedTranscript" class="bg-white rounded-2xl p-8 max-h-96 overflow-y-auto font-mono text-sm leading-loose"></div>
                 </div>
             </div>
+
+            <!-- Counterfactual Explanation -->
+            <div id="counterfactualSection" class="mt-12 hidden">
+
+                <h3 class="text-3xl font-medium text-primary-900 mb-4">
+                    What would change this prediction?
+                </h3>
+
+                <p class="text-sm text-primary-600 mb-6">
+                    This analysis shows the smallest realistic changes required to flip the
+                    model’s prediction to the opposite class.
+                </p>
+
+                <!-- Natural language what-if -->
+                <div
+                    id="whatIfBox"
+                    class="bg-primary-50 border border-primary-200 rounded-2xl p-6 mb-6 text-primary-900"
+                ></div>
+
+                <!-- Summary -->
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white rounded-2xl p-5 border border-primary-200">
+                        <p class="text-sm text-primary-600">Prediction flipped</p>
+                        <p id="cfFlipped" class="text-xl font-bold"></p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-primary-200">
+                        <p class="text-sm text-primary-600">Overall change (L2)</p>
+                        <p id="cfL2" class="text-xl font-bold"></p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-primary-200">
+                        <p class="text-sm text-primary-600">Features changed</p>
+                        <p id="cfTotal" class="text-xl font-bold"></p>
+                    </div>
+                </div>
+
+                <!-- Feature-level changes -->
+                <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                    <h4 class="text-xl font-medium text-primary-900 mb-4">
+                        Most influential feature changes
+                    </h4>
+
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b text-left">
+                                <th class="py-2">Feature</th>
+                                <th class="py-2">Original</th>
+                                <th class="py-2">Counterfactual</th>
+                                <th class="py-2">Change</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cfTableBody"></tbody>
+                    </table>
+                </div>
+
+            </div>
+
         </div>
         
         <!-- Training Mode -->

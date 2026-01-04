@@ -469,6 +469,11 @@ function displayResults(data) {
         document.getElementById('annotatedTranscript').innerHTML = data.annotated_transcript_html;
     }
 
+    //Counterfactuals
+    if (data.counterfactual) {
+    renderCounterfactual(data.counterfactual);
+}
+
 
 }
 
@@ -1490,6 +1495,76 @@ function renderConfusionMatrix(matrix) {
     
     return html;
 }
+
+function generateWhatIfText(counterfactual) {
+    if (!counterfactual.top_changes || counterfactual.top_changes.length === 0) {
+        return "No meaningful counterfactual changes could be generated.";
+    }
+
+    const top = counterfactual.top_changes[0];
+
+    return `
+        If the <strong>${top.feature.replaceAll("_", " ")}</strong>
+        were adjusted from <strong>${top.from.toFixed(2)}</strong>
+        to <strong>${top.to.toFixed(2)}</strong>,
+        the model’s prediction would change from
+        <strong>ASD</strong> to <strong>TD</strong>.
+`;
+}
+
+function renderCounterfactual(counterfactual) {
+    if (!counterfactual) return;
+
+    // Show section
+    document
+        .getElementById("counterfactualSection")
+        .classList.remove("hidden");
+
+    // What-if text
+    document.getElementById("whatIfBox").innerHTML =
+        generateWhatIfText(counterfactual);
+
+    // Summary
+    document.getElementById("cfFlipped").textContent =
+        counterfactual.prediction_flipped ? "Yes ✅" : "No ❌";
+
+    document.getElementById("cfL2").textContent =
+        counterfactual.l2_change.toFixed(3);
+
+    document.getElementById("cfTotal").textContent =
+        counterfactual.total_features_changed;
+
+    // Table
+    const tbody = document.getElementById("cfTableBody");
+    tbody.innerHTML = "";
+
+    counterfactual.top_changes.forEach(change => {
+        const row = document.createElement("tr");
+        row.className = "border-b last:border-b-0";
+
+        row.innerHTML = `
+            <td class="py-2 font-medium">
+                ${change.feature.replaceAll("_", " ")}
+            </td>
+            <td class="py-2">
+                ${change.from.toFixed(3)}
+            </td>
+            <td class="py-2">
+                ${change.to.toFixed(3)}
+            </td>
+            <td class="py-2 ${
+                change.change > 0 ? "text-green-600" : "text-red-600"
+            }">
+                ${change.change > 0 ? "+" : ""}
+                ${change.change.toFixed(3)}
+            </td>
+        `;
+
+        tbody.appendChild(row);
+    });
+}
+
+
 
 // Load models for prediction dropdowns
 async function loadModelsForPrediction() {
