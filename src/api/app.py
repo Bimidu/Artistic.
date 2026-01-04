@@ -1014,29 +1014,40 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             local_shap_dir = Path("assets/shap/local") / request_id
             local_shap_dir.mkdir(parents=True, exist_ok=True)
 
-            background = np.load(
-                Path("assets/shap") / used_model_name  / "background.npy"
-            )
+            try:
+                # Load background data saved during training
+                background_path = Path("assets/shap") / used_model_name / "background.npy"
+                if background_path.exists():
+                    background = np.load(background_path)
 
-            predicted_class = 1 if result["prediction"] == "ASD" else 0
+                    predicted_class = 1 if result["prediction"] == "ASD" else 0
 
-            shap_manager = SHAPManager(
-                model=model,
-                background_data=background,
-                feature_names=list(features_df.columns),
-                model_type=used_model_name.split("_")[-1]
-            )
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=selected_features,
+                        model_type=used_model_name.split("_")[-1]
+                    )
 
-            shap_manager.generate_local_waterfall(
-                X_instance=features_df.values[0],
-                save_dir=local_shap_dir,
-                predicted_class=predicted_class
-            )
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values,
+                        save_dir=local_shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    local_shap_data = {
+                        'request_id': request_id,
+                        'waterfall': f"/assets/shap/local/{request_id}/waterfall.png"
+                    }
+            except Exception as shap_error:
+                logger.warning(f"SHAP explanation not available: {shap_error}")
+                # Continue without SHAP
 
             # ============================
             # COUNTERFACTUAL
             # ============================
             component = "_".join(used_model_name .split("_")[:-1])
+            logger.info(component)
 
             cf_result = generate_counterfactual(
                 model=model,
@@ -1388,7 +1399,8 @@ async def predict_from_transcript(
                 # Continue without SHAP
 
             #Generate Counterfactuals
-            component = "_".join(model_name.split("_")[:-1])
+            component = "_".join(used_model_name.split("_")[:-1])
+            logger.info(component)
             cf_result = generate_counterfactual(
                 model=model,
                 x_instance=features_df.values[0],
@@ -1898,54 +1910,6 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         if hasattr(preprocessor_dict['scaler'], 'logger'):
             preprocessor_dict['scaler'].logger = None
 
-        # =====================================================
-        # TRAIN COUNTERFACTUAL AUTOENCODER (ONCE PER COMPONENT)
-        # =====================================================
-        # Note: This is optional and may crash on some systems (e.g., macOS ARM64 with PyTorch)
-        # Disabled by default on macOS due to PyTorch segfault issues
-        # Can be controlled via UI checkbox or ENABLE_COUNTERFACTUAL_AE environment variable
-        
-        import platform
-        is_macos = platform.system() == "Darwin"
-        
-        # Priority: UI setting > environment variable > OS-based default
-        if enable_autoencoder is None:
-            env_setting = os.getenv("ENABLE_COUNTERFACTUAL_AE", "").lower()
-            if env_setting == "":
-                # Default: disabled on macOS, enabled elsewhere
-                enable_autoencoder_flag = not is_macos
-            else:
-                enable_autoencoder_flag = env_setting == "true"
-        else:
-            enable_autoencoder_flag = enable_autoencoder
-        
-        if enable_autoencoder_flag:
-            ae_dir = Path("models/counterfactuals")
-            ae_dir.mkdir(parents=True, exist_ok=True)
-            ae_path = ae_dir / f"{component}_ae.pt"
-
-            # Train only if not already trained
-            if not ae_path.exists():
-                try:
-                    logger.info(f"Training counterfactual autoencoder for {component}")
-                    train_autoencoder(
-                        X_train.values,  # IMPORTANT: already preprocessed + feature-selected
-                        component,
-                        ae_dir
-                    )
-                    logger.info(f"Counterfactual autoencoder trained successfully for {component}")
-                except Exception as ae_error:
-                    # Autoencoder training is optional - log warning but continue training
-                    logger.warning(
-                        f"Failed to train counterfactual autoencoder for {component}: {ae_error}. "
-                        f"Training will continue without counterfactual support. "
-                        f"If you see segmentation faults, set ENABLE_COUNTERFACTUAL_AE=false to disable. "
-                        f"Counterfactual explanations will not be available for predictions."
-                    )
-            else:
-                logger.info(f"Autoencoder already exists for {component}, skipping training")
-        else:
-            logger.info(f"Counterfactual autoencoder training is disabled (ENABLE_COUNTERFACTUAL_AE=false)")
         
         # Step 3: Train models
         from src.models import ModelTrainer, ModelConfig, ModelEvaluator
@@ -2001,18 +1965,69 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
             # Create model name with component prefix
             model_name = f"{component}_{model_type}"
 
+            # =====================================================
+            # TRAIN COUNTERFACTUAL AUTOENCODER (ONCE PER COMPONENT)
+            # =====================================================
+            # Note: This is optional and may crash on some systems (e.g., macOS ARM64 with PyTorch)
+            # Disabled by default on macOS due to PyTorch segfault issues
+            # Can be controlled via UI checkbox or ENABLE_COUNTERFACTUAL_AE environment variable
+
+            import platform
+            is_macos = platform.system() == "Darwin"
+
+            # Priority: UI setting > environment variable > OS-based default
+            if enable_autoencoder is None:
+                env_setting = os.getenv("ENABLE_COUNTERFACTUAL_AE", "").lower()
+                if env_setting == "":
+                    # Default: disabled on macOS, enabled elsewhere
+                    enable_autoencoder_flag = not is_macos
+                else:
+                    enable_autoencoder_flag = env_setting == "true"
+            else:
+                enable_autoencoder_flag = enable_autoencoder
+
+            if enable_autoencoder_flag:
+                ae_dir = Path("models/counterfactuals")
+                ae_dir.mkdir(parents=True, exist_ok=True)
+                ae_path = ae_dir / f"{model_name}_ae.pt"
+
+                # Train only if not already trained
+                if not ae_path.exists():
+                    try:
+                        logger.info(f"Training counterfactual autoencoder for {component}")
+                        train_autoencoder(
+                            X_train.values,  # IMPORTANT: already preprocessed + feature-selected
+                            model_name,
+                            ae_dir
+                        )
+                        logger.info(f"Counterfactual autoencoder trained successfully for {component}")
+                    except Exception as ae_error:
+                        # Autoencoder training is optional - log warning but continue training
+                        logger.warning(
+                            f"Failed to train counterfactual autoencoder for {model_name}: {ae_error}. "
+                            f"Training will continue without counterfactual support. "
+                            f"If you see segmentation faults, set ENABLE_COUNTERFACTUAL_AE=false to disable. "
+                            f"Counterfactual explanations will not be available for predictions."
+                        )
+                else:
+                    logger.info(f"Autoencoder already exists for {model_name}, skipping training")
+            else:
+                logger.info(f"Counterfactual autoencoder training is disabled (ENABLE_COUNTERFACTUAL_AE=false)")
+
             SHAP_SUPPORTED_MODELS = {
                 "random_forest",
                 "gradient_boosting",
                 "adaboost",
                 "svm",
-                "lightgbm"
+                "lightgbm",
+                "xgboost",
+                "logistic",
             }
 
             logger.warning(f"Calling SHAP for model {model_name}, X_train shape: {X_train.shape}")
 
             # ================================
-            # 🔍 GLOBAL SHAP (TRAINING TIME)
+            # GLOBAL SHAP (TRAINING TIME)
             # ================================
 
             if model_type in SHAP_SUPPORTED_MODELS:

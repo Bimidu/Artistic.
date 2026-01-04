@@ -2,6 +2,9 @@ from pathlib import Path
 import numpy as np
 from .cf_generator import CounterfactualGenerator
 from .cf_serializer import serialize_counterfactual
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 def generate_counterfactual(
     model,
@@ -13,9 +16,11 @@ def generate_counterfactual(
     ae_path = Path("models/counterfactuals") / f"{component}_ae.pt"
 
     if not ae_path.exists():
-        raise FileNotFoundError(
-            f"No autoencoder found for component={component}"
+        logger.warning(
+            f"[CF] Autoencoder not found for component={component}. "
+            f"Skipping counterfactual generation."
         )
+        return None
 
     cf_gen = CounterfactualGenerator(
         model=model,

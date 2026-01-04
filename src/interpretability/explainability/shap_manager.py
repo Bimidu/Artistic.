@@ -46,7 +46,7 @@ class SHAPManager:
 
         save_dir.mkdir(parents=True, exist_ok=True)
 
-        # 🔧 FIX: enforce numeric input
+        # FIX: enforce numeric input
         X_train = self._ensure_numeric(X_train)
 
         # XGBoost-specific handling

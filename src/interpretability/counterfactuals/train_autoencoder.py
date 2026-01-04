@@ -11,7 +11,7 @@ logger = get_logger(__name__)
 
 def train_autoencoder(
     X_train: np.ndarray,
-    component: str,
+    model_name: str,
     save_dir: Path,
     epochs: int = 100,
     lr: float = 1e-3,
@@ -19,7 +19,7 @@ def train_autoencoder(
     device: str = "cpu"
 ):
     logger.info(
-        f"[AE:{component}] Training autoencoder | "
+        f"[AE:{model_name}] Training autoencoder | "
         f"samples={X_train.shape[0]}, features={X_train.shape[1]}"
     )
 
@@ -50,7 +50,7 @@ def train_autoencoder(
         # Log reconstruction loss
         if epoch == 1 or epoch % log_every == 0 or epoch == epochs:
             logger.info(
-                f"[AE:{component}] Epoch {epoch:03d}/{epochs} | "
+                f"[AE:{model_name}] Epoch {epoch:03d}/{epochs} | "
                 f"Reconstruction MSE={loss.item():.6f}"
             )
 
@@ -70,10 +70,10 @@ def train_autoencoder(
             _, Z = model(X_tensor)
 
     logger.info(
-        f"[AE:{component}] Final reconstruction MSE={final_loss:.6f}"
+        f"[AE:{model_name}] Final reconstruction MSE={final_loss:.6f}"
     )
     logger.info(
-        f"[AE:{component}] Latent stats | "
+        f"[AE:{model_name}] Latent stats | "
         f"mean={Z.mean().item():.3f}, std={Z.std().item():.3f}"
     )
 
@@ -81,12 +81,12 @@ def train_autoencoder(
     # Save model
     # ======================
     save_dir.mkdir(parents=True, exist_ok=True)
-    path = save_dir / f"{component}_ae.pt"
+    path = save_dir / f"{model_name}_ae.pt"
 
     torch.save(model.state_dict(), path)
 
     logger.info(
-        f"[AE:{component}] Autoencoder saved to {path}"
+        f"[AE:{model_name}] Autoencoder saved to {path}"
     )
 
     return path
