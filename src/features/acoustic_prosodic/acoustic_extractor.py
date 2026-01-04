@@ -208,4 +208,53 @@ class AcousticFeatureExtractor:
         
         logger.info(f"Extracted features from {len(data)} audio files")
         return pd.DataFrame(data)
+    
+    def extract_with_audio(
+        self,
+        transcript: TranscriptData,
+        audio_path: Optional[Path] = None,
+        transcription_result: Optional[Any] = None
+    ) -> Any:
+        """
+        Extract acoustic features with audio support (API compatibility method).
+        
+        This method matches the interface expected by the API for feature extraction
+        with audio files. It extracts child-only audio segments if enabled.
+        
+        Args:
+            transcript: Parsed transcript data
+            audio_path: Optional path to audio file
+            transcription_result: Optional TranscriptionResult with timing information
+        
+        Returns:
+            FeatureSet-like object with features attribute
+        """
+        logger.debug(f"Extracting acoustic features with audio for {transcript.participant_id}")
+        
+        # Extract features using the internal audio feature extractor
+        result = self.audio_feature_extractor.extract(
+            transcript=transcript,
+            audio_path=audio_path,
+            transcription_result=transcription_result
+        )
+        
+        # Return a FeatureSet-like object for API compatibility
+        from src.features.feature_extractor import FeatureSet
+        feature_set = FeatureSet(
+            participant_id=transcript.participant_id,
+            file_path=transcript.file_path,
+            diagnosis=transcript.diagnosis,
+            age_months=transcript.age_months,
+            features=result.features,
+            metadata={
+                'total_utterances': transcript.total_utterances,
+                'extraction_metadata': result.metadata,
+                'audio_path': str(audio_path) if audio_path else None,
+                'has_audio': audio_path is not None,
+            },
+            feature_categories=['acoustic_prosodic']
+        )
+        
+        logger.debug(f"Extracted {len(result.features)} acoustic features")
+        return feature_set
 
