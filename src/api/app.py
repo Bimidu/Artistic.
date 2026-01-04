@@ -941,7 +941,7 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             local_shap_dir.mkdir(parents=True, exist_ok=True)
 
             background = np.load(
-                Path("assets/shap") / model_name / "background.npy"
+                Path("assets/shap") / used_model_name  / "background.npy"
             )
 
             predicted_class = 1 if result["prediction"] == "ASD" else 0
@@ -950,7 +950,7 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                 model=model,
                 background_data=background,
                 feature_names=list(features_df.columns),
-                model_type=model_name.split("_")[-1]
+                model_type=used_model_name.split("_")[-1]
             )
 
             shap_manager.generate_local_waterfall(
@@ -962,7 +962,7 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             # ============================
             # COUNTERFACTUAL
             # ============================
-            component = "_".join(model_name.split("_")[:-1])
+            component = "_".join(used_model_name .split("_")[:-1])
 
             cf_result = generate_counterfactual(
                 model=model,
