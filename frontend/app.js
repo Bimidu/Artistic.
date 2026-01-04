@@ -65,7 +65,50 @@ document.querySelectorAll('.tab').forEach(tab => {
         const inputType = tab.dataset.input;
         document.querySelectorAll('.input-panel').forEach(p => p.classList.add('hidden'));
         document.getElementById(inputType + 'Panel').classList.remove('hidden');
+        
+        // Load models when switching to a prediction tab
+        loadModelsForPrediction();
     });
+});
+
+// Toggle model selection based on fusion checkbox
+function setupFusionToggle() {
+    const fusionCheckboxes = [
+        { checkbox: 'audioUseFusion', select: 'audioModelSelect', container: 'audioModelSelectContainer', note: 'audioModelSelectNote' },
+        { checkbox: 'textUseFusion', select: 'textModelSelect', container: 'textModelSelectContainer', note: 'textModelSelectNote' },
+        { checkbox: 'chaUseFusion', select: 'chaModelSelect', container: 'chaModelSelectContainer', note: 'chaModelSelectNote' }
+    ];
+    
+    fusionCheckboxes.forEach(({ checkbox, select, container, note }) => {
+        const checkboxEl = document.getElementById(checkbox);
+        const selectEl = document.getElementById(select);
+        const containerEl = document.getElementById(container);
+        const noteEl = document.getElementById(note);
+        
+        if (checkboxEl && selectEl && containerEl && noteEl) {
+            checkboxEl.addEventListener('change', () => {
+                if (checkboxEl.checked) {
+                    // Fusion enabled - disable model selection
+                    selectEl.disabled = true;
+                    selectEl.value = ''; // Reset to "Best Model (Auto)"
+                    containerEl.style.opacity = '0.5';
+                    containerEl.style.pointerEvents = 'none';
+                    noteEl.classList.remove('hidden');
+                } else {
+                    // Fusion disabled - enable model selection
+                    selectEl.disabled = false;
+                    containerEl.style.opacity = '1';
+                    containerEl.style.pointerEvents = 'auto';
+                    noteEl.classList.add('hidden');
+                }
+            });
+        }
+    });
+}
+
+// Initialize fusion toggles on page load
+document.addEventListener('DOMContentLoaded', () => {
+    setupFusionToggle();
 });
 
 // File upload handling
@@ -150,6 +193,9 @@ async function testConnection() {
             const data = await response.json();
             statusDot.className = 'w-2.5 h-2.5 rounded-full bg-green-400 status-connected';
             statusText.textContent = `Connected (${data.models_available} models, ${data.features_supported} features)`;
+            
+            // Load models for prediction dropdowns
+            loadModelsForPrediction();
         } else {
             throw new Error('Not healthy');
         }
@@ -162,6 +208,8 @@ async function testConnection() {
 async function predictFromAudio() {
     const fileInput = document.getElementById('audioFileInput');
     const participantId = document.getElementById('audioParticipantId').value || 'CHI';
+    const modelName = document.getElementById('audioModelSelect').value || null;
+    const useFusion = document.getElementById('audioUseFusion').checked;
     
     if (!fileInput.files[0]) {
         alert('Please select an audio file');
@@ -173,6 +221,10 @@ async function predictFromAudio() {
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('participant_id', participantId);
+    if (modelName) {
+        formData.append('model_name', modelName);
+    }
+    formData.append('use_fusion', useFusion);
     
     try {
         const response = await fetch(`${getApiUrl()}/predict/audio`, {
@@ -194,6 +246,8 @@ async function predictFromAudio() {
 
 async function predictFromText() {
     const text = document.getElementById('textInput').value;
+    const modelName = document.getElementById('textModelSelect').value || null;
+    const useFusion = document.getElementById('textUseFusion').checked;
     
     if (!text.trim()) {
         alert('Please enter some text');
@@ -206,7 +260,12 @@ async function predictFromText() {
         const response = await fetch(`${getApiUrl()}/predict/text`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: text, participant_id: 'CHI' })
+            body: JSON.stringify({ 
+                text: text, 
+                participant_id: 'CHI',
+                model_name: modelName,
+                use_fusion: useFusion
+            })
         });
         
         const data = await response.json();
@@ -223,6 +282,7 @@ async function predictFromText() {
 
 async function predictFromChatFile() {
     const fileInput = document.getElementById('chaFileInput');
+    const modelName = document.getElementById('chaModelSelect').value || null;
     const useFusion = document.getElementById('chaUseFusion').checked;
     
     if (!fileInput.files[0]) {
@@ -230,12 +290,15 @@ async function predictFromChatFile() {
         return;
     }
     
-    console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion);
+    console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion, 'Model:', modelName);
     showLoading('resultsArea');
     
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('use_fusion', useFusion);
+    if (modelName) {
+        formData.append('model_name', modelName);
+    }
     
     try {
         const response = await fetch(`${getApiUrl()}/predict/transcript`, {
@@ -251,8 +314,24 @@ async function predictFromChatFile() {
         if (response.ok) {
             displayResults(data);
         } else {
-            const errorMsg = data.detail || data.error || JSON.stringify(data);
-            console.error('Prediction error:', errorMsg);
+            // Try to extract error message from response
+            let errorMsg = 'Unknown error';
+            try {
+                if (data.detail) {
+                    errorMsg = data.detail;
+                } else if (data.error) {
+                    errorMsg = data.error;
+                } else if (typeof data === 'string') {
+                    errorMsg = data;
+                } else if (data.message) {
+                    errorMsg = data.message;
+                } else {
+                    errorMsg = JSON.stringify(data);
+                }
+            } catch (e) {
+                errorMsg = `Error: ${response.status} ${response.statusText}`;
+            }
+            console.error('Prediction error:', errorMsg, data);
             displayError(errorMsg);
         }
     } catch (error) {
@@ -355,9 +434,18 @@ function displayResults(data) {
         
         ${componentBreakdown}
         
-        <div class="text-sm text-primary-500 pt-6">
-            Model: ${data.model_used} | Input: ${data.input_type}
-            ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
+        <div class="text-sm text-primary-500 pt-6 border-t border-primary-200">
+            <div class="mb-2">
+                <span class="font-medium text-primary-700">Model(s) Used:</span>
+                ${data.models_used ? 
+                    `<span class="text-primary-600">${data.models_used.join(', ')}</span>` : 
+                    `<span class="text-primary-600">${data.model_used || 'Unknown'}</span>`
+                }
+            </div>
+            <div class="text-xs text-primary-500">
+                Input: ${data.input_type}${data.component ? ` | Component: ${data.component}` : ''}
+                ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
+            </div>
         </div>
     `;
 
@@ -1389,6 +1477,72 @@ function renderConfusionMatrix(matrix) {
     `;
     
     return html;
+}
+
+// Load models for prediction dropdowns
+async function loadModelsForPrediction() {
+    const selects = {
+        'audioModelSelect': ['pragmatic_conversational', 'acoustic_prosodic'], // Audio can use pragmatic or acoustic
+        'textModelSelect': ['pragmatic_conversational', 'syntactic_semantic'], // Text can use pragmatic or semantic
+        'chaModelSelect': ['pragmatic_conversational', 'syntactic_semantic']  // CHAT can use pragmatic or semantic
+    };
+    
+    try {
+        const response = await fetch(`${getApiUrl()}/models`);
+        const data = await response.json();
+        
+        if (data.models && data.models.length > 0) {
+            // Group models by component for better organization
+            const modelsByComponent = {};
+            for (const model of data.models) {
+                const component = model.component || (model.name.split('_').slice(0, 2).join('_'));
+                if (!modelsByComponent[component]) {
+                    modelsByComponent[component] = [];
+                }
+                modelsByComponent[component].push(model);
+            }
+            
+            // Update each select dropdown with compatible models only
+            for (const [selectId, compatibleComponents] of Object.entries(selects)) {
+                const select = document.getElementById(selectId);
+                if (!select) continue;
+                
+                // Keep the "Best Model" option
+                select.innerHTML = '<option value="">Best Model (Auto)</option>';
+                
+                // Add models grouped by component (only compatible ones)
+                for (const [component, models] of Object.entries(modelsByComponent)) {
+                    // Only add if component is compatible with this input type
+                    if (!compatibleComponents.includes(component)) {
+                        continue;
+                    }
+                    
+                    const componentNames = {
+                        'pragmatic_conversational': 'Pragmatic & Conversational',
+                        'acoustic_prosodic': 'Acoustic & Prosodic',
+                        'syntactic_semantic': 'Syntactic & Semantic'
+                    };
+                    const componentName = componentNames[component] || component;
+                    
+                    // Add optgroup
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = componentName;
+                    
+                    models.forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model.name;
+                        const isBest = model.name === data.best_model;
+                        option.textContent = `${model.type}${isBest ? ' (Best)' : ''} - ${(model.f1_score * 100).toFixed(1)}% F1`;
+                        optgroup.appendChild(option);
+                    });
+                    
+                    select.appendChild(optgroup);
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error loading models:', error);
+    }
 }
 
 // Test connection on load
