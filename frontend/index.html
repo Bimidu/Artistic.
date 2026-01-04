@@ -93,6 +93,15 @@
                                 </label>
                             </div>
                             
+                            <div class="mt-8" id="audioModelSelectContainer">
+                                <label class="block text-xl text-primary-900 mb-4">Model Selection</label>
+                                <select class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="audioModelSelect">
+                                    <option value="">Best Model (Auto)</option>
+                                </select>
+                                <p class="text-sm text-primary-500 mt-2">Leave as "Best Model" to automatically select the best performing model</p>
+                                <p class="text-sm text-primary-400 mt-1 hidden" id="audioModelSelectNote">Model selection is disabled when fusion is enabled</p>
+                            </div>
+                            
                             <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onclick="predictFromAudio()" id="predictAudioBtn" disabled>
                                 Analyze Audio
                             </button>
@@ -103,6 +112,22 @@
                             <div>
                                 <label class="block text-xl text-primary-900 mb-4">Speech Transcript</label>
                                 <textarea class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all resize-none" id="textInput" rows="10" placeholder="Enter or paste the speech transcript here..."></textarea>
+                            </div>
+                            
+                            <div class="mt-6 flex items-center gap-3">
+                                <input type="checkbox" id="textUseFusion" class="w-5 h-5 text-primary-600 rounded">
+                                <label for="textUseFusion" class="text-base text-primary-700">
+                                    Use multi-component fusion (if available)
+                                </label>
+                            </div>
+                            
+                            <div class="mt-8" id="textModelSelectContainer">
+                                <label class="block text-xl text-primary-900 mb-4">Model Selection</label>
+                                <select class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="textModelSelect">
+                                    <option value="">Best Model (Auto)</option>
+                                </select>
+                                <p class="text-sm text-primary-500 mt-2">Leave as "Best Model" to automatically select the best performing model</p>
+                                <p class="text-sm text-primary-400 mt-1 hidden" id="textModelSelectNote">Model selection is disabled when fusion is enabled</p>
                             </div>
                             
                             <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="predictFromText()">
@@ -127,6 +152,15 @@
                                 <label for="chaUseFusion" class="text-base text-primary-700">
                                     Use multi-component fusion (if available)
                                 </label>
+                            </div>
+                            
+                            <div class="mt-8" id="chaModelSelectContainer">
+                                <label class="block text-xl text-primary-900 mb-4">Model Selection</label>
+                                <select class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="chaModelSelect">
+                                    <option value="">Best Model (Auto)</option>
+                                </select>
+                                <p class="text-sm text-primary-500 mt-2">Leave as "Best Model" to automatically select the best performing model</p>
+                                <p class="text-sm text-primary-400 mt-1 hidden" id="chaModelSelectNote">Model selection is disabled when fusion is enabled</p>
                             </div>
                             
                             <button class="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onclick="predictFromChatFile()" id="predictChaBtn" disabled>
