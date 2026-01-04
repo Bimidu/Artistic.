@@ -1,23 +1,4 @@
 {
-  "random_forest": {
-    "model_name": "random_forest",
-    "model_type": "random_forest",
-    "version": "1.0.0",
-    "created_at": "2025-01-01T00:00:00",
-    "accuracy": 0.85,
-    "f1_score": 0.83,
-    "precision": 0.0,
-    "recall": 0.0,
-    "roc_auc": null,
-    "matthews_corr": 0.0,
-    "confusion_matrix": [],
-    "feature_names": [],
-    "n_features": 218,
-    "hyperparameters": {},
-    "training_samples": 100,
-    "component": "pragmatic_conversational",
-    "description": "Random Forest model for ASD detection using pragmatic and conversational features"
-  },
   "acoustic_prosodic_random_forest": {
     "model_name": "acoustic_prosodic_random_forest",
     "model_type": "random_forest",

@@ -180,7 +180,6 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
 
 setupUploadArea('audioUploadArea', 'audioFileInput', 'selectedAudioFile', ['.wav', '.mp3', '.flac']);
 setupUploadArea('chaUploadArea', 'chaFileInput', 'selectedChaFile', ['.cha']);
-setupUploadArea('inspectUploadArea', 'inspectFileInput', null, ['.wav', '.cha', '.txt']);
 
 // API calls
 async function testConnection() {
@@ -877,23 +876,6 @@ function updateTrainingUI(status) {
     }
 }
 
-async function loadFeatures() {
-    const gridEl = document.getElementById('featureGrid');
-    gridEl.innerHTML = '<div class="col-span-full text-center"><div class="spinner mx-auto"></div></div>';
-    
-    try {
-        const response = await fetch(`${getApiUrl()}/features`);
-        const data = await response.json();
-        
-        if (data.features && data.features.length > 0) {
-            gridEl.innerHTML = data.features.map(f => `<div class="px-5 py-4 bg-white rounded-2xl text-sm font-mono text-primary-700 hover:bg-primary-100 transition-colors">${f}</div>`).join('');
-        } else {
-            gridEl.innerHTML = '<div class="col-span-full text-center text-primary-400 text-xl">No features found</div>';
-        }
-    } catch (error) {
-        gridEl.innerHTML = `<div class="col-span-full text-red-500 text-base">Error: ${error.message}</div>`;
-    }
-}
 
 async function loadAvailableModels() {
     const container = document.getElementById('availableModelsContainer');
@@ -918,7 +900,7 @@ async function loadAvailableModels() {
             
             let modelsHtml = '';
             
-            // Display models grouped by component
+            // Display models grouped by component in table format
             for (const [component, models] of Object.entries(modelsByComponent)) {
                 const componentNames = {
                     'pragmatic_conversational': 'Pragmatic & Conversational',
@@ -940,7 +922,24 @@ async function loadAvailableModels() {
                             ${componentName}
                             <span class="px-3 py-1 bg-${color}-100 text-${color}-700 text-sm rounded-full">${models.length} model${models.length > 1 ? 's' : ''}</span>
                         </h3>
-                        <div class="space-y-4">
+                        <div class="bg-white rounded-2xl overflow-hidden border border-primary-200">
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-primary-50">
+                                        <tr>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold text-primary-900">Model Type</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Accuracy</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">F1 Score</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Precision</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Recall</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">ROC-AUC</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Features</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Samples</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Created</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-primary-200">
                 `;
                 
                 for (const model of models) {
@@ -949,61 +948,44 @@ async function loadAvailableModels() {
                     const f1 = (model.f1_score * 100).toFixed(1);
                     const precision = (model.precision * 100).toFixed(1);
                     const recall = (model.recall * 100).toFixed(1);
-                    const rocAuc = model.roc_auc ? (model.roc_auc * 100).toFixed(1) : null;
-                    const matthews = model.matthews_corr ? model.matthews_corr.toFixed(3) : 'N/A';
+                    const rocAuc = model.roc_auc ? (model.roc_auc * 100).toFixed(1) : 'N/A';
                     const date = new Date(model.created_at).toLocaleDateString();
                     const time = new Date(model.created_at).toLocaleTimeString();
                     
                     modelsHtml += `
-                        <div class="p-5 bg-white rounded-2xl hover:bg-primary-50 transition-colors ${isBest ? 'ring-2 ring-primary-600' : ''}">
-                            <div class="flex items-start justify-between mb-3">
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <h4 class="text-lg font-medium text-primary-900">${model.type}</h4>
-                                        ${isBest ? '<span class="px-2 py-0.5 bg-primary-600 text-white text-xs rounded-full">Best</span>' : ''}
-                                    </div>
-                                    <div class="text-xs text-primary-500">${date} at ${time}</div>
+                        <tr class="hover:bg-primary-50 transition-colors ${isBest ? 'bg-primary-100' : ''}">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-base font-medium text-primary-900">${model.type}</span>
+                                    ${isBest ? '<span class="px-2 py-0.5 bg-primary-600 text-white text-xs rounded-full">Best</span>' : ''}
                                 </div>
-                                <button class="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-xs" onclick="deleteModel('${model.name}')">
-                                    Delete
-                                </button>
-                            </div>
-                            
-                            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 mb-3">
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${accuracy}%</div>
-                                    <div class="text-xs text-primary-600">Accuracy</div>
+                            </td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${accuracy}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${f1}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${precision}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${recall}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${rocAuc}${rocAuc !== 'N/A' ? '%' : ''}</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${model.n_features}</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${model.training_samples}</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-600">${date}<br><span class="text-xs">${time}</span></td>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex items-center justify-center gap-2">
+                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-xs" onclick='showModelDetails(${JSON.stringify(model)})'>
+                                        View
+                                    </button>
+                                    <button class="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-xs" onclick="deleteModel('${model.name}')">
+                                        Delete
+                                    </button>
                                 </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${f1}%</div>
-                                    <div class="text-xs text-primary-600">F1</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${precision}%</div>
-                                    <div class="text-xs text-primary-600">Precision</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${recall}%</div>
-                                    <div class="text-xs text-primary-600">Recall</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${model.n_features}</div>
-                                    <div class="text-xs text-primary-600">Features</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${model.training_samples}</div>
-                                    <div class="text-xs text-primary-600">Samples</div>
-                                </div>
-                            </div>
-                            ${rocAuc ? `<div class="mb-3 flex gap-2 items-center justify-center"><span class="text-xs text-primary-600">ROC-AUC:</span><span class="font-medium text-sm">${rocAuc}%</span><span class="text-xs text-primary-600 ml-3">Matthews:</span><span class="font-medium text-sm">${matthews}</span></div>` : ''}
-                            <button class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm" onclick='showModelDetails(${JSON.stringify(model)})'>
-                                View Detailed Metrics & Graphs
-                            </button>
-                        </div>
+                            </td>
+                        </tr>
                     `;
                 }
                 
                 modelsHtml += `
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -1047,47 +1029,6 @@ async function deleteModel(modelName) {
     }
 }
 
-// Inspect file handling
-document.getElementById('inspectFileInput').addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    const resultsEl = document.getElementById('inspectionResults');
-    resultsEl.innerHTML = '<div class="spinner mx-auto mt-8"></div>';
-    
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    try {
-        const response = await fetch(`${getApiUrl()}/training/inspect-features`, {
-            method: 'POST',
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            resultsEl.innerHTML = `
-                <div class="bg-white rounded-2xl p-8">
-                    <div class="text-lg space-y-3">
-                        <div><span class="text-primary-600">Participant:</span> <span class="text-primary-900 font-medium">${data.participant_id}</span></div>
-                        <div><span class="text-primary-600">Input Type:</span> <span class="text-primary-900 font-medium">${data.input_type}</span></div>
-                        <div><span class="text-primary-600">Features Extracted:</span> <span class="text-primary-900 font-medium">${data.total_features}</span></div>
-                        <div><span class="text-primary-600">Utterances:</span> <span class="text-primary-900 font-medium">${data.utterance_count}</span></div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <h4 class="text-2xl font-medium text-primary-900 mb-4">Annotated Transcript</h4>
-                    <div class="bg-white rounded-2xl p-8 max-h-96 overflow-y-auto font-mono text-sm leading-loose">${data.annotated_transcript_html}</div>
-                </div>
-            `;
-        } else {
-            resultsEl.innerHTML = `<div class="text-red-500 text-base">${data.detail}</div>`;
-        }
-    } catch (error) {
-        resultsEl.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
-    }
-});
 
 // Model Details Modal Functions
 function showModelDetails(model) {
