@@ -129,8 +129,8 @@ class DatasetConfig:
     ])
     
     # Limit TD dataset to avoid processing 4000+ files
-    # Set to None to use all files, or a number like 50 for random sampling
-    max_samples_td: int = 50  # Use 50 random TD samples instead of all 4,228
+    # Set to None to use all files, or a number like 100 for random sampling
+    max_samples_td: int = 100  # Use 100 random TD samples instead of all 4,228
     
     # Standardize diagnosis labels across datasets
     diagnosis_mapping: Dict[str, str] = field(default_factory=lambda: {

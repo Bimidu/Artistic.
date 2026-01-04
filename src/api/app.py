@@ -72,7 +72,12 @@ app.add_middleware(
 # Initialize components
 model_registry = ModelRegistry()
 chat_parser = CHATParser()
-feature_extractor = FeatureExtractor(categories='pragmatic_conversational')
+# Include both pragmatic and acoustic features for prediction
+# This ensures models trained with acoustic features can be used for prediction
+feature_extractor = FeatureExtractor(
+    categories=['turn_taking', 'topic_coherence', 'pause_latency', 'repair_detection', 
+                'pragmatic_linguistic', 'pragmatic_audio', 'acoustic_prosodic']
+)
 input_handler = None  # Lazy-loaded due to heavy model loading
 transcript_annotator = TranscriptAnnotator()
 model_fusion = ModelFusion(method='weighted')
@@ -195,7 +200,7 @@ class TrainingRequest(BaseModel):
         description="Whether to perform feature selection"
     )
     test_size: float = Field(
-        default=0.3,
+        default=0.2,
         description="Fraction of data for test set (0.1 to 0.4)"
     )
     random_state: int = Field(
@@ -949,7 +954,7 @@ def force_numeric_dataframe(X: pd.DataFrame) -> pd.DataFrame:
 
     return X
 
-def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.3, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
     """Background task for model training."""
     global training_state
 
