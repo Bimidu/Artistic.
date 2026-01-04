@@ -72,7 +72,12 @@ app.add_middleware(
 # Initialize components
 model_registry = ModelRegistry()
 chat_parser = CHATParser()
-feature_extractor = FeatureExtractor(categories='pragmatic_conversational')
+# Include both pragmatic and acoustic features for prediction
+# This ensures models trained with acoustic features can be used for prediction
+feature_extractor = FeatureExtractor(
+    categories=['turn_taking', 'topic_coherence', 'pause_latency', 'repair_detection', 
+                'pragmatic_linguistic', 'pragmatic_audio', 'acoustic_prosodic']
+)
 input_handler = None  # Lazy-loaded due to heavy model loading
 transcript_annotator = TranscriptAnnotator()
 model_fusion = ModelFusion(method='weighted')
@@ -195,7 +200,7 @@ class TrainingRequest(BaseModel):
         description="Whether to perform feature selection"
     )
     test_size: float = Field(
-        default=0.3,
+        default=0.2,
         description="Fraction of data for test set (0.1 to 0.4)"
     )
     random_state: int = Field(
@@ -315,6 +320,10 @@ def get_model_and_preprocessor(model_name: Optional[str] = None, component: Opti
                 model_name, _ = model_registry.get_best_model()
             logger.info(f"Using best model: {model_name}")
         
+        # Validate model exists
+        if model_name not in model_registry.list_models():
+            raise ValueError(f"Model '{model_name}' not found in registry")
+
         model, preprocessor = model_registry.load_model(
             model_name,
             load_preprocessor=True
@@ -328,6 +337,77 @@ def get_model_and_preprocessor(model_name: Optional[str] = None, component: Opti
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error loading model: {str(e)}"
         )
+
+
+def get_model_component(model_name: str) -> Optional[str]:
+    """Extract component name from model name."""
+    if not model_name:
+        return None
+    parts = model_name.split('_')
+    if len(parts) >= 2:
+        return f"{parts[0]}_{parts[1]}"
+    return None
+
+
+def is_model_compatible_with_input(model_name: str, input_type: str) -> bool:
+    """
+    Check if a model is compatible with the input type.
+
+    Args:
+        model_name: Name of the model
+        input_type: 'audio', 'text', or 'chat_file'
+
+    Returns:
+        True if compatible, False otherwise
+    """
+    component = get_model_component(model_name)
+
+    if input_type == 'audio':
+        # Audio can use pragmatic or acoustic models
+        return component in ['pragmatic_conversational', 'acoustic_prosodic']
+    elif input_type in ['text', 'chat_file']:
+        # Text/chat can use pragmatic or semantic models (not acoustic)
+        return component in ['pragmatic_conversational', 'syntactic_semantic']
+
+    return True  # Unknown input type, allow it
+
+
+def get_component_weights_for_input_type(input_type: str) -> Dict[str, float]:
+    """
+    Get appropriate component weights based on input type.
+
+    Rules:
+    - For audio: acoustic_prosodic has weight, syntactic_semantic has 0 (no semantic features from audio alone)
+    - For text/chat: acoustic_prosodic has 0 (no audio), syntactic_semantic has weight
+    - pragmatic_conversational works for both
+
+    Args:
+        input_type: 'audio', 'text', or 'chat_file'
+
+    Returns:
+        Dictionary of component weights
+    """
+    if input_type == 'audio':
+        # Audio input: acoustic works, semantic doesn't (no text analysis)
+        return {
+            'pragmatic_conversational': 0.4,
+            'acoustic_prosodic': 0.4,
+            'syntactic_semantic': 0.0,  # No semantic features from audio alone
+        }
+    elif input_type in ['text', 'chat_file']:
+        # Text/chat input: semantic works, acoustic doesn't (no audio)
+        return {
+            'pragmatic_conversational': 0.4,
+            'acoustic_prosodic': 0.0,  # No audio features from text
+            'syntactic_semantic': 0.6,
+        }
+    else:
+        # Default: all components have weight
+        return {
+            'pragmatic_conversational': 0.5,
+            'acoustic_prosodic': 0.25,
+            'syntactic_semantic': 0.25,
+        }
 
 
 def make_prediction(
@@ -430,7 +510,9 @@ async def health_check():
 @app.post("/predict/audio", tags=["User Mode"])
 async def predict_from_audio(
     file: UploadFile = File(...),
-    participant_id: Optional[str] = Form("CHI")
+    participant_id: Optional[str] = Form("CHI"),
+    model_name: Optional[str] = Form(None),
+    use_fusion: bool = Form(False)
 ):
     """
     Predict ASD from uploaded audio file.
@@ -467,44 +549,225 @@ async def predict_from_audio(
             participant_id=participant_id
         )
         
-        # Extract features with audio
-        feature_set = feature_extractor.extract_with_audio(
-            processed.transcript_data,
-            audio_path=processed.audio_path,
-            transcription_result=processed.transcription_result
-        )
-        
-        features_df = pd.DataFrame([feature_set.features])
-        
-        # Get model and make prediction
-        model, preprocessor, model_name = get_model_and_preprocessor()
-        
-        if preprocessor is not None:
-            if isinstance(preprocessor, dict):
-                features_df = preprocess_with_dict(features_df, preprocessor)
+        if use_fusion:
+            # Multi-component prediction with fusion for audio
+            component_predictions = []
+
+            # Get weights for audio input (acoustic works, semantic doesn't)
+            component_weights = get_component_weights_for_input_type('audio')
+
+            # Try each component
+            for component in ['pragmatic_conversational', 'acoustic_prosodic', 'syntactic_semantic']:
+                # Skip components with zero weight
+                if component_weights.get(component, 0) == 0:
+                    logger.info(f"Skipping {component} for audio input (weight=0)")
+                    continue
+
+                try:
+                    # Select feature extractor
+                    if component == 'acoustic_prosodic':
+                        from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
+                        extractor = AcousticFeatureExtractor()
+                        features = extractor.extract_with_audio(
+                            processed.transcript_data,
+                            audio_path=processed.audio_path,
+                            transcription_result=processed.transcription_result
+                        ).features
+                    elif component == 'syntactic_semantic':
+                        # Skip semantic for audio (no text analysis)
+                        continue
+                    else:  # pragmatic_conversational
+                        features = feature_extractor.extract_with_audio(
+                            processed.transcript_data,
+                            audio_path=processed.audio_path,
+                            transcription_result=processed.transcription_result
+                        ).features
+
+                    features_df = pd.DataFrame([features])
+
+                    # Get best model for this component (fusion always uses best model per component)
+                    # Ignore model_name when fusion is enabled - fusion uses best model from each component
+                    model, preprocessor, used_model_name = get_model_and_preprocessor(component=component)
+
+                    if preprocessor is not None:
+                        if isinstance(preprocessor, dict):
+                            features_df = preprocess_with_dict(features_df, preprocessor)
+                        else:
+                            features_df = preprocessor.transform(features_df)
+
+                    # Make prediction
+                    prediction = model.predict(features_df)[0]
+                    proba = model.predict_proba(features_df)[0] if hasattr(model, 'predict_proba') else None
+
+                    if proba is not None:
+                        classes = model.classes_ if hasattr(model, 'classes_') else ['ASD', 'TD']
+                        # Convert numeric classes to string labels
+                        if isinstance(classes[0], (int, np.integer)):
+                            label_map = {0: 'TD', 1: 'ASD'}
+                            class_labels = [label_map.get(c, str(c)) for c in classes]
+                        else:
+                            class_labels = [str(c) for c in classes]
+                        probabilities = {str(cls): float(prob) for cls, prob in zip(class_labels, proba)}
+                        confidence = float(np.max(proba))
+                        asd_prob = probabilities.get('ASD', proba[1] if len(proba) > 1 else proba[0])
+                    else:
+                        probabilities = {str(prediction): 1.0}
+                        confidence = 1.0
+                        asd_prob = 1.0 if str(prediction).upper() == 'ASD' else 0.0
+
+                    component_predictions.append(ComponentPrediction(
+                        component=component,
+                        prediction=str(prediction),
+                        probability=asd_prob,
+                        probabilities=probabilities,
+                        confidence=confidence,
+                        model_name=used_model_name
+                    ))
+
+                    logger.info(f"{component}: {prediction} ({confidence:.2f})")
+
+                except Exception as e:
+                    logger.warning(f"Component {component} failed: {e}")
+                    continue
+
+            if not component_predictions:
+                raise ValueError("No components available for prediction")
+
+            # Fuse predictions with audio-specific weights
+            fused = model_fusion.fuse(component_predictions, component_weights_override=component_weights)
+
+            # Generate annotated transcript (from pragmatic component)
+            feature_set = feature_extractor.extract_with_audio(
+                processed.transcript_data,
+                audio_path=processed.audio_path,
+                transcription_result=processed.transcription_result
+            )
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features
+            )
+
+            # Clean up temp file
+            tmp_path.unlink()
+
+            return {
+                'prediction': fused.final_prediction,
+                'confidence': fused.confidence,
+                'probabilities': fused.final_probabilities,
+                'model_used': 'fusion',
+                'models_used': [cp.model_name for cp in component_predictions],  # List all models used
+                'component_breakdown': [
+                    {
+                        'component': cp.component,
+                        'prediction': cp.prediction,
+                        'confidence': cp.confidence,
+                        'probabilities': cp.probabilities,
+                        'model_name': cp.model_name
+                    }
+                    for cp in component_predictions
+                ],
+                'features_extracted': len(feature_set.features),
+                'transcript': processed.raw_text,
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'audio',
+                'duration': processed.metadata.get('duration', 0),
+            }
+        else:
+            # Single component prediction
+            # Determine which component/model to use and extract appropriate features
+            selected_component = None
+            if model_name:
+                selected_component = get_model_component(model_name)
+                # Validate compatibility
+                if not is_model_compatible_with_input(model_name, 'audio'):
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail=f"Model '{model_name}' ({selected_component}) is not compatible with audio input. "
+                               f"Audio input requires pragmatic_conversational or acoustic_prosodic models. "
+                               f"Please select a compatible model or use 'Best Model (Auto)'."
+                    )
+
+            # Extract features based on selected model component
+            if selected_component == 'acoustic_prosodic':
+                # Extract acoustic features
+                from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
+                acoustic_extractor = AcousticFeatureExtractor()
+                feature_set = acoustic_extractor.extract_with_audio(
+                    processed.transcript_data,
+                    audio_path=processed.audio_path,
+                    transcription_result=processed.transcription_result
+                )
             else:
-                features_df = preprocessor.transform(features_df)
-        
-        result = make_prediction(model, features_df, model_name)
-        
-        # Generate annotated transcript
-        annotated = transcript_annotator.annotate(
-            processed.transcript_data,
-            features=feature_set.features
-        )
-        
-        # Clean up temp file
-        tmp_path.unlink()
-        
-        return {
-            **result,
-            'features_extracted': len(feature_set.features),
-            'transcript': processed.raw_text,
-            'annotated_transcript_html': annotated.to_html(),
-            'annotation_summary': annotated._get_annotation_summary(),
-            'input_type': 'audio',
-            'duration': processed.metadata.get('duration', 0),
-        }
+                # Extract pragmatic features (default for audio)
+                feature_set = feature_extractor.extract_with_audio(
+                    processed.transcript_data,
+                    audio_path=processed.audio_path,
+                    transcription_result=processed.transcription_result
+                )
+
+            features_df = pd.DataFrame([feature_set.features])
+
+            # Get model and make prediction (use specified model or best compatible model)
+            if model_name:
+                model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
+            else:
+                # Get best compatible model for audio
+                models = model_registry.list_models()
+                compatible_models = [m for m in models if is_model_compatible_with_input(m, 'audio')]
+                if not compatible_models:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail="No compatible models found for audio input. "
+                               "Please train a pragmatic_conversational or acoustic_prosodic model first."
+                    )
+                # Find best compatible model
+                best_f1 = -1
+                best_model = None
+                for m in compatible_models:
+                    try:
+                        metadata = model_registry.get_model_metadata(m)
+                        if metadata.f1_score > best_f1:
+                            best_f1 = metadata.f1_score
+                            best_model = m
+                    except:
+                        pass
+                model_name = best_model or compatible_models[0]
+                model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
+
+            if preprocessor is not None:
+                if isinstance(preprocessor, dict):
+                    features_df = preprocess_with_dict(features_df, preprocessor)
+                else:
+                    features_df = preprocessor.transform(features_df)
+
+            result = make_prediction(model, features_df, used_model_name)
+
+            # Generate annotated transcript (use pragmatic features for annotation)
+            pragmatic_feature_set = feature_extractor.extract_with_audio(
+                processed.transcript_data,
+                audio_path=processed.audio_path,
+                transcription_result=processed.transcription_result
+            )
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=pragmatic_feature_set.features
+            )
+
+            # Clean up temp file
+            tmp_path.unlink()
+
+            return {
+                **result,
+                'features_extracted': len(feature_set.features),
+                'transcript': processed.raw_text,
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'audio',
+                'duration': processed.metadata.get('duration', 0),
+                'model_used': used_model_name,  # Explicitly state which model was used
+                'component': get_model_component(used_model_name),
+            }
         
     except Exception as e:
         logger.error(f"Audio prediction failed: {e}")
@@ -514,14 +777,23 @@ async def predict_from_audio(
         )
 
 
+class TextPredictionRequestWithOptions(BaseModel):
+    """Request for prediction from text with model selection."""
+    text: str = Field(..., description="Text content to analyze")
+    participant_id: Optional[str] = Field("CHI", description="Participant ID")
+    model_name: Optional[str] = Field(None, description="Specific model to use (None = best model)")
+    use_fusion: bool = Field(False, description="Use multi-component fusion")
+
+
 @app.post("/predict/text", tags=["User Mode"])
-async def predict_from_text(request: TextPredictionRequest):
+async def predict_from_text(request: TextPredictionRequestWithOptions):
     """
     Predict ASD from text input.
     
     Analyzes the provided text and returns prediction with annotations.
+    Supports model selection and multi-component fusion.
     """
-    logger.info("Text prediction request")
+    logger.info(f"Text prediction request (fusion={request.use_fusion}, model={request.model_name})")
     
     try:
         # Process text
@@ -531,19 +803,160 @@ async def predict_from_text(request: TextPredictionRequest):
             participant_id=request.participant_id
         )
         
+        if request.use_fusion:
+            # Multi-component prediction with fusion for text
+            component_predictions = []
+
+            # Get weights for text input (semantic works, acoustic doesn't)
+            component_weights = get_component_weights_for_input_type('text')
+
+            # Try each component
+            for component in ['pragmatic_conversational', 'acoustic_prosodic', 'syntactic_semantic']:
+                # Skip components with zero weight
+                if component_weights.get(component, 0) == 0:
+                    logger.info(f"Skipping {component} for text input (weight=0)")
+                    continue
+
+                try:
+                    # Select feature extractor
+                    if component == 'acoustic_prosodic':
+                        # Skip acoustic for text (no audio)
+                        continue
+                    elif component == 'syntactic_semantic':
+                        from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
+                        extractor = SyntacticFeatureExtractor()
+                        features = extractor.extract_from_transcript(processed.transcript_data).features
+                    else:  # pragmatic_conversational
+                        features = feature_extractor.extract_from_transcript(processed.transcript_data).features
+
+                    features_df = pd.DataFrame([features])
+
+                    # Get best model for this component (or use specified model if it matches)
+                    if request.model_name and request.model_name.startswith(component):
+                        model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=request.model_name)
+                    else:
+                        model, preprocessor, used_model_name = get_model_and_preprocessor(component=component)
+
+                    if preprocessor is not None:
+                        if isinstance(preprocessor, dict):
+                            features_df = preprocess_with_dict(features_df, preprocessor)
+                        else:
+                            features_df = preprocessor.transform(features_df)
+
+                    # Make prediction
+                    prediction = model.predict(features_df)[0]
+                    proba = model.predict_proba(features_df)[0] if hasattr(model, 'predict_proba') else None
+
+                    if proba is not None:
+                        classes = model.classes_ if hasattr(model, 'classes_') else ['ASD', 'TD']
+                        # Convert numeric classes to string labels
+                        if isinstance(classes[0], (int, np.integer)):
+                            label_map = {0: 'TD', 1: 'ASD'}
+                            class_labels = [label_map.get(c, str(c)) for c in classes]
+                        else:
+                            class_labels = [str(c) for c in classes]
+                        probabilities = {str(cls): float(prob) for cls, prob in zip(class_labels, proba)}
+                        confidence = float(np.max(proba))
+                        asd_prob = probabilities.get('ASD', proba[1] if len(proba) > 1 else proba[0])
+                    else:
+                        probabilities = {str(prediction): 1.0}
+                        confidence = 1.0
+                        asd_prob = 1.0 if str(prediction).upper() == 'ASD' else 0.0
+
+                    component_predictions.append(ComponentPrediction(
+                        component=component,
+                        prediction=str(prediction),
+                        probability=asd_prob,
+                        probabilities=probabilities,
+                        confidence=confidence,
+                        model_name=used_model_name
+                    ))
+
+                    logger.info(f"{component}: {prediction} ({confidence:.2f})")
+
+                except Exception as e:
+                    logger.warning(f"Component {component} failed: {e}")
+                    continue
+
+            if not component_predictions:
+                raise ValueError("No components available for prediction")
+
+            # Fuse predictions with text-specific weights
+            fused = model_fusion.fuse(component_predictions, component_weights_override=component_weights)
+
+            # Generate annotated transcript (from pragmatic component)
+            feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features
+            )
+
+            return {
+                'prediction': fused.final_prediction,
+                'confidence': fused.confidence,
+                'probabilities': fused.final_probabilities,
+                'model_used': 'fusion',
+                'models_used': [cp.model_name for cp in component_predictions],  # List all models used
+                'component_breakdown': [
+                    {
+                        'component': cp.component,
+                        'prediction': cp.prediction,
+                        'confidence': cp.confidence,
+                        'probabilities': cp.probabilities,
+                        'model_name': cp.model_name
+                    }
+                    for cp in component_predictions
+                ],
+                'features_extracted': len(feature_set.features),
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'text',
+            }
+        else:
+            # Single component prediction
+            # Extract features
+            feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
+            features_df = pd.DataFrame([feature_set.features])
+
+            # Get model and make prediction (use specified model or best model)
+            model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=request.model_name)
+
+            if preprocessor is not None:
+                if isinstance(preprocessor, dict):
+                    features_df = preprocess_with_dict(features_df, preprocessor)
+                else:
+                    features_df = preprocessor.transform(features_df)
+
+            result = make_prediction(model, features_df, used_model_name)
+
+            # Generate annotated transcript
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features
+            )
+
+            return {
+                **result,
+                'features_extracted': len(feature_set.features),
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'text',
+                'model_used': used_model_name,  # Explicitly state which model was used
+                'component': get_model_component(used_model_name),
+            }
         # Extract features
         feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
         features_df = pd.DataFrame([feature_set.features])
-        
+
         # Get model and make prediction
         model, preprocessor, model_name = get_model_and_preprocessor()
-        
+
         if preprocessor is not None:
             if isinstance(preprocessor, dict):
                 features_df = preprocess_with_dict(features_df, preprocessor)
             else:
                 features_df = preprocessor.transform(features_df)
-        
+
         result = make_prediction(model, features_df, model_name)
 
         # ============================
@@ -571,13 +984,13 @@ async def predict_from_text(request: TextPredictionRequest):
             save_dir=local_shap_dir,
             predicted_class=predicted_class
         )
-        
+
         # Generate annotated transcript
         annotated = transcript_annotator.annotate(
             processed.transcript_data,
             features=feature_set.features
         )
-        
+
         return {
             **result,
             'features_extracted': len(feature_set.features),
@@ -589,7 +1002,7 @@ async def predict_from_text(request: TextPredictionRequest):
                 "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
             },
         }
-        
+
     except Exception as e:
         logger.error(f"Text prediction failed: {e}")
         raise HTTPException(
@@ -601,7 +1014,8 @@ async def predict_from_text(request: TextPredictionRequest):
 @app.post("/predict/transcript", tags=["User Mode"])
 async def predict_from_transcript(
     file: UploadFile = File(...),
-    use_fusion: bool = Form(False)
+    use_fusion: bool = Form(False),
+    model_name: Optional[str] = Form(None)
 ):
     """
     Predict ASD from uploaded CHAT transcript file (.cha).
@@ -629,28 +1043,36 @@ async def predict_from_transcript(
         transcript = chat_parser.parse_file(tmp_path)
         
         if use_fusion:
-            # Multi-component prediction with fusion
+            # Multi-component prediction with fusion for chat file
             component_predictions = []
             
+            # Get weights for chat file input (semantic works, acoustic doesn't)
+            component_weights = get_component_weights_for_input_type('chat_file')
+
             # Try each component
             for component in ['pragmatic_conversational', 'acoustic_prosodic', 'syntactic_semantic']:
+                # Skip components with zero weight
+                if component_weights.get(component, 0) == 0:
+                    logger.info(f"Skipping {component} for chat file input (weight=0)")
+                    continue
+
                 try:
                     # Select feature extractor
                     if component == 'acoustic_prosodic':
-                        from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
-                        extractor = AcousticFeatureExtractor()
-                        features = extractor.extract_from_transcript(transcript)
+                        # Skip acoustic for chat file (no audio)
+                        continue
                     elif component == 'syntactic_semantic':
                         from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
                         extractor = SyntacticFeatureExtractor()
-                        features = extractor.extract_from_transcript(transcript)
+                        features = extractor.extract_from_transcript(transcript).features
                     else:
                         features = feature_extractor.extract_from_transcript(transcript).features
                     
                     features_df = pd.DataFrame([features])
                     
-                    # Get best model for this component
-                    model, preprocessor, model_name = get_model_and_preprocessor(component=component)
+                    # Get best model for this component (fusion always uses best model per component)
+                    # Ignore model_name when fusion is enabled - fusion uses best model from each component
+                    model, preprocessor, used_model_name = get_model_and_preprocessor(component=component)
                     
                     if preprocessor is not None:
                         if isinstance(preprocessor, dict):
@@ -664,18 +1086,27 @@ async def predict_from_transcript(
                     
                     if proba is not None:
                         classes = model.classes_ if hasattr(model, 'classes_') else ['ASD', 'TD']
-                        probabilities = {str(cls): float(prob) for cls, prob in zip(classes, proba)}
+                        # Convert numeric classes to string labels
+                        if isinstance(classes[0], (int, np.integer)):
+                            label_map = {0: 'TD', 1: 'ASD'}
+                            class_labels = [label_map.get(c, str(c)) for c in classes]
+                        else:
+                            class_labels = [str(c) for c in classes]
+                        probabilities = {str(cls): float(prob) for cls, prob in zip(class_labels, proba)}
                         confidence = float(np.max(proba))
+                        asd_prob = probabilities.get('ASD', proba[1] if len(proba) > 1 else proba[0])
                     else:
                         probabilities = {str(prediction): 1.0}
                         confidence = 1.0
-                    
+                        asd_prob = 1.0 if str(prediction).upper() == 'ASD' else 0.0
+
                     component_predictions.append(ComponentPrediction(
                         component=component,
                         prediction=str(prediction),
+                        probability=asd_prob,
                         probabilities=probabilities,
                         confidence=confidence,
-                        model_name=model_name
+                        model_name=used_model_name
                     ))
                     
                     logger.info(f"{component}: {prediction} ({confidence:.2f})")
@@ -685,10 +1116,32 @@ async def predict_from_transcript(
                     continue
             
             if not component_predictions:
-                raise ValueError("No components available for prediction")
+                # Check which components have models available
+                available_components = []
+                for comp in ['pragmatic_conversational', 'syntactic_semantic']:
+                    if component_weights.get(comp, 0) > 0:
+                        models = model_registry.list_models()
+                        comp_models = [m for m in models if m.startswith(comp)]
+                        if comp_models:
+                            available_components.append(comp)
+
+                if not available_components:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail="No compatible models found for CHAT file input with fusion enabled. "
+                               "CHAT files require pragmatic_conversational or syntactic_semantic models. "
+                               "Please train models for these components first."
+                    )
+                else:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail=f"Fusion failed: Could not get predictions from any component. "
+                               f"Available components with models: {', '.join(available_components)}. "
+                               f"Please check that models are properly trained and loaded."
+                    )
             
-            # Fuse predictions
-            fused = model_fusion.fuse(component_predictions)
+            # Fuse predictions with chat file-specific weights
+            fused = model_fusion.fuse(component_predictions, component_weights_override=component_weights)
             
             # Generate annotated transcript (from pragmatic component)
             annotated = transcript_annotator.annotate(
@@ -700,10 +1153,11 @@ async def predict_from_transcript(
             tmp_path.unlink()
             
             return {
-                'prediction': fused.prediction,
+                'prediction': fused.final_prediction,
                 'confidence': fused.confidence,
-                'probabilities': fused.probabilities,
+                'probabilities': fused.final_probabilities,
                 'model_used': 'fusion',
+                'models_used': [cp.model_name for cp in component_predictions],  # List all models used
                 'component_breakdown': [
                     {
                         'component': cp.component,
@@ -715,19 +1169,115 @@ async def predict_from_transcript(
                     for cp in component_predictions
                 ],
                 'participant_id': transcript.participant_id,
-                'features_extracted': sum(len(cp.probabilities) for cp in component_predictions),
+                'features_extracted': len(feature_extractor.extract_from_transcript(transcript).features),
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
                 'input_type': 'chat_file',
             }
         
         else:
-            # Single component prediction (original logic)
+            # Single component prediction
+            # Validate model compatibility with input type
+            if model_name:
+                if not is_model_compatible_with_input(model_name, 'chat_file'):
+                    component = get_model_component(model_name)
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail=f"Model '{model_name}' ({component}) is not compatible with CHAT file input. "
+                               f"CHAT files don't contain audio, so acoustic models cannot be used. "
+                               f"Please select a pragmatic_conversational or syntactic_semantic model, "
+                               f"or use 'Best Model (Auto)' to automatically select a compatible model."
+                    )
+
             feature_set = feature_extractor.extract_from_transcript(transcript)
             features_df = pd.DataFrame([feature_set.features])
             
-            # Get model and make prediction
-            model, preprocessor, model_name = get_model_and_preprocessor()
+            # Get model and make prediction (use specified model or best compatible model)
+            if model_name:
+                # Validate that the model exists in the registry
+                available_models = model_registry.list_models()
+                if model_name not in available_models:
+                    # Try to find a matching model
+                    matching_models = [m for m in available_models if model_name in m]
+                    if matching_models:
+                        # If there's exactly one match, use it
+                        if len(matching_models) == 1:
+                            logger.info(f"Model '{model_name}' not found, using matching model: {matching_models[0]}")
+                            model_name = matching_models[0]
+                        else:
+                            # Multiple matches - find compatible ones
+                            compatible_matches = [m for m in matching_models if is_model_compatible_with_input(m, 'chat_file')]
+                            if compatible_matches:
+                                # Use the best compatible match
+                                best_f1 = -1
+                                best_match = None
+                                for m in compatible_matches:
+                                    try:
+                                        metadata = model_registry.get_model_metadata(m)
+                                        if metadata.f1_score > best_f1:
+                                            best_f1 = metadata.f1_score
+                                            best_match = m
+                                    except:
+                                        pass
+                                if best_match:
+                                    logger.info(f"Model '{model_name}' not found, using best compatible match: {best_match}")
+                                    model_name = best_match
+                                else:
+                                    raise HTTPException(
+                                        status_code=status.HTTP_400_BAD_REQUEST,
+                                        detail=f"Model '{model_name}' not found. Found {len(matching_models)} similar models: {', '.join(matching_models[:5])}. "
+                                               f"Please select a full model name from the dropdown."
+                                    )
+                            else:
+                                raise HTTPException(
+                                    status_code=status.HTTP_400_BAD_REQUEST,
+                                    detail=f"Model '{model_name}' not found and no compatible matches. "
+                                           f"Available models: {', '.join(available_models[:10])}. "
+                                           f"Please select a full model name from the dropdown."
+                                )
+                    else:
+                        raise HTTPException(
+                            status_code=status.HTTP_400_BAD_REQUEST,
+                            detail=f"Model '{model_name}' not found in registry. "
+                                   f"Available models: {', '.join(available_models[:10])}. "
+                                   f"Please select a model from the dropdown."
+                        )
+
+                # Now validate compatibility
+                if not is_model_compatible_with_input(model_name, 'chat_file'):
+                    component = get_model_component(model_name)
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail=f"Model '{model_name}' ({component}) is not compatible with CHAT file input. "
+                               f"CHAT files don't contain audio, so acoustic models cannot be used. "
+                               f"Please select a pragmatic_conversational or syntactic_semantic model, "
+                               f"or use 'Best Model (Auto)' to automatically select a compatible model."
+                    )
+
+                model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
+            else:
+                # Get best model, but only from compatible components
+                models = model_registry.list_models()
+                compatible_models = [m for m in models if is_model_compatible_with_input(m, 'chat_file')]
+                if not compatible_models:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail="No compatible models found for CHAT file input. "
+                               "Please train a pragmatic_conversational or syntactic_semantic model first."
+                    )
+                # Find best compatible model
+                best_f1 = -1
+                best_model = None
+                for m in compatible_models:
+                    try:
+                        metadata = model_registry.get_model_metadata(m)
+                        if metadata.f1_score > best_f1:
+                            best_f1 = metadata.f1_score
+                            best_model = m
+                    except:
+                        pass
+                model_name = best_model or compatible_models[0]
+                model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
             
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
@@ -737,31 +1287,41 @@ async def predict_from_transcript(
                     features_df = preprocessor.transform(features_df)
                     selected_features = preprocessor.selected_features_
             
-            result = make_prediction(model, features_df, model_name)
+            result = make_prediction(model, features_df, used_model_name)
 
-            #SHAP explanation
+            # SHAP explanation (optional, may not be available for all models)
             request_id = str(uuid.uuid4())
             local_shap_dir = Path("assets/shap/local") / request_id
+            local_shap_data = None
 
-            # Load background data saved during training
-            background = np.load(
-                Path("assets/shap") / model_name / "background.npy"
-            )
+            try:
+                # Load background data saved during training
+                background_path = Path("assets/shap") / used_model_name / "background.npy"
+                if background_path.exists():
+                    background = np.load(background_path)
 
-            predicted_class = 1 if result["prediction"] == "ASD" else 0
+                    predicted_class = 1 if result["prediction"] == "ASD" else 0
 
-            shap_manager = SHAPManager(
-                model=model,
-                background_data=background,
-                feature_names=selected_features,
-                model_type=model_name.split("_")[-1]
-            )
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=selected_features,
+                        model_type=used_model_name.split("_")[-1]
+                    )
 
-            shap_manager.generate_local_waterfall(
-                X_instance=features_df.values,
-                save_dir=local_shap_dir,
-                predicted_class=predicted_class
-            )
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values,
+                        save_dir=local_shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    local_shap_data = {
+                        'request_id': request_id,
+                        'waterfall': f"/assets/shap/local/{request_id}/waterfall.png"
+                    }
+            except Exception as shap_error:
+                logger.warning(f"SHAP explanation not available: {shap_error}")
+                # Continue without SHAP
             
             # Generate annotated transcript
             annotated = transcript_annotator.annotate(
@@ -772,24 +1332,39 @@ async def predict_from_transcript(
             # Clean up temp file
             tmp_path.unlink()
             
-            return {
+            response_data = {
                 **result,
                 'participant_id': transcript.participant_id,
                 'features_extracted': len(feature_set.features),
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
                 'input_type': 'chat_file',
-                'local_shap': {
-                    'request_id': request_id,
-                    'waterfall': f"/assets/shap/local/{request_id}/waterfall.png"
-                },
+                'model_used': used_model_name,  # Explicitly state which model was used
+                'component': get_model_component(used_model_name),
             }
-        
+
+            # Add SHAP data if available
+            if local_shap_data:
+                response_data['local_shap'] = local_shap_data
+
+            return response_data
+
+    except HTTPException as http_exc:
+        # Re-raise HTTPExceptions as-is (they already have proper error messages)
+        # But ensure detail is not empty
+        if not http_exc.detail or http_exc.detail.strip() == '':
+            http_exc.detail = f"Transcript prediction failed: {type(http_exc).__name__}"
+        raise
     except Exception as e:
-        logger.error(f"Transcript prediction failed: {e}")
+        logger.error(f"Transcript prediction failed: {e}", exc_info=True)
+        # Get error message - try multiple ways
+        error_msg = str(e) if str(e) else repr(e)
+        if not error_msg or error_msg.strip() == '':
+            error_msg = f"{type(e).__name__}: An error occurred during prediction"
+
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Transcript prediction failed: {str(e)}"
+            detail=f"Transcript prediction failed: {error_msg}"
         )
 
 
@@ -979,7 +1554,7 @@ def force_numeric_dataframe(X: pd.DataFrame) -> pd.DataFrame:
 
     return X
 
-def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.3, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
     """Background task for model training."""
     global training_state
 

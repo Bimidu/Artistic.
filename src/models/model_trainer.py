@@ -74,79 +74,62 @@ class ModelTrainer:
     """
     
     # Default hyperparameters for each model type
-    # Aggressive regularization to prevent overfitting on small datasets
     DEFAULT_PARAMS = {
         'random_forest': {
-            'n_estimators': 50,  # Reduced from 100
-            'max_depth': 5,  # Reduced from 10
-            'min_samples_split': 10,  # Increased from 5
-            'min_samples_leaf': 4,  # Increased from 2
-            'max_features': 'sqrt',  # Limit features per split
-            'class_weight': 'balanced',  # Handle class imbalance
+            'n_estimators': 100,
+            'max_depth': 10,
+            'min_samples_split': 5,
+            'min_samples_leaf': 2,
             'random_state': 42,
             'n_jobs': -1,
         },
         'xgboost': {
-            'n_estimators': 50,  # Reduced from 100
-            'max_depth': 3,  # Reduced from 6
-            'learning_rate': 0.05,  # Reduced from 0.1
-            'subsample': 0.7,  # Reduced from 0.8
-            'colsample_bytree': 0.7,  # Reduced from 0.8
-            'min_child_weight': 3,  # Add regularization
-            'reg_alpha': 0.1,  # L1 regularization
-            'reg_lambda': 0.1,  # L2 regularization
-            'scale_pos_weight': 1,  # Handle imbalance
+            'n_estimators': 100,
+            'max_depth': 6,
+            'learning_rate': 0.1,
+            'subsample': 0.8,
+            'colsample_bytree': 0.8,
             'random_state': 42,
             'n_jobs': -1,
         },
         'lightgbm': {
-            'n_estimators': 50,  # Reduced from 100
-            'max_depth': 3,  # Reduced from 6
-            'learning_rate': 0.05,  # Reduced from 0.1
-            'subsample': 0.7,  # Reduced from 0.8
-            'colsample_bytree': 0.7,  # Reduced from 0.8
-            'min_child_samples': 10,  # Add regularization
-            'reg_alpha': 0.1,  # L1 regularization
-            'reg_lambda': 0.1,  # L2 regularization
+            'n_estimators': 100,
+            'max_depth': 6,
+            'learning_rate': 0.1,
+            'subsample': 0.8,
+            'colsample_bytree': 0.8,
             'random_state': 42,
             'n_jobs': -1,
             'verbose': -1,
         },
         'svm': {
-            'C': 0.1,  # Reduced from 1.0 (stronger regularization)
+            'C': 1.0,
             'kernel': 'rbf',
             'gamma': 'scale',
-            'class_weight': 'balanced',  # Handle class imbalance
             'random_state': 42,
         },
         'logistic': {
-            'C': 0.1,  # Reduced from 1.0 (stronger regularization)
+            'C': 1.0,
             'max_iter': 1000,
-            'class_weight': 'balanced',  # Handle class imbalance
             'random_state': 42,
             'n_jobs': -1,
         },
         'mlp': {
-            'hidden_layer_sizes': (50, 25),  # Reduced from (100, 50)
+            'hidden_layer_sizes': (100, 50),
             'activation': 'relu',
-            'alpha': 0.01,  # Add L2 regularization
-            'learning_rate': 'adaptive',
             'max_iter': 500,
             'random_state': 42,
         },
         'gradient_boosting': {
-            'n_estimators': 50,  # Reduced from 100
-            'learning_rate': 0.05,  # Reduced from 0.1
-            'max_depth': 3,  # Reduced from 5
-            'min_samples_split': 10,  # Increased from 5
-            'min_samples_leaf': 4,  # Add regularization
-            'subsample': 0.7,  # Add regularization
-            'max_features': 'sqrt',  # Limit features
+            'n_estimators': 100,
+            'learning_rate': 0.1,
+            'max_depth': 5,
+            'min_samples_split': 5,
             'random_state': 42,
         },
         'adaboost': {
-            'n_estimators': 50,  # Reduced from 100
-            'learning_rate': 0.5,  # Reduced from 1.0
+            'n_estimators': 100,
+            'learning_rate': 1.0,
             'random_state': 42,
         },
     }
@@ -266,24 +249,13 @@ class ModelTrainer:
         model_name = model_name or config.model_type
         self.logger.info(f"Training {model_name} model...")
         
-        # Compute sample weights for class imbalance (for models that don't support class_weight)
-        from sklearn.utils.class_weight import compute_sample_weight
-        sample_weight = None
-        models_needing_sample_weight = ['gradient_boosting', 'adaboost', 'lightgbm']
-        if config.model_type in models_needing_sample_weight:
-            sample_weight = compute_sample_weight('balanced', y_train)
-            self.logger.debug(f"Computed sample weights for {config.model_type} to handle class imbalance")
-        
         if config.tune_hyperparameters:
             # Hyperparameter tuning
             model = self._train_with_tuning(X_train, y_train, config)
         else:
             # Train with default/provided parameters
             model = self._create_model(config)
-            if sample_weight is not None:
-                model.fit(X_train, y_train, sample_weight=sample_weight)
-            else:
-                model.fit(X_train, y_train)
+            model.fit(X_train, y_train)
         
         # Store model
         self.models_[model_name] = model
