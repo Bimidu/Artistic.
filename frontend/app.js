@@ -993,8 +993,6 @@ function showModelDetails(model) {
                             </div>
                         </div>
                     </div>
-                \`;
-            }
         </div>
     `;
     

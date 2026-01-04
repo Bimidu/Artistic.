@@ -537,6 +537,32 @@ async def predict_from_text(request: TextPredictionRequest):
                 features_df = preprocessor.transform(features_df)
         
         result = make_prediction(model, features_df, model_name)
+
+        # ============================
+        # 🔥 LOCAL SHAP (SAME AS TRANSCRIPT)
+        # ============================
+        request_id = str(uuid.uuid4())
+        local_shap_dir = Path("assets/shap/local") / request_id
+        local_shap_dir.mkdir(parents=True, exist_ok=True)
+
+        background = np.load(
+            Path("assets/shap") / model_name / "background.npy"
+        )
+
+        predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+        shap_manager = SHAPManager(
+            model=model,
+            background_data=background,
+            feature_names=list(features_df.columns),
+            model_type=model_name.split("_")[-1]
+        )
+
+        shap_manager.generate_local_waterfall(
+            X_instance=features_df.values[0],
+            save_dir=local_shap_dir,
+            predicted_class=predicted_class
+        )
         
         # Generate annotated transcript
         annotated = transcript_annotator.annotate(
@@ -550,6 +576,10 @@ async def predict_from_text(request: TextPredictionRequest):
             'annotated_transcript_html': annotated.to_html(),
             'annotation_summary': annotated._get_annotation_summary(),
             'input_type': 'text',
+            "local_shap": {
+                "request_id": request_id,
+                "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
+            },
         }
         
     except Exception as e:
