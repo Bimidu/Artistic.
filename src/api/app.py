@@ -25,6 +25,7 @@ from typing import Dict, List, Optional, Any
 import os
 import pandas as pd
 import numpy as np
+import ast
 from src.interpretability.explainability.shap_manager import SHAPManager
 from pathlib import Path
 import tempfile
@@ -776,14 +777,14 @@ async def predict_from_audio(
                 )
             else:
                 # Extract pragmatic features (default for audio)
-        feature_set = feature_extractor.extract_with_audio(
-            processed.transcript_data,
-            audio_path=processed.audio_path,
-            transcription_result=processed.transcription_result
-        )
-        
-        features_df = pd.DataFrame([feature_set.features])
-        
+                feature_set = feature_extractor.extract_with_audio(
+                    processed.transcript_data,
+                    audio_path=processed.audio_path,
+                    transcription_result=processed.transcription_result
+                )
+            
+            features_df = pd.DataFrame([feature_set.features])
+            
             # Get model and make prediction (use specified model or best compatible model)
             if model_name:
                 model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
@@ -990,21 +991,21 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             }
         else:
             # Single component prediction
-        # Extract features
-        feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
-        features_df = pd.DataFrame([feature_set.features])
-        
+            # Extract features
+            feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
+            features_df = pd.DataFrame([feature_set.features])
+            
             # Get model and make prediction (use specified model or best model)
             model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=request.model_name)
-        
-        if preprocessor is not None:
-            if isinstance(preprocessor, dict):
-                features_df = preprocess_with_dict(features_df, preprocessor)
+            
+            if preprocessor is not None:
+                if isinstance(preprocessor, dict):
+                    features_df = preprocess_with_dict(features_df, preprocessor)
                     selected_features = preprocessor["selected_features"]
-            else:
-                features_df = preprocessor.transform(features_df)
+                else:
+                    features_df = preprocessor.transform(features_df)
                     selected_features = preprocessor.selected_features_
-        
+            
             result = make_prediction(model, features_df, used_model_name)
 
             # ============================
@@ -1045,19 +1046,19 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                 component=component,
                 predicted_class=predicted_class
             )
-        
-        # Generate annotated transcript
-        annotated = transcript_annotator.annotate(
-            processed.transcript_data,
-            features=feature_set.features
-        )
-        
-        return {
-            **result,
-            'features_extracted': len(feature_set.features),
-            'annotated_transcript_html': annotated.to_html(),
-            'annotation_summary': annotated._get_annotation_summary(),
-            'input_type': 'text',
+            
+            # Generate annotated transcript
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features
+            )
+            
+            return {
+                **result,
+                'features_extracted': len(feature_set.features),
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'text',
                 'model_used': used_model_name,  # Explicitly state which model was used
                 'component': get_model_component(used_model_name),
                 "local_shap": {
@@ -1065,7 +1066,7 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                     "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
                 },
                 "counterfactual": cf_result,
-        }
+            }
         
     except Exception as e:
         logger.error(f"Text prediction failed: {e}")
@@ -1468,17 +1469,17 @@ async def list_datasets():
         )
 
         if not name_matches:
-                continue
+            continue
 
         cha_files = list(item.rglob("*.cha"))
         wav_files = list(item.rglob("*.wav"))
 
-            datasets.append({
+        datasets.append({
             "name": item.name,
-                "path": str(item),
-                "chat_files": len(cha_files),
-                "audio_files": len(wav_files),
-            })
+            "path": str(item),
+            "chat_files": len(cha_files),
+            "audio_files": len(wav_files),
+        })
 
     return {
         "data_directory": str(data_dir),
