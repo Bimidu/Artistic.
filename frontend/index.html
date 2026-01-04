@@ -276,12 +276,68 @@
         
         <!-- Training Mode -->
         <div class="mode-content hidden" id="trainingMode">
+            <!-- Feature Extraction Section -->
+            <div class="mb-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
+                <div class="px-10 py-8 bg-white flex items-center justify-between">
+                    <h2 class="text-5xl text-primary-900">Feature Extraction</h2>
+                    <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadDatasets()">Refresh</button>
+                </div>
+                
+                <div class="p-10">
+                    <p class="text-lg text-primary-600 mb-6">
+                        Select datasets from your file system to extract features. Extracted features will be saved to CSV files.
+                    </p>
+                    
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- Dataset Selection for Extraction -->
+                        <div class="bg-white rounded-2xl p-6" style="max-height: 500px; overflow-y: auto;">
+                            <h3 class="text-2xl text-primary-900 mb-4">Select Datasets to Extract</h3>
+                            <div id="extractionDatasetList">
+                                <div class="text-center py-16 text-primary-400 text-xl">
+                                    Click Refresh to load datasets
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Extraction Controls -->
+                        <div class="bg-white rounded-2xl p-6">
+                            <h3 class="text-2xl text-primary-900 mb-4">Extraction Settings</h3>
+                            
+                            <div class="mb-6">
+                                <label class="block text-lg text-primary-900 mb-3">Component</label>
+                                <select class="w-full px-6 py-4 bg-primary-50 rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="extractionComponent">
+                                    <option value="pragmatic_conversational">Pragmatic & Conversational</option>
+                                    <option value="acoustic_prosodic">Acoustic & Prosodic</option>
+                                    <option value="syntactic_semantic">Syntactic & Semantic</option>
+                                </select>
+                                <p class="text-sm text-primary-500 mt-2">Select which component's features to extract</p>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-lg text-primary-900 mb-3">Max Samples per Dataset</label>
+                                <input type="number" id="maxSamplesExtraction" value="" min="1" class="w-full px-6 py-4 bg-primary-50 rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" placeholder="Leave empty for all samples">
+                                <p class="text-sm text-primary-500 mt-2">Limit samples for large datasets (e.g., TD). Leave empty to extract all.</p>
+                            </div>
+                            
+                            <button class="w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="extractFeatures()">
+                                Extract Features
+                            </button>
+                            
+                            <div class="mt-6 bg-primary-50 rounded-xl p-4 hidden" id="extractionStatus">
+                                <div id="extractionStatusContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Training Section -->
             <div class="grid lg:grid-cols-2 gap-12">
-                <!-- Dataset Selection -->
+                <!-- Dataset Selection for Training -->
                 <div class="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                     <div class="px-10 py-8 bg-white flex items-center justify-between">
-                        <h2 class="text-5xl text-primary-900">Dataset Selection</h2>
-                        <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadDatasets()">Refresh</button>
+                        <h2 class="text-5xl text-primary-900">Available Datasets (from CSV)</h2>
+                        <button class="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onclick="loadAvailableDatasetsForTraining()">Refresh</button>
                     </div>
                     
                     <div class="p-10 flex flex-col" style="height: calc(100vh - 400px); min-height: 400px;">
@@ -322,6 +378,19 @@
                                     <input type="number" id="nFeatures" value="30" min="1" max="218" class="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all">
                                     <p class="text-sm text-primary-500 mt-2">Default: 30 (max: 218 for pragmatic, 20 for others)</p>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <label class="block text-xl text-primary-900 mb-4">Counterfactual Explanations</label>
+                            <div class="space-y-4">
+                                <label class="flex items-center cursor-pointer p-5 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
+                                    <input type="checkbox" id="enableAutoencoder" class="w-5 h-5 text-primary-600 rounded">
+                                    <div class="ml-4 flex-1">
+                                        <span class="text-lg text-primary-900">Enable counterfactual autoencoder</span>
+                                        <p class="text-sm text-primary-500 mt-1">Train autoencoder for counterfactual explanations (may crash on macOS - disabled by default)</p>
+                                    </div>
+                                </label>
                             </div>
                         </div>
                         
@@ -393,9 +462,8 @@
                             </div>
                         </div>
                         
-                        <div class="flex gap-4">
-                            <button class="flex-1 px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="extractFeatures()">Extract Features</button>
-                            <button class="flex-1 px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="startTraining()">Start Training</button>
+                        <div>
+                            <button class="w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onclick="startTraining()">Start Training</button>
                         </div>
                         
                         <div class="mt-8 bg-white rounded-2xl p-6 hidden" id="trainingStatus">

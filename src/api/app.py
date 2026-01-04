@@ -22,6 +22,7 @@ from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Dict, List, Optional, Any
+import os
 import pandas as pd
 import numpy as np
 from src.interpretability.explainability.shap_manager import SHAPManager
@@ -174,7 +175,11 @@ class FeatureExtractionRequest(BaseModel):
     dataset_paths: List[str] = Field(..., description="Paths to dataset folders")
     output_filename: str = Field(
         default="training_features.csv",
-        description="Output CSV filename"
+        description="Output CSV filename (component-specific: pragmatic_conversational_features.csv, etc.)"
+    )
+    component: Optional[str] = Field(
+        default=None,
+        description="Component name (pragmatic_conversational, acoustic_prosodic, syntactic_semantic). Auto-detected from filename if not provided."
     )
     max_samples_per_dataset: Optional[int] = Field(
         default=None,
@@ -184,7 +189,7 @@ class FeatureExtractionRequest(BaseModel):
 
 class TrainingRequest(BaseModel):
     """Request for model training."""
-    dataset_paths: List[str] = Field(..., description="Paths to dataset folders")
+    dataset_names: List[str] = Field(..., description="Dataset names to use from CSV (not paths)")
     model_types: List[str] = Field(
         default=['random_forest', 'xgboost'],
         description="Model types to train"
@@ -209,13 +214,13 @@ class TrainingRequest(BaseModel):
         default=42,
         description="Random seed for reproducibility"
     )
-    max_samples_per_dataset: Optional[int] = Field(
-        default=None,
-        description="Maximum samples per dataset (useful for large datasets like TD with 4000+ files)"
-    )
     custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = Field(
         default=None,
         description="Custom hyperparameters for each model type"
+    )
+    enable_autoencoder: Optional[bool] = Field(
+        default=None,
+        description="Enable counterfactual autoencoder training (None = auto-detect based on OS)"
     )
 
 
@@ -372,6 +377,75 @@ def is_model_compatible_with_input(model_name: str, input_type: str) -> bool:
         return component in ['pragmatic_conversational', 'syntactic_semantic']
 
     return True  # Unknown input type, allow it
+
+
+def get_feature_csv_path(component: str) -> Path:
+    """
+    Get the path to the feature CSV file for a component.
+    
+    Args:
+        component: Component name (e.g., 'pragmatic_conversational')
+        
+    Returns:
+        Path to the feature CSV file
+    """
+    filename = f"{component}_features.csv"
+    return config.paths.output_dir / filename
+
+
+def load_features_from_csv(csv_path: Path, dataset_names: Optional[List[str]] = None) -> Optional[pd.DataFrame]:
+    """
+    Load features from CSV file, optionally filtered by dataset names.
+    
+    Args:
+        csv_path: Path to the CSV file
+        dataset_names: Optional list of dataset names to filter by
+        
+    Returns:
+        DataFrame with features, or None if file doesn't exist
+    """
+    if not csv_path.exists():
+        return None
+    
+    try:
+        df = pd.read_csv(csv_path)
+        if dataset_names:
+            # Filter to only specified datasets
+            if 'dataset' in df.columns:
+                df = df[df['dataset'].isin(dataset_names)]
+        return df
+    except Exception as e:
+        logger.warning(f"Error loading features from {csv_path}: {e}")
+        return None
+
+
+def update_features_csv(csv_path: Path, new_features_df: pd.DataFrame, dataset_names: List[str]):
+    """
+    Update feature CSV by replacing rows for specified datasets with new features.
+    
+    Args:
+        csv_path: Path to the CSV file
+        new_features_df: DataFrame with new features (must have 'dataset' column)
+        dataset_names: List of dataset names to update
+    """
+    # Load existing CSV if it exists
+    if csv_path.exists():
+        try:
+            existing_df = pd.read_csv(csv_path)
+            # Remove rows for datasets being updated
+            if 'dataset' in existing_df.columns:
+                existing_df = existing_df[~existing_df['dataset'].isin(dataset_names)]
+            # Combine with new features
+            combined_df = pd.concat([existing_df, new_features_df], ignore_index=True)
+        except Exception as e:
+            logger.warning(f"Error reading existing CSV, creating new one: {e}")
+            combined_df = new_features_df
+    else:
+        combined_df = new_features_df
+    
+    # Save updated CSV
+    combined_df.to_csv(csv_path, index=False)
+    logger.info(f"Updated feature CSV: {csv_path} ({len(combined_df)} total samples)")
 
 
 def get_component_weights_for_input_type(input_type: str) -> Dict[str, float]:
@@ -1377,8 +1451,7 @@ async def predict_from_transcript(
 
 @app.get("/training/datasets", tags=["Training Mode"])
 async def list_datasets():
-    """List available dataset folders for training."""
-
+    """List available dataset folders for feature extraction."""
     data_dir = config.paths.data_dir
     datasets = []
 
@@ -1414,6 +1487,65 @@ async def list_datasets():
     }
 
 
+@app.get("/training/available-datasets/{component}", tags=["Training Mode"])
+async def list_available_datasets_in_csv(component: str):
+    """
+    List datasets available in the feature CSV for a component.
+    
+    This is used for training - shows which datasets have features available.
+    """
+    feature_csv_path = get_feature_csv_path(component)
+    
+    if not feature_csv_path.exists():
+        return {
+            "component": component,
+            "csv_exists": False,
+            "datasets": [],
+            "total_datasets": 0,
+            "total_samples": 0,
+            "message": f"No features CSV found for {component}. Please extract features first."
+        }
+    
+    try:
+        df = pd.read_csv(feature_csv_path)
+        
+        if 'dataset' not in df.columns:
+            return {
+                "component": component,
+                "csv_exists": True,
+                "datasets": [],
+                "total_datasets": 0,
+                "total_samples": len(df),
+                "message": "CSV exists but has no 'dataset' column. Cannot identify datasets."
+            }
+        
+        # Get unique datasets with sample counts
+        dataset_counts = df['dataset'].value_counts().to_dict()
+        datasets = [
+            {
+                "name": name,
+                "samples": int(count)
+            }
+            for name, count in dataset_counts.items()
+        ]
+        
+        return {
+            "component": component,
+            "csv_exists": True,
+            "csv_path": str(feature_csv_path),
+            "datasets": datasets,
+            "total_datasets": len(datasets),
+            "total_samples": len(df),
+            "message": f"Found {len(datasets)} dataset(s) with {len(df)} total samples"
+        }
+    except Exception as e:
+        logger.error(f"Error reading feature CSV: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error reading feature CSV: {str(e)}"
+        )
+
+
 
 @app.post("/training/extract-features", tags=["Training Mode"])
 async def extract_features_for_training(request: FeatureExtractionRequest):
@@ -1421,14 +1553,38 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
     Extract features from specified datasets for training.
     
     Supports max_samples_per_dataset for large datasets (e.g., TD with 4000+ files).
+    Updates existing CSV by overwriting only the relevant dataset's features.
     
-    Returns the path to the generated feature CSV file.
+    Returns the path to the generated/updated feature CSV file.
     """
     logger.info(f"Feature extraction request for {len(request.dataset_paths)} datasets")
     if request.max_samples_per_dataset:
         logger.info(f"Max samples per dataset: {request.max_samples_per_dataset}")
     
+    # Determine component from request, filename, or default to pragmatic
+    if request.component:
+        component = request.component
+    elif 'acoustic' in request.output_filename.lower():
+        component = 'acoustic_prosodic'
+    elif 'syntactic' in request.output_filename.lower() or 'semantic' in request.output_filename.lower():
+        component = 'syntactic_semantic'
+    else:
+        component = 'pragmatic_conversational'  # Default
+    
+    logger.info(f"Using component: {component}")
+    
+    # Select appropriate feature extractor
+    if component == 'acoustic_prosodic':
+        from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
+        extractor = AcousticFeatureExtractor()
+    elif component == 'syntactic_semantic':
+        from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
+        extractor = SyntacticFeatureExtractor()
+    else:
+        extractor = feature_extractor
+    
     all_dfs = []
+    dataset_names = []
     
     for dataset_path in request.dataset_paths:
         path = Path(dataset_path)
@@ -1439,6 +1595,9 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
             logger.warning(f"Dataset path not found: {dataset_path}")
             continue
         
+        dataset_name = path.name
+        dataset_names.append(dataset_name)
+        
         try:
             # Check if this is a large dataset (TD)
             is_td_dataset = 'td' in path.name.lower()
@@ -1447,17 +1606,22 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
             max_samples = request.max_samples_per_dataset or config.datasets.max_samples_td
             max_samples_for_extraction = max_samples if is_td_dataset else None
             
-            # Extract features - pragmatic extractor doesn't support max_samples param
-            df = feature_extractor.extract_from_directory(path)
+            logger.info(f"Extracting {component} features from {dataset_name}...")
             
-            # Sample after extraction for pragmatic features
-            if is_td_dataset and max_samples and len(df) > max_samples:
-                logger.info(f"Sampling {max_samples} from {len(df)} TD samples (config: max_samples_td={config.datasets.max_samples_td})")
-                df = df.sample(n=max_samples, random_state=42)
+            # Extract features
+            if component == 'acoustic_prosodic' and hasattr(extractor, 'extract_from_directory'):
+                df = extractor.extract_from_directory(path, max_samples=max_samples_for_extraction)
+            else:
+                df = extractor.extract_from_directory(path)
+                # Sample after extraction for other extractors
+                if is_td_dataset and max_samples and len(df) > max_samples:
+                    logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
+                    df = df.sample(n=max_samples, random_state=42)
             
             if not df.empty:
-                df['dataset'] = path.name
+                df['dataset'] = dataset_name
                 all_dfs.append(df)
+                logger.info(f"Extracted {len(df)} samples from {dataset_name}")
         except Exception as e:
             logger.error(f"Error extracting from {dataset_path}: {e}")
     
@@ -1468,22 +1632,27 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
         )
     
     # Combine all DataFrames
-    combined_df = pd.concat(all_dfs, ignore_index=True)
+    new_features_df = pd.concat(all_dfs, ignore_index=True)
     
-    # Save to output
+    # Update CSV (overwrite only relevant datasets)
     output_path = config.paths.output_dir / request.output_filename
-    combined_df.to_csv(output_path, index=False)
+    update_features_csv(output_path, new_features_df, dataset_names)
     
     # Count actual features in the dataframe (exclude metadata columns)
     metadata_cols = ['participant_id', 'file_path', 'diagnosis', 'age_months', 'dataset']
-    actual_feature_cols = [col for col in combined_df.columns if col not in metadata_cols]
+    actual_feature_cols = [col for col in new_features_df.columns if col not in metadata_cols]
+    
+    # Get total samples in CSV after update
+    total_samples = len(pd.read_csv(output_path)) if output_path.exists() else len(new_features_df)
     
     return {
         'status': 'success',
         'output_file': str(output_path),
-        'total_samples': len(combined_df),
-        'features_count': len(actual_feature_cols),  # ← FIXED: Count actual features
-        'datasets_processed': len(all_dfs)
+        'total_samples': total_samples,
+        'new_samples': len(new_features_df),
+        'features_count': len(actual_feature_cols),
+        'datasets_processed': len(all_dfs),
+        'datasets_updated': dataset_names
     }
 
 @app.get("/explain/shap/global/{model_name}", tags=["Interpretability"])
@@ -1557,7 +1726,7 @@ def force_numeric_dataframe(X: pd.DataFrame) -> pd.DataFrame:
 
     return X
 
-def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
+def run_training_task(dataset_names: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, enable_autoencoder: Optional[bool] = None):
     """Background task for model training."""
     global training_state
 
@@ -1573,50 +1742,66 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
         
         logger.info(f"Starting training: component={component}, models={model_types}, n_features={n_features}, feature_selection={feature_selection}")
         
-        # Select appropriate feature extractor based on component
-        if component == 'acoustic_prosodic':
-            from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
-            extractor = AcousticFeatureExtractor()
-        elif component == 'syntactic_semantic':
-            from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
-            extractor = SyntacticFeatureExtractor()
-        else:  # pragmatic_conversational (default)
-            extractor = feature_extractor
+        # Step 1: Load features from CSV (training NEVER extracts features)
+        feature_csv_path = get_feature_csv_path(component)
         
-        # Step 1: Load or extract features
-        all_dfs = []
-        for i, dataset_path in enumerate(dataset_paths):
-            path = Path(dataset_path)
-            if not path.exists():
-                path = config.paths.data_dir / dataset_path
+        if not feature_csv_path.exists():
+            raise ValueError(
+                f"No features CSV found for {component}. "
+                f"Please extract features first using the 'Extract Features' button. "
+                f"Expected CSV: {feature_csv_path}"
+            )
+        
+        logger.info(f"Loading features from CSV: {feature_csv_path}")
+        training_state['message'] = f'Loading features from CSV for {component}...'
+        
+        # Load features for selected datasets
+        existing_df = load_features_from_csv(feature_csv_path, dataset_names)
+        
+        if existing_df is None or existing_df.empty:
+            available_datasets = []
+            if feature_csv_path.exists():
+                try:
+                    full_df = pd.read_csv(feature_csv_path)
+                    if 'dataset' in full_df.columns:
+                        available_datasets = full_df['dataset'].unique().tolist()
+                except:
+                    pass
             
-            if not path.exists():
-                logger.warning(f"Dataset path not found: {dataset_path}")
-                continue
+            raise ValueError(
+                f"No features found for selected datasets: {', '.join(dataset_names)}. "
+                f"Available datasets in CSV: {', '.join(available_datasets) if available_datasets else 'none'}. "
+                f"Please extract features for these datasets first."
+            )
+        
+        # Filter to only selected datasets
+        if 'dataset' in existing_df.columns:
+            existing_datasets = set(existing_df['dataset'].unique())
+            missing_datasets = [d for d in dataset_names if d not in existing_datasets]
             
-            # Check if this is TD dataset and apply sampling BEFORE extraction
-            is_td_dataset = 'td' in path.name.lower()
-            max_samples = max_samples_per_dataset or config.datasets.max_samples_td
-            max_samples_for_extraction = max_samples if is_td_dataset else None
+            if missing_datasets:
+                raise ValueError(
+                    f"Some selected datasets are not in the CSV: {', '.join(missing_datasets)}. "
+                    f"Available datasets: {', '.join(sorted(existing_datasets))}. "
+                    f"Please extract features for missing datasets first."
+                )
             
-            training_state['message'] = f'Extracting {component} features from dataset {i+1}/{len(dataset_paths)}...'
-            
-            # Pass max_samples to acoustic extractor to limit files BEFORE processing
-            if component == 'acoustic_prosodic' and hasattr(extractor, 'extract_from_directory'):
-                df = extractor.extract_from_directory(path, max_samples=max_samples_for_extraction)
-            else:
-                df = extractor.extract_from_directory(path)
-                # For other extractors, sample after extraction
-                if is_td_dataset and max_samples and len(df) > max_samples:
-                    logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
-                    df = df.sample(n=max_samples, random_state=42)
-            
-            if not df.empty:
-                df['dataset'] = path.name
-                all_dfs.append(df)
+            # Filter to only selected datasets
+            all_dfs = []
+            for dataset_name in dataset_names:
+                dataset_df = existing_df[existing_df['dataset'] == dataset_name].copy()
+                if not dataset_df.empty:
+                    all_dfs.append(dataset_df)
+                    logger.info(f"Loaded {len(dataset_df)} samples for {dataset_name} from CSV")
+                else:
+                    logger.warning(f"No samples found for {dataset_name} in CSV")
+        else:
+            # No dataset column, use all features
+            all_dfs = [existing_df]
+            logger.warning("CSV has no 'dataset' column, using all features")
         
         if not all_dfs:
-            raise ValueError("No features extracted from any dataset")
+            raise ValueError("No features available for selected datasets. Please extract features first.")
         
         combined_df = pd.concat(all_dfs, ignore_index=True)
         logger.info(f"Combined features: {len(combined_df)} samples")
@@ -1716,23 +1901,51 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
         # =====================================================
         # TRAIN COUNTERFACTUAL AUTOENCODER (ONCE PER COMPONENT)
         # =====================================================
-
-
-        ae_dir = Path("models/counterfactuals")
-        ae_dir.mkdir(parents=True, exist_ok=True)
-
-        ae_path = ae_dir / f"{component}_ae.pt"
-
-        # Train only if not already trained
-        if not ae_path.exists():
-            logger.info(f"Training counterfactual autoencoder for {component}")
-            train_autoencoder(
-                X_train.values,  # IMPORTANT: already preprocessed + feature-selected
-                component,
-                ae_dir
-            )
+        # Note: This is optional and may crash on some systems (e.g., macOS ARM64 with PyTorch)
+        # Disabled by default on macOS due to PyTorch segfault issues
+        # Can be controlled via UI checkbox or ENABLE_COUNTERFACTUAL_AE environment variable
+        
+        import platform
+        is_macos = platform.system() == "Darwin"
+        
+        # Priority: UI setting > environment variable > OS-based default
+        if enable_autoencoder is None:
+            env_setting = os.getenv("ENABLE_COUNTERFACTUAL_AE", "").lower()
+            if env_setting == "":
+                # Default: disabled on macOS, enabled elsewhere
+                enable_autoencoder_flag = not is_macos
+            else:
+                enable_autoencoder_flag = env_setting == "true"
         else:
-            logger.info(f"Autoencoder already exists for {component}, skipping training")
+            enable_autoencoder_flag = enable_autoencoder
+        
+        if enable_autoencoder_flag:
+            ae_dir = Path("models/counterfactuals")
+            ae_dir.mkdir(parents=True, exist_ok=True)
+            ae_path = ae_dir / f"{component}_ae.pt"
+
+            # Train only if not already trained
+            if not ae_path.exists():
+                try:
+                    logger.info(f"Training counterfactual autoencoder for {component}")
+                    train_autoencoder(
+                        X_train.values,  # IMPORTANT: already preprocessed + feature-selected
+                        component,
+                        ae_dir
+                    )
+                    logger.info(f"Counterfactual autoencoder trained successfully for {component}")
+                except Exception as ae_error:
+                    # Autoencoder training is optional - log warning but continue training
+                    logger.warning(
+                        f"Failed to train counterfactual autoencoder for {component}: {ae_error}. "
+                        f"Training will continue without counterfactual support. "
+                        f"If you see segmentation faults, set ENABLE_COUNTERFACTUAL_AE=false to disable. "
+                        f"Counterfactual explanations will not be available for predictions."
+                    )
+            else:
+                logger.info(f"Autoencoder already exists for {component}, skipping training")
+        else:
+            logger.info(f"Counterfactual autoencoder training is disabled (ENABLE_COUNTERFACTUAL_AE=false)")
         
         # Step 3: Train models
         from src.models import ModelTrainer, ModelConfig, ModelEvaluator
@@ -1904,7 +2117,7 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
     # Start training in background
     background_tasks.add_task(
         run_training_task,
-        request.dataset_paths,
+        request.dataset_names,
         request.model_types,
         request.component,
         request.n_features,
@@ -1912,14 +2125,14 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         request.test_size,
         request.random_state,
         request.custom_hyperparameters,
-        request.max_samples_per_dataset
+        request.enable_autoencoder
     )
     
     return {
         'status': 'training_initiated',
         'component': request.component,
         'model_types': request.model_types,
-        'datasets': request.dataset_paths,
+        'datasets': request.dataset_names,
         'message': 'Training started in background. Check /training/status for progress.'
     }
 

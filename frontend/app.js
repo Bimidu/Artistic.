@@ -507,7 +507,19 @@ function displayError(message) {
 
 // Training mode functions
 async function loadDatasets() {
-    const listEl = document.getElementById('datasetList');
+    // This is for feature extraction - shows dataset paths from file system
+    const listEl = document.getElementById('extractionDatasetList');
+    if (!listEl) {
+        // Fallback to old location if new element doesn't exist
+        const oldListEl = document.getElementById('datasetList');
+        if (oldListEl) {
+            listEl = oldListEl;
+        } else {
+            console.error('Could not find extractionDatasetList element');
+            return;
+        }
+    }
+    
     listEl.innerHTML = '<div class="text-center py-16"><div class="spinner mx-auto"></div></div>';
     
     try {
@@ -516,8 +528,8 @@ async function loadDatasets() {
         
         if (data.datasets && data.datasets.length > 0) {
             listEl.innerHTML = data.datasets.map(ds => `
-                <div class="flex items-center p-6 bg-white rounded-2xl mb-4 hover:bg-primary-100 transition-colors">
-                    <input type="checkbox" class="dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.path}">
+                <div class="flex items-center p-4 bg-primary-50 rounded-xl mb-3 hover:bg-primary-100 transition-colors">
+                    <input type="checkbox" class="extraction-dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.path}" data-name="${ds.name}">
                     <div class="flex-1 ml-5">
                         <div class="text-lg text-primary-900">${ds.name}</div>
                         <div class="text-base text-primary-500 mt-1">${ds.chat_files} CHAT files, ${ds.audio_files} audio files</div>
@@ -532,24 +544,86 @@ async function loadDatasets() {
     }
 }
 
+async function loadAvailableDatasetsForTraining() {
+    // This is for training - shows datasets from CSV
+    const listEl = document.getElementById('datasetList');
+    const component = document.getElementById('trainingComponent').value;
+    
+    listEl.innerHTML = '<div class="text-center py-16"><div class="spinner mx-auto"></div></div>';
+    
+    try {
+        const response = await fetch(`${getApiUrl()}/training/available-datasets/${component}`);
+        const data = await response.json();
+        
+        if (data.csv_exists && data.datasets && data.datasets.length > 0) {
+            listEl.innerHTML = `
+                <div class="mb-4 p-4 bg-green-50 rounded-xl border border-green-200">
+                    <div class="text-sm text-green-700">
+                        <strong>✓ Features CSV found:</strong> ${data.total_samples} total samples from ${data.total_datasets} dataset(s)
+                    </div>
+                </div>
+                ${data.datasets.map(ds => `
+                    <div class="flex items-center p-6 bg-white rounded-2xl mb-4 hover:bg-primary-100 transition-colors">
+                        <input type="checkbox" class="dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.name}" data-name="${ds.name}">
+                        <div class="flex-1 ml-5">
+                            <div class="text-lg text-primary-900">${ds.name}</div>
+                            <div class="text-base text-primary-500 mt-1">${ds.samples} samples available</div>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        } else {
+            listEl.innerHTML = `
+                <div class="mb-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+                    <div class="text-sm text-yellow-700">
+                        <strong>⚠ No features CSV found for ${component}</strong>
+                    </div>
+                    <div class="text-xs text-yellow-600 mt-2">
+                        Please extract features first using the "Extract Features" section.
+                    </div>
+                </div>
+                <div class="text-center py-16 text-primary-400 text-xl">
+                    ${data.message || 'No datasets available'}
+                </div>
+            `;
+        }
+    } catch (error) {
+        listEl.innerHTML = `<div class="text-center py-16 text-red-500 text-xl">Error: ${error.message}</div>`;
+    }
+}
+
 async function extractFeatures() {
-    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
+    // Get datasets from extraction checkboxes (file system datasets)
+    const selectedDatasets = Array.from(document.querySelectorAll('.extraction-dataset-checkbox:checked')).map(cb => cb.value);
     
     if (selectedDatasets.length === 0) {
-        alert('Please select at least one dataset');
+        alert('Please select at least one dataset for feature extraction');
         return;
     }
     
-    const statusEl = document.getElementById('trainingStatus');
-    const statusContent = document.getElementById('trainingStatusContent');
+    const component = document.getElementById('extractionComponent').value;
+    const maxSamples = document.getElementById('maxSamplesExtraction').value;
+    
+    const statusEl = document.getElementById('extractionStatus');
+    const statusContent = document.getElementById('extractionStatusContent');
     statusEl.classList.remove('hidden');
-    statusContent.innerHTML = '<div class="spinner mx-auto"></div>';
+    statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-4 text-base text-primary-600">Extracting features...</div>';
     
     try {
+        const requestBody = {
+            dataset_paths: selectedDatasets,
+            component: component,
+            output_filename: `${component}_features.csv`
+        };
+        
+        if (maxSamples && maxSamples.trim() !== '') {
+            requestBody.max_samples_per_dataset = parseInt(maxSamples);
+        }
+        
         const response = await fetch(`${getApiUrl()}/training/extract-features`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ dataset_paths: selectedDatasets })
+            body: JSON.stringify(requestBody)
         });
         
         const data = await response.json();
@@ -557,15 +631,25 @@ async function extractFeatures() {
         if (response.ok) {
             statusContent.innerHTML = `
                 <div class="text-green-600 text-lg mb-3">✓ Feature extraction complete</div>
-                <div class="text-lg text-primary-900 mb-2">
-                    ${data.total_samples} samples, ${data.features_count} features
+                <div class="text-base text-primary-900 mb-2">
+                    <strong>Total samples:</strong> ${data.total_samples || data.new_samples}
+                    ${data.new_samples ? ` (${data.new_samples} new)` : ''}
                 </div>
-                <div class="text-sm text-primary-500">
-                    Output: ${data.output_file}
+                <div class="text-base text-primary-900 mb-2">
+                    <strong>Features:</strong> ${data.features_count}
                 </div>
+                <div class="text-sm text-primary-500 mb-2">
+                    <strong>Output:</strong> ${data.output_file}
+                </div>
+                ${data.datasets_updated ? `<div class="text-sm text-primary-600 mt-2">Updated datasets: ${data.datasets_updated.join(', ')}</div>` : ''}
             `;
+            
+            // Reload available datasets for training after extraction
+            setTimeout(() => {
+                loadAvailableDatasetsForTraining();
+            }, 1000);
         } else {
-            statusContent.innerHTML = `<div class="text-red-500 text-base">${data.detail}</div>`;
+            statusContent.innerHTML = `<div class="text-red-500 text-base">${data.detail || 'Feature extraction failed'}</div>`;
         }
     } catch (error) {
         statusContent.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
@@ -573,7 +657,9 @@ async function extractFeatures() {
 }
 
 async function startTraining() {
-    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
+    // Get dataset names (not paths) from checkboxes
+    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked'))
+        .map(cb => cb.getAttribute('data-name') || cb.value.split('/').pop() || cb.value);
     
     if (selectedDatasets.length === 0) {
         alert('Please select at least one dataset');
@@ -595,6 +681,7 @@ async function startTraining() {
     const nFeatures = parseInt(document.getElementById('nFeatures').value) || 30;
     const testSize = parseFloat(document.getElementById('testSize').value) / 100 || 0.2;
     const randomState = parseInt(document.getElementById('randomState').value) || 42;
+    const enableAutoencoder = document.getElementById('enableAutoencoder').checked;
     const customHyperparams = getCustomHyperparameters();
     
     const statusEl = document.getElementById('trainingStatus');
@@ -607,13 +694,14 @@ async function startTraining() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                dataset_paths: selectedDatasets,
+                dataset_names: selectedDatasets,  // Changed from dataset_paths to dataset_names
                 model_types: selectedModels,
                 component: component,
                 feature_selection: featureSelectionEnabled,
                 n_features: featureSelectionEnabled ? nFeatures : null,
                 test_size: testSize,
                 random_state: randomState,
+                enable_autoencoder: enableAutoencoder,
                 custom_hyperparameters: customHyperparams
             })
         });
@@ -645,6 +733,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 featureCountSection.style.opacity = '0.5';
                 featureCountSection.style.pointerEvents = 'none';
             }
+        });
+    }
+    
+    // Reload available datasets when component changes
+    const trainingComponent = document.getElementById('trainingComponent');
+    if (trainingComponent) {
+        trainingComponent.addEventListener('change', () => {
+            loadAvailableDatasetsForTraining();
         });
     }
 });

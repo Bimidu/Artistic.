@@ -1,3 +1,7 @@
+import matplotlib
+# Set non-interactive backend before importing pyplot to prevent GUI issues in background threads
+matplotlib.use('Agg')  # Use Agg backend (no GUI) - required for background tasks on macOS
+
 import shap
 import matplotlib.pyplot as plt
 import numpy as np
