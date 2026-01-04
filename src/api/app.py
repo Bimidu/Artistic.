@@ -1056,6 +1056,17 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
             combined_df['diagnosis'] = combined_df['diagnosis'].map(label_map)
             
             logger.info(f"After cleaning: {len(combined_df)} samples with labels {combined_df['diagnosis'].unique()}")
+            
+            # Check if we have at least 2 classes for binary classification
+            unique_labels = combined_df['diagnosis'].unique()
+            if len(unique_labels) < 2:
+                class_name = 'TD' if 0 in unique_labels else 'ASD'
+                raise ValueError(
+                    f"Cannot train binary classifier with only one class: {class_name}. "
+                    f"Need both ASD and TD samples. "
+                    f"Found {len(combined_df)} samples, all labeled as {class_name}. "
+                    f"Please include datasets with both ASD and TD samples for training."
+                )
         
         if len(combined_df) < 10:
             raise ValueError(f"Insufficient samples after filtering: {len(combined_df)} (need at least 10)")
