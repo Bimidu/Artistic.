@@ -115,6 +115,7 @@ class DatasetConfig:
         datasets: List of dataset names to process
         diagnosis_mapping: Mapping of diagnosis codes to standardized labels
         speaker_roles: Valid speaker role identifiers
+        max_samples_td: Maximum samples to use from TD dataset (None = use all)
     """
     datasets: list = field(default_factory=lambda: [
         "asdbank_aac",
@@ -126,6 +127,10 @@ class DatasetConfig:
         "typical_dev",
         "asdbank_child_only"
     ])
+    
+    # Limit TD dataset to avoid processing 4000+ files
+    # Set to None to use all files, or a number like 100 for random sampling
+    max_samples_td: int = 100  # Use 100 random TD samples instead of all 4,228
     
     # Standardize diagnosis labels across datasets
     diagnosis_mapping: Dict[str, str] = field(default_factory=lambda: {

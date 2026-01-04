@@ -117,22 +117,38 @@ class AcousticFeatureExtractor:
         
         return result.features
     
-    def extract_from_directory(self, directory: Path) -> pd.DataFrame:
+    def extract_from_directory(self, directory: Path, max_samples: Optional[int] = None) -> pd.DataFrame:
         """
         Extract features from all files in directory.
         
         Args:
             directory: Directory path
+            max_samples: Maximum number of samples to process (random sample if exceeded)
         
         Returns:
             DataFrame with features
         """
         logger.info(f"Extracting acoustic features from directory: {directory}")
         
-        # Find audio files
-        audio_files = list(directory.rglob('*.wav'))
-        audio_files.extend(directory.rglob('*.mp3'))
-        audio_files.extend(directory.rglob('*.flac'))
+        # Find audio files (exclude child_only directories from old extraction script)
+        audio_files = []
+        for ext in ['*.wav', '*.mp3', '*.flac']:
+            for audio_file in directory.rglob(ext):
+                # Skip files in child_only folders (from old standalone script)
+                if 'child_only' in str(audio_file):
+                    logger.debug(f"Skipping pre-extracted file: {audio_file.name}")
+                    continue
+                audio_files.append(audio_file)
+        
+        total_files = len(audio_files)
+        logger.info(f"Found {total_files} audio files in {directory}")
+        
+        # Random sampling if too many files
+        if max_samples and total_files > max_samples:
+            import random
+            random.seed(42)  # For reproducibility
+            audio_files = random.sample(audio_files, max_samples)
+            logger.info(f"Randomly sampled {max_samples} files from {total_files} total files")
         
         if not audio_files:
             logger.warning(f"No audio files found in {directory}")

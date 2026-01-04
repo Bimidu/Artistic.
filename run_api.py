@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print("\nEndpoints:")
     print("  [DIAGNOSIS] Health Check: http://localhost:8000/health")
     print("  [ML] List Models: http://localhost:8000/models")
-    print("  🔮 Predictions: http://localhost:8000/predict")
+    print("  [PREDICT] Predictions: http://localhost:8000/predict")
     print("\n" + "="*70 + "\n")
     
     uvicorn.run(

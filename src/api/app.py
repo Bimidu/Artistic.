@@ -169,6 +169,10 @@ class FeatureExtractionRequest(BaseModel):
         default="training_features.csv",
         description="Output CSV filename"
     )
+    max_samples_per_dataset: Optional[int] = Field(
+        default=None,
+        description="Maximum samples per dataset (for large datasets like TD)"
+    )
 
 
 class TrainingRequest(BaseModel):
@@ -197,6 +201,10 @@ class TrainingRequest(BaseModel):
     random_state: int = Field(
         default=42,
         description="Random seed for reproducibility"
+    )
+    max_samples_per_dataset: Optional[int] = Field(
+        default=None,
+        description="Maximum samples per dataset (useful for large datasets like TD with 4000+ files)"
     )
     custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = Field(
         default=None,
@@ -834,9 +842,13 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
     """
     Extract features from specified datasets for training.
     
+    Supports max_samples_per_dataset for large datasets (e.g., TD with 4000+ files).
+    
     Returns the path to the generated feature CSV file.
     """
     logger.info(f"Feature extraction request for {len(request.dataset_paths)} datasets")
+    if request.max_samples_per_dataset:
+        logger.info(f"Max samples per dataset: {request.max_samples_per_dataset}")
     
     all_dfs = []
     
@@ -850,7 +862,21 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
             continue
         
         try:
+            # Check if this is a large dataset (TD)
+            is_td_dataset = 'td' in path.name.lower()
+            
+            # Use request parameter, or fall back to config default
+            max_samples = request.max_samples_per_dataset or config.datasets.max_samples_td
+            max_samples_for_extraction = max_samples if is_td_dataset else None
+            
+            # Extract features - pragmatic extractor doesn't support max_samples param
             df = feature_extractor.extract_from_directory(path)
+            
+            # Sample after extraction for pragmatic features
+            if is_td_dataset and max_samples and len(df) > max_samples:
+                logger.info(f"Sampling {max_samples} from {len(df)} TD samples (config: max_samples_td={config.datasets.max_samples_td})")
+                df = df.sample(n=max_samples, random_state=42)
+            
             if not df.empty:
                 df['dataset'] = path.name
                 all_dfs.append(df)
@@ -953,7 +979,7 @@ def force_numeric_dataframe(X: pd.DataFrame) -> pd.DataFrame:
 
     return X
 
-def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None):
+def run_training_task(dataset_paths: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, max_samples_per_dataset: Optional[int] = None):
     """Background task for model training."""
     global training_state
 
@@ -990,8 +1016,23 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
                 logger.warning(f"Dataset path not found: {dataset_path}")
                 continue
             
+            # Check if this is TD dataset and apply sampling BEFORE extraction
+            is_td_dataset = 'td' in path.name.lower()
+            max_samples = max_samples_per_dataset or config.datasets.max_samples_td
+            max_samples_for_extraction = max_samples if is_td_dataset else None
+            
             training_state['message'] = f'Extracting {component} features from dataset {i+1}/{len(dataset_paths)}...'
-            df = extractor.extract_from_directory(path)
+            
+            # Pass max_samples to acoustic extractor to limit files BEFORE processing
+            if component == 'acoustic_prosodic' and hasattr(extractor, 'extract_from_directory'):
+                df = extractor.extract_from_directory(path, max_samples=max_samples_for_extraction)
+            else:
+                df = extractor.extract_from_directory(path)
+                # For other extractors, sample after extraction
+                if is_td_dataset and max_samples and len(df) > max_samples:
+                    logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
+                    df = df.sample(n=max_samples, random_state=42)
+            
             if not df.empty:
                 df['dataset'] = path.name
                 all_dfs.append(df)
@@ -1045,6 +1086,17 @@ def run_training_task(dataset_paths: List[str], model_types: List[str], componen
             combined_df['diagnosis'] = combined_df['diagnosis'].map(label_map)
             
             logger.info(f"After cleaning: {len(combined_df)} samples with labels {combined_df['diagnosis'].unique()}")
+            
+            # Check if we have at least 2 classes for binary classification
+            unique_labels = combined_df['diagnosis'].unique()
+            if len(unique_labels) < 2:
+                class_name = 'TD' if 0 in unique_labels else 'ASD'
+                raise ValueError(
+                    f"Cannot train binary classifier with only one class: {class_name}. "
+                    f"Need both ASD and TD samples. "
+                    f"Found {len(combined_df)} samples, all labeled as {class_name}. "
+                    f"Please include datasets with both ASD and TD samples for training."
+                )
         
         if len(combined_df) < 10:
             raise ValueError(f"Insufficient samples after filtering: {len(combined_df)} (need at least 10)")
@@ -1260,7 +1312,8 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         request.feature_selection,
         request.test_size,
         request.random_state,
-        request.custom_hyperparameters
+        request.custom_hyperparameters,
+        request.max_samples_per_dataset
     )
     
     return {
