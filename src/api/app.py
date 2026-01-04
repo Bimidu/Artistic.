@@ -330,7 +330,7 @@ def get_model_and_preprocessor(model_name: Optional[str] = None, component: Opti
         # Validate model exists
         if model_name not in model_registry.list_models():
             raise ValueError(f"Model '{model_name}' not found in registry")
-
+        
         model, preprocessor = model_registry.load_model(
             model_name,
             load_preprocessor=True
@@ -776,14 +776,14 @@ async def predict_from_audio(
                 )
             else:
                 # Extract pragmatic features (default for audio)
-                feature_set = feature_extractor.extract_with_audio(
-                    processed.transcript_data,
-                    audio_path=processed.audio_path,
-                    transcription_result=processed.transcription_result
-                )
-
-            features_df = pd.DataFrame([feature_set.features])
-
+        feature_set = feature_extractor.extract_with_audio(
+            processed.transcript_data,
+            audio_path=processed.audio_path,
+            transcription_result=processed.transcription_result
+        )
+        
+        features_df = pd.DataFrame([feature_set.features])
+        
             # Get model and make prediction (use specified model or best compatible model)
             if model_name:
                 model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
@@ -810,40 +810,40 @@ async def predict_from_audio(
                         pass
                 model_name = best_model or compatible_models[0]
                 model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
-
-            if preprocessor is not None:
-                if isinstance(preprocessor, dict):
-                    features_df = preprocess_with_dict(features_df, preprocessor)
-                else:
-                    features_df = preprocessor.transform(features_df)
-
+        
+        if preprocessor is not None:
+            if isinstance(preprocessor, dict):
+                features_df = preprocess_with_dict(features_df, preprocessor)
+            else:
+                features_df = preprocessor.transform(features_df)
+        
             result = make_prediction(model, features_df, used_model_name)
-
+        
             # Generate annotated transcript (use pragmatic features for annotation)
             pragmatic_feature_set = feature_extractor.extract_with_audio(
                 processed.transcript_data,
                 audio_path=processed.audio_path,
                 transcription_result=processed.transcription_result
             )
-            annotated = transcript_annotator.annotate(
-                processed.transcript_data,
+        annotated = transcript_annotator.annotate(
+            processed.transcript_data,
                 features=pragmatic_feature_set.features
-            )
-
-            # Clean up temp file
-            tmp_path.unlink()
-
-            return {
-                **result,
-                'features_extracted': len(feature_set.features),
-                'transcript': processed.raw_text,
-                'annotated_transcript_html': annotated.to_html(),
-                'annotation_summary': annotated._get_annotation_summary(),
-                'input_type': 'audio',
-                'duration': processed.metadata.get('duration', 0),
+        )
+        
+        # Clean up temp file
+        tmp_path.unlink()
+        
+        return {
+            **result,
+            'features_extracted': len(feature_set.features),
+            'transcript': processed.raw_text,
+            'annotated_transcript_html': annotated.to_html(),
+            'annotation_summary': annotated._get_annotation_summary(),
+            'input_type': 'audio',
+            'duration': processed.metadata.get('duration', 0),
                 'model_used': used_model_name,  # Explicitly state which model was used
                 'component': get_model_component(used_model_name),
-            }
+        }
         
     except Exception as e:
         logger.error(f"Audio prediction failed: {e}")
@@ -990,21 +990,21 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             }
         else:
             # Single component prediction
-            # Extract features
-            feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
-            features_df = pd.DataFrame([feature_set.features])
-
+        # Extract features
+        feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
+        features_df = pd.DataFrame([feature_set.features])
+        
             # Get model and make prediction (use specified model or best model)
             model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=request.model_name)
-
-            if preprocessor is not None:
-                if isinstance(preprocessor, dict):
-                    features_df = preprocess_with_dict(features_df, preprocessor)
+        
+        if preprocessor is not None:
+            if isinstance(preprocessor, dict):
+                features_df = preprocess_with_dict(features_df, preprocessor)
                     selected_features = preprocessor["selected_features"]
-                else:
-                    features_df = preprocessor.transform(features_df)
+            else:
+                features_df = preprocessor.transform(features_df)
                     selected_features = preprocessor.selected_features_
-
+        
             result = make_prediction(model, features_df, used_model_name)
 
             # ============================
@@ -1045,19 +1045,19 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                 component=component,
                 predicted_class=predicted_class
             )
-
-            # Generate annotated transcript
-            annotated = transcript_annotator.annotate(
-                processed.transcript_data,
-                features=feature_set.features
-            )
-
-            return {
-                **result,
-                'features_extracted': len(feature_set.features),
-                'annotated_transcript_html': annotated.to_html(),
-                'annotation_summary': annotated._get_annotation_summary(),
-                'input_type': 'text',
+        
+        # Generate annotated transcript
+        annotated = transcript_annotator.annotate(
+            processed.transcript_data,
+            features=feature_set.features
+        )
+        
+        return {
+            **result,
+            'features_extracted': len(feature_set.features),
+            'annotated_transcript_html': annotated.to_html(),
+            'annotation_summary': annotated._get_annotation_summary(),
+            'input_type': 'text',
                 'model_used': used_model_name,  # Explicitly state which model was used
                 'component': get_model_component(used_model_name),
                 "local_shap": {
@@ -1065,8 +1065,8 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                     "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
                 },
                 "counterfactual": cf_result,
-            }
-
+        }
+        
     except Exception as e:
         logger.error(f"Text prediction failed: {e}")
         raise HTTPException(
@@ -1112,7 +1112,7 @@ async def predict_from_transcript(
             
             # Get weights for chat file input (semantic works, acoustic doesn't)
             component_weights = get_component_weights_for_input_type('chat_file')
-
+            
             # Try each component
             for component in ['pragmatic_conversational', 'acoustic_prosodic', 'syntactic_semantic']:
                 # Skip components with zero weight
@@ -1163,7 +1163,7 @@ async def predict_from_transcript(
                         probabilities = {str(prediction): 1.0}
                         confidence = 1.0
                         asd_prob = 1.0 if str(prediction).upper() == 'ASD' else 0.0
-
+                    
                     component_predictions.append(ComponentPrediction(
                         component=component,
                         prediction=str(prediction),
@@ -1396,7 +1396,7 @@ async def predict_from_transcript(
                 component=component,
                 predicted_class=predicted_class
             )
-
+            
             # Generate annotated transcript
             annotated = transcript_annotator.annotate(
                 transcript,
@@ -1468,17 +1468,17 @@ async def list_datasets():
         )
 
         if not name_matches:
-            continue
+                continue
 
         cha_files = list(item.rglob("*.cha"))
         wav_files = list(item.rglob("*.wav"))
 
-        datasets.append({
+            datasets.append({
             "name": item.name,
-            "path": str(item),
-            "chat_files": len(cha_files),
-            "audio_files": len(wav_files),
-        })
+                "path": str(item),
+                "chat_files": len(cha_files),
+                "audio_files": len(wav_files),
+            })
 
     return {
         "data_directory": str(data_dir),
@@ -1729,7 +1729,7 @@ def force_numeric_dataframe(X: pd.DataFrame) -> pd.DataFrame:
 def run_training_task(dataset_names: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, enable_autoencoder: Optional[bool] = None):
     """Background task for model training."""
     global training_state
-
+    
     try:
         training_state['status'] = 'training'
         training_state['component'] = component

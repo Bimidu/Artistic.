@@ -444,7 +444,7 @@ function displayResults(data) {
             </div>
             <div class="text-xs text-primary-500">
                 Input: ${data.input_type}${data.component ? ` | Component: ${data.component}` : ''}
-                ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
+            ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
             </div>
         </div>
     `;
@@ -472,7 +472,7 @@ function displayResults(data) {
     //Counterfactuals
     if (data.counterfactual) {
     renderCounterfactual(data.counterfactual);
-}
+    }
 
 
 }
@@ -1155,34 +1155,34 @@ function showModelDetails(model) {
                 ${confusionMatrixHtml}
             </div>
             ${model.shap ? `
-                <!-- SHAP Explanations -->
-                <div class="mt-10">
-                    <h3 class="text-2xl font-medium text-primary-900 mb-4">
-                        Global SHAP Explanations
-                    </h3>
-                
-                    <p class="text-sm text-primary-600 mb-6">
-                        Feature importance across the full training dataset
-                    </p>
-                
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="bg-white rounded-2xl p-6 border border-primary-200">
-                            <h4 class="text-lg font-medium mb-3">Beeswarm</h4>
-                            <img
-                                src="${getApiUrl()}${model.shap.beeswarm}?t=${Date.now()}"
-                                class="w-full rounded-xl border"
-                            />
-                        </div>
-                
-                        <div class="bg-white rounded-2xl p-6 border border-primary-200">
-                            <h4 class="text-lg font-medium mb-3">Mean |SHAP| Importance</h4>
-                            <img
-                                src="${getApiUrl()}${model.shap.bar}?t=${Date.now()}"
-                                class="w-full rounded-xl border"
-                            />
+            <!-- SHAP Explanations -->
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-medium text-primary-900 mb-4">
+                            Global SHAP Explanations
+                        </h3>
+            
+                        <p class="text-sm text-primary-600 mb-6">
+                            Feature importance across the full training dataset
+                        </p>
+            
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Beeswarm</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.beeswarm}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
+            
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Mean |SHAP| Importance</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.bar}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
                 ` : `
                 <!-- No SHAP -->
                 <div class="mt-10 bg-primary-50 border border-primary-200 rounded-2xl p-6">
