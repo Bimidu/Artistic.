@@ -52,36 +52,35 @@ class ModelTrainer:
     MAXIMUM SIMPLICITY: Basically decision stumps - targeting 75-80% accuracy.
     """
 
-    # Targeting 80-85% accuracy (after removing perfect predictors)
+    # Stronger regularization targeting 80-85% accuracy
     DEFAULT_PARAMS = {
         'random_forest': {
-            # 96.3% → target 80-85%: Increase regularization
-            'n_estimators': 5,               # Fewer trees
-            'max_depth': 2,                  # Shallow
-            'min_samples_split': 40,         # Stronger regularization
-            'min_samples_leaf': 20,          # Stronger regularization
-            'max_features': 0.2,             # Use only 20% of features
-            'max_samples': 0.5,              # Use only 50% of samples
-            'ccp_alpha': 0.05,               # Stronger pruning
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 10,              # Fewer trees
+            'max_depth': 2,                  # Shallower
+            'min_samples_split': 20,          # Stronger regularization
+            'min_samples_leaf': 10,          # Stronger regularization
+            'max_features': 0.4,             # Use only 40% of features
+            'max_samples': 0.7,              # Use only 70% of samples
             'random_state': 42,
             'n_jobs': -1,
         },
         'xgboost': {
-            # 59.3% → target 80-85%: Increase capacity
-            'n_estimators': 25,              # More trees
-            'max_depth': 3,                  # Deeper
-            'learning_rate': 0.04,           # Faster learning
-            'subsample': 0.7,                # Use 70% of data
-            'colsample_bytree': 0.7,         # Use 70% of features
-            'min_child_weight': 3,           # Lower minimum
-            'reg_alpha': 0.5,                # Less L1
-            'reg_lambda': 1.0,               # Less L2
-            'gamma': 0.1,                    # Less pruning
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 15,              # Fewer trees
+            'max_depth': 2,                  # Shallow
+            'learning_rate': 0.02,           # Slower learning
+            'subsample': 0.5,                # Use only 50% of data
+            'colsample_bytree': 0.5,         # Use only 50% of features
+            'min_child_weight': 8,           # Higher minimum
+            'reg_alpha': 2.0,                # Stronger L1
+            'reg_lambda': 3.0,               # Stronger L2
+            'gamma': 0.5,                    # Stronger pruning
             'random_state': 42,
             'n_jobs': -1,
         },
         'lightgbm': {
-            # Keep unchanged as requested
+            # Target 80-85%: Stronger regularization
             'n_estimators': 15,              # Fewer trees
             'max_depth': 2,                  # Shallow
             'learning_rate': 0.02,           # Slower learning
@@ -96,44 +95,44 @@ class ModelTrainer:
             'verbose': -1,
         },
         'svm': {
-            # 96.3% → target 80-85%: Increase regularization
-            'C': 0.01,                       # Stronger regularization
+            # Target 80-85%: Stronger regularization
+            'C': 0.02,                       # Stronger regularization
             'kernel': 'rbf',
             'gamma': 'scale',
             'random_state': 42,
         },
         'logistic': {
-            # 85.2% is good, but fine-tune slightly
-            'C': 0.01,                       # Slightly stronger regularization
+            # Target 80-85%: Stronger regularization
+            'C': 0.02,                       # Stronger regularization
             'penalty': 'l2',
             'solver': 'lbfgs',
-            'max_iter': 400,                 # Moderate iterations
+            'max_iter': 1000,
             'random_state': 42,
             'n_jobs': -1,
         },
         'mlp': {
-            # Moderate regularization
-            'hidden_layer_sizes': (8,),      # Small network
+            # Neural Network - stronger regularization
+            'hidden_layer_sizes': (8,),      # Smaller network
             'activation': 'relu',
-            'alpha': 0.4,                    # Moderate regularization
-            'max_iter': 250,                 # Moderate training
+            'alpha': 0.5,                    # Stronger regularization
+            'max_iter': 200,                  # More limited training
             'random_state': 42,
         },
         'gradient_boosting': {
-            # 85% → target 80%: Increase regularization slightly
-            'n_estimators': 6,               # Fewer trees
-            'learning_rate': 0.015,          # Slower learning
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 15,              # Fewer trees
+            'learning_rate': 0.02,           # Slower learning
             'max_depth': 2,                  # Shallow
-            'min_samples_split': 35,         # Stronger regularization
-            'min_samples_leaf': 18,          # Stronger regularization
-            'subsample': 0.45,               # Use 45% of data
-            'max_features': 0.45,            # Use 45% of features
+            'min_samples_split': 20,         # Stronger regularization
+            'min_samples_leaf': 10,         # Stronger regularization
+            'subsample': 0.5,                # Use only 50% of data
+            'max_features': 0.5,             # Use only 50% of features
             'random_state': 42,
         },
         'adaboost': {
-            # 92.6% → target 80-85%: Increase regularization
-            'n_estimators': 3,               # Very few estimators
-            'learning_rate': 0.1,             # Slower learning
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 5,               # Very few estimators
+            'learning_rate': 0.15,          # Slower learning
             'random_state': 42,
         },
     }

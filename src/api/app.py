@@ -1824,58 +1824,6 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         cols_to_drop = ['participant_id', 'file_path', 'age_months', 'dataset']
         combined_df = combined_df.drop(columns=[col for col in cols_to_drop if col in combined_df.columns])
         
-        # 1.5. Convert feature columns to numeric (fix string/number problem)
-        # This handles cases where CSV stores numbers as strings (e.g., "[0.77]", "7.7227724E-1")
-        feature_cols = [col for col in combined_df.columns if col != 'diagnosis']
-        converted_count = 0
-        for col in feature_cols:
-            if col in combined_df.columns:
-                # Skip if already numeric
-                if pd.api.types.is_numeric_dtype(combined_df[col]):
-                    continue
-                
-                try:
-                    # First try direct conversion
-                    combined_df[col] = pd.to_numeric(combined_df[col], errors='coerce')
-                    if pd.api.types.is_numeric_dtype(combined_df[col]):
-                        converted_count += 1
-                        continue
-                    
-                    # If that failed, try parsing string representations like "[0.77]"
-                    def parse_value(v):
-                        if pd.isna(v):
-                            return np.nan
-                        if isinstance(v, (int, float, np.number)):
-                            return float(v)
-                        if isinstance(v, str):
-                            try:
-                                # Try parsing string representations
-                                parsed = ast.literal_eval(v)
-                                if isinstance(parsed, (list, tuple, np.ndarray)):
-                                    return float(parsed[0])
-                                return float(parsed)
-                            except:
-                                try:
-                                    return float(v)
-                                except:
-                                    return np.nan
-                        return np.nan
-                    
-                    combined_df[col] = combined_df[col].apply(parse_value)
-                    if pd.api.types.is_numeric_dtype(combined_df[col]):
-                        converted_count += 1
-                except Exception as e:
-                    logger.warning(f"Could not convert column '{col}' to numeric: {e}")
-        
-        if converted_count > 0:
-            logger.info(f"Converted {converted_count} feature columns from string to numeric")
-        
-        # Log any columns that still couldn't be converted
-        non_numeric_cols = [col for col in feature_cols if col in combined_df.columns 
-                           and not pd.api.types.is_numeric_dtype(combined_df[col])]
-        if non_numeric_cols:
-            logger.warning(f"Non-numeric feature columns (will be dropped): {non_numeric_cols}")
-        
         # 2. Filter out samples with missing diagnosis
         if 'diagnosis' in combined_df.columns:
             before_count = len(combined_df)
@@ -1946,29 +1894,6 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         X_train, X_test, y_train, y_test = preprocessor.fit_transform(combined_df, validate=False)
         logger.info(f"Training set: {X_train.shape}, Test set: {X_test.shape}")
         logger.info(f"Feature selection: {feature_selection}, Features used: {X_train.shape[1]}")
-        
-        # CRITICAL: Remove perfect predictors (features with unique values for each sample)
-        # These cause data leakage and 100% accuracy
-        # Check if X_train is DataFrame (it should be after preprocessing)
-        if hasattr(X_train, 'columns'):
-            perfect_predictors = []
-            for col in X_train.columns:
-                unique_count = X_train[col].nunique()
-                if unique_count == len(X_train):
-                    perfect_predictors.append(col)
-                    logger.warning(f"🚨 REMOVING PERFECT PREDICTOR: '{col}' has {unique_count} unique values for {len(X_train)} samples (row ID?)")
-            
-            if perfect_predictors:
-                logger.warning(f"🚨 REMOVING {len(perfect_predictors)} PERFECT PREDICTOR FEATURES: {perfect_predictors}")
-                X_train = X_train.drop(columns=perfect_predictors)
-                X_test = X_test.drop(columns=perfect_predictors)
-                logger.info(f"After removing perfect predictors - Training set: {X_train.shape}, Test set: {X_test.shape}")
-                
-                # Update preprocessor's selected features
-                preprocessor.selected_features_ = [f for f in preprocessor.selected_features_ if f not in perfect_predictors]
-                logger.info(f"Updated selected_features_ to {len(preprocessor.selected_features_)} features")
-        else:
-            logger.warning("⚠️ X_train is not a DataFrame - cannot check for perfect predictors")
         
         # Save preprocessor as dict to avoid pickling issues
         # Remove logger references to make it picklable
