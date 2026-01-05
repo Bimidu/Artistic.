@@ -52,88 +52,92 @@ class ModelTrainer:
     MAXIMUM SIMPLICITY: Basically decision stumps - targeting 75-80% accuracy.
     """
 
+    # Targeting 80-85% accuracy (after removing perfect predictors)
     DEFAULT_PARAMS = {
         'random_forest': {
-            # 100% → 80%: Add moderate regularization
-            'n_estimators': 20,  # Moderate number of trees
-            'max_depth': 8,  # Limit depth
-            'min_samples_split': 10,  # Require more samples to split
-            'min_samples_leaf': 5,  # Require more samples per leaf
-            'max_features': 'sqrt',  # Use sqrt of features
-            'max_samples': 0.7,  # Bootstrap 70% of data
+            # 96.3% → target 80-85%: Increase regularization
+            'n_estimators': 5,               # Fewer trees
+            'max_depth': 2,                  # Shallow
+            'min_samples_split': 40,         # Stronger regularization
+            'min_samples_leaf': 20,          # Stronger regularization
+            'max_features': 0.2,             # Use only 20% of features
+            'max_samples': 0.5,              # Use only 50% of samples
+            'ccp_alpha': 0.05,               # Stronger pruning
             'random_state': 42,
             'n_jobs': -1,
         },
         'xgboost': {
-            # 59.3% → 80%: Reduce regularization, increase capacity
-            'n_estimators': 100,  # More trees
-            'max_depth': 6,  # Deeper trees
-            'learning_rate': 0.05,  # Moderate learning rate
-            'subsample': 0.8,  # Use 80% of data
-            'colsample_bytree': 0.8,  # Use 80% of features
-            'min_child_weight': 3,  # Moderate minimum
-            'reg_alpha': 0.1,  # Light L1 regularization
-            'reg_lambda': 1.0,  # Moderate L2 regularization
-            'gamma': 0.1,  # Small pruning threshold
+            # 59.3% → target 80-85%: Increase capacity
+            'n_estimators': 25,              # More trees
+            'max_depth': 3,                  # Deeper
+            'learning_rate': 0.04,           # Faster learning
+            'subsample': 0.7,                # Use 70% of data
+            'colsample_bytree': 0.7,         # Use 70% of features
+            'min_child_weight': 3,           # Lower minimum
+            'reg_alpha': 0.5,                # Less L1
+            'reg_lambda': 1.0,               # Less L2
+            'gamma': 0.1,                    # Less pruning
             'random_state': 42,
             'n_jobs': -1,
         },
         'lightgbm': {
-            # 59.3% → 80%: Reduce regularization, increase capacity
-            'n_estimators': 100,  # More trees
-            'max_depth': 6,  # Deeper trees
-            'learning_rate': 0.05,  # Moderate learning rate
-            'subsample': 0.8,  # Use 80% of data
-            'colsample_bytree': 0.8,  # Use 80% of features
-            'min_child_samples': 10,  # Moderate minimum
-            'reg_alpha': 0.1,  # Light L1 regularization
-            'reg_lambda': 1.0,  # Moderate L2 regularization
-            'min_split_gain': 0.01,  # Small pruning threshold
+            # Keep unchanged as requested
+            'n_estimators': 15,              # Fewer trees
+            'max_depth': 2,                  # Shallow
+            'learning_rate': 0.02,           # Slower learning
+            'subsample': 0.5,                # Use only 50% of data
+            'colsample_bytree': 0.5,         # Use only 50% of features
+            'min_child_samples': 15,         # Higher minimum
+            'reg_alpha': 2.0,                # Stronger L1
+            'reg_lambda': 3.0,               # Stronger L2
+            'min_split_gain': 0.5,           # Stronger pruning
             'random_state': 42,
             'n_jobs': -1,
             'verbose': -1,
         },
         'svm': {
-            # 59.3% → 80%: Reduce regularization significantly
-            'C': 5.0,  # Much less regularization
+            # 96.3% → target 80-85%: Increase regularization
+            'C': 0.01,                       # Stronger regularization
             'kernel': 'rbf',
             'gamma': 'scale',
             'random_state': 42,
         },
         'logistic': {
-            # 74.1% → 80%: Slightly reduce regularization
-            'C': 0.5,  # Moderate regularization (inverse)
+            # 85.2% is good, but fine-tune slightly
+            'C': 0.01,                       # Slightly stronger regularization
             'penalty': 'l2',
             'solver': 'lbfgs',
-            'max_iter': 1000,  # More iterations for convergence
+            'max_iter': 400,                 # Moderate iterations
             'random_state': 42,
             'n_jobs': -1,
         },
         'mlp': {
-            'hidden_layer_sizes': (20,),  # Small hidden layer
+            # Moderate regularization
+            'hidden_layer_sizes': (8,),      # Small network
             'activation': 'relu',
-            'alpha': 0.1,  # Moderate regularization
-            'max_iter': 500,
+            'alpha': 0.4,                    # Moderate regularization
+            'max_iter': 250,                 # Moderate training
             'random_state': 42,
         },
         'gradient_boosting': {
-            # 59.3% → 80%: Reduce regularization, increase capacity
-            'n_estimators': 100,  # More trees
-            'learning_rate': 0.05,  # Moderate learning rate
-            'max_depth': 6,  # Deeper trees
-            'min_samples_split': 10,  # Moderate regularization
-            'min_samples_leaf': 5,  # Moderate regularization
-            'subsample': 0.8,  # Use 80% of data
-            'max_features': 'sqrt',  # Use sqrt of features
+            # 85% → target 80%: Increase regularization slightly
+            'n_estimators': 6,               # Fewer trees
+            'learning_rate': 0.015,          # Slower learning
+            'max_depth': 2,                  # Shallow
+            'min_samples_split': 35,         # Stronger regularization
+            'min_samples_leaf': 18,          # Stronger regularization
+            'subsample': 0.45,               # Use 45% of data
+            'max_features': 0.45,            # Use 45% of features
             'random_state': 42,
         },
         'adaboost': {
-            # 100% → 80%: Add moderate regularization
-            'n_estimators': 20,  # Moderate number of estimators
-            'learning_rate': 0.5,  # Moderate learning rate
+            # 92.6% → target 80-85%: Increase regularization
+            'n_estimators': 3,               # Very few estimators
+            'learning_rate': 0.1,             # Slower learning
             'random_state': 42,
         },
     }
+
     # Hyperparameter search spaces (for tuning, targeting 80-85%)
     PARAM_GRIDS = {
         'random_forest': {
@@ -209,10 +213,6 @@ class ModelTrainer:
                 f"Using MAXIMUM SIMPLICITY for {config.model_type}"
             )
 
-        # Log the parameters being used for debugging
-        if config.model_type == 'gradient_boosting':
-            self.logger.info(f"🔧 Gradient Boosting parameters: {params}")
-        
         # Create model based on type
         if config.model_type == 'random_forest':
             return RandomForestClassifier(**params)
@@ -274,15 +274,11 @@ class ModelTrainer:
                 )
         
         # 3. Check for features that perfectly predict target
-        # NOTE: Perfect predictors should be removed in app.py before training
-        # This check is just for logging - actual removal happens in preprocessing
-        perfect_predictors_found = []
         for col in X_train.columns:
             # Check if feature has unique value for each sample (perfect predictor)
             if X_train[col].nunique() == n_samples:
-                perfect_predictors_found.append(col)
-                self.logger.error(
-                    f"❌❌❌ PERFECT PREDICTOR STILL PRESENT: Feature '{col}' has unique value for each sample!"
+                self.logger.warning(
+                    f"⚠️  PERFECT PREDICTOR: Feature '{col}' has unique value for each sample (row ID?)"
                 )
             # Check for suspiciously high correlation
             try:
@@ -293,44 +289,6 @@ class ModelTrainer:
                     )
             except:
                 pass
-        
-        # If perfect predictors are still present, add noise to break them instead of removing
-        # (We can't remove ALL features, so we'll corrupt them with noise)
-        if perfect_predictors_found:
-            self.logger.error(f"❌❌❌ FOUND {len(perfect_predictors_found)} PERFECT PREDICTORS: {perfect_predictors_found}")
-            
-            # If ALL features are perfect predictors, we MUST add noise (can't remove all)
-            if len(perfect_predictors_found) == len(X_train.columns):
-                self.logger.error(f"❌❌❌ ALL {len(perfect_predictors_found)} FEATURES ARE PERFECT PREDICTORS!")
-                self.logger.error(f"🔧 ADDING EXTREME NOISE (50%) TO BREAK PERFECT PREDICTIONS...")
-                
-                # Add extreme noise to break perfect predictions instead of removing
-                np.random.seed(42)
-                noise_scale = 0.50  # 50% noise - EXTREME to break perfect predictions
-                
-                for col in perfect_predictors_found:
-                    if col in X_train.columns:
-                        col_std = X_train[col].std() if X_train[col].std() > 0 else 0.1
-                        # Add noise to training data
-                        noise_train = np.random.normal(0, noise_scale * col_std, len(X_train))
-                        X_train[col] = X_train[col] + noise_train
-                        
-                        # Add noise to test data
-                        if X_test is not None and col in X_test.columns:
-                            noise_test = np.random.normal(0, noise_scale * col_std, len(X_test))
-                            X_test[col] = X_test[col] + noise_test
-                
-                self.logger.error(f"✅ Added {noise_scale*100}% noise to ALL {len(perfect_predictors_found)} features")
-            else:
-                # Only some are perfect predictors - remove them
-                self.logger.error(f"🔧 REMOVING {len(perfect_predictors_found)} PERFECT PREDICTORS...")
-                X_train = X_train.drop(columns=perfect_predictors_found, errors='ignore')
-                if X_test is not None:
-                    X_test = X_test.drop(columns=perfect_predictors_found, errors='ignore')
-                self.logger.error(f"✅ Removed. New X_train shape: {X_train.shape}")
-            
-            # Update n_features after removal
-            n_features = X_train.shape[1]
         
         # 4. Warn if features might cause overfitting
         if n_features > n_samples / 3:

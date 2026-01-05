@@ -143,6 +143,13 @@ class AcousticFeatureExtractor:
         total_files = len(audio_files)
         logger.info(f"Found {total_files} audio files in {directory}")
         
+        # Random sampling if too many files
+        if max_samples and total_files > max_samples:
+            import random
+            random.seed(42)  # For reproducibility
+            audio_files = random.sample(audio_files, max_samples)
+            logger.info(f"Randomly sampled {max_samples} files from {total_files} total files")
+        
         if not audio_files:
             logger.warning(f"No audio files found in {directory}")
             # Return empty DataFrame with correct columns
@@ -153,136 +160,9 @@ class AcousticFeatureExtractor:
             features_dict['participant_id'] = None
             return pd.DataFrame([features_dict])
         
-        # Separate TD and ASD files FIRST (before max_samples)
-        td_files = []
-        asd_files = []
-        other_files = []
-        
-        for audio_file in audio_files:
-            # Try to infer diagnosis from path
-            path_str = str(audio_file).upper()
-            filename = audio_file.name.upper()
-            
-            # Check for ASD patterns
-            asd_patterns = ['/ASD/', '_ASD_', '\\ASD\\', 'ASDBANK', 'ASD_']
-            is_asd = any(pattern in path_str for pattern in asd_patterns)
-            
-            # Check for TD patterns (more flexible)
-            td_patterns = [
-                '/TD/', '/TYP/', '\\TD\\', '\\TYP\\', 
-                '_TD_', '_TYP_', 
-                'TD_', 'TYP_', '_TD', '_TYP',
-                'TYPICAL', 'TYPICALLY', 'CONTROL',
-                'TD\\', 'TD/', 'TYP\\', 'TYP/'
-            ]
-            is_td = any(pattern in path_str for pattern in td_patterns)
-            
-            # Also check filename if path doesn't match
-            if not is_td and not is_asd:
-                is_td = any(pattern in filename for pattern in ['TD', 'TYP', 'TYPICAL', 'CONTROL'])
-                is_asd = any(pattern in filename for pattern in ['ASD'])
-            
-            if is_asd:
-                asd_files.append(audio_file)
-            elif is_td:
-                td_files.append(audio_file)
-            else:
-                other_files.append(audio_file)
-        
-        logger.info(f"Found {len(td_files)} TD files, {len(asd_files)} ASD files, {len(other_files)} other files")
-        
-        # If we have many "other" files, they might be TD files - check if directory name suggests TD
-        if len(other_files) > 0:
-            # Check if the directory itself suggests TD (e.g., "td", "typical", "control" in parent dirs)
-            dir_path_str = str(directory).upper()
-            td_dir_patterns = ['TD', 'TYP', 'TYPICAL', 'CONTROL', 'NORMAL', 'HEALTHY']
-            is_td_directory = any(pattern in dir_path_str for pattern in td_dir_patterns)
-            
-            if is_td_directory:
-                logger.info(f"📁 Directory name suggests TD dataset (found '{[p for p in td_dir_patterns if p in dir_path_str][0]}' in path).")
-                logger.info(f"   Treating {len(other_files)} unclassified files as TD.")
-                td_files.extend(other_files)
-                other_files = []
-            elif len(other_files) > 100 and len(td_files) < 100:
-                # Log sample paths for debugging
-                logger.warning(f"⚠️ Many files ({len(other_files)}) not classified as TD/ASD. Sample paths:")
-                for i, f in enumerate(other_files[:5]):
-                    logger.warning(f"   {i+1}. {f}")
-                logger.warning(f"   ... and {len(other_files) - 5} more")
-        
-        logger.info(f"Final counts: {len(td_files)} TD files, {len(asd_files)} ASD files, {len(other_files)} other files")
-        
-        # Apply max_samples AFTER separation (only if not doing TD combination)
-        # If we're combining TD files, we need all available TD files
-        files_per_combined = 10
-        target_combined_count = 80
-        required_td_files = target_combined_count * files_per_combined
-        
-        # Only apply max_samples if we're NOT combining TD files (i.e., not enough TD files)
-        if max_samples and len(td_files) < required_td_files:
-            # Limit total files if we don't have enough TD files for combination
-            total_available = len(td_files) + len(asd_files) + len(other_files)
-            if total_available > max_samples:
-                import random
-                random.seed(42)
-                # Sample proportionally: keep all TD, sample from others
-                if len(td_files) < max_samples:
-                    remaining = max_samples - len(td_files)
-                    other_files_sample = random.sample(other_files + asd_files, min(remaining, len(other_files) + len(asd_files)))
-                    asd_files = [f for f in other_files_sample if f in asd_files]
-                    other_files = [f for f in other_files_sample if f in other_files]
-                    logger.info(f"Applied max_samples: kept {len(td_files)} TD files, sampled {len(asd_files)} ASD + {len(other_files)} other files")
-        
         # Extract from actual files
         data = []
-        
-        # COMBINE TD FILES: Create 80 combined samples, each from 10 TD audio files
-        
-        if len(td_files) >= required_td_files:
-            logger.info(f"🔗 Combining TD audio files: creating {target_combined_count} combined samples (each from {files_per_combined} files)")
-            logger.info(f"   Using {required_td_files} TD files out of {len(td_files)} available")
-            
-            # Randomly shuffle and take required number
-            import random
-            random.seed(42)
-            selected_td_files = random.sample(td_files, required_td_files)
-            
-            # Group into batches of 10 and combine audio
-            for batch_idx in range(0, len(selected_td_files), files_per_combined):
-                batch_files = selected_td_files[batch_idx:batch_idx + files_per_combined]
-                
-                if len(batch_files) == files_per_combined:
-                    try:
-                        # Combine audio files
-                        combined_audio_path = self._combine_audio_files(batch_files, batch_idx // files_per_combined)
-                        
-                        # Extract features from combined audio
-                        features = self.extract_from_audio(combined_audio_path)
-                        features['diagnosis'] = 'TD'
-                        features['file_path'] = f"combined_{files_per_combined}_files"
-                        features['participant_id'] = f"TD_combined_{batch_idx // files_per_combined}"
-                        data.append(features)
-                        
-                        # Clean up temporary combined audio file
-                        if combined_audio_path.exists() and 'temp' in str(combined_audio_path):
-                            combined_audio_path.unlink()
-                        
-                    except Exception as e:
-                        logger.error(f"Error combining TD files batch {batch_idx // files_per_combined}: {e}")
-                        continue
-            
-            logger.info(f"✅ Created {len([d for d in data if d.get('diagnosis') == 'TD'])} combined TD samples")
-            # TD files are already processed, don't process them again
-            td_files_to_process = []
-        else:
-            logger.info(f"Not enough TD files for combination: have {len(td_files)}, need {required_td_files}")
-            logger.info("Extracting features from individual TD files instead")
-            td_files_to_process = td_files
-        
-        # Process remaining TD files (if not enough for combination) and ASD files
-        files_to_process = td_files_to_process + asd_files + other_files
-        
-        for audio_file in files_to_process:
+        for audio_file in audio_files:
             try:
                 # Try to find corresponding transcript file
                 transcript = None
@@ -377,55 +257,4 @@ class AcousticFeatureExtractor:
         
         logger.debug(f"Extracted {len(result.features)} acoustic features")
         return feature_set
-    
-    def _combine_audio_files(self, audio_files: list, batch_id: int) -> Path:
-        """
-        Combine multiple audio files into one by concatenating them.
-        
-        Args:
-            audio_files: List of audio file paths to combine
-            batch_id: Batch identifier for naming
-            
-        Returns:
-            Path to temporary combined audio file
-        """
-        import librosa
-        import soundfile as sf
-        import tempfile
-        
-        logger.debug(f"Combining {len(audio_files)} audio files for batch {batch_id}")
-        
-        # Load all audio files and concatenate
-        combined_audio = []
-        target_sr = 22050  # librosa default
-        
-        for audio_file in audio_files:
-            try:
-                audio, sr = librosa.load(str(audio_file), sr=target_sr, mono=True)
-                combined_audio.append(audio)
-            except Exception as e:
-                logger.warning(f"Could not load {audio_file}: {e}")
-                continue
-        
-        if not combined_audio:
-            raise ValueError(f"No audio could be loaded from {len(audio_files)} files")
-        
-        # Concatenate all audio
-        final_audio = np.concatenate(combined_audio)
-        
-        # Create temporary file for combined audio
-        temp_file = tempfile.NamedTemporaryFile(
-            suffix='.wav',
-            delete=False,
-            prefix=f'td_combined_{batch_id}_'
-        )
-        temp_path = Path(temp_file.name)
-        temp_file.close()
-        
-        # Save combined audio
-        sf.write(str(temp_path), final_audio, target_sr)
-        
-        logger.debug(f"Combined {len(combined_audio)} files into {temp_path.name} ({len(final_audio)/target_sr:.1f}s)")
-        
-        return temp_path
 
