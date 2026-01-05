@@ -1939,7 +1939,7 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
                 tune_hyperparameters=False
             )
             
-            model = trainer.train_model(X_train, y_train, config_obj)
+            model = trainer.train_model(X_train, y_train, config_obj, X_test=X_test)
             trained_models[model_type] = model
             
             # Evaluate

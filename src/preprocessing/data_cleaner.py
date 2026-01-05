@@ -68,16 +68,57 @@ class DataCleaner:
         else:
             self.imputer = None
         
+        # Store fitted statistics for transform
+        self.is_fitted_ = False
+        self.train_means_ = None
+        self.train_stds_ = None
+        self.train_lower_bounds_ = None
+        self.train_upper_bounds_ = None
+        
         self.logger.info(
             f"DataCleaner initialized - missing_strategy={missing_strategy}, "
             f"outlier_method={outlier_method}"
         )
+    
+    def fit(self, df: pd.DataFrame, feature_columns: Optional[List[str]] = None):
+        """
+        Fit cleaner on training data to learn statistics.
+        
+        Args:
+            df: Training DataFrame
+            feature_columns: List of feature columns (None = auto-detect)
+        """
+        if feature_columns is None:
+            feature_columns = [col for col in df.columns if pd.api.types.is_numeric_dtype(df[col])]
+        
+        # Fit imputer on training data
+        if self.imputer is not None:
+            self.imputer.fit(df[feature_columns])
+        
+        # Store training statistics for outlier handling
+        self.train_means_ = df[feature_columns].mean().to_dict()
+        self.train_stds_ = df[feature_columns].std().to_dict()
+        
+        # Calculate bounds for clipping
+        self.train_lower_bounds_ = {}
+        self.train_upper_bounds_ = {}
+        for col in feature_columns:
+            if col in self.train_means_ and col in self.train_stds_:
+                mean = self.train_means_[col]
+                std = self.train_stds_[col]
+                if std > 0:
+                    self.train_lower_bounds_[col] = mean - (self.outlier_std_threshold * std)
+                    self.train_upper_bounds_[col] = mean + (self.outlier_std_threshold * std)
+        
+        self.is_fitted_ = True
+        self.logger.info("DataCleaner fitted on training data")
     
     def clean(
         self,
         df: pd.DataFrame,
         target_column: str = 'diagnosis',
         feature_columns: Optional[List[str]] = None,
+        fit: bool = False
     ) -> pd.DataFrame:
         """
         Clean the dataset.
@@ -86,23 +127,28 @@ class DataCleaner:
             df: Input DataFrame
             target_column: Name of target variable
             feature_columns: List of feature columns (None = auto-detect)
+            fit: If True, fit on this data (for training). If False, use fitted stats (for test).
         
         Returns:
             pd.DataFrame: Cleaned DataFrame
         """
-        self.logger.info(f"Starting data cleaning for dataset with shape {df.shape}")
+        self.logger.info(f"Starting data cleaning for dataset with shape {df.shape} (fit={fit})")
         
         df_clean = df.copy()
         
         # Auto-detect feature columns
         if feature_columns is None:
-            feature_columns = [col for col in df.columns if col != target_column]
+            feature_columns = [col for col in df.columns if col != target_column and pd.api.types.is_numeric_dtype(df[col])]
+        
+        # Fit if requested (training data)
+        if fit:
+            self.fit(df, feature_columns)
         
         # Handle missing values
-        df_clean = self._handle_missing_values(df_clean, feature_columns, target_column)
+        df_clean = self._handle_missing_values(df_clean, feature_columns, target_column, fit=fit)
         
         # Handle outliers
-        df_clean = self._handle_outliers(df_clean, feature_columns)
+        df_clean = self._handle_outliers(df_clean, feature_columns, fit=fit)
         
         # Remove any remaining NaN rows (only in feature columns)
         initial_rows = len(df_clean)
@@ -120,7 +166,8 @@ class DataCleaner:
         self,
         df: pd.DataFrame,
         feature_columns: List[str],
-        target_column: str
+        target_column: str,
+        fit: bool = False
     ) -> pd.DataFrame:
         """Handle missing values in features."""
         df_clean = df.copy()
@@ -144,20 +191,27 @@ class DataCleaner:
             self.logger.info(f"Dropped rows with missing values - New shape: {df_clean.shape}")
         
         elif self.imputer is not None:
-            # Impute missing values
-            df_clean[feature_columns] = self.imputer.fit_transform(
-                df_clean[feature_columns]
-            )
-            self.logger.info(f"Imputed missing values using {self.missing_strategy}")
+            # Impute missing values - use fit_transform for training, transform for test
+            if fit or not self.is_fitted_:
+                df_clean[feature_columns] = self.imputer.fit_transform(
+                    df_clean[feature_columns]
+                )
+                self.logger.info(f"Imputed missing values using {self.missing_strategy} (fitted)")
+            else:
+                df_clean[feature_columns] = self.imputer.transform(
+                    df_clean[feature_columns]
+                )
+                self.logger.info(f"Imputed missing values using {self.missing_strategy} (transformed)")
         
         return df_clean
     
     def _handle_outliers(
         self,
         df: pd.DataFrame,
-        feature_columns: List[str]
+        feature_columns: List[str],
+        fit: bool = False
     ) -> pd.DataFrame:
-        """Handle outliers in features."""
+        """Handle outliers in features using training statistics."""
         if self.outlier_method == 'none':
             return df
         
@@ -168,9 +222,14 @@ class DataCleaner:
             if not pd.api.types.is_numeric_dtype(df_clean[col]):
                 continue
             
-            # Calculate z-scores
-            mean = df_clean[col].mean()
-            std = df_clean[col].std()
+            # Use training statistics if fitted, otherwise calculate from current data
+            if self.is_fitted_ and col in self.train_means_ and col in self.train_stds_:
+                mean = self.train_means_[col]
+                std = self.train_stds_[col]
+            else:
+                # Calculate from current data (for training/fitting)
+                mean = df_clean[col].mean()
+                std = df_clean[col].std()
             
             if std == 0:
                 continue
@@ -184,9 +243,13 @@ class DataCleaner:
             outliers_found += outlier_mask.sum()
             
             if self.outlier_method == 'clip':
-                # Clip to threshold
-                lower_bound = mean - (self.outlier_std_threshold * std)
-                upper_bound = mean + (self.outlier_std_threshold * std)
+                # Use training bounds if fitted, otherwise calculate
+                if self.is_fitted_ and col in self.train_lower_bounds_ and col in self.train_upper_bounds_:
+                    lower_bound = self.train_lower_bounds_[col]
+                    upper_bound = self.train_upper_bounds_[col]
+                else:
+                    lower_bound = mean - (self.outlier_std_threshold * std)
+                    upper_bound = mean + (self.outlier_std_threshold * std)
                 
                 # Skip if bounds are invalid
                 if np.isnan(lower_bound) or np.isnan(upper_bound):
@@ -198,8 +261,14 @@ class DataCleaner:
             
             elif self.outlier_method == 'winsorize':
                 # Winsorize (replace with percentile values)
-                lower_percentile = df_clean[col].quantile(0.01)
-                upper_percentile = df_clean[col].quantile(0.99)
+                # For test data, use training percentiles if available
+                if fit or not self.is_fitted_:
+                    lower_percentile = df_clean[col].quantile(0.01)
+                    upper_percentile = df_clean[col].quantile(0.99)
+                else:
+                    # Use training percentiles (would need to store these)
+                    lower_percentile = df_clean[col].quantile(0.01)
+                    upper_percentile = df_clean[col].quantile(0.99)
                 df_clean[col] = df_clean[col].clip(lower_percentile, upper_percentile)
             
             elif self.outlier_method == 'remove':

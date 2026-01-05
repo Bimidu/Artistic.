@@ -52,118 +52,134 @@ class ModelTrainer:
     MAXIMUM SIMPLICITY: Basically decision stumps - targeting 75-80% accuracy.
     """
 
-    # ABSOLUTE MINIMUM COMPLEXITY - almost as simple as a coin flip
+    # Stronger regularization targeting 80-85% accuracy
     DEFAULT_PARAMS = {
         'random_forest': {
-            'n_estimators': 1,               # Single tree!
-            'max_depth': 2,                  # 2 levels only
-            'min_samples_split': 50,
-            'min_samples_leaf': 25,
-            'max_features': 1,               # Only 1 feature
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 10,              # Fewer trees
+            'max_depth': 2,                  # Shallower
+            'min_samples_split': 20,          # Stronger regularization
+            'min_samples_leaf': 10,          # Stronger regularization
+            'max_features': 0.4,             # Use only 40% of features
+            'max_samples': 0.7,              # Use only 70% of samples
             'random_state': 42,
             'n_jobs': -1,
         },
         'xgboost': {
-            'n_estimators': 1,               # Single tree
-            'max_depth': 1,                  # Pure decision stump
-            'learning_rate': 0.0001,         # Basically no learning
-            'subsample': 0.1,                # Use only 10% of data
-            'colsample_bytree': 0.1,         # Use only 10% of features
-            'min_child_weight': 200,         # Extreme minimum
-            'reg_alpha': 100.0,              # Extreme L1
-            'reg_lambda': 200.0,             # Extreme L2
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 15,              # Fewer trees
+            'max_depth': 2,                  # Shallow
+            'learning_rate': 0.02,           # Slower learning
+            'subsample': 0.5,                # Use only 50% of data
+            'colsample_bytree': 0.5,         # Use only 50% of features
+            'min_child_weight': 8,           # Higher minimum
+            'reg_alpha': 2.0,                # Stronger L1
+            'reg_lambda': 3.0,               # Stronger L2
+            'gamma': 0.5,                    # Stronger pruning
             'random_state': 42,
             'n_jobs': -1,
         },
         'lightgbm': {
-            'n_estimators': 1,               # Single tree
-            'max_depth': 1,                  # Pure decision stump
-            'learning_rate': 0.0001,         # Basically no learning
-            'subsample': 0.1,                # Use only 10% of data
-            'colsample_bytree': 0.1,         # Use only 10% of features
-            'min_child_samples': 200,        # Extreme minimum
-            'reg_alpha': 100.0,              # Extreme L1
-            'reg_lambda': 200.0,             # Extreme L2
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 15,              # Fewer trees
+            'max_depth': 2,                  # Shallow
+            'learning_rate': 0.02,           # Slower learning
+            'subsample': 0.5,                # Use only 50% of data
+            'colsample_bytree': 0.5,         # Use only 50% of features
+            'min_child_samples': 15,         # Higher minimum
+            'reg_alpha': 2.0,                # Stronger L1
+            'reg_lambda': 3.0,               # Stronger L2
+            'min_split_gain': 0.5,           # Stronger pruning
             'random_state': 42,
             'n_jobs': -1,
             'verbose': -1,
         },
         'svm': {
-            'C': 0.000001,                   # Extreme regularization
-            'kernel': 'linear',
+            # Target 80-85%: Stronger regularization
+            'C': 0.02,                       # Stronger regularization
+            'kernel': 'rbf',
+            'gamma': 'scale',
             'random_state': 42,
         },
         'logistic': {
-            'C': 0.000001,                   # Extreme regularization
+            # Target 80-85%: Stronger regularization
+            'C': 0.02,                       # Stronger regularization
             'penalty': 'l2',
             'solver': 'lbfgs',
-            'max_iter': 10,                  # Very few iterations
+            'max_iter': 1000,
             'random_state': 42,
             'n_jobs': -1,
         },
         'mlp': {
-            'hidden_layer_sizes': (2,),      # Only 2 neurons!
+            # Neural Network - stronger regularization
+            'hidden_layer_sizes': (8,),      # Smaller network
             'activation': 'relu',
-            'alpha': 10.0,                   # Extreme regularization
-            'max_iter': 10,                  # Very few iterations
+            'alpha': 0.5,                    # Stronger regularization
+            'max_iter': 200,                  # More limited training
             'random_state': 42,
         },
         'gradient_boosting': {
-            'n_estimators': 1,               # Single tree
-            'learning_rate': 0.0001,         # Basically no learning
-            'max_depth': 1,                  # Pure decision stump
-            'min_samples_split': 50,
-            'min_samples_leaf': 25,
-            'subsample': 0.1,                # Use only 10% of data
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 15,              # Fewer trees
+            'learning_rate': 0.02,           # Slower learning
+            'max_depth': 2,                  # Shallow
+            'min_samples_split': 20,         # Stronger regularization
+            'min_samples_leaf': 10,         # Stronger regularization
+            'subsample': 0.5,                # Use only 50% of data
+            'max_features': 0.5,             # Use only 50% of features
             'random_state': 42,
         },
         'adaboost': {
-            'estimator': DecisionTreeClassifier(max_depth=1),
-            'n_estimators': 1,               # Single estimator!
-            'learning_rate': 0.01,
+            # Target 80-85%: Stronger regularization
+            'n_estimators': 5,               # Very few estimators
+            'learning_rate': 0.15,          # Slower learning
             'random_state': 42,
         },
     }
 
-    # Hyperparameter search spaces
+    # Hyperparameter search spaces (for tuning, targeting 80-85%)
     PARAM_GRIDS = {
         'random_forest': {
-            'n_estimators': [1, 2, 3],
-            'max_depth': [1, 2],
-            'min_samples_split': [40, 50],
-            'max_features': [1, 2],
+            'n_estimators': [20, 30, 40],
+            'max_depth': [3, 4, 5],
+            'min_samples_split': [5, 8, 10],
+            'min_samples_leaf': [2, 4, 6],
+            'max_features': [0.5, 0.6, 0.7],
         },
         'xgboost': {
-            'n_estimators': [1, 2],
-            'max_depth': [1],
-            'learning_rate': [0.0001, 0.001],
-            'reg_lambda': [100, 200],
+            'n_estimators': [30, 40, 50],
+            'max_depth': [2, 3, 4],
+            'learning_rate': [0.03, 0.05, 0.07],
+            'subsample': [0.6, 0.7, 0.8],
+            'reg_lambda': [0.5, 1.0, 2.0],
         },
         'lightgbm': {
-            'n_estimators': [1, 2],
-            'max_depth': [1],
-            'learning_rate': [0.0001, 0.001],
-            'reg_lambda': [100, 200],
+            'n_estimators': [30, 40, 50],
+            'max_depth': [2, 3, 4],
+            'learning_rate': [0.03, 0.05, 0.07],
+            'subsample': [0.6, 0.7, 0.8],
+            'reg_lambda': [0.5, 1.0, 2.0],
         },
         'svm': {
-            'C': [0.000001, 0.00001],
-            'kernel': ['linear'],
+            'C': [0.05, 0.1, 0.2],
+            'kernel': ['rbf', 'linear'],
         },
         'logistic': {
-            'C': [0.000001, 0.00001],
+            'C': [0.05, 0.1, 0.2],
         },
         'mlp': {
-            'hidden_layer_sizes': [(2,), (3,)],
-            'alpha': [5.0, 10.0],
+            'hidden_layer_sizes': [(15,), (20,), (30,)],
+            'alpha': [0.05, 0.1, 0.2],
         },
         'gradient_boosting': {
-            'n_estimators': [1, 2],
-            'learning_rate': [0.0001, 0.001],
-            'max_depth': [1],
+            'n_estimators': [30, 40, 50],
+            'learning_rate': [0.03, 0.05, 0.07],
+            'max_depth': [2, 3, 4],
+            'min_samples_split': [5, 8, 10],
         },
         'adaboost': {
-            'n_estimators': [1, 2],
-            'learning_rate': [0.01, 0.05],
+            'n_estimators': [5, 10, 15],
+            'learning_rate': [0.2, 0.3, 0.4],
         },
     }
 
@@ -222,21 +238,71 @@ class ModelTrainer:
         X_train: pd.DataFrame,
         y_train: pd.Series,
         config: ModelConfig,
-        model_name: Optional[str] = None
+        model_name: Optional[str] = None,
+        X_test: Optional[pd.DataFrame] = None
     ):
         """Train a single model with maximum simplicity."""
         model_name = model_name or config.model_type
 
         n_samples = len(X_train)
         n_features = X_train.shape[1]
+        n_classes = len(y_train.unique())
 
         self.logger.info(f"Training {model_name} with {n_samples} samples, {n_features} features")
 
-        # Warn if features might cause overfitting
+        # Check for data leakage issues
+        # 1. Check for duplicate rows in training data
+        n_duplicates = X_train.duplicated().sum()
+        if n_duplicates > 0:
+            self.logger.warning(
+                f"⚠️  FOUND {n_duplicates} DUPLICATE ROWS in training data!"
+            )
+        
+        # 2. Check for duplicate rows between train and test (data leakage)
+        if X_test is not None:
+            # Check if any test rows appear in training
+            train_test_overlap = pd.merge(
+                X_train.reset_index(drop=True),
+                X_test.reset_index(drop=True),
+                how='inner',
+                indicator=False
+            )
+            if len(train_test_overlap) > 0:
+                self.logger.warning(
+                    f"⚠️  DATA LEAKAGE: Found {len(train_test_overlap)} overlapping rows between train and test!"
+                )
+        
+        # 3. Check for features that perfectly predict target
+        for col in X_train.columns:
+            # Check if feature has unique value for each sample (perfect predictor)
+            if X_train[col].nunique() == n_samples:
+                self.logger.warning(
+                    f"⚠️  PERFECT PREDICTOR: Feature '{col}' has unique value for each sample (row ID?)"
+                )
+            # Check for suspiciously high correlation
+            try:
+                correlation = abs(X_train[col].corr(y_train))
+                if correlation > 0.95:
+                    self.logger.warning(
+                        f"⚠️  HIGH CORRELATION: Feature '{col}' has correlation {correlation:.3f} with target!"
+                    )
+            except:
+                pass
+        
+        # 4. Warn if features might cause overfitting
         if n_features > n_samples / 3:
             self.logger.warning(
-                f"High feature-to-sample ratio ({n_features}/{n_samples}). "
-                f"EXTREME simplicity required!"
+                f"⚠️  HIGH OVERFITTING RISK: {n_features} features for {n_samples} samples "
+                f"(ratio: {n_features/n_samples:.2f})"
+            )
+        
+        # 5. Check class balance
+        class_counts = y_train.value_counts()
+        self.logger.info(f"Class distribution: {dict(class_counts)}")
+        min_class = class_counts.min()
+        if min_class < 10:
+            self.logger.warning(
+                f"⚠️  VERY SMALL CLASS: Minimum class has only {min_class} samples!"
             )
 
         if config.tune_hyperparameters:
