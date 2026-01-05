@@ -65,7 +65,50 @@ document.querySelectorAll('.tab').forEach(tab => {
         const inputType = tab.dataset.input;
         document.querySelectorAll('.input-panel').forEach(p => p.classList.add('hidden'));
         document.getElementById(inputType + 'Panel').classList.remove('hidden');
+        
+        // Load models when switching to a prediction tab
+        loadModelsForPrediction();
     });
+});
+
+// Toggle model selection based on fusion checkbox
+function setupFusionToggle() {
+    const fusionCheckboxes = [
+        { checkbox: 'audioUseFusion', select: 'audioModelSelect', container: 'audioModelSelectContainer', note: 'audioModelSelectNote' },
+        { checkbox: 'textUseFusion', select: 'textModelSelect', container: 'textModelSelectContainer', note: 'textModelSelectNote' },
+        { checkbox: 'chaUseFusion', select: 'chaModelSelect', container: 'chaModelSelectContainer', note: 'chaModelSelectNote' }
+    ];
+    
+    fusionCheckboxes.forEach(({ checkbox, select, container, note }) => {
+        const checkboxEl = document.getElementById(checkbox);
+        const selectEl = document.getElementById(select);
+        const containerEl = document.getElementById(container);
+        const noteEl = document.getElementById(note);
+        
+        if (checkboxEl && selectEl && containerEl && noteEl) {
+            checkboxEl.addEventListener('change', () => {
+                if (checkboxEl.checked) {
+                    // Fusion enabled - disable model selection
+                    selectEl.disabled = true;
+                    selectEl.value = ''; // Reset to "Best Model (Auto)"
+                    containerEl.style.opacity = '0.5';
+                    containerEl.style.pointerEvents = 'none';
+                    noteEl.classList.remove('hidden');
+                } else {
+                    // Fusion disabled - enable model selection
+                    selectEl.disabled = false;
+                    containerEl.style.opacity = '1';
+                    containerEl.style.pointerEvents = 'auto';
+                    noteEl.classList.add('hidden');
+                }
+            });
+        }
+    });
+}
+
+// Initialize fusion toggles on page load
+document.addEventListener('DOMContentLoaded', () => {
+    setupFusionToggle();
 });
 
 // File upload handling
@@ -137,7 +180,6 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
 
 setupUploadArea('audioUploadArea', 'audioFileInput', 'selectedAudioFile', ['.wav', '.mp3', '.flac']);
 setupUploadArea('chaUploadArea', 'chaFileInput', 'selectedChaFile', ['.cha']);
-setupUploadArea('inspectUploadArea', 'inspectFileInput', null, ['.wav', '.cha', '.txt']);
 
 // API calls
 async function testConnection() {
@@ -150,6 +192,9 @@ async function testConnection() {
             const data = await response.json();
             statusDot.className = 'w-2.5 h-2.5 rounded-full bg-green-400 status-connected';
             statusText.textContent = `Connected (${data.models_available} models, ${data.features_supported} features)`;
+            
+            // Load models for prediction dropdowns
+            loadModelsForPrediction();
         } else {
             throw new Error('Not healthy');
         }
@@ -162,6 +207,8 @@ async function testConnection() {
 async function predictFromAudio() {
     const fileInput = document.getElementById('audioFileInput');
     const participantId = document.getElementById('audioParticipantId').value || 'CHI';
+    const modelName = document.getElementById('audioModelSelect').value || null;
+    const useFusion = document.getElementById('audioUseFusion').checked;
     
     if (!fileInput.files[0]) {
         alert('Please select an audio file');
@@ -173,6 +220,10 @@ async function predictFromAudio() {
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('participant_id', participantId);
+    if (modelName) {
+        formData.append('model_name', modelName);
+    }
+    formData.append('use_fusion', useFusion);
     
     try {
         const response = await fetch(`${getApiUrl()}/predict/audio`, {
@@ -194,6 +245,8 @@ async function predictFromAudio() {
 
 async function predictFromText() {
     const text = document.getElementById('textInput').value;
+    const modelName = document.getElementById('textModelSelect').value || null;
+    const useFusion = document.getElementById('textUseFusion').checked;
     
     if (!text.trim()) {
         alert('Please enter some text');
@@ -206,7 +259,12 @@ async function predictFromText() {
         const response = await fetch(`${getApiUrl()}/predict/text`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: text, participant_id: 'CHI' })
+            body: JSON.stringify({ 
+                text: text, 
+                participant_id: 'CHI',
+                model_name: modelName,
+                use_fusion: useFusion
+            })
         });
         
         const data = await response.json();
@@ -223,6 +281,7 @@ async function predictFromText() {
 
 async function predictFromChatFile() {
     const fileInput = document.getElementById('chaFileInput');
+    const modelName = document.getElementById('chaModelSelect').value || null;
     const useFusion = document.getElementById('chaUseFusion').checked;
     
     if (!fileInput.files[0]) {
@@ -230,12 +289,15 @@ async function predictFromChatFile() {
         return;
     }
     
-    console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion);
+    console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion, 'Model:', modelName);
     showLoading('resultsArea');
     
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('use_fusion', useFusion);
+    if (modelName) {
+        formData.append('model_name', modelName);
+    }
     
     try {
         const response = await fetch(`${getApiUrl()}/predict/transcript`, {
@@ -251,8 +313,24 @@ async function predictFromChatFile() {
         if (response.ok) {
             displayResults(data);
         } else {
-            const errorMsg = data.detail || data.error || JSON.stringify(data);
-            console.error('Prediction error:', errorMsg);
+            // Try to extract error message from response
+            let errorMsg = 'Unknown error';
+            try {
+                if (data.detail) {
+                    errorMsg = data.detail;
+                } else if (data.error) {
+                    errorMsg = data.error;
+                } else if (typeof data === 'string') {
+                    errorMsg = data;
+                } else if (data.message) {
+                    errorMsg = data.message;
+                } else {
+                    errorMsg = JSON.stringify(data);
+                }
+            } catch (e) {
+                errorMsg = `Error: ${response.status} ${response.statusText}`;
+            }
+            console.error('Prediction error:', errorMsg, data);
             displayError(errorMsg);
         }
     } catch (error) {
@@ -355,17 +433,47 @@ function displayResults(data) {
         
         ${componentBreakdown}
         
-        <div class="text-sm text-primary-500 pt-6">
-            Model: ${data.model_used} | Input: ${data.input_type}
+        <div class="text-sm text-primary-500 pt-6 border-t border-primary-200">
+            <div class="mb-2">
+                <span class="font-medium text-primary-700">Model(s) Used:</span>
+                ${data.models_used ? 
+                    `<span class="text-primary-600">${data.models_used.join(', ')}</span>` : 
+                    `<span class="text-primary-600">${data.model_used || 'Unknown'}</span>`
+                }
+            </div>
+            <div class="text-xs text-primary-500">
+                Input: ${data.input_type}${data.component ? ` | Component: ${data.component}` : ''}
             ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
+            </div>
         </div>
     `;
-    
+
+    // ==============================
+    // Local SHAP Waterfall
+    // ==============================
+    const localShapSection = document.getElementById('localShapSection');
+    const localShapImg = document.getElementById('localShapWaterfall');
+
+    if (data.local_shap && data.local_shap.waterfall) {
+        localShapImg.src =
+            getApiUrl() + data.local_shap.waterfall + '?t=' + Date.now();
+        localShapSection.classList.remove('hidden');
+    } else {
+        localShapSection.classList.add('hidden');
+    }
+
     // Show annotated transcript
     if (data.annotated_transcript_html) {
         document.getElementById('annotationCard').classList.remove('hidden');
         document.getElementById('annotatedTranscript').innerHTML = data.annotated_transcript_html;
     }
+
+    //Counterfactuals
+    if (data.counterfactual) {
+    renderCounterfactual(data.counterfactual);
+    }
+
+
 }
 
 function displayError(message) {
@@ -398,7 +506,19 @@ function displayError(message) {
 
 // Training mode functions
 async function loadDatasets() {
-    const listEl = document.getElementById('datasetList');
+    // This is for feature extraction - shows dataset paths from file system
+    const listEl = document.getElementById('extractionDatasetList');
+    if (!listEl) {
+        // Fallback to old location if new element doesn't exist
+        const oldListEl = document.getElementById('datasetList');
+        if (oldListEl) {
+            listEl = oldListEl;
+        } else {
+            console.error('Could not find extractionDatasetList element');
+            return;
+        }
+    }
+    
     listEl.innerHTML = '<div class="text-center py-16"><div class="spinner mx-auto"></div></div>';
     
     try {
@@ -407,8 +527,8 @@ async function loadDatasets() {
         
         if (data.datasets && data.datasets.length > 0) {
             listEl.innerHTML = data.datasets.map(ds => `
-                <div class="flex items-center p-6 bg-white rounded-2xl mb-4 hover:bg-primary-100 transition-colors">
-                    <input type="checkbox" class="dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.path}">
+                <div class="flex items-center p-4 bg-primary-50 rounded-xl mb-3 hover:bg-primary-100 transition-colors">
+                    <input type="checkbox" class="extraction-dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.path}" data-name="${ds.name}">
                     <div class="flex-1 ml-5">
                         <div class="text-lg text-primary-900">${ds.name}</div>
                         <div class="text-base text-primary-500 mt-1">${ds.chat_files} CHAT files, ${ds.audio_files} audio files</div>
@@ -423,24 +543,86 @@ async function loadDatasets() {
     }
 }
 
+async function loadAvailableDatasetsForTraining() {
+    // This is for training - shows datasets from CSV
+    const listEl = document.getElementById('datasetList');
+    const component = document.getElementById('trainingComponent').value;
+    
+    listEl.innerHTML = '<div class="text-center py-16"><div class="spinner mx-auto"></div></div>';
+    
+    try {
+        const response = await fetch(`${getApiUrl()}/training/available-datasets/${component}`);
+        const data = await response.json();
+        
+        if (data.csv_exists && data.datasets && data.datasets.length > 0) {
+            listEl.innerHTML = `
+                <div class="mb-4 p-4 bg-green-50 rounded-xl border border-green-200">
+                    <div class="text-sm text-green-700">
+                        <strong>✓ Features CSV found:</strong> ${data.total_samples} total samples from ${data.total_datasets} dataset(s)
+                    </div>
+                </div>
+                ${data.datasets.map(ds => `
+                    <div class="flex items-center p-6 bg-white rounded-2xl mb-4 hover:bg-primary-100 transition-colors">
+                        <input type="checkbox" class="dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.name}" data-name="${ds.name}">
+                        <div class="flex-1 ml-5">
+                            <div class="text-lg text-primary-900">${ds.name}</div>
+                            <div class="text-base text-primary-500 mt-1">${ds.samples} samples available</div>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        } else {
+            listEl.innerHTML = `
+                <div class="mb-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+                    <div class="text-sm text-yellow-700">
+                        <strong>⚠ No features CSV found for ${component}</strong>
+                    </div>
+                    <div class="text-xs text-yellow-600 mt-2">
+                        Please extract features first using the "Extract Features" section.
+                    </div>
+                </div>
+                <div class="text-center py-16 text-primary-400 text-xl">
+                    ${data.message || 'No datasets available'}
+                </div>
+            `;
+        }
+    } catch (error) {
+        listEl.innerHTML = `<div class="text-center py-16 text-red-500 text-xl">Error: ${error.message}</div>`;
+    }
+}
+
 async function extractFeatures() {
-    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
+    // Get datasets from extraction checkboxes (file system datasets)
+    const selectedDatasets = Array.from(document.querySelectorAll('.extraction-dataset-checkbox:checked')).map(cb => cb.value);
     
     if (selectedDatasets.length === 0) {
-        alert('Please select at least one dataset');
+        alert('Please select at least one dataset for feature extraction');
         return;
     }
     
-    const statusEl = document.getElementById('trainingStatus');
-    const statusContent = document.getElementById('trainingStatusContent');
+    const component = document.getElementById('extractionComponent').value;
+    const maxSamples = document.getElementById('maxSamplesExtraction').value;
+    
+    const statusEl = document.getElementById('extractionStatus');
+    const statusContent = document.getElementById('extractionStatusContent');
     statusEl.classList.remove('hidden');
-    statusContent.innerHTML = '<div class="spinner mx-auto"></div>';
+    statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-4 text-base text-primary-600">Extracting features...</div>';
     
     try {
+        const requestBody = {
+            dataset_paths: selectedDatasets,
+            component: component,
+            output_filename: `${component}_features.csv`
+        };
+        
+        if (maxSamples && maxSamples.trim() !== '') {
+            requestBody.max_samples_per_dataset = parseInt(maxSamples);
+        }
+        
         const response = await fetch(`${getApiUrl()}/training/extract-features`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ dataset_paths: selectedDatasets })
+            body: JSON.stringify(requestBody)
         });
         
         const data = await response.json();
@@ -448,15 +630,25 @@ async function extractFeatures() {
         if (response.ok) {
             statusContent.innerHTML = `
                 <div class="text-green-600 text-lg mb-3">✓ Feature extraction complete</div>
-                <div class="text-lg text-primary-900 mb-2">
-                    ${data.total_samples} samples, ${data.features_count} features
+                <div class="text-base text-primary-900 mb-2">
+                    <strong>Total samples:</strong> ${data.total_samples || data.new_samples}
+                    ${data.new_samples ? ` (${data.new_samples} new)` : ''}
                 </div>
-                <div class="text-sm text-primary-500">
-                    Output: ${data.output_file}
+                <div class="text-base text-primary-900 mb-2">
+                    <strong>Features:</strong> ${data.features_count}
                 </div>
+                <div class="text-sm text-primary-500 mb-2">
+                    <strong>Output:</strong> ${data.output_file}
+                </div>
+                ${data.datasets_updated ? `<div class="text-sm text-primary-600 mt-2">Updated datasets: ${data.datasets_updated.join(', ')}</div>` : ''}
             `;
+            
+            // Reload available datasets for training after extraction
+            setTimeout(() => {
+                loadAvailableDatasetsForTraining();
+            }, 1000);
         } else {
-            statusContent.innerHTML = `<div class="text-red-500 text-base">${data.detail}</div>`;
+            statusContent.innerHTML = `<div class="text-red-500 text-base">${data.detail || 'Feature extraction failed'}</div>`;
         }
     } catch (error) {
         statusContent.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
@@ -464,7 +656,9 @@ async function extractFeatures() {
 }
 
 async function startTraining() {
-    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked')).map(cb => cb.value);
+    // Get dataset names (not paths) from checkboxes
+    const selectedDatasets = Array.from(document.querySelectorAll('.dataset-checkbox:checked'))
+        .map(cb => cb.getAttribute('data-name') || cb.value.split('/').pop() || cb.value);
     
     if (selectedDatasets.length === 0) {
         alert('Please select at least one dataset');
@@ -486,6 +680,7 @@ async function startTraining() {
     const nFeatures = parseInt(document.getElementById('nFeatures').value) || 30;
     const testSize = parseFloat(document.getElementById('testSize').value) / 100 || 0.2;
     const randomState = parseInt(document.getElementById('randomState').value) || 42;
+    const enableAutoencoder = document.getElementById('enableAutoencoder').checked;
     const customHyperparams = getCustomHyperparameters();
     
     const statusEl = document.getElementById('trainingStatus');
@@ -498,13 +693,14 @@ async function startTraining() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                dataset_paths: selectedDatasets,
+                dataset_names: selectedDatasets,  // Changed from dataset_paths to dataset_names
                 model_types: selectedModels,
                 component: component,
                 feature_selection: featureSelectionEnabled,
                 n_features: featureSelectionEnabled ? nFeatures : null,
                 test_size: testSize,
                 random_state: randomState,
+                enable_autoencoder: enableAutoencoder,
                 custom_hyperparameters: customHyperparams
             })
         });
@@ -536,6 +732,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 featureCountSection.style.opacity = '0.5';
                 featureCountSection.style.pointerEvents = 'none';
             }
+        });
+    }
+    
+    // Reload available datasets when component changes
+    const trainingComponent = document.getElementById('trainingComponent');
+    if (trainingComponent) {
+        trainingComponent.addEventListener('change', () => {
+            loadAvailableDatasetsForTraining();
         });
     }
 });
@@ -672,23 +876,6 @@ function updateTrainingUI(status) {
     }
 }
 
-async function loadFeatures() {
-    const gridEl = document.getElementById('featureGrid');
-    gridEl.innerHTML = '<div class="col-span-full text-center"><div class="spinner mx-auto"></div></div>';
-    
-    try {
-        const response = await fetch(`${getApiUrl()}/features`);
-        const data = await response.json();
-        
-        if (data.features && data.features.length > 0) {
-            gridEl.innerHTML = data.features.map(f => `<div class="px-5 py-4 bg-white rounded-2xl text-sm font-mono text-primary-700 hover:bg-primary-100 transition-colors">${f}</div>`).join('');
-        } else {
-            gridEl.innerHTML = '<div class="col-span-full text-center text-primary-400 text-xl">No features found</div>';
-        }
-    } catch (error) {
-        gridEl.innerHTML = `<div class="col-span-full text-red-500 text-base">Error: ${error.message}</div>`;
-    }
-}
 
 async function loadAvailableModels() {
     const container = document.getElementById('availableModelsContainer');
@@ -713,7 +900,7 @@ async function loadAvailableModels() {
             
             let modelsHtml = '';
             
-            // Display models grouped by component
+            // Display models grouped by component in table format
             for (const [component, models] of Object.entries(modelsByComponent)) {
                 const componentNames = {
                     'pragmatic_conversational': 'Pragmatic & Conversational',
@@ -735,7 +922,24 @@ async function loadAvailableModels() {
                             ${componentName}
                             <span class="px-3 py-1 bg-${color}-100 text-${color}-700 text-sm rounded-full">${models.length} model${models.length > 1 ? 's' : ''}</span>
                         </h3>
-                        <div class="space-y-4">
+                        <div class="bg-white rounded-2xl overflow-hidden border border-primary-200">
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-primary-50">
+                                        <tr>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold text-primary-900">Model Type</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Accuracy</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">F1 Score</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Precision</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Recall</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">ROC-AUC</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Features</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Samples</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Created</th>
+                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-primary-200">
                 `;
                 
                 for (const model of models) {
@@ -744,61 +948,44 @@ async function loadAvailableModels() {
                     const f1 = (model.f1_score * 100).toFixed(1);
                     const precision = (model.precision * 100).toFixed(1);
                     const recall = (model.recall * 100).toFixed(1);
-                    const rocAuc = model.roc_auc ? (model.roc_auc * 100).toFixed(1) : null;
-                    const matthews = model.matthews_corr ? model.matthews_corr.toFixed(3) : 'N/A';
+                    const rocAuc = model.roc_auc ? (model.roc_auc * 100).toFixed(1) : 'N/A';
                     const date = new Date(model.created_at).toLocaleDateString();
                     const time = new Date(model.created_at).toLocaleTimeString();
                     
                     modelsHtml += `
-                        <div class="p-5 bg-white rounded-2xl hover:bg-primary-50 transition-colors ${isBest ? 'ring-2 ring-primary-600' : ''}">
-                            <div class="flex items-start justify-between mb-3">
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <h4 class="text-lg font-medium text-primary-900">${model.type}</h4>
-                                        ${isBest ? '<span class="px-2 py-0.5 bg-primary-600 text-white text-xs rounded-full">Best</span>' : ''}
-                                    </div>
-                                    <div class="text-xs text-primary-500">${date} at ${time}</div>
+                        <tr class="hover:bg-primary-50 transition-colors ${isBest ? 'bg-primary-100' : ''}">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-base font-medium text-primary-900">${model.type}</span>
+                                    ${isBest ? '<span class="px-2 py-0.5 bg-primary-600 text-white text-xs rounded-full">Best</span>' : ''}
                                 </div>
-                                <button class="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-xs" onclick="deleteModel('${model.name}')">
-                                    Delete
-                                </button>
-                            </div>
-                            
-                            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 mb-3">
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${accuracy}%</div>
-                                    <div class="text-xs text-primary-600">Accuracy</div>
+                            </td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${accuracy}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${f1}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${precision}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${recall}%</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${rocAuc}${rocAuc !== 'N/A' ? '%' : ''}</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${model.n_features}</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-700">${model.training_samples}</td>
+                            <td class="px-6 py-4 text-center text-sm text-primary-600">${date}<br><span class="text-xs">${time}</span></td>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex items-center justify-center gap-2">
+                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-xs" onclick='showModelDetails(${JSON.stringify(model)})'>
+                                        View
+                                    </button>
+                                    <button class="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-xs" onclick="deleteModel('${model.name}')">
+                                        Delete
+                                    </button>
                                 </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${f1}%</div>
-                                    <div class="text-xs text-primary-600">F1</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${precision}%</div>
-                                    <div class="text-xs text-primary-600">Precision</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${recall}%</div>
-                                    <div class="text-xs text-primary-600">Recall</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${model.n_features}</div>
-                                    <div class="text-xs text-primary-600">Features</div>
-                                </div>
-                                <div class="text-center p-2 bg-primary-50 rounded-lg">
-                                    <div class="text-lg font-medium text-primary-900">${model.training_samples}</div>
-                                    <div class="text-xs text-primary-600">Samples</div>
-                                </div>
-                            </div>
-                            ${rocAuc ? `<div class="mb-3 flex gap-2 items-center justify-center"><span class="text-xs text-primary-600">ROC-AUC:</span><span class="font-medium text-sm">${rocAuc}%</span><span class="text-xs text-primary-600 ml-3">Matthews:</span><span class="font-medium text-sm">${matthews}</span></div>` : ''}
-                            <button class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm" onclick='showModelDetails(${JSON.stringify(model)})'>
-                                View Detailed Metrics & Graphs
-                            </button>
-                        </div>
+                            </td>
+                        </tr>
                     `;
                 }
                 
                 modelsHtml += `
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -842,47 +1029,6 @@ async function deleteModel(modelName) {
     }
 }
 
-// Inspect file handling
-document.getElementById('inspectFileInput').addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    const resultsEl = document.getElementById('inspectionResults');
-    resultsEl.innerHTML = '<div class="spinner mx-auto mt-8"></div>';
-    
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    try {
-        const response = await fetch(`${getApiUrl()}/training/inspect-features`, {
-            method: 'POST',
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            resultsEl.innerHTML = `
-                <div class="bg-white rounded-2xl p-8">
-                    <div class="text-lg space-y-3">
-                        <div><span class="text-primary-600">Participant:</span> <span class="text-primary-900 font-medium">${data.participant_id}</span></div>
-                        <div><span class="text-primary-600">Input Type:</span> <span class="text-primary-900 font-medium">${data.input_type}</span></div>
-                        <div><span class="text-primary-600">Features Extracted:</span> <span class="text-primary-900 font-medium">${data.total_features}</span></div>
-                        <div><span class="text-primary-600">Utterances:</span> <span class="text-primary-900 font-medium">${data.utterance_count}</span></div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <h4 class="text-2xl font-medium text-primary-900 mb-4">Annotated Transcript</h4>
-                    <div class="bg-white rounded-2xl p-8 max-h-96 overflow-y-auto font-mono text-sm leading-loose">${data.annotated_transcript_html}</div>
-                </div>
-            `;
-        } else {
-            resultsEl.innerHTML = `<div class="text-red-500 text-base">${data.detail}</div>`;
-        }
-    } catch (error) {
-        resultsEl.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
-    }
-});
 
 // Model Details Modal Functions
 function showModelDetails(model) {
@@ -949,6 +1095,48 @@ function showModelDetails(model) {
                 <h3 class="text-xl font-medium text-primary-900 mb-3">Confusion Matrix</h3>
                 ${confusionMatrixHtml}
             </div>
+            ${model.shap ? `
+            <!-- SHAP Explanations -->
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-medium text-primary-900 mb-4">
+                            Global SHAP Explanations
+                        </h3>
+            
+                        <p class="text-sm text-primary-600 mb-6">
+                            Feature importance across the full training dataset
+                        </p>
+            
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Beeswarm</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.beeswarm}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
+            
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <h4 class="text-lg font-medium mb-3">Mean |SHAP| Importance</h4>
+                                <img
+                                    src="${getApiUrl()}${model.shap.bar}?t=${Date.now()}"
+                                    class="w-full rounded-xl border"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                ` : `
+                <!-- No SHAP -->
+                <div class="mt-10 bg-primary-50 border border-primary-200 rounded-2xl p-6">
+                    <h3 class="text-lg font-medium text-primary-900 mb-2">
+                        SHAP Explanations
+                    </h3>
+                    <p class="text-sm text-primary-600">
+                        SHAP explanations are not available for this model.
+                        <br />
+                        This may be due to model type limitations (e.g., SVM) or skipped training.
+                    </p>
+                </div>
+                `}
         </div>
     `;
     
@@ -1343,6 +1531,142 @@ function renderConfusionMatrix(matrix) {
     `;
     
     return html;
+}
+
+function generateWhatIfText(counterfactual) {
+    if (!counterfactual.top_changes || counterfactual.top_changes.length === 0) {
+        return "No meaningful counterfactual changes could be generated.";
+    }
+
+    const top = counterfactual.top_changes[0];
+
+    return `
+        If the <strong>${top.feature.replaceAll("_", " ")}</strong>
+        were adjusted from <strong>${top.from.toFixed(2)}</strong>
+        to <strong>${top.to.toFixed(2)}</strong>,
+        the model’s prediction would change from
+        <strong>ASD</strong> to <strong>TD</strong>.
+`;
+}
+
+function renderCounterfactual(counterfactual) {
+    if (!counterfactual) return;
+
+    // Show section
+    document
+        .getElementById("counterfactualSection")
+        .classList.remove("hidden");
+
+    // What-if text
+    document.getElementById("whatIfBox").innerHTML =
+        generateWhatIfText(counterfactual);
+
+    // Summary
+    document.getElementById("cfFlipped").textContent =
+        counterfactual.prediction_flipped ? "Yes ✅" : "No ❌";
+
+    document.getElementById("cfL2").textContent =
+        counterfactual.l2_change.toFixed(3);
+
+    document.getElementById("cfTotal").textContent =
+        counterfactual.total_features_changed;
+
+    // Table
+    const tbody = document.getElementById("cfTableBody");
+    tbody.innerHTML = "";
+
+    counterfactual.top_changes.forEach(change => {
+        const row = document.createElement("tr");
+        row.className = "border-b last:border-b-0";
+
+        row.innerHTML = `
+            <td class="py-2 font-medium">
+                ${change.feature.replaceAll("_", " ")}
+            </td>
+            <td class="py-2">
+                ${change.from.toFixed(3)}
+            </td>
+            <td class="py-2">
+                ${change.to.toFixed(3)}
+            </td>
+            <td class="py-2 ${
+                change.change > 0 ? "text-green-600" : "text-red-600"
+            }">
+                ${change.change > 0 ? "+" : ""}
+                ${change.change.toFixed(3)}
+            </td>
+        `;
+
+        tbody.appendChild(row);
+    });
+}
+
+
+
+// Load models for prediction dropdowns
+async function loadModelsForPrediction() {
+    const selects = {
+        'audioModelSelect': ['pragmatic_conversational', 'acoustic_prosodic'], // Audio can use pragmatic or acoustic
+        'textModelSelect': ['pragmatic_conversational', 'syntactic_semantic'], // Text can use pragmatic or semantic
+        'chaModelSelect': ['pragmatic_conversational', 'syntactic_semantic']  // CHAT can use pragmatic or semantic
+    };
+    
+    try {
+        const response = await fetch(`${getApiUrl()}/models`);
+        const data = await response.json();
+        
+        if (data.models && data.models.length > 0) {
+            // Group models by component for better organization
+            const modelsByComponent = {};
+            for (const model of data.models) {
+                const component = model.component || (model.name.split('_').slice(0, 2).join('_'));
+                if (!modelsByComponent[component]) {
+                    modelsByComponent[component] = [];
+                }
+                modelsByComponent[component].push(model);
+            }
+            
+            // Update each select dropdown with compatible models only
+            for (const [selectId, compatibleComponents] of Object.entries(selects)) {
+                const select = document.getElementById(selectId);
+                if (!select) continue;
+                
+                // Keep the "Best Model" option
+                select.innerHTML = '<option value="">Best Model (Auto)</option>';
+                
+                // Add models grouped by component (only compatible ones)
+                for (const [component, models] of Object.entries(modelsByComponent)) {
+                    // Only add if component is compatible with this input type
+                    if (!compatibleComponents.includes(component)) {
+                        continue;
+                    }
+                    
+                    const componentNames = {
+                        'pragmatic_conversational': 'Pragmatic & Conversational',
+                        'acoustic_prosodic': 'Acoustic & Prosodic',
+                        'syntactic_semantic': 'Syntactic & Semantic'
+                    };
+                    const componentName = componentNames[component] || component;
+                    
+                    // Add optgroup
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = componentName;
+                    
+                    models.forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model.name;
+                        const isBest = model.name === data.best_model;
+                        option.textContent = `${model.type}${isBest ? ' (Best)' : ''} - ${(model.f1_score * 100).toFixed(1)}% F1`;
+                        optgroup.appendChild(option);
+                    });
+                    
+                    select.appendChild(optgroup);
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error loading models:', error);
+    }
 }
 
 // Test connection on load

@@ -35,11 +35,16 @@ class PathConfig:
     models_dir: Path = field(default_factory=lambda: Path(os.getenv("MODELS_DIR", "./models")))
     logs_dir: Path = field(default_factory=lambda: Path(os.getenv("LOGS_DIR", "./logs")))
     cache_dir: Path = field(default_factory=lambda: Path(os.getenv("CACHE_DIR", "./cache")))
+    assets_dir: Path = field(default_factory=lambda: Path(os.getenv("ASSETS_DIR", "./assets")))
+    shap_dir: Path = field(init=False)
     
     def __post_init__(self):
         """Create directories if they don't exist."""
-        for dir_path in [self.output_dir, self.models_dir, self.logs_dir, self.cache_dir]:
+        for dir_path in [self.output_dir, self.models_dir, self.logs_dir, self.cache_dir, self.assets_dir,]:
             dir_path.mkdir(parents=True, exist_ok=True)
+
+        self.shap_dir = self.assets_dir / "shap"
+        self.shap_dir.mkdir(parents=True, exist_ok=True)
 
 
 @dataclass
@@ -110,6 +115,7 @@ class DatasetConfig:
         datasets: List of dataset names to process
         diagnosis_mapping: Mapping of diagnosis codes to standardized labels
         speaker_roles: Valid speaker role identifiers
+        max_samples_td: Maximum samples to use from TD dataset (None = use all)
     """
     datasets: list = field(default_factory=lambda: [
         "asdbank_aac",
@@ -121,6 +127,10 @@ class DatasetConfig:
         "typical_dev",
         "asdbank_child_only"
     ])
+    
+    # Limit TD dataset to avoid processing 4000+ files
+    # Set to None to use all files, or a number like 100 for random sampling
+    max_samples_td: int = 100  # Use 100 random TD samples instead of all 4,228
     
     # Standardize diagnosis labels across datasets
     diagnosis_mapping: Dict[str, str] = field(default_factory=lambda: {

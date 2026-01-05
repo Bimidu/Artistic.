@@ -157,13 +157,15 @@ class ModelFusion:
     
     def fuse(
         self,
-        component_predictions: List[ComponentPrediction]
+        component_predictions: List[ComponentPrediction],
+        component_weights_override: Optional[Dict[str, float]] = None
     ) -> FusionResult:
         """
         Fuse component predictions into final prediction.
         
         Args:
             component_predictions: List of predictions from components
+            component_weights_override: Optional weights to override instance weights
             
         Returns:
             FusionResult with final prediction
@@ -179,7 +181,7 @@ class ModelFusion:
         elif self.method == 'averaging':
             return self._fuse_averaging(component_predictions)
         elif self.method == 'weighted':
-            return self._fuse_weighted(component_predictions)
+            return self._fuse_weighted(component_predictions, component_weights_override)
         elif self.method == 'max_confidence':
             return self._fuse_max_confidence(component_predictions)
         elif self.method == 'stacking':
@@ -233,27 +235,39 @@ class ModelFusion:
     
     def _fuse_weighted(
         self,
-        predictions: List[ComponentPrediction]
+        predictions: List[ComponentPrediction],
+        component_weights_override: Optional[Dict[str, float]] = None
     ) -> FusionResult:
         """Weighted averaging based on component weights."""
+        # Use override weights if provided, otherwise use instance weights
+        weights_to_use = component_weights_override if component_weights_override is not None else self.component_weights
+        
         total_weight = 0.0
         weighted_prob = 0.0
         
         for pred in predictions:
-            weight = self.component_weights.get(pred.component, 0.33)
+            weight = weights_to_use.get(pred.component, 0.33)
+            # Skip components with zero weight
+            if weight == 0:
+                continue
             weighted_prob += pred.probability * weight
             total_weight += weight
         
         # Normalize
         if total_weight > 0:
             weighted_prob /= total_weight
+        else:
+            # Fallback: if all weights are 0, use simple average
+            logger.warning("All component weights are 0, falling back to simple average")
+            weighted_prob = np.mean([p.probability for p in predictions])
+            total_weight = 1.0
         
         is_asd = weighted_prob >= self.threshold
         final_prediction = 'ASD' if is_asd else 'TD'
         
         # Build weight info for explanation
         weight_info = ", ".join([
-            f"{p.component}: {self.component_weights.get(p.component, 0.33):.2f}"
+            f"{p.component}: {weights_to_use.get(p.component, 0.33):.2f}"
             for p in predictions
         ])
         
@@ -264,7 +278,7 @@ class ModelFusion:
             confidence=abs(weighted_prob - 0.5) * 2,
             component_predictions=predictions,
             fusion_method='weighted',
-            component_weights={p.component: self.component_weights.get(p.component, 0.33) for p in predictions},
+            component_weights={p.component: weights_to_use.get(p.component, 0.33) for p in predictions},
             explanation=f"Weighted average: {weighted_prob:.3f} (weights: {weight_info})",
         )
     
