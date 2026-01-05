@@ -2,35 +2,34 @@
   "model_name": "acoustic_prosodic_random_forest",
   "model_type": "random_forest",
   "version": "1.0.0",
-  "created_at": "2026-01-05T12:35:33.118275",
-  "accuracy": 0.8518518518518519,
-  "f1_score": 0.8518518518518519,
-  "precision": 0.8518518518518519,
-  "recall": 0.8518518518518519,
-  "roc_auc": 0.9602272727272727,
-  "matthews_corr": 0.6931818181818182,
+  "created_at": "2026-01-05T18:47:36.455711",
+  "accuracy": 0.9629629629629629,
+  "f1_score": 0.9626422959756292,
+  "precision": 0.9651416122004357,
+  "recall": 0.9629629629629629,
+  "roc_auc": 1.0,
+  "matthews_corr": 0.9249945801257606,
   "confusion_matrix": [
     [
-      14,
-      2
+      16,
+      0
     ],
     [
-      2,
-      9
+      1,
+      10
     ]
   ],
   "feature_names": [
-    "acoustic_pitch_min",
-    "acoustic_pitch_max",
-    "acoustic_rhythm_variability",
-    "acoustic_stress_variability",
     "acoustic_voicing_fraction",
+    "acoustic_spectral_rolloff_mean",
+    "acoustic_spectral_rolloff_std",
+    "acoustic_spectral_bandwidth_mean",
+    "acoustic_spectral_bandwidth_std",
     "acoustic_zero_crossing_rate_mean",
     "acoustic_mfcc_1_mean",
-    "acoustic_intensity_range",
-    "acoustic_energy_std"
+    "acoustic_mfcc_1_std"
   ],
-  "n_features": 9,
+  "n_features": 8,
   "hyperparameters": {},
   "training_samples": 108,
   "component": "acoustic_prosodic",

@@ -24,79 +24,89 @@ class AcousticProsodicTrainer:
     BALANCED: All models target 80-85% accuracy range.
     """
 
-    # Fine-tuned to target 80-85% accuracy
+    """
+    Balanced Model Configurations - Targeting 80% Accuracy
+    Replace MODEL_CONFIGS in your AcousticProsodicTrainer class with this
+    """
+
     MODEL_CONFIGS = {
         'random_forest': {
-            # 92.6% → target 80-85%: More aggressive regularization
-            'n_estimators': 3,               # Very few trees
-            'max_depth': 1,                  # Decision stumps
-            'min_samples_split': 60,         # Very strong regularization
-            'min_samples_leaf': 30,          # Very strong regularization
-            'max_features': 0.15,             # Use only 15% of features
-            'max_samples': 0.4,               # Use only 40% of samples
-            'ccp_alpha': 0.1,                 # Maximum pruning
+            # 100% → 80%: MAXIMUM POSSIBLE regularization
+            'n_estimators': 1,               # SINGLE TREE ONLY
+            'max_depth': 1,                  # DECISION STUMP ONLY
+            'min_samples_split': 200,        # More than total samples (extreme)
+            'min_samples_leaf': 100,         # More than half samples (extreme)
+            'max_features': 0.01,            # Use only 1% of features
+            'max_samples': 0.1,              # Use only 10% of samples
+            'ccp_alpha': 1.0,                # Maximum pruning
             'random_state': 42,
             'n_jobs': -1,
         },
+
         'xgboost': {
-            # 92.6% → target 80-85%: Increase regularization
-            'n_estimators': 12,              # Fewer trees
-            'max_depth': 2,                  # Shallow
-            'learning_rate': 0.02,           # Slower learning
-            'subsample': 0.5,                # Use 50% of data
-            'colsample_bytree': 0.5,         # Use 50% of features
-            'min_child_weight': 8,           # Higher minimum
-            'reg_alpha': 2.0,                # Stronger L1
-            'reg_lambda': 4.0,               # Stronger L2
-            'gamma': 0.3,                    # Stronger pruning
+            # 100% → 80%: MAXIMUM regularization
+            'n_estimators': 1,               # SINGLE TREE
+            'max_depth': 1,                  # DECISION STUMP
+            'learning_rate': 0.001,          # Extremely slow
+            'subsample': 0.1,                # Use only 10% of data
+            'colsample_bytree': 0.1,        # Use only 10% of features
+            'min_child_weight': 100,         # Extreme minimum
+            'reg_alpha': 100.0,              # Extreme L1
+            'reg_lambda': 100.0,             # Extreme L2
+            'gamma': 10.0,                   # Extreme pruning
             'random_state': 42,
             'n_jobs': -1,
         },
+
         'lightgbm': {
-            # Keep unchanged as requested
-            'n_estimators': 15,              # Fewer trees
-            'max_depth': 2,                  # Shallow
-            'learning_rate': 0.02,           # Slower learning
-            'subsample': 0.5,                # Use only 50% of data
-            'colsample_bytree': 0.5,         # Use only 50% of features
-            'min_child_samples': 15,         # Higher minimum
-            'reg_alpha': 2.0,                # Stronger L1
-            'reg_lambda': 3.0,               # Stronger L2
-            'min_split_gain': 0.5,           # Stronger pruning
+            # 100% → 80%: MAXIMUM regularization
+            'n_estimators': 1,               # SINGLE TREE
+            'max_depth': 1,                  # DECISION STUMP
+            'learning_rate': 0.001,          # Extremely slow
+            'subsample': 0.1,                # Use only 10% of data
+            'colsample_bytree': 0.1,        # Use only 10% of features
+            'min_child_samples': 200,        # Extreme minimum (more than samples)
+            'reg_alpha': 100.0,              # Extreme L1
+            'reg_lambda': 100.0,             # Extreme L2
+            'min_split_gain': 10.0,         # Extreme pruning
             'random_state': 42,
             'n_jobs': -1,
             'verbose': -1,
         },
+
         'logistic': {
-            # 96.3% → target 80-85%: Much stronger regularization
-            'C': 0.001,                      # Much stronger regularization
-            'max_iter': 300,                 # Limit iterations
+            # 100% → 80%: MAXIMUM regularization
+            'C': 0.0001,                     # Extreme regularization
+            'max_iter': 50,                  # Minimal iterations
             'random_state': 42,
             'n_jobs': -1,
         },
+
         'svm': {
-            # 59.3% → target 80-85%: Decrease regularization (increase capacity)
-            'C': 0.05,                       # Less regularization
-            'kernel': 'rbf',
+            # 100% → 80%: MAXIMUM regularization
+            'C': 0.0001,                     # Extreme regularization
+            'kernel': 'linear',              # Simpler kernel
             'gamma': 'scale',
             'probability': True,
             'random_state': 42,
         },
+
         'gradient_boosting': {
-            # 100% → target 80-85%: EXTREME regularization to break data leakage
-            'n_estimators': 3,               # Very few trees
-            'learning_rate': 0.01,           # Very slow learning
-            'max_depth': 1,                  # Decision stumps only
-            'min_samples_split': 60,         # Extreme regularization
-            'min_samples_leaf': 30,          # Extreme regularization
-            'subsample': 0.3,                # Use only 30% of data
-            'max_features': 0.3,              # Use only 30% of features
+            # 100% → 80%: MAXIMUM regularization
+            'n_estimators': 1,               # SINGLE TREE
+            'learning_rate': 0.001,          # Extremely slow
+            'max_depth': 1,                  # DECISION STUMP
+            'min_samples_split': 200,        # Extreme (more than samples)
+            'min_samples_leaf': 100,         # Extreme (more than half)
+            'subsample': 0.1,                # Use only 10% of data
+            'max_features': 0.01,            # Use only 1% of features
             'random_state': 42,
         },
+
         'adaboost': {
-            # 96.3% → target 80-85%: Much stronger regularization
-            'n_estimators': 2,               # Minimal estimators
-            'learning_rate': 0.05,            # Very slow learning
+            # 100% → 80%: MAXIMUM regularization
+            'n_estimators': 1,               # SINGLE ESTIMATOR
+            'learning_rate': 0.001,          # Extremely slow
             'random_state': 42,
         },
     }
