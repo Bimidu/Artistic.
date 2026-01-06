@@ -542,12 +542,12 @@ mark.search-match {
     .transcript-container {
         font-size: 0.875rem;
     }
-    
+
     .transcript-container .speaker {
         min-width: 60px;
         font-size: 0.8rem;
     }
-    
+
     .feature-chip {
         font-size: 0.75rem;
         padding: 6px 8px;
@@ -576,4 +576,56 @@ mark.search-match {
 
 .transcript-container::-webkit-scrollbar-thumb:hover {
     background: #868e96;
+}
+
+.shap-tab {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid #84cc16;
+  color: #365314;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: white;
+  transition: all 0.2s;
+}
+
+.shap-tab.active {
+  background: #84cc16;
+  color: white;
+}
+
+.shap-panel {
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.explain-box h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.explain-box ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.explain-box p {
+  margin-bottom: 0.5rem;
+}
+
+.example {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #f7fee7;
+  border: 1px solid #d9f99d;
+  border-radius: 0.75rem;
+}
+
+.red { color: #dc2626; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }

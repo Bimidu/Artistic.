@@ -86,6 +86,7 @@ input_handler = None  # Lazy-loaded due to heavy model loading
 transcript_annotator = TranscriptAnnotator()
 model_fusion = ModelFusion(method='weighted')
 
+FEATURE_CSV_PATH = Path("assets/feature_explanations/feature_explanations_literal.csv")
 
 def get_input_handler():
     """Lazy-load input handler with smart backend selection."""
@@ -634,7 +635,7 @@ async def predict_from_audio(
                 detail="Audio transcription failed. No speech was detected or transcription backend is not available. "
                        "Please ensure faster-whisper is installed: pip install faster-whisper"
             )
-        
+
         if len(processed.transcript_data.valid_utterances) == 0:
             tmp_path.unlink()
             raise HTTPException(
@@ -642,7 +643,7 @@ async def predict_from_audio(
                 detail="Audio transcription produced no valid utterances. The audio may be too quiet, "
                        "contain only noise, or be in an unsupported format."
             )
-        
+
         if use_fusion:
             # Multi-component prediction with fusion for audio
             component_predictions = []
@@ -828,15 +829,56 @@ async def predict_from_audio(
                         pass
                 model_name = best_model or compatible_models[0]
                 model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
-            
+
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
                     features_df = preprocess_with_dict(features_df, preprocessor)
                 else:
                     features_df = preprocessor.transform(features_df)
-            
+
             result = make_prediction(model, features_df, used_model_name)
-            
+
+            # LOCAL SHAP (AUDIO)
+            request_id = str(uuid.uuid4())
+            local_shap_dir = Path("assets/shap/local") / request_id
+            local_shap_dir.mkdir(parents=True, exist_ok=True)
+
+            background = np.load(
+                Path("assets/shap") / used_model_name / "background.npy"
+            )
+
+            predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+            shap_manager = SHAPManager(
+                model=model,
+                background_data=background,
+                feature_names=list(features_df.columns),
+                model_type=used_model_name.split("_")[-1]
+            )
+
+            shap_manager.generate_local_waterfall(
+                X_instance=features_df.values[0],
+                save_dir=local_shap_dir,
+                predicted_class=predicted_class
+            )
+
+            # COUNTERFACTUAL
+            component = "_".join(used_model_name.split("_")[:-1])
+            logger.info(f"Counterfactual component: {component}")
+
+            cf_result = None
+            try:
+                cf_result = generate_counterfactual(
+                    model=model,
+                    x_instance=features_df.values[0],
+                    feature_names=list(features_df.columns),
+                    component=component,
+                    predicted_class=predicted_class
+                )
+            except FileNotFoundError as e:
+                logger.warning(f"Counterfactual skipped: {e}")
+
+
             # Generate annotated transcript (use pragmatic features for annotation)
             pragmatic_feature_set = feature_extractor.extract_with_audio(
                 processed.transcript_data,
@@ -861,6 +903,11 @@ async def predict_from_audio(
             'duration': processed.metadata.get('duration', 0),
                 'model_used': used_model_name,  # Explicitly state which model was used
                 'component': get_model_component(used_model_name),
+            "local_shap": {
+                "request_id": request_id,
+                "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
+            },
+            "counterfactual": cf_result,
         }
         
     except Exception as e:
@@ -2182,17 +2229,17 @@ async def analyze_semantic_coherence(
 ):
     """
     Analyze semantic coherence of a transcript.
-    
+
     Returns coherence scores for each utterance pair, allowing the frontend
     to highlight coherent/incoherent segments.
     """
     try:
         from src.parsers.chat_parser import CHATParser
         from src.features.pragmatic_conversational.topic_coherence import TopicCoherenceFeatures
-        
+
         # Parse the text into a transcript
         parser = CHATParser()
-        
+
         # Try to parse as CHAT format first, otherwise treat as plain text
         try:
             transcript = parser.parse_text(text)
@@ -2209,7 +2256,7 @@ async def analyze_semantic_coherence(
                 else:
                     speaker = 'CHI'  # Default speaker
                     text_content = line
-                
+
                 from src.parsers.chat_parser import Utterance
                 utterances.append(Utterance(
                     speaker=speaker,
@@ -2217,7 +2264,7 @@ async def analyze_semantic_coherence(
                     timing=None,
                     end_timing=None
                 ))
-            
+
             from src.parsers.chat_parser import TranscriptData
             from pathlib import Path
             transcript = TranscriptData(
@@ -2227,17 +2274,17 @@ async def analyze_semantic_coherence(
                 diagnosis=None,
                 metadata={}
             )
-        
+
         # Initialize topic coherence extractor
         coherence_extractor = TopicCoherenceFeatures()
-        
+
         # Get embeddings for each utterance
         all_texts = [utt.text for utt in transcript.utterances]
         embeddings = []
         for text in all_texts:
             emb = coherence_extractor._get_embedding(text)
             embeddings.append(emb)
-        
+
         # Calculate similarities between consecutive utterances
         coherence_scores = []
         for i in range(len(embeddings)):
@@ -2261,7 +2308,7 @@ async def analyze_semantic_coherence(
                 else:
                     similarity = None
                     is_coherent = None
-                
+
                 coherence_scores.append({
                     'utterance_idx': i,
                     'similarity': similarity,
@@ -2269,18 +2316,18 @@ async def analyze_semantic_coherence(
                     'text': transcript.utterances[i].text,
                     'speaker': transcript.utterances[i].speaker
                 })
-        
+
         # Calculate overall coherence
         valid_similarities = [s['similarity'] for s in coherence_scores if s['similarity'] is not None]
         overall_coherence = float(np.mean(valid_similarities)) if valid_similarities else 0.0
-        
+
         return {
             'coherence_scores': coherence_scores,
             'overall_coherence': overall_coherence,
             'threshold': 0.3,
             'total_utterances': len(transcript.utterances)
         }
-        
+
     except Exception as e:
         logger.error(f"Semantic coherence analysis failed: {e}", exc_info=True)
         raise HTTPException(
@@ -2556,6 +2603,18 @@ async def general_exception_handler(request, exc):
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={"error": "Internal server error", "detail": str(exc)}
     )
+
+@app.get("/features/guidelines")
+def get_feature_guidelines():
+    if not FEATURE_CSV_PATH.exists():
+        return {"error": "Feature guideline CSV not found"}
+
+    df = pd.read_csv(FEATURE_CSV_PATH)
+
+    return {
+        "columns": list(df.columns),
+        "rows": df.fillna("").to_dict(orient="records")
+    }
 
 
 # Startup and shutdown events

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feature Guideline | Artistic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-white min-h-screen font-sans antialiased">
+
+<header class="bg-lime-950">
+    <div class="max-w-7xl mx-auto px-12 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <div class="text-4xl text-white">Artistic</div>
+                <div class="text-lg text-white hidden sm:block">
+                    ASD Detection System
+                </div>
+            </div>
+
+            <div class="flex items-center gap-8">
+                <!-- Back Button -->
+                <input type="hidden" id="apiUrl" value="http://localhost:8000" />
+
+                <a
+                  href="index.html"
+                  class="px-5 py-2 rounded-xl border border-lime-400 text-lime-300
+                         hover:bg-lime-900 hover:text-white transition-all duration-200 text-sm font-medium"
+                >
+                  Back
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<main class="max-w-7xl mx-auto px-12 py-10">
+
+    <div class="mb-8">
+        <h1 class="text-4xl font-semibold text-gray-900">
+            Conversational Feature Guidelines
+        </h1>
+        <p class="text-gray-600 mt-2 max-w-3xl">
+            This table documents all extracted conversational, linguistic, and interactional
+            features used by the ASD detection models, along with their interpretations.
+        </p>
+    </div>
+
+    <!-- Search -->
+    <div class="mb-4">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search feature name or description..."
+            class="w-full md:w-1/2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-600"
+            onkeyup="filterTable()"
+        />
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto bg-white border rounded-2xl shadow-sm max-h-[500px] overflow-y-auto">
+        <table class="min-w-full text-sm text-left" id="featureTable">
+            <thead class="bg-lime-100 text-gray-800 sticky top-0 z-10">
+                <tr>
+                    <th class="px-6 py-4 font-semibold">Feature Name</th>
+                    <th class="px-6 py-4 font-semibold">Description</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y">
+                <tr>
+                    <td class="px-6 py-4 font-mono text-gray-900">
+                        participant_id
+                    </td>
+                    <td class="px-6 py-4 text-gray-700">
+                        Unique identifier assigned to each participant.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="px-6 py-4 font-mono text-gray-900">
+                        total_turns
+                    </td>
+                    <td class="px-6 py-4 text-gray-700">
+                        Total number of conversational turns taken by the participant.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- ================= SHAP EXPLANATIONS ================= -->
+    <section class="mt-16">
+
+      <div class="bg-white border rounded-2xl p-8 shadow-sm">
+
+        <h2 class="text-2xl font-semibold text-gray-900 mb-2">
+          Understanding Model SHAP Explanations
+        </h2>
+
+        <p class="text-gray-600 mb-6 max-w-3xl">
+          These visualizations explain how conversational behaviors influence
+          ASD or TD predictions.
+        </p>
+
+        <!-- Toggle Buttons -->
+        <div class="flex gap-2 mb-8">
+          <button class="shap-tab active" onclick="showShap('waterfall')">
+            Waterfall
+          </button>
+          <button class="shap-tab" onclick="showShap('bar')">
+            Bar Plot
+          </button>
+          <button class="shap-tab" onclick="showShap('beeswarm')">
+            Beeswarm
+          </button>
+        </div>
+
+        <!--  WATERFALL -->
+        <div id="shap-waterfall" class="shap-panel">
+          <img
+            src="./src/images/waterfall.png"
+            class="rounded-xl border w-full max-w-4xl mx-auto mb-6"
+            alt="SHAP Waterfall Plot"
+          />
+
+          <div class="explain-box">
+            <h3>Waterfall Plot — Why THIS prediction was made</h3>
+
+            <p><strong>What it answers:</strong><br>
+              “Which behaviors pushed this prediction toward ASD or TD, and by how much?”
+            </p>
+
+            <ul>
+              <li>Each row represents one conversational feature</li>
+              <li><span class="red">Red bars</span> increase likelihood of ASD</li>
+              <li><span class="blue">Blue bars</span> decrease likelihood (toward TD)</li>
+              <li>Bars accumulate step-by-step to reach the final prediction score</li>
+            </ul>
+
+            <p><strong>What the numbers mean:</strong></p>
+            <ul>
+              <li>
+                <strong>Numbers next to feature names</strong> (e.g. <code>−0.56</code>, <code>1.32</code>)<br>
+                → The child’s <em>standardized value</em> for that feature compared to the training population
+              </li>
+              <li>
+                <strong>Numbers inside the bars</strong> (e.g. <code>+0.03</code>, <code>−0.02</code>)<br>
+                → How much that feature <em>shifted the model’s decision</em> toward ASD or TD
+              </li>
+              <li>
+                <strong>Baseline value (E[f(X)])</strong><br>
+                → The model’s average prediction before seeing this child’s data
+              </li>
+              <li>
+                <strong>Final value (f(x))</strong><br>
+                → The model’s final confidence score for this child after all features are considered
+              </li>
+            </ul>
+
+            <p><strong>How to read it clinically:</strong></p>
+            <ul>
+              <li>Start at the baseline (average child)</li>
+              <li>Move feature by feature from top to bottom</li>
+              <li>Observe which behaviors push the prediction most strongly</li>
+              <li>Small bars indicate minor influence and are usually not clinically dominant</li>
+            </ul>
+
+            <div class="example">
+              <strong>Example interpretation:</strong><br>
+              Higher continuation markers and discourse markers increased ASD likelihood,
+              while stronger semantic coherence reduced it.
+            </div>
+          </div>
+        </div>
+
+
+        <!--  BAR PLOT-->
+        <div id="shap-bar" class="shap-panel hidden">
+          <img
+            src="./src/images/global_bar.png"
+            class="rounded-xl border w-full max-w-4xl mx-auto mb-6"
+            alt="SHAP Bar Plot"
+          />
+
+          <div class="explain-box">
+            <h3>Bar Plot — Which features matter MOST overall</h3>
+
+            <p><strong>What it answers:</strong><br>
+              “Which conversational behaviors are most influential across the entire dataset?”
+            </p>
+
+            <ul>
+              <li>Each bar represents one conversational feature</li>
+              <li>Bar length shows <strong>average importance</strong> of that feature</li>
+              <li>Longer bars = greater overall influence on predictions</li>
+              <li>This plot does <strong>not</strong> show ASD vs TD direction</li>
+            </ul>
+
+            <p><strong>What the numbers mean:</strong></p>
+            <ul>
+              <li>
+                <strong>Bar length (|SHAP value|)</strong><br>
+                → Average size of that feature’s influence across all children
+              </li>
+              <li>
+                <strong>No negative or positive sign</strong><br>
+                → Direction is removed to focus on <em>importance</em>, not diagnosis
+              </li>
+              <li>
+                <strong>Features at the top</strong><br>
+                → Consistently important behaviors in the population
+              </li>
+            </ul>
+
+            <p><strong>How to read it clinically:</strong></p>
+            <ul>
+              <li>Use this plot to understand <strong>key behavioral markers</strong></li>
+              <li>Helpful for screening, research, and feature validation</li>
+              <li>Not intended for individual-level interpretation</li>
+            </ul>
+
+            <div class="example">
+              <strong>Example interpretation:</strong><br>
+              Semantic coherence and turn-taking consistency are
+              strong global indicators across many transcripts.
+            </div>
+          </div>
+        </div>
+
+        <!-- BEESWARM-->
+        <div id="shap-beeswarm" class="shap-panel hidden">
+          <img
+            src="./src/images/global_beeswarm.png"
+            class="rounded-xl border w-full max-w-4xl mx-auto mb-6"
+            alt="SHAP Beeswarm Plot"
+          />
+
+          <div class="explain-box">
+            <h3>Beeswarm Plot — How feature values affect predictions</h3>
+
+            <p><strong>What it answers:</strong><br>
+              “How do low vs high values of each behavior influence ASD likelihood?”
+            </p>
+
+            <ul>
+              <li>Each dot represents one child or transcript</li>
+              <li>Dots are spread horizontally by their influence</li>
+              <li>Right side → pushes prediction toward ASD</li>
+              <li>Left side → pushes prediction toward TD</li>
+            </ul>
+
+            <p><strong>What the numbers and colors mean:</strong></p>
+            <ul>
+              <li>
+                <strong>X-axis position (SHAP value)</strong><br>
+                → Strength and direction of influence for that feature
+              </li>
+              <li>
+                <strong>Red dots</strong><br>
+                → Higher values of that feature
+              </li>
+              <li>
+                <strong>Blue dots</strong><br>
+                → Lower values of that feature
+              </li>
+              <li>
+                <strong>Vertical spread</strong><br>
+                → Variability across children
+              </li>
+            </ul>
+
+            <p><strong>How to read it clinically:</strong></p>
+            <ul>
+              <li>Look for patterns, not individual points</li>
+              <li>Helps identify risk thresholds and variability</li>
+              <li>Useful for understanding heterogeneous presentations</li>
+              <li>More exploratory than diagnostic</li>
+            </ul>
+
+            <div class="example">
+              <strong>Example interpretation:</strong><br>
+              Higher filled-pause ratios consistently push predictions toward ASD,
+              while lower values cluster near TD.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+</main>
+
+<script src="guidelines.js"></script>
+
+<script>
+function filterTable() {
+    const input = document.getElementById("searchInput");
+    const filter = input.value.toLowerCase();
+    const rows = document.querySelectorAll("#featureTable tbody tr");
+
+    rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+    });
+}
+</script>
+
+<script>
+function showShap(type) {
+  document.querySelectorAll('.shap-panel').forEach(p => p.classList.add('hidden'));
+  document.querySelectorAll('.shap-tab').forEach(b => b.classList.remove('active'));
+
+  document.getElementById(`shap-${type}`).classList.remove('hidden');
+  event.target.classList.add('active');
+}
+</script>
+
+
+</body>
+</html>
