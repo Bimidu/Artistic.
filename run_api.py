@@ -14,6 +14,13 @@ Then access:
 Author: Bimidu Gunathilake
 """
 
+# Fix numpy/OpenBLAS threading issues on macOS
+import os
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
+os.environ['MKL_NUM_THREADS'] = '1'
+os.environ['NUMEXPR_NUM_THREADS'] = '1'
+os.environ['OMP_NUM_THREADS'] = '1'
+
 import uvicorn
 from pathlib import Path
 

@@ -15,7 +15,7 @@ Author: Randil Haturusinghe
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Any, Literal
+from typing import Dict, List, Tuple, Optional, Any, Literal, Union
 from dataclasses import dataclass, field
 from pathlib import Path
 import joblib
@@ -90,6 +90,7 @@ class SyntacticSemanticTrainer:
             'max_depth': 15,
             'min_samples_split': 3,
             'min_samples_leaf': 1,
+            'class_weight': 'balanced',
             'random_state': 42,
             'n_jobs': -1,
         },
@@ -99,6 +100,7 @@ class SyntacticSemanticTrainer:
             'learning_rate': 0.1,
             'subsample': 0.8,
             'colsample_bytree': 0.8,
+            'scale_pos_weight': 1.88,
             'random_state': 42,
             'n_jobs': -1,
         },
@@ -116,11 +118,13 @@ class SyntacticSemanticTrainer:
             'C': 1.0,
             'kernel': 'rbf',
             'gamma': 'scale',
+            'class_weight': 'balanced',
             'random_state': 42,
         },
         'logistic': {
             'C': 1.0,
             'max_iter': 2000,
+            'class_weight': 'balanced',
             'random_state': 42,
             'n_jobs': -1,
         },
@@ -417,7 +421,7 @@ class SyntacticSemanticTrainer:
     def save_model(
         self,
         model_name: str,
-        save_path: str | Path
+        save_path: Union[str, Path]
     ):
         """
         Save trained syntactic/semantic model with metadata.
@@ -441,7 +445,7 @@ class SyntacticSemanticTrainer:
                 'status': 'implemented',
                 'syntactic_features': True,
                 'semantic_features': True,
-                'feature_count': 27,
+                'feature_count': 46,
                 'implementation_date': pd.Timestamp.now().isoformat(),
             }
         }
@@ -476,13 +480,16 @@ class SyntacticSemanticTrainer:
         print("- Gradient Boosting (sklearn)")
 
         print("\n[TARGET] Syntactic/Semantic Features Supported:")
-        print("- Syntactic complexity (6 features)")
-        print("- Grammatical accuracy (5 features)")
-        print("- Sentence structure (4 features)")
-        print("- Semantic features (4 features)")
-        print("- Vocabulary semantic (4 features)")
-        print("- Advanced semantic (3 features)")
-        print("- Total: 27 syntactic/semantic features")
+        print("- POS tag ratios (8 features)")
+        print("- Dependency tree metrics (6 features)")
+        print("- Clause structure (6 features)")
+        print("- Sentence complexity (6 features)")
+        print("- Phrase structure (4 features)")
+        print("- Semantic features (8 features)")
+        print("- Named entity features (3 features)")
+        print("- Verb analysis (4 features)")
+        print("- Aggregated complexity (1 feature)")
+        print("- Total: 46 syntactic/semantic features")
 
         print("\n[BULB] Usage:")
         print("from src.models.syntactic_semantic import SyntacticSemanticTrainer")

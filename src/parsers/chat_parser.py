@@ -18,7 +18,7 @@ Author: Bimidu Gunathilake
 import re
 from datetime import datetime, date
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Tuple, Any, Union
 from dataclasses import dataclass, field
 
 import pylangacq
@@ -166,7 +166,7 @@ class CHATParser:
         self.diagnosis_mapper = DiagnosisMapper()
         logger.info(f"CHATParser initialized with min_words={min_words}")
     
-    def parse_file(self, file_path: str | Path) -> TranscriptData:
+    def parse_file(self, file_path: Union[str, Path]) -> TranscriptData:
         """
         Parse a CHAT file and extract all information.
         
@@ -190,17 +190,28 @@ class CHATParser:
             raise FileNotFoundError(f"File not found: {file_path}")
         
         logger.info(f"Parsing CHAT file: {file_path.name}")
-        
+
+        # Initialize variables for exception handling
+        metadata = {}
+        participants = {}
+
         try:
             # Use pylangacq to read the file
             reader = pylangacq.read_chat(str(file_path))
-            
+
             # Extract metadata
             metadata = self._extract_metadata(reader, file_path)
-            
+
             # Extract participant information
             participants = self._extract_participants(reader)
-            
+            # Extract diagnosis, age, and gender from participants
+            if '_diagnosis' in participants:
+                metadata['diagnosis'] = participants['_diagnosis']
+            if '_age_months' in participants:
+                metadata['age_months'] = participants['_age_months']
+            if '_gender' in participants:
+                metadata['gender'] = participants['_gender']
+
             # Resolve diagnosis using the diagnosis mapper
             diagnosis = metadata.get('diagnosis')
             if not diagnosis and '_diagnosis' in participants:
@@ -222,17 +233,41 @@ class CHATParser:
                 metadata=metadata,
                 speakers=participants,
             )
-            
+
             # Extract all utterances
             transcript.utterances = self._extract_utterances(reader)
-            
+
             logger.info(
                 f"Successfully parsed {transcript.total_utterances} utterances "
                 f"from {file_path.name}"
             )
-            
+
             return transcript
-            
+
+        except ValueError as e:
+            # Catch alignment errors from pylangacq and handle gracefully
+            error_msg = str(e)
+            if "align" in error_msg.lower():
+                logger.warning(
+                    f"Skipping file {file_path.name} due to alignment error "
+                    f"(likely contains 0-prefixed words without morphology): {error_msg[:100]}"
+                )
+                # Return a minimal transcript with metadata but no utterances
+                return TranscriptData(
+                    file_path=file_path,
+                    participant_id=metadata.get('participant_id', file_path.stem),
+                    diagnosis=metadata.get('diagnosis'),
+                    age_months=metadata.get('age_months'),
+                    gender=metadata.get('gender'),
+                    session_date=metadata.get('session_date'),
+                    session_type=metadata.get('session_type'),
+                    languages=metadata.get('languages', []),
+                    metadata=metadata,
+                    speakers=participants,
+                )
+            else:
+                logger.error(f"Error parsing file {file_path}: {e}")
+                raise ValueError(f"Failed to parse {file_path}: {e}")
         except Exception as e:
             logger.error(f"Error parsing file {file_path}: {e}")
             raise ValueError(f"Failed to parse {file_path}: {e}")
@@ -335,12 +370,12 @@ class CHATParser:
     ) -> Dict[str, Dict[str, str]]:
         """
         Extract participant information from @ID headers.
-        
+
         @ID format: lang|corpus|code|age|sex|group|SES|role|education|custom
-        
+
         Args:
             reader: pylangacq Reader object
-            
+
         Returns:
             Dictionary mapping speaker codes to participant info
         """
@@ -372,7 +407,6 @@ class CHATParser:
         for speaker_code, info in participant_data.items():
             if not isinstance(info, dict):
                 continue
-                
             participants[speaker_code] = {
                 'code': speaker_code,
                 'language': info.get('language', ''),
@@ -389,8 +423,14 @@ class CHATParser:
             # Extract diagnosis from group field (ASD, TD, DD, etc.)
             group = info.get('group', '').upper()
             if speaker_code == 'CHI' and group:
-                # Store diagnosis in metadata (will be used in TranscriptData)
-                participants['_diagnosis'] = group
+                # Validate that group is a diagnosis label, not an age value
+                # Age values typically match pattern: X;YY. or similar
+                # Valid diagnosis labels: ASD, TD, TYP, DD, ADHD, SLI, etc.
+                if not re.match(r'^\d+;\d+\.?$', group):  # Reject age-like patterns
+                    # Store diagnosis in metadata (will be used in TranscriptData)
+                    participants['_diagnosis'] = group
+                else:
+                    logger.warning(f"Rejected age-like value '{group}' as diagnosis for {speaker_code}")
             
             # Extract age in months from age field (format: Y;MM.DD)
             age_str = info.get('age', '')
@@ -523,7 +563,7 @@ class CHATParser:
     
     def parse_directory(
         self,
-        directory: str | Path,
+        directory: Union[str, Path],
         pattern: str = "**/*.cha",
         recursive: bool = True
     ) -> List[TranscriptData]:
