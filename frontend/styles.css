@@ -349,7 +349,7 @@ input:focus, textarea:focus, select:focus {
    ======================================== */
 
 .transcript-container {
-    font-family: 'Saans', system-ui, sans-serif;
+    font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
     line-height: 1.8;
     color: #1a1a1a;
 }

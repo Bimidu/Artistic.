@@ -1731,7 +1731,7 @@ const ANNOTATION_COLORS = {
 
 let currentTranscriptData = null;
 let currentTranscriptText = null;
-let isCompactView = false;
+let isCompactView = true; // Always start in compact mode
 let semanticCoherenceData = null;
 let isSemanticCoherenceActive = false;
 
@@ -1814,6 +1814,13 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
     
     // Render transcript with enhanced styling
     container.innerHTML = transcriptDiv.innerHTML || htmlContent;
+    
+    // Always apply compact view by default
+    container.classList.add('compact-view');
+    const toggleText = document.getElementById('viewToggleText');
+    if (toggleText) {
+        toggleText.textContent = 'Expanded View';
+    }
     
     // Enhance annotations with interactive features
     enhanceAnnotations(container);
