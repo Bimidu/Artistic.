@@ -14,7 +14,7 @@ Methods implemented:
 7. Sequential Feature Selection
 8. Ensemble Selection (voting across methods)
 
-Author: AI Assistant
+Author: Randil Haturusinghe
 """
 
 import pandas as pd

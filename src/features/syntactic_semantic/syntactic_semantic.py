@@ -124,45 +124,71 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
     
     @property
     def feature_names(self) -> List[str]:
-        """Get list of syntactic/semantic feature names."""
+        """Get list of syntactic/semantic feature names (40+ features for comprehensive analysis)."""
         return [
-            # Syntactic complexity (Section 3.3.5)
-            'avg_dependency_depth',
-            'max_dependency_depth',
+            # POS ratios (8 features)
+            'pos_noun_ratio',
+            'pos_verb_ratio',
+            'pos_adj_ratio',
+            'pos_adv_ratio',
+            'pos_pronoun_ratio',
+            'pos_det_ratio',
+            'pos_adp_ratio',
+            'pos_conj_ratio',
+            
+            # Dependency tree metrics (6 features)
+            'dependency_tree_depth',
+            'dependency_tree_width',
             'avg_dependency_distance',
-            'clause_complexity',
-            'subordination_index',
-            'coordination_index',
+            'max_dependency_distance',
+            'root_distance_avg',
+            'dependency_branching_factor',
             
-            # Grammatical accuracy (Section 3.3.5)
-            'grammatical_error_rate',
-            'tense_consistency_score',
-            'tense_variety',
-            'structure_diversity',
-            'pos_tag_diversity',
+            # Clause structure (6 features)
+            'clause_count',
+            'subordinate_clause_ratio',
+            'coordinate_clause_ratio',
+            'relative_clause_ratio',
+            'complement_clause_ratio',
+            'adverbial_clause_ratio',
             
-            # Sentence structure
-            'avg_parse_tree_height',
-            'noun_phrase_complexity',
-            'verb_phrase_complexity',
-            'prepositional_phrase_ratio',
+            # Sentence complexity (6 features)
+            'sentence_complexity_score',
+            'parse_tree_height',
+            'avg_sentence_length',
+            'sentence_length_variance',
+            'complex_sentence_ratio',
+            'simple_sentence_ratio',
             
-            # Semantic features (Section 3.3.6)
-            'semantic_coherence',
-            'semantic_density',
-            'lexical_diversity_semantic',
-            'thematic_consistency',
+            # Phrase structure (4 features)
+            'phrase_structure_depth',
+            'np_complexity',
+            'vp_complexity',
+            'pp_ratio',
             
-            # Vocabulary semantic features (Section 3.3.6)
-            'vocabulary_abstractness',
-            'semantic_field_diversity',
+            # Semantic features (8 features)
+            'semantic_coherence_score',
+            'lexical_diversity',
             'word_sense_diversity',
             'content_word_ratio',
+            'function_word_ratio',
+            'unique_lemma_ratio',
+            'hapax_legomena_ratio',
+            'avg_word_length',
             
-            # Advanced semantic
-            'semantic_role_diversity',
-            'entity_density',
-            'verb_argument_complexity',
+            # Named entity features (3 features)
+            'named_entity_density',
+            'named_entity_diversity',
+            'person_entity_ratio',
+            
+            # Verb analysis (4 features)
+            'verb_tense_consistency',
+            'modal_verb_ratio',
+            'auxiliary_verb_ratio',
+            'verb_argument_count_avg',
+            
+            # Aggregated complexity (1 feature)
+            'syntactic_complexity',
         ]
     
     def extract(self, transcript: TranscriptData) -> FeatureResult:
@@ -252,6 +278,14 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         advanced_features = self._calculate_advanced_semantic_features(docs)
         features.update(advanced_features)
         
+        # Calculate syntactic_complexity as aggregate metric
+        # Combine normalized values from multiple syntactic features
+        if 'dependency_tree_depth' in features and 'clause_count' in features:
+            normalized_depth = min(features.get('dependency_tree_depth', 0) / 10.0, 1.0)
+            normalized_clauses = min(features.get('clause_count', 0) / 5.0, 1.0)
+            normalized_subordination = features.get('subordinate_clause_ratio', 0)
+            features['syntactic_complexity'] = (normalized_depth + normalized_clauses + normalized_subordination) / 3.0
+        
         self.logger.debug(f"Extracted {len(features)} syntactic/semantic features")
         
         return FeatureResult(
@@ -325,12 +359,19 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             Dictionary of syntactic complexity features
         """
         features = {
-            'avg_dependency_depth': 0.0,
-            'max_dependency_depth': 0.0,
+            'dependency_tree_depth': 0.0,
+            'dependency_tree_width': 0.0,
             'avg_dependency_distance': 0.0,
-            'clause_complexity': 0.0,
-            'subordination_index': 0.0,
-            'coordination_index': 0.0,
+            'max_dependency_distance': 0.0,
+            'root_distance_avg': 0.0,
+            'dependency_branching_factor': 0.0,
+            'clause_count': 0.0,
+            'subordinate_clause_ratio': 0.0,
+            'coordinate_clause_ratio': 0.0,
+            'relative_clause_ratio': 0.0,
+            'complement_clause_ratio': 0.0,
+            'adverbial_clause_ratio': 0.0,
+            'sentence_complexity_score': 0.0,
         }
         
         if not docs:
@@ -338,41 +379,76 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         
         all_depths = []
         all_distances = []
+        root_distances = []
+        children_counts = []
         subordinate_count = 0
         coordinate_count = 0
+        relative_count = 0
+        complement_count = 0
+        adverbial_count = 0
         clause_count = 0
         
         for doc in docs:
+            root_token = None
             for token in doc:
                 # Dependency depth
                 depth = self._get_dependency_depth(token)
                 all_depths.append(depth)
                 
-                # Dependency distance (absolute distance between token and head)
+                # Children count for branching factor
+                children_counts.append(len(list(token.children)))
+                
+                # Dependency distance
                 if token.head != token:
                     distance = abs(token.i - token.head.i)
                     all_distances.append(distance)
                 
-                # Count subordinate clauses (adverbial, adjectival, complement)
-                if token.dep_ in ['advcl', 'acl', 'ccomp', 'xcomp', 'relcl']:
-                    subordinate_count += 1
+                # Find root
+                if token.dep_ == 'ROOT':
+                    root_token = token
                 
-                # Count coordinate clauses
-                if token.dep_ == 'conj':
-                    coordinate_count += 1
-                
-                # Count clause markers (subordinating conjunctions, etc.)
+                # Clause analysis
                 if token.dep_ == 'mark':
                     clause_count += 1
+                if token.dep_ == 'advcl':
+                    adverbial_count += 1
+                    subordinate_count += 1
+                if token.dep_ in ['relcl', 'acl']:
+                    relative_count += 1
+                    subordinate_count += 1
+                if token.dep_ in ['ccomp', 'xcomp']:
+                    complement_count += 1
+                    subordinate_count += 1
+                if token.dep_ == 'conj':
+                    coordinate_count += 1
+            
+            # Root distances
+            if root_token:
+                for other_token in doc:
+                    root_distances.append(abs(other_token.i - root_token.i))
         
         num_docs = len(docs)
         
-        features['avg_dependency_depth'] = float(np.mean(all_depths)) if all_depths else 0.0
-        features['max_dependency_depth'] = float(max(all_depths)) if all_depths else 0.0
+        features['dependency_tree_depth'] = float(np.mean(all_depths)) if all_depths else 0.0
+        features['dependency_tree_width'] = float(max(all_depths)) if all_depths else 0.0
         features['avg_dependency_distance'] = float(np.mean(all_distances)) if all_distances else 0.0
-        features['clause_complexity'] = safe_divide(clause_count, num_docs)
-        features['subordination_index'] = safe_divide(subordinate_count, num_docs)
-        features['coordination_index'] = safe_divide(coordinate_count, num_docs)
+        features['max_dependency_distance'] = float(max(all_distances)) if all_distances else 0.0
+        features['root_distance_avg'] = float(np.mean(root_distances)) if root_distances else 0.0
+        features['dependency_branching_factor'] = float(np.mean(children_counts)) if children_counts else 0.0
+        features['clause_count'] = safe_divide(clause_count, num_docs)
+        features['subordinate_clause_ratio'] = safe_divide(subordinate_count, num_docs)
+        features['coordinate_clause_ratio'] = safe_divide(coordinate_count, num_docs)
+        features['relative_clause_ratio'] = safe_divide(relative_count, num_docs)
+        features['complement_clause_ratio'] = safe_divide(complement_count, num_docs)
+        features['adverbial_clause_ratio'] = safe_divide(adverbial_count, num_docs)
+        
+        # Composite sentence complexity score
+        features['sentence_complexity_score'] = (
+            safe_divide(subordinate_count, num_docs) * 0.3 +
+            safe_divide(coordinate_count, num_docs) * 0.2 +
+            min(features['dependency_tree_depth'] / 10.0, 1.0) * 0.3 +
+            min(features['avg_dependency_distance'] / 5.0, 1.0) * 0.2
+        )
         
         return features
     
@@ -397,11 +473,11 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             Dictionary of grammatical features
         """
         features = {
-            'grammatical_error_rate': 0.0,
-            'tense_consistency_score': 0.0,
-            'tense_variety': 0.0,
-            'structure_diversity': 0.0,
-            'pos_tag_diversity': 0.0,
+            'pos_noun_ratio': 0.0,
+            'pos_verb_ratio': 0.0,
+            'pos_adj_ratio': 0.0,
+            'pos_adv_ratio': 0.0,
+            'pos_pronoun_ratio': 0.0,
         }
         
         if not docs:
@@ -440,25 +516,45 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
                 structures.append(roots[0].pos_)
         
         num_docs = len(docs)
-        
-        # Grammatical error rate
-        features['grammatical_error_rate'] = safe_divide(error_count, num_docs)
-        
-        # Tense consistency (ratio of most common tense)
-        if tenses:
-            tense_counts = Counter(tenses)
-            most_common_count = tense_counts.most_common(1)[0][1]
-            features['tense_consistency_score'] = safe_divide(most_common_count, len(tenses))
-            features['tense_variety'] = safe_divide(len(tense_counts), len(tenses))
-        
-        # Structure diversity
-        if structures:
-            structure_counts = Counter(structures)
-            features['structure_diversity'] = safe_divide(len(structure_counts), len(structures))
-        
-        # POS tag diversity (TTR for POS tags)
         total_tokens = sum(len(doc) for doc in docs)
-        features['pos_tag_diversity'] = safe_divide(len(pos_tags), total_tokens)
+        
+        # POS ratios (nouns, verbs, adj, adv, pronouns / total_tokens)
+        noun_count = 0
+        verb_count = 0
+        adj_count = 0
+        adv_count = 0
+        pron_count = 0
+        det_count = 0
+        adp_count = 0
+        conj_count = 0
+        
+        for doc in docs:
+            for token in doc:
+                if token.pos_ == 'NOUN':
+                    noun_count += 1
+                elif token.pos_ == 'VERB':
+                    verb_count += 1
+                elif token.pos_ == 'ADJ':
+                    adj_count += 1
+                elif token.pos_ == 'ADV':
+                    adv_count += 1
+                elif token.pos_ == 'PRON':
+                    pron_count += 1
+                elif token.pos_ == 'DET':
+                    det_count += 1
+                elif token.pos_ == 'ADP':
+                    adp_count += 1
+                elif token.pos_ in ['CONJ', 'CCONJ', 'SCONJ']:
+                    conj_count += 1
+        
+        features['pos_noun_ratio'] = safe_divide(noun_count, total_tokens)
+        features['pos_verb_ratio'] = safe_divide(verb_count, total_tokens)
+        features['pos_adj_ratio'] = safe_divide(adj_count, total_tokens)
+        features['pos_adv_ratio'] = safe_divide(adv_count, total_tokens)
+        features['pos_pronoun_ratio'] = safe_divide(pron_count, total_tokens)
+        features['pos_det_ratio'] = safe_divide(det_count, total_tokens)
+        features['pos_adp_ratio'] = safe_divide(adp_count, total_tokens)
+        features['pos_conj_ratio'] = safe_divide(conj_count, total_tokens)
         
         return features
     
@@ -475,10 +571,15 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             Dictionary of structure features
         """
         features = {
-            'avg_parse_tree_height': 0.0,
-            'noun_phrase_complexity': 0.0,
-            'verb_phrase_complexity': 0.0,
-            'prepositional_phrase_ratio': 0.0,
+            'parse_tree_height': 0.0,
+            'np_complexity': 0.0,
+            'vp_complexity': 0.0,
+            'phrase_structure_depth': 0.0,
+            'pp_ratio': 0.0,
+            'avg_sentence_length': 0.0,
+            'sentence_length_variance': 0.0,
+            'complex_sentence_ratio': 0.0,
+            'simple_sentence_ratio': 0.0,
         }
         
         if not docs:
@@ -488,8 +589,13 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         np_complexity = []
         vp_complexity = []
         pp_count = 0
+        sentence_lengths = []
+        total_tokens = 0
         
         for doc in docs:
+            sentence_lengths.append(len(doc))
+            total_tokens += len(doc)
+            
             # Parse tree height (max dependency depth in document)
             if doc:
                 max_depth = max(self._get_dependency_depth(token) for token in doc)
@@ -510,10 +616,22 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
                 if token.pos_ == 'ADP':
                     pp_count += 1
         
-        features['avg_parse_tree_height'] = float(np.mean(tree_heights)) if tree_heights else 0.0
-        features['noun_phrase_complexity'] = float(np.mean(np_complexity)) if np_complexity else 0.0
-        features['verb_phrase_complexity'] = float(np.mean(vp_complexity)) if vp_complexity else 0.0
-        features['prepositional_phrase_ratio'] = safe_divide(pp_count, len(docs))
+        num_docs = len(docs)
+        features['parse_tree_height'] = float(np.mean(tree_heights)) if tree_heights else 0.0
+        features['np_complexity'] = float(np.mean(np_complexity)) if np_complexity else 0.0
+        features['vp_complexity'] = float(np.mean(vp_complexity)) if vp_complexity else 0.0
+        features['phrase_structure_depth'] = safe_divide(pp_count, num_docs)
+        features['pp_ratio'] = safe_divide(pp_count, total_tokens)
+        
+        # Sentence length statistics
+        features['avg_sentence_length'] = float(np.mean(sentence_lengths)) if sentence_lengths else 0.0
+        features['sentence_length_variance'] = float(np.var(sentence_lengths)) if len(sentence_lengths) > 1 else 0.0
+        
+        # Complex vs simple sentences
+        complex_sentences = sum(1 for length in sentence_lengths if length > 10)
+        simple_sentences = sum(1 for length in sentence_lengths if length <= 5)
+        features['complex_sentence_ratio'] = safe_divide(complex_sentences, num_docs)
+        features['simple_sentence_ratio'] = safe_divide(simple_sentences, num_docs)
         
         return features
     
@@ -538,10 +656,12 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             Dictionary of semantic features
         """
         features = {
-            'semantic_coherence': 0.0,
-            'semantic_density': 0.0,
-            'lexical_diversity_semantic': 0.0,
-            'thematic_consistency': 0.0,
+            'semantic_coherence_score': 0.0,
+            'lexical_diversity': 0.0,
+            'content_word_ratio': 0.0,
+            'unique_lemma_ratio': 0.0,
+            'hapax_legomena_ratio': 0.0,
+            'avg_word_length': 0.0,
         }
         
         if not docs:
@@ -553,42 +673,53 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         if has_vectors and len(docs) > 1:
             for i in range(1, len(docs)):
                 try:
-                    # spaCy's similarity uses word vectors
                     similarity = docs[i-1].similarity(docs[i])
-                    # Filter out NaN values
                     if not np.isnan(similarity):
                         coherence_scores.append(similarity)
                 except Exception:
-                    # Handle cases where vectors are missing
                     pass
         
-        features['semantic_coherence'] = float(np.mean(coherence_scores)) if coherence_scores else 0.0
+        features['semantic_coherence_score'] = float(np.mean(coherence_scores)) if coherence_scores else 0.0
         
-        # Semantic density (content words per utterance)
-        content_word_counts = []
+        # Collect all tokens and lemmas
+        all_lemmas = []
         all_content_words = []
+        word_lengths = []
+        total_tokens = 0
+        content_count = 0
         
         for doc in docs:
-            content_words = [
-                token.lemma_.lower() for token in doc
-                if token.pos_ in ['NOUN', 'VERB', 'ADJ', 'ADV'] and not token.is_stop
-            ]
-            content_word_counts.append(len(content_words))
-            all_content_words.extend(content_words)
-        
-        features['semantic_density'] = float(np.mean(content_word_counts)) if content_word_counts else 0.0
+            for token in doc:
+                total_tokens += 1
+                
+                if token.is_alpha:
+                    word_lengths.append(len(token.text))
+                    all_lemmas.append(token.lemma_.lower())
+                
+                if token.pos_ in ['NOUN', 'VERB', 'ADJ', 'ADV'] and not token.is_stop:
+                    content_count += 1
+                    all_content_words.append(token.lemma_.lower())
         
         # Lexical diversity (TTR for content words)
         if all_content_words:
-            features['lexical_diversity_semantic'] = calculate_ratio(
+            features['lexical_diversity'] = calculate_ratio(
                 len(set(all_content_words)), len(all_content_words)
             )
         
-        # Thematic consistency (proportion of repeated content words)
-        if all_content_words:
-            word_freq = Counter(all_content_words)
-            repeated_words = sum(1 for count in word_freq.values() if count > 1)
-            features['thematic_consistency'] = calculate_ratio(repeated_words, len(word_freq))
+        # Content word ratio
+        features['content_word_ratio'] = safe_divide(content_count, total_tokens)
+        
+        # Unique lemma ratio
+        unique_lemmas = set(all_lemmas)
+        features['unique_lemma_ratio'] = safe_divide(len(unique_lemmas), total_tokens)
+        
+        # Hapax legomena ratio (words appearing only once)
+        lemma_counts = Counter(all_lemmas)
+        hapax = sum(1 for count in lemma_counts.values() if count == 1)
+        features['hapax_legomena_ratio'] = safe_divide(hapax, len(all_lemmas))
+        
+        # Average word length
+        features['avg_word_length'] = float(np.mean(word_lengths)) if word_lengths else 0.0
         
         return features
     
@@ -606,10 +737,15 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             Dictionary of vocabulary semantic features
         """
         features = {
-            'vocabulary_abstractness': 0.0,
-            'semantic_field_diversity': 0.0,
             'word_sense_diversity': 0.0,
-            'content_word_ratio': 0.0,
+            'function_word_ratio': 0.0,
+            'named_entity_density': 0.0,
+            'named_entity_diversity': 0.0,
+            'person_entity_ratio': 0.0,
+            'verb_tense_consistency': 0.0,
+            'modal_verb_ratio': 0.0,
+            'auxiliary_verb_ratio': 0.0,
+            'verb_argument_count_avg': 0.0,
         }
         
         if not docs:
@@ -619,58 +755,82 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         self._ensure_wordnet_loaded()
         from nltk.corpus import wordnet
         
-        abstract_count = 0
-        concrete_count = 0
-        semantic_fields: Set[str] = set()
         sense_counts = []
         total_tokens = 0
-        content_tokens = 0
+        function_tokens = 0
+        all_entities = []
+        entity_labels = []
+        verbs = []
+        tenses = []
+        modal_count = 0
+        aux_count = 0
+        verb_args = []
         
         for doc in docs:
+            # Collect named entities
+            for ent in doc.ents:
+                all_entities.append(ent)
+                entity_labels.append(ent.label_)
+            
             for token in doc:
                 total_tokens += 1
                 
-                # Content word ratio
+                # Function word ratio
+                if token.pos_ in ['DET', 'ADP', 'CONJ', 'CCONJ', 'SCONJ', 'AUX'] or token.is_stop:
+                    function_tokens += 1
+                
+                # Word sense diversity for content words
                 if token.pos_ in ['NOUN', 'VERB', 'ADJ', 'ADV'] and not token.is_stop:
-                    content_tokens += 1
-                    
-                    # Abstractness using WordNet
                     try:
                         synsets = wordnet.synsets(token.lemma_)
                         if synsets:
                             sense_counts.append(len(synsets))
-                            
-                            # Use first sense for depth analysis
-                            first_synset = synsets[0]
-                            depth = first_synset.min_depth()
-                            
-                            if depth > self.ABSTRACT_DEPTH_THRESHOLD:
-                                abstract_count += 1
-                            else:
-                                concrete_count += 1
-                            
-                            # Semantic field (top-level hypernym)
-                            hypernyms = first_synset.hypernyms()
-                            if hypernyms:
-                                semantic_fields.add(hypernyms[0].name())
                     except Exception:
-                        # WordNet lookup failed for this token
                         pass
+                
+                # Verb analysis
+                if token.pos_ == 'VERB':
+                    verbs.append(token)
+                    # Collect tenses
+                    if token.tag_ in ['VBD', 'VBN']:
+                        tenses.append('past')
+                    elif token.tag_ in ['VBP', 'VBZ', 'VBG']:
+                        tenses.append('present')
+                    # Verb arguments
+                    args = len([child for child in token.children if child.dep_ in ['nsubj', 'dobj', 'iobj', 'pobj', 'attr']])
+                    verb_args.append(args)
+                
+                # Modal and auxiliary verbs
+                if token.tag_ == 'MD':
+                    modal_count += 1
+                if token.pos_ == 'AUX':
+                    aux_count += 1
         
-        # Vocabulary abstractness ratio
-        total_classified = abstract_count + concrete_count
-        if total_classified > 0:
-            features['vocabulary_abstractness'] = calculate_ratio(abstract_count, total_classified)
-        
-        # Semantic field diversity
-        if content_tokens > 0:
-            features['semantic_field_diversity'] = calculate_ratio(len(semantic_fields), content_tokens)
-        
-        # Word sense diversity (average number of senses per word)
+        # Word sense diversity
         features['word_sense_diversity'] = float(np.mean(sense_counts)) if sense_counts else 0.0
         
-        # Content word ratio
-        features['content_word_ratio'] = calculate_ratio(content_tokens, total_tokens)
+        # Function word ratio
+        features['function_word_ratio'] = calculate_ratio(function_tokens, total_tokens)
+        
+        # Named entity features
+        features['named_entity_density'] = safe_divide(len(all_entities), total_tokens)
+        features['named_entity_diversity'] = len(set(entity_labels))
+        person_ents = sum(1 for label in entity_labels if label == 'PERSON')
+        features['person_entity_ratio'] = safe_divide(person_ents, len(all_entities)) if all_entities else 0.0
+        
+        # Verb tense consistency
+        if tenses:
+            tense_counts = Counter(tenses)
+            most_common_count = tense_counts.most_common(1)[0][1]
+            features['verb_tense_consistency'] = safe_divide(most_common_count, len(tenses))
+        
+        # Modal and auxiliary verb ratios
+        num_verbs = len(verbs)
+        features['modal_verb_ratio'] = safe_divide(modal_count, num_verbs) if num_verbs > 0 else 0.0
+        features['auxiliary_verb_ratio'] = safe_divide(aux_count, total_tokens)
+        
+        # Verb argument count average
+        features['verb_argument_count_avg'] = float(np.mean(verb_args)) if verb_args else 0.0
         
         return features
     
@@ -686,41 +846,13 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         Returns:
             Dictionary of advanced semantic features
         """
+        # Calculate syntactic_complexity as aggregate metric
         features = {
-            'semantic_role_diversity': 0.0,
-            'entity_density': 0.0,
-            'verb_argument_complexity': 0.0,
+            'syntactic_complexity': 0.0,
         }
         
-        if not docs:
-            return features
-        
-        semantic_roles: Set[str] = set()
-        entity_count = 0
-        verb_arg_counts = []
-        
-        for doc in docs:
-            # Semantic roles (dependency relations that indicate arguments)
-            for token in doc:
-                if token.dep_ in ['nsubj', 'dobj', 'iobj', 'pobj', 'agent', 'attr']:
-                    semantic_roles.add(token.dep_)
-                
-                # Verb argument structure
-                if token.pos_ == 'VERB':
-                    args = [
-                        child for child in token.children
-                        if child.dep_ in ['nsubj', 'dobj', 'iobj', 'prep', 'ccomp', 'xcomp']
-                    ]
-                    verb_arg_counts.append(len(args))
-            
-            # Named entities
-            entity_count += len(doc.ents)
-        
-        num_docs = len(docs)
-        
-        features['semantic_role_diversity'] = safe_divide(len(semantic_roles), num_docs)
-        features['entity_density'] = safe_divide(entity_count, num_docs)
-        features['verb_argument_complexity'] = float(np.mean(verb_arg_counts)) if verb_arg_counts else 0.0
+        # This will be calculated as an aggregate from other syntactic features
+        # Will be computed in the main extract() method
         
         return features
 

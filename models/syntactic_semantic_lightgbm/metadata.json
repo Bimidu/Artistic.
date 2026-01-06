@@ -2,38 +2,41 @@
   "model_name": "syntactic_semantic_lightgbm",
   "model_type": "lightgbm",
   "version": "1.0.0",
-  "created_at": "2026-01-03T22:44:59.450664",
-  "accuracy": 0.4927536231884058,
-  "f1_score": 0.4927536231884058,
-  "precision": 0.4929606625258799,
-  "recall": 0.4927536231884058,
-  "roc_auc": 0.4957983193277311,
-  "matthews_corr": -0.014285714285714285,
+  "created_at": "2026-01-06T15:49:44.333318",
+  "accuracy": 0.5714285714285714,
+  "f1_score": 0.4155844155844156,
+  "precision": 0.32653061224489793,
+  "recall": 0.5714285714285714,
+  "roc_auc": 0.5,
+  "matthews_corr": 0.0,
   "confusion_matrix": [
     [
-      17,
-      18
+      4,
+      0
     ],
     [
-      17,
-      17
+      3,
+      0
     ]
   ],
   "feature_names": [
-    "pos_noun_ratio",
-    "pos_verb_ratio",
-    "pos_adj_ratio",
-    "pos_adv_ratio",
-    "dependency_tree_width",
-    "parse_tree_height",
-    "semantic_coherence_score",
-    "word_sense_diversity",
-    "lexical_diversity",
-    "syntactic_complexity"
+    "avg_dependency_distance",
+    "tense_consistency_score",
+    "tense_variety",
+    "structure_diversity",
+    "pos_tag_diversity",
+    "avg_parse_tree_height",
+    "noun_phrase_complexity",
+    "verb_phrase_complexity",
+    "thematic_consistency",
+    "vocabulary_abstractness",
+    "semantic_field_diversity",
+    "entity_density",
+    "verb_argument_complexity"
   ],
-  "n_features": 10,
+  "n_features": 13,
   "hyperparameters": {},
-  "training_samples": 388,
+  "training_samples": 63,
   "component": "syntactic_semantic",
   "description": "syntactic_semantic component - lightgbm"
 }

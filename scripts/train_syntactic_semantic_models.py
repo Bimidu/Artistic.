@@ -13,7 +13,7 @@ Models:
 6. SVM
 7. Logistic Regression
 
-Author: AI Assistant
+Author: Randil Haturusinghe
 """
 
 import pandas as pd

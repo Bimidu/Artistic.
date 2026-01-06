@@ -117,30 +117,42 @@
     "model_name": "syntactic_semantic_random_forest",
     "model_type": "random_forest",
     "version": "1.0.0",
-    "created_at": "2026-01-01T22:50:54.182360",
-    "accuracy": 0.5,
-    "f1_score": 0.5,
-    "precision": 0.0,
-    "recall": 0.0,
-    "roc_auc": null,
+    "created_at": "2026-01-06T15:49:43.093870",
+    "accuracy": 0.5714285714285714,
+    "f1_score": 0.4155844155844156,
+    "precision": 0.32653061224489793,
+    "recall": 0.5714285714285714,
+    "roc_auc": 0.75,
     "matthews_corr": 0.0,
-    "confusion_matrix": [],
-    "feature_names": [
-      "pos_noun_ratio",
-      "pos_adj_ratio",
-      "dependency_tree_width",
-      "sentence_complexity_score",
-      "parse_tree_height",
-      "semantic_coherence_score",
-      "word_sense_diversity",
-      "phrase_structure_depth",
-      "np_complexity",
-      "vp_complexity"
+    "confusion_matrix": [
+      [
+        4,
+        0
+      ],
+      [
+        3,
+        0
+      ]
     ],
-    "n_features": 10,
+    "feature_names": [
+      "avg_dependency_distance",
+      "tense_consistency_score",
+      "tense_variety",
+      "structure_diversity",
+      "pos_tag_diversity",
+      "avg_parse_tree_height",
+      "noun_phrase_complexity",
+      "verb_phrase_complexity",
+      "thematic_consistency",
+      "vocabulary_abstractness",
+      "semantic_field_diversity",
+      "entity_density",
+      "verb_argument_complexity"
+    ],
+    "n_features": 13,
     "hyperparameters": {},
-    "training_samples": 47,
-    "component": "pragmatic_conversational",
+    "training_samples": 63,
+    "component": "syntactic_semantic",
     "description": "syntactic_semantic component - random_forest"
   },
   "pragmatic_conversational_xgboost": {
@@ -826,5 +838,257 @@
     "training_samples": 108,
     "component": "acoustic_prosodic",
     "description": "acoustic_prosodic component - svm"
+  },
+  "syntactic_semantic_xgboost": {
+    "model_name": "syntactic_semantic_xgboost",
+    "model_type": "xgboost",
+    "version": "1.0.0",
+    "created_at": "2026-01-06T15:49:43.134760",
+    "accuracy": 0.5714285714285714,
+    "f1_score": 0.4155844155844156,
+    "precision": 0.32653061224489793,
+    "recall": 0.5714285714285714,
+    "roc_auc": 0.5,
+    "matthews_corr": 0.0,
+    "confusion_matrix": [
+      [
+        4,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "feature_names": [
+      "avg_dependency_distance",
+      "tense_consistency_score",
+      "tense_variety",
+      "structure_diversity",
+      "pos_tag_diversity",
+      "avg_parse_tree_height",
+      "noun_phrase_complexity",
+      "verb_phrase_complexity",
+      "thematic_consistency",
+      "vocabulary_abstractness",
+      "semantic_field_diversity",
+      "entity_density",
+      "verb_argument_complexity"
+    ],
+    "n_features": 13,
+    "hyperparameters": {},
+    "training_samples": 63,
+    "component": "syntactic_semantic",
+    "description": "syntactic_semantic component - xgboost"
+  },
+  "syntactic_semantic_logistic": {
+    "model_name": "syntactic_semantic_logistic",
+    "model_type": "logistic",
+    "version": "1.0.0",
+    "created_at": "2026-01-06T15:49:43.141929",
+    "accuracy": 0.42857142857142855,
+    "f1_score": 0.34285714285714286,
+    "precision": 0.2857142857142857,
+    "recall": 0.42857142857142855,
+    "roc_auc": 0.16666666666666666,
+    "matthews_corr": -0.3535533905932738,
+    "confusion_matrix": [
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "feature_names": [
+      "avg_dependency_distance",
+      "tense_consistency_score",
+      "tense_variety",
+      "structure_diversity",
+      "pos_tag_diversity",
+      "avg_parse_tree_height",
+      "noun_phrase_complexity",
+      "verb_phrase_complexity",
+      "thematic_consistency",
+      "vocabulary_abstractness",
+      "semantic_field_diversity",
+      "entity_density",
+      "verb_argument_complexity"
+    ],
+    "n_features": 13,
+    "hyperparameters": {},
+    "training_samples": 63,
+    "component": "syntactic_semantic",
+    "description": "syntactic_semantic component - logistic"
+  },
+  "syntactic_semantic_gradient_boosting": {
+    "model_name": "syntactic_semantic_gradient_boosting",
+    "model_type": "gradient_boosting",
+    "version": "1.0.0",
+    "created_at": "2026-01-06T15:49:43.722684",
+    "accuracy": 0.5714285714285714,
+    "f1_score": 0.4155844155844156,
+    "precision": 0.32653061224489793,
+    "recall": 0.5714285714285714,
+    "roc_auc": 0.5,
+    "matthews_corr": 0.0,
+    "confusion_matrix": [
+      [
+        4,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "feature_names": [
+      "avg_dependency_distance",
+      "tense_consistency_score",
+      "tense_variety",
+      "structure_diversity",
+      "pos_tag_diversity",
+      "avg_parse_tree_height",
+      "noun_phrase_complexity",
+      "verb_phrase_complexity",
+      "thematic_consistency",
+      "vocabulary_abstractness",
+      "semantic_field_diversity",
+      "entity_density",
+      "verb_argument_complexity"
+    ],
+    "n_features": 13,
+    "hyperparameters": {},
+    "training_samples": 63,
+    "component": "syntactic_semantic",
+    "description": "syntactic_semantic component - gradient_boosting"
+  },
+  "syntactic_semantic_adaboost": {
+    "model_name": "syntactic_semantic_adaboost",
+    "model_type": "adaboost",
+    "version": "1.0.0",
+    "created_at": "2026-01-06T15:49:43.731827",
+    "accuracy": 0.5714285714285714,
+    "f1_score": 0.4155844155844156,
+    "precision": 0.32653061224489793,
+    "recall": 0.5714285714285714,
+    "roc_auc": 1.0,
+    "matthews_corr": 0.0,
+    "confusion_matrix": [
+      [
+        4,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "feature_names": [
+      "avg_dependency_distance",
+      "tense_consistency_score",
+      "tense_variety",
+      "structure_diversity",
+      "pos_tag_diversity",
+      "avg_parse_tree_height",
+      "noun_phrase_complexity",
+      "verb_phrase_complexity",
+      "thematic_consistency",
+      "vocabulary_abstractness",
+      "semantic_field_diversity",
+      "entity_density",
+      "verb_argument_complexity"
+    ],
+    "n_features": 13,
+    "hyperparameters": {},
+    "training_samples": 63,
+    "component": "syntactic_semantic",
+    "description": "syntactic_semantic component - adaboost"
+  },
+  "syntactic_semantic_lightgbm": {
+    "model_name": "syntactic_semantic_lightgbm",
+    "model_type": "lightgbm",
+    "version": "1.0.0",
+    "created_at": "2026-01-06T15:49:44.333318",
+    "accuracy": 0.5714285714285714,
+    "f1_score": 0.4155844155844156,
+    "precision": 0.32653061224489793,
+    "recall": 0.5714285714285714,
+    "roc_auc": 0.5,
+    "matthews_corr": 0.0,
+    "confusion_matrix": [
+      [
+        4,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "feature_names": [
+      "avg_dependency_distance",
+      "tense_consistency_score",
+      "tense_variety",
+      "structure_diversity",
+      "pos_tag_diversity",
+      "avg_parse_tree_height",
+      "noun_phrase_complexity",
+      "verb_phrase_complexity",
+      "thematic_consistency",
+      "vocabulary_abstractness",
+      "semantic_field_diversity",
+      "entity_density",
+      "verb_argument_complexity"
+    ],
+    "n_features": 13,
+    "hyperparameters": {},
+    "training_samples": 63,
+    "component": "syntactic_semantic",
+    "description": "syntactic_semantic component - lightgbm"
+  },
+  "syntactic_semantic_svm": {
+    "model_name": "syntactic_semantic_svm",
+    "model_type": "svm",
+    "version": "1.0.0",
+    "created_at": "2026-01-06T15:49:44.339827",
+    "accuracy": 0.42857142857142855,
+    "f1_score": 0.34285714285714286,
+    "precision": 0.2857142857142857,
+    "recall": 0.42857142857142855,
+    "roc_auc": 0.5,
+    "matthews_corr": -0.3535533905932738,
+    "confusion_matrix": [
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "feature_names": [
+      "avg_dependency_distance",
+      "tense_consistency_score",
+      "tense_variety",
+      "structure_diversity",
+      "pos_tag_diversity",
+      "avg_parse_tree_height",
+      "noun_phrase_complexity",
+      "verb_phrase_complexity",
+      "thematic_consistency",
+      "vocabulary_abstractness",
+      "semantic_field_diversity",
+      "entity_density",
+      "verb_argument_complexity"
+    ],
+    "n_features": 13,
+    "hyperparameters": {},
+    "training_samples": 63,
+    "component": "syntactic_semantic",
+    "description": "syntactic_semantic component - svm"
   }
 }

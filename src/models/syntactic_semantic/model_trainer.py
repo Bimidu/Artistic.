@@ -441,7 +441,7 @@ class SyntacticSemanticTrainer:
                 'status': 'implemented',
                 'syntactic_features': True,
                 'semantic_features': True,
-                'feature_count': 27,
+                'feature_count': 46,
                 'implementation_date': pd.Timestamp.now().isoformat(),
             }
         }
@@ -476,13 +476,16 @@ class SyntacticSemanticTrainer:
         print("- Gradient Boosting (sklearn)")
 
         print("\n[TARGET] Syntactic/Semantic Features Supported:")
-        print("- Syntactic complexity (6 features)")
-        print("- Grammatical accuracy (5 features)")
-        print("- Sentence structure (4 features)")
-        print("- Semantic features (4 features)")
-        print("- Vocabulary semantic (4 features)")
-        print("- Advanced semantic (3 features)")
-        print("- Total: 27 syntactic/semantic features")
+        print("- POS tag ratios (8 features)")
+        print("- Dependency tree metrics (6 features)")
+        print("- Clause structure (6 features)")
+        print("- Sentence complexity (6 features)")
+        print("- Phrase structure (4 features)")
+        print("- Semantic features (8 features)")
+        print("- Named entity features (3 features)")
+        print("- Verb analysis (4 features)")
+        print("- Aggregated complexity (1 feature)")
+        print("- Total: 46 syntactic/semantic features")
 
         print("\n[BULB] Usage:")
         print("from src.models.syntactic_semantic import SyntacticSemanticTrainer")
