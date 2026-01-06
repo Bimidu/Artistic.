@@ -173,6 +173,9 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
     // Enable the corresponding predict button
     if (input.id === 'audioFileInput') {
         document.getElementById('predictAudioBtn').disabled = false;
+        // Display waveform for audio files
+        currentAudioFile = file;
+        displayWaveform(file);
     } else if (input.id === 'chaFileInput') {
         document.getElementById('predictChaBtn').disabled = false;
     }
@@ -215,6 +218,12 @@ async function predictFromAudio() {
         return;
     }
     
+    // Store audio file for waveform display
+    currentAudioFile = fileInput.files[0];
+    
+    // Display waveform immediately
+    await displayWaveform(currentAudioFile);
+    
     showLoading('resultsArea');
     
     const formData = new FormData();
@@ -235,6 +244,10 @@ async function predictFromAudio() {
         
         if (response.ok) {
             displayResults(data);
+            // Ensure waveform is still visible after results
+            if (currentAudioFile) {
+                await displayWaveform(currentAudioFile);
+            }
         } else {
             displayError(data.detail || 'Prediction failed');
         }
@@ -2306,6 +2319,168 @@ function clearSemanticCoherence() {
     const toggle = document.getElementById('semanticCoherenceToggle');
     if (toggle) {
         toggle.checked = false;
+    }
+}
+
+// ==============================
+// Waveform Visualization
+// ==============================
+
+let currentAudioFile = null;
+
+/**
+ * Extract waveform data from an audio file
+ */
+async function extractWaveform(audioFile) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const arrayBuffer = e.target.result;
+                const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                
+                // Get channel data (use first channel)
+                const channelData = audioBuffer.getChannelData(0);
+                const sampleRate = audioBuffer.sampleRate;
+                const duration = audioBuffer.duration;
+                
+                // Downsample for visualization (take every Nth sample)
+                const samplesToShow = 2000; // Number of points to display
+                const step = Math.max(1, Math.floor(channelData.length / samplesToShow));
+                const waveform = [];
+                
+                for (let i = 0; i < channelData.length; i += step) {
+                    // Get max and min in this chunk for better visualization
+                    let max = 0;
+                    let min = 0;
+                    for (let j = i; j < Math.min(i + step, channelData.length); j++) {
+                        max = Math.max(max, channelData[j]);
+                        min = Math.min(min, channelData[j]);
+                    }
+                    waveform.push({ max, min });
+                }
+                
+                resolve({
+                    waveform,
+                    duration,
+                    sampleRate,
+                    sampleCount: channelData.length
+                });
+            } catch (error) {
+                reject(error);
+            }
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(audioFile);
+    });
+}
+
+/**
+ * Render waveform on canvas
+ */
+function renderWaveform(canvas, waveformData, color = '#3B82F6') {
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = canvas.offsetWidth;
+    const height = canvas.height = 150;
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+    
+    if (!waveformData || !waveformData.waveform || waveformData.waveform.length === 0) {
+        ctx.fillStyle = '#9CA3AF';
+        ctx.font = '14px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('No waveform data available', width / 2, height / 2);
+        return;
+    }
+    
+    const waveform = waveformData.waveform;
+    const centerY = height / 2;
+    const stepX = width / waveform.length;
+    
+    // Draw background
+    ctx.fillStyle = '#F3F4F6';
+    ctx.fillRect(0, 0, width, height);
+    
+    // Draw waveform
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    
+    for (let i = 0; i < waveform.length; i++) {
+        const x = i * stepX;
+        const maxY = centerY - (waveform[i].max * centerY * 0.9);
+        const minY = centerY - (waveform[i].min * centerY * 0.9);
+        
+        if (i === 0) {
+            ctx.moveTo(x, maxY);
+        } else {
+            ctx.lineTo(x, maxY);
+        }
+    }
+    
+    // Draw bottom half
+    for (let i = waveform.length - 1; i >= 0; i--) {
+        const x = i * stepX;
+        const minY = centerY - (waveform[i].min * centerY * 0.9);
+        ctx.lineTo(x, minY);
+    }
+    
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
+    
+    // Draw center line
+    ctx.strokeStyle = '#9CA3AF';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, centerY);
+    ctx.lineTo(width, centerY);
+    ctx.stroke();
+}
+
+/**
+ * Display waveform for uploaded audio file
+ */
+async function displayWaveform(audioFile) {
+    const waveformSection = document.getElementById('waveformSection');
+    const waveformCanvas = document.getElementById('waveformCanvas');
+    const waveformInfo = document.getElementById('waveformInfo');
+    const waveformAudio = document.getElementById('waveformAudio');
+    
+    if (!audioFile) {
+        waveformSection.classList.add('hidden');
+        return;
+    }
+    
+    try {
+        waveformInfo.textContent = 'Processing waveform...';
+        waveformSection.classList.remove('hidden');
+        
+        // Create audio element for playback
+        const audioUrl = URL.createObjectURL(audioFile);
+        waveformAudio.src = audioUrl;
+        waveformAudio.style.display = 'block';
+        
+        // Extract and render waveform
+        const waveformData = await extractWaveform(audioFile);
+        renderWaveform(waveformCanvas, waveformData, '#3B82F6');
+        
+        // Update info
+        const duration = waveformData.duration.toFixed(2);
+        waveformInfo.textContent = `Duration: ${duration}s | Sample Rate: ${waveformData.sampleRate}Hz | Samples: ${waveformData.sampleCount.toLocaleString()}`;
+        
+        // Clean up URL when audio element is removed
+        waveformAudio.addEventListener('loadstart', () => {
+            // Keep URL alive while audio is playing
+        });
+        
+    } catch (error) {
+        console.error('Error displaying waveform:', error);
+        waveformInfo.textContent = 'Error loading waveform';
+        waveformSection.classList.remove('hidden');
     }
 }
 

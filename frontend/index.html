@@ -181,6 +181,23 @@
                             Upload an audio file or enter text to see results
                         </div>
                     </div>
+                    
+                    <!-- Waveform Display -->
+                    <div id="waveformSection" class="hidden border-t border-primary-200">
+                        <div class="px-10 py-6 bg-white">
+                            <h3 class="text-2xl text-primary-900 mb-1">Child Speech Waveform</h3>
+                            <p class="text-sm text-primary-500">Visual representation of the child's speech audio</p>
+                        </div>
+                        <div class="px-10 pb-10 bg-primary-50">
+                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                                <canvas id="waveformCanvas" class="w-full" style="height: 150px;"></canvas>
+                                <div class="mt-4 flex items-center justify-between text-sm text-primary-600">
+                                    <span id="waveformInfo">Loading waveform...</span>
+                                    <audio id="waveformAudio" controls class="max-w-xs"></audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

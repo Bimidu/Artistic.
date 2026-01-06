@@ -898,8 +898,8 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
         features = {}
         
         try:
-            # Extract chroma features (12 pitch classes)
-            chroma = librosa.feature.chroma(y=audio, sr=sr)
+            # Extract chroma features (12 pitch classes) using chroma_stft
+            chroma = librosa.feature.chroma_stft(y=audio, sr=sr)
             
             for i in range(1, 13):  # 12 pitch classes
                 chroma_coeff = chroma[i-1, :]  # 0-indexed
@@ -1072,6 +1072,388 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
                 'acoustic_tempo',
                 'acoustic_onset_rate',
                 'acoustic_silence_ratio'
+            ]})
+        
+        return features
+    
+    def _extract_advanced_pitch_statistics(
+        self,
+        audio: np.ndarray,
+        sr: int,
+        pitch_features: Dict[str, float]
+    ) -> Dict[str, float]:
+        """Extract advanced pitch statistics (quartiles, skewness, kurtosis)."""
+        features = {}
+        
+        try:
+            # Extract pitch for advanced statistics
+            f0, _, _ = librosa.pyin(
+                audio,
+                fmin=librosa.note_to_hz('C2'),
+                fmax=librosa.note_to_hz('C7'),
+                frame_length=2048,
+                hop_length=512
+            )
+            f0_voiced = f0[~np.isnan(f0)]
+            
+            if len(f0_voiced) > 0:
+                # Quartiles
+                features['acoustic_pitch_q25'] = float(np.percentile(f0_voiced, 25))
+                features['acoustic_pitch_q75'] = float(np.percentile(f0_voiced, 75))
+                features['acoustic_pitch_iqr'] = float(features['acoustic_pitch_q75'] - features['acoustic_pitch_q25'])
+                
+                # Percentiles
+                features['acoustic_pitch_percentile_10'] = float(np.percentile(f0_voiced, 10))
+                features['acoustic_pitch_percentile_90'] = float(np.percentile(f0_voiced, 90))
+                
+                # Median absolute deviation
+                median = np.median(f0_voiced)
+                features['acoustic_pitch_median_abs_dev'] = float(np.median(np.abs(f0_voiced - median)))
+                
+                # Skewness and kurtosis
+                if len(f0_voiced) > 2:
+                    from scipy import stats
+                    try:
+                        features['acoustic_pitch_skewness'] = float(stats.skew(f0_voiced))
+                        features['acoustic_pitch_kurtosis'] = float(stats.kurtosis(f0_voiced))
+                    except:
+                        features['acoustic_pitch_skewness'] = 0.0
+                        features['acoustic_pitch_kurtosis'] = 0.0
+                else:
+                    features['acoustic_pitch_skewness'] = 0.0
+                    features['acoustic_pitch_kurtosis'] = 0.0
+            else:
+                features.update({k: 0.0 for k in [
+                    'acoustic_pitch_q25', 'acoustic_pitch_q75', 'acoustic_pitch_iqr',
+                    'acoustic_pitch_skewness', 'acoustic_pitch_kurtosis',
+                    'acoustic_pitch_percentile_10', 'acoustic_pitch_percentile_90',
+                    'acoustic_pitch_median_abs_dev'
+                ]})
+                
+        except Exception as e:
+            logger.warning(f"Error extracting advanced pitch statistics: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_pitch_q25', 'acoustic_pitch_q75', 'acoustic_pitch_iqr',
+                'acoustic_pitch_skewness', 'acoustic_pitch_kurtosis',
+                'acoustic_pitch_percentile_10', 'acoustic_pitch_percentile_90',
+                'acoustic_pitch_median_abs_dev'
+            ]})
+        
+        return features
+    
+    def _extract_advanced_spectral_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract advanced spectral features (flatness, flux, spread)."""
+        features = {}
+        
+        try:
+            # Spectral flatness
+            spectral_flatness = librosa.feature.spectral_flatness(y=audio)[0]
+            features['acoustic_spectral_flatness_mean'] = float(np.mean(spectral_flatness))
+            features['acoustic_spectral_flatness_std'] = float(np.std(spectral_flatness))
+            
+            # Spectral flux (rate of change of spectrum)
+            stft = librosa.stft(audio)
+            magnitude = np.abs(stft)
+            spectral_flux = np.sum(np.diff(magnitude, axis=1)**2, axis=0)
+            features['acoustic_spectral_flux_mean'] = float(np.mean(spectral_flux))
+            features['acoustic_spectral_flux_std'] = float(np.std(spectral_flux))
+            
+            # Spectral spread (second moment around centroid)
+            spectral_centroid = librosa.feature.spectral_centroid(y=audio, sr=sr)[0]
+            spectral_spread = librosa.feature.spectral_bandwidth(y=audio, sr=sr)[0]
+            features['acoustic_spectral_spread_mean'] = float(np.mean(spectral_spread))
+            features['acoustic_spectral_spread_std'] = float(np.std(spectral_spread))
+            
+        except Exception as e:
+            logger.warning(f"Error extracting advanced spectral features: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_spectral_flatness_mean', 'acoustic_spectral_flatness_std',
+                'acoustic_spectral_flux_mean', 'acoustic_spectral_flux_std',
+                'acoustic_spectral_spread_mean', 'acoustic_spectral_spread_std'
+            ]})
+        
+        return features
+    
+    def _extract_mfcc_delta_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract MFCC delta features (first 5 coefficients)."""
+        features = {}
+        
+        try:
+            # Extract MFCCs
+            mfccs = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=13)
+            
+            # Compute delta (first derivative)
+            mfcc_delta = librosa.feature.delta(mfccs)
+            
+            # Extract first 5 coefficients
+            for i in range(1, 6):
+                delta_coeff = mfcc_delta[i-1, :]
+                features[f'acoustic_mfcc_{i}_delta_mean'] = float(np.mean(delta_coeff))
+                features[f'acoustic_mfcc_{i}_delta_std'] = float(np.std(delta_coeff))
+                
+        except Exception as e:
+            logger.warning(f"Error extracting MFCC delta features: {e}")
+            for i in range(1, 6):
+                features[f'acoustic_mfcc_{i}_delta_mean'] = 0.0
+                features[f'acoustic_mfcc_{i}_delta_std'] = 0.0
+        
+        return features
+    
+    def _extract_additional_formant_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract additional formant features."""
+        features = {}
+        
+        try:
+            # Get spectral magnitude
+            stft = librosa.stft(audio)
+            magnitude = np.abs(stft)
+            
+            # Find spectral peaks for formant 4
+            formant_4 = []
+            formant_1_list = []
+            formant_2_list = []
+            
+            for frame in range(magnitude.shape[1]):
+                frame_mag = magnitude[:, frame]
+                peaks, _ = librosa.util.peak_pick(
+                    frame_mag,
+                    pre_max=3,
+                    post_max=3,
+                    pre_avg=3,
+                    post_avg=5,
+                    delta=0.1,
+                    wait=10
+                )
+                
+                if len(peaks) > 0:
+                    freqs = librosa.fft_frequencies(sr=sr, n_fft=stft.shape[0] * 2 - 1)
+                    peak_freqs = freqs[peaks]
+                    peak_mags = frame_mag[peaks]
+                    sorted_indices = np.argsort(peak_mags)[::-1]
+                    sorted_freqs = peak_freqs[sorted_indices]
+                    
+                    # F4: 3500-5000 Hz
+                    f4_candidates = sorted_freqs[(sorted_freqs >= 3500) & (sorted_freqs <= 5000)]
+                    f1_candidates = sorted_freqs[(sorted_freqs >= 300) & (sorted_freqs <= 1000)]
+                    f2_candidates = sorted_freqs[(sorted_freqs >= 1000) & (sorted_freqs <= 3000)]
+                    
+                    if len(f4_candidates) > 0:
+                        formant_4.append(f4_candidates[0])
+                    if len(f1_candidates) > 0:
+                        formant_1_list.append(f1_candidates[0])
+                    if len(f2_candidates) > 0:
+                        formant_2_list.append(f2_candidates[0])
+            
+            # Calculate statistics
+            if len(formant_4) > 0:
+                features['acoustic_formant_4_mean'] = float(np.mean(formant_4))
+                features['acoustic_formant_4_std'] = float(np.std(formant_4))
+            else:
+                features['acoustic_formant_4_mean'] = 0.0
+                features['acoustic_formant_4_std'] = 0.0
+            
+            # Formant bandwidths (approximation using spectral bandwidth)
+            if len(formant_1_list) > 0 and len(formant_2_list) > 0:
+                f1_std = np.std(formant_1_list)
+                f2_std = np.std(formant_2_list)
+                features['acoustic_formant_1_bandwidth'] = float(f1_std)
+                features['acoustic_formant_2_bandwidth'] = float(f2_std)
+                
+                # F2/F1 ratio
+                f1_mean = np.mean(formant_1_list)
+                f2_mean = np.mean(formant_2_list)
+                features['acoustic_formant_2_1_ratio'] = safe_divide(f2_mean, f1_mean)
+            else:
+                features['acoustic_formant_1_bandwidth'] = 0.0
+                features['acoustic_formant_2_bandwidth'] = 0.0
+                features['acoustic_formant_2_1_ratio'] = 0.0
+                
+        except Exception as e:
+            logger.warning(f"Error extracting additional formant features: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_formant_4_mean', 'acoustic_formant_4_std',
+                'acoustic_formant_1_bandwidth', 'acoustic_formant_2_bandwidth',
+                'acoustic_formant_2_1_ratio'
+            ]})
+        
+        return features
+    
+    def _extract_cross_feature_correlations(
+        self,
+        audio: np.ndarray,
+        sr: int,
+        pitch_features: Dict[str, float],
+        energy_features: Dict[str, float]
+    ) -> Dict[str, float]:
+        """Extract cross-feature correlations."""
+        features = {}
+        
+        try:
+            # Extract pitch and energy time series
+            f0, _, _ = librosa.pyin(
+                audio,
+                fmin=librosa.note_to_hz('C2'),
+                fmax=librosa.note_to_hz('C7'),
+                frame_length=2048,
+                hop_length=512
+            )
+            f0_voiced = f0[~np.isnan(f0)]
+            
+            frame_length = 2048
+            hop_length = 512
+            rms = librosa.feature.rms(y=audio, frame_length=frame_length, hop_length=hop_length)[0]
+            
+            # Align lengths
+            min_len = min(len(f0_voiced), len(rms))
+            if min_len > 1:
+                f0_aligned = f0_voiced[:min_len]
+                rms_aligned = rms[:min_len]
+                
+                # Correlations
+                features['acoustic_pitch_energy_correlation'] = float(np.corrcoef(f0_aligned, rms_aligned)[0, 1])
+            else:
+                features['acoustic_pitch_energy_correlation'] = 0.0
+            
+            # Intensity correlation
+            rms_db = librosa.power_to_db(rms**2, ref=np.max)
+            if min_len > 1:
+                features['acoustic_pitch_intensity_correlation'] = float(np.corrcoef(f0_aligned, rms_db[:min_len])[0, 1])
+            else:
+                features['acoustic_pitch_intensity_correlation'] = 0.0
+            
+            # Spectral centroid correlations
+            spectral_centroid = librosa.feature.spectral_centroid(y=audio, sr=sr)[0]
+            spectral_bandwidth = librosa.feature.spectral_bandwidth(y=audio, sr=sr)[0]
+            
+            if len(rms) > 1 and len(spectral_centroid) > 1:
+                min_len_sc = min(len(rms), len(spectral_centroid))
+                features['acoustic_energy_spectral_centroid_correlation'] = float(
+                    np.corrcoef(rms[:min_len_sc], spectral_centroid[:min_len_sc])[0, 1]
+                )
+            else:
+                features['acoustic_energy_spectral_centroid_correlation'] = 0.0
+            
+            if len(f0_voiced) > 1 and len(spectral_centroid) > 1:
+                min_len_pc = min(len(f0_voiced), len(spectral_centroid))
+                features['acoustic_pitch_spectral_centroid_correlation'] = float(
+                    np.corrcoef(f0_voiced[:min_len_pc], spectral_centroid[:min_len_pc])[0, 1]
+                )
+            else:
+                features['acoustic_pitch_spectral_centroid_correlation'] = 0.0
+            
+            if len(rms_db) > 1 and len(spectral_bandwidth) > 1:
+                min_len_sb = min(len(rms_db), len(spectral_bandwidth))
+                features['acoustic_intensity_spectral_bandwidth_correlation'] = float(
+                    np.corrcoef(rms_db[:min_len_sb], spectral_bandwidth[:min_len_sb])[0, 1]
+                )
+            else:
+                features['acoustic_intensity_spectral_bandwidth_correlation'] = 0.0
+                
+        except Exception as e:
+            logger.warning(f"Error extracting cross-feature correlations: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_pitch_energy_correlation',
+                'acoustic_pitch_intensity_correlation',
+                'acoustic_energy_spectral_centroid_correlation',
+                'acoustic_pitch_spectral_centroid_correlation',
+                'acoustic_intensity_spectral_bandwidth_correlation'
+            ]})
+        
+        return features
+    
+    def _extract_harmonic_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract harmonic and percussive features."""
+        features = {}
+        
+        try:
+            # Separate harmonic and percussive components
+            y_harmonic, y_percussive = librosa.effects.hpss(audio)
+            
+            # Calculate energy for each component
+            frame_length = 2048
+            hop_length = 512
+            rms_harmonic = librosa.feature.rms(y=y_harmonic, frame_length=frame_length, hop_length=hop_length)[0]
+            rms_percussive = librosa.feature.rms(y=y_percussive, frame_length=frame_length, hop_length=hop_length)[0]
+            
+            features['acoustic_harmonic_energy_mean'] = float(np.mean(rms_harmonic))
+            features['acoustic_harmonic_energy_std'] = float(np.std(rms_harmonic))
+            
+            # Percussive energy ratio
+            total_energy = np.mean(rms_harmonic) + np.mean(rms_percussive)
+            features['acoustic_percussive_energy_ratio'] = safe_divide(
+                np.mean(rms_percussive),
+                total_energy
+            )
+            
+        except Exception as e:
+            logger.warning(f"Error extracting harmonic features: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_harmonic_energy_mean',
+                'acoustic_harmonic_energy_std',
+                'acoustic_percussive_energy_ratio'
+            ]})
+        
+        return features
+    
+    def _extract_additional_statistical_moments(
+        self,
+        audio: np.ndarray,
+        sr: int,
+        energy_features: Dict[str, float]
+    ) -> Dict[str, float]:
+        """Extract additional statistical moments for energy and intensity."""
+        features = {}
+        
+        try:
+            # Extract energy time series
+            frame_length = 2048
+            hop_length = 512
+            rms = librosa.feature.rms(y=audio, frame_length=frame_length, hop_length=hop_length)[0]
+            rms_db = librosa.power_to_db(rms**2, ref=np.max)
+            
+            if len(rms) > 2:
+                from scipy import stats
+                try:
+                    features['acoustic_energy_skewness'] = float(stats.skew(rms))
+                    features['acoustic_energy_kurtosis'] = float(stats.kurtosis(rms))
+                except:
+                    features['acoustic_energy_skewness'] = 0.0
+                    features['acoustic_energy_kurtosis'] = 0.0
+            else:
+                features['acoustic_energy_skewness'] = 0.0
+                features['acoustic_energy_kurtosis'] = 0.0
+            
+            if len(rms_db) > 2:
+                from scipy import stats
+                try:
+                    features['acoustic_intensity_skewness'] = float(stats.skew(rms_db))
+                except:
+                    features['acoustic_intensity_skewness'] = 0.0
+            else:
+                features['acoustic_intensity_skewness'] = 0.0
+                
+        except Exception as e:
+            logger.warning(f"Error extracting additional statistical moments: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_energy_skewness',
+                'acoustic_energy_kurtosis',
+                'acoustic_intensity_skewness'
             ]})
         
         return features
