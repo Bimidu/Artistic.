@@ -6,6 +6,7 @@ function getApiUrl() {
 // Mode switching with toggle
 const toggleOptions = document.querySelectorAll('.toggle-option');
 const toggleSlider = document.getElementById('toggleSlider');
+const landingSection = document.getElementById('landingSection');
 
 function updateToggleSlider() {
     const activeOption = document.querySelector('.toggle-option.active');
@@ -36,12 +37,18 @@ toggleOptions.forEach(option => {
         const apiConfigBar = document.getElementById('apiConfigBar');
         if (mode === 'training') {
             apiConfigBar.classList.remove('hidden');
+            if (landingSection) {
+                landingSection.classList.add('hidden');
+            }
             // Auto-load models when entering training mode
             setTimeout(() => {
                 loadAvailableModels();
             }, 100);
         } else {
             apiConfigBar.classList.add('hidden');
+            if (landingSection) {
+                landingSection.classList.remove('hidden');
+            }
         }
         
         updateToggleSlider();
