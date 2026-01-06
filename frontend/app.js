@@ -2646,6 +2646,7 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
  * Generate a plain-language textual summary of observed speech characteristics
  * Based on energy patterns, pause distribution, and overall speech activity
  * Uses descriptive language without numerical values or diagnostic claims
+ * Improved analysis with more nuanced thresholds for better differentiation
  */
 function generateSpeechSummary(waveformData) {
     if (!waveformData || !waveformData.energyEnvelope || !waveformData.energyStats) {
@@ -2655,8 +2656,21 @@ function generateSpeechSummary(waveformData) {
     const energies = waveformData.energyEnvelope;
     const avgEnergy = waveformData.energyStats.avg;
     const maxEnergy = waveformData.energyStats.max;
-    const silenceRegions = waveformData.silenceRegions || [];
+    const minEnergy = waveformData.energyStats.min;
     const silenceThreshold = avgEnergy * 0.3;
+    
+    // Calculate actual pause ratio by checking energy values directly
+    let silenceCount = 0;
+    let speechCount = 0;
+    for (let i = 0; i < energies.length; i++) {
+        if (energies[i] < silenceThreshold) {
+            silenceCount++;
+        } else {
+            speechCount++;
+        }
+    }
+    const pauseRatio = silenceCount / energies.length;
+    const activeRatio = speechCount / energies.length;
     
     // Calculate energy variability (coefficient of variation)
     const energyMean = energies.reduce((a, b) => a + b, 0) / energies.length;
@@ -2664,48 +2678,63 @@ function generateSpeechSummary(waveformData) {
     const energyStd = Math.sqrt(energyVariance);
     const energyCV = energyMean > 0 ? energyStd / energyMean : 0;
     
-    // Calculate pause ratio
-    const pauseRatio = silenceRegions.length / energies.length;
+    // Calculate energy range (how much variation between min and max)
+    const energyRange = maxEnergy - minEnergy;
+    const energyRangeRatio = maxEnergy > 0 ? energyRange / maxEnergy : 0;
     
-    // Determine energy level description
+    // Determine energy level description (more nuanced)
     let energyLevel = '';
-    if (avgEnergy > maxEnergy * 0.6) {
+    const energyPercentile = avgEnergy / maxEnergy;
+    if (energyPercentile > 0.7) {
         energyLevel = 'generally higher energy';
-    } else if (avgEnergy < maxEnergy * 0.3) {
-        energyLevel = 'generally lower energy';
-    } else {
+    } else if (energyPercentile > 0.5) {
+        energyLevel = 'moderate to higher energy';
+    } else if (energyPercentile > 0.3) {
         energyLevel = 'moderate energy levels';
+    } else if (energyPercentile > 0.15) {
+        energyLevel = 'moderate to lower energy';
+    } else {
+        energyLevel = 'generally lower energy';
     }
     
-    // Determine energy variability
+    // Determine energy variability (more nuanced with range consideration)
     let variability = '';
-    if (energyCV > 0.5) {
+    if (energyCV > 0.6 || energyRangeRatio > 0.8) {
         variability = 'shows considerable variation in loudness';
-    } else if (energyCV > 0.25) {
+    } else if (energyCV > 0.35 || energyRangeRatio > 0.5) {
         variability = 'shows moderate variation in loudness';
+    } else if (energyCV > 0.15 || energyRangeRatio > 0.25) {
+        variability = 'shows some variation in loudness';
     } else {
         variability = 'shows relatively consistent loudness';
     }
     
-    // Determine pause pattern
+    // Determine pause pattern (more nuanced thresholds)
     let pausePattern = '';
-    if (pauseRatio > 0.4) {
+    if (pauseRatio > 0.5) {
+        pausePattern = 'includes frequent pauses and breaks throughout';
+    } else if (pauseRatio > 0.35) {
         pausePattern = 'includes frequent pauses and breaks';
     } else if (pauseRatio > 0.2) {
         pausePattern = 'includes occasional pauses';
+    } else if (pauseRatio > 0.1) {
+        pausePattern = 'includes some pauses';
     } else {
         pausePattern = 'shows relatively continuous speech with few pauses';
     }
     
-    // Determine overall activity
+    // Determine overall activity (more nuanced)
     let activity = '';
-    const activeRatio = 1 - pauseRatio;
-    if (activeRatio > 0.8) {
+    if (activeRatio > 0.85) {
         activity = 'predominantly active speech';
+    } else if (activeRatio > 0.7) {
+        activity = 'mostly active speech';
     } else if (activeRatio > 0.5) {
         activity = 'mixed speech and silence periods';
-    } else {
+    } else if (activeRatio > 0.3) {
         activity = 'more silence than active speech';
+    } else {
+        activity = 'predominantly silence with limited speech';
     }
     
     // Combine into natural language summary
@@ -2803,7 +2832,7 @@ function setupWaveformTooltips(canvas, waveformData) {
     const tooltip = document.createElement('div');
     tooltip.id = 'waveformTooltip';
     tooltip.style.cssText = `
-        position: absolute;
+        position: fixed;
         background: rgba(17, 24, 39, 0.92);
         color: white;
         padding: 6px 10px;
@@ -2814,6 +2843,7 @@ function setupWaveformTooltips(canvas, waveformData) {
         display: none;
         white-space: nowrap;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: opacity 0.15s ease;
     `;
     document.body.appendChild(tooltip);
     
@@ -2865,9 +2895,52 @@ function setupWaveformTooltips(canvas, waveformData) {
             // Show tooltip for both waveform area and activity bar
             if (y >= 0 && y <= waveformHeight + activityBarHeight) {
                 tooltip.textContent = description;
+                
+                // Position tooltip near cursor with offset (10px right, 12px below)
+                const offsetX = 10;
+                const offsetY = 12;
+                let tooltipX = e.clientX + offsetX;
+                let tooltipY = e.clientY + offsetY;
+                
+                // Show tooltip first to measure dimensions
                 tooltip.style.display = 'block';
-                tooltip.style.left = (e.clientX + 10) + 'px';
-                tooltip.style.top = (e.clientY - 30) + 'px';
+                tooltip.style.visibility = 'hidden'; // Temporarily hide to measure
+                tooltip.style.left = tooltipX + 'px';
+                tooltip.style.top = tooltipY + 'px';
+                
+                // Get tooltip dimensions after it's in the DOM
+                const tooltipRect = tooltip.getBoundingClientRect();
+                const tooltipWidth = tooltipRect.width;
+                const tooltipHeight = tooltipRect.height;
+                
+                // Keep tooltip within viewport bounds
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                // Adjust horizontal position if tooltip would go off-screen right
+                if (tooltipX + tooltipWidth > viewportWidth) {
+                    tooltipX = e.clientX - tooltipWidth - offsetX; // Position to the left of cursor
+                }
+                
+                // Adjust horizontal position if tooltip would go off-screen left
+                if (tooltipX < 0) {
+                    tooltipX = offsetX;
+                }
+                
+                // Adjust vertical position if tooltip would go off-screen bottom
+                if (tooltipY + tooltipHeight > viewportHeight) {
+                    tooltipY = e.clientY - tooltipHeight - offsetY; // Position above cursor
+                }
+                
+                // Adjust vertical position if tooltip would go off-screen top
+                if (tooltipY < 0) {
+                    tooltipY = offsetY;
+                }
+                
+                // Apply final position and make visible
+                tooltip.style.left = tooltipX + 'px';
+                tooltip.style.top = tooltipY + 'px';
+                tooltip.style.visibility = 'visible';
             } else {
                 tooltip.style.display = 'none';
             }
