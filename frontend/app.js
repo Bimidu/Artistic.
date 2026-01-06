@@ -180,6 +180,9 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
     // Enable the corresponding predict button
     if (input.id === 'audioFileInput') {
         document.getElementById('predictAudioBtn').disabled = false;
+        // Display waveform for audio files
+        currentAudioFile = file;
+        displayWaveform(file);
     } else if (input.id === 'chaFileInput') {
         document.getElementById('predictChaBtn').disabled = false;
     }
@@ -222,6 +225,12 @@ async function predictFromAudio() {
         return;
     }
     
+    // Store audio file for waveform display
+    currentAudioFile = fileInput.files[0];
+    
+    // Display waveform immediately
+    await displayWaveform(currentAudioFile);
+    
     showLoading('resultsArea');
     
     const formData = new FormData();
@@ -242,6 +251,10 @@ async function predictFromAudio() {
         
         if (response.ok) {
             displayResults(data);
+            // Ensure waveform is still visible after results with feature info
+            if (currentAudioFile) {
+                await displayWaveform(currentAudioFile, data);
+            }
         } else {
             displayError(data.detail || 'Prediction failed');
         }
@@ -2314,6 +2327,669 @@ function clearSemanticCoherence() {
     if (toggle) {
         toggle.checked = false;
     }
+}
+
+// ==============================
+// Waveform Visualization
+// ==============================
+
+let currentAudioFile = null;
+
+/**
+ * Extract waveform data from an audio file with feature analysis
+ */
+async function extractWaveform(audioFile) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const arrayBuffer = e.target.result;
+                const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                
+                // Get channel data (use first channel)
+                const channelData = audioBuffer.getChannelData(0);
+                const sampleRate = audioBuffer.sampleRate;
+                const duration = audioBuffer.duration;
+                
+                // Downsample for visualization (take every Nth sample)
+                const samplesToShow = 2000; // Number of points to display
+                const step = Math.max(1, Math.floor(channelData.length / samplesToShow));
+                const waveform = [];
+                
+                // Calculate energy for each segment (for energy feature annotations)
+                const energyThreshold = 0.1; // Threshold for high energy regions
+                const energyRegions = [];
+                
+                for (let i = 0; i < channelData.length; i += step) {
+                    // Get max and min in this chunk for better visualization
+                    let max = 0;
+                    let min = 0;
+                    let energy = 0;
+                    for (let j = i; j < Math.min(i + step, channelData.length); j++) {
+                        const absValue = Math.abs(channelData[j]);
+                        max = Math.max(max, absValue);
+                        min = Math.min(min, -absValue);
+                        energy += absValue * absValue;
+                    }
+                    energy = Math.sqrt(energy / step); // RMS energy
+                    waveform.push({ max, min, energy });
+                    
+                    // Track high energy regions (for energy feature annotations)
+                    const timePos = (i / channelData.length) * duration;
+                    if (energy > energyThreshold) {
+                        energyRegions.push({ time: timePos, energy: energy });
+                    }
+                }
+                
+                // Calculate statistics for energy envelope and silence detection
+                const energies = waveform.map(w => w.energy);
+                const avgEnergy = energies.reduce((a, b) => a + b, 0) / energies.length;
+                const maxEnergy = Math.max(...energies);
+                const minEnergy = Math.min(...energies);
+                
+                // Compute smoothed energy envelope using simple moving average
+                // This provides a cleaner visualization of relative loudness over time
+                const smoothingWindow = 5; // Number of samples to average
+                const smoothedEnergy = [];
+                for (let i = 0; i < energies.length; i++) {
+                    let sum = 0;
+                    let count = 0;
+                    for (let j = Math.max(0, i - smoothingWindow); j <= Math.min(energies.length - 1, i + smoothingWindow); j++) {
+                        sum += energies[j];
+                        count++;
+                    }
+                    smoothedEnergy.push(sum / count);
+                }
+                
+                // Identify silence regions (low energy) for subtle shading
+                // Threshold: regions below 30% of average energy are considered silence
+                const silenceThreshold = avgEnergy * 0.3;
+                const silenceRegions = waveform
+                    .map((w, idx) => ({ 
+                        idx, 
+                        energy: w.energy, 
+                        smoothedEnergy: smoothedEnergy[idx],
+                        time: (idx / waveform.length) * duration,
+                        isSilence: w.energy < silenceThreshold
+                    }))
+                    .filter(w => w.isSilence);
+                
+                resolve({
+                    waveform,
+                    duration,
+                    sampleRate,
+                    sampleCount: channelData.length,
+                    energyEnvelope: smoothedEnergy, // Smoothed RMS energy for visualization
+                    energyStats: {
+                        avg: avgEnergy,
+                        max: maxEnergy,
+                        min: minEnergy
+                    },
+                    silenceRegions: silenceRegions // For subtle shading of pause regions
+                });
+            } catch (error) {
+                reject(error);
+            }
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(audioFile);
+    });
+}
+
+/**
+ * Render waveform on canvas with energy envelope overlay and speech activity bar
+ * 
+ * Research-grade enhancements:
+ * - Blue waveform: Raw audio signal (amplitude vs time) - the primary visualization
+ * - Energy envelope: Light, semi-transparent overlay showing relative loudness (RMS energy)
+ * - Activity bar: Thin bar below waveform showing speech vs silence regions
+ * - Hover tooltips: Interactive feedback for speech activity regions
+ * 
+ * Design rationale:
+ * - Activity bar provides intuitive visual summary of speech dynamics
+ * - Color-coded regions (active speech vs pauses) aid pattern recognition
+ * - Minimal, calm design suitable for ASD research context
+ * - No numeric values or overwhelming visual complexity
+ * 
+ * Scientific accuracy:
+ * - This visualization shows signal-level properties only (amplitude, energy, silence)
+ * - Acoustic features (pitch, MFCCs, spectral features) are NOT visualized here
+ * - Features are computed as global statistics, not from specific time segments
+ * - This is for user understanding/explainability, not model inference
+ */
+function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = null) {
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = canvas.offsetWidth;
+    const activityBarHeight = 8; // Height of activity bar below waveform
+    const waveformHeight = 142; // Waveform area (leaving space for activity bar)
+    const height = canvas.height = 150; // Total height: waveform + activity bar
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+    
+    if (!waveformData || !waveformData.waveform || waveformData.waveform.length === 0) {
+        ctx.fillStyle = '#9CA3AF';
+        ctx.font = '14px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('No waveform data available', width / 2, height / 2);
+        return;
+    }
+    
+    const waveform = waveformData.waveform;
+    const centerY = waveformHeight / 2; // Center of waveform area
+    const stepX = width / waveform.length;
+    
+    // Draw background
+    ctx.fillStyle = '#F3F4F6';
+    ctx.fillRect(0, 0, width, waveformHeight);
+    
+    // Draw subtle silence shading (low energy regions = pauses)
+    // This provides visual context for speech vs silence without implying feature extraction
+    if (waveformData.silenceRegions && waveformData.silenceRegions.length > 0) {
+        ctx.fillStyle = 'rgba(156, 163, 175, 0.15)'; // Very subtle gray shading
+        waveformData.silenceRegions.forEach(region => {
+            const x = (region.idx / waveform.length) * width;
+            ctx.fillRect(x, 0, stepX, waveformHeight);
+        });
+    }
+    
+    // Draw energy envelope overlay (smoothed RMS energy)
+    // Enhanced visibility: slightly increased opacity for better perceptual clarity
+    // This shows relative loudness over time as a semi-transparent overlay
+    if (waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
+        const maxEnergy = waveformData.energyStats?.max || 1;
+        const envelope = waveformData.energyEnvelope;
+        
+        // Draw upper envelope (positive side)
+        // Slightly increased opacity (0.45 vs 0.4) for better visibility while maintaining subtlety
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(251, 146, 60, 0.45)'; // Light orange, slightly more visible
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(0, centerY);
+        
+        for (let i = 0; i < envelope.length; i++) {
+            const x = i * stepX;
+            // Normalize energy to waveform height (0 to centerY)
+            const energyHeight = (envelope[i] / maxEnergy) * centerY * 0.8;
+            const y = centerY - energyHeight;
+            ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        
+        // Draw lower envelope (negative side, symmetric)
+        ctx.beginPath();
+        ctx.moveTo(width, centerY);
+        for (let i = envelope.length - 1; i >= 0; i--) {
+            const x = i * stepX;
+            const energyHeight = (envelope[i] / maxEnergy) * centerY * 0.8;
+            const y = centerY + energyHeight;
+            ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        
+        // Fill envelope area with slightly increased visibility
+        ctx.beginPath();
+        ctx.moveTo(0, centerY);
+        for (let i = 0; i < envelope.length; i++) {
+            const x = i * stepX;
+            const energyHeight = (envelope[i] / maxEnergy) * centerY * 0.8;
+            ctx.lineTo(x, centerY - energyHeight);
+        }
+        for (let i = envelope.length - 1; i >= 0; i--) {
+            const x = i * stepX;
+            const energyHeight = (envelope[i] / maxEnergy) * centerY * 0.8;
+            ctx.lineTo(x, centerY + energyHeight);
+        }
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(251, 146, 60, 0.1)'; // Slightly more visible fill (0.1 vs 0.08)
+        ctx.fill();
+    }
+    
+    // Draw main waveform (raw audio signal - amplitude vs time)
+    // This is the primary visualization showing the actual speech signal
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    
+    for (let i = 0; i < waveform.length; i++) {
+        const x = i * stepX;
+        const maxY = centerY - (waveform[i].max * centerY * 0.9);
+        const minY = centerY - (waveform[i].min * centerY * 0.9);
+        
+        if (i === 0) {
+            ctx.moveTo(x, maxY);
+        } else {
+            ctx.lineTo(x, maxY);
+        }
+    }
+    
+    // Draw bottom half
+    for (let i = waveform.length - 1; i >= 0; i--) {
+        const x = i * stepX;
+        const minY = centerY - (waveform[i].min * centerY * 0.9);
+        ctx.lineTo(x, minY);
+    }
+    
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
+    
+    // Draw center line (zero amplitude reference)
+    ctx.strokeStyle = '#9CA3AF';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, centerY);
+    ctx.lineTo(width, centerY);
+    ctx.stroke();
+    
+    // Draw speech activity bar below waveform
+    // This provides an intuitive visual summary of speech vs silence regions
+    // Design: Thin horizontal bar with color-coded segments
+    const activityBarY = waveformHeight;
+    const silenceThreshold = waveformData.energyStats?.avg * 0.3 || 0.1;
+    
+    // Draw activity bar background
+    ctx.fillStyle = '#E5E7EB';
+    ctx.fillRect(0, activityBarY, width, activityBarHeight);
+    
+    // Draw speech activity segments
+    if (waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
+        const envelope = waveformData.energyEnvelope;
+        const segmentWidth = stepX;
+        
+        for (let i = 0; i < envelope.length; i++) {
+            const x = i * segmentWidth;
+            const energy = envelope[i];
+            const isSpeech = energy > silenceThreshold;
+            
+            // Color coding: active speech (teal) vs pause/silence (light gray)
+            if (isSpeech) {
+                // Gradient from light to darker teal based on energy level
+                const maxEnergy = waveformData.energyStats?.max || 1;
+                const energyRatio = Math.min(energy / maxEnergy, 1);
+                // Light teal for low energy speech, darker for high energy
+                const r = Math.floor(94 + (energyRatio * 20)); // 94-114
+                const g = Math.floor(234 - (energyRatio * 30)); // 234-204
+                const b = Math.floor(212 - (energyRatio * 20)); // 212-192
+                ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+            } else {
+                // Light gray for silence/pause regions
+                ctx.fillStyle = '#D1D5DB';
+            }
+            
+            ctx.fillRect(x, activityBarY, Math.max(segmentWidth, 1), activityBarHeight);
+        }
+    }
+    
+    // Draw time markers at bottom (for temporal reference only)
+    if (waveformData.duration) {
+        ctx.fillStyle = '#6B7280';
+        ctx.font = '10px sans-serif';
+        ctx.textAlign = 'center';
+        const timeMarkers = 5;
+        for (let i = 0; i <= timeMarkers; i++) {
+            const x = (i / timeMarkers) * width;
+            const time = (i / timeMarkers) * waveformData.duration;
+            ctx.fillText(time.toFixed(1) + 's', x, height - 2);
+        }
+    }
+    
+    // Store waveform data for hover tooltips
+    canvas._waveformData = waveformData;
+    canvas._stepX = stepX;
+    canvas._silenceThreshold = silenceThreshold;
+}
+
+/**
+ * Generate a plain-language textual summary of observed speech characteristics
+ * Based on energy patterns, pause distribution, and overall speech activity
+ * Uses descriptive language without numerical values or diagnostic claims
+ * Improved analysis with more nuanced thresholds for better differentiation
+ */
+function generateSpeechSummary(waveformData) {
+    if (!waveformData || !waveformData.energyEnvelope || !waveformData.energyStats) {
+        return '<p>Analyzing speech characteristics...</p>';
+    }
+    
+    const energies = waveformData.energyEnvelope;
+    const avgEnergy = waveformData.energyStats.avg;
+    const maxEnergy = waveformData.energyStats.max;
+    const minEnergy = waveformData.energyStats.min;
+    const silenceThreshold = avgEnergy * 0.3;
+    
+    // Calculate actual pause ratio by checking energy values directly
+    let silenceCount = 0;
+    let speechCount = 0;
+    for (let i = 0; i < energies.length; i++) {
+        if (energies[i] < silenceThreshold) {
+            silenceCount++;
+        } else {
+            speechCount++;
+        }
+    }
+    const pauseRatio = silenceCount / energies.length;
+    const activeRatio = speechCount / energies.length;
+    
+    // Calculate energy variability (coefficient of variation)
+    const energyMean = energies.reduce((a, b) => a + b, 0) / energies.length;
+    const energyVariance = energies.reduce((sum, e) => sum + Math.pow(e - energyMean, 2), 0) / energies.length;
+    const energyStd = Math.sqrt(energyVariance);
+    const energyCV = energyMean > 0 ? energyStd / energyMean : 0;
+    
+    // Calculate energy range (how much variation between min and max)
+    const energyRange = maxEnergy - minEnergy;
+    const energyRangeRatio = maxEnergy > 0 ? energyRange / maxEnergy : 0;
+    
+    // Determine energy level description (more nuanced)
+    let energyLevel = '';
+    const energyPercentile = avgEnergy / maxEnergy;
+    if (energyPercentile > 0.7) {
+        energyLevel = 'generally higher energy';
+    } else if (energyPercentile > 0.5) {
+        energyLevel = 'moderate to higher energy';
+    } else if (energyPercentile > 0.3) {
+        energyLevel = 'moderate energy levels';
+    } else if (energyPercentile > 0.15) {
+        energyLevel = 'moderate to lower energy';
+    } else {
+        energyLevel = 'generally lower energy';
+    }
+    
+    // Determine energy variability (more nuanced with range consideration)
+    let variability = '';
+    if (energyCV > 0.6 || energyRangeRatio > 0.8) {
+        variability = 'shows considerable variation in loudness';
+    } else if (energyCV > 0.35 || energyRangeRatio > 0.5) {
+        variability = 'shows moderate variation in loudness';
+    } else if (energyCV > 0.15 || energyRangeRatio > 0.25) {
+        variability = 'shows some variation in loudness';
+    } else {
+        variability = 'shows relatively consistent loudness';
+    }
+    
+    // Determine pause pattern (more nuanced thresholds)
+    let pausePattern = '';
+    if (pauseRatio > 0.5) {
+        pausePattern = 'includes frequent pauses and breaks throughout';
+    } else if (pauseRatio > 0.35) {
+        pausePattern = 'includes frequent pauses and breaks';
+    } else if (pauseRatio > 0.2) {
+        pausePattern = 'includes occasional pauses';
+    } else if (pauseRatio > 0.1) {
+        pausePattern = 'includes some pauses';
+    } else {
+        pausePattern = 'shows relatively continuous speech with few pauses';
+    }
+    
+    // Determine overall activity (more nuanced)
+    let activity = '';
+    if (activeRatio > 0.85) {
+        activity = 'predominantly active speech';
+    } else if (activeRatio > 0.7) {
+        activity = 'mostly active speech';
+    } else if (activeRatio > 0.5) {
+        activity = 'mixed speech and silence periods';
+    } else if (activeRatio > 0.3) {
+        activity = 'more silence than active speech';
+    } else {
+        activity = 'predominantly silence with limited speech';
+    }
+    
+    // Generate refined, non-diagnostic characteristics description
+    // Focus on signal-level qualitative observations
+    const characteristics = [];
+    
+    // Add loudness variation description
+    if (energyCV > 0.5 || energyRangeRatio > 0.7) {
+        characteristics.push('Variation in speech loudness across the recording');
+    } else if (energyCV > 0.25 || energyRangeRatio > 0.4) {
+        characteristics.push('Some variation in speech loudness across the recording');
+    } else {
+        characteristics.push('Relatively consistent speech loudness across the recording');
+    }
+    
+    // Add pause pattern description
+    if (pauseRatio > 0.3) {
+        characteristics.push('Presence of short and longer pauses between speech segments');
+    } else if (pauseRatio > 0.15) {
+        characteristics.push('Presence of some pauses between speech segments');
+    } else {
+        characteristics.push('Relatively continuous speech with minimal pauses');
+    }
+    
+    // Add activity pattern description
+    if (activeRatio > 0.7 && pauseRatio > 0.2) {
+        characteristics.push('Periods of continuous speech interspersed with low-activity intervals');
+    } else if (activeRatio > 0.5) {
+        characteristics.push('Mixed periods of active speech and silence');
+    }
+    
+    // Add signal quality assessment
+    if (maxEnergy > 0.1 && energyRangeRatio > 0.2) {
+        characteristics.push('Overall signal quality suitable for acoustic analysis');
+    } else if (maxEnergy > 0.05) {
+        characteristics.push('Signal quality appears adequate for analysis');
+    }
+    
+    // Combine into formatted list with HTML
+    const summary = characteristics.length > 0 
+        ? characteristics.map(char => `<p>• ${char}</p>`).join('')
+        : '<p>Signal characteristics are being analyzed.</p>';
+    
+    return summary;
+}
+
+/**
+ * Display waveform for uploaded audio file with feature annotations
+ * Shows waveform only before the annotated transcript section
+ */
+async function displayWaveform(audioFile, featureInfo = null) {
+    const waveformSectionResults = document.getElementById('waveformSectionResults');
+    const waveformCanvasResults = document.getElementById('waveformCanvasResults');
+    const waveformInfoResults = document.getElementById('waveformInfoResults');
+    const waveformAudioResults = document.getElementById('waveformAudioResults');
+    const waveformSummaryResults = document.getElementById('waveformSummaryResults');
+    
+    if (!audioFile) {
+        if (waveformSectionResults) waveformSectionResults.classList.add('hidden');
+        return;
+    }
+    
+    try {
+        if (waveformInfoResults) waveformInfoResults.textContent = 'Processing waveform...';
+        if (waveformSectionResults) waveformSectionResults.classList.remove('hidden');
+        
+        // Create audio element for playback
+        const audioUrl = URL.createObjectURL(audioFile);
+        if (waveformAudioResults) {
+            waveformAudioResults.src = audioUrl;
+            waveformAudioResults.style.display = 'block';
+        }
+        
+        // Extract and render waveform
+        const waveformData = await extractWaveform(audioFile);
+        if (waveformCanvasResults) {
+            renderWaveform(waveformCanvasResults, waveformData, '#3B82F6', featureInfo);
+            setupWaveformTooltips(waveformCanvasResults, waveformData);
+        }
+        
+        // Generate and display speech characteristics summary
+        if (waveformSummaryResults) {
+            const summary = generateSpeechSummary(waveformData);
+            waveformSummaryResults.innerHTML = summary;
+        }
+        
+        // Update info with feature extraction details
+        const duration = waveformData.duration.toFixed(2);
+        let finalInfoText = `Duration: ${duration}s | Sample Rate: ${waveformData.sampleRate}Hz | Samples: ${waveformData.sampleCount.toLocaleString()}`;
+        
+        if (featureInfo && featureInfo.features_extracted) {
+            finalInfoText += ` | Features Extracted: ${featureInfo.features_extracted}`;
+        }
+        
+        if (waveformInfoResults) waveformInfoResults.textContent = finalInfoText;
+        
+        // Handle window resize to redraw waveform
+        let resizeTimeout;
+        const resizeHandler = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (waveformCanvasResults) {
+                    renderWaveform(waveformCanvasResults, waveformData, '#3B82F6', featureInfo);
+                    setupWaveformTooltips(waveformCanvasResults, waveformData);
+                }
+            }, 250);
+        };
+        
+        // Remove old resize listeners and add new one
+        window.removeEventListener('resize', resizeHandler);
+        window.addEventListener('resize', resizeHandler);
+        
+    } catch (error) {
+        console.error('Error displaying waveform:', error);
+        if (waveformInfoResults) waveformInfoResults.textContent = 'Error loading waveform';
+        if (waveformSectionResults) waveformSectionResults.classList.remove('hidden');
+    }
+}
+
+/**
+ * Setup hover tooltips for waveform and activity bar
+ * Provides interactive feedback with descriptive, non-numeric energy descriptions
+ * Enhanced with relative energy level descriptions for better user understanding
+ */
+function setupWaveformTooltips(canvas, waveformData) {
+    // Remove existing tooltip if present
+    const existingTooltip = document.getElementById('waveformTooltip');
+    if (existingTooltip) {
+        existingTooltip.remove();
+    }
+    
+    // Create tooltip element with refined styling
+    const tooltip = document.createElement('div');
+    tooltip.id = 'waveformTooltip';
+    tooltip.style.cssText = `
+        position: fixed;
+        background: rgba(17, 24, 39, 0.92);
+        color: white;
+        padding: 6px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        pointer-events: none;
+        z-index: 1000;
+        display: none;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: opacity 0.15s ease;
+    `;
+    document.body.appendChild(tooltip);
+    
+    const activityBarY = 142; // Top of activity bar
+    const activityBarHeight = 8;
+    const waveformHeight = 142;
+    const silenceThreshold = waveformData.energyStats?.avg * 0.3 || 0.1;
+    const avgEnergy = waveformData.energyStats?.avg || 0.1;
+    const maxEnergy = waveformData.energyStats?.max || 1;
+    
+    /**
+     * Get descriptive, non-numeric energy level description
+     * Uses relative terms: high, moderate, low, pause
+     */
+    function getEnergyDescription(energy, isSpeech) {
+        if (!isSpeech) {
+            return 'Pause region';
+        }
+        
+        // Relative energy levels: high (>70% of max), moderate (30-70%), low (threshold to 30%)
+        const energyRatio = energy / maxEnergy;
+        if (energyRatio > 0.7) {
+            return 'High energy speech';
+        } else if (energyRatio > 0.3) {
+            return 'Moderate energy speech';
+        } else {
+            return 'Low energy speech';
+        }
+    }
+    
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        if (!waveformData.energyEnvelope) {
+            tooltip.style.display = 'none';
+            return;
+        }
+        
+        const stepX = canvas.width / waveformData.energyEnvelope.length;
+        const segmentIndex = Math.floor(x / stepX);
+        
+        if (segmentIndex >= 0 && segmentIndex < waveformData.energyEnvelope.length) {
+            const energy = waveformData.energyEnvelope[segmentIndex];
+            const isSpeech = energy > silenceThreshold;
+            const description = getEnergyDescription(energy, isSpeech);
+            
+            // Show tooltip for both waveform area and activity bar
+            if (y >= 0 && y <= waveformHeight + activityBarHeight) {
+                tooltip.textContent = description;
+                
+                // Position tooltip near cursor with offset (10px right, 12px below)
+                const offsetX = 10;
+                const offsetY = 12;
+                let tooltipX = e.clientX + offsetX;
+                let tooltipY = e.clientY + offsetY;
+                
+                // Show tooltip first to measure dimensions
+                tooltip.style.display = 'block';
+                tooltip.style.visibility = 'hidden'; // Temporarily hide to measure
+                tooltip.style.left = tooltipX + 'px';
+                tooltip.style.top = tooltipY + 'px';
+                
+                // Get tooltip dimensions after it's in the DOM
+                const tooltipRect = tooltip.getBoundingClientRect();
+                const tooltipWidth = tooltipRect.width;
+                const tooltipHeight = tooltipRect.height;
+                
+                // Keep tooltip within viewport bounds
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                // Adjust horizontal position if tooltip would go off-screen right
+                if (tooltipX + tooltipWidth > viewportWidth) {
+                    tooltipX = e.clientX - tooltipWidth - offsetX; // Position to the left of cursor
+                }
+                
+                // Adjust horizontal position if tooltip would go off-screen left
+                if (tooltipX < 0) {
+                    tooltipX = offsetX;
+                }
+                
+                // Adjust vertical position if tooltip would go off-screen bottom
+                if (tooltipY + tooltipHeight > viewportHeight) {
+                    tooltipY = e.clientY - tooltipHeight - offsetY; // Position above cursor
+                }
+                
+                // Adjust vertical position if tooltip would go off-screen top
+                if (tooltipY < 0) {
+                    tooltipY = offsetY;
+                }
+                
+                // Apply final position and make visible
+                tooltip.style.left = tooltipX + 'px';
+                tooltip.style.top = tooltipY + 'px';
+                tooltip.style.visibility = 'visible';
+            } else {
+                tooltip.style.display = 'none';
+            }
+        } else {
+            tooltip.style.display = 'none';
+        }
+    });
+    
+    canvas.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+    });
 }
 
 // Test connection on load
