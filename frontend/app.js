@@ -462,10 +462,12 @@ function displayResults(data) {
         localShapSection.classList.add('hidden');
     }
 
-    // Show annotated transcript
+    // Show annotated transcript with interactive features
     if (data.annotated_transcript_html) {
         document.getElementById('annotationCard').classList.remove('hidden');
-        document.getElementById('annotatedTranscript').innerHTML = data.annotated_transcript_html;
+        // Store transcript text for semantic coherence analysis
+        const transcriptText = data.transcript || extractTranscriptFromHTML(data.annotated_transcript_html);
+        renderAnnotatedTranscript(data.annotated_transcript_html, data.annotation_summary || {}, transcriptText);
     }
 
     //Counterfactuals
@@ -1666,6 +1668,637 @@ async function loadModelsForPrediction() {
         }
     } catch (error) {
         console.error('Error loading models:', error);
+    }
+}
+
+// ==============================
+// Annotated Transcript Rendering
+// ==============================
+
+// Feature type categories and colors
+const FEATURE_CATEGORIES = {
+    'Turn-Taking': {
+        types: ['turn_start', 'turn_end', 'overlap', 'interruption', 'long_pause', 'response_latency'],
+        color: '#2196F3',
+        icon: '🔄'
+    },
+    'Pragmatic Markers': {
+        types: ['echolalia', 'pronoun_reversal', 'stereotyped_phrase', 'social_greeting', 'question'],
+        color: '#F44336',
+        icon: '💬'
+    },
+    'Conversational': {
+        types: ['topic_shift', 'topic_maintenance', 'repair_initiation', 'repair_completion', 'clarification_request'],
+        color: '#4CAF50',
+        icon: '🗣️'
+    },
+    'Linguistic': {
+        types: ['complex_sentence', 'simple_sentence', 'filled_pause', 'discourse_marker'],
+        color: '#9C27B0',
+        icon: '📝'
+    },
+    'General': {
+        types: ['feature_region'],
+        color: '#607D8B',
+        icon: '📍'
+    }
+};
+
+// Color mapping for annotation types
+const ANNOTATION_COLORS = {
+    'turn_start': '#2196F3',
+    'turn_end': '#1976D2',
+    'overlap': '#03A9F4',
+    'interruption': '#00BCD4',
+    'long_pause': '#0097A7',
+    'response_latency': '#00838F',
+    'echolalia': '#F44336',
+    'pronoun_reversal': '#E91E63',
+    'stereotyped_phrase': '#FF5722',
+    'social_greeting': '#FF9800',
+    'question': '#FFC107',
+    'topic_shift': '#4CAF50',
+    'topic_maintenance': '#8BC34A',
+    'repair_initiation': '#CDDC39',
+    'repair_completion': '#009688',
+    'clarification_request': '#00BFA5',
+    'complex_sentence': '#9C27B0',
+    'simple_sentence': '#E1BEE7',
+    'filled_pause': '#7B1FA2',
+    'discourse_marker': '#AB47BC',
+    'feature_region': '#607D8B'
+};
+
+let currentTranscriptData = null;
+let currentTranscriptText = null;
+let isCompactView = false;
+let semanticCoherenceData = null;
+let isSemanticCoherenceActive = false;
+
+function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptText = null) {
+    const container = document.getElementById('annotatedTranscript');
+    const summaryPanel = document.getElementById('featureSummaryContent');
+    const filterSelect = document.getElementById('featureFilter');
+    const annotationCount = document.getElementById('annotationCount');
+    
+    if (!container || !summaryPanel || !filterSelect || !annotationCount) {
+        console.error('Required elements not found for transcript rendering');
+        return;
+    }
+    
+    // Store current data
+    currentTranscriptData = { html: htmlContent, summary: annotationSummary || {} };
+    currentTranscriptText = transcriptText;
+    
+    // Parse the HTML to extract annotation data
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    
+    // Try to find transcript content, fallback to body if structure is different
+    let transcriptDiv = doc.querySelector('.transcript-content');
+    if (!transcriptDiv) {
+        transcriptDiv = doc.querySelector('.annotated-transcript');
+    }
+    if (!transcriptDiv) {
+        transcriptDiv = doc.body;
+    }
+    
+    // Count total annotations
+    const totalAnnotations = annotationSummary ? 
+        Object.values(annotationSummary).reduce((sum, count) => sum + count, 0) : 0;
+    annotationCount.textContent = `${totalAnnotations} Feature${totalAnnotations !== 1 ? 's' : ''} Marked`;
+    
+    // Render feature summary chips
+    summaryPanel.innerHTML = '';
+    
+    if (annotationSummary && Object.keys(annotationSummary).length > 0) {
+        const featureEntries = Object.entries(annotationSummary).sort((a, b) => b[1] - a[1]);
+        
+        featureEntries.forEach(([featureType, count]) => {
+            const category = getFeatureCategory(featureType);
+            const color = ANNOTATION_COLORS[featureType] || category.color;
+            
+            const chip = document.createElement('button');
+            chip.className = 'feature-chip px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105 cursor-pointer';
+            chip.style.backgroundColor = color + '20';
+            chip.style.borderLeft = `4px solid ${color}`;
+            chip.style.color = '#1a1a1a';
+            chip.dataset.featureType = featureType;
+            chip.innerHTML = `
+                <span class="font-semibold">${formatFeatureName(featureType)}</span>
+                <span class="ml-2 px-2 py-0.5 rounded-full text-xs" style="background-color: ${color}; color: white;">
+                    ${count}
+                </span>
+            `;
+            
+            chip.addEventListener('click', () => {
+                filterByFeatureType(featureType);
+                filterSelect.value = featureType;
+            });
+            
+            summaryPanel.appendChild(chip);
+        });
+        
+        // Populate filter dropdown
+        filterSelect.innerHTML = '<option value="all">All Features</option>';
+        featureEntries.forEach(([featureType, count]) => {
+            const option = document.createElement('option');
+            option.value = featureType;
+            option.textContent = `${formatFeatureName(featureType)} (${count})`;
+            filterSelect.appendChild(option);
+        });
+    } else {
+        summaryPanel.innerHTML = '<p class="text-sm text-primary-500">No features detected</p>';
+        filterSelect.innerHTML = '<option value="all">All Features</option>';
+    }
+    
+    // Render transcript with enhanced styling
+    container.innerHTML = transcriptDiv.innerHTML || htmlContent;
+    
+    // Enhance annotations with interactive features
+    enhanceAnnotations(container);
+    
+    // Setup event listeners
+    setupTranscriptInteractivity();
+    
+    // Show statistics
+    if (annotationSummary) {
+        renderTranscriptStats(annotationSummary);
+    }
+}
+
+function enhanceAnnotations(container) {
+    const annotations = container.querySelectorAll('.annotation, [class*="annotation"]');
+    
+    annotations.forEach(ann => {
+        // Add click handler for highlighting
+        ann.addEventListener('click', function() {
+            // Remove previous highlights
+            container.querySelectorAll('.annotation-highlighted').forEach(el => {
+                el.classList.remove('annotation-highlighted');
+            });
+            
+            // Highlight this annotation
+            this.classList.add('annotation-highlighted');
+            
+            // Scroll into view
+            this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        
+        // Add hover effect
+        ann.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.zIndex = '10';
+        });
+        
+        ann.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.zIndex = '1';
+        });
+    });
+}
+
+function setupTranscriptInteractivity() {
+    // Search functionality
+    const searchInput = document.getElementById('transcriptSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            searchTranscript(query);
+        });
+    }
+    
+    // Filter functionality
+    const filterSelect = document.getElementById('featureFilter');
+    if (filterSelect) {
+        filterSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'all') {
+                clearFilters();
+            } else {
+                filterByFeatureType(e.target.value);
+            }
+        });
+    }
+    
+    // Clear filters
+    const clearBtn = document.getElementById('clearFilters');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', clearFilters);
+    }
+    
+    // Toggle view
+    const toggleView = document.getElementById('toggleTranscriptView');
+    if (toggleView) {
+        toggleView.addEventListener('click', toggleTranscriptView);
+    }
+    
+    // Toggle feature summary
+    const toggleSummary = document.getElementById('toggleFeatureSummary');
+    if (toggleSummary) {
+        toggleSummary.addEventListener('click', () => {
+            const content = document.getElementById('featureSummaryContent');
+            const toggleText = document.getElementById('summaryToggleText');
+            if (content.style.display === 'none') {
+                content.style.display = 'grid';
+                toggleText.textContent = 'Hide';
+            } else {
+                content.style.display = 'none';
+                toggleText.textContent = 'Show';
+            }
+        });
+    }
+    
+    // Semantic coherence toggle
+    const coherenceToggle = document.getElementById('semanticCoherenceToggle');
+    if (coherenceToggle) {
+        coherenceToggle.addEventListener('change', async (e) => {
+            if (e.target.checked) {
+                await analyzeSemanticCoherence();
+            } else {
+                clearSemanticCoherence();
+            }
+        });
+    }
+}
+
+function searchTranscript(query) {
+    const container = document.getElementById('annotatedTranscript');
+    if (!container) return;
+    
+    const utterances = container.querySelectorAll('.utterance');
+    
+    if (!query.trim()) {
+        utterances.forEach(utt => {
+            utt.style.display = '';
+            utt.classList.remove('search-highlight');
+        });
+        // Remove search marks
+        container.querySelectorAll('mark.search-match').forEach(mark => {
+            const parent = mark.parentNode;
+            parent.replaceChild(document.createTextNode(mark.textContent), mark);
+            parent.normalize();
+        });
+        return;
+    }
+    
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedQuery})`, 'gi');
+    
+    utterances.forEach(utt => {
+        const text = utt.textContent.toLowerCase();
+        if (text.includes(query.toLowerCase())) {
+            utt.style.display = '';
+            utt.classList.add('search-highlight');
+            
+            // Highlight matching text in text span
+            const textSpan = utt.querySelector('.text');
+            if (textSpan) {
+                // Remove previous marks
+                textSpan.querySelectorAll('mark.search-match').forEach(mark => {
+                    const parent = mark.parentNode;
+                    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                    parent.normalize();
+                });
+                
+                // Add new marks
+                const originalHTML = textSpan.innerHTML;
+                textSpan.innerHTML = originalHTML.replace(regex, '<mark class="search-match">$1</mark>');
+            }
+        } else {
+            utt.style.display = 'none';
+        }
+    });
+}
+
+function filterByFeatureType(featureType) {
+    const container = document.getElementById('annotatedTranscript');
+    if (!container) return;
+    
+    const annotations = container.querySelectorAll('.annotation, [class*="annotation"]');
+    let firstMatch = null;
+    
+    annotations.forEach(ann => {
+        const annType = ann.getAttribute('data-type');
+        if (annType === featureType) {
+            ann.classList.add('annotation-filtered');
+            if (!firstMatch) {
+                firstMatch = ann;
+            }
+        } else {
+            ann.classList.remove('annotation-filtered');
+        }
+    });
+    
+    // Scroll to first match
+    if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // Highlight utterances with this feature
+    const utterances = container.querySelectorAll('.utterance');
+    let hasAnyMatch = false;
+    
+    utterances.forEach(utt => {
+        const hasFeature = utt.querySelector(`[data-type="${featureType}"]`);
+        if (hasFeature) {
+            utt.classList.add('utterance-highlighted');
+            hasAnyMatch = true;
+        } else {
+            utt.classList.remove('utterance-highlighted');
+        }
+    });
+    
+    // If no matches found, show a message
+    if (!hasAnyMatch && firstMatch === null) {
+        console.log(`No annotations found for feature type: ${featureType}`);
+    }
+}
+
+function clearFilters() {
+    const container = document.getElementById('annotatedTranscript');
+    const searchInput = document.getElementById('transcriptSearch');
+    const filterSelect = document.getElementById('featureFilter');
+    
+    // Clear search
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    
+    // Clear filter
+    if (filterSelect) {
+        filterSelect.value = 'all';
+    }
+    
+    // Reset all highlights
+    container.querySelectorAll('.annotation-filtered, .annotation-highlighted, .utterance-highlighted, .search-highlight').forEach(el => {
+        el.classList.remove('annotation-filtered', 'annotation-highlighted', 'utterance-highlighted', 'search-highlight');
+    });
+    
+    container.querySelectorAll('.utterance').forEach(utt => {
+        utt.style.display = '';
+    });
+    
+    // Remove search marks
+    container.querySelectorAll('mark.search-match').forEach(mark => {
+        mark.outerHTML = mark.textContent;
+    });
+}
+
+function toggleTranscriptView() {
+    const container = document.getElementById('annotatedTranscript');
+    const toggleText = document.getElementById('viewToggleText');
+    isCompactView = !isCompactView;
+    
+    if (isCompactView) {
+        container.classList.add('compact-view');
+        toggleText.textContent = 'Expanded View';
+    } else {
+        container.classList.remove('compact-view');
+        toggleText.textContent = 'Compact View';
+    }
+}
+
+function renderTranscriptStats(summary) {
+    const statsPanel = document.getElementById('transcriptStats');
+    const statsContent = document.getElementById('statsContent');
+    
+    if (!statsPanel || !statsContent) return;
+    
+    const totalFeatures = Object.values(summary).reduce((sum, count) => sum + count, 0);
+    const uniqueFeatureTypes = Object.keys(summary).length;
+    const mostCommon = Object.entries(summary).sort((a, b) => b[1] - a[1])[0];
+    
+    statsContent.innerHTML = `
+        <div class="stat-card p-4 bg-primary-50 rounded-lg">
+            <div class="text-2xl font-bold text-primary-900">${totalFeatures}</div>
+            <div class="text-sm text-primary-600 mt-1">Total Annotations</div>
+        </div>
+        <div class="stat-card p-4 bg-primary-50 rounded-lg">
+            <div class="text-2xl font-bold text-primary-900">${uniqueFeatureTypes}</div>
+            <div class="text-sm text-primary-600 mt-1">Feature Types</div>
+        </div>
+        <div class="stat-card p-4 bg-primary-50 rounded-lg">
+            <div class="text-2xl font-bold text-primary-900">${mostCommon ? mostCommon[1] : 0}</div>
+            <div class="text-sm text-primary-600 mt-1">Most Common</div>
+            <div class="text-xs text-primary-500 mt-1">${mostCommon ? formatFeatureName(mostCommon[0]) : 'N/A'}</div>
+        </div>
+        <div class="stat-card p-4 bg-primary-50 rounded-lg">
+            <div class="text-2xl font-bold text-primary-900">${(totalFeatures / uniqueFeatureTypes).toFixed(1)}</div>
+            <div class="text-sm text-primary-600 mt-1">Avg per Type</div>
+        </div>
+    `;
+    
+    statsPanel.classList.remove('hidden');
+}
+
+function getFeatureCategory(featureType) {
+    for (const [categoryName, category] of Object.entries(FEATURE_CATEGORIES)) {
+        if (category.types.includes(featureType)) {
+            return category;
+        }
+    }
+    return FEATURE_CATEGORIES['General'];
+}
+
+function formatFeatureName(featureType) {
+    return featureType
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+// ==============================
+// Semantic Coherence Analysis
+// ==============================
+
+function extractTranscriptFromHTML(htmlContent) {
+    // Extract transcript text from HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    const utterances = doc.querySelectorAll('.utterance');
+    
+    const transcriptLines = [];
+    utterances.forEach(utt => {
+        const speaker = utt.querySelector('.speaker')?.textContent.replace('*', '').replace(':', '').trim() || 'CHI';
+        const text = utt.querySelector('.text')?.textContent.trim() || '';
+        if (text) {
+            transcriptLines.push(`*${speaker}: ${text}`);
+        }
+    });
+    
+    return transcriptLines.join('\n');
+}
+
+async function analyzeSemanticCoherence() {
+    const container = document.getElementById('annotatedTranscript');
+    if (!container || !currentTranscriptData) {
+        console.error('Transcript container or data not available');
+        return;
+    }
+    
+    // Use stored transcript text if available, otherwise extract from HTML
+    let transcriptText = currentTranscriptText;
+    if (!transcriptText) {
+        // Extract text from transcript
+        const utterances = container.querySelectorAll('.utterance');
+        if (utterances.length === 0) {
+            console.error('No utterances found in transcript');
+            return;
+        }
+        
+        // Build transcript text from utterances
+        const transcriptLines = [];
+        utterances.forEach(utt => {
+            const speaker = utt.querySelector('.speaker')?.textContent.replace('*', '').replace(':', '').trim() || 'CHI';
+            const text = utt.querySelector('.text')?.textContent.trim() || '';
+            if (text) {
+                transcriptLines.push(`*${speaker}: ${text}`);
+            }
+        });
+        
+        transcriptText = transcriptLines.join('\n');
+    }
+    
+    try {
+        // Show loading state
+        const toggle = document.getElementById('semanticCoherenceToggle');
+        if (toggle) {
+            toggle.disabled = true;
+        }
+        
+        // Call API
+        const formData = new FormData();
+        formData.append('text', transcriptText);
+        
+        const response = await fetch(`${getApiUrl()}/analyze/semantic-coherence`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        semanticCoherenceData = data;
+        isSemanticCoherenceActive = true;
+        
+        // Apply semantic coherence highlighting
+        applySemanticCoherenceHighlighting(data);
+        
+        // Re-enable toggle
+        if (toggle) {
+            toggle.disabled = false;
+        }
+        
+    } catch (error) {
+        console.error('Semantic coherence analysis failed:', error);
+        alert('Failed to analyze semantic coherence. Please try again.');
+        
+        // Re-enable toggle and uncheck
+        const toggle = document.getElementById('semanticCoherenceToggle');
+        if (toggle) {
+            toggle.disabled = false;
+            toggle.checked = false;
+        }
+    }
+}
+
+function applySemanticCoherenceHighlighting(data) {
+    const container = document.getElementById('annotatedTranscript');
+    if (!container) return;
+    
+    const utterances = container.querySelectorAll('.utterance');
+    
+    utterances.forEach((utt, idx) => {
+        // Remove previous coherence classes
+        utt.classList.remove('coherent-utterance', 'incoherent-utterance', 'coherence-unknown');
+        
+        const coherenceInfo = data.coherence_scores[idx];
+        if (!coherenceInfo) return;
+        
+        if (coherenceInfo.is_coherent === true) {
+            utt.classList.add('coherent-utterance');
+            // Add tooltip with similarity score
+            const similarity = (coherenceInfo.similarity * 100).toFixed(1);
+            utt.title = `Semantically coherent (similarity: ${similarity}%)`;
+        } else if (coherenceInfo.is_coherent === false) {
+            utt.classList.add('incoherent-utterance');
+            // Add tooltip with similarity score
+            const similarity = (coherenceInfo.similarity * 100).toFixed(1);
+            utt.title = `Semantically incoherent (similarity: ${similarity}%)`;
+        } else {
+            utt.classList.add('coherence-unknown');
+            utt.title = 'Coherence analysis not available for this utterance';
+        }
+    });
+    
+    // Show overall coherence score
+    showCoherenceSummary(data);
+}
+
+function showCoherenceSummary(data) {
+    // Create or update summary element
+    let summaryEl = document.getElementById('coherenceSummary');
+    if (!summaryEl) {
+        summaryEl = document.createElement('div');
+        summaryEl.id = 'coherenceSummary';
+        summaryEl.className = 'mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200';
+        
+        const container = document.getElementById('annotatedTranscript').parentElement;
+        container.appendChild(summaryEl);
+    }
+    
+    const overallScore = (data.overall_coherence * 100).toFixed(1);
+    const coherentCount = data.coherence_scores.filter(s => s.is_coherent === true).length;
+    const incoherentCount = data.coherence_scores.filter(s => s.is_coherent === false).length;
+    
+    summaryEl.innerHTML = `
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="text-sm font-semibold text-primary-900 mb-2">Semantic Coherence Analysis</h4>
+                <div class="flex gap-4 text-sm">
+                    <span class="text-green-700">
+                        <strong>${coherentCount}</strong> coherent transitions
+                    </span>
+                    <span class="text-red-700">
+                        <strong>${incoherentCount}</strong> incoherent transitions
+                    </span>
+                    <span class="text-primary-700">
+                        Overall: <strong>${overallScore}%</strong>
+                    </span>
+                </div>
+            </div>
+            <button onclick="clearSemanticCoherence()" class="px-3 py-1 text-xs bg-white text-primary-700 rounded hover:bg-primary-100 transition-colors">
+                Clear
+            </button>
+        </div>
+    `;
+}
+
+function clearSemanticCoherence() {
+    const container = document.getElementById('annotatedTranscript');
+    if (!container) return;
+    
+    const utterances = container.querySelectorAll('.utterance');
+    utterances.forEach(utt => {
+        utt.classList.remove('coherent-utterance', 'incoherent-utterance', 'coherence-unknown');
+        utt.title = '';
+    });
+    
+    // Remove summary
+    const summaryEl = document.getElementById('coherenceSummary');
+    if (summaryEl) {
+        summaryEl.remove();
+    }
+    
+    semanticCoherenceData = null;
+    isSemanticCoherenceActive = false;
+    
+    // Uncheck toggle
+    const toggle = document.getElementById('semanticCoherenceToggle');
+    if (toggle) {
+        toggle.checked = false;
     }
 }
 

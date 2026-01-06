@@ -2159,6 +2159,119 @@ async def training_status():
     return training_state
 
 
+@app.post("/analyze/semantic-coherence", tags=["User Mode"])
+async def analyze_semantic_coherence(
+    text: str = Form(...)
+):
+    """
+    Analyze semantic coherence of a transcript.
+    
+    Returns coherence scores for each utterance pair, allowing the frontend
+    to highlight coherent/incoherent segments.
+    """
+    try:
+        from src.parsers.chat_parser import CHATParser
+        from src.features.pragmatic_conversational.topic_coherence import TopicCoherenceFeatures
+        
+        # Parse the text into a transcript
+        parser = CHATParser()
+        
+        # Try to parse as CHAT format first, otherwise treat as plain text
+        try:
+            transcript = parser.parse_text(text)
+        except:
+            # If CHAT parsing fails, create a simple transcript from plain text
+            lines = [line.strip() for line in text.split('\n') if line.strip()]
+            utterances = []
+            for i, line in enumerate(lines):
+                # Simple parsing: assume format "SPEAKER: text" or just text
+                if ':' in line:
+                    parts = line.split(':', 1)
+                    speaker = parts[0].strip().replace('*', '')
+                    text_content = parts[1].strip()
+                else:
+                    speaker = 'CHI'  # Default speaker
+                    text_content = line
+                
+                from src.parsers.chat_parser import Utterance
+                utterances.append(Utterance(
+                    speaker=speaker,
+                    text=text_content,
+                    timing=None,
+                    end_timing=None
+                ))
+            
+            from src.parsers.chat_parser import TranscriptData
+            from pathlib import Path
+            transcript = TranscriptData(
+                file_path=Path("semantic_analysis_temp"),
+                participant_id='CHI',
+                utterances=utterances,
+                diagnosis=None,
+                metadata={}
+            )
+        
+        # Initialize topic coherence extractor
+        coherence_extractor = TopicCoherenceFeatures()
+        
+        # Get embeddings for each utterance
+        all_texts = [utt.text for utt in transcript.utterances]
+        embeddings = []
+        for text in all_texts:
+            emb = coherence_extractor._get_embedding(text)
+            embeddings.append(emb)
+        
+        # Calculate similarities between consecutive utterances
+        coherence_scores = []
+        for i in range(len(embeddings)):
+            if i == 0:
+                # First utterance - no previous to compare
+                coherence_scores.append({
+                    'utterance_idx': i,
+                    'similarity': None,
+                    'is_coherent': None,
+                    'text': transcript.utterances[i].text,
+                    'speaker': transcript.utterances[i].speaker
+                })
+            else:
+                if embeddings[i-1] is not None and embeddings[i] is not None:
+                    similarity = coherence_extractor._cosine_similarity(
+                        embeddings[i-1],
+                        embeddings[i]
+                    )
+                    # Threshold: similarity > 0.3 is considered coherent
+                    is_coherent = similarity > 0.3
+                else:
+                    similarity = None
+                    is_coherent = None
+                
+                coherence_scores.append({
+                    'utterance_idx': i,
+                    'similarity': similarity,
+                    'is_coherent': is_coherent,
+                    'text': transcript.utterances[i].text,
+                    'speaker': transcript.utterances[i].speaker
+                })
+        
+        # Calculate overall coherence
+        valid_similarities = [s['similarity'] for s in coherence_scores if s['similarity'] is not None]
+        overall_coherence = float(np.mean(valid_similarities)) if valid_similarities else 0.0
+        
+        return {
+            'coherence_scores': coherence_scores,
+            'overall_coherence': overall_coherence,
+            'threshold': 0.3,
+            'total_utterances': len(transcript.utterances)
+        }
+        
+    except Exception as e:
+        logger.error(f"Semantic coherence analysis failed: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Semantic coherence analysis failed: {str(e)}"
+        )
+
+
 @app.post("/training/inspect-features", tags=["Training Mode"])
 async def inspect_features(
     file: UploadFile = File(...),

@@ -208,10 +208,66 @@
             <div class="mt-12 bg-primary-50 rounded-3xl overflow-hidden hidden" id="annotationCard">
                 <div class="px-10 py-8 bg-white flex items-center justify-between">
                     <h2 class="text-5xl text-primary-900">Annotated Transcript</h2>
-                    <span class="px-6 py-3 bg-accent-100 text-accent-700 text-base rounded-full">Features Marked</span>
+                    <div class="flex items-center gap-3">
+                        <span id="annotationCount" class="px-6 py-3 bg-accent-100 text-accent-700 text-base rounded-full">Features Marked</span>
+                        <button id="toggleTranscriptView" class="px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 transition-colors text-sm">
+                            <span id="viewToggleText">Compact View</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="p-10">
-                    <div id="annotatedTranscript" class="bg-white rounded-2xl p-8 max-h-96 overflow-y-auto font-mono text-sm leading-loose"></div>
+                    <!-- Feature Summary Panel -->
+                    <div id="featureSummaryPanel" class="mb-6 bg-white rounded-2xl p-6 border border-primary-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-medium text-primary-900">Detected Features</h3>
+                            <button id="toggleFeatureSummary" class="text-primary-600 hover:text-primary-900 transition-colors text-sm">
+                                <span id="summaryToggleText">Hide</span>
+                            </button>
+                        </div>
+                        <div id="featureSummaryContent" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                            <!-- Feature chips will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Controls Panel -->
+                    <div class="mb-6 bg-white rounded-2xl p-6 border border-primary-200">
+                        <div class="flex flex-wrap items-center gap-4">
+                            <div class="flex-1 min-w-[200px]">
+                                <input 
+                                    type="text" 
+                                    id="transcriptSearch" 
+                                    placeholder="Search transcript..." 
+                                    class="w-full px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all"
+                                />
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="text-sm text-primary-700">Filter by feature:</label>
+                                <select id="featureFilter" class="px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all">
+                                    <option value="all">All Features</option>
+                                </select>
+                            </div>
+                            <button id="clearFilters" class="px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 transition-colors text-sm">
+                                Clear Filters
+                            </button>
+                            <div class="flex items-center gap-2">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="semanticCoherenceToggle" class="w-5 h-5 text-primary-600 rounded">
+                                    <span class="text-sm text-primary-700">Semantic Coherence</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transcript Display -->
+                    <div id="annotatedTranscript" class="bg-white rounded-2xl p-8 border border-primary-200 max-h-[600px] overflow-y-auto transcript-container"></div>
+                    
+                    <!-- Statistics Panel -->
+                    <div id="transcriptStats" class="mt-6 bg-white rounded-2xl p-6 border border-primary-200 hidden">
+                        <h3 class="text-lg font-medium text-primary-900 mb-4">Transcript Statistics</h3>
+                        <div id="statsContent" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <!-- Stats will be inserted here -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
