@@ -626,6 +626,23 @@ async def predict_from_audio(
             participant_id=participant_id
         )
         
+        # Validate transcription succeeded
+        if not processed.transcript_data or len(processed.transcript_data.utterances) == 0:
+            tmp_path.unlink()
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Audio transcription failed. No speech was detected or transcription backend is not available. "
+                       "Please ensure faster-whisper is installed: pip install faster-whisper"
+            )
+        
+        if len(processed.transcript_data.valid_utterances) == 0:
+            tmp_path.unlink()
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Audio transcription produced no valid utterances. The audio may be too quiet, "
+                       "contain only noise, or be in an unsupported format."
+            )
+        
         if use_fusion:
             # Multi-component prediction with fusion for audio
             component_predictions = []
@@ -811,25 +828,25 @@ async def predict_from_audio(
                         pass
                 model_name = best_model or compatible_models[0]
                 model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
-        
-        if preprocessor is not None:
-            if isinstance(preprocessor, dict):
-                features_df = preprocess_with_dict(features_df, preprocessor)
-            else:
-                features_df = preprocessor.transform(features_df)
-        
+            
+            if preprocessor is not None:
+                if isinstance(preprocessor, dict):
+                    features_df = preprocess_with_dict(features_df, preprocessor)
+                else:
+                    features_df = preprocessor.transform(features_df)
+            
             result = make_prediction(model, features_df, used_model_name)
-        
+            
             # Generate annotated transcript (use pragmatic features for annotation)
             pragmatic_feature_set = feature_extractor.extract_with_audio(
                 processed.transcript_data,
                 audio_path=processed.audio_path,
                 transcription_result=processed.transcription_result
             )
-        annotated = transcript_annotator.annotate(
-            processed.transcript_data,
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
                 features=pragmatic_feature_set.features
-        )
+            )
         
         # Clean up temp file
         tmp_path.unlink()
