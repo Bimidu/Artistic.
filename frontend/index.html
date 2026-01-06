@@ -302,25 +302,7 @@
                 </div>
             </div>
 
-            <!-- Local SHAP Explanation -->
-            <div id="localShapSection" class="mt-12 hidden">
-                <h3 class="text-3xl font-medium text-primary-900 mb-4">
-                    Why this prediction was made
-                </h3>
 
-                <p class="text-sm text-primary-600 mb-6">
-                    This waterfall plot explains how each conversational feature contributed
-                    to the final ASD / TD prediction for this specific transcript.
-                </p>
-
-                <div class="bg-white rounded-2xl p-6 border border-primary-200">
-                    <img
-                        id="localShapWaterfall"
-                        class="w-full rounded-xl border border-primary-100"
-                        alt="Local SHAP Waterfall Explanation"
-                    />
-                </div>
-            </div>
             
             <!-- Waveform Display before Annotated Transcript (duplicate for results view) -->
             <div id="waveformSectionResults" class="hidden mt-12 bg-primary-50 rounded-3xl overflow-hidden">
@@ -428,6 +410,26 @@
                             <!-- Stats will be inserted here -->
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Local SHAP Explanation -->
+            <div id="localShapSection" class="mt-12 hidden">
+                <h3 class="text-3xl font-medium text-primary-900 mb-4">
+                    Why this prediction was made
+                </h3>
+
+                <p class="text-sm text-primary-600 mb-6">
+                    This waterfall plot explains how each conversational feature contributed
+                    to the final ASD / TD prediction for this specific transcript.
+                </p>
+
+                <div class="bg-white rounded-2xl p-6 border border-primary-200">
+                    <img
+                        id="localShapWaterfall"
+                        class="w-full rounded-xl border border-primary-100"
+                        alt="Local SHAP Waterfall Explanation"
+                    />
                 </div>
             </div>
 
