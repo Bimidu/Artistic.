@@ -86,6 +86,7 @@ input_handler = None  # Lazy-loaded due to heavy model loading
 transcript_annotator = TranscriptAnnotator()
 model_fusion = ModelFusion(method='weighted')
 
+FEATURE_CSV_PATH = Path("assets/feature_explanations/feature_explanations_literal.csv")
 
 def get_input_handler():
     """Lazy-load input handler with smart backend selection."""
@@ -2426,6 +2427,18 @@ async def general_exception_handler(request, exc):
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={"error": "Internal server error", "detail": str(exc)}
     )
+
+@app.get("/features/guidelines")
+def get_feature_guidelines():
+    if not FEATURE_CSV_PATH.exists():
+        return {"error": "Feature guideline CSV not found"}
+
+    df = pd.read_csv(FEATURE_CSV_PATH)
+
+    return {
+        "columns": list(df.columns),
+        "rows": df.fillna("").to_dict(orient="records")
+    }
 
 
 # Startup and shutdown events
