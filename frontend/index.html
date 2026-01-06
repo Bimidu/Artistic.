@@ -321,21 +321,38 @@
                         
                         <canvas id="waveformCanvasResults" class="w-full" style="height: 150px;"></canvas>
                         
-                        <!-- Waveform explanation caption -->
-                        <div class="mt-2 px-2">
-                            <p class="text-xs text-primary-600 italic">
-                                The waveform and energy visualizations represent signal-level properties. 
-                                Acoustic and prosodic features used by the model are computed as global 
-                                statistical summaries from the full recording.
+                        <!-- Waveform Legend -->
+                        <div class="mt-3 px-2">
+                            <div class="flex flex-wrap items-center gap-4 text-xs">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-4 h-3 bg-blue-500 rounded-sm"></div>
+                                    <span class="text-primary-700">Raw speech signal (amplitude over time)</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-4 h-3 bg-gray-300 rounded-sm"></div>
+                                    <span class="text-primary-700">Relative speech energy (loudness distribution)</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-4 h-3 bg-orange-400 rounded-sm"></div>
+                                    <span class="text-primary-700">Detected speech-silence boundaries</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-4 h-3 bg-teal-500 rounded-sm"></div>
+                                    <span class="text-primary-700">Detected speech activity timeline (used for pause and rhythm analysis)</span>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-xs text-primary-600 italic">
+                                These visual elements represent signal-level properties of the audio. 
+                                Acoustic and prosodic features are computed as global statistical summaries.
                             </p>
                         </div>
                         
                         <!-- Speech Characteristics Summary -->
                         <div class="mt-4 p-4 bg-primary-50 rounded-lg border border-primary-200">
                             <p class="text-sm font-medium text-primary-800 mb-2">Observed Speech Characteristics:</p>
-                            <p id="waveformSummaryResults" class="text-sm text-primary-700 leading-relaxed">
-                                Analyzing speech characteristics...
-                            </p>
+                            <div id="waveformSummaryResults" class="text-sm text-primary-700 leading-relaxed">
+                                <p>Analyzing speech characteristics...</p>
+                            </div>
                         </div>
                         
                         <div class="mt-4 flex items-center justify-between text-sm text-primary-600">

@@ -2650,7 +2650,7 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
  */
 function generateSpeechSummary(waveformData) {
     if (!waveformData || !waveformData.energyEnvelope || !waveformData.energyStats) {
-        return 'Analyzing speech characteristics...';
+        return '<p>Analyzing speech characteristics...</p>';
     }
     
     const energies = waveformData.energyEnvelope;
@@ -2737,8 +2737,46 @@ function generateSpeechSummary(waveformData) {
         activity = 'predominantly silence with limited speech';
     }
     
-    // Combine into natural language summary
-    const summary = `The recording contains ${activity} with ${energyLevel}. The speech ${variability}, and ${pausePattern}.`;
+    // Generate refined, non-diagnostic characteristics description
+    // Focus on signal-level qualitative observations
+    const characteristics = [];
+    
+    // Add loudness variation description
+    if (energyCV > 0.5 || energyRangeRatio > 0.7) {
+        characteristics.push('Variation in speech loudness across the recording');
+    } else if (energyCV > 0.25 || energyRangeRatio > 0.4) {
+        characteristics.push('Some variation in speech loudness across the recording');
+    } else {
+        characteristics.push('Relatively consistent speech loudness across the recording');
+    }
+    
+    // Add pause pattern description
+    if (pauseRatio > 0.3) {
+        characteristics.push('Presence of short and longer pauses between speech segments');
+    } else if (pauseRatio > 0.15) {
+        characteristics.push('Presence of some pauses between speech segments');
+    } else {
+        characteristics.push('Relatively continuous speech with minimal pauses');
+    }
+    
+    // Add activity pattern description
+    if (activeRatio > 0.7 && pauseRatio > 0.2) {
+        characteristics.push('Periods of continuous speech interspersed with low-activity intervals');
+    } else if (activeRatio > 0.5) {
+        characteristics.push('Mixed periods of active speech and silence');
+    }
+    
+    // Add signal quality assessment
+    if (maxEnergy > 0.1 && energyRangeRatio > 0.2) {
+        characteristics.push('Overall signal quality suitable for acoustic analysis');
+    } else if (maxEnergy > 0.05) {
+        characteristics.push('Signal quality appears adequate for analysis');
+    }
+    
+    // Combine into formatted list with HTML
+    const summary = characteristics.length > 0 
+        ? characteristics.map(char => `<p>• ${char}</p>`).join('')
+        : '<p>Signal characteristics are being analyzed.</p>';
     
     return summary;
 }
@@ -2780,7 +2818,7 @@ async function displayWaveform(audioFile, featureInfo = null) {
         // Generate and display speech characteristics summary
         if (waveformSummaryResults) {
             const summary = generateSpeechSummary(waveformData);
-            waveformSummaryResults.textContent = summary;
+            waveformSummaryResults.innerHTML = summary;
         }
         
         // Update info with feature extraction details
