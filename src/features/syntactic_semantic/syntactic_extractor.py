@@ -23,6 +23,7 @@ import numpy as np
 from typing import Dict, Any, List, Optional
 from pathlib import Path
 from collections import Counter
+from multiprocessing import Pool, cpu_count
 
 from src.utils.logger import get_logger
 
@@ -43,7 +44,7 @@ class SyntacticFeatureExtractor:
         self._spacy_loaded = False
         self._wordnet_loaded = False
         
-        # Comprehensive feature names (40+ features)
+        # Comprehensive feature names (56 features - added 10 new robust features)
         self.feature_names = [
             # POS ratios (8 features)
             'pos_noun_ratio',
@@ -105,6 +106,22 @@ class SyntacticFeatureExtractor:
             'modal_verb_ratio',
             'auxiliary_verb_ratio',
             'verb_argument_count_avg',
+            
+            # NEW: Repetition & Echolalia features (3 features)
+            'word_repetition_ratio',
+            'phrase_repetition_ratio',
+            'immediate_repetition_count',
+            
+            # NEW: Pronoun usage features (3 features)
+            'first_person_pronoun_ratio',
+            'pronoun_reversal_indicators',
+            'pronoun_diversity',
+            
+            # NEW: Question & Interaction features (4 features)
+            'question_ratio',
+            'wh_question_ratio',
+            'yes_no_question_ratio',
+            'imperative_ratio',
             
             # Aggregated complexity (1 feature)
             'syntactic_complexity',
@@ -394,6 +411,59 @@ class SyntacticFeatureExtractor:
             verb_args.append(args)
         features['verb_argument_count_avg'] = float(np.mean(verb_args)) if verb_args else 0.0
         
+        # ===== NEW: REPETITION & ECHOLALIA FEATURES =====
+        words = [token.text.lower() for token in doc if token.is_alpha]
+        word_counts = Counter(words)
+        repeated_words = sum(1 for count in word_counts.values() if count > 1)
+        features['word_repetition_ratio'] = self._safe_divide(repeated_words, len(word_counts))
+        
+        # Phrase repetition (bigrams)
+        bigrams = [f"{words[i]} {words[i+1]}" for i in range(len(words)-1)]
+        bigram_counts = Counter(bigrams)
+        repeated_bigrams = sum(1 for count in bigram_counts.values() if count > 1)
+        features['phrase_repetition_ratio'] = self._safe_divide(repeated_bigrams, len(bigram_counts))
+        
+        # Immediate repetition (consecutive identical words)
+        immediate_reps = sum(1 for i in range(len(words)-1) if words[i] == words[i+1])
+        features['immediate_repetition_count'] = float(immediate_reps)
+        
+        # ===== NEW: PRONOUN USAGE FEATURES =====
+        pronouns = [token for token in doc if token.pos_ == 'PRON']
+        first_person_pronouns = [p for p in pronouns if p.text.lower() in ['i', 'me', 'my', 'mine', 'we', 'us', 'our', 'ours']]
+        features['first_person_pronoun_ratio'] = self._safe_divide(len(first_person_pronouns), len(pronouns)) if pronouns else 0.0
+        
+        # Pronoun reversal indicators (you/me confusion patterns)
+        reversal_indicators = 0
+        for i, token in enumerate(doc):
+            if token.text.lower() in ['you', 'me', 'i']:
+                # Check for unusual patterns (simplified heuristic)
+                if i > 0 and doc[i-1].text.lower() in ['want', 'give', 'help']:
+                    reversal_indicators += 1
+        features['pronoun_reversal_indicators'] = float(reversal_indicators)
+        
+        # Pronoun diversity
+        unique_pronouns = len(set(p.text.lower() for p in pronouns))
+        features['pronoun_diversity'] = float(unique_pronouns)
+        
+        # ===== NEW: QUESTION & INTERACTION FEATURES =====
+        questions = [sent for sent in sentences if sent.text.strip().endswith('?')]
+        features['question_ratio'] = self._safe_divide(len(questions), num_sentences)
+        
+        # WH-questions (what, where, when, why, who, how)
+        wh_questions = sum(1 for sent in questions if any(
+            token.text.lower() in ['what', 'where', 'when', 'why', 'who', 'how']
+            for token in sent
+        ))
+        features['wh_question_ratio'] = self._safe_divide(wh_questions, len(questions)) if questions else 0.0
+        
+        # Yes/No questions (auxiliary verb at start)
+        yn_questions = sum(1 for sent in questions if len(sent) > 0 and sent[0].pos_ == 'AUX')
+        features['yes_no_question_ratio'] = self._safe_divide(yn_questions, len(questions)) if questions else 0.0
+        
+        # Imperative sentences (commands)
+        imperatives = sum(1 for sent in sentences if len(sent) > 0 and sent[0].pos_ == 'VERB' and sent[0].tag_ == 'VB')
+        features['imperative_ratio'] = self._safe_divide(imperatives, num_sentences)
+        
         # ===== AGGREGATED SYNTACTIC COMPLEXITY =====
         features['syntactic_complexity'] = (
             min(features['dependency_tree_depth'] / 10.0, 1.0) * 0.25 +
@@ -421,12 +491,15 @@ class SyntacticFeatureExtractor:
         text = ""
         
         if hasattr(transcript_data, 'utterances'):
-            # TranscriptData object
-            child_utterances = [
-                u for u in transcript_data.utterances 
-                if hasattr(u, 'speaker') and u.speaker and u.speaker.upper() in ['CHI', 'CHILD', 'TARGET_CHILD']
-            ]
-            text = " ".join(u.text for u in child_utterances if hasattr(u, 'text') and u.text)
+            # TranscriptData object - include BOTH child and adult utterances for context
+            all_utterances = []
+            for u in transcript_data.utterances:
+                if hasattr(u, 'speaker') and hasattr(u, 'text') and u.text:
+                    # Include child and adult utterances (MOT, FAT, etc.)
+                    speaker = u.speaker.upper() if u.speaker else ''
+                    if speaker in ['CHI', 'CHILD', 'TARGET_CHILD', 'MOT', 'MOTHER', 'FAT', 'FATHER', 'INV', 'INVESTIGATOR']:
+                        all_utterances.append(u.text)
+            text = " ".join(all_utterances)
         elif isinstance(transcript_data, dict):
             # Dictionary format
             if 'text' in transcript_data:
@@ -436,27 +509,138 @@ class SyntacticFeatureExtractor:
         elif isinstance(transcript_data, str):
             text = transcript_data
         
+        # Ensure minimum text length for reliable analysis
+        if len(text.strip()) < 50:
+            logger.warning(f"Text too short ({len(text)} chars), features may be unreliable")
+        
         return self.extract_from_text(text)
     
-    def extract_from_directory(self, directory: Path) -> pd.DataFrame:
+    def _extract_child_text_from_chat(self, file_path: Path) -> tuple[str, Optional[str]]:
+        """
+        Extract utterances and diagnosis from CHAT file manually (fallback parser).
+        Now extracts BOTH child and adult utterances for better context.
+        
+        Args:
+            file_path: Path to CHAT file
+            
+        Returns:
+            Tuple of (concatenated utterances, diagnosis)
+        """
+        all_utterances = []
+        diagnosis = None
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                for line in f:
+                    line = line.strip()
+                    
+                    # Extract diagnosis from @Types header
+                    if line.startswith('@Types:'):
+                        # Check if ASD or TD is mentioned in the types
+                        types_upper = line.upper()
+                        if 'ASD' in types_upper:
+                            diagnosis = 'ASD'
+                        elif 'TD' in types_upper or 'TYP' in types_upper:
+                            diagnosis = 'TD'
+                    
+                    # Skip empty lines and other header lines
+                    if not line or line.startswith('@'):
+                        continue
+                    
+                    # Look for speaker lines (child and adult)
+                    if line.startswith('*'):
+                        # Extract speaker code
+                        if ':' in line:
+                            speaker_part = line.split(':', 1)[0]
+                            speaker = speaker_part[1:].upper()  # Remove * and uppercase
+                            
+                            # Include child and adult speakers
+                            if speaker in ['CHI', 'TARGET_CHILD', 'MOT', 'MOTHER', 'FAT', 'FATHER', 'INV', 'INVESTIGATOR']:
+                                # Extract text after speaker code
+                                text = line.split(':', 1)[1].strip()
+                                # Remove CHAT annotations (e.g., [+ exc], [* m:+ed], etc.)
+                                import re
+                                text = re.sub(r'\[.*?\]', '', text)
+                                text = re.sub(r'<.*?>', '', text)
+                                text = re.sub(r'\+\w+', '', text)
+                                text = text.strip()
+                                if text:
+                                    all_utterances.append(text)
+        except Exception as e:
+            logger.warning(f"Error parsing CHAT file {file_path}: {e}")
+            return "", None
+        
+        return " ".join(all_utterances), diagnosis
+
+    
+    def _process_single_file(self, file_path: Path) -> Optional[Dict[str, Any]]:
+        """
+        Process a single transcript file (helper for parallel processing).
+        
+        Args:
+            file_path: Path to transcript file
+            
+        Returns:
+            Dictionary of features or None if error
+        """
+        try:
+            # Import CHAT parser
+            try:
+                from src.parsers.chat_parser import ChatParser
+                parser = ChatParser()
+            except ImportError:
+                parser = None
+            
+            extracted_diagnosis = None
+            
+            if parser:
+                # Parse with CHAT parser
+                try:
+                    transcript = parser.parse_file(str(file_path))
+                    features = self.extract_from_transcript(transcript)
+                except Exception as e:
+                    logger.warning(f"ChatParser failed for {file_path}, using fallback: {e}")
+                    # Fallback to manual parsing
+                    text, extracted_diagnosis = self._extract_child_text_from_chat(file_path)
+                    features = self.extract_from_text(text)
+            else:
+                # Fallback: manual CHAT parsing
+                text, extracted_diagnosis = self._extract_child_text_from_chat(file_path)
+                features = self.extract_from_text(text)
+            
+            # Determine diagnosis (prioritize extracted from @Types, then path-based)
+            if extracted_diagnosis:
+                features['diagnosis'] = extracted_diagnosis
+            else:
+                # Infer diagnosis from path as fallback
+                path_str = str(file_path).upper()
+                if '/ASD/' in path_str or '_ASD_' in path_str or 'ASD' in file_path.parent.name.upper():
+                    features['diagnosis'] = 'ASD'
+                elif '/TD/' in path_str or '/TYP/' in path_str or '_TD_' in path_str:
+                    features['diagnosis'] = 'TD'
+                else:
+                    features['diagnosis'] = None  # Unknown
+            
+            features['file_path'] = str(file_path)
+            return features
+            
+        except Exception as e:
+            logger.error(f"Error extracting features from {file_path}: {e}")
+            return None
+    
+    def extract_from_directory(self, directory: Path, parallel: bool = True, n_workers: Optional[int] = None) -> pd.DataFrame:
         """
         Extract features from all CHAT files in directory.
         
         Args:
             directory: Directory path
+            parallel: Whether to use parallel processing (default: True)
+            n_workers: Number of worker processes (default: CPU count - 1)
         
         Returns:
             DataFrame with features
         """
         logger.info(f"Extracting syntactic features from directory: {directory}")
-        
-        # Import CHAT parser
-        try:
-            from src.parsers.chat_parser import ChatParser
-            parser = ChatParser()
-        except ImportError:
-            logger.warning("ChatParser not available, falling back to text extraction")
-            parser = None
         
         # Find transcript files
         directory = Path(directory)
@@ -466,35 +650,31 @@ class SyntacticFeatureExtractor:
             logger.warning(f"No .cha files found in {directory}")
             return pd.DataFrame()
         
-        data = []
-        for transcript_file in transcript_files:
-            try:
-                if parser:
-                    # Parse with CHAT parser
-                    transcript = parser.parse_file(str(transcript_file))
-                    features = self.extract_from_transcript(transcript)
-                else:
-                    # Fallback: read as text
-                    with open(transcript_file, 'r', encoding='utf-8', errors='ignore') as f:
-                        text = f.read()
-                    features = self.extract_from_text(text)
-                
-                # Infer diagnosis from path
-                path_str = str(transcript_file).upper()
-                if '/ASD/' in path_str or '_ASD_' in path_str or 'ASD' in transcript_file.parent.name.upper():
-                    features['diagnosis'] = 'ASD'
-                elif '/TD/' in path_str or '/TYP/' in path_str or '_TD_' in path_str:
-                    features['diagnosis'] = 'TD'
-                else:
-                    features['diagnosis'] = None  # Unknown
-                
-                features['file_path'] = str(transcript_file)
-                data.append(features)
-                
-            except Exception as e:
-                logger.error(f"Error extracting features from {transcript_file}: {e}")
-                continue
+        logger.info(f"Found {len(transcript_files)} transcript files")
+        
+        if parallel and len(transcript_files) > 1:
+            # Parallel processing
+            if n_workers is None:
+                n_workers = max(1, cpu_count() - 2) 
+            
+            logger.info(f"Using parallel processing with {n_workers} workers")
+            
+            # Create a pool of workers
+            with Pool(processes=n_workers) as pool:
+                results = pool.map(self._process_single_file, transcript_files)
+            
+            # Filter out None results
+            data = [r for r in results if r is not None]
+        else:
+            # Sequential processing (fallback)
+            logger.info("Using sequential processing")
+            data = []
+            for transcript_file in transcript_files:
+                result = self._process_single_file(transcript_file)
+                if result is not None:
+                    data.append(result)
         
         logger.info(f"Extracted features from {len(data)} transcript files")
         return pd.DataFrame(data)
+
 
