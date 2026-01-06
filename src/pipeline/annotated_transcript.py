@@ -24,6 +24,20 @@ import html
 from src.utils.logger import get_logger
 from src.parsers.chat_parser import TranscriptData, Utterance
 
+# Import exact patterns and thresholds from feature extractors
+from src.features.pragmatic_conversational.repair_detection import (
+    RepairDetectionFeatures
+)
+from src.features.pragmatic_conversational.pragmatic_linguistic import (
+    PragmaticLinguisticFeatures
+)
+from src.features.pragmatic_conversational.pause_latency import (
+    PauseLatencyFeatures
+)
+from src.features.pragmatic_conversational.turn_taking import (
+    TurnTakingFeatures
+)
+
 logger = get_logger(__name__)
 
 
@@ -40,7 +54,7 @@ class AnnotationType(Enum):
     # Pragmatic markers
     ECHOLALIA = "echolalia"
     PRONOUN_REVERSAL = "pronoun_reversal"
-    STEREOTYPED_PHRASE = "stereotyped_phrase"
+    # NOTE: STEREOTYPED_PHRASE removed - not an extracted feature
     SOCIAL_GREETING = "social_greeting"
     QUESTION = "question"
     
@@ -111,7 +125,7 @@ ANNOTATION_COLORS = {
     # Pragmatic markers (reds/oranges)
     AnnotationType.ECHOLALIA: "#F44336",
     AnnotationType.PRONOUN_REVERSAL: "#E91E63",
-    AnnotationType.STEREOTYPED_PHRASE: "#FF5722",
+    # STEREOTYPED_PHRASE removed - not an extracted feature
     AnnotationType.SOCIAL_GREETING: "#FF9800",
     AnnotationType.QUESTION: "#FFC107",
     
@@ -143,7 +157,7 @@ ANNOTATION_SYMBOLS = {
     
     AnnotationType.ECHOLALIA: "[ECH]",
     AnnotationType.PRONOUN_REVERSAL: "[PR]",
-    AnnotationType.STEREOTYPED_PHRASE: "[STP]",
+    # STEREOTYPED_PHRASE removed - not an extracted feature
     AnnotationType.SOCIAL_GREETING: "[SOC]",
     AnnotationType.QUESTION: "[Q]",
     
@@ -507,36 +521,105 @@ class TranscriptAnnotator:
         >>> print(annotated.to_html())
     """
     
-    # Patterns for detecting features in text
+    # Patterns for detecting features in text (matching extractor patterns)
     ECHOLALIA_PATTERNS = [
         r'\b(\w+(?:\s+\w+)?)\s+\1\b',  # Immediate repetition
     ]
     
     PRONOUN_PATTERNS = {
         'reversal': [
-            (r'\byou\b.*\bwant\b', 'you/I reversal context'),
+            (r'\byou\b.*\bwant\b', 'you/I reversal - "you want" instead of "I want"'),
+            (r'\byou\b.*\blike\b', 'you/I reversal - "you like" instead of "I like"'),
+            (r'\byou\b.*\bneed\b', 'you/I reversal - "you need" instead of "I need"'),
+            (r'\byou\b.*\bhave\b', 'you/I reversal - "you have" instead of "I have"'),
             (r'\bme\b.*\bgive\s+you\b', 'me/you reversal context'),
         ]
     }
     
     QUESTION_PATTERNS = [
-        r'\?',
-        r'\b(what|where|when|why|how|who|which)\b',
+        r'\?',  # Any question mark
+    ]
+    
+    YES_NO_QUESTION_PATTERNS = [
+        r'\b(is|are|do|does|did|can|will|would|have|has)\b.*\?',
+    ]
+    
+    WH_QUESTION_PATTERNS = [
+        r'\b(what|where|when|why|how|who|which)\b.*\?',
     ]
     
     FILLED_PAUSE_PATTERNS = [
-        r'\b(um|uh|er|ah|hmm|erm)\b',
+        r'\bum+\b', r'\buh+\b', r'\ber\b', r'\bah\b', r'\behm\b',
+        r'\bhmm\b', r'\bmm\b', r'\buhm\b', r'\bumm\b',
+        r'&-um', r'&-uh', r'&-er', r'&-ah',  # CHAT format
     ]
     
     DISCOURSE_MARKER_PATTERNS = [
         r'\b(well|so|okay|right|you know|I mean|like)\b',
     ]
     
+    CONTINUATION_MARKER_PATTERNS = [
+        r'\b(and|then|so|also|plus|next)\b',
+    ]
+    
+    ACKNOWLEDGMENT_PATTERNS = [
+        r'\b(oh|I see|okay|yes|oh okay|ah|go on|I got it|uh huh|mm hmm)\b',
+    ]
+    
     REPAIR_PATTERNS = [
-        r'\b(I mean|no wait|sorry|actually|I meant)\b',
-        r'\.\.\.',  # Hesitation
-        r'\[/\]',   # CHAT repair marker
-        r'\[//\]',  # CHAT retracing marker
+        r'\bi mean\b',
+        r'\bno wait\b',
+        r'\bsorry\b',
+        r'\bactually\b',
+        r'\bno\s+i\s+mean\b',
+        r'\bwell\s+not\b',
+        r'\bor\s+rather\b',
+        r'\blet me\s+rephrase\b',
+        r'\[/\]',   # CHAT retrace marker
+        r'\[//\]',  # CHAT retrace with correction
+        r'\[///\]', # CHAT reformulation
+    ]
+    
+    CLARIFICATION_PATTERNS = [
+        r'\bwhat\?',
+        r'\bhuh\?',
+        r'\bpardon\?',
+        r'\bexcuse me\?',
+        r'\bsay again\b',
+        r'\bwhat did you\b',
+        r'\bcan you repeat\b',
+        r'\bi don\'?t understand\b',
+        r'\bwhat do you mean\b',
+        r'\bsorry\?',
+    ]
+    
+    CONFIRMATION_PATTERNS = [
+        r'\bdo you mean\b',
+        r'\bso you\b',
+        r'\blike\s+a\b',
+        r'\byou mean\b',
+        r'\bis that\b',
+        r'\bright\?',
+        r'\bokay\?',
+    ]
+    
+    POLITENESS_PATTERNS = [
+        r'\b(please|thank you|thanks|sorry|excuse me)\b',
+    ]
+    
+    SOCIAL_PHRASES = [
+        'hello', 'hi', 'hey', 'bye', 'goodbye', 'good morning', 'good night',
+        'thank you', 'thanks', 'please', 'sorry', 'excuse me', 'you\'re welcome',
+        'nice to meet you', 'how are you', 'see you later'
+    ]
+    
+    FALSE_START_PATTERNS = [
+        r'^[a-z]+\s+[a-z]+\s+[a-z]+\s*\.\.\.',  # Word word word ...
+        r'^[a-z]+\s*\[/\]',  # Word followed by retrace
+    ]
+    
+    WORD_REPETITION_PATTERNS = [
+        r'\b(\w+)\s+\1\s+\1\b',  # Same word 3+ times
     ]
     
     def __init__(self, component: str = "pragmatic_conversational"):
@@ -547,6 +630,27 @@ class TranscriptAnnotator:
             component: Component name for annotations
         """
         self.component = component
+        
+        # Initialize feature extractors to get exact patterns and thresholds
+        self.repair_extractor = RepairDetectionFeatures()
+        self.linguistic_extractor = PragmaticLinguisticFeatures()
+        self.pause_extractor = PauseLatencyFeatures()
+        self.turn_extractor = TurnTakingFeatures()
+        
+        # Use exact patterns from extractors
+        self.REPAIR_PATTERNS = self.repair_extractor.SELF_REPAIR_PATTERNS + \
+                               [re.escape(m) for m in self.repair_extractor.CHAT_RETRACE_MARKERS]
+        self.CLARIFICATION_PATTERNS = self.repair_extractor.CLARIFICATION_PATTERNS
+        self.CONFIRMATION_PATTERNS = self.repair_extractor.CONFIRMATION_PATTERNS
+        self.ACKNOWLEDGMENT_PATTERNS = self.repair_extractor.ACKNOWLEDGMENT_PATTERNS
+        self.FILLED_PAUSE_PATTERNS = self.pause_extractor.FILLED_PAUSE_PATTERNS
+        
+        # Use exact thresholds from extractors
+        self.OVERLAP_THRESHOLD = self.turn_extractor.OVERLAP_THRESHOLD_MS / 1000.0  # Convert to seconds
+        self.INTERRUPTION_THRESHOLD = self.turn_extractor.INTERRUPTION_THRESHOLD_MS / 1000.0
+        self.LONG_PAUSE_THRESHOLD = self.turn_extractor.LONG_PAUSE_THRESHOLD_SEC
+        self.VERY_LONG_PAUSE_THRESHOLD = self.pause_extractor.VERY_LONG_PAUSE_THRESHOLD
+        
         logger.info(f"TranscriptAnnotator initialized for {component}")
     
     def annotate(
@@ -577,6 +681,10 @@ class TranscriptAnnotator:
             for idx, utterance in enumerate(transcript.utterances):
                 annotations = self._detect_patterns(utterance, idx)
                 annotated.add_annotations(annotations)
+            
+            # Detect delayed echolalia (requires looking across utterances)
+            delayed_echolalia = self._detect_delayed_echolalia(transcript)
+            annotated.add_annotations(delayed_echolalia)
         
         # Add feature-based annotations if features provided
         if features:
@@ -589,6 +697,38 @@ class TranscriptAnnotator:
         
         return annotated
     
+    def _detect_delayed_echolalia(
+        self,
+        transcript: TranscriptData
+    ) -> List[FeatureAnnotation]:
+        """Detect delayed echolalia (repetition of earlier utterances)."""
+        annotations = []
+        utterance_texts = [u.text.lower().strip() for u in transcript.utterances]
+        
+        for idx, utterance in enumerate(transcript.utterances):
+            if utterance.speaker != 'CHI' or idx == 0:
+                continue
+            
+            child_text = utterance.text.lower().strip()
+            if len(child_text.split()) < 2:
+                continue
+            
+            # Check for delayed echolalia (look back up to 10 turns)
+            for j in range(max(0, idx - 10), idx):
+                if utterance_texts[j] == child_text:
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.ECHOLALIA,
+                        start_pos=0,
+                        end_pos=len(utterance.text),
+                        utterance_idx=idx,
+                        feature_name="delayed_echolalia",
+                        description=f"Delayed echolalia (repeats utterance from {idx - j} turns ago)",
+                        metadata={'type': 'delayed', 'turns_ago': idx - j, 'original_idx': j}
+                    ))
+                    break
+        
+        return annotations
+    
     def _detect_patterns(
         self,
         utterance: Utterance,
@@ -598,7 +738,7 @@ class TranscriptAnnotator:
         annotations = []
         text = utterance.text
         
-        # Detect echolalia patterns
+        # Detect echolalia patterns (immediate repetition)
         for pattern in self.ECHOLALIA_PATTERNS:
             for match in re.finditer(pattern, text, re.IGNORECASE):
                 annotations.append(FeatureAnnotation(
@@ -606,27 +746,56 @@ class TranscriptAnnotator:
                     start_pos=match.start(),
                     end_pos=match.end(),
                     utterance_idx=utterance_idx,
-                    feature_name="echolalia_repetition",
-                    description=f"Repeated phrase: '{match.group()}'",
-                    metadata={'span_text': match.group()}
+                    feature_name="immediate_echolalia",
+                    description=f"Immediate repetition: '{match.group()}'",
+                    metadata={'span_text': match.group(), 'type': 'immediate'}
                 ))
         
-        # Detect questions
-        for pattern in self.QUESTION_PATTERNS:
-            for match in re.finditer(pattern, text, re.IGNORECASE):
-                annotations.append(FeatureAnnotation(
-                    annotation_type=AnnotationType.QUESTION,
-                    start_pos=match.start(),
-                    end_pos=match.end(),
-                    utterance_idx=utterance_idx,
-                    feature_name="question_marker",
-                    description="Question detected",
-                    metadata={'span_text': match.group()}
-                ))
+        # Detect questions (all types)
+        if '?' in text:
+            # Check for WH questions
+            for pattern in self.WH_QUESTION_PATTERNS:
+                if re.search(pattern, text, re.IGNORECASE):
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.QUESTION,
+                        start_pos=0,
+                        end_pos=len(text),
+                        utterance_idx=utterance_idx,
+                        feature_name="wh_question",
+                        description="WH-question detected",
+                        metadata={'type': 'wh'}
+                    ))
+                    break
+            else:
+                # Check for yes/no questions
+                for pattern in self.YES_NO_QUESTION_PATTERNS:
+                    if re.search(pattern, text, re.IGNORECASE):
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.QUESTION,
+                            start_pos=0,
+                            end_pos=len(text),
+                            utterance_idx=utterance_idx,
+                            feature_name="yes_no_question",
+                            description="Yes/No question detected",
+                            metadata={'type': 'yes_no'}
+                        ))
+                        break
+                else:
+                    # Generic question
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.QUESTION,
+                        start_pos=text.rfind('?'),
+                        end_pos=text.rfind('?') + 1,
+                        utterance_idx=utterance_idx,
+                        feature_name="question",
+                        description="Question detected",
+                        metadata={'type': 'generic'}
+                    ))
         
-        # Detect filled pauses
+        # Detect filled pauses (with specific types)
         for pattern in self.FILLED_PAUSE_PATTERNS:
             for match in re.finditer(pattern, text, re.IGNORECASE):
+                filler_type = 'um' if 'um' in match.group().lower() else 'uh' if 'uh' in match.group().lower() else 'other'
                 annotations.append(FeatureAnnotation(
                     annotation_type=AnnotationType.FILLED_PAUSE,
                     start_pos=match.start(),
@@ -634,7 +803,7 @@ class TranscriptAnnotator:
                     utterance_idx=utterance_idx,
                     feature_name="filled_pause",
                     description=f"Filled pause: '{match.group()}'",
-                    metadata={'span_text': match.group()}
+                    metadata={'span_text': match.group(), 'type': filler_type}
                 ))
         
         # Detect discourse markers
@@ -650,7 +819,33 @@ class TranscriptAnnotator:
                     metadata={'span_text': match.group()}
                 ))
         
-        # Detect repairs
+        # Detect continuation markers (could be topic maintenance indicator)
+        for pattern in self.CONTINUATION_MARKER_PATTERNS:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.TOPIC_MAINTENANCE,
+                    start_pos=match.start(),
+                    end_pos=match.end(),
+                    utterance_idx=utterance_idx,
+                    feature_name="continuation_marker",
+                    description=f"Continuation marker: '{match.group()}'",
+                    metadata={'span_text': match.group()}
+                ))
+        
+        # Detect acknowledgments
+        for pattern in self.ACKNOWLEDGMENT_PATTERNS:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.REPAIR_COMPLETION,
+                    start_pos=match.start(),
+                    end_pos=match.end(),
+                    utterance_idx=utterance_idx,
+                    feature_name="acknowledgment",
+                    description=f"Acknowledgment: '{match.group()}'",
+                    metadata={'span_text': match.group()}
+                ))
+        
+        # Detect repairs (self-repair initiations)
         for pattern in self.REPAIR_PATTERNS:
             for match in re.finditer(pattern, text, re.IGNORECASE):
                 annotations.append(FeatureAnnotation(
@@ -658,23 +853,90 @@ class TranscriptAnnotator:
                     start_pos=match.start(),
                     end_pos=match.end(),
                     utterance_idx=utterance_idx,
-                    feature_name="repair_marker",
-                    description=f"Repair detected: '{match.group()}'",
+                    feature_name="self_repair",
+                    description=f"Self-repair: '{match.group()}'",
                     metadata={'span_text': match.group()}
                 ))
         
-        # Detect social greetings
-        greeting_pattern = r'\b(hi|hello|bye|goodbye|thank you|thanks|please|sorry)\b'
-        for match in re.finditer(greeting_pattern, text, re.IGNORECASE):
-            annotations.append(FeatureAnnotation(
-                annotation_type=AnnotationType.SOCIAL_GREETING,
-                start_pos=match.start(),
-                end_pos=match.end(),
-                utterance_idx=utterance_idx,
-                feature_name="social_language",
-                description=f"Social phrase: '{match.group()}'",
-                metadata={'span_text': match.group()}
-            ))
+        # Detect clarification requests
+        for pattern in self.CLARIFICATION_PATTERNS:
+            if re.search(pattern, text, re.IGNORECASE):
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.CLARIFICATION_REQUEST,
+                    start_pos=0,
+                    end_pos=len(text),
+                    utterance_idx=utterance_idx,
+                    feature_name="clarification_request",
+                    description="Clarification request",
+                ))
+                break
+        
+        # Detect confirmation checks
+        for pattern in self.CONFIRMATION_PATTERNS:
+            if re.search(pattern, text, re.IGNORECASE):
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.CLARIFICATION_REQUEST,
+                    start_pos=0,
+                    end_pos=len(text),
+                    utterance_idx=utterance_idx,
+                    feature_name="confirmation_check",
+                    description="Confirmation check",
+                ))
+                break
+        
+        # Detect social greetings and politeness
+        for phrase in self.SOCIAL_PHRASES:
+            pattern = r'\b' + re.escape(phrase) + r'\b'
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                is_greeting = phrase in ['hello', 'hi', 'hey', 'bye', 'goodbye', 'good morning', 'good night']
+                is_politeness = phrase in ['please', 'thank you', 'thanks', 'sorry', 'excuse me', 'you\'re welcome']
+                
+                if is_greeting:
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.SOCIAL_GREETING,
+                        start_pos=match.start(),
+                        end_pos=match.end(),
+                        utterance_idx=utterance_idx,
+                        feature_name="greeting",
+                        description=f"Greeting: '{match.group()}'",
+                        metadata={'span_text': match.group()}
+                    ))
+                elif is_politeness:
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.SOCIAL_GREETING,
+                        start_pos=match.start(),
+                        end_pos=match.end(),
+                        utterance_idx=utterance_idx,
+                        feature_name="politeness_marker",
+                        description=f"Politeness marker: '{match.group()}'",
+                        metadata={'span_text': match.group()}
+                    ))
+        
+        # Detect false starts
+        for pattern in self.FALSE_START_PATTERNS:
+            if re.search(pattern, text, re.IGNORECASE):
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.REPAIR_INITIATION,
+                    start_pos=0,
+                    end_pos=min(20, len(text)),
+                    utterance_idx=utterance_idx,
+                    feature_name="false_start",
+                    description="False start detected",
+                ))
+                break
+        
+        # Detect word repetitions (3+ times)
+        for pattern in self.WORD_REPETITION_PATTERNS:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.ECHOLALIA,
+                    start_pos=match.start(),
+                    end_pos=match.end(),
+                    utterance_idx=utterance_idx,
+                    feature_name="word_repetition",
+                    description=f"Word repetition: '{match.group()}'",
+                    metadata={'span_text': match.group()}
+                ))
         
         return annotations
     
@@ -683,43 +945,498 @@ class TranscriptAnnotator:
         transcript: TranscriptData,
         features: Dict[str, Any]
     ) -> List[FeatureAnnotation]:
-        """Generate annotations from extracted feature values."""
+        """
+        Generate annotations from extracted feature values.
+        
+        Uses the extractors' patterns and thresholds to replicate their detection logic,
+        but tracks instances instead of just counts. This ensures annotations match
+        exactly what the extractors detected.
+        """
         annotations = []
         
-        # Add long pause annotations if detected
+        all_utterances = transcript.utterances
+        has_timing = self.turn_extractor._has_timing_info(all_utterances)
+        adult_codes = {'MOT', 'FAT', 'INV', 'INV1', 'INV2', 'EXA', 'EXP'}
+        
+        # ========================================
+        # Turn-Taking Features (Section 3.3.1)
+        # ========================================
+        
+        # Overlaps: Replicate logic from _calculate_overlaps
+        if features.get('overlap_count', 0) > 0:
+            if has_timing and len(all_utterances) >= 2:
+                threshold_sec = self.turn_extractor.OVERLAP_THRESHOLD_MS / 1000.0
+                for i in range(1, len(all_utterances)):
+                    prev = all_utterances[i - 1]
+                    curr = all_utterances[i]
+                    if prev.timing is not None and curr.timing is not None:
+                        gap = curr.timing - prev.timing
+                        if gap < threshold_sec:
+                            annotations.append(FeatureAnnotation(
+                                annotation_type=AnnotationType.OVERLAP,
+                                start_pos=0,
+                                end_pos=len(curr.text),
+                                utterance_idx=i,
+                                feature_name="overlap",
+                                feature_value=abs(gap),
+                                description=f"Overlap detected: {abs(gap):.2f}s",
+                            ))
+            else:
+                # Text-based overlap detection (from _estimate_overlaps_from_text)
+                overlap_markers = ['<', '>', '[>]', '[<]', '[/]', '[//]']
+                for i, u in enumerate(all_utterances):
+                    if any(marker in u.text for marker in overlap_markers):
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.OVERLAP,
+                            start_pos=0,
+                            end_pos=len(u.text),
+                            utterance_idx=i,
+                            feature_name="overlap",
+                            description="Overlap detected (text marker)",
+                        ))
+        
+        # Long pauses: Replicate logic from _calculate_inter_turn_gaps
         if features.get('long_pause_count', 0) > 0:
-            # Mark utterances that might have long pauses before them
-            for idx in range(1, len(transcript.utterances)):
-                prev_utt = transcript.utterances[idx - 1]
-                curr_utt = transcript.utterances[idx]
-                
-                # Check timing gap if available
-                if prev_utt.end_timing and curr_utt.timing:
-                    gap = curr_utt.timing - prev_utt.end_timing
-                    if gap > 1.0:  # Long pause threshold
+            for i in range(1, len(all_utterances)):
+                prev = all_utterances[i - 1]
+                curr = all_utterances[i]
+                if prev.end_timing is not None and curr.timing is not None:
+                    gap = curr.timing - prev.end_timing
+                    if gap > self.turn_extractor.LONG_PAUSE_THRESHOLD_SEC:
                         annotations.append(FeatureAnnotation(
                             annotation_type=AnnotationType.LONG_PAUSE,
                             start_pos=0,
                             end_pos=0,
-                            utterance_idx=idx,
+                            utterance_idx=i,
                             feature_name="long_pause",
                             feature_value=gap,
                             description=f"Long pause before utterance: {gap:.2f}s",
                         ))
         
-        # Add topic shift annotations if high topic_shift_ratio
-        if features.get('topic_shift_ratio', 0) > 0.3:
-            # This is a simplified approach - real implementation would
-            # need the actual topic shift detection results
+        # Interruptions: Replicate logic from _calculate_interruptions
+        if features.get('interruption_count', 0) > 0:
+            interruption_markers = ['[//]', '+/', '+//', '<', '>', '[<]', '[>]']
+            threshold_sec = self.turn_extractor.INTERRUPTION_THRESHOLD_MS / 1000.0
+            
+            for i in range(1, len(all_utterances)):
+                prev = all_utterances[i - 1]
+                curr = all_utterances[i]
+                
+                has_interruption_marker = any(
+                    marker in curr.text or marker in prev.text
+                    for marker in interruption_markers
+                )
+                
+                timing_interruption = False
+                if has_timing and prev.timing is not None and curr.timing is not None:
+                    gap = curr.timing - prev.timing
+                    if gap < threshold_sec and prev.speaker != curr.speaker:
+                        timing_interruption = True
+                
+                if (has_interruption_marker or timing_interruption) and prev.speaker != curr.speaker:
+                    gap = 0.0
+                    if prev.end_timing and curr.timing:
+                        gap = curr.timing - prev.end_timing
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.INTERRUPTION,
+                        start_pos=0,
+                        end_pos=len(curr.text),
+                        utterance_idx=i,
+                        feature_name="interruption",
+                        feature_value=gap,
+                        description=f"Interruption detected: {gap:.2f}s gap" if gap > 0 else "Interruption detected",
+                    ))
+        
+        # Turn starts: Simple speaker change detection
+        if len(all_utterances) > 0:
             annotations.append(FeatureAnnotation(
-                annotation_type=AnnotationType.TOPIC_SHIFT,
+                annotation_type=AnnotationType.TURN_START,
                 start_pos=0,
-                end_pos=0,
+                end_pos=min(10, len(all_utterances[0].text)),
                 utterance_idx=0,
-                feature_name="high_topic_shift_ratio",
-                feature_value=features.get('topic_shift_ratio'),
-                description=f"High topic shift ratio detected: {features.get('topic_shift_ratio', 0):.2f}",
+                feature_name="turn_start",
+                description="Turn start",
             ))
+            for i in range(1, len(all_utterances)):
+                if all_utterances[i - 1].speaker != all_utterances[i].speaker:
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.TURN_START,
+                        start_pos=0,
+                        end_pos=min(10, len(all_utterances[i].text)),
+                        utterance_idx=i,
+                        feature_name="turn_start",
+                        description="Turn start",
+                    ))
+        
+        # Response latency: Replicate logic from pause extractor
+        if features.get('delayed_response_count', 0) > 0 or features.get('response_latency_mean', 0) > 0:
+            normal_response_time = self.pause_extractor.NORMAL_RESPONSE_TIME
+            for i in range(1, len(all_utterances)):
+                prev = all_utterances[i - 1]
+                curr = all_utterances[i]
+                if prev.end_timing and curr.timing and curr.speaker == 'CHI':
+                    gap = curr.timing - prev.end_timing
+                    if gap > normal_response_time:
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.RESPONSE_LATENCY,
+                            start_pos=0,
+                            end_pos=len(curr.text),
+                            utterance_idx=i,
+                            feature_name="delayed_response",
+                            feature_value=gap,
+                            description=f"Delayed response: {gap:.2f}s",
+                        ))
+        
+        # ========================================
+        # Topic Coherence Features (Section 3.3.2)
+        # ========================================
+        
+        # Detect topic shifts and maintenance
+        # Only annotate if the feature extractor found topic shifts
+        topic_shift_count = int(features.get('topic_shift_count', 0))
+        abrupt_shift_count = int(features.get('abrupt_topic_shift_count', 0))
+        total_shifts = topic_shift_count + abrupt_shift_count
+        
+        if total_shifts > 0:
+            # Mark utterances where topic might shift (simplified heuristic)
+            # Limit to the number of shifts actually detected
+            shifts_found = 0
+            for idx in range(1, len(transcript.utterances)):
+                if shifts_found >= total_shifts:
+                    break
+                    
+                prev_words = set(transcript.utterances[idx - 1].text.lower().split())
+                curr_words = set(transcript.utterances[idx].text.lower().split())
+                
+                # If very few words overlap, likely topic shift
+                overlap = prev_words.intersection(curr_words)
+                overlap_ratio = len(overlap) / len(prev_words) if prev_words else 0
+                
+                if overlap_ratio < 0.2 and len(curr_words) > 2:  # Less than 20% overlap
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.TOPIC_SHIFT,
+                        start_pos=0,
+                        end_pos=len(transcript.utterances[idx].text),
+                        utterance_idx=idx,
+                        feature_name="topic_shift",
+                        description=f"Topic shift (low word overlap: {overlap_ratio:.2f})",
+                    ))
+                    shifts_found += 1
+        
+        # Topic maintenance - only annotate if we have high overlap utterances
+        # This is a derived feature, so we annotate based on lexical_overlap_child feature
+        if features.get('lexical_overlap_child', 0) > 0.5:
+            # Mark some high-overlap utterances as topic maintenance
+            maintenance_count = 0
+            max_maintenance = min(10, len(transcript.utterances) // 4)  # Limit annotations
+            for idx in range(1, len(transcript.utterances)):
+                if maintenance_count >= max_maintenance:
+                    break
+                    
+                prev_words = set(transcript.utterances[idx - 1].text.lower().split())
+                curr_words = set(transcript.utterances[idx].text.lower().split())
+                overlap_ratio = len(prev_words.intersection(curr_words)) / len(prev_words) if prev_words else 0
+                
+                if overlap_ratio > 0.5:  # High overlap = topic maintenance
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.TOPIC_MAINTENANCE,
+                        start_pos=0,
+                        end_pos=len(transcript.utterances[idx].text),
+                        utterance_idx=idx,
+                        feature_name="topic_maintenance",
+                        description=f"Topic maintenance (high word overlap: {overlap_ratio:.2f})",
+                    ))
+                    maintenance_count += 1
+        
+        # Mark off-topic responses if feature indicates
+        if features.get('off_topic_response_count', 0) > 0:
+            # Mark child utterances that might be off-topic
+            for idx, utterance in enumerate(transcript.utterances):
+                if utterance.speaker == 'CHI' and idx > 0:
+                    # Simple heuristic: very short responses after long questions
+                    prev_utt = transcript.utterances[idx - 1]
+                    if len(prev_utt.text.split()) > 5 and len(utterance.text.split()) < 3:
+                        if '?' in prev_utt.text:  # Was a question
+                            annotations.append(FeatureAnnotation(
+                                annotation_type=AnnotationType.TOPIC_SHIFT,
+                                start_pos=0,
+                                end_pos=len(utterance.text),
+                                utterance_idx=idx,
+                                feature_name="off_topic_response",
+                                description="Potential off-topic response",
+                            ))
+        
+        # ========================================
+        # Repair Detection Features (Section 3.3.4)
+        # ========================================
+        
+        # Self-repair: Replicate logic from _calculate_self_repair
+        if features.get('self_repair_count', 0) > 0:
+            for i, u in enumerate(all_utterances):
+                text = u.text.lower()
+                repair_found = False
+                
+                # Check for linguistic self-repair markers (using extractor's patterns)
+                for pattern in self.repair_extractor.SELF_REPAIR_PATTERNS:
+                    if re.search(pattern, text):
+                        repair_found = True
+                        break
+                
+                # Check for CHAT retrace markers (using extractor's patterns)
+                if not repair_found:
+                    for pattern in self.repair_extractor.CHAT_RETRACE_MARKERS:
+                        if re.search(pattern, u.text):
+                            repair_found = True
+                            break
+                
+                if repair_found:
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.REPAIR_INITIATION,
+                        start_pos=0,
+                        end_pos=len(u.text),
+                        utterance_idx=i,
+                        feature_name="self_repair",
+                        description="Self-repair detected",
+                    ))
+        
+        # Clarification requests: Replicate logic from _calculate_clarification_requests
+        if features.get('clarification_request_count', 0) > 0:
+            for i, u in enumerate(all_utterances):
+                text = u.text.lower()
+                for pattern in self.repair_extractor.CLARIFICATION_PATTERNS:
+                    if re.search(pattern, text):
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.CLARIFICATION_REQUEST,
+                            start_pos=0,
+                            end_pos=len(u.text),
+                            utterance_idx=i,
+                            feature_name="clarification_request",
+                            description="Clarification request",
+                        ))
+                        break
+        
+        # Repetition repairs: Replicate logic from _calculate_repetition_repairs
+        if features.get('repetition_repair_count', 0) > 0 or features.get('exact_repetition_count', 0) > 0:
+            for i in range(1, len(all_utterances)):
+                prev = all_utterances[i - 1]
+                curr = all_utterances[i]
+                
+                # Skip if same speaker (not a repair situation)
+                if prev.speaker == curr.speaker:
+                    continue
+                
+                prev_words = set(prev.text.lower().split())
+                curr_words = set(curr.text.lower().split())
+                
+                if not prev_words or not curr_words:
+                    continue
+                
+                # Exact repetition
+                if prev.text.lower().strip() == curr.text.lower().strip():
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.REPAIR_COMPLETION,
+                        start_pos=0,
+                        end_pos=len(curr.text),
+                        utterance_idx=i,
+                        feature_name="repetition_repair",
+                        description="Repetition repair (exact)",
+                    ))
+                # Partial repetition (significant overlap)
+                else:
+                    overlap = prev_words & curr_words
+                    overlap_ratio = len(overlap) / len(prev_words)
+                    if overlap_ratio > 0.5:
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.REPAIR_COMPLETION,
+                            start_pos=0,
+                            end_pos=len(curr.text),
+                            utterance_idx=i,
+                            feature_name="partial_repetition_repair",
+                            description=f"Partial repetition repair ({overlap_ratio:.1%} overlap)",
+                        ))
+        
+        # ========================================
+        # Pragmatic Linguistic Features
+        # ========================================
+        
+        # Echolalia: Replicate logic from _calculate_echolalia
+        if features.get('immediate_echolalia_count', 0) > 0 or features.get('delayed_echolalia_count', 0) > 0:
+            utterance_texts = [u.text.lower().strip() for u in all_utterances]
+            
+            for i, utterance in enumerate(all_utterances):
+                if utterance.speaker != 'CHI':
+                    continue
+                
+                child_text = utterance.text.lower().strip()
+                if len(child_text.split()) < 2:
+                    continue
+                
+                # Immediate echolalia (replicate extractor logic)
+                if i > 0:
+                    prev_text = utterance_texts[i - 1]
+                    
+                    if child_text == prev_text:
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.ECHOLALIA,
+                            start_pos=0,
+                            end_pos=len(utterance.text),
+                            utterance_idx=i,
+                            feature_name="immediate_echolalia",
+                            description="Immediate echolalia (exact repetition)",
+                            metadata={'type': 'immediate'}
+                        ))
+                        continue
+                    
+                    # Partial match (replicate extractor's _is_partial_repetition logic)
+                    words1 = set(child_text.split())
+                    words2 = set(prev_text.split())
+                    if words1 and words2:
+                        overlap = words1.intersection(words2)
+                        overlap_ratio = len(overlap) / len(words2)
+                        if overlap_ratio > 0.6:  # Same threshold as extractor
+                            annotations.append(FeatureAnnotation(
+                                annotation_type=AnnotationType.ECHOLALIA,
+                                start_pos=0,
+                                end_pos=len(utterance.text),
+                                utterance_idx=i,
+                                feature_name="partial_repetition",
+                                description=f"Partial repetition ({overlap_ratio:.1%} overlap)",
+                                metadata={'type': 'partial'}
+                            ))
+                
+                # Delayed echolalia (replicate extractor logic: look back up to 10 turns)
+                for j in range(max(0, i - 10), i - 1):
+                    if utterance_texts[j] == child_text:
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.ECHOLALIA,
+                            start_pos=0,
+                            end_pos=len(utterance.text),
+                            utterance_idx=i,
+                            feature_name="delayed_echolalia",
+                            description=f"Delayed echolalia (repeats utterance from {i - j} turns ago)",
+                            metadata={'type': 'delayed', 'turns_ago': i - j}
+                        ))
+                        break
+        
+        # Detect pronoun reversals (using same patterns as extractor)
+        if features.get('pronoun_reversal_count', 0) > 0:
+            for idx, utterance in enumerate(transcript.utterances):
+                if utterance.speaker == 'CHI':
+                    text = utterance.text.lower()
+                    for pattern, desc in self.PRONOUN_PATTERNS['reversal']:
+                        if re.search(pattern, text, re.IGNORECASE):
+                            annotations.append(FeatureAnnotation(
+                                annotation_type=AnnotationType.PRONOUN_REVERSAL,
+                                start_pos=0,
+                                end_pos=len(utterance.text),
+                                utterance_idx=idx,
+                                feature_name="pronoun_reversal",
+                                description=desc,
+                            ))
+                            break
+        
+        # NOTE: "stereotyped_phrase" is NOT an extracted feature.
+        # The pragmatic component does NOT extract this feature.
+        # Removed annotation for non-existent feature.
+        
+        # ========================================
+        # Pause and Latency Features (Section 3.3.3)
+        # ========================================
+        
+        # Detect very long pauses (> 4.32s threshold)
+        for idx in range(1, len(transcript.utterances)):
+            prev_utt = transcript.utterances[idx - 1]
+            curr_utt = transcript.utterances[idx]
+            
+            if prev_utt.end_timing and curr_utt.timing:
+                gap = curr_utt.timing - prev_utt.end_timing
+                if gap > 4.32:  # Very long pause threshold
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.LONG_PAUSE,
+                        start_pos=0,
+                        end_pos=0,
+                        utterance_idx=idx,
+                        feature_name="very_long_pause",
+                        feature_value=gap,
+                        description=f"Very long pause: {gap:.2f}s (disengagement threshold)",
+                    ))
+        
+        # Detect false starts (from pause/latency features)
+        if features.get('false_start_count', 0) > 0:
+            for idx, utterance in enumerate(transcript.utterances):
+                text = utterance.text
+                # False start patterns: word word word ... or word [/]
+                for pattern in self.FALSE_START_PATTERNS:
+                    if re.search(pattern, text, re.IGNORECASE):
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.REPAIR_INITIATION,
+                            start_pos=0,
+                            end_pos=min(30, len(text)),
+                            utterance_idx=idx,
+                            feature_name="false_start",
+                            description="False start detected",
+                        ))
+                        break
+        
+        # Detect word repetitions (from pause/latency features)
+        if features.get('word_repetition_count', 0) > 0:
+            for idx, utterance in enumerate(transcript.utterances):
+                text = utterance.text
+                # Find word repetitions (same word 3+ times)
+                for pattern in self.WORD_REPETITION_PATTERNS:
+                    for match in re.finditer(pattern, text, re.IGNORECASE):
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.ECHOLALIA,
+                            start_pos=match.start(),
+                            end_pos=match.end(),
+                            utterance_idx=idx,
+                            feature_name="word_repetition",
+                            description=f"Word repetition: '{match.group()}'",
+                            metadata={'span_text': match.group()}
+                        ))
+        
+        # Mark child-initiated turns (from turn-taking features)
+        if features.get('child_initiated_turns', 0) > 0:
+            for idx, utterance in enumerate(transcript.utterances):
+                if utterance.speaker == 'CHI' and idx > 0:
+                    prev_speaker = transcript.utterances[idx - 1].speaker
+                    # Child-initiated if previous speaker was also child (no adult in between)
+                    if prev_speaker == 'CHI':
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.TURN_START,
+                            start_pos=0,
+                            end_pos=min(10, len(utterance.text)),
+                            utterance_idx=idx,
+                            feature_name="child_initiated_turn",
+                            description="Child-initiated turn",
+                        ))
+        
+        # Mark consecutive child turns (monologues)
+        if features.get('max_consecutive_child_turns', 0) > 2:
+            consecutive_count = 0
+            for idx, utterance in enumerate(transcript.utterances):
+                if utterance.speaker == 'CHI':
+                    consecutive_count += 1
+                    if consecutive_count >= 3:  # Mark as part of monologue
+                        annotations.append(FeatureAnnotation(
+                            annotation_type=AnnotationType.TURN_START,
+                            start_pos=0,
+                            end_pos=len(utterance.text),
+                            utterance_idx=idx,
+                            feature_name="child_monologue",
+                            description=f"Part of child monologue ({consecutive_count} consecutive turns)",
+                            metadata={'consecutive_count': consecutive_count}
+                        ))
+                else:
+                    consecutive_count = 0
+        
+        # ========================================
+        # Linguistic Features
+        # ========================================
+        
+        # Note: Simple/Complex sentence features are NOT extracted by the pragmatic component.
+        # The pragmatic component focuses on conversational/pragmatic features only.
+        # These would be part of a linguistic/syntactic component, not pragmatic.
         
         return annotations
 

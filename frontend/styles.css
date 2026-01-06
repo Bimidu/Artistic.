@@ -374,11 +374,13 @@ input:focus, textarea:focus, select:focus {
 .transcript-container .utterance:hover {
     background-color: #f8f9fa;
     border-left-color: #495057;
+    border-radius: 0 8px 8px 0; /* Only round right side to prevent border-left curve */
 }
 
 .transcript-container .utterance.utterance-highlighted {
     background-color: #e7f5ff;
     border-left-color: #2196F3;
+    border-radius: 0 8px 8px 0; /* Only round right side to prevent border-left curve */
     box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
 }
 
@@ -407,6 +409,7 @@ input:focus, textarea:focus, select:focus {
 .transcript-container .utterance.search-highlight {
     background-color: #fff3cd;
     border-left-color: #ffc107;
+    border-radius: 0 8px 8px 0; /* Only round right side to prevent border-left curve */
 }
 
 .transcript-container .speaker {
