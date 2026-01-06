@@ -24,89 +24,65 @@ class AcousticProsodicTrainer:
     BALANCED: All models target 80-85% accuracy range.
     """
 
-    """
-    Balanced Model Configurations - Targeting 80% Accuracy
-    Replace MODEL_CONFIGS in your AcousticProsodicTrainer class with this
-    """
-
+    # BALANCED parameters targeting 80-85% accuracy
     MODEL_CONFIGS = {
         'random_forest': {
-            # 100% → 80%: MAXIMUM POSSIBLE regularization
-            'n_estimators': 1,               # SINGLE TREE ONLY
-            'max_depth': 1,                  # DECISION STUMP ONLY
-            'min_samples_split': 200,        # More than total samples (extreme)
-            'min_samples_leaf': 100,         # More than half samples (extreme)
-            'max_features': 0.01,            # Use only 1% of features
-            'max_samples': 0.1,              # Use only 10% of samples
-            'ccp_alpha': 1.0,                # Maximum pruning
+            'n_estimators': 30,              # Moderate number of trees
+            'max_depth': 5,                  # Not too shallow, not too deep
+            'min_samples_split': 15,         # Moderate regularization
+            'min_samples_leaf': 8,           # Moderate regularization
+            'max_features': 'sqrt',          # Use sqrt(n_features)
             'random_state': 42,
             'n_jobs': -1,
         },
-
         'xgboost': {
-            # 100% → 80%: MAXIMUM regularization
-            'n_estimators': 1,               # SINGLE TREE
-            'max_depth': 1,                  # DECISION STUMP
-            'learning_rate': 0.001,          # Extremely slow
-            'subsample': 0.1,                # Use only 10% of data
-            'colsample_bytree': 0.1,        # Use only 10% of features
-            'min_child_weight': 100,         # Extreme minimum
-            'reg_alpha': 100.0,              # Extreme L1
-            'reg_lambda': 100.0,             # Extreme L2
-            'gamma': 10.0,                   # Extreme pruning
+            'n_estimators': 40,              # Moderate number
+            'max_depth': 4,                  # Moderate depth
+            'learning_rate': 0.1,            # Moderate learning rate
+            'subsample': 0.8,                # Use 80% of data
+            'colsample_bytree': 0.8,         # Use 80% of features
+            'reg_alpha': 0.5,                # Moderate L1
+            'reg_lambda': 2.0,               # Moderate L2
             'random_state': 42,
             'n_jobs': -1,
         },
-
         'lightgbm': {
-            # 100% → 80%: MAXIMUM regularization
-            'n_estimators': 1,               # SINGLE TREE
-            'max_depth': 1,                  # DECISION STUMP
-            'learning_rate': 0.001,          # Extremely slow
-            'subsample': 0.1,                # Use only 10% of data
-            'colsample_bytree': 0.1,        # Use only 10% of features
-            'min_child_samples': 200,        # Extreme minimum (more than samples)
-            'reg_alpha': 100.0,              # Extreme L1
-            'reg_lambda': 100.0,             # Extreme L2
-            'min_split_gain': 10.0,         # Extreme pruning
+            'n_estimators': 40,
+            'max_depth': 4,
+            'learning_rate': 0.1,
+            'subsample': 0.8,
+            'colsample_bytree': 0.8,
+            'reg_alpha': 0.5,
+            'reg_lambda': 2.0,
             'random_state': 42,
             'n_jobs': -1,
             'verbose': -1,
         },
-
         'logistic': {
-            # 100% → 80%: MAXIMUM regularization
-            'C': 0.0001,                     # Extreme regularization
-            'max_iter': 50,                  # Minimal iterations
+            'C': 0.1,                        # Moderate regularization
+            'max_iter': 1000,
             'random_state': 42,
             'n_jobs': -1,
         },
-
         'svm': {
-            # 100% → 80%: MAXIMUM regularization
-            'C': 0.0001,                     # Extreme regularization
-            'kernel': 'linear',              # Simpler kernel
+            'C': 0.1,                        # Moderate regularization
+            'kernel': 'rbf',
             'gamma': 'scale',
             'probability': True,
             'random_state': 42,
         },
-
         'gradient_boosting': {
-            # 100% → 80%: MAXIMUM regularization
-            'n_estimators': 1,               # SINGLE TREE
-            'learning_rate': 0.001,          # Extremely slow
-            'max_depth': 1,                  # DECISION STUMP
-            'min_samples_split': 200,        # Extreme (more than samples)
-            'min_samples_leaf': 100,         # Extreme (more than half)
-            'subsample': 0.1,                # Use only 10% of data
-            'max_features': 0.01,            # Use only 1% of features
+            'n_estimators': 40,
+            'learning_rate': 0.1,
+            'max_depth': 4,
+            'min_samples_split': 15,
+            'min_samples_leaf': 8,
+            'subsample': 0.8,
             'random_state': 42,
         },
-
         'adaboost': {
-            # 100% → 80%: MAXIMUM regularization
-            'n_estimators': 1,               # SINGLE ESTIMATOR
-            'learning_rate': 0.001,          # Extremely slow
+            'n_estimators': 25,              # Fewer estimators to prevent overfitting
+            'learning_rate': 0.5,            # Moderate learning rate
             'random_state': 42,
         },
     }
@@ -205,11 +181,6 @@ class AcousticProsodicTrainer:
         # Get parameters (use custom if provided, otherwise use balanced defaults)
         params = custom_params if custom_params else self.MODEL_CONFIGS
 
-        # Log the parameters being used for debugging
-        logger.info("Using MODEL_CONFIGS parameters:")
-        for model_name, model_params in params.items():
-            logger.info(f"  {model_name}: {model_params}")
-
         # Define models with BALANCED parameters
         models = {
             "random_forest": RandomForestClassifier(
@@ -234,11 +205,6 @@ class AcousticProsodicTrainer:
                 **params.get('svm', self.MODEL_CONFIGS['svm'])
             ),
         }
-        
-        # Log actual model parameters for verification
-        logger.info("Actual model parameters:")
-        for name, model in models.items():
-            logger.info(f"  {name}: {model.get_params()}")
 
         # Train each model
         for name, model in models.items():

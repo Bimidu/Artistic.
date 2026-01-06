@@ -149,18 +149,15 @@ class DataPreprocessor:
         )
 
         # Step 4: Clean train and test data separately
-        # CRITICAL: Fit cleaner on train, then transform test to prevent data leakage
         df_train_clean = self.cleaner.clean(
             df_train,
             target_column=self.target_column,
-            feature_columns=self.feature_columns_,
-            fit=True  # Fit on training data
+            feature_columns=self.feature_columns_
         )
         df_test_clean = self.cleaner.clean(
             df_test,
             target_column=self.target_column,
-            feature_columns=self.feature_columns_,
-            fit=False  # Use fitted statistics from training
+            feature_columns=self.feature_columns_
         )
         self.logger.info(
             "Data cleaned - "

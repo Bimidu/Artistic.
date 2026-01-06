@@ -127,6 +127,133 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             'acoustic_formant_2_std',
             'acoustic_formant_3_mean',
             'acoustic_formant_3_std',
+            
+            # Extended MFCC features (MFCC 6-13) - 8 coefficients × 2 = 16 features
+            'acoustic_mfcc_6_mean',
+            'acoustic_mfcc_6_std',
+            'acoustic_mfcc_7_mean',
+            'acoustic_mfcc_7_std',
+            'acoustic_mfcc_8_mean',
+            'acoustic_mfcc_8_std',
+            'acoustic_mfcc_9_mean',
+            'acoustic_mfcc_9_std',
+            'acoustic_mfcc_10_mean',
+            'acoustic_mfcc_10_std',
+            'acoustic_mfcc_11_mean',
+            'acoustic_mfcc_11_std',
+            'acoustic_mfcc_12_mean',
+            'acoustic_mfcc_12_std',
+            'acoustic_mfcc_13_mean',
+            'acoustic_mfcc_13_std',
+            
+            # Chroma features (12 pitch classes) - mean/std = 24 features
+            'acoustic_chroma_1_mean',
+            'acoustic_chroma_1_std',
+            'acoustic_chroma_2_mean',
+            'acoustic_chroma_2_std',
+            'acoustic_chroma_3_mean',
+            'acoustic_chroma_3_std',
+            'acoustic_chroma_4_mean',
+            'acoustic_chroma_4_std',
+            'acoustic_chroma_5_mean',
+            'acoustic_chroma_5_std',
+            'acoustic_chroma_6_mean',
+            'acoustic_chroma_6_std',
+            'acoustic_chroma_7_mean',
+            'acoustic_chroma_7_std',
+            'acoustic_chroma_8_mean',
+            'acoustic_chroma_8_std',
+            'acoustic_chroma_9_mean',
+            'acoustic_chroma_9_std',
+            'acoustic_chroma_10_mean',
+            'acoustic_chroma_10_std',
+            'acoustic_chroma_11_mean',
+            'acoustic_chroma_11_std',
+            'acoustic_chroma_12_mean',
+            'acoustic_chroma_12_std',
+            
+            # Temporal dynamics - pitch trajectory features (5 features)
+            'acoustic_pitch_trajectory_slope',
+            'acoustic_pitch_trajectory_curvature',
+            'acoustic_pitch_acceleration_mean',
+            'acoustic_pitch_acceleration_std',
+            'acoustic_energy_trajectory_slope',
+            
+            # Spectral contrast features (7 bands) - 7 features
+            'acoustic_spectral_contrast_1',
+            'acoustic_spectral_contrast_2',
+            'acoustic_spectral_contrast_3',
+            'acoustic_spectral_contrast_4',
+            'acoustic_spectral_contrast_5',
+            'acoustic_spectral_contrast_6',
+            'acoustic_spectral_contrast_mean',
+            
+            # Tonnetz features (harmonic network) - 6 features
+            'acoustic_tonnetz_1',
+            'acoustic_tonnetz_2',
+            'acoustic_tonnetz_3',
+            'acoustic_tonnetz_4',
+            'acoustic_tonnetz_5',
+            'acoustic_tonnetz_6',
+            
+            # Additional rhythm and timing features (3 features)
+            'acoustic_tempo',
+            'acoustic_onset_rate',
+            'acoustic_silence_ratio',
+            
+            # Advanced pitch statistics (8 features)
+            'acoustic_pitch_q25',
+            'acoustic_pitch_q75',
+            'acoustic_pitch_iqr',
+            'acoustic_pitch_skewness',
+            'acoustic_pitch_kurtosis',
+            'acoustic_pitch_percentile_10',
+            'acoustic_pitch_percentile_90',
+            'acoustic_pitch_median_abs_dev',
+            
+            # Advanced spectral features (6 features)
+            'acoustic_spectral_flatness_mean',
+            'acoustic_spectral_flatness_std',
+            'acoustic_spectral_flux_mean',
+            'acoustic_spectral_flux_std',
+            'acoustic_spectral_spread_mean',
+            'acoustic_spectral_spread_std',
+            
+            # MFCC Delta features (first 5 coefficients) - 10 features
+            'acoustic_mfcc_1_delta_mean',
+            'acoustic_mfcc_1_delta_std',
+            'acoustic_mfcc_2_delta_mean',
+            'acoustic_mfcc_2_delta_std',
+            'acoustic_mfcc_3_delta_mean',
+            'acoustic_mfcc_3_delta_std',
+            'acoustic_mfcc_4_delta_mean',
+            'acoustic_mfcc_4_delta_std',
+            'acoustic_mfcc_5_delta_mean',
+            'acoustic_mfcc_5_delta_std',
+            
+            # Additional formant features (5 features)
+            'acoustic_formant_4_mean',
+            'acoustic_formant_4_std',
+            'acoustic_formant_1_bandwidth',
+            'acoustic_formant_2_bandwidth',
+            'acoustic_formant_2_1_ratio',
+            
+            # Cross-feature correlations (5 features)
+            'acoustic_pitch_energy_correlation',
+            'acoustic_pitch_intensity_correlation',
+            'acoustic_energy_spectral_centroid_correlation',
+            'acoustic_pitch_spectral_centroid_correlation',
+            'acoustic_intensity_spectral_bandwidth_correlation',
+            
+            # Harmonic features (3 features)
+            'acoustic_harmonic_energy_mean',
+            'acoustic_harmonic_energy_std',
+            'acoustic_percussive_energy_ratio',
+            
+            # Additional statistical moments (3 features)
+            'acoustic_energy_skewness',
+            'acoustic_energy_kurtosis',
+            'acoustic_intensity_skewness',
         ]
     
     def __init__(self, sample_rate: int = 16000, extract_child_only: bool = True):
@@ -284,6 +411,58 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             # Extract formant-like features
             formant_features = self._extract_formant_features(audio, sr)
             features.update(formant_features)
+            
+            # Extract extended MFCC features (6-13)
+            extended_mfcc_features = self._extract_extended_mfcc_features(audio, sr)
+            features.update(extended_mfcc_features)
+            
+            # Extract chroma features
+            chroma_features = self._extract_chroma_features(audio, sr)
+            features.update(chroma_features)
+            
+            # Extract temporal dynamics features
+            temporal_features = self._extract_temporal_dynamics_features(audio, sr, pitch_features)
+            features.update(temporal_features)
+            
+            # Extract spectral contrast features
+            spectral_contrast_features = self._extract_spectral_contrast_features(audio, sr)
+            features.update(spectral_contrast_features)
+            
+            # Extract tonnetz features
+            tonnetz_features = self._extract_tonnetz_features(audio, sr)
+            features.update(tonnetz_features)
+            
+            # Extract rhythm and timing features
+            rhythm_features = self._extract_rhythm_timing_features(audio, sr)
+            features.update(rhythm_features)
+            
+            # Extract advanced pitch statistics
+            advanced_pitch_features = self._extract_advanced_pitch_statistics(audio, sr, pitch_features)
+            features.update(advanced_pitch_features)
+            
+            # Extract advanced spectral features
+            advanced_spectral_features = self._extract_advanced_spectral_features(audio, sr)
+            features.update(advanced_spectral_features)
+            
+            # Extract MFCC delta features
+            mfcc_delta_features = self._extract_mfcc_delta_features(audio, sr)
+            features.update(mfcc_delta_features)
+            
+            # Extract additional formant features
+            additional_formant_features = self._extract_additional_formant_features(audio, sr)
+            features.update(additional_formant_features)
+            
+            # Extract cross-feature correlations
+            correlation_features = self._extract_cross_feature_correlations(audio, sr, pitch_features, energy_features)
+            features.update(correlation_features)
+            
+            # Extract harmonic features
+            harmonic_features = self._extract_harmonic_features(audio, sr)
+            features.update(harmonic_features)
+            
+            # Extract additional statistical moments
+            statistical_moments = self._extract_additional_statistical_moments(audio, sr, energy_features)
+            features.update(statistical_moments)
             
         except Exception as e:
             logger.error(f"Error processing audio file {audio_path}: {e}")
@@ -681,6 +860,218 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
                 'acoustic_formant_1_mean', 'acoustic_formant_1_std',
                 'acoustic_formant_2_mean', 'acoustic_formant_2_std',
                 'acoustic_formant_3_mean', 'acoustic_formant_3_std'
+            ]})
+        
+        return features
+    
+    def _extract_extended_mfcc_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract extended MFCC features (coefficients 6-13)."""
+        features = {}
+        
+        try:
+            # Extract MFCCs (13 coefficients total, we use 6-13)
+            mfccs = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=13)
+            
+            for i in range(6, 14):  # MFCC 6-13 (0-indexed: 5-12)
+                mfcc_coeff = mfccs[i-1, :]  # librosa uses 0-indexed
+                features[f'acoustic_mfcc_{i}_mean'] = float(np.mean(mfcc_coeff))
+                features[f'acoustic_mfcc_{i}_std'] = float(np.std(mfcc_coeff))
+                
+        except Exception as e:
+            logger.warning(f"Error extracting extended MFCC features: {e}")
+            for i in range(6, 14):
+                features[f'acoustic_mfcc_{i}_mean'] = 0.0
+                features[f'acoustic_mfcc_{i}_std'] = 0.0
+        
+        return features
+    
+    def _extract_chroma_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract chroma features (12 pitch classes)."""
+        features = {}
+        
+        try:
+            # Extract chroma features (12 pitch classes)
+            chroma = librosa.feature.chroma(y=audio, sr=sr)
+            
+            for i in range(1, 13):  # 12 pitch classes
+                chroma_coeff = chroma[i-1, :]  # 0-indexed
+                features[f'acoustic_chroma_{i}_mean'] = float(np.mean(chroma_coeff))
+                features[f'acoustic_chroma_{i}_std'] = float(np.std(chroma_coeff))
+                
+        except Exception as e:
+            logger.warning(f"Error extracting chroma features: {e}")
+            for i in range(1, 13):
+                features[f'acoustic_chroma_{i}_mean'] = 0.0
+                features[f'acoustic_chroma_{i}_std'] = 0.0
+        
+        return features
+    
+    def _extract_temporal_dynamics_features(
+        self,
+        audio: np.ndarray,
+        sr: int,
+        pitch_features: Dict[str, float]
+    ) -> Dict[str, float]:
+        """Extract temporal dynamics features (pitch/energy trajectories)."""
+        features = {}
+        
+        try:
+            # Extract pitch for trajectory analysis
+            f0, _, _ = librosa.pyin(
+                audio,
+                fmin=librosa.note_to_hz('C2'),
+                fmax=librosa.note_to_hz('C7'),
+                frame_length=2048,
+                hop_length=512
+            )
+            f0_voiced = f0[~np.isnan(f0)]
+            
+            if len(f0_voiced) > 2:
+                # Pitch trajectory slope (linear fit)
+                x = np.arange(len(f0_voiced))
+                coeffs = np.polyfit(x, f0_voiced, 1)
+                features['acoustic_pitch_trajectory_slope'] = float(coeffs[0])
+                
+                # Pitch trajectory curvature (quadratic fit)
+                coeffs_quad = np.polyfit(x, f0_voiced, 2)
+                features['acoustic_pitch_trajectory_curvature'] = float(coeffs_quad[0])
+                
+                # Pitch acceleration (second derivative)
+                if len(f0_voiced) > 2:
+                    pitch_diff = np.diff(f0_voiced)
+                    pitch_accel = np.diff(pitch_diff)
+                    features['acoustic_pitch_acceleration_mean'] = float(np.mean(pitch_accel))
+                    features['acoustic_pitch_acceleration_std'] = float(np.std(pitch_accel))
+                else:
+                    features['acoustic_pitch_acceleration_mean'] = 0.0
+                    features['acoustic_pitch_acceleration_std'] = 0.0
+            else:
+                features['acoustic_pitch_trajectory_slope'] = 0.0
+                features['acoustic_pitch_trajectory_curvature'] = 0.0
+                features['acoustic_pitch_acceleration_mean'] = 0.0
+                features['acoustic_pitch_acceleration_std'] = 0.0
+            
+            # Energy trajectory slope
+            frame_length = 2048
+            hop_length = 512
+            rms = librosa.feature.rms(y=audio, frame_length=frame_length, hop_length=hop_length)[0]
+            if len(rms) > 1:
+                x_energy = np.arange(len(rms))
+                coeffs_energy = np.polyfit(x_energy, rms, 1)
+                features['acoustic_energy_trajectory_slope'] = float(coeffs_energy[0])
+            else:
+                features['acoustic_energy_trajectory_slope'] = 0.0
+                
+        except Exception as e:
+            logger.warning(f"Error extracting temporal dynamics features: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_pitch_trajectory_slope',
+                'acoustic_pitch_trajectory_curvature',
+                'acoustic_pitch_acceleration_mean',
+                'acoustic_pitch_acceleration_std',
+                'acoustic_energy_trajectory_slope'
+            ]})
+        
+        return features
+    
+    def _extract_spectral_contrast_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract spectral contrast features."""
+        features = {}
+        
+        try:
+            # Extract spectral contrast (6 frequency bands by default)
+            spectral_contrast = librosa.feature.spectral_contrast(y=audio, sr=sr)
+            
+            # Get mean across time for each band (typically 6-7 bands)
+            n_bands = min(spectral_contrast.shape[0], 6)  # Use up to 6 bands
+            for i in range(1, n_bands + 1):
+                features[f'acoustic_spectral_contrast_{i}'] = float(np.mean(spectral_contrast[i-1, :]))
+            
+            # Fill remaining bands with 0 if fewer than 6
+            for i in range(n_bands + 1, 7):
+                features[f'acoustic_spectral_contrast_{i}'] = 0.0
+            
+            # Overall mean
+            features['acoustic_spectral_contrast_mean'] = float(np.mean(spectral_contrast))
+            
+        except Exception as e:
+            logger.warning(f"Error extracting spectral contrast features: {e}")
+            # Default to 7 features (6 bands + mean)
+            for i in range(1, 7):
+                features[f'acoustic_spectral_contrast_{i}'] = 0.0
+            features['acoustic_spectral_contrast_mean'] = 0.0
+        
+        return features
+    
+    def _extract_tonnetz_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract tonnetz features (harmonic network representation)."""
+        features = {}
+        
+        try:
+            # Extract tonnetz features (6 dimensions)
+            tonnetz = librosa.feature.tonnetz(y=audio, sr=sr)
+            
+            # Get mean across time for each dimension
+            for i in range(1, 7):  # 6 dimensions
+                features[f'acoustic_tonnetz_{i}'] = float(np.mean(tonnetz[i-1, :]))
+                
+        except Exception as e:
+            logger.warning(f"Error extracting tonnetz features: {e}")
+            for i in range(1, 7):
+                features[f'acoustic_tonnetz_{i}'] = 0.0
+        
+        return features
+    
+    def _extract_rhythm_timing_features(
+        self,
+        audio: np.ndarray,
+        sr: int
+    ) -> Dict[str, float]:
+        """Extract rhythm and timing features."""
+        features = {}
+        
+        try:
+            # Tempo estimation
+            tempo, _ = librosa.beat.beat_track(y=audio, sr=sr)
+            features['acoustic_tempo'] = float(tempo) if tempo is not None else 0.0
+            
+            # Onset rate (onsets per second)
+            onset_env = librosa.onset.onset_strength(y=audio, sr=sr)
+            onsets = librosa.onset.onset_detect(onset_envelope=onset_env, sr=sr)
+            duration = len(audio) / sr
+            features['acoustic_onset_rate'] = safe_divide(len(onsets), duration)
+            
+            # Silence ratio (proportion of silence)
+            intervals = librosa.effects.split(audio, top_db=30)
+            if len(intervals) > 0:
+                speech_time = sum((e - s) for s, e in intervals) / sr
+                silence_time = max(duration - speech_time, 0.0)
+                features['acoustic_silence_ratio'] = safe_divide(silence_time, duration)
+            else:
+                features['acoustic_silence_ratio'] = 1.0  # All silence
+                
+        except Exception as e:
+            logger.warning(f"Error extracting rhythm/timing features: {e}")
+            features.update({k: 0.0 for k in [
+                'acoustic_tempo',
+                'acoustic_onset_rate',
+                'acoustic_silence_ratio'
             ]})
         
         return features
