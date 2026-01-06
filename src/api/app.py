@@ -820,7 +820,47 @@ async def predict_from_audio(
                 features_df = preprocessor.transform(features_df)
         
             result = make_prediction(model, features_df, used_model_name)
-        
+
+            # LOCAL SHAP (AUDIO)
+            request_id = str(uuid.uuid4())
+            local_shap_dir = Path("assets/shap/local") / request_id
+            local_shap_dir.mkdir(parents=True, exist_ok=True)
+
+            background = np.load(
+                Path("assets/shap") / used_model_name / "background.npy"
+            )
+
+            predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+            shap_manager = SHAPManager(
+                model=model,
+                background_data=background,
+                feature_names=list(features_df.columns),
+                model_type=used_model_name.split("_")[-1]
+            )
+
+            shap_manager.generate_local_waterfall(
+                X_instance=features_df.values[0],
+                save_dir=local_shap_dir,
+                predicted_class=predicted_class
+            )
+
+            # COUNTERFACTUAL
+            component = "_".join(used_model_name.split("_")[:-1])
+            logger.info(f"Counterfactual component: {component}")
+
+            cf_result = None
+            try:
+                cf_result = generate_counterfactual(
+                    model=model,
+                    x_instance=features_df.values[0],
+                    feature_names=list(features_df.columns),
+                    component=component,
+                    predicted_class=predicted_class
+                )
+            except FileNotFoundError as e:
+                logger.warning(f"Counterfactual skipped: {e}")
+
             # Generate annotated transcript (use pragmatic features for annotation)
             pragmatic_feature_set = feature_extractor.extract_with_audio(
                 processed.transcript_data,
@@ -845,6 +885,11 @@ async def predict_from_audio(
             'duration': processed.metadata.get('duration', 0),
                 'model_used': used_model_name,  # Explicitly state which model was used
                 'component': get_model_component(used_model_name),
+            "local_shap": {
+                "request_id": request_id,
+                "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
+            },
+            "counterfactual": cf_result,
         }
         
     except Exception as e:
