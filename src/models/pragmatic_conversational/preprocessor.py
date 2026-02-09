@@ -15,7 +15,7 @@ Author: Current Implementation (Pragmatic/Conversational Specialist)
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Literal, Any, Union
+from typing import Dict, List, Tuple, Optional, Literal, Any
 from pathlib import Path
 import joblib
 
@@ -416,7 +416,7 @@ class PragmaticConversationalPreprocessor:
         
         return selected_features
     
-    def save(self, save_path: Union[str, Path]):
+    def save(self, save_path: str | Path):
         """
         Save fitted pragmatic preprocessor.
         
@@ -450,7 +450,7 @@ class PragmaticConversationalPreprocessor:
         self.logger.info(f"Pragmatic preprocessor saved to {save_path}")
     
     @classmethod
-    def load(cls, load_path: Union[str, Path]) -> 'PragmaticConversationalPreprocessor':
+    def load(cls, load_path: str | Path) -> 'PragmaticConversationalPreprocessor':
         """
         Load fitted pragmatic preprocessor.
         

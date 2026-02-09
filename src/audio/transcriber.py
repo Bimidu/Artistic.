@@ -22,7 +22,7 @@ import sys
 import subprocess
 import pickle
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple, Union
+from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field
 import tempfile
 import json

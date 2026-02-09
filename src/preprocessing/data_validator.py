@@ -17,7 +17,7 @@ Author: Bimidu Gunathilake
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Any, Union
+from typing import Dict, List, Tuple, Optional, Any
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -392,7 +392,7 @@ class DataValidator:
     
     def validate_file(
         self,
-        file_path: Union[str, Path],
+        file_path: str | Path,
         **kwargs
     ) -> ValidationReport:
         """

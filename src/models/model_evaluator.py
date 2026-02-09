@@ -15,7 +15,7 @@ Author: Bimidu Gunathilake
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Any, Union
+from typing import Dict, List, Tuple, Optional, Any
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -447,7 +447,7 @@ class ModelEvaluator:
         
         plt.close()
     
-    def save_reports(self, save_path: Union[str, Path]):
+    def save_reports(self, save_path: str | Path):
         """
         Save all evaluation reports to file.
         

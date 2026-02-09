@@ -16,7 +16,7 @@ Author: Bimidu Gunathilake
 
 import numpy as np
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Tuple, Union
+from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field
 
 from src.parsers.chat_parser import TranscriptData, Utterance

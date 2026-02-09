@@ -257,9 +257,7 @@ def preprocess_with_dict(df: pd.DataFrame, preprocessor_dict: Dict) -> pd.DataFr
         Preprocessed DataFrame with selected features
     """
     try:
-        logger.info(f"Preprocessing DataFrame columns: {df.columns.tolist()}")
         # Get selected features
-
         selected_features = preprocessor_dict.get('selected_features', [])
         feature_columns = preprocessor_dict.get('feature_columns', [])
         
@@ -280,7 +278,7 @@ def preprocess_with_dict(df: pd.DataFrame, preprocessor_dict: Dict) -> pd.DataFr
         missing_features = [f for f in selected_features if f not in df.columns]
         
         if missing_features:
-            logger.warning(f"Missing {len(missing_features)} features: {missing_features}")
+            logger.warning(f"Missing {len(missing_features)} features: {missing_features[:5]}...")
             # Add missing features with zeros
             for feature in missing_features:
                 df[feature] = 0.0
@@ -2492,24 +2490,7 @@ async def list_models():
             except:
                 model_info.append({'name': model_name, 'type': 'unknown'})
         
-        # Get best model per component
-        best_models = {}
-        if model_info:
-            # Group models by component
-            models_by_component = {}
-            for model in model_info:
-                component = model.get('component', 'unknown')
-                if component not in models_by_component:
-                    models_by_component[component] = []
-                models_by_component[component].append(model)
-            
-            # Find best model for each component (highest F1 score)
-            for component, component_models in models_by_component.items():
-                if component_models:
-                    best_model = max(component_models, key=lambda x: x.get('f1_score', 0))
-                    best_models[component] = best_model['name']
-        
-        # Also keep global best for backward compatibility
+        # Get best model
         best_model_name = None
         if model_info:
             best_model_name = max(model_info, key=lambda x: x.get('f1_score', 0))['name']
@@ -2517,8 +2498,7 @@ async def list_models():
         return {
             "models": model_info,
             "count": len(models),
-            "best_model": best_model_name,  # Global best (backward compatibility)
-            "best_models": best_models  # Best per component
+            "best_model": best_model_name
         }
     except Exception as e:
         logger.error(f"Error listing models: {e}")

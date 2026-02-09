@@ -131,6 +131,8 @@ class InputHandler:
     
     def determine_input_type(self, input_path: str | Path) -> InputType:
         """
+        Determine the type of input file.
+        
         Args:
             input_path: Path to input file
             
@@ -169,30 +171,14 @@ class InputHandler:
             ProcessedInput with unified format
         """
         # Determine if input is a file or raw text
-        # Check if it's a Path object first
-        if isinstance(input_source, Path):
-            input_path = input_source
-            if not input_path.exists():
-                raise FileNotFoundError(f"Input file not found: {input_path}")
-        elif isinstance(input_source, str):
-            # Check if string looks like a file path (has extension and reasonable length)
-            # Avoid treating long text as a path
-            if len(input_source) > 500 or '\n' in input_source:
-                # Definitely raw text (too long or has newlines)
-                return self._process_raw_text(input_source, participant_id, diagnosis)
-            
-            # Try to interpret as path
-            try:
-                input_path = Path(input_source)
-                # Check if it exists as a file
-                if not input_path.exists():
-                    # Doesn't exist as file, treat as raw text
-                    return self._process_raw_text(input_source, participant_id, diagnosis)
-            except (OSError, ValueError):
-                # Path construction failed (invalid characters, etc.), treat as raw text
-                return self._process_raw_text(input_source, participant_id, diagnosis)
-        else:
-            raise TypeError(f"input_source must be str or Path, got {type(input_source)}")
+        if isinstance(input_source, str) and not Path(input_source).exists():
+            # Treat as raw text
+            return self._process_raw_text(input_source, participant_id, diagnosis)
+        
+        input_path = Path(input_source)
+        
+        if not input_path.exists():
+            raise FileNotFoundError(f"Input file not found: {input_path}")
         
         input_type = self.determine_input_type(input_path)
         

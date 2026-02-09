@@ -15,7 +15,7 @@ Author: Bimidu Gunathilake
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Literal, Union
+from typing import Dict, List, Tuple, Optional, Literal
 from pathlib import Path
 from sklearn.model_selection import train_test_split, StratifiedKFold
 import joblib
@@ -394,7 +394,7 @@ class DataPreprocessor:
         
         return category_splits
     
-    def save(self, save_path: Union[str, Path]):
+    def save(self, save_path: str | Path):
         """
         Save fitted preprocessor to disk.
         
@@ -438,7 +438,7 @@ class DataPreprocessor:
                 self.selector.logger = selector_logger
     
     @classmethod
-    def load(cls, load_path: Union[str, Path]) -> 'DataPreprocessor':
+    def load(cls, load_path: str | Path) -> 'DataPreprocessor':
         """
         Load fitted preprocessor from disk.
         

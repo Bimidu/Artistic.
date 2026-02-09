@@ -15,7 +15,7 @@ Author: Current Implementation (Pragmatic/Conversational Specialist)
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Any, Literal, Union
+from typing import Dict, List, Tuple, Optional, Any, Literal
 from dataclasses import dataclass, field
 from pathlib import Path
 import joblib
@@ -411,7 +411,7 @@ class PragmaticConversationalTrainer:
     def save_model(
         self,
         model_name: str,
-        save_path: Union[str, Path]
+        save_path: str | Path
     ):
         """
         Save trained pragmatic model with pragmatic-specific metadata.
