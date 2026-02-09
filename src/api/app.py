@@ -1057,23 +1057,12 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             }
         else:
             # Single component prediction
-            # Get model and preprocessor first to determine component type
-            model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=request.model_name)
+            # Extract features
+            feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
+            features_df = pd.DataFrame([feature_set.features])
             
-            # Extract features using appropriate extractor based on model type
-            if used_model_name and 'syntactic_semantic' in used_model_name:
-                from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
-                syntactic_extractor = SyntacticFeatureExtractor()
-                features = syntactic_extractor.extract_from_transcript(processed.transcript_data)
-                features_df = pd.DataFrame([features])
-                # Create a simple feature_set-like object for later use
-                class FeatureSetLike:
-                    def __init__(self, f):
-                        self.features = f
-                feature_set = FeatureSetLike(features)
-            else:
-                feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
-                features_df = pd.DataFrame([feature_set.features])
+            # Get model and make prediction (use specified model or best model)
+            model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=request.model_name)
             
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
@@ -1342,8 +1331,10 @@ async def predict_from_transcript(
                                f"or use 'Best Model (Auto)' to automatically select a compatible model."
                     )
 
-            # First determine final model name before extracting features
-            final_model_name = model_name
+            feature_set = feature_extractor.extract_from_transcript(transcript)
+            features_df = pd.DataFrame([feature_set.features])
+            
+            # Get model and make prediction (use specified model or best compatible model)
             if model_name:
                 # Validate that the model exists in the registry
                 available_models = model_registry.list_models()
@@ -1354,7 +1345,7 @@ async def predict_from_transcript(
                         # If there's exactly one match, use it
                         if len(matching_models) == 1:
                             logger.info(f"Model '{model_name}' not found, using matching model: {matching_models[0]}")
-                            final_model_name = matching_models[0]
+                            model_name = matching_models[0]
                         else:
                             # Multiple matches - find compatible ones
                             compatible_matches = [m for m in matching_models if is_model_compatible_with_input(m, 'chat_file')]
@@ -1372,7 +1363,7 @@ async def predict_from_transcript(
                                         pass
                                 if best_match:
                                     logger.info(f"Model '{model_name}' not found, using best compatible match: {best_match}")
-                                    final_model_name = best_match
+                                    model_name = best_match
                                 else:
                                     raise HTTPException(
                                         status_code=status.HTTP_400_BAD_REQUEST,
@@ -1395,15 +1386,17 @@ async def predict_from_transcript(
                         )
 
                 # Now validate compatibility
-                if not is_model_compatible_with_input(final_model_name, 'chat_file'):
-                    component = get_model_component(final_model_name)
+                if not is_model_compatible_with_input(model_name, 'chat_file'):
+                    component = get_model_component(model_name)
                     raise HTTPException(
                         status_code=status.HTTP_400_BAD_REQUEST,
-                        detail=f"Model '{final_model_name}' ({component}) is not compatible with CHAT file input. "
+                        detail=f"Model '{model_name}' ({component}) is not compatible with CHAT file input. "
                                f"CHAT files don't contain audio, so acoustic models cannot be used. "
                                f"Please select a pragmatic_conversational or syntactic_semantic model, "
                                f"or use 'Best Model (Auto)' to automatically select a compatible model."
                     )
+
+                model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
             else:
                 # Get best model, but only from compatible components
                 models = model_registry.list_models()
@@ -1425,25 +1418,8 @@ async def predict_from_transcript(
                             best_model = m
                     except:
                         pass
-                final_model_name = best_model or compatible_models[0]
-
-            # Now extract features based on the model's component type
-            if final_model_name and 'syntactic_semantic' in final_model_name:
-                from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
-                syntactic_extractor = SyntacticFeatureExtractor()
-                features = syntactic_extractor.extract_from_transcript(transcript)
-                features_df = pd.DataFrame([features])
-                # Create a simple feature_set-like object for later use
-                class FeatureSetLike:
-                    def __init__(self, f):
-                        self.features = f
-                feature_set = FeatureSetLike(features)
-            else:
-                feature_set = feature_extractor.extract_from_transcript(transcript)
-                features_df = pd.DataFrame([feature_set.features])
-            
-            # Get model and preprocessor
-            model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=final_model_name)
+                model_name = best_model or compatible_models[0]
+                model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
             
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
