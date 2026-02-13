@@ -49,6 +49,13 @@ from config import config
 logger = get_logger(__name__)
 ASSETS_DIR = Path("assets")
 
+# Component-specific model type mapping
+COMPONENT_MODEL_TYPES = {
+    'pragmatic_conversational': ['xgboost', 'random_forest'],
+    'acoustic_prosodic': ['svm', 'lightgbm'],
+    'syntactic_semantic': ['logistic', 'gradient_boosting']
+}
+
 # Initialize FastAPI app
 app = FastAPI(
     title="ASD Detection API",
@@ -2192,7 +2199,27 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
             detail="Training already in progress"
         )
     
-    logger.info(f"Training request for component: {request.component}")
+    # Validate component
+    if request.component not in COMPONENT_MODEL_TYPES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid component. Must be one of: {list(COMPONENT_MODEL_TYPES.keys())}"
+        )
+    
+    # Validate model types for component
+    allowed_models = COMPONENT_MODEL_TYPES[request.component]
+    invalid_models = [mt for mt in request.model_types if mt not in allowed_models]
+    
+    if invalid_models:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                f"Invalid model types for component '{request.component}': {invalid_models}. "
+                f"Allowed models for this component: {allowed_models}"
+            )
+        )
+    
+    logger.info(f"Training request for component: {request.component}, models: {request.model_types}")
     
     # Start training in background
     background_tasks.add_task(
@@ -2221,6 +2248,24 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
 async def training_status():
     """Get current training status."""
     return training_state
+
+
+@app.get("/training/component-models", tags=["Training Mode"])
+async def get_component_models():
+    """
+    Get allowed model types for each component.
+    
+    Returns a mapping of component names to their allowed model types.
+    This is used by the frontend to dynamically show available models.
+    """
+    return {
+        'components': COMPONENT_MODEL_TYPES,
+        'description': {
+            'pragmatic_conversational': 'Optimized for mixed temporal, linguistic, and semantic features',
+            'acoustic_prosodic': 'Optimized for continuous acoustic features (pitch, energy, spectral) using SVM and LightGBM',
+            'syntactic_semantic': 'Optimized for syntactic patterns and semantic relationships using Logistic Regression and Gradient Boosting'
+        }
+    }
 
 
 @app.post("/analyze/semantic-coherence", tags=["User Mode"])

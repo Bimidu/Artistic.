@@ -690,17 +690,26 @@ async function startTraining() {
         return;
     }
     
-    // Get selected model types
-    const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
-        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value))
-        .map(cb => cb.value);
+    const component = document.getElementById('trainingComponent').value;
+    
+    // Get selected model types (only from the model types section)
+    const modelTypeCheckboxes = document.querySelectorAll('#modelTypesContainer input[type="checkbox"][value]:checked');
+    const selectedModels = Array.from(modelTypeCheckboxes).map(cb => cb.value);
     
     if (selectedModels.length === 0) {
         alert('Please select at least one model type');
         return;
     }
     
-    const component = document.getElementById('trainingComponent').value;
+    // Validate models are allowed for this component
+    if (componentModelTypes && componentModelTypes[component]) {
+        const allowedModels = componentModelTypes[component];
+        const invalidModels = selectedModels.filter(m => !allowedModels.includes(m));
+        if (invalidModels.length > 0) {
+            alert(`Invalid models for ${component}: ${invalidModels.join(', ')}. Allowed: ${allowedModels.join(', ')}`);
+            return;
+        }
+    }
     const featureSelectionEnabled = document.getElementById('featureSelectionEnabled').checked;
     const nFeatures = parseInt(document.getElementById('nFeatures').value) || 30;
     const testSize = parseFloat(document.getElementById('testSize').value) / 100 || 0.2;
@@ -744,6 +753,68 @@ async function startTraining() {
 }
 
 // Toggle feature count input based on checkbox
+// Component-specific model types (fetched from API)
+let componentModelTypes = null;
+
+async function fetchComponentModelTypes() {
+    try {
+        const response = await fetch(`${getApiUrl()}/training/component-models`);
+        if (response.ok) {
+            const data = await response.json();
+            componentModelTypes = data.components;
+        }
+    } catch (error) {
+        console.error('Failed to fetch component model types:', error);
+    }
+}
+
+function updateModelCheckboxes() {
+    const component = document.getElementById('trainingComponent').value;
+    
+    if (!componentModelTypes || !component) {
+        return;
+    }
+    
+    const allowedModels = componentModelTypes[component] || [];
+    
+    // Map of model values to their display info
+    const modelInfo = {
+        'random_forest': { label: 'Random Forest' },
+        'xgboost': { label: 'XGBoost' },
+        'logistic': { label: 'Logistic Regression' },
+        'gradient_boosting': { label: 'Gradient Boosting' },
+        'adaboost': { label: 'AdaBoost' },
+        'lightgbm': { label: 'LightGBM' },
+        'svm': { label: 'SVM (RBF)' }
+    };
+    
+    // Find the model types container
+    const modelTypesContainer = document.getElementById('modelTypesContainer');
+    
+    if (!modelTypesContainer) {
+        console.error('Model types container not found');
+        return;
+    }
+    
+    // Clear existing checkboxes
+    modelTypesContainer.innerHTML = '';
+    
+    // Add only allowed models for this component
+    allowedModels.forEach((modelValue, index) => {
+        const info = modelInfo[modelValue] || { label: modelValue };
+        const isChecked = index === 0 || index === 1; // Check first two by default
+        
+        const label = document.createElement('label');
+        label.className = 'flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors';
+        label.innerHTML = `
+            <input type="checkbox" value="${modelValue}" ${isChecked ? 'checked' : ''} class="w-5 h-5 text-primary-600 rounded">
+            <span class="ml-3 text-base text-primary-900">${info.label}</span>
+        `;
+        
+        modelTypesContainer.appendChild(label);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const featureSelectionCheckbox = document.getElementById('featureSelectionEnabled');
     const featureCountSection = document.getElementById('featureCountSection');
@@ -765,6 +836,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (trainingComponent) {
         trainingComponent.addEventListener('change', () => {
             loadAvailableDatasetsForTraining();
+            updateModelCheckboxes(); // Update model checkboxes when component changes
+        });
+        
+        // Load component model types on page load
+        fetchComponentModelTypes().then(() => {
+            updateModelCheckboxes(); // Initialize with default component
         });
     }
 });

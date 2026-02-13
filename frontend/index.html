@@ -700,34 +700,16 @@
                             
                             <div class="mb-8">
                                 <label class="block text-xl text-primary-900 mb-4">Model Types</label>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                                        <input type="checkbox" value="random_forest" checked class="w-5 h-5 text-primary-600 rounded">
-                                        <span class="ml-3 text-base text-primary-900">Random Forest</span>
-                                    </label>
+                                <p class="text-sm text-primary-500 mb-3">Available models change based on selected component</p>
+                                <div id="modelTypesContainer" class="grid grid-cols-2 gap-3">
+                                    <!-- Dynamically populated based on selected component -->
                                     <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
                                         <input type="checkbox" value="xgboost" checked class="w-5 h-5 text-primary-600 rounded">
                                         <span class="ml-3 text-base text-primary-900">XGBoost</span>
                                     </label>
                                     <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                                        <input type="checkbox" value="logistic" class="w-5 h-5 text-primary-600 rounded">
-                                        <span class="ml-3 text-base text-primary-900">Logistic Regression</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                                        <input type="checkbox" value="gradient_boosting" class="w-5 h-5 text-primary-600 rounded">
-                                        <span class="ml-3 text-base text-primary-900">Gradient Boosting</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                                        <input type="checkbox" value="adaboost" class="w-5 h-5 text-primary-600 rounded">
-                                        <span class="ml-3 text-base text-primary-900">AdaBoost</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                                        <input type="checkbox" value="lightgbm" class="w-5 h-5 text-primary-600 rounded">
-                                        <span class="ml-3 text-base text-primary-900">LightGBM</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                                        <input type="checkbox" value="svm" class="w-5 h-5 text-primary-600 rounded">
-                                        <span class="ml-3 text-base text-primary-900">SVM</span>
+                                        <input type="checkbox" value="random_forest" checked class="w-5 h-5 text-primary-600 rounded">
+                                        <span class="ml-3 text-base text-primary-900">Random Forest</span>
                                     </label>
                                 </div>
                             </div>

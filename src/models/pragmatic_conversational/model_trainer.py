@@ -51,10 +51,7 @@ class PragmaticModelConfig:
         cv_folds: Number of cross-validation folds for tuning
         random_state: Random state for reproducibility
     """
-    model_type: Literal[
-        'random_forest', 'xgboost', 'lightgbm', 'svm',
-        'logistic', 'mlp', 'gradient_boosting'
-    ]
+    model_type: Literal['xgboost', 'random_forest']
     pragmatic_preprocessing: Dict[str, Any] = field(default_factory=lambda: {
         'handle_social_features': True,
         'normalize_conversational_features': True,
@@ -80,53 +77,37 @@ class PragmaticConversationalTrainer:
     Fully implemented with comprehensive training and evaluation capabilities.
     """
     
-    # Pragmatic-optimized hyperparameters
+    # COMPONENT-SPECIFIC: Pragmatic/Conversational models
+    # Only XGBoost and Random Forest supported for this component
+    # These models excel at handling mixed temporal, linguistic, and semantic features
+    ALLOWED_MODEL_TYPES = ['xgboost', 'random_forest']
+    
+    # Pragmatic-optimized hyperparameters (fine-tuned for conversational data)
     PRAGMATIC_DEFAULT_PARAMS = {
-        'random_forest': {
-            'n_estimators': 200,
-            'max_depth': 15,
-            'min_samples_split': 3,
-            'min_samples_leaf': 1,
-            'random_state': 42,
-            'n_jobs': -1,
-        },
         'xgboost': {
-            'n_estimators': 150,
-            'max_depth': 8,
-            'learning_rate': 0.1,
-            'subsample': 0.8,
-            'colsample_bytree': 0.8,
+            'n_estimators': 200,           # More trees for complex patterns
+            'max_depth': 10,               # Deep trees for interaction capture
+            'learning_rate': 0.05,         # Lower LR for better generalization
+            'subsample': 0.85,             # Slightly higher sampling
+            'colsample_bytree': 0.85,      # Slightly higher feature sampling
+            'min_child_weight': 2,         # Prevent overfitting
+            'gamma': 0.1,                  # Regularization
+            'reg_alpha': 0.3,              # L1 regularization
+            'reg_lambda': 1.5,             # L2 regularization
             'random_state': 42,
             'n_jobs': -1,
+            'eval_metric': 'logloss',
         },
-        'lightgbm': {
-            'n_estimators': 150,
-            'max_depth': 8,
-            'learning_rate': 0.1,
-            'subsample': 0.8,
-            'colsample_bytree': 0.8,
+        'random_forest': {
+            'n_estimators': 250,           # Many trees for stability
+            'max_depth': 18,               # Deep for conversation complexity
+            'min_samples_split': 4,        # Balance bias-variance
+            'min_samples_leaf': 2,         # Prevent overfitting
+            'max_features': 0.7,           # Use 70% of features per split
+            'bootstrap': True,
             'random_state': 42,
             'n_jobs': -1,
-            'verbose': -1,
-        },
-        'svm': {
-            'C': 1.0,
-            'kernel': 'rbf',
-            'gamma': 'scale',
-            'random_state': 42,
-        },
-        'logistic': {
-            'C': 1.0,
-            'max_iter': 2000,
-            'random_state': 42,
-            'n_jobs': -1,
-        },
-        'mlp': {
-            'hidden_layer_sizes': (150, 100, 50),
-            'activation': 'relu',
-            'max_iter': 1000,
-            'alpha': 0.001,
-            'random_state': 42,
+            'class_weight': 'balanced',    # Handle class imbalance
         },
     }
     
@@ -227,9 +208,9 @@ class PragmaticConversationalTrainer:
         self.logger.info("Training multiple pragmatic models (IMPLEMENTED)")
         
         if model_configs is None:
-            model_types = ['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic']
+            # Component-specific: Only XGBoost and Random Forest
             model_configs = [
-                PragmaticModelConfig(model_type=mt) for mt in model_types
+                PragmaticModelConfig(model_type=mt) for mt in self.ALLOWED_MODEL_TYPES
             ]
         
         trained_models = {}
@@ -266,19 +247,17 @@ class PragmaticConversationalTrainer:
         }
     
     def _create_model(self, model_type: str, params: Dict[str, Any]):
-        """Create model instance based on type."""
+        """Create model instance based on type (component-specific)."""
         model_classes = {
-            'random_forest': RandomForestClassifier,
             'xgboost': XGBClassifier,
-            'lightgbm': LGBMClassifier,
-            'svm': SVC,
-            'logistic': LogisticRegression,
-            'mlp': MLPClassifier,
-            'gradient_boosting': GradientBoostingClassifier,
+            'random_forest': RandomForestClassifier,
         }
         
         if model_type not in model_classes:
-            raise ValueError(f"Unknown model type: {model_type}")
+            raise ValueError(
+                f"Model type '{model_type}' not supported for Pragmatic/Conversational component. "
+                f"Allowed types: {self.ALLOWED_MODEL_TYPES}"
+            )
         
         return model_classes[model_type](**params)
     
@@ -460,14 +439,9 @@ class PragmaticConversationalTrainer:
         print("5. [CHECK] Model evaluation and comparison")
         print("6. [CHECK] Model saving/loading with metadata")
         
-        print("\n[CHART] Supported Models:")
-        print("- Random Forest (optimized for pragmatic features)")
-        print("- XGBoost (gradient boosting)")
-        print("- LightGBM (light gradient boosting)")
-        print("- SVM (support vector machine)")
-        print("- Logistic Regression (linear model)")
-        print("- MLP (neural network)")
-        print("- Gradient Boosting (sklearn)")
+        print("\n[CHART] Component-Specific Models:")
+        print("XGBoost - Primary model (handles complex temporal and semantic interactions)")
+        print("Random Forest - Secondary model (robust to conversational noise, interpretable)")
         
         print("\n[TARGET] Pragmatic Features Supported:")
         print("- Turn-taking patterns (15 features)")
