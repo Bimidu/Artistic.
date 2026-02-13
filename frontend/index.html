@@ -512,6 +512,72 @@
 
             </div>
 
+
+
+
+
+
+
+
+            <!-- Interactive Counterfactual Chat -->
+                <div
+                    id="cfChatSection"
+                    class="mt-10 bg-primary-50 border border-primary-200 rounded-2xl p-6 hidden"
+                >
+
+                    <h3 class="text-2xl font-medium text-primary-900 mb-3">
+                        Explore a What-If Scenario
+                    </h3>
+
+                    <p class="text-sm text-primary-600 mb-5">
+                        Ask a hypothetical question about a conversational behavior to explore
+                        how it might influence the model’s decision.
+                        <span class="italic">(Simulated response – future extension)</span>
+                    </p>
+
+                    <!-- Preset Question -->
+                    <div class="flex flex-col md:flex-row gap-4 mb-4">
+                        <select
+                            id="cfQuestion"
+                            class="flex-1 px-4 py-2 rounded-xl border border-primary-300 bg-white text-sm focus:outline-none"
+                        >
+                            <option>
+                                What if the number of “uhm” continuation markers increased by 0.3?
+                            </option>
+                            <option>
+                                What if average turn length decreased slightly?
+                            </option>
+                            <option>
+                                What if semantic coherence improved?
+                            </option>
+                        </select>
+
+                        <button
+                            onclick="simulateCounterfactualChat()"
+                            class="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm hover:bg-primary-700 transition"
+                        >
+                            Ask
+                        </button>
+                    </div>
+
+                    <!-- Simulated Answer -->
+                    <div
+                        id="cfChatResponse"
+                        class="hidden bg-white border border-primary-200 rounded-xl p-5 text-sm text-primary-900"
+                    ></div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
         </div>
         
         <!-- Training Mode -->

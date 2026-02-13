@@ -8,6 +8,7 @@ Key functionalities:
 - Model versioning
 - Model selection and retrieval
 - Model metadata management
+- Cloud storage integration (HuggingFace Hub)
 
 Author: Bimidu Gunathilake
 """
@@ -72,14 +73,20 @@ class ModelRegistry:
     Model registry for managing trained models.
     
     Handles saving, loading, versioning, and metadata management.
+    Supports cloud storage via HuggingFace Hub.
     """
     
-    def __init__(self, registry_dir: Optional[Path] = None):
+    def __init__(
+        self,
+        registry_dir: Optional[Path] = None,
+        use_cloud: Optional[bool] = None
+    ):
         """
         Initialize model registry.
         
         Args:
             registry_dir: Directory for storing models (None = use config)
+            use_cloud: Use cloud storage (None = use config setting)
         """
         self.registry_dir = registry_dir or config.paths.models_dir
         self.registry_dir.mkdir(parents=True, exist_ok=True)
@@ -89,10 +96,37 @@ class ModelRegistry:
         
         self.logger = logger
         
+        # Cloud storage configuration
+        self.use_cloud = use_cloud if use_cloud is not None else config.cloud.use_cloud
+        self.hf_manager = None
+        
+        if self.use_cloud:
+            try:
+                from src.cloud import get_hf_manager, HFConfig
+                
+                # Create HF config from app config
+                hf_config = HFConfig(
+                    dataset_repo=config.cloud.hf_dataset_repo,
+                    model_repo=config.cloud.hf_model_repo,
+                    use_cloud=config.cloud.use_cloud,
+                    fallback_to_local=config.cloud.fallback_to_local
+                )
+                
+                self.hf_manager = get_hf_manager(hf_config)
+                self.logger.info("Cloud storage enabled via HuggingFace Hub")
+            except Exception as e:
+                self.logger.warning(f"Failed to initialize cloud storage: {e}")
+                self.logger.info("Falling back to local-only mode")
+                self.use_cloud = False
+        
         # Load existing registry
         self._load_registry()
         
-        self.logger.info(f"ModelRegistry initialized - Directory: {self.registry_dir}")
+        self.logger.info(
+            f"ModelRegistry initialized - "
+            f"Directory: {self.registry_dir}, "
+            f"Cloud: {self.use_cloud}"
+        )
     
     def _load_registry(self):
         """Load registry metadata from disk."""
@@ -132,7 +166,8 @@ class ModelRegistry:
         self,
         model: Any,
         metadata: ModelMetadata,
-        preprocessor: Optional[Any] = None
+        preprocessor: Optional[Any] = None,
+        upload_to_cloud: Optional[bool] = None
     ):
         """
         Register and save a trained model.
@@ -141,6 +176,7 @@ class ModelRegistry:
             model: Trained model to save
             metadata: Model metadata
             preprocessor: Optional preprocessor to save with model
+            upload_to_cloud: Upload to cloud storage (None = use config)
         """
         self.logger.info(f"Registering model: {metadata.model_name}")
         
@@ -169,28 +205,68 @@ class ModelRegistry:
         self._save_registry()
         
         self.logger.info(f"Model {metadata.model_name} registered successfully")
+        
+        # Upload to cloud if enabled
+        should_upload = upload_to_cloud if upload_to_cloud is not None else (
+            self.use_cloud and config.cloud.auto_sync
+        )
+        
+        if should_upload and self.hf_manager:
+            self.logger.info(f"Uploading model to cloud: {metadata.model_name}")
+            success = self.hf_manager.upload_model(metadata.model_name, model_dir)
+            if success:
+                self.logger.info(f"✓ Model uploaded to cloud")
+            else:
+                self.logger.warning(f"Failed to upload model to cloud")
     
     def load_model(
         self,
         model_name: str,
-        load_preprocessor: bool = False
+        load_preprocessor: bool = False,
+        prefer_cloud: Optional[bool] = None
     ) -> Any:
         """
-        Load a registered model.
+        Load a registered model (from cloud or local).
         
         Args:
             model_name: Name of model to load
             load_preprocessor: Whether to load preprocessor as well
+            prefer_cloud: Try cloud first (None = use config)
         
         Returns:
             Loaded model (and preprocessor if requested)
         """
         if model_name not in self.models_:
-            raise ValueError(f"Model {model_name} not found in registry")
+            # Try to sync from cloud if not in local registry
+            if self.use_cloud and self.hf_manager:
+                self.logger.info(f"Model not in local registry, trying cloud: {model_name}")
+                cloud_path = self.hf_manager.download_model(model_name)
+                if cloud_path:
+                    # Update local registry
+                    self._sync_model_from_cloud(model_name, cloud_path)
+            
+            if model_name not in self.models_:
+                raise ValueError(f"Model {model_name} not found in registry or cloud")
         
         self.logger.info(f"Loading model: {model_name}")
         
-        model_dir = self.registry_dir / model_name
+        # Determine source (cloud or local)
+        should_prefer_cloud = prefer_cloud if prefer_cloud is not None else self.use_cloud
+        
+        model_dir = None
+        
+        # Try cloud first if preferred
+        if should_prefer_cloud and self.hf_manager:
+            self.logger.debug("Trying to load from cloud first")
+            cloud_path = self.hf_manager.download_model(model_name)
+            if cloud_path:
+                model_dir = cloud_path
+                self.logger.info(f"Using model from cloud")
+        
+        # Fallback to local
+        if model_dir is None:
+            model_dir = self.registry_dir / model_name
+            self.logger.debug(f"Using local model: {model_dir}")
         
         # Load model
         model_path = model_dir / "model.joblib"
@@ -212,6 +288,20 @@ class ModelRegistry:
                 return model, None
         
         return model
+    
+    def _sync_model_from_cloud(self, model_name: str, cloud_path: Path):
+        """Sync model metadata from cloud to local registry."""
+        try:
+            metadata_path = cloud_path / "metadata.json"
+            if metadata_path.exists():
+                with open(metadata_path, 'r') as f:
+                    metadata_dict = json.load(f)
+                metadata = ModelMetadata(**metadata_dict)
+                self.models_[model_name] = metadata
+                self._save_registry()
+                self.logger.info(f"Synced model metadata from cloud: {model_name}")
+        except Exception as e:
+            self.logger.warning(f"Failed to sync metadata from cloud: {e}")
     
     def get_model_metadata(self, model_name: str) -> ModelMetadata:
         """
@@ -319,11 +409,72 @@ class ModelRegistry:
         
         return df
     
+    def sync_to_cloud(self, model_names: Optional[List[str]] = None) -> Dict[str, bool]:
+        """
+        Sync models to cloud storage.
+        
+        Args:
+            model_names: List of model names to sync (None = sync all)
+        
+        Returns:
+            Dict mapping model_name to success status
+        """
+        if not self.use_cloud or not self.hf_manager:
+            self.logger.warning("Cloud storage not available")
+            return {}
+        
+        if model_names is None:
+            model_names = list(self.models_.keys())
+        
+        results = {}
+        for model_name in model_names:
+            if model_name in self.models_:
+                model_dir = self.registry_dir / model_name
+                success = self.hf_manager.upload_model(model_name, model_dir)
+                results[model_name] = success
+            else:
+                self.logger.warning(f"Model not found: {model_name}")
+                results[model_name] = False
+        
+        return results
+    
+    def sync_from_cloud(self, model_names: Optional[List[str]] = None) -> Dict[str, bool]:
+        """
+        Sync models from cloud storage.
+        
+        Args:
+            model_names: List of model names to sync (None = list from cloud)
+        
+        Returns:
+            Dict mapping model_name to success status
+        """
+        if not self.use_cloud or not self.hf_manager:
+            self.logger.warning("Cloud storage not available")
+            return {}
+        
+        if model_names is None:
+            # Get list of models from cloud
+            model_names = self.hf_manager.list_cloud_models()
+        
+        results = {}
+        for model_name in model_names:
+            cloud_path = self.hf_manager.download_model(model_name)
+            if cloud_path:
+                # Update local registry
+                self._sync_model_from_cloud(model_name, cloud_path)
+                results[model_name] = True
+            else:
+                results[model_name] = False
+        
+        return results
+    
     def print_summary(self):
         """Print registry summary."""
         print("\n" + "="*70)
         print("MODEL REGISTRY SUMMARY")
         print("="*70)
+        
+        print(f"\nCloud Storage: {'Enabled' if self.use_cloud else 'Disabled'}")
         
         if not self.models_:
             print("\nNo models registered")
@@ -342,6 +493,14 @@ class ModelRegistry:
                 print(f"  Type: {best_meta.model_type}")
                 print(f"  Accuracy: {best_meta.accuracy:.4f}")
                 print(f"  F1-Score: {best_meta.f1_score:.4f}")
+            except:
+                pass
+        
+        # Show cloud status if enabled
+        if self.use_cloud and self.hf_manager:
+            try:
+                cloud_models = self.hf_manager.list_cloud_models()
+                print(f"\nCloud Models Available: {len(cloud_models)}")
             except:
                 pass
         

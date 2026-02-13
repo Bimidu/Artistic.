@@ -86,6 +86,25 @@ class ProcessingConfig:
 
 
 @dataclass
+class CloudConfig:
+    """
+    Configuration for cloud storage integration.
+    
+    Attributes:
+        use_cloud: Whether to use cloud storage (HuggingFace Hub)
+        fallback_to_local: Fall back to local storage if cloud fails
+        hf_dataset_repo: HuggingFace dataset repository name
+        hf_model_repo: HuggingFace model repository name
+        auto_sync: Automatically sync models/data to cloud after training
+    """
+    use_cloud: bool = os.getenv("USE_CLOUD_STORAGE", "True").lower() == "true"
+    fallback_to_local: bool = os.getenv("CLOUD_FALLBACK_LOCAL", "True").lower() == "true"
+    hf_dataset_repo: str = os.getenv("HF_DATASET_REPO", "your-username/artistic-asd-datasets")
+    hf_model_repo: str = os.getenv("HF_MODEL_REPO", "your-username/artistic-asd-models")
+    auto_sync: bool = os.getenv("CLOUD_AUTO_SYNC", "False").lower() == "true"
+
+
+@dataclass
 class LoggingConfig:
     """
     Configuration for logging settings.
@@ -169,6 +188,7 @@ class Config:
         self.processing = ProcessingConfig()
         self.logging = LoggingConfig()
         self.datasets = DatasetConfig()
+        self.cloud = CloudConfig()
     
     def to_dict(self) -> Dict[str, Any]:
         """
@@ -183,6 +203,7 @@ class Config:
             "processing": self.processing.__dict__,
             "logging": self.logging.__dict__,
             "datasets": self.datasets.__dict__,
+            "cloud": self.cloud.__dict__,
         }
     
     def __repr__(self) -> str:
@@ -202,5 +223,6 @@ __all__ = [
     "ProcessingConfig",
     "LoggingConfig",
     "DatasetConfig",
+    "CloudConfig",
 ]
 

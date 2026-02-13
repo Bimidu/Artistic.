@@ -493,6 +493,9 @@ function displayResults(data) {
     //Counterfactuals
     if (data.counterfactual) {
     renderCounterfactual(data.counterfactual);
+    document
+        .getElementById("cfChatSection")
+        .classList.remove("hidden");
     }
 
 
@@ -1585,7 +1588,7 @@ function renderCounterfactual(counterfactual) {
 
     // Summary
     document.getElementById("cfFlipped").textContent =
-        counterfactual.prediction_flipped ? "Yes ✅" : "No ❌";
+        counterfactual.prediction_flipped ? "Yes " : "No ";
 
     document.getElementById("cfL2").textContent =
         counterfactual.l2_change.toFixed(3);
@@ -1620,7 +1623,10 @@ function renderCounterfactual(counterfactual) {
         `;
 
         tbody.appendChild(row);
+
     });
+
+
 }
 
 
@@ -2852,6 +2858,26 @@ async function displayWaveform(audioFile, featureInfo = null) {
         if (waveformInfoResults) waveformInfoResults.textContent = 'Error loading waveform';
         if (waveformSectionResults) waveformSectionResults.classList.remove('hidden');
     }
+}
+
+
+function simulateCounterfactualChat() {
+    const responseBox = document.getElementById("cfChatResponse");
+
+    responseBox.innerHTML = `
+        <strong>Simulated Response:</strong><br><br>
+        Increasing the frequency of <em>continuation markers</em> (e.g., “uhm”)
+        would increase the model’s estimated likelihood of ASD.
+        <br><br>
+        In the current model, this feature is associated with
+        disrupted conversational flow and increased hesitation.
+        A change of this magnitude alone may not flip the prediction,
+        but it would contribute positively toward ASD risk.
+        <br><br>
+       
+    `;
+
+    responseBox.classList.remove("hidden");
 }
 
 /**
