@@ -22,6 +22,7 @@ class UserInDB(BaseModel):
     full_name: str
     google_id: Optional[str] = None
     avatar_url: Optional[str] = None
+    role: str = "user"  # "user" or "admin"
     is_active: bool = True
     is_verified: bool = False
     created_at: datetime = Field(default_factory=datetime.utcnow)
@@ -43,6 +44,7 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str  # No length restrictions
     full_name: str = Field(..., min_length=2)
+    role: str = Field(default="user")  # "user" or "admin", defaults to "user"
 
 
 class UserLogin(BaseModel):
@@ -57,6 +59,7 @@ class UserResponse(BaseModel):
     email: EmailStr
     full_name: str
     avatar_url: Optional[str] = None
+    role: str  # "user" or "admin", no default - use value from database
     is_active: bool
     created_at: datetime
 

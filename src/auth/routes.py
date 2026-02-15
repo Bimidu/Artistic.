@@ -40,28 +40,37 @@ async def register(user_data: UserCreate):
     
     # Create user document
     user_id = str(uuid.uuid4())
+    
+    # DEBUG: Log the role being used
+    print(f"DEBUG: user_data.role = {user_data.role}")
+    print(f"DEBUG: user_data dict = {user_data.dict()}")
+    
     user_doc = {
         "_id": user_id,
         "email": user_data.email,
         "hashed_password": get_password_hash(user_data.password),
         "full_name": user_data.full_name,
+        "role": user_data.role,  # Use role from registration data
         "is_active": True,
         "is_verified": False,
         "created_at": datetime.utcnow(),
         "updated_at": datetime.utcnow(),
     }
     
+    print(f"DEBUG: user_doc['role'] = {user_doc['role']}")
+    
     # Insert into database
     await db.users.insert_one(user_doc)
     
     # Create access token
-    access_token = create_access_token(data={"sub": user_id, "email": user_data.email})
+    access_token = create_access_token(data={"sub": user_id, "email": user_data.email, "role": user_data.role})
     
     # Return token and user info
     user_response = UserResponse(
         _id=user_id,
         email=user_data.email,
         full_name=user_data.full_name,
+        role=user_data.role,
         is_active=True,
         created_at=user_doc["created_at"]
     )
@@ -103,7 +112,7 @@ async def login(credentials: UserLogin):
     
     # Create access token
     access_token = create_access_token(
-        data={"sub": user["_id"], "email": user["email"]}
+        data={"sub": user["_id"], "email": user["email"], "role": user.get("role", "user")}
     )
     
     # Return token and user info

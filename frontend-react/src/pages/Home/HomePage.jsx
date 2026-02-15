@@ -28,22 +28,24 @@ export const HomePage = () => {
                         </div>
 
                         <div className="flex items-center gap-8">
-                            {/* Mode Toggle */}
-                            <div className="toggle-switch">
-                                <div className={`toggle-option ${mode === 'user' ? 'active' : ''}`} onClick={() => setMode('user')}>
-                                    User Mode
+                            {/* Mode Toggle - Only show for admin users */}
+                            {user?.role === 'admin' && (
+                                <div className="toggle-switch">
+                                    <div className={`toggle-option ${mode === 'user' ? 'active' : ''}`} onClick={() => setMode('user')}>
+                                        User Mode
+                                    </div>
+                                    <div className={`toggle-option ${mode === 'training' ? 'active' : ''}`} onClick={() => setMode('training')}>
+                                        Training Mode
+                                    </div>
+                                    <div
+                                        className="toggle-slider"
+                                        style={{
+                                            width: 'calc(50% - 4px)',
+                                            left: mode === 'user' ? '4px' : '50%',
+                                        }}
+                                    />
                                 </div>
-                                <div className={`toggle-option ${mode === 'training' ? 'active' : ''}`} onClick={() => setMode('training')}>
-                                    Training Mode
-                                </div>
-                                <div
-                                    className="toggle-slider"
-                                    style={{
-                                        width: 'calc(50% - 4px)',
-                                        left: mode === 'user' ? '4px' : '50%',
-                                    }}
-                                />
-                            </div>
+                            )}
 
                             {/* Status */}
                             <div className="flex items-center gap-3 text-base text-white/80">
@@ -179,7 +181,12 @@ export const HomePage = () => {
             {/* Mode Content */}
             <div className="max-w-7xl mx-auto px-12 py-12">
                 {mode === 'user' && <PredictionPage />}
-                {mode === 'training' && <TrainingPage />}
+                {mode === 'training' && user?.role === 'admin' && <TrainingPage />}
+                {mode === 'training' && user?.role !== 'admin' && (
+                    <div className="text-center py-12">
+                        <p className="text-xl text-lime-900">Training mode is only available for administrators.</p>
+                    </div>
+                )}
             </div>
         </div>
     );

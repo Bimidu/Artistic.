@@ -12,6 +12,7 @@ export const RegisterForm = () => {
     const { register: registerUser } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isAdminSignup, setIsAdminSignup] = useState(false);
 
     const {
         register,
@@ -28,7 +29,7 @@ export const RegisterForm = () => {
         setLoading(true);
 
         try {
-            await registerUser(data.name, data.email, data.password);
+            await registerUser(data.name, data.email, data.password, isAdminSignup ? 'admin' : 'user');
             navigate('/');
         } catch (err) {
             setError(err.response?.data?.detail || 'Registration failed');
@@ -38,8 +39,8 @@ export const RegisterForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <h2 className="text-4xl text-primary-900 mb-8">
+        <form onSubmit={handleSubmit(onSubmit)} className={`space-y-6 ${isAdminSignup ? 'p-6 border-2 border-lime-600 rounded-2xl bg-lime-50/30' : ''}`}>
+            <h2 className={`text-4xl mb-8 ${isAdminSignup ? 'text-lime-900' : 'text-primary-900'}`}>
                 Create Account
             </h2>
 
@@ -146,6 +147,16 @@ export const RegisterForm = () => {
                 </span>
             </label>
             {errors.terms && <p className="text-red-500 text-sm -mt-4">{errors.terms.message}</p>}
+
+            <div className="text-center">
+                <button
+                    type="button"
+                    onClick={() => setIsAdminSignup(!isAdminSignup)}
+                    className="text-sm text-primary-700 hover:text-primary-900 transition-colors underline mb-4"
+                >
+                    {isAdminSignup ? '✓ Sign up as Admin' : 'Sign up as Admin'}
+                </button>
+            </div>
 
             <Button type="submit" variant="primary" loading={loading} className="w-full">
                 Create Account

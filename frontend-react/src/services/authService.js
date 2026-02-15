@@ -1,11 +1,12 @@
 import api from './api';
 
 export const authService = {
-    async register(name, email, password) {
+    async register(name, email, password, role = 'user') {
         const response = await api.post('/auth/register', {
             full_name: name,
             email,
             password,
+            role,
         });
         return response.data;
     },
