@@ -40,11 +40,6 @@ async def register(user_data: UserCreate):
     
     # Create user document
     user_id = str(uuid.uuid4())
-    
-    # DEBUG: Log the role being used
-    print(f"DEBUG: user_data.role = {user_data.role}")
-    print(f"DEBUG: user_data dict = {user_data.dict()}")
-    
     user_doc = {
         "_id": user_id,
         "email": user_data.email,
@@ -56,8 +51,7 @@ async def register(user_data: UserCreate):
         "created_at": datetime.utcnow(),
         "updated_at": datetime.utcnow(),
     }
-    
-    print(f"DEBUG: user_doc['role'] = {user_doc['role']}")
+
     
     # Insert into database
     await db.users.insert_one(user_doc)
