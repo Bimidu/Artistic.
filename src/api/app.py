@@ -45,6 +45,9 @@ from src.utils.logger import get_logger
 from src.interpretability.counterfactuals.cf_service import generate_counterfactual
 from src.interpretability.counterfactuals.train_autoencoder import train_autoencoder
 from config import config
+from src.database import connect_to_mongo, close_mongo_connection
+from src.auth.routes import router as auth_router
+from src.auth.google_oauth import router as google_oauth_router
 
 logger = get_logger(__name__)
 ASSETS_DIR = Path("assets")
@@ -79,6 +82,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include authentication routes
+app.include_router(auth_router)
+app.include_router(google_oauth_router)
+
+# Startup and shutdown events for MongoDB
+@app.on_event("startup")
+async def startup_db_client():
+    """Initialize MongoDB connection on startup"""
+    try:
+        await connect_to_mongo()
+    except Exception as e:
+        logger.warning(f"MongoDB connection failed: {e}. Authentication features will be unavailable.")
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    """Close MongoDB connection on shutdown"""
+    await close_mongo_connection()
 
 # Initialize components
 model_registry = ModelRegistry()

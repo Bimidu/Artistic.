@@ -1,0 +1,161 @@
+@import './styles/fonts.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   BASE STYLES - Matching original frontend
+   ======================================== */
+
+body {
+  margin: 0;
+  font-family: 'Saans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: #212529;
+  min-height: 100vh;
+}
+
+/* Clean Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Saans', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Modern Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-option {
+  position: relative;
+  padding: 10px 32px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.toggle-option.active {
+  color: #212529;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  background: white;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Upload area transitions */
+.upload-area {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.upload-area:hover {
+  transform: translateY(-2px);
+}
+
+.upload-area.dragover {
+  background-color: #f8f9fa;
+  transform: scale(1.01);
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border: 2px solid #e9ecef;
+  border-top-color: #495057;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Modern Input Focus */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* Button base */
+button {
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Status animation */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.status-connected {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Model card hover */
+.model-card {
+  transition: all 0.3s ease;
+}
+
+.model-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Clean Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f3f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
+
+/* Card base style for HomePage */
+.card {
+  @apply bg-white rounded-2xl p-8 border border-primary-200 transition-shadow;
+}
