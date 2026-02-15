@@ -51,7 +51,7 @@ class PragmaticModelConfig:
         cv_folds: Number of cross-validation folds for tuning
         random_state: Random state for reproducibility
     """
-    model_type: Literal['xgboost', 'random_forest']
+    model_type: Literal['svm', 'logistic']
     pragmatic_preprocessing: Dict[str, Any] = field(default_factory=lambda: {
         'handle_social_features': True,
         'normalize_conversational_features': True,
@@ -78,33 +78,28 @@ class PragmaticConversationalTrainer:
     """
     
     # COMPONENT-SPECIFIC: Pragmatic/Conversational models
-    # Only XGBoost and Random Forest supported for this component
-    # These models excel at handling mixed temporal, linguistic, and semantic features
-    ALLOWED_MODEL_TYPES = ['xgboost', 'random_forest']
+    # Only SVM and Logistic Regression supported for this component
+    # These models are robust, interpretable, and less prone to overfitting
+    ALLOWED_MODEL_TYPES = ['svm', 'logistic']
     
-    # Pragmatic-optimized hyperparameters (fine-tuned for conversational data)
+    # ANTI-OVERFITTING pragmatic-optimized hyperparameters
+    # Heavily regularized and tuned for generalization on pragmatic/conversational data
     PRAGMATIC_DEFAULT_PARAMS = {
-        'xgboost': {
-            'n_estimators': 200,           # More trees for complex patterns
-            'max_depth': 10,               # Deep trees for interaction capture
-            'learning_rate': 0.05,         # Lower LR for better generalization
-            'subsample': 0.85,             # Slightly higher sampling
-            'colsample_bytree': 0.85,      # Slightly higher feature sampling
-            'min_child_weight': 2,         # Prevent overfitting
-            'gamma': 0.1,                  # Regularization
-            'reg_alpha': 0.3,              # L1 regularization
-            'reg_lambda': 1.5,             # L2 regularization
+        'svm': {
+            'C': 0.5,                      # Strong regularization to prevent overfitting
+            'kernel': 'rbf',               # RBF kernel for non-linear patterns
+            'gamma': 'scale',              # Automatic gamma scaling
+            'probability': True,           # Enable probability estimates
+            'class_weight': 'balanced',    # Handle class imbalance
             'random_state': 42,
-            'n_jobs': -1,
-            'eval_metric': 'logloss',
+            'cache_size': 500,             # Faster training
         },
-        'random_forest': {
-            'n_estimators': 250,           # Many trees for stability
-            'max_depth': 18,               # Deep for conversation complexity
-            'min_samples_split': 4,        # Balance bias-variance
-            'min_samples_leaf': 2,         # Prevent overfitting
-            'max_features': 0.7,           # Use 70% of features per split
-            'bootstrap': True,
+        'logistic': {
+            'C': 0.3,                      # Strong L2 regularization (1/C)
+            'penalty': 'elasticnet',       # Elastic net (L1 + L2) for feature selection
+            'solver': 'saga',              # SAGA solver supports elastic net
+            'l1_ratio': 0.5,               # Balance between L1 and L2
+            'max_iter': 3000,              # Ensure convergence
             'random_state': 42,
             'n_jobs': -1,
             'class_weight': 'balanced',    # Handle class imbalance
@@ -247,10 +242,10 @@ class PragmaticConversationalTrainer:
         }
     
     def _create_model(self, model_type: str, params: Dict[str, Any]):
-        """Create model instance based on type (component-specific)."""
+        """Create model instance based on type (component-specific with anti-overfitting)."""
         model_classes = {
-            'xgboost': XGBClassifier,
-            'random_forest': RandomForestClassifier,
+            'svm': SVC,
+            'logistic': LogisticRegression,
         }
         
         if model_type not in model_classes:
@@ -440,8 +435,8 @@ class PragmaticConversationalTrainer:
         print("6. [CHECK] Model saving/loading with metadata")
         
         print("\n[CHART] Component-Specific Models:")
-        print("XGBoost - Primary model (handles complex temporal and semantic interactions)")
-        print("Random Forest - Secondary model (robust to conversational noise, interpretable)")
+        print("SVM (RBF) - Primary model (non-linear patterns with strong regularization)")
+        print("Logistic Regression (ElasticNet) - Secondary model (interpretable with L1+L2 regularization)")
         
         print("\n[TARGET] Pragmatic Features Supported:")
         print("- Turn-taking patterns (15 features)")

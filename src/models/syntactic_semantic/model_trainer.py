@@ -51,7 +51,7 @@ class SyntacticSemanticModelConfig:
         cv_folds: Number of cross-validation folds for tuning
         random_state: Random state for reproducibility
     """
-    model_type: Literal['logistic', 'gradient_boosting']
+    model_type: Literal['lightgbm', 'gradient_boosting']
     syntactic_preprocessing: Dict[str, Any] = field(default_factory=lambda: {
         'normalize_dependency_features': True,
         'handle_parse_tree_features': True,
@@ -81,20 +81,23 @@ class SyntacticSemanticTrainer:
     """
 
     # COMPONENT-SPECIFIC: Syntactic/Semantic models
-    # Only Logistic Regression and Gradient Boosting supported for this component
-    # Logistic is simple/interpretable; Gradient Boosting handles non-linearities when real features added
-    ALLOWED_MODEL_TYPES = ['logistic', 'gradient_boosting']
+    # Only LightGBM and Gradient Boosting supported for this component
+    # Lightweight gradient boosting models appropriate for syntactic features
+    ALLOWED_MODEL_TYPES = ['lightgbm', 'gradient_boosting']
     
     # Syntactic/semantic-optimized hyperparameters
     SYNTACTIC_SEMANTIC_DEFAULT_PARAMS = {
-        'logistic': {
-            'C': 0.8,                      # Moderate regularization
-            'penalty': 'l2',               # L2 regularization
-            'solver': 'lbfgs',             # Efficient for small datasets
-            'max_iter': 2000,
+        'lightgbm': {
+            'n_estimators': 100,           # Moderate number
+            'max_depth': 6,                # Shallow for simple patterns
+            'learning_rate': 0.08,         # Learning rate for generalization
+            'subsample': 0.85,             # Sampling ratio
+            'colsample_bytree': 0.85,      # Feature sampling
+            'reg_alpha': 0.3,              # L1 regularization
+            'reg_lambda': 1.5,             # L2 regularization
             'random_state': 42,
             'n_jobs': -1,
-            'class_weight': 'balanced',
+            'verbose': -1,
         },
         'gradient_boosting': {
             'n_estimators': 150,           # Moderate number
@@ -204,7 +207,7 @@ class SyntacticSemanticTrainer:
         self.logger.info("Training multiple syntactic/semantic models (IMPLEMENTED)")
 
         if model_configs is None:
-            # Component-specific: Only Logistic Regression and Gradient Boosting
+            # Component-specific: Only LightGBM and Gradient Boosting
             model_configs = [
                 SyntacticSemanticModelConfig(model_type=mt) for mt in self.ALLOWED_MODEL_TYPES
             ]
@@ -246,7 +249,7 @@ class SyntacticSemanticTrainer:
     def _create_model(self, model_type: str, params: Dict[str, Any]):
         """Create model instance based on type (component-specific)."""
         model_classes = {
-            'logistic': LogisticRegression,
+            'lightgbm': LGBMClassifier,
             'gradient_boosting': GradientBoostingClassifier,
         }
 
@@ -439,7 +442,7 @@ class SyntacticSemanticTrainer:
         print("6. [CHECK] Model saving/loading with metadata")
 
         print("\n[CHART] Component-Specific Models:")
-        print("Logistic Regression - Primary model (simple, interpretable for syntactic patterns)")
+        print("LightGBM - Primary model (fast gradient boosting for syntactic patterns)")
         print("Gradient Boosting - Secondary model (handles non-linearities when real features added)")
 
         print("\n[TARGET] Syntactic/Semantic Features Supported:")

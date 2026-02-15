@@ -21,34 +21,40 @@ logger = get_logger(__name__)
 class AcousticProsodicTrainer:
     """
     Trains ML models on acoustic & prosodic features.
-    COMPONENT-SPECIFIC: Only SVM and LightGBM (optimized for acoustic data).
+    COMPONENT-SPECIFIC: Only XGBoost and Random Forest (optimized for acoustic data).
     """
 
     # COMPONENT-SPECIFIC: Acoustic/Prosodic models
-    # Only SVM and LightGBM supported for this component
+    # Only XGBoost and Random Forest supported for this component
     # These models work well with continuous acoustic features (pitch, energy, spectral)
-    ALLOWED_MODEL_TYPES = ['svm', 'lightgbm']
+    ALLOWED_MODEL_TYPES = ['xgboost', 'random_forest']
     
     # Acoustic-optimized hyperparameters (fine-tuned for prosodic/spectral features)
     MODEL_CONFIGS = {
-        'svm': {
-            'C': 1.0,                        # Regularization strength
-            'kernel': 'rbf',
-            'gamma': 'scale',
-            'probability': True,
-            'random_state': 42,
-        },
-        'lightgbm': {
-            'n_estimators': 120,             # Moderate number for acoustic features
+        'xgboost': {
+            'n_estimators': 120,             # Moderate for acoustic features
             'max_depth': 8,                  # Moderate depth
             'learning_rate': 0.08,           # Slower learning for generalization
             'subsample': 0.8,                # Use 80% of data
             'colsample_bytree': 0.8,         # Use 80% of features
+            'min_child_weight': 3,           # Regularization for acoustic noise
+            'gamma': 0.2,                    # Pruning for generalization
             'reg_alpha': 0.4,                # L1 regularization
             'reg_lambda': 1.8,               # L2 regularization
             'random_state': 42,
             'n_jobs': -1,
-            'verbose': -1,
+            'eval_metric': 'logloss',
+        },
+        'random_forest': {
+            'n_estimators': 150,             # Many trees for acoustic stability
+            'max_depth': 12,                 # Moderate depth for acoustic patterns
+            'min_samples_split': 8,          # Balance bias-variance
+            'min_samples_leaf': 4,           # Prevent overfitting
+            'max_features': 'sqrt',          # Use sqrt(n_features) for acoustic
+            'bootstrap': True,
+            'random_state': 42,
+            'n_jobs': -1,
+            'class_weight': 'balanced',
         },
     }
 
@@ -147,13 +153,13 @@ class AcousticProsodicTrainer:
         # Get parameters (use custom if provided, otherwise use acoustic-optimized defaults)
         params = custom_params if custom_params else self.MODEL_CONFIGS
 
-        # Define COMPONENT-SPECIFIC models (only SVM and LightGBM)
+        # Define COMPONENT-SPECIFIC models (only XGBoost and Random Forest)
         models = {
-            "svm": SVC(
-                **params.get('svm', self.MODEL_CONFIGS['svm'])
+            "xgboost": XGBClassifier(
+                **params.get('xgboost', self.MODEL_CONFIGS['xgboost'])
             ),
-            "lightgbm": LGBMClassifier(
-                **params.get('lightgbm', self.MODEL_CONFIGS['lightgbm'])
+            "random_forest": RandomForestClassifier(
+                **params.get('random_forest', self.MODEL_CONFIGS['random_forest'])
             ),
         }
 

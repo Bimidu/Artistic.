@@ -785,7 +785,7 @@ function updateModelCheckboxes() {
         'gradient_boosting': { label: 'Gradient Boosting' },
         'adaboost': { label: 'AdaBoost' },
         'lightgbm': { label: 'LightGBM' },
-        'svm': { label: 'SVM (RBF)' }
+        'svm': { label: 'SVM' }
     };
     
     // Find the model types container

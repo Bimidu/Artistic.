@@ -51,9 +51,9 @@ ASSETS_DIR = Path("assets")
 
 # Component-specific model type mapping
 COMPONENT_MODEL_TYPES = {
-    'pragmatic_conversational': ['xgboost', 'random_forest'],
-    'acoustic_prosodic': ['svm', 'lightgbm'],
-    'syntactic_semantic': ['logistic', 'gradient_boosting']
+    'pragmatic_conversational': ['svm', 'logistic'],
+    'acoustic_prosodic': ['xgboost', 'random_forest'],
+    'syntactic_semantic': ['lightgbm', 'gradient_boosting']
 }
 
 # Initialize FastAPI app
@@ -2261,9 +2261,9 @@ async def get_component_models():
     return {
         'components': COMPONENT_MODEL_TYPES,
         'description': {
-            'pragmatic_conversational': 'Optimized for mixed temporal, linguistic, and semantic features',
-            'acoustic_prosodic': 'Optimized for continuous acoustic features (pitch, energy, spectral) using SVM and LightGBM',
-            'syntactic_semantic': 'Optimized for syntactic patterns and semantic relationships using Logistic Regression and Gradient Boosting'
+            'pragmatic_conversational': 'SVM and Logistic Regression with strong regularization for generalization',
+            'acoustic_prosodic': 'XGBoost and Random Forest optimized for continuous acoustic features',
+            'syntactic_semantic': 'LightGBM and Gradient Boosting for syntactic patterns'
         }
     }
 
