@@ -582,7 +582,18 @@
         
         <!-- Training Mode -->
         <div class="mode-content hidden" id="trainingMode">
+            <!-- Training mode tabs row (after main navbar) -->
+            <div class="bg-primary-100 border-b-2 border-primary-200">
+                <div class="max-w-7xl mx-auto px-12">
+                    <div class="flex gap-4">
+                        <button type="button" class="training-tab px-8 py-5 text-lg border-b-2 border-primary-900 text-primary-900" data-training-tab="feature-extraction">Feature Extraction</button>
+                        <button type="button" class="training-tab px-8 py-5 text-lg border-b-2 border-transparent text-primary-500 hover:text-primary-900 transition-colors" data-training-tab="training">Training</button>
+                        <button type="button" class="training-tab px-8 py-5 text-lg border-b-2 border-transparent text-primary-500 hover:text-primary-900 transition-colors" data-training-tab="trained-models">Trained Models</button>
+                    </div>
+                </div>
+            </div>
             <!-- Feature Extraction Section -->
+            <div class="training-tab-panel max-w-7xl mx-auto px-12 py-12" id="trainingTabFeatureExtraction" data-training-tab="feature-extraction">
             <div class="mb-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                 <div class="px-10 py-8 bg-white flex items-center justify-between">
                     <h2 class="text-5xl text-primary-900">Feature Extraction</h2>
@@ -636,8 +647,10 @@
                     </div>
                 </div>
             </div>
+            </div>
             
             <!-- Training Section -->
+            <div class="training-tab-panel hidden max-w-7xl mx-auto px-12 py-12" id="trainingTabTraining" data-training-tab="training">
             <div class="mb-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                 <div class="px-10 py-8 bg-white flex items-center justify-between">
                     <h2 class="text-5xl text-primary-900">Training</h2>
@@ -759,8 +772,10 @@
                     </div>
                 </div>
             </div>
+            </div>
             
-            <!-- Available Models -->
+            <!-- Available Models (Trained Models) -->
+            <div class="training-tab-panel hidden max-w-7xl mx-auto px-12 py-12" id="trainingTabTrainedModels" data-training-tab="trained-models">
             <div class="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
                 <div class="px-10 py-8 bg-white flex items-center justify-between">
                     <h2 class="text-5xl text-primary-900">Trained Models</h2>
@@ -774,6 +789,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

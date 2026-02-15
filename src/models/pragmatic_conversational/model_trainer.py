@@ -25,7 +25,11 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, StratifiedKFold
+from sklearn.metrics import make_scorer, f1_score as sk_f1_score
+from sklearn.feature_selection import RFECV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 
@@ -65,7 +69,8 @@ class PragmaticModelConfig:
         'extract_conversational': True,
     })
     hyperparameters: Dict[str, Any] = field(default_factory=dict)
-    tune_hyperparameters: bool = True  # Default to tuning for pragmatic features
+    tune_hyperparameters: bool = True  # RandomizedSearchCV for better F1
+    use_rfecv: bool = True  # RFECV feature selection when n_features > 30
     cv_folds: int = 5
     random_state: int = 42
 
@@ -83,23 +88,22 @@ class PragmaticConversationalTrainer:
     ALLOWED_MODEL_TYPES = ['svm', 'logistic']
     
     # ANTI-OVERFITTING pragmatic-optimized hyperparameters
-    # Heavily regularized and tuned for generalization on pragmatic/conversational data
+    # Balanced regularization tuned for performance on pragmatic/conversational data
     PRAGMATIC_DEFAULT_PARAMS = {
         'svm': {
-            'C': 0.5,                      # Strong regularization to prevent overfitting
+            'C': 2.0,                      # Moderate regularization (increased from 0.5)
             'kernel': 'rbf',               # RBF kernel for non-linear patterns
-            'gamma': 'scale',              # Automatic gamma scaling
+            'gamma': 0.01,                 # Manual gamma for better non-linear capture
             'probability': True,           # Enable probability estimates
             'class_weight': 'balanced',    # Handle class imbalance
             'random_state': 42,
             'cache_size': 500,             # Faster training
         },
         'logistic': {
-            'C': 0.3,                      # Strong L2 regularization (1/C)
-            'penalty': 'elasticnet',       # Elastic net (L1 + L2) for feature selection
-            'solver': 'saga',              # SAGA solver supports elastic net
-            'l1_ratio': 0.5,               # Balance between L1 and L2
-            'max_iter': 3000,              # Ensure convergence
+            'C': 1.0,                      # Moderate regularization (increased from 0.3)
+            'penalty': 'l2',               # L2 only for better convergence
+            'solver': 'lbfgs',             # LBFGS for L2 (faster than saga)
+            'max_iter': 2000,              # Sufficient iterations
             'random_state': 42,
             'n_jobs': -1,
             'class_weight': 'balanced',    # Handle class imbalance
@@ -115,6 +119,74 @@ class PragmaticConversationalTrainer:
         
         self.logger.info("PragmaticConversationalTrainer initialized (IMPLEMENTED)")
     
+    def _encode_labels_if_needed(self, y: pd.Series) -> Tuple[pd.Series, Optional[LabelEncoder]]:
+        """Encode string labels (ASD/TD) to 0/1 for sklearn compatibility."""
+        if y.dtype == object or y.dtype.name == 'category' or str(y.dtype).startswith('str'):
+            le = LabelEncoder()
+            y_enc = pd.Series(le.fit_transform(y.astype(str)), index=y.index)
+            return y_enc, le
+        return y, None
+
+    def _apply_rfecv_and_tuning(
+        self,
+        X_train: pd.DataFrame,
+        y_train: pd.Series,
+        config: PragmaticModelConfig,
+        model_type: str,
+    ):
+        """Apply RFECV and optional hyperparameter tuning. Returns fitted model/pipeline."""
+        n_features = X_train.shape[1]
+        params = self.PRAGMATIC_DEFAULT_PARAMS[model_type].copy()
+        params.update(config.hyperparameters)
+        base_model = self._create_model(model_type, params)
+
+        if config.use_rfecv and n_features > 30:
+            self.logger.info(f"Applying RFECV (n_features={n_features})")
+            rfecv = RFECV(
+                estimator=LogisticRegression(C=1.0, max_iter=1000, random_state=config.random_state, n_jobs=-1),
+                step=5,
+                cv=StratifiedKFold(3, shuffle=True, random_state=config.random_state),
+                scoring='f1_weighted',
+                min_features_to_select=20,
+                n_jobs=-1,
+            )
+            pipeline = Pipeline([('selector', rfecv), ('model', base_model)])
+        else:
+            pipeline = Pipeline([('model', base_model)])
+
+        if config.tune_hyperparameters:
+            self.logger.info(f"Running RandomizedSearchCV for {model_type}")
+            param_prefix = 'model__'
+            param_distributions = (
+                {
+                    f'{param_prefix}C': [0.5, 1.0, 2.0, 3.0, 5.0],
+                    f'{param_prefix}gamma': [0.005, 0.01, 0.05, 0.1, 'scale'],
+                    f'{param_prefix}class_weight': ['balanced'],
+                }
+                if model_type == 'svm'
+                else {
+                    f'{param_prefix}C': [0.5, 1.0, 2.0, 3.0, 5.0],
+                    f'{param_prefix}solver': ['lbfgs', 'saga'],
+                    f'{param_prefix}class_weight': ['balanced'],
+                }
+            )
+            scorer = make_scorer(sk_f1_score, average='weighted')
+            search = RandomizedSearchCV(
+                pipeline,
+                param_distributions,
+                n_iter=20,
+                cv=StratifiedKFold(3, shuffle=True, random_state=config.random_state),
+                scoring=scorer,
+                random_state=config.random_state,
+                n_jobs=-1,
+            )
+            search.fit(X_train, y_train)
+            self.best_params_[model_type] = search.best_params_
+            return search.best_estimator_
+
+        pipeline.fit(X_train, y_train)
+        return pipeline
+
     @timing_decorator
     def train_model(
         self,
@@ -126,56 +198,43 @@ class PragmaticConversationalTrainer:
         model_name: Optional[str] = None
     ):
         """
-        Train a single pragmatic/conversational model with full implementation.
-        
-        Args:
-            X_train: Training features (pragmatic/conversational)
-            y_train: Training labels
-            X_test: Test features (optional, for evaluation)
-            y_test: Test labels (optional, for evaluation)
-            config: Pragmatic model configuration
-            model_name: Name for the model
-        
-        Returns:
-            Trained model with evaluation results
+        Train a single pragmatic/conversational model with RFECV, label encoding,
+        and hyperparameter tuning built in.
         """
         if config is None:
-            config = PragmaticModelConfig(model_type='random_forest')
-        
+            config = PragmaticModelConfig(model_type='svm')
         model_name = model_name or f"pragmatic_{config.model_type}"
-        
-        self.logger.info(f"Training {model_name} model (IMPLEMENTED)")
-        
-        # Get hyperparameters
-        params = self.PRAGMATIC_DEFAULT_PARAMS[config.model_type].copy()
-        params.update(config.hyperparameters)
-        
-        # Create model
-        model = self._create_model(config.model_type, params)
-        
-        # Train model
-        model.fit(X_train, y_train)
-        
-        # Store model
-        self.models_[model_name] = model
-        
-        # Evaluate if test data provided
-        evaluation_results = {}
+
+        y_train_enc, _ = self._encode_labels_if_needed(y_train)
         if X_test is not None and y_test is not None:
-            y_pred = model.predict(X_test)
-            y_pred_proba = model.predict_proba(X_test)[:, 1] if hasattr(model, 'predict_proba') else None
-            
-            evaluation_results = self.evaluator.evaluate_model(
-                y_test, y_pred, y_pred_proba, model_name
-            )
-        
-        self.logger.info(f"{model_name} training complete (IMPLEMENTED)")
-        
+            y_test_enc, _ = self._encode_labels_if_needed(y_test)
+        else:
+            y_test_enc = None
+
+        self.logger.info(f"Training {model_name} (RFECV + tuning built in)")
+
+        model = self._apply_rfecv_and_tuning(X_train, y_train_enc, config, config.model_type)
+        self.models_[model_name] = model
+
+        evaluation_results = {}
+        if X_test is not None and y_test_enc is not None:
+            report = self.evaluator.evaluate(model, X_test, y_test_enc, model_name)
+            evaluation_results = {
+                'accuracy': report.accuracy,
+                'f1_score': report.f1_score,
+                'precision': report.precision,
+                'recall': report.recall,
+            }
+
+        n_feat = X_train.shape[1]
+        if hasattr(model, 'named_steps') and 'selector' in model.named_steps:
+            n_feat = model.named_steps['selector'].n_features_
+        self.logger.info(f"{model_name} training complete")
         return {
             'model': model,
             'evaluation': evaluation_results,
             'config': config,
-            'feature_count': X_train.shape[1]
+            'feature_count': n_feat,
         }
     
     @timing_decorator
@@ -330,20 +389,25 @@ class PragmaticConversationalTrainer:
         
         self.logger.info(f"Getting pragmatic feature importance (IMPLEMENTED)")
         
-        # Get feature importance
-        if hasattr(model, 'feature_importances_'):
-            importance_values = model.feature_importances_
-        elif hasattr(model, 'coef_'):
-            # For linear models, use absolute coefficients
-            importance_values = np.abs(model.coef_[0])
+        # Get feature importance (handle Pipeline with selector)
+        inner_model = model
+        names = list(feature_names)
+        if hasattr(model, 'named_steps') and 'model' in model.named_steps:
+            inner_model = model.named_steps['model']
+            if 'selector' in model.named_steps:
+                sel = model.named_steps['selector']
+                if hasattr(sel, 'support_'):
+                    names = [f for f, s in zip(feature_names, sel.support_) if s]
+        if hasattr(inner_model, 'feature_importances_'):
+            importance_values = inner_model.feature_importances_
+        elif hasattr(inner_model, 'coef_'):
+            importance_values = np.abs(inner_model.coef_[0])
         else:
-            # Fallback: random importance
-            importance_values = np.random.rand(len(feature_names))
-        
-        # Create importance DataFrame
+            importance_values = np.random.rand(len(names))
+        n = min(len(names), len(importance_values))
         importance_df = pd.DataFrame({
-            'feature': feature_names,
-            'importance': importance_values
+            'feature': names[:n],
+            'importance': importance_values[:n]
         }).sort_values('importance', ascending=False).head(top_n)
         
         # Add pragmatic categories

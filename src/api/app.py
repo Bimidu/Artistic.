@@ -1985,8 +1985,11 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         
         # Step 3: Train models
         from src.models import ModelTrainer, ModelConfig, ModelEvaluator
-        trainer = ModelTrainer()
+        from src.models.pragmatic_conversational import PragmaticConversationalTrainer
+        from src.models.pragmatic_conversational.model_trainer import PragmaticModelConfig
         evaluator = ModelEvaluator()
+        pragmatic_trainer = PragmaticConversationalTrainer() if component == 'pragmatic_conversational' else None
+        trainer = ModelTrainer() if pragmatic_trainer is None else None
         
         trained_models = {}
         model_reports = {}
@@ -1998,19 +2001,27 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
             
             logger.info(f"Training model: {model_type}")
             
-            # Get custom hyperparameters if provided
             hyperparams = {}
             if custom_hyperparameters and model_type in custom_hyperparameters:
                 hyperparams = custom_hyperparameters[model_type]
                 logger.info(f"Using custom hyperparameters for {model_type}: {hyperparams}")
             
-            config_obj = ModelConfig(
-                model_type=model_type,
-                hyperparameters=hyperparams,
-                tune_hyperparameters=False
-            )
-            
-            model = trainer.train_model(X_train, y_train, config_obj)
+            if pragmatic_trainer is not None:
+                config_obj = PragmaticModelConfig(
+                    model_type=model_type,
+                    hyperparameters=hyperparams,
+                    tune_hyperparameters=True,
+                    use_rfecv=True,
+                )
+                result = pragmatic_trainer.train_model(X_train, y_train, X_test, y_test, config_obj)
+                model = result['model']
+            else:
+                config_obj = ModelConfig(
+                    model_type=model_type,
+                    hyperparameters=hyperparams,
+                    tune_hyperparameters=False
+                )
+                model = trainer.train_model(X_train, y_train, config_obj)
             trained_models[model_type] = model
             
             # Evaluate

@@ -78,6 +78,23 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
+// Training mode tab switching (Feature Extraction, Training, Trained Models)
+document.querySelectorAll('.training-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.training-tab').forEach(t => {
+            t.classList.remove('border-primary-900', 'text-primary-900');
+            t.classList.add('border-transparent', 'text-primary-500');
+        });
+        tab.classList.add('border-primary-900', 'text-primary-900');
+        tab.classList.remove('border-transparent', 'text-primary-500');
+
+        const tabId = tab.getAttribute('data-training-tab');
+        document.querySelectorAll('.training-tab-panel').forEach(p => p.classList.add('hidden'));
+        const panel = document.querySelector(`.training-tab-panel[data-training-tab="${tabId}"]`);
+        if (panel) panel.classList.remove('hidden');
+    });
+});
+
 // Toggle model selection based on fusion checkbox
 function setupFusionToggle() {
     const fusionCheckboxes = [
