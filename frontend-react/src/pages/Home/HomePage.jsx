@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { PredictionPage } from '@pages/UserMode/PredictionPage';
@@ -10,6 +10,18 @@ export const HomePage = () => {
     const [mode, setMode] = useState('user'); // 'user' or 'training'
     const [apiStatus, setApiStatus] = useState('Connected');
     const [statusColor, setStatusColor] = useState('bg-green-400');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const handleLogout = async () => {
         await logout();
@@ -17,18 +29,19 @@ export const HomePage = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen font-sans antialiased">
+        <div className="bg-white min-h-screen font-sans antialiased flex flex-col">
             {/* Header */}
             <header className="bg-lime-950">
-                <div className="max-w-7xl mx-auto px-12 py-4">
+                <div className="max-w-full mx-auto px-12 py-4">
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-6">
+                        {/* Left: Logo */}
+                        <div className="flex items-center gap-6 flex-1">
                             <div className="text-4xl text-white">Artistic</div>
                             <div className="text-lg text-white/70 hidden sm:block">ASD Detection System</div>
                         </div>
 
-                        <div className="flex items-center gap-8">
-                            {/* Mode Toggle - Only show for admin users */}
+                        {/* Center: Mode Toggle - Only show for admin users */}
+                        <div className="flex-1 flex justify-center">
                             {user?.role === 'admin' && (
                                 <div className="toggle-switch">
                                     <div className={`toggle-option ${mode === 'user' ? 'active' : ''}`} onClick={() => setMode('user')}>
@@ -46,148 +59,208 @@ export const HomePage = () => {
                                     />
                                 </div>
                             )}
+                        </div>
 
+                        {/* Right: Status and Profile */}
+                        <div className="flex items-center gap-8 flex-1 justify-end">
                             {/* Status */}
                             <div className="flex items-center gap-3 text-base text-white/80">
                                 <span className={`w-2.5 h-2.5 rounded-full ${statusColor} status-connected`}></span>
                                 <span>{apiStatus}</span>
                             </div>
 
-                            {/* User Menu */}
-                            <div className="flex items-center gap-4">
-                                <span className="text-white text-sm">{user?.full_name || 'User'}</span>
+                            {/* Profile Icon Toggle */}
+                            <div className="relative" ref={dropdownRef}>
                                 <button
-                                    onClick={handleLogout}
-                                    className="px-5 py-2 bg-white text-primary-900 rounded-xl hover:bg-primary-100 transition-colors"
+                                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                                    className="w-12 h-12 bg-lime-700 rounded-full flex items-center justify-center text-xl font-medium text-white hover:bg-lime-600 transition-colors"
+                                    aria-label="Toggle profile menu"
                                 >
-                                    Logout
+                                    {user?.full_name?.charAt(0).toUpperCase() || 'U'}
                                 </button>
+
+                                {/* Dropdown Menu */}
+                                {dropdownOpen && (
+                                    <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-lime-200 overflow-hidden z-50">
+                                        {/* Profile Section */}
+                                        <div className="p-6 bg-gradient-to-br from-lime-950 to-lime-900 text-white">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-14 h-14 bg-lime-700 rounded-full flex items-center justify-center text-2xl font-medium ring-2 ring-white/20">
+                                                    {user?.full_name?.charAt(0).toUpperCase() || 'U'}
+                                                </div>
+                                                <div className="flex-1">
+                                                    <h3 className="font-medium text-lg">{user?.full_name || 'User'}</h3>
+                                                    <p className="text-sm text-lime-200/90">{user?.email}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Menu Items */}
+                                        <div className="p-3">
+                                            <button
+                                                onClick={() => {
+                                                    navigate('/reports');
+                                                    setDropdownOpen(false);
+                                                }}
+                                                className="w-full px-4 py-3 text-left rounded-xl hover:bg-lime-50 transition-colors flex items-center gap-3 text-lime-950 group"
+                                            >
+                                                <div className="w-10 h-10 rounded-lg bg-lime-100 group-hover:bg-lime-200 flex items-center justify-center transition-colors">
+                                                    <svg className="w-5 h-5 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                </div>
+                                                <span className="font-medium">My Reports</span>
+                                            </button>
+
+                                            <div className="my-2 border-t border-lime-100"></div>
+
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full px-4 py-3 text-left rounded-xl hover:bg-red-50 transition-colors flex items-center gap-3 text-red-600 group"
+                                            >
+                                                <div className="w-10 h-10 rounded-lg bg-red-100 group-hover:bg-red-200 flex items-center justify-center transition-colors">
+                                                    <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                                    </svg>
+                                                </div>
+                                                <span className="font-medium">Logout</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
             </header>
 
-            {/* Landing Section */}
-            <div className="bg-gradient-to-b from-lime-900/20 to-white">
-                <div className="max-w-7xl mx-auto px-12 py-20">
-                    {/* Hero */}
-                    <div className="text-center mb-20">
-                        <h1 className="text-6xl font-normal text-lime-950 mb-6">
-                            ASD Detection Through Speech Analysis
-                        </h1>
-                        <p className="text-xl text-lime-800 max-w-3xl mx-auto leading-relaxed">
-                            Advanced machine learning system for analyzing speech patterns to support
-                            autism spectrum disorder detection using multi-modal feature extraction for children
-                        </p>
-                    </div>
-
-                    {/* Components Grid */}
-                    <div className="mb-16">
-                        <h2 className="text-4xl font-light text-lime-950 text-center mb-12">
-                            Four-Component Analysis Framework
-                        </h2>
-
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {/* Pragmatic & Conversational */}
-                            <div className="bg-white rounded-2xl p-8 transition-shadow">
-                                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                                    <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl font-medium text-lime-950 mb-3">Pragmatic & Conversational</h3>
-                                <p className="text-sm text-lime-700 leading-relaxed">
-                                    Analyzes turn-taking, topic maintenance, conversational repairs, and social communication patterns in dialogue
+            {/* Main Content Area */}
+            <div className="flex flex-1 overflow-hidden">
+                {/* Main Content */}
+                <div className="flex-1 overflow-y-auto">
+                    {/* Landing Section */}
+                    <div className="bg-gradient-to-b from-lime-900/20 to-white">
+                        <div className="max-w-7xl mx-auto px-12 py-20">
+                            {/* Hero */}
+                            <div className="text-center mb-20">
+                                <h1 className="text-6xl font-normal text-lime-950 mb-6">
+                                    ASD Detection Through Speech Analysis
+                                </h1>
+                                <p className="text-xl text-lime-800 max-w-3xl mx-auto leading-relaxed">
+                                    Advanced machine learning system for analyzing speech patterns to support
+                                    autism spectrum disorder detection using multi-modal feature extraction for children
                                 </p>
                             </div>
 
-                            {/* Acoustic & Prosodic */}
-                            <div className="bg-white rounded-2xl p-8 transition-shadow">
-                                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                                    <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-                                    </svg>
+                            {/* Components Grid */}
+                            <div className="mb-16">
+                                <h2 className="text-4xl font-light text-lime-950 text-center mb-12">
+                                    Four-Component Analysis Framework
+                                </h2>
+
+                                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                                    {/* Pragmatic & Conversational */}
+                                    <div className="bg-white rounded-2xl p-8 transition-shadow">
+                                        <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
+                                            <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-medium text-lime-950 mb-3">Pragmatic & Conversational</h3>
+                                        <p className="text-sm text-lime-700 leading-relaxed">
+                                            Analyzes turn-taking, topic maintenance, conversational repairs, and social communication patterns in dialogue
+                                        </p>
+                                    </div>
+
+                                    {/* Acoustic & Prosodic */}
+                                    <div className="bg-white rounded-2xl p-8 transition-shadow">
+                                        <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
+                                            <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-medium text-lime-950 mb-3">Acoustic & Prosodic</h3>
+                                        <p className="text-sm text-lime-700 leading-relaxed">
+                                            Examines pitch variation, speech rhythm, intonation patterns, and vocal quality characteristics
+                                        </p>
+                                    </div>
+
+                                    {/* Syntactic & Semantic */}
+                                    <div className="bg-white rounded-2xl p-8 transition-shadow">
+                                        <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
+                                            <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-medium text-lime-950 mb-3">Syntactic & Semantic</h3>
+                                        <p className="text-sm text-lime-700 leading-relaxed">
+                                            Evaluates sentence structure complexity, grammatical patterns, and semantic coherence in language use
+                                        </p>
+                                    </div>
+
+                                    {/* Multi-Modal Fusion */}
+                                    <div className="bg-white rounded-2xl p-8 transition-shadow">
+                                        <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
+                                            <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-medium text-lime-950 mb-3">Multi-Modal Fusion</h3>
+                                        <p className="text-sm text-lime-700 leading-relaxed">
+                                            Integrates insights from all components using ensemble learning for comprehensive analysis
+                                        </p>
+                                    </div>
                                 </div>
-                                <h3 className="text-xl font-medium text-lime-950 mb-3">Acoustic & Prosodic</h3>
-                                <p className="text-sm text-lime-700 leading-relaxed">
-                                    Examines pitch variation, speech rhythm, intonation patterns, and vocal quality characteristics
-                                </p>
                             </div>
 
-                            {/* Syntactic & Semantic */}
-                            <div className="bg-white rounded-2xl p-8 transition-shadow">
-                                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                                    <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                    </svg>
+                            {/* Key Features */}
+                            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                                <div className="text-center">
+                                    <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        </svg>
+                                    </div>
+                                    <h4 className="text-lg font-medium text-lime-950 mb-2">Real-time Analysis</h4>
+                                    <p className="text-sm text-lime-700">Instant processing of audio files and text transcripts</p>
                                 </div>
-                                <h3 className="text-xl font-medium text-lime-950 mb-3">Syntactic & Semantic</h3>
-                                <p className="text-sm text-lime-700 leading-relaxed">
-                                    Evaluates sentence structure complexity, grammatical patterns, and semantic coherence in language use
-                                </p>
-                            </div>
 
-                            {/* Multi-Modal Fusion */}
-                            <div className="bg-white rounded-2xl p-8 transition-shadow">
-                                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                                    <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"></path>
-                                    </svg>
+                                <div className="text-center">
+                                    <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                        </svg>
+                                    </div>
+                                    <h4 className="text-lg font-medium text-lime-950 mb-2">Explainable AI</h4>
+                                    <p className="text-sm text-lime-700">SHAP values and counterfactual explanations</p>
                                 </div>
-                                <h3 className="text-xl font-medium text-lime-950 mb-3">Multi-Modal Fusion</h3>
-                                <p className="text-sm text-lime-700 leading-relaxed">
-                                    Integrates insights from all components using ensemble learning for comprehensive analysis
-                                </p>
+
+                                <div className="text-center">
+                                    <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                                        <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                                        </svg>
+                                    </div>
+                                    <h4 className="text-lg font-medium text-lime-950 mb-2">Flexible Training</h4>
+                                    <p className="text-sm text-lime-700">Custom model training with multiple ML algorithms</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Key Features */}
-                    <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                        <div className="text-center">
-                            <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
+                    {/* Mode Content */}
+                    <div className="max-w-7xl mx-auto px-12 py-12">
+                        {mode === 'user' && <PredictionPage />}
+                        {mode === 'training' && user?.role === 'admin' && <TrainingPage />}
+                        {mode === 'training' && user?.role !== 'admin' && (
+                            <div className="text-center py-12">
+                                <p className="text-xl text-lime-900">Training mode is only available for administrators.</p>
                             </div>
-                            <h4 className="text-lg font-medium text-lime-950 mb-2">Real-time Analysis</h4>
-                            <p className="text-sm text-lime-700">Instant processing of audio files and text transcripts</p>
-                        </div>
-
-                        <div className="text-center">
-                            <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                </svg>
-                            </div>
-                            <h4 className="text-lg font-medium text-lime-950 mb-2">Explainable AI</h4>
-                            <p className="text-sm text-lime-700">SHAP values and counterfactual explanations</p>
-                        </div>
-
-                        <div className="text-center">
-                            <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-                                </svg>
-                            </div>
-                            <h4 className="text-lg font-medium text-lime-950 mb-2">Flexible Training</h4>
-                            <p className="text-sm text-lime-700">Custom model training with multiple ML algorithms</p>
-                        </div>
+                        )}
                     </div>
                 </div>
-            </div>
-
-            {/* Mode Content */}
-            <div className="max-w-7xl mx-auto px-12 py-12">
-                {mode === 'user' && <PredictionPage />}
-                {mode === 'training' && user?.role === 'admin' && <TrainingPage />}
-                {mode === 'training' && user?.role !== 'admin' && (
-                    <div className="text-center py-12">
-                        <p className="text-xl text-lime-900">Training mode is only available for administrators.</p>
-                    </div>
-                )}
             </div>
         </div>
     );
 };
+

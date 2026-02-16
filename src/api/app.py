@@ -48,6 +48,7 @@ from config import config
 from src.database import connect_to_mongo, close_mongo_connection
 from src.auth.routes import router as auth_router
 from src.auth.google_oauth import router as google_oauth_router
+from src.auth.report_routes import router as report_router
 
 logger = get_logger(__name__)
 ASSETS_DIR = Path("assets")
@@ -86,6 +87,7 @@ app.add_middleware(
 # Include authentication routes
 app.include_router(auth_router)
 app.include_router(google_oauth_router)
+app.include_router(report_router)
 
 # Startup and shutdown events for MongoDB
 @app.on_event("startup")

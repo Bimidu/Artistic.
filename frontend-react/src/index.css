@@ -136,23 +136,32 @@ button {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Clean Scrollbar */
+/* Clean Scrollbar - Hidden */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 0px;
+  height: 0px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f3f5;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #adb5bd;
-  border-radius: 4px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #868e96;
+  background: transparent;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE, Edge */
+* {
+  -ms-overflow-style: none;
 }
 
 /* Card base style for HomePage */

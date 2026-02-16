@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { predictionService } from '@services/predictionService';
+import { reportService } from '@services/reportService';
 
 export const PredictionPage = () => {
     const [activeTab, setActiveTab] = useState('audio');
@@ -13,6 +14,13 @@ export const PredictionPage = () => {
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
+
+    // Save report state
+    const [showSaveDialog, setShowSaveDialog] = useState(false);
+    const [patientName, setPatientName] = useState('');
+    const [saving, setSaving] = useState(false);
+    const [saveSuccess, setSaveSuccess] = useState('');
+    const [saveError, setSaveError] = useState('');
 
     const audioInputRef = useRef(null);
     const chatInputRef = useRef(null);
@@ -65,6 +73,44 @@ export const PredictionPage = () => {
         }
     };
 
+    const handleSaveReport = async () => {
+        if (!patientName.trim()) {
+            setSaveError('Please enter a patient name');
+            return;
+        }
+
+        setSaving(true);
+        setSaveError('');
+        setSaveSuccess('');
+
+        try {
+            const reportData = {
+                patient_name: patientName,
+                prediction: result.prediction,
+                confidence: result.confidence,
+                probabilities: result.probabilities,
+                model_used: result.model_used || result.models_used?.join(', ') || 'unknown',
+                input_type: result.input_type || activeTab,
+                features_extracted: result.features_extracted,
+                transcript: result.transcript
+            };
+
+            await reportService.saveReport(reportData);
+            setSaveSuccess('Report saved successfully!');
+            setPatientName('');
+
+            // Close dialog after 2 seconds
+            setTimeout(() => {
+                setShowSaveDialog(false);
+                setSaveSuccess('');
+            }, 2000);
+        } catch (err) {
+            setSaveError(err.response?.data?.detail || 'Failed to save report');
+        } finally {
+            setSaving(false);
+        }
+    };
+
     const ModelSelect = () => (
         <div className="mt-8" id="modelSelectContainer">
             <label className="block text-xl text-primary-900 mb-4">Model Selection</label>
@@ -113,8 +159,8 @@ export const PredictionPage = () => {
                                 key={tab.key}
                                 onClick={() => setActiveTab(tab.key)}
                                 className={`px-8 py-5 text-lg border-b-2 transition-colors ${activeTab === tab.key
-                                        ? 'border-primary-900 text-primary-900'
-                                        : 'border-transparent text-primary-500 hover:text-primary-900'
+                                    ? 'border-primary-900 text-primary-900'
+                                    : 'border-transparent text-primary-500 hover:text-primary-900'
                                     }`}
                             >
                                 {tab.label}
@@ -276,10 +322,78 @@ export const PredictionPage = () => {
                                 <p>Model: {result.model_used || result.models_used?.join(', ')}</p>
                                 {result.features_extracted && <p>Features Extracted: {result.features_extracted}</p>}
                             </div>
+
+                            {/* Save Report Button */}
+                            <button
+                                onClick={() => setShowSaveDialog(true)}
+                                className="mt-6 w-full px-8 py-4 bg-lime-700 text-white rounded-2xl text-lg hover:bg-lime-800 transition-all flex items-center justify-center gap-2"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                                </svg>
+                                Save Report
+                            </button>
                         </div>
                     )}
                 </div>
             </div>
+
+            {/* Save Report Dialog */}
+            {showSaveDialog && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                    <div className="bg-white rounded-3xl p-8 max-w-md w-full">
+                        <h3 className="text-3xl font-medium text-primary-900 mb-6">Save Report</h3>
+
+                        {saveSuccess && (
+                            <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+                                <p className="text-green-700">{saveSuccess}</p>
+                            </div>
+                        )}
+
+                        {saveError && (
+                            <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+                                <p className="text-red-700">{saveError}</p>
+                            </div>
+                        )}
+
+                        <div className="mb-6">
+                            <label className="block text-lg text-primary-900 mb-3">Patient Name</label>
+                            <input
+                                type="text"
+                                value={patientName}
+                                onChange={(e) => setPatientName(e.target.value)}
+                                placeholder="Enter patient name"
+                                className="w-full px-4 py-3 bg-primary-50 rounded-xl text-base focus:outline-none focus:bg-primary-100 transition-all"
+                                disabled={saving}
+                            />
+                            <p className="text-sm text-primary-500 mt-2">A unique ID will be auto-generated for this report</p>
+                        </div>
+
+                        <div className="flex gap-4">
+                            <button
+                                onClick={() => {
+                                    setShowSaveDialog(false);
+                                    setPatientName('');
+                                    setSaveError('');
+                                    setSaveSuccess('');
+                                }}
+                                disabled={saving}
+                                className="flex-1 px-6 py-3 bg-primary-200 text-primary-900 rounded-xl hover:bg-primary-300 transition-all disabled:opacity-40"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleSaveReport}
+                                disabled={saving || !patientName.trim()}
+                                className="flex-1 px-6 py-3 bg-lime-700 text-white rounded-xl hover:bg-lime-800 transition-all disabled:opacity-40"
+                            >
+                                {saving ? 'Saving...' : 'Save'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
+

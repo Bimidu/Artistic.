@@ -9,6 +9,7 @@ import { GoogleCallbackPage } from '@pages/Auth/GoogleCallbackPage';
 import { HomePage } from '@pages/Home/HomePage';
 import { PredictionPage } from '@pages/UserMode/PredictionPage';
 import { TrainingPage } from '@pages/Training/TrainingPage';
+import { ReportsPage } from '@pages/Reports/ReportsPage';
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,14 @@ export const router = createBrowserRouter([
         element: (
             <ProtectedRoute>
                 <TrainingPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: '/reports',
+        element: (
+            <ProtectedRoute>
+                <ReportsPage />
             </ProtectedRoute>
         ),
     },
