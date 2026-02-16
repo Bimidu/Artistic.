@@ -7,7 +7,7 @@ FastAPI routes for user registration, login, and authentication.
 from fastapi import APIRouter, HTTPException, status, Depends
 from src.auth.models import (
     UserCreate, UserLogin, TokenResponse, UserResponse,
-    PasswordResetRequest, PasswordResetConfirm,
+    PasswordResetRequest, PasswordResetConfirm, PasswordReset,
     get_password_hash, verify_password
 )
 from src.auth.jwt import create_access_token
@@ -158,7 +158,7 @@ async def request_password_reset(request: PasswordResetRequest):
 async def confirm_password_reset(reset_data: PasswordResetConfirm):
     """
     Confirm password reset with token
-    
+
     Note: Token validation not yet implemented
     """
     # TODO: Validate reset token and update password
@@ -166,3 +166,34 @@ async def confirm_password_reset(reset_data: PasswordResetConfirm):
         status_code=status.HTTP_501_NOT_IMPLEMENTED,
         detail="Password reset not yet implemented"
     )
+
+
+@router.post("/reset-password")
+async def reset_password(reset_data: PasswordReset):
+    """
+    Reset password directly with email and new password
+
+    - **email**: User's email address
+    - **new_password**: New password to set
+    """
+    db = get_database()
+
+    # Find user by email
+    user = await db.users.find_one({"email": reset_data.email})
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+
+    # Update password
+    hashed_password = get_password_hash(reset_data.new_password)
+    await db.users.update_one(
+        {"email": reset_data.email},
+        {"$set": {
+            "hashed_password": hashed_password,
+            "updated_at": datetime.utcnow()
+        }}
+    )
+
+    return {"message": "Password reset successful"}

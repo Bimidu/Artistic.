@@ -85,6 +85,12 @@ class PasswordResetConfirm(BaseModel):
     new_password: str  # No length restrictions
 
 
+class PasswordReset(BaseModel):
+    """Schema for direct password reset (without token)"""
+    email: EmailStr
+    new_password: str  # No length restrictions
+
+
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """
     TEMPORARY: Plain text password verification (INSECURE - for development only)

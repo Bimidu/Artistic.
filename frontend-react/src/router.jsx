@@ -5,6 +5,7 @@ import { ProtectedRoute } from '@components/auth/ProtectedRoute';
 // Pages
 import { LoginPage } from '@pages/Auth/LoginPage';
 import { RegisterPage } from '@pages/Auth/RegisterPage';
+import { ForgotPasswordPage } from '@pages/Auth/ForgotPasswordPage';
 import { GoogleCallbackPage } from '@pages/Auth/GoogleCallbackPage';
 import { HomePage } from '@pages/Home/HomePage';
 import { PredictionPage } from '@pages/UserMode/PredictionPage';
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
     {
         path: '/register',
         element: <RegisterPage />,
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPasswordPage />,
     },
     {
         path: '/auth/google/callback',
