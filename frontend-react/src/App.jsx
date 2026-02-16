@@ -1,8 +1,8 @@
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { AuthProvider } from '@context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import { router } from './router';
-import '@styles/index.css';
+import './styles/index.css';
 
 function App() {
   return (
