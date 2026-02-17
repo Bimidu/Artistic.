@@ -158,11 +158,11 @@ export const TrainingPage = () => {
                                     ) : (
                                         <div className="space-y-2">
                                             {datasets.map(dataset => (
-                                                <label key={dataset} className="flex items-center gap-3 p-3 hover:bg-primary-50 rounded-lg cursor-pointer">
-                                                    <input type="checkbox" checked={extractionDatasets.includes(dataset)}
-                                                        onChange={() => toggleDataset(dataset, 'extraction')}
+                                                <label key={dataset.name || dataset.path} className="flex items-center gap-3 p-3 hover:bg-primary-50 rounded-lg cursor-pointer">
+                                                    <input type="checkbox" checked={extractionDatasets.includes(dataset.name || dataset.path)}
+                                                        onChange={() => toggleDataset(dataset.name || dataset.path, 'extraction')}
                                                         className="w-5 h-5 text-primary-600 rounded" />
-                                                    <span className="text-base text-primary-900">{dataset}</span>
+                                                    <span className="text-base text-primary-900">{dataset.name || dataset.path}</span>
                                                 </label>
                                             ))}
                                         </div>
@@ -235,11 +235,11 @@ export const TrainingPage = () => {
                                         ) : (
                                             <div className="space-y-2">
                                                 {datasets.map(dataset => (
-                                                    <label key={dataset} className="flex items-center gap-3 p-3 hover:bg-primary-50 rounded-lg cursor-pointer">
-                                                        <input type="checkbox" checked={trainingDatasets.includes(dataset)}
-                                                            onChange={() => toggleDataset(dataset, 'training')}
+                                                    <label key={dataset.name || dataset.path} className="flex items-center gap-3 p-3 hover:bg-primary-50 rounded-lg cursor-pointer">
+                                                        <input type="checkbox" checked={trainingDatasets.includes(dataset.name || dataset.path)}
+                                                            onChange={() => toggleDataset(dataset.name || dataset.path, 'training')}
                                                             className="w-5 h-5 text-primary-600 rounded" />
-                                                        <span className="text-base text-primary-900">{dataset}</span>
+                                                        <span className="text-base text-primary-900">{dataset.name || dataset.path}</span>
                                                     </label>
                                                 ))}
                                             </div>

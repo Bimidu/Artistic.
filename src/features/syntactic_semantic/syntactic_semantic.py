@@ -33,6 +33,8 @@ Author: Randil Haturusinghe
 
 import re
 import numpy as np
+import pandas as pd
+from pathlib import Path
 from typing import List, Dict, Any, Set
 from collections import Counter
 import spacy
@@ -521,6 +523,93 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         features['verb_argument_complexity'] = np.mean(verb_arg_counts) if verb_arg_counts else 0.0
 
         return features
+
+    def extract_from_transcript(self, transcript: TranscriptData) -> Dict[str, float]:
+        """
+        Extract syntactic and semantic features from a transcript.
+
+        This is a convenience wrapper around extract() that returns
+        just the features dictionary instead of a FeatureResult.
+
+        Args:
+            transcript: Parsed transcript data
+
+        Returns:
+            Dictionary of feature names to values
+        """
+        result = self.extract(transcript)
+        return result.features
+
+    def extract_from_directory(self, directory: Path) -> pd.DataFrame:
+        """
+        Extract features from all .cha transcript files in a directory.
+
+        Args:
+            directory: Directory path containing .cha files
+
+        Returns:
+            DataFrame with features for each transcript
+        """
+        from src.parsers.chat_parser import CHATParser
+
+        directory = Path(directory)
+        self.logger.info(f"Extracting syntactic/semantic features from directory: {directory}")
+
+        # Find all .cha files
+        cha_files = list(directory.rglob("*.cha"))
+
+        if not cha_files:
+            self.logger.warning(f"No .cha files found in {directory}")
+            # Return empty DataFrame with correct columns
+            features_dict = {name: 0.0 for name in self.feature_names}
+            features_dict['diagnosis'] = None
+            features_dict['file_path'] = None
+            features_dict['participant_id'] = None
+            return pd.DataFrame([features_dict])
+
+        self.logger.info(f"Found {len(cha_files)} .cha files")
+
+        # Initialize parser
+        parser = CHATParser()
+
+        # Extract features from each file
+        data = []
+        for cha_file in cha_files:
+            try:
+                # Parse the transcript
+                transcript = parser.parse_file(cha_file)
+
+                # Extract features
+                features = self.extract_from_transcript(transcript)
+
+                # Add metadata
+                if transcript.diagnosis:
+                    features['diagnosis'] = transcript.diagnosis
+                else:
+                    # Try to infer from directory structure
+                    path_str = str(cha_file).upper()
+                    if '/ASD/' in path_str or '_ASD_' in path_str or '\\ASD\\' in path_str:
+                        features['diagnosis'] = 'ASD'
+                    elif '/TD/' in path_str or '/TYP/' in path_str or '_TD_' in path_str or '\\TD\\' in path_str or '\\TYP\\' in path_str:
+                        features['diagnosis'] = 'TD'
+                    else:
+                        features['diagnosis'] = None
+
+                features['file_path'] = str(cha_file)
+                features['participant_id'] = cha_file.stem
+
+                data.append(features)
+
+            except Exception as e:
+                self.logger.error(f"Error extracting features from {cha_file}: {e}")
+                continue
+
+        if not data:
+            self.logger.warning("No features extracted from any files")
+            return pd.DataFrame()
+
+        self.logger.info(f"Extracted features from {len(data)} transcript files")
+        return pd.DataFrame(data)
 
 
 __all__ = ["SyntacticSemanticFeatures"]

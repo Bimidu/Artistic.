@@ -36,7 +36,7 @@ export const predictionService = {
         if (modelName) formData.append('model_name', modelName);
         formData.append('use_fusion', useFusion);
 
-        const response = await api.post('/predict/chat_file', formData, {
+        const response = await api.post('/predict/transcript', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
         return response.data;

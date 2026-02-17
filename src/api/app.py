@@ -994,8 +994,8 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                         # Skip acoustic for text (no audio)
                         continue
                     elif component == 'syntactic_semantic':
-                        from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
-                        extractor = SyntacticFeatureExtractor()
+                        from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+                        extractor = SyntacticSemanticFeatures()
                         features = extractor.extract_from_transcript(processed.transcript_data).features
                     else:  # pragmatic_conversational
                         features = feature_extractor.extract_from_transcript(processed.transcript_data).features
@@ -1085,12 +1085,36 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
             }
         else:
             # Single component prediction
-            # Extract features
-            feature_set = feature_extractor.extract_from_transcript(processed.transcript_data)
-            features_df = pd.DataFrame([feature_set.features])
-            
             # Get model and make prediction (use specified model or best model)
             model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=request.model_name)
+
+            # Determine which component's feature extractor to use based on model name
+            component = None
+            if used_model_name:
+                if 'syntactic_semantic' in used_model_name:
+                    component = 'syntactic_semantic'
+                elif 'acoustic_prosodic' in used_model_name:
+                    component = 'acoustic_prosodic'
+                else:
+                    component = 'pragmatic_conversational'
+
+            # Extract features using the appropriate extractor
+            if component == 'syntactic_semantic':
+                from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+                extractor = SyntacticSemanticFeatures()
+                result_obj = extractor.extract(processed.transcript_data)
+                features = result_obj.features
+            elif component == 'acoustic_prosodic':
+                # Acoustic features need audio, so we'll use pragmatic for text-only
+                result_obj = feature_extractor.extract_from_transcript(processed.transcript_data)
+                features = result_obj.features
+            else:  # pragmatic_conversational
+                result_obj = feature_extractor.extract_from_transcript(processed.transcript_data)
+                features = result_obj.features
+
+            # For backward compatibility, keep feature_set reference
+            feature_set = result_obj
+            features_df = pd.DataFrame([features])
             
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
@@ -1232,8 +1256,8 @@ async def predict_from_transcript(
                         # Skip acoustic for chat file (no audio)
                         continue
                     elif component == 'syntactic_semantic':
-                        from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
-                        extractor = SyntacticFeatureExtractor()
+                        from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+                        extractor = SyntacticSemanticFeatures()
                         features = extractor.extract_from_transcript(transcript).features
                     else:
                         features = feature_extractor.extract_from_transcript(transcript).features
@@ -1359,9 +1383,7 @@ async def predict_from_transcript(
                                f"or use 'Best Model (Auto)' to automatically select a compatible model."
                     )
 
-            feature_set = feature_extractor.extract_from_transcript(transcript)
-            features_df = pd.DataFrame([feature_set.features])
-            
+            # Get model first to determine which feature extractor to use
             # Get model and make prediction (use specified model or best compatible model)
             if model_name:
                 # Validate that the model exists in the registry
@@ -1448,7 +1470,17 @@ async def predict_from_transcript(
                         pass
                 model_name = best_model or compatible_models[0]
                 model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name)
-            
+
+            # Determine which component's feature extractor to use based on model name
+            if 'syntactic_semantic' in used_model_name:
+                from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+                extractor = SyntacticSemanticFeatures()
+                feature_set = extractor.extract(transcript)
+            else:  # pragmatic_conversational (acoustic is not compatible with chat files)
+                feature_set = feature_extractor.extract_from_transcript(transcript)
+
+            features_df = pd.DataFrame([feature_set.features])
+
             if preprocessor is not None:
                 if isinstance(preprocessor, dict):
                     features_df = preprocess_with_dict(features_df, preprocessor)
@@ -1685,8 +1717,8 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
         from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
         extractor = AcousticFeatureExtractor()
     elif component == 'syntactic_semantic':
-        from src.features.syntactic_semantic.syntactic_extractor import SyntacticFeatureExtractor
-        extractor = SyntacticFeatureExtractor()
+        from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+        extractor = SyntacticSemanticFeatures()
     else:
         extractor = feature_extractor
     

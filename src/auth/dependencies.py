@@ -19,45 +19,52 @@ async def get_current_user(
 ) -> UserResponse:
     """
     Extract and validate the current user from JWT token
-    
+
     Args:
         credentials: HTTP Bearer token from request header
-        
+
     Returns:
         UserResponse object
-        
+
     Raises:
         HTTPException: If token is invalid or user not found
     """
+    from src.utils.logger import get_logger
+    logger = get_logger(__name__)
+
     token = credentials.credentials
-    
+
     # Verify token
     payload = verify_token(token)
     if payload is None:
+        logger.error("Token verification failed - invalid or expired token")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
+            detail="Invalid or expired token",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     user_id: str = payload.get("sub")
     if user_id is None:
+        logger.error("Token payload missing 'sub' field")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
+            detail="Invalid token payload",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     # Get user from database
     db = get_database()
     user = await db.users.find_one({"_id": user_id})
-    
+
     if user is None:
+        logger.error(f"User not found in database: {user_id}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User not found",
         )
-    
+
+    logger.info(f"User authenticated: {user.get('email')}")
     return UserResponse(**user)
 
 

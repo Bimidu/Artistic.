@@ -3,6 +3,17 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 /**
+ * Get the auth token and throw error if not found
+ */
+const getAuthToken = () => {
+    const token = localStorage.getItem('asd_auth_token');
+    if (!token) {
+        throw new Error('No authentication token found. Please log in again.');
+    }
+    return token;
+};
+
+/**
  * Report Service
  * Handles API calls for patient reports
  */
@@ -11,7 +22,8 @@ export const reportService = {
      * Save a new patient analysis report
      */
     async saveReport(reportData) {
-        const token = localStorage.getItem('asd_auth_token');
+        const token = getAuthToken();
+        console.log('Saving report with token:', token ? 'Token exists' : 'No token');
         const response = await axios.post(
             `${API_URL}/api/reports/save`,
             reportData,
@@ -29,7 +41,7 @@ export const reportService = {
      * Get all reports for the current user
      */
     async getMyReports() {
-        const token = localStorage.getItem('asd_auth_token');
+        const token = getAuthToken();
         const response = await axios.get(
             `${API_URL}/api/reports/my-reports`,
             {
@@ -45,7 +57,7 @@ export const reportService = {
      * Get reports grouped by patient
      */
     async getReportsByPatient() {
-        const token = localStorage.getItem('asd_auth_token');
+        const token = getAuthToken();
         const response = await axios.get(
             `${API_URL}/api/reports/by-patient`,
             {
