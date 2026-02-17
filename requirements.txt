@@ -1,5 +1,7 @@
-# ASD Detection from Conversational Features
-# Latest Requirements for Modern Python (3.9+)
+# ============================================================================
+# ASD Detection System - Complete Requirements
+# Python 3.9+
+# ============================================================================
 
 # ============================================================================
 # Core Data Processing Libraries
@@ -7,7 +9,7 @@
 pylangacq>=0.19.1          # CHAT/CHILDES file parsing and analysis
 pandas>=2.0.0              # Data manipulation and analysis
 numpy>=1.24.0              # Numerical computing
-scipy>=1.11.0              # Scientific computing (1.11+ fixes numpy compatibility)
+scipy>=1.11.0              # Scientific computing
 
 # ============================================================================
 # Natural Language Processing
@@ -16,7 +18,6 @@ nltk>=3.8.0                # Natural Language Toolkit
 spacy>=3.7.0               # Advanced NLP library
 # NOTE: After installing spacy, download the language model:
 #       python -m spacy download en_core_web_lg
-#       Models are saved in your Python environment and persist until you delete the environment
 textstat>=0.7.0            # Text statistics and readability metrics
 
 # ============================================================================
@@ -26,24 +27,51 @@ scikit-learn>=1.3.0        # Machine learning algorithms
 xgboost>=2.0.0             # Gradient boosting
 lightgbm>=4.0.0            # Light gradient boosting
 imbalanced-learn>=0.11.0   # Handling imbalanced datasets
+torch>=2.0.0               # PyTorch for deep learning
 
 # ============================================================================
-# Interpretability & Explainability (Component 4)
+# Interpretability & Explainability
 # ============================================================================
-shap>=0.44.0
-dice-ml>=0.11
-cloudpickle>=3.0.0
+shap>=0.44.0               # Model interpretability
+dice-ml>=0.11              # Counterfactual explanations
+cloudpickle>=3.0.0         # Serialization
 
 # ============================================================================
-# Interpretability & Explainability (Component 4)
+# Audio Processing & Transcription
 # ============================================================================
-torch>=2.0.0
+librosa~=0.11.0            # Audio analysis
+pydub~=0.25.1              # Audio manipulation
+soundfile~=0.13.1          # Audio file I/O
+audioread~=3.0.1           # Audio reading
+soxr~=0.3.7                # High-quality resampling
+faster-whisper>=0.10.0     # Audio transcription using CTranslate2
+openai-whisper>=20231117   # Alternative: Audio transcription
+vosk>=0.3.44               # Alternative: Lightweight offline transcription
+SpeechRecognition>=3.10.0  # Alternative: Google Speech-to-Text
 
 # ============================================================================
-# Plot stability (SHAP / matplotlib internals)
+# API Framework & Web Backend
 # ============================================================================
-cycler>=0.12.1
-kiwisolver>=1.4.5
+fastapi>=0.100.0           # Modern API framework
+uvicorn[standard]>=0.20.0  # ASGI server
+python-multipart>=0.0.6    # File uploads support
+joblib>=1.3.0              # Model serialization
+
+# ============================================================================
+# Authentication & Database (MongoDB)
+# ============================================================================
+pymongo>=4.6.0             # MongoDB Python driver
+motor>=3.3.0               # Async MongoDB driver for FastAPI
+pydantic-settings>=2.1.0   # Settings management
+python-jose[cryptography]>=3.3.0  # JWT token handling
+passlib[bcrypt]>=1.7.4     # Password hashing
+
+# ============================================================================
+# Google OAuth Integration
+# ============================================================================
+httpx>=0.25.0              # Async HTTP client
+google-auth>=2.23.0        # Google authentication
+google-auth-oauthlib>=1.1.0  # Google OAuth flow
 
 # ============================================================================
 # Utilities
@@ -51,24 +79,48 @@ kiwisolver>=1.4.5
 python-dotenv>=1.0.0       # Environment variable management
 loguru>=0.7.0              # Advanced logging
 pydantic>=2.0.0            # Data validation
+email-validator>=2.0.0     # Email validation for Pydantic
 tqdm>=4.60.0               # Progress bars
 openpyxl>=3.1.0            # Excel file reading
 python-docx>=1.0.0         # Word document reading
+pillow~=10.4.0             # Image processing
+PyYAML~=6.0.3              # YAML file parsing
+colorama~=0.4.6            # Colored terminal output
+python-dateutil~=2.9.0.post0  # Date utilities
 
 # ============================================================================
-# API Framework
-# ============================================================================
-fastapi>=0.100.0          # Modern API framework
-uvicorn[standard]>=0.20.0  # ASGI server
-python-multipart>=0.0.5    # For file uploads
-joblib>=1.3.0              # Model serialization
-
-# ============================================================================
-# Data Visualization (Optional)
+# Data Visualization
 # ============================================================================
 matplotlib>=3.7.0          # Plotting library
 seaborn>=0.12.0            # Statistical visualization
 plotly>=5.15.0             # Interactive plots
+
+# ============================================================================
+# Supporting Libraries (Dependencies)
+# ============================================================================
+cycler>=0.12.1             # Plot stability
+kiwisolver>=1.4.5          # Constraint solver
+cffi~=1.17.1               # Foreign function interface
+pytz~=2025.2               # Timezone handling
+zipp~=3.20.2               # Zipfile utilities
+numba~=0.58.1              # JIT compilation
+llvmlite~=0.41.1           # LLVM Python binding
+charset-normalizer~=3.4.4  # Character encoding
+pooch~=1.8.2               # Data download utilities
+packaging~=25.0            # Package utilities
+platformdirs~=4.3.6        # Platform-specific directories
+lxml~=6.0.2                # XML/HTML processing
+certifi~=2025.10.5         # SSL certificates
+lazy-loader~=0.4           # Lazy loading
+msgpack~=1.1.1             # Serialization
+decorator~=5.2.1           # Decorator utilities
+threadpoolctl~=3.5.0       # Thread pool control
+urllib3~=2.2.3             # HTTP library
+six~=1.17.0                # Python 2/3 compatibility
+idna~=3.11                 # Internationalized domain names
+pycparser~=2.23            # C parser
+importlib-metadata~=8.5.0  # Import metadata
+coverage~=7.6.1            # Code coverage
 
 # ============================================================================
 # Development & Testing (Optional)
@@ -78,37 +130,3 @@ pytest-cov>=4.1.0          # Coverage reporting
 black>=23.0.0              # Code formatting
 flake8>=6.0.0              # Linting
 mypy>=1.5.0                # Static type checking
-librosa~=0.11.0
-pydub~=0.25.1
-faster-whisper>=0.10.0  # Recommended: Audio transcription using CTranslate2 (avoids PyTorch crashes on macOS)
-openai-whisper>=20231117  # Alternative: Audio transcription (may crash on macOS due to PyTorch)
-vosk>=0.3.44  # Alternative: Lightweight offline transcription (no PyTorch)
-SpeechRecognition>=3.10.0  # Alternative: Google Speech-to-Text (requires internet)
-pillow~=10.4.0
-cffi~=1.17.1
-pytz~=2025.2
-zipp~=3.20.2
-numba~=0.58.1
-llvmlite~=0.41.1
-PyYAML~=6.0.3
-colorama~=0.4.6
-importlib-metadata~=8.5.0
-coverage~=7.6.1
-charset-normalizer~=3.4.4
-pooch~=1.8.2
-packaging~=25.0
-platformdirs~=4.3.6
-lxml~=6.0.2
-python-dateutil~=2.9.0.post0
-certifi~=2025.10.5
-soundfile~=0.13.1
-audioread~=3.0.1
-soxr~=0.3.7
-lazy-loader~=0.4
-msgpack~=1.1.1
-decorator~=5.2.1
-threadpoolctl~=3.5.0
-urllib3~=2.2.3
-six~=1.17.0
-idna~=3.11
-pycparser~=2.23

@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Saans';
+    src: url('../assets/fonts/NeueHaasDisplayRoman.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jokker';
+    src: url('../assets/fonts/Jokker-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Haffer';
+    src: url('../assets/fonts/HafferXH-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

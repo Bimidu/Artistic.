@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@import './fonts.css';
+
+/* ===== Custom Theme (Tailwind v4 — @theme replaces tailwind.config.js) ===== */
+@theme {
+  /* Primary palette (neutral grays matching original frontend) */
+  --color-primary-50: #f8f9fa;
+  --color-primary-100: #f1f3f5;
+  --color-primary-200: #e9ecef;
+  --color-primary-300: #dee2e6;
+  --color-primary-400: #ced4da;
+  --color-primary-500: #adb5bd;
+  --color-primary-600: #868e96;
+  --color-primary-700: #495057;
+  --color-primary-800: #343a40;
+  --color-primary-900: #212529;
+
+  /* Accent palette (blue) */
+  --color-accent-50: #e3f2fd;
+  --color-accent-100: #bbdefb;
+  --color-accent-200: #90caf9;
+  --color-accent-300: #64b5f6;
+  --color-accent-400: #42a5f5;
+  --color-accent-500: #2196f3;
+  --color-accent-600: #1e88e5;
+  --color-accent-700: #1976d2;
+  --color-accent-800: #1565c0;
+  --color-accent-900: #0d47a1;
+
+  /* Fonts */
+  --font-sans: 'Saans', system-ui, sans-serif;
+  --font-heading: 'Saans', system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+
+  /* Extra font sizes */
+  --font-size-7xl: 4.5rem;
+  --font-size-8xl: 6rem;
+  --font-size-9xl: 8rem;
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  body {
+    margin: 0;
+    background-color: white;
+    color: #212529;
+    font-family: 'Saans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Saans', system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
+
+  button {
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+}
+
+/* ===== Component Styles ===== */
+@layer components {
+
+  /* Card */
+  .card {
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border-top: 2px solid black;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+
+  /* Spinner */
+  .spinner {
+    display: inline-block;
+    border: 2px solid #e9ecef;
+    border-top-color: #495057;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+/* ===== Animations ===== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ===== Toggle Switch ===== */
+.toggle-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-option {
+  position: relative;
+  padding: 10px 32px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+  z-index: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-option.active {
+  color: #212529;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 4px;
+  height: calc(100% - 8px);
+  background: white;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Upload Area ===== */
+.upload-area {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px dashed #dee2e6;
+}
+
+.upload-area:hover {
+  transform: translateY(-2px);
+  border-color: #adb5bd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.upload-area.dragover {
+  background-color: #f8f9fa;
+  transform: scale(1.01);
+  border-color: #868e96;
+}
+
+/* ===== Status Indicator ===== */
+.status-connected {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ===== Model Card ===== */
+.model-card {
+  transition: all 0.3s ease;
+}
+
+.model-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f3f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
