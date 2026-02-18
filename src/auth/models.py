@@ -8,10 +8,8 @@ for authentication and user management.
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 from datetime import datetime
-from passlib.context import CryptContext
+import bcrypt
 import hashlib
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class UserInDB(BaseModel):
@@ -93,16 +91,43 @@ class PasswordReset(BaseModel):
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """
-    TEMPORARY: Plain text password verification (INSECURE - for development only)
+    Verify plain password against bcrypt hash.
+
+    Handles backward compatibility:
+    - Tries bcrypt verification first (new users)
+    - Falls back to plain-text comparison (old users during migration)
     """
-    return plain_password == hashed_password
+    try:
+        # Convert password to bytes if needed
+        password_bytes = plain_password.encode('utf-8')
+        hash_bytes = hashed_password.encode('utf-8') if isinstance(hashed_password, str) else hashed_password
+        return bcrypt.checkpw(password_bytes, hash_bytes)
+    except Exception:
+        # Fallback for plain-text passwords (migration period)
+        return plain_password == hashed_password
 
 
 def get_password_hash(password: str) -> str:
     """
-    TEMPORARY: No hashing - stores plain text (INSECURE - for development only)
+    Hash password using bcrypt.
+
+    Uses bcrypt default cost factor (12 rounds) - industry standard.
     """
-    return password
+    password_bytes = password.encode('utf-8')
+    salt = bcrypt.gensalt(rounds=12)  # 12 rounds = industry standard
+    hashed = bcrypt.hashpw(password_bytes, salt)
+    return hashed.decode('utf-8')  # Return as string for MongoDB storage
+
+
+def is_password_hashed(hashed_password: str) -> bool:
+    """
+    Detect if password is bcrypt-hashed or plain text.
+
+    Bcrypt hashes start with "$2a$", "$2b$", or "$2y$".
+    """
+    if not hashed_password:
+        return False
+    return hashed_password.startswith(('$2a$', '$2b$', '$2y$'))
 
 
 

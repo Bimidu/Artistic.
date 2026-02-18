@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from src.auth.models import (
     UserCreate, UserLogin, TokenResponse, UserResponse,
     PasswordResetRequest, PasswordResetConfirm, PasswordReset,
-    get_password_hash, verify_password
+    get_password_hash, verify_password, is_password_hashed
 )
 from src.auth.jwt import create_access_token
 from src.auth.dependencies import get_current_active_user
@@ -103,7 +103,20 @@ async def login(credentials: UserLogin):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Inactive user account"
         )
-    
+
+    # Auto-migrate plain-text passwords to bcrypt on login
+    if not is_password_hashed(user["hashed_password"]):
+        new_hash = get_password_hash(credentials.password)
+        await db.users.update_one(
+            {"_id": user["_id"]},
+            {
+                "$set": {
+                    "hashed_password": new_hash,
+                    "updated_at": datetime.utcnow()
+                }
+            }
+        )
+
     # Create access token
     access_token = create_access_token(
         data={"sub": user["_id"], "email": user["email"], "role": user.get("role", "user")}
