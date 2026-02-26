@@ -95,44 +95,9 @@ document.querySelectorAll('.training-tab').forEach(tab => {
     });
 });
 
-// Toggle model selection based on fusion checkbox
-function setupFusionToggle() {
-    const fusionCheckboxes = [
-        { checkbox: 'audioUseFusion', select: 'audioModelSelect', container: 'audioModelSelectContainer', note: 'audioModelSelectNote' },
-        { checkbox: 'textUseFusion', select: 'textModelSelect', container: 'textModelSelectContainer', note: 'textModelSelectNote' },
-        { checkbox: 'chaUseFusion', select: 'chaModelSelect', container: 'chaModelSelectContainer', note: 'chaModelSelectNote' }
-    ];
-    
-    fusionCheckboxes.forEach(({ checkbox, select, container, note }) => {
-        const checkboxEl = document.getElementById(checkbox);
-        const selectEl = document.getElementById(select);
-        const containerEl = document.getElementById(container);
-        const noteEl = document.getElementById(note);
-        
-        if (checkboxEl && selectEl && containerEl && noteEl) {
-            checkboxEl.addEventListener('change', () => {
-                if (checkboxEl.checked) {
-                    // Fusion enabled - disable model selection
-                    selectEl.disabled = true;
-                    selectEl.value = ''; // Reset to "Best Model (Auto)"
-                    containerEl.style.opacity = '0.5';
-                    containerEl.style.pointerEvents = 'none';
-                    noteEl.classList.remove('hidden');
-                } else {
-                    // Fusion disabled - enable model selection
-                    selectEl.disabled = false;
-                    containerEl.style.opacity = '1';
-                    containerEl.style.pointerEvents = 'auto';
-                    noteEl.classList.add('hidden');
-                }
-            });
-        }
-    });
-}
-
-// Initialize fusion toggles on page load
+// Initialize audio recording on page load
 document.addEventListener('DOMContentLoaded', () => {
-    setupFusionToggle();
+    setupAudioRecording();
 });
 
 // File upload handling
@@ -166,6 +131,196 @@ function setupUploadArea(areaId, inputId, selectedId, allowedExtensions) {
         const file = e.target.files[0];
         if (file) {
             handleFileSelect(file, input, selected, allowedExtensions);
+        }
+    });
+}
+
+// Audio recording state
+let mediaRecorder = null;
+let recordedChunks = [];
+let recordingStream = null;
+let recordingTimerInterval = null;
+let recordingStartTime = null;
+
+function setupAudioRecording() {
+    const section = document.getElementById('audioRecordSection');
+    if (!section) {
+        return;
+    }
+
+    const recordButton = document.getElementById('audioRecordButton');
+    const stopButton = document.getElementById('audioStopButton');
+    const statusText = document.getElementById('audioRecordStatusText');
+    const indicator = document.getElementById('audioRecordIndicator');
+    const timerEl = document.getElementById('audioRecordTimer');
+    const errorEl = document.getElementById('audioRecordError');
+
+    // If browser does not support recording, hide the section
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined') {
+        section.classList.add('hidden');
+        return;
+    }
+
+    const updateTimer = () => {
+        if (!recordingStartTime || !timerEl) return;
+        const elapsedMs = Date.now() - recordingStartTime;
+        const totalSeconds = Math.floor(elapsedMs / 1000);
+        const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        timerEl.textContent = `${minutes}:${seconds}`;
+    };
+
+    const resetRecordingState = () => {
+        if (recordingTimerInterval) {
+            clearInterval(recordingTimerInterval);
+            recordingTimerInterval = null;
+        }
+        recordingStartTime = null;
+        if (timerEl) {
+            timerEl.textContent = '00:00';
+            timerEl.classList.add('hidden');
+        }
+        if (indicator) {
+            indicator.className = 'w-2.5 h-2.5 rounded-full bg-gray-300';
+        }
+        if (statusText) {
+            statusText.textContent = 'Microphone idle';
+        }
+        if (recordButton) {
+            recordButton.disabled = false;
+        }
+        if (stopButton) {
+            stopButton.disabled = true;
+        }
+        if (recordingStream) {
+            recordingStream.getTracks().forEach(t => t.stop());
+            recordingStream = null;
+        }
+        mediaRecorder = null;
+        recordedChunks = [];
+    };
+
+    recordButton.addEventListener('click', async () => {
+        if (errorEl) {
+            errorEl.textContent = '';
+            errorEl.classList.add('hidden');
+        }
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            recordingStream = stream;
+            recordedChunks = [];
+
+            let options = {};
+            let chosenMimeType = null;
+            // Prefer formats that the backend already supports: OGG or M4A/MP4 audio
+            if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/ogg;codecs=opus')) {
+                chosenMimeType = 'audio/ogg;codecs=opus';
+                options.mimeType = chosenMimeType;
+            } else if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/mp4')) {
+                chosenMimeType = 'audio/mp4';
+                options.mimeType = chosenMimeType;
+            }
+
+            try {
+                mediaRecorder = new MediaRecorder(stream, options);
+            } catch (e) {
+                // Fallback without explicit mimeType if options are rejected
+                mediaRecorder = new MediaRecorder(stream);
+            }
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data && event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
+            };
+
+            mediaRecorder.onerror = (event) => {
+                console.error('MediaRecorder error:', event.error);
+                if (errorEl) {
+                    errorEl.textContent = 'Recording error. Please try again or use file upload.';
+                    errorEl.classList.remove('hidden');
+                }
+                resetRecordingState();
+            };
+
+            mediaRecorder.onstop = async () => {
+                try {
+                    if (!recordedChunks.length) {
+                        if (errorEl) {
+                            errorEl.textContent = 'No audio captured. Please try recording again.';
+                            errorEl.classList.remove('hidden');
+                        }
+                        resetRecordingState();
+                        return;
+                    }
+
+                    const effectiveMime = mediaRecorder.mimeType || chosenMimeType || 'audio/ogg';
+                    let extension = '.ogg';
+                    if (effectiveMime.includes('mp4') || effectiveMime.includes('m4a')) {
+                        extension = '.m4a';
+                    }
+
+                    const blob = new Blob(recordedChunks, { type: effectiveMime });
+                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                    const fileName = `recording-${timestamp}${extension}`;
+                    const file = new File([blob], fileName, { type: effectiveMime });
+
+                    // Populate the existing file input so we fully reuse the current flow
+                    const fileInput = document.getElementById('audioFileInput');
+                    if (fileInput) {
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(file);
+                        fileInput.files = dataTransfer.files;
+                        // Trigger change handler to update UI and waveform
+                        fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+
+                    // Automatically trigger analysis using existing flow
+                    await predictFromAudio();
+                } catch (err) {
+                    console.error('Error handling recorded audio:', err);
+                    if (errorEl) {
+                        errorEl.textContent = 'Failed to process recorded audio. Please try again or upload a file.';
+                        errorEl.classList.remove('hidden');
+                    }
+                } finally {
+                    resetRecordingState();
+                }
+            };
+
+            mediaRecorder.start();
+
+            if (indicator) {
+                indicator.className = 'w-2.5 h-2.5 rounded-full bg-red-500 status-training';
+            }
+            if (statusText) {
+                statusText.textContent = 'Recording in progress...';
+            }
+            if (timerEl) {
+                timerEl.classList.remove('hidden');
+            }
+            recordingStartTime = Date.now();
+            updateTimer();
+            recordingTimerInterval = setInterval(updateTimer, 1000);
+
+            recordButton.disabled = true;
+            stopButton.disabled = false;
+        } catch (err) {
+            console.error('Microphone access error:', err);
+            if (errorEl) {
+                errorEl.textContent = 'Could not access microphone. Please allow microphone permissions or use file upload.';
+                errorEl.classList.remove('hidden');
+            }
+            resetRecordingState();
+        }
+    });
+
+    stopButton.addEventListener('click', () => {
+        if (mediaRecorder && mediaRecorder.state === 'recording') {
+            mediaRecorder.stop();
+        } else {
+            resetRecordingState();
         }
     });
 }
@@ -205,7 +360,7 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
     }
 }
 
-setupUploadArea('audioUploadArea', 'audioFileInput', 'selectedAudioFile', ['.wav', '.mp3', '.flac']);
+setupUploadArea('audioUploadArea', 'audioFileInput', 'selectedAudioFile', ['.wav', '.mp3', '.flac', '.ogg', '.m4a']);
 setupUploadArea('chaUploadArea', 'chaFileInput', 'selectedChaFile', ['.cha']);
 
 // API calls
@@ -233,9 +388,8 @@ async function testConnection() {
 
 async function predictFromAudio() {
     const fileInput = document.getElementById('audioFileInput');
-    const participantId = document.getElementById('audioParticipantId').value || 'CHI';
-    const modelName = document.getElementById('audioModelSelect').value || null;
-    const useFusion = document.getElementById('audioUseFusion').checked;
+    // Always use default participant ID on backend; no manual model selection, always fusion
+    const useFusion = true;
     
     if (!fileInput.files[0]) {
         alert('Please select an audio file');
@@ -252,10 +406,6 @@ async function predictFromAudio() {
     
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
-    formData.append('participant_id', participantId);
-    if (modelName) {
-        formData.append('model_name', modelName);
-    }
     formData.append('use_fusion', useFusion);
     
     try {
@@ -273,7 +423,21 @@ async function predictFromAudio() {
                 await displayWaveform(currentAudioFile, data);
             }
         } else {
-            displayError(data.detail || 'Prediction failed');
+            let message = 'Prediction failed';
+            if (data) {
+                if (typeof data.detail === 'string') {
+                    message = data.detail;
+                } else if (Array.isArray(data.detail) && data.detail[0]?.msg) {
+                    message = data.detail[0].msg;
+                } else if (typeof data.message === 'string') {
+                    message = data.message;
+                }
+            }
+            // Hard fallback for short/invalid audio so the user always sees a useful explanation
+            if (response.status === 400 && message === 'Prediction failed') {
+                message = 'Not enough speech data in the recording to generate a reliable prediction. Please record or upload at least 5 seconds of clear child speech.';
+            }
+            displayError(message);
         }
     } catch (error) {
         displayError('Connection error: ' + error.message);
@@ -282,8 +446,7 @@ async function predictFromAudio() {
 
 async function predictFromText() {
     const text = document.getElementById('textInput').value;
-    const modelName = document.getElementById('textModelSelect').value || null;
-    const useFusion = document.getElementById('textUseFusion').checked;
+    const useFusion = true;
     
     if (!text.trim()) {
         alert('Please enter some text');
@@ -299,7 +462,6 @@ async function predictFromText() {
             body: JSON.stringify({ 
                 text: text, 
                 participant_id: 'CHI',
-                model_name: modelName,
                 use_fusion: useFusion
             })
         });
@@ -309,7 +471,18 @@ async function predictFromText() {
         if (response.ok) {
             displayResults(data);
         } else {
-            displayError(data.detail || 'Prediction failed');
+            // Try to surface the most informative backend error message
+            let message = 'Prediction failed';
+            if (data) {
+                if (typeof data.detail === 'string') {
+                    message = data.detail;
+                } else if (Array.isArray(data.detail) && data.detail[0]?.msg) {
+                    message = data.detail[0].msg;
+                } else if (typeof data.message === 'string') {
+                    message = data.message;
+                }
+            }
+            displayError(message);
         }
     } catch (error) {
         displayError('Connection error: ' + error.message);
@@ -318,23 +491,19 @@ async function predictFromText() {
 
 async function predictFromChatFile() {
     const fileInput = document.getElementById('chaFileInput');
-    const modelName = document.getElementById('chaModelSelect').value || null;
-    const useFusion = document.getElementById('chaUseFusion').checked;
+    const useFusion = true;
     
     if (!fileInput.files[0]) {
         alert('Please select a CHAT file');
         return;
     }
     
-    console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion, 'Model:', modelName);
+    console.log('Uploading CHAT file:', fileInput.files[0].name, 'Fusion:', useFusion);
     showLoading('resultsArea');
     
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('use_fusion', useFusion);
-    if (modelName) {
-        formData.append('model_name', modelName);
-    }
     
     try {
         const response = await fetch(`${getApiUrl()}/predict/transcript`, {

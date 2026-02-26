@@ -95,6 +95,58 @@ model_fusion = ModelFusion(method='weighted')
 
 FEATURE_CSV_PATH = Path("assets/feature_explanations/feature_explanations_literal.csv")
 
+MIN_AUDIO_DURATION_SECONDS = 5.0
+
+
+def convert_audio_to_wav(input_path: Path) -> Path:
+    """
+    Convert an audio file to WAV before feeding it into the pipeline.
+    
+    This ensures consistent downstream processing regardless of the original
+    upload/recording format. If conversion fails, the original path is returned.
+    """
+    try:
+        if not input_path.exists():
+            logger.warning(f"convert_audio_to_wav: input file does not exist: {input_path}")
+            return input_path
+        
+        if input_path.suffix.lower() == ".wav":
+            return input_path
+        
+        # Try PyDub first (uses ffmpeg under the hood)
+        try:
+            from pydub import AudioSegment  # type: ignore
+            
+            audio = AudioSegment.from_file(input_path)
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_wav:
+                audio.export(tmp_wav.name, format="wav")
+                wav_path = Path(tmp_wav.name)
+            logger.info(f"Converted audio to WAV using PyDub: {input_path.name} -> {wav_path.name}")
+            return wav_path
+        except Exception as pydub_error:
+            logger.warning(f"PyDub conversion to WAV failed for {input_path}: {pydub_error}")
+        
+        # Fallback: librosa + soundfile
+        try:
+            import librosa  # type: ignore
+            import soundfile as sf  # type: ignore
+            
+            audio_data, sr = librosa.load(str(input_path), sr=16000, mono=True)
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_wav:
+                sf.write(tmp_wav.name, audio_data, sr)
+                wav_path = Path(tmp_wav.name)
+            logger.info(f"Converted audio to WAV using librosa: {input_path.name} -> {wav_path.name}")
+            return wav_path
+        except Exception as librosa_error:
+            logger.warning(f"Librosa conversion to WAV failed for {input_path}: {librosa_error}")
+        
+        # If all conversions fail, fall back to original path
+        logger.warning(f"Falling back to original audio path without WAV conversion: {input_path}")
+        return input_path
+    except Exception as e:
+        logger.warning(f"Unexpected error during audio conversion to WAV for {input_path}: {e}")
+        return input_path
+
 def get_input_handler():
     """Lazy-load input handler with smart backend selection."""
     global input_handler
@@ -562,7 +614,8 @@ async def root():
         "version": "2.0.0",
         "docs": "/docs",
         "modes": ["user", "training"],
-        "supported_inputs": ["audio (.wav)", "transcript (.cha)", "text"]
+        # Note: backend supports multiple common audio formats; UI defaults to WAV/MP3/FLAC
+        "supported_inputs": ["audio (.wav, .mp3, .flac, .ogg, .m4a)", "transcript (.cha)", "text"]
     }
 
 
@@ -610,12 +663,15 @@ async def predict_from_audio(
     """
     logger.info(f"Audio prediction request: {file.filename}")
     
-    # Validate file type
-    if not file.filename.lower().endswith(('.wav', '.mp3', '.flac')):
+    # Validate file type against supported audio formats
+    if not file.filename.lower().endswith(('.wav', '.mp3', '.flac', '.ogg', '.m4a')):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Only audio files (.wav, .mp3, .flac) are supported"
+            detail="Only audio files (.wav, .mp3, .flac, .ogg, .m4a) are supported"
         )
+    
+    tmp_path: Optional[Path] = None
+    pipeline_audio_path: Optional[Path] = None
     
     try:
         # Save uploaded file temporarily
@@ -627,28 +683,40 @@ async def predict_from_audio(
             tmp_file.write(contents)
             tmp_path = Path(tmp_file.name)
         
+        # Convert any supported upload/recording format to WAV before pipeline
+        pipeline_audio_path = convert_audio_to_wav(tmp_path)
+        
         # Process audio
         handler = get_input_handler()
         processed = handler.process(
-            tmp_path,
+            pipeline_audio_path,
             participant_id=participant_id
         )
         
+        # Enforce minimum duration to ensure enough speech data
+        duration = processed.metadata.get('duration', 0) or 0
+        if duration < MIN_AUDIO_DURATION_SECONDS:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=(
+                    "Not enough speech data in the recording to generate a reliable prediction. "
+                    f"Please record or upload at least {MIN_AUDIO_DURATION_SECONDS:.0f} seconds of clear speech."
+                )
+            )
+        
         # Validate transcription succeeded
         if not processed.transcript_data or len(processed.transcript_data.utterances) == 0:
-            tmp_path.unlink()
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Audio transcription failed. No speech was detected or transcription backend is not available. "
-                       "Please ensure faster-whisper is installed: pip install faster-whisper"
+                detail="Not enough speech data in the recording to generate a reliable prediction. "
+                       "Please ensure the recording contains clear, continuous child speech."
             )
-
+        
         if len(processed.transcript_data.valid_utterances) == 0:
-            tmp_path.unlink()
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Audio transcription produced no valid utterances. The audio may be too quiet, "
-                       "contain only noise, or be in an unsupported format."
+                detail="Not enough speech data in the recording to generate a reliable prediction. "
+                       "Please ensure the recording contains clear, continuous child speech."
             )
 
         if use_fusion:
@@ -749,9 +817,6 @@ async def predict_from_audio(
                 features=feature_set.features
             )
 
-            # Clean up temp file
-            tmp_path.unlink()
-
             return {
                 'prediction': fused.final_prediction,
                 'confidence': fused.confidence,
@@ -844,31 +909,40 @@ async def predict_from_audio(
                     features_df = preprocessor.transform(features_df)
 
             result = make_prediction(model, features_df, used_model_name)
-
-            # LOCAL SHAP (AUDIO)
-            request_id = str(uuid.uuid4())
-            local_shap_dir = Path("assets/shap/local") / request_id
-            local_shap_dir.mkdir(parents=True, exist_ok=True)
-
-            background = np.load(
-                Path("assets/shap") / used_model_name / "background.npy"
-            )
-
-            predicted_class = 1 if result["prediction"] == "ASD" else 0
-
-            shap_manager = SHAPManager(
-                model=model,
-                background_data=background,
-                feature_names=list(features_df.columns),
-                model_type=used_model_name.split("_")[-1]
-            )
-
-            shap_manager.generate_local_waterfall(
-                X_instance=features_df.values[0],
-                save_dir=local_shap_dir,
-                predicted_class=predicted_class
-            )
-
+            
+            # LOCAL SHAP (AUDIO) - optional, should not break prediction if unavailable
+            local_shap_data = None
+            try:
+                request_id = str(uuid.uuid4())
+                local_shap_dir = Path("assets/shap/local") / request_id
+                local_shap_dir.mkdir(parents=True, exist_ok=True)
+                
+                background_path = Path("assets/shap") / used_model_name / "background.npy"
+                background = np.load(background_path)
+                
+                predicted_class = 1 if result["prediction"] == "ASD" else 0
+                
+                shap_manager = SHAPManager(
+                    model=model,
+                    background_data=background,
+                    feature_names=list(features_df.columns),
+                    model_type=used_model_name.split("_")[-1]
+                )
+                
+                shap_manager.generate_local_waterfall(
+                    X_instance=features_df.values[0],
+                    save_dir=local_shap_dir,
+                    predicted_class=predicted_class
+                )
+                
+                local_shap_data = {
+                    "request_id": request_id,
+                    "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
+                }
+            except Exception as shap_error:
+                logger.warning(f"Audio SHAP explanation not available: {shap_error}")
+                predicted_class = 1 if result["prediction"] == "ASD" else 0
+            
             # COUNTERFACTUAL
             component = "_".join(used_model_name.split("_")[:-1])
             logger.info(f"Counterfactual component: {component}")
@@ -896,11 +970,7 @@ async def predict_from_audio(
                 processed.transcript_data,
                 features=pragmatic_feature_set.features
             )
-        
-        # Clean up temp file
-        tmp_path.unlink()
-        
-        return {
+        response_data = {
             **result,
             'features_extracted': len(feature_set.features),
             'transcript': processed.raw_text,
@@ -908,21 +978,35 @@ async def predict_from_audio(
             'annotation_summary': annotated._get_annotation_summary(),
             'input_type': 'audio',
             'duration': processed.metadata.get('duration', 0),
-                'model_used': used_model_name,  # Explicitly state which model was used
-                'component': get_model_component(used_model_name),
-            "local_shap": {
-                "request_id": request_id,
-                "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
-            },
-            "counterfactual": cf_result,
+            'model_used': used_model_name,  # Explicitly state which model was used
+            'component': get_model_component(used_model_name),
         }
         
+        if local_shap_data:
+            response_data['local_shap'] = local_shap_data
+        if cf_result:
+            response_data['counterfactual'] = cf_result
+        
+        return response_data
+        
+    except HTTPException as http_exc:
+        # Preserve original user-facing error message so frontend can display it
+        logger.error(f"Audio prediction failed: {http_exc.detail}")
+        raise http_exc
     except Exception as e:
         logger.error(f"Audio prediction failed: {e}")
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Audio prediction failed: {str(e)}"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Audio prediction failed due to an internal error. Please try again or contact the system administrator."
         )
+    finally:
+        # Cleanup temporary files (original upload and any converted WAV)
+        for path in {tmp_path, pipeline_audio_path}:
+            try:
+                if path and path.exists():
+                    path.unlink()
+            except Exception as cleanup_error:
+                logger.warning(f"Failed to clean up temporary audio file {path}: {cleanup_error}")
 
 
 class TextPredictionRequestWithOptions(BaseModel):
