@@ -1,0 +1,713 @@
+@import "tailwindcss";
+
+/* ========================================
+   TAILWIND THEME (from original tailwind.config.js)
+   ======================================== */
+@theme {
+  --font-family-sans: 'Saans', system-ui, sans-serif;
+  --font-family-heading: 'Saans', system-ui, sans-serif;
+  --font-family-mono: ui-monospace, monospace;
+
+  --color-primary-50: #f8f9fa;
+  --color-primary-100: #f1f3f5;
+  --color-primary-200: #e9ecef;
+  --color-primary-300: #dee2e6;
+  --color-primary-400: #ced4da;
+  --color-primary-500: #adb5bd;
+  --color-primary-600: #868e96;
+  --color-primary-700: #495057;
+  --color-primary-800: #343a40;
+  --color-primary-900: #212529;
+
+  --color-accent-50: #e3f2fd;
+  --color-accent-100: #bbdefb;
+  --color-accent-200: #90caf9;
+  --color-accent-300: #64b5f6;
+  --color-accent-400: #42a5f5;
+  --color-accent-500: #2196f3;
+  --color-accent-600: #1e88e5;
+  --color-accent-700: #1976d2;
+  --color-accent-800: #1565c0;
+  --color-accent-900: #0d47a1;
+
+  --font-size-7xl: 4.5rem;
+  --font-size-8xl: 6rem;
+  --font-size-9xl: 8rem;
+}
+
+/* ========================================
+   FONT FAMILIES
+   ======================================== */
+
+/* Jokker Font Family */
+@font-face {
+  font-family: 'Jokker';
+  src: url('/fonts/Jokker/Jokker-TRIAL-Thin.woff2') format('woff2'),
+    url('/fonts/Jokker/Jokker-TRIAL-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jokker';
+  src: url('/fonts/Jokker/Jokker-TRIAL-Light.woff2') format('woff2'),
+    url('/fonts/Jokker/Jokker-TRIAL-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jokker';
+  src: url('/fonts/Jokker/Jokker-TRIAL-Regular.woff2') format('woff2'),
+    url('/fonts/Jokker/Jokker-TRIAL-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jokker';
+  src: url('/fonts/Jokker/Jokker-TRIAL-Medium.woff2') format('woff2'),
+    url('/fonts/Jokker/Jokker-TRIAL-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jokker';
+  src: url('/fonts/Jokker/Jokker-TRIAL-Semibold.woff2') format('woff2'),
+    url('/fonts/Jokker/Jokker-TRIAL-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jokker';
+  src: url('/fonts/Jokker/Jokker-TRIAL-Bold.woff2') format('woff2'),
+    url('/fonts/Jokker/Jokker-TRIAL-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jokker';
+  src: url('/fonts/Jokker/Jokker-TRIAL-Heavy.woff2') format('woff2'),
+    url('/fonts/Jokker/Jokker-TRIAL-Heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Saans Font Family */
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/Saans/Saans/Saans-TRIAL-Light.woff2') format('woff2'),
+    url('/fonts/Saans/Saans/Saans-TRIAL-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/Saans/Saans/Saans-TRIAL-Regular.woff2') format('woff2'),
+    url('/fonts/Saans/Saans/Saans-TRIAL-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/Saans/Saans/Saans-TRIAL-Medium.woff2') format('woff2'),
+    url('/fonts/Saans/Saans/Saans-TRIAL-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/Saans/Saans/Saans-TRIAL-SemiBold.woff2') format('woff2'),
+    url('/fonts/Saans/Saans/Saans-TRIAL-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/Saans/Saans/Saans-TRIAL-Bold.woff2') format('woff2'),
+    url('/fonts/Saans/Saans/Saans-TRIAL-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/Saans/Saans/Saans-TRIAL-Heavy.woff2') format('woff2'),
+    url('/fonts/Saans/Saans/Saans-TRIAL-Heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Haffer Font Family */
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-Thin.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-Light.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-Regular.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-Medium.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-SemiBold.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-Bold.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-Heavy.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-Heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Haffer';
+  src: url('/fonts/Haffer/Haffer/Haffer-TRIAL-Black.woff2') format('woff2'),
+    url('/fonts/Haffer/Haffer/Haffer-TRIAL-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   MODERN MINIMAL STYLES
+   ======================================== */
+
+/* Clean Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Saans', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+body {
+  font-family: 'Saans', system-ui, sans-serif;
+}
+
+/* Modern Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-option {
+  position: relative;
+  padding: 10px 32px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.toggle-option.active {
+  color: #212529;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  background: white;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Upload area transitions */
+.upload-area {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.upload-area:hover {
+  transform: translateY(-2px);
+}
+
+.upload-area.dragover {
+  background-color: #f8f9fa;
+  transform: scale(1.01);
+}
+
+/* Modern Card Transitions */
+.card-modern {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Button Enhancements */
+button {
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border: 2px solid #e9ecef;
+  border-top-color: #495057;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Modern Input Focus */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* Smooth Status Animation */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.status-connected {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-training {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Progress bar animation */
+@keyframes progress-shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.progress-bar-animated {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  background-size: 200px 100%;
+  animation: progress-shimmer 2s linear infinite;
+}
+
+/* Model card hover effect */
+.model-card {
+  transition: all 0.3s ease;
+}
+
+.model-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Clean Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f3f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
+
+/* ========================================
+   ANNOTATED TRANSCRIPT STYLES
+   ======================================== */
+
+.transcript-container {
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  line-height: 1.8;
+  color: #1a1a1a;
+}
+
+.transcript-container.compact-view {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.transcript-container.compact-view .utterance {
+  padding: 4px 0;
+}
+
+.transcript-container .utterance {
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 0 8px 8px 0;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.transcript-container .utterance:hover {
+  background-color: #f8f9fa;
+  border-left-color: #495057;
+  border-radius: 0 8px 8px 0;
+}
+
+.transcript-container .utterance.utterance-highlighted {
+  background-color: #e7f5ff;
+  border-left-color: #2196F3;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+}
+
+/* Semantic coherence highlighting */
+.transcript-container .utterance.coherent-utterance {
+  background-color: #e8f5e9;
+  border-left: 4px solid #4CAF50;
+  border-radius: 0 8px 8px 0;
+  padding-left: 12px;
+}
+
+.transcript-container .utterance.incoherent-utterance {
+  background-color: #ffebee;
+  border-left: 4px solid #F44336;
+  border-radius: 0 8px 8px 0;
+  padding-left: 12px;
+}
+
+.transcript-container .utterance.coherence-unknown {
+  background-color: #f5f5f5;
+  border-left: 4px solid #9E9E9E;
+  border-radius: 0 8px 8px 0;
+  padding-left: 12px;
+}
+
+.transcript-container .utterance.search-highlight {
+  background-color: #fff3cd;
+  border-left-color: #ffc107;
+  border-radius: 0 8px 8px 0;
+}
+
+.transcript-container .speaker {
+  font-weight: 600;
+  color: #1976D2;
+  margin-right: 8px;
+  display: inline-block;
+  min-width: 80px;
+}
+
+.transcript-container .text {
+  color: #2c3e50;
+}
+
+.transcript-container .annotation {
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  display: inline-block;
+  margin: 0 2px;
+  font-weight: 500;
+}
+
+.transcript-container .annotation:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.transcript-container .annotation.annotation-highlighted {
+  animation: pulse-highlight 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.2);
+  z-index: 10;
+}
+
+.transcript-container .annotation.annotation-filtered {
+  animation: pulse-filter 2s ease-in-out infinite;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+@keyframes pulse-highlight {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(33, 150, 243, 0.1);
+  }
+}
+
+@keyframes pulse-filter {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 0 6px rgba(76, 175, 80, 0.15);
+  }
+}
+
+/* Feature chips */
+.feature-chip {
+  transition: all 0.2s ease;
+  text-align: left;
+  border-radius: 0 8px 8px 0;
+}
+
+.feature-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Search match highlighting */
+mark.search-match {
+  background-color: #ffc107;
+  color: #1a1a1a;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* Legend styling */
+.legend {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #dee2e6;
+}
+
+.legend h4 {
+  margin: 0 0 12px 0;
+  color: #212529;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.legend-item {
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.legend-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Statistics cards */
+.stat-card {
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .transcript-container {
+    font-size: 0.875rem;
+  }
+
+  .transcript-container .speaker {
+    min-width: 60px;
+    font-size: 0.8rem;
+  }
+
+  .feature-chip {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+}
+
+/* Smooth scrolling */
+.transcript-container {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for transcript */
+.transcript-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.transcript-container::-webkit-scrollbar-track {
+  background: #f1f3f5;
+  border-radius: 5px;
+}
+
+.transcript-container::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 5px;
+}
+
+.transcript-container::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
+
+.shap-tab {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid #84cc16;
+  color: #365314;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: white;
+  transition: all 0.2s;
+}
+
+.shap-tab.active {
+  background: #84cc16;
+  color: white;
+}
+
+.shap-panel {
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.explain-box h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.explain-box ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.explain-box p {
+  margin-bottom: 0.5rem;
+}
+
+.example {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #f7fee7;
+  border: 1px solid #d9f99d;
+  border-radius: 0.75rem;
+}
+
+.red {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.blue {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
