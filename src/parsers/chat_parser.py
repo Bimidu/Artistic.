@@ -260,7 +260,7 @@ class CHATParser:
     
     def _extract_metadata(
         self,
-        reader: pylangacq.Reader,
+        reader: Any,
         file_path: Path
     ) -> Dict[str, Any]:
         """
@@ -353,7 +353,7 @@ class CHATParser:
     
     def _extract_participants(
         self,
-        reader: pylangacq.Reader
+        reader: Any
     ) -> Dict[str, Dict[str, str]]:
         """
         Extract participant information from @ID headers.
@@ -430,7 +430,7 @@ class CHATParser:
     
     def _extract_utterances(
         self,
-        reader: pylangacq.Reader
+        reader: Any
     ) -> List[Utterance]:
         """
         Extract all utterances from the transcript.
