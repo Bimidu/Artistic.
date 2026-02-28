@@ -630,9 +630,9 @@ async function predictFromChatFile() {
 
 function showLoading(elementId) {
     document.getElementById(elementId).innerHTML = `
-        <div class="text-center py-24">
-            <div class="spinner mx-auto mb-6"></div>
-            <div class="text-lg text-primary-600">Analyzing...</div>
+        <div class="text-center py-16">
+            <div class="spinner mx-auto mb-4"></div>
+            <div class="text-sm text-primary-500">Analyzing...</div>
         </div>
     `;
 }
@@ -655,7 +655,7 @@ function displayResults(data) {
             'syntactic_semantic': 'purple'
         };
 
-        componentBreakdown = '<div class="mt-6 pt-6 border-t border-primary-200"><div class="text-lg font-medium text-primary-900 mb-4">Component Breakdown</div><div class="space-y-3">';
+        componentBreakdown = '<div class="mt-5 pt-5 border-t border-primary-200"><div class="text-xs font-medium text-primary-500 uppercase tracking-wide mb-3">Component Breakdown</div><div class="space-y-2">';
 
         for (const comp of data.component_breakdown) {
             const compName = componentNames[comp.component] || comp.component;
@@ -666,17 +666,17 @@ function displayResults(data) {
             const tdProb = ((comp.probabilities.TD || 0) * 100).toFixed(1);
 
             componentBreakdown += `
-                <div class="p-4 bg-${color}-50 rounded-xl">
+                <div class="p-4 bg-primary-50 border border-primary-200 rounded-xl">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <span class="text-base font-medium text-primary-900">${compName}</span>
-                            <span class="px-2 py-1 text-xs rounded-full ${compIsAsd ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">${comp.prediction}</span>
+                            <span class="text-sm font-medium text-primary-900">${compName}</span>
+                            <span class="px-2 py-0.5 text-xs rounded-full ${compIsAsd ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">${comp.prediction}</span>
                         </div>
-                        <span class="text-sm text-primary-600">${compConf}% confidence</span>
+                        <span class="text-xs text-primary-500">${compConf}% confidence</span>
                     </div>
-                    <div class="flex gap-2 text-xs">
-                        <span class="text-primary-600">ASD: ${asdProb}%</span>
-                        <span class="text-primary-600">TD: ${tdProb}%</span>
+                    <div class="flex gap-3 text-xs text-primary-500">
+                        <span>ASD: ${asdProb}%</span>
+                        <span>TD: ${tdProb}%</span>
                     </div>
                 </div>
             `;
@@ -686,53 +686,54 @@ function displayResults(data) {
     }
 
     document.getElementById('resultsArea').innerHTML = `
-        <div class="flex items-center justify-between mb-8">
-            <span class="px-10 py-4 rounded-full text-3xl ${isAsd ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}">
+        <div class="flex items-center justify-between mb-6">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${isAsd ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-green-100 text-green-700 border border-green-200'}">
+                <span class="w-2 h-2 rounded-full ${isAsd ? 'bg-red-500' : 'bg-green-500'}"></span>
                 ${data.prediction}
             </span>
-            <span class="text-base text-primary-600">
+            <span class="text-xs text-primary-500">
                 ${data.features_extracted} features analyzed
             </span>
         </div>
         
-        <div class="mb-8">
-            <div class="flex justify-between text-xl mb-4">
-                <span class="text-primary-900">Confidence</span>
-                <span class="text-primary-900">${confidence}%</span>
+        <div class="mb-6">
+            <div class="flex justify-between text-sm mb-2">
+                <span class="text-primary-600">Confidence</span>
+                <span class="font-medium text-primary-900">${confidence}%</span>
             </div>
-            <div class="w-full h-2 bg-primary-200 rounded-full overflow-hidden">
+            <div class="w-full h-1.5 bg-primary-200 rounded-full overflow-hidden">
                 <div class="h-full transition-all duration-700 ${isAsd ? 'bg-red-500' : 'bg-green-500'}" style="width: ${confidence}%"></div>
             </div>
         </div>
         
-        <div class="grid grid-cols-2 gap-6 mb-8">
-            <div class="text-center p-8 bg-red-50 rounded-3xl">
-                <div class="text-5xl font-medium text-red-600">
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="p-5 bg-red-50 border border-red-100 rounded-xl text-center">
+                <div class="text-3xl font-semibold text-red-600">
                     ${(data.probabilities.ASD * 100).toFixed(1)}%
                 </div>
-                <div class="text-base text-primary-600 mt-3">ASD Probability</div>
+                <div class="text-xs text-primary-500 mt-2">ASD Probability</div>
             </div>
-            <div class="text-center p-8 bg-green-50 rounded-3xl">
-                <div class="text-5xl font-medium text-green-600">
+            <div class="p-5 bg-green-50 border border-green-100 rounded-xl text-center">
+                <div class="text-3xl font-semibold text-green-600">
                     ${(data.probabilities.TD * 100).toFixed(1)}%
                 </div>
-                <div class="text-base text-primary-600 mt-3">TD Probability</div>
+                <div class="text-xs text-primary-500 mt-2">TD Probability</div>
             </div>
         </div>
         
         ${componentBreakdown}
         
-        <div class="text-sm text-primary-500 pt-6 border-t border-primary-200">
-            <div class="mb-2">
-                <span class="font-medium text-primary-700">Model(s) Used:</span>
+        <div class="text-xs text-primary-500 pt-4 border-t border-primary-200">
+            <div class="mb-1.5">
+                <span class="font-medium text-primary-600">Model(s) Used:</span>
                 ${data.models_used ?
-            `<span class="text-primary-600">${data.models_used.join(', ')}</span>` :
-            `<span class="text-primary-600">${data.model_used || 'Unknown'}</span>`
+            `<span class="text-primary-500">${data.models_used.join(', ')}</span>` :
+            `<span class="text-primary-500">${data.model_used || 'Unknown'}</span>`
         }
             </div>
-            <div class="text-xs text-primary-500">
-                Input: ${data.input_type}${data.component ? ` | Component: ${data.component}` : ''}
-            ${data.duration ? ' | Duration: ' + data.duration.toFixed(1) + 's' : ''}
+            <div class="text-primary-400">
+                Input: ${data.input_type}${data.component ? ` · Component: ${data.component}` : ''}
+            ${data.duration ? ' · Duration: ' + data.duration.toFixed(1) + 's' : ''}
             </div>
         </div>
     `;
@@ -775,24 +776,29 @@ function displayError(message) {
 
     if (message.includes('No models in registry') || message.includes('No models')) {
         additionalHelp = `
-            <div class="mt-6 p-6 bg-yellow-50 rounded-2xl text-left">
-                <div class="text-base text-primary-900 font-medium mb-3">💡 How to fix:</div>
-                <div class="text-sm text-primary-700 space-y-2">
-                    <div>1. Switch to <strong>Training Mode</strong></div>
-                    <div>2. Click <strong>Refresh</strong> to load datasets</div>
+            <div class="mt-5 p-5 bg-primary-50 border border-primary-200 rounded-xl text-left">
+                <div class="text-xs font-medium text-primary-700 uppercase tracking-wide mb-3">How to fix</div>
+                <div class="text-sm text-primary-600 space-y-1.5">
+                    <div>1. Switch to <strong class="text-primary-800">Training Mode</strong></div>
+                    <div>2. Click <strong class="text-primary-800">Refresh</strong> to load datasets</div>
                     <div>3. Select one or more datasets</div>
-                    <div>4. Click <strong>Extract Features</strong></div>
+                    <div>4. Click <strong class="text-primary-800">Extract Features</strong></div>
                     <div>5. Train a model using the training scripts</div>
-                    <div class="mt-3 pt-3 border-t border-primary-200">Or restart the API server to reload existing models</div>
+                    <div class="mt-3 pt-3 border-t border-primary-200 text-xs text-primary-500">Or restart the API server to reload existing models</div>
                 </div>
             </div>
         `;
     }
 
     document.getElementById('resultsArea').innerHTML = `
-        <div class="text-center py-24">
-            <div class="text-6xl mb-6">⚠️</div>
-            <div class="text-xl text-primary-900 mb-4">${message}</div>
+        <div class="py-12 text-center">
+            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <div class="text-sm font-medium text-primary-900 mb-1">Something went wrong</div>
+            <div class="text-sm text-primary-500 mb-4 max-w-sm mx-auto">${message}</div>
             ${additionalHelp}
         </div>
     `;
@@ -813,7 +819,7 @@ async function loadDatasets() {
         }
     }
 
-    listEl.innerHTML = '<div class="text-center py-16"><div class="spinner mx-auto"></div></div>';
+    listEl.innerHTML = '<div class="text-center py-12"><div class="spinner mx-auto"></div></div>';
 
     try {
         const response = await fetch(`${getApiUrl()}/training/datasets`);
@@ -821,19 +827,19 @@ async function loadDatasets() {
 
         if (data.datasets && data.datasets.length > 0) {
             listEl.innerHTML = data.datasets.map(ds => `
-                <div class="flex items-center p-4 bg-primary-50 rounded-xl mb-3 hover:bg-primary-100 transition-colors">
-                    <input type="checkbox" class="extraction-dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.path}" data-name="${ds.name}">
-                    <div class="flex-1 ml-5">
-                        <div class="text-lg text-primary-900">${ds.name}</div>
-                        <div class="text-base text-primary-500 mt-1">${ds.chat_files} CHAT files, ${ds.audio_files} audio files</div>
+                <div class="flex items-center p-4 bg-white border border-primary-200 rounded-xl mb-2.5 hover:border-primary-300 transition-colors">
+                    <input type="checkbox" class="extraction-dataset-checkbox w-4 h-4 text-primary-600 rounded" value="${ds.path}" data-name="${ds.name}">
+                    <div class="flex-1 ml-4">
+                        <div class="text-sm font-medium text-primary-900">${ds.name}</div>
+                        <div class="text-xs text-primary-500 mt-0.5">${ds.chat_files} CHAT files · ${ds.audio_files} audio files</div>
                     </div>
                 </div>
             `).join('');
         } else {
-            listEl.innerHTML = '<div class="text-center py-16 text-primary-400 text-xl">No datasets found</div>';
+            listEl.innerHTML = '<div class="text-center py-12 text-sm text-primary-400">No datasets found</div>';
         }
     } catch (error) {
-        listEl.innerHTML = `<div class="text-red-500 text-base p-6">Error loading datasets: ${error.message}</div>`;
+        listEl.innerHTML = `<div class="text-sm text-red-500 p-4">Error loading datasets: ${error.message}</div>`;
     }
 }
 
@@ -842,7 +848,7 @@ async function loadAvailableDatasetsForTraining() {
     const listEl = document.getElementById('datasetList');
     const component = document.getElementById('trainingComponent').value;
 
-    listEl.innerHTML = '<div class="text-center py-16"><div class="spinner mx-auto"></div></div>';
+    listEl.innerHTML = '<div class="text-center py-12"><div class="spinner mx-auto"></div></div>';
 
     try {
         const response = await fetch(`${getApiUrl()}/training/available-datasets/${component}`);
@@ -850,38 +856,35 @@ async function loadAvailableDatasetsForTraining() {
 
         if (data.csv_exists && data.datasets && data.datasets.length > 0) {
             listEl.innerHTML = `
-                <div class="mb-4 p-4 bg-green-50 rounded-xl border border-green-200">
-                    <div class="text-sm text-green-700">
-                        <strong>✓ Features CSV found:</strong> ${data.total_samples} total samples from ${data.total_datasets} dataset(s)
+                <div class="mb-4 p-3 bg-green-50 border border-green-200 rounded-xl">
+                    <div class="text-xs text-green-700 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <strong>Features CSV found:</strong> ${data.total_samples} total samples from ${data.total_datasets} dataset(s)
                     </div>
                 </div>
                 ${data.datasets.map(ds => `
-                    <div class="flex items-center p-6 bg-white rounded-2xl mb-4 hover:bg-primary-100 transition-colors">
-                        <input type="checkbox" class="dataset-checkbox w-5 h-5 text-primary-600 rounded" value="${ds.name}" data-name="${ds.name}">
-                        <div class="flex-1 ml-5">
-                            <div class="text-lg text-primary-900">${ds.name}</div>
-                            <div class="text-base text-primary-500 mt-1">${ds.samples} samples available</div>
+                    <div class="flex items-center p-4 bg-white border border-primary-200 rounded-xl mb-2.5 hover:border-primary-300 transition-colors">
+                        <input type="checkbox" class="dataset-checkbox w-4 h-4 text-primary-600 rounded" value="${ds.name}" data-name="${ds.name}">
+                        <div class="flex-1 ml-4">
+                            <div class="text-sm font-medium text-primary-900">${ds.name}</div>
+                            <div class="text-xs text-primary-500 mt-0.5">${ds.samples} samples available</div>
                         </div>
                     </div>
                 `).join('')}
             `;
         } else {
             listEl.innerHTML = `
-                <div class="mb-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200">
-                    <div class="text-sm text-yellow-700">
-                        <strong>⚠ No features CSV found for ${component}</strong>
-                    </div>
-                    <div class="text-xs text-yellow-600 mt-2">
-                        Please extract features first using the "Extract Features" section.
-                    </div>
+                <div class="mb-4 p-3 bg-primary-50 border border-primary-200 rounded-xl">
+                    <div class="text-xs text-primary-700 font-medium mb-1">No features CSV found for ${component}</div>
+                    <div class="text-xs text-primary-500">Extract features first using the Feature Extraction tab.</div>
                 </div>
-                <div class="text-center py-16 text-primary-400 text-xl">
+                <div class="text-center py-10 text-sm text-primary-400">
                     ${data.message || 'No datasets available'}
                 </div>
             `;
         }
     } catch (error) {
-        listEl.innerHTML = `<div class="text-center py-16 text-red-500 text-xl">Error: ${error.message}</div>`;
+        listEl.innerHTML = `<div class="text-sm text-red-500 p-4">Error: ${error.message}</div>`;
     }
 }
 
@@ -900,7 +903,7 @@ async function extractFeatures() {
     const statusEl = document.getElementById('extractionStatus');
     const statusContent = document.getElementById('extractionStatusContent');
     statusEl.classList.remove('hidden');
-    statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-4 text-base text-primary-600">Extracting features...</div>';
+    statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-3 text-sm text-primary-500">Extracting features...</div>';
 
     try {
         const requestBody = {
@@ -923,18 +926,16 @@ async function extractFeatures() {
 
         if (response.ok) {
             statusContent.innerHTML = `
-                <div class="text-green-600 text-lg mb-3">✓ Feature extraction complete</div>
-                <div class="text-base text-primary-900 mb-2">
-                    <strong>Total samples:</strong> ${data.total_samples || data.new_samples}
-                    ${data.new_samples ? ` (${data.new_samples} new)` : ''}
+                <div class="flex items-center gap-2 text-green-700 text-sm font-medium mb-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Feature extraction complete
                 </div>
-                <div class="text-base text-primary-900 mb-2">
-                    <strong>Features:</strong> ${data.features_count}
+                <div class="space-y-1 text-xs text-primary-600">
+                    <div><span class="text-primary-400">Total samples:</span> <strong class="text-primary-700">${data.total_samples || data.new_samples}${data.new_samples ? ` (${data.new_samples} new)` : ''}</strong></div>
+                    <div><span class="text-primary-400">Features:</span> <strong class="text-primary-700">${data.features_count}</strong></div>
+                    <div><span class="text-primary-400">Output:</span> <span class="text-primary-600 font-mono text-xs">${data.output_file}</span></div>
+                    ${data.datasets_updated ? `<div class="text-primary-500">Updated: ${data.datasets_updated.join(', ')}</div>` : ''}
                 </div>
-                <div class="text-sm text-primary-500 mb-2">
-                    <strong>Output:</strong> ${data.output_file}
-                </div>
-                ${data.datasets_updated ? `<div class="text-sm text-primary-600 mt-2">Updated datasets: ${data.datasets_updated.join(', ')}</div>` : ''}
             `;
 
             // Reload available datasets for training after extraction
@@ -942,10 +943,10 @@ async function extractFeatures() {
                 loadAvailableDatasetsForTraining();
             }, 1000);
         } else {
-            statusContent.innerHTML = `<div class="text-red-500 text-base">${data.detail || 'Feature extraction failed'}</div>`;
+            statusContent.innerHTML = `<div class="text-sm text-red-600">${data.detail || 'Feature extraction failed'}</div>`;
         }
     } catch (error) {
-        statusContent.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
+        statusContent.innerHTML = `<div class="text-sm text-red-600">Error: ${error.message}</div>`;
     }
 }
 
@@ -989,7 +990,7 @@ async function startTraining() {
     const statusEl = document.getElementById('trainingStatus');
     const statusContent = document.getElementById('trainingStatusContent');
     statusEl.classList.remove('hidden');
-    statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-4 text-base text-primary-600">Initializing training...</div>';
+    statusContent.innerHTML = '<div class="spinner mx-auto"></div><div class="text-center mt-3 text-sm text-primary-500">Initializing training...</div>';
 
     try {
         const response = await fetch(`${getApiUrl()}/training/train`, {
@@ -1014,10 +1015,10 @@ async function startTraining() {
             // Start polling for progress
             pollTrainingProgress();
         } else {
-            statusContent.innerHTML = `<div class="text-red-500 text-base">${data.detail || 'Failed to start training'}</div>`;
+            statusContent.innerHTML = `<div class="text-sm text-red-600">${data.detail || 'Failed to start training'}</div>`;
         }
     } catch (error) {
-        statusContent.innerHTML = `<div class="text-red-500 text-base">Error: ${error.message}</div>`;
+        statusContent.innerHTML = `<div class="text-sm text-red-600">Error: ${error.message}</div>`;
     }
 }
 
@@ -1074,10 +1075,10 @@ function updateModelCheckboxes() {
         const isChecked = index === 0 || index === 1; // Check first two by default
 
         const label = document.createElement('label');
-        label.className = 'flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors';
+        label.className = 'flex items-center cursor-pointer p-4 bg-white border border-primary-200 rounded-xl hover:border-primary-300 transition-colors';
         label.innerHTML = `
-            <input type="checkbox" value="${modelValue}" ${isChecked ? 'checked' : ''} class="w-5 h-5 text-primary-600 rounded">
-            <span class="ml-3 text-base text-primary-900">${info.label}</span>
+            <input type="checkbox" value="${modelValue}" ${isChecked ? 'checked' : ''} class="w-4 h-4 text-primary-600 rounded">
+            <span class="ml-3 text-sm text-primary-900">${info.label}</span>
         `;
 
         modelTypesContainer.appendChild(label);
@@ -1159,33 +1160,33 @@ function updateTrainingUI(status) {
 
     if (status.status === 'training') {
         const progressPercent = status.progress || 0;
-        const currentModel = status.current_model ? ` - ${status.current_model}` : '';
+        const currentModel = status.current_model ? ` · ${status.current_model}` : '';
 
         statusContent.innerHTML = `
-            <div class="mb-4">
-                <div class="flex justify-between text-sm text-primary-600 mb-2">
+            <div class="mb-3">
+                <div class="flex justify-between text-xs text-primary-500 mb-1.5">
                     <span>${status.message}${currentModel}</span>
-                    <span>${progressPercent}%</span>
+                    <span class="font-medium text-primary-700">${progressPercent}%</span>
                 </div>
-                <div class="w-full h-3 bg-primary-200 rounded-full overflow-hidden">
-                    <div class="h-full bg-primary-600 transition-all duration-500" style="width: ${progressPercent}%"></div>
+                <div class="w-full h-1.5 bg-primary-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary-700 transition-all duration-500" style="width: ${progressPercent}%"></div>
                 </div>
             </div>
-            <div class="text-sm text-primary-500">
-                Training ${status.total_models || 0} models for ${status.component || 'component'}...
+            <div class="text-xs text-primary-400">
+                Training ${status.total_models || 0} model(s) for ${status.component || 'component'}...
             </div>
         `;
     } else if (status.status === 'completed') {
         let resultsHtml = '';
         if (status.results && Object.keys(status.results).length > 0) {
-            resultsHtml = '<div class="mt-4 space-y-2">';
+            resultsHtml = '<div class="mt-3 space-y-2">';
             for (const [model, metrics] of Object.entries(status.results)) {
                 resultsHtml += `
-                    <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-                        <span class="font-medium text-primary-900">${model}</span>
-                        <div class="flex gap-4 text-sm">
-                            <span class="text-primary-600">Acc: ${(metrics.accuracy * 100).toFixed(1)}%</span>
-                            <span class="text-primary-600">F1: ${(metrics.f1_score * 100).toFixed(1)}%</span>
+                    <div class="flex items-center justify-between p-3 bg-primary-50 border border-primary-200 rounded-xl">
+                        <span class="text-sm font-medium text-primary-900">${model}</span>
+                        <div class="flex gap-4 text-xs text-primary-500">
+                            <span>Acc: <strong class="text-primary-700">${(metrics.accuracy * 100).toFixed(1)}%</strong></span>
+                            <span>F1: <strong class="text-primary-700">${(metrics.f1_score * 100).toFixed(1)}%</strong></span>
                         </div>
                     </div>
                 `;
@@ -1194,9 +1195,9 @@ function updateTrainingUI(status) {
         }
 
         statusContent.innerHTML = `
-            <div class="text-green-600 text-lg mb-3 flex items-center gap-2">
-                <span class="text-2xl">✓</span>
-                <span>${status.message}</span>
+            <div class="flex items-center gap-2 text-green-700 text-sm font-medium mb-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                ${status.message}
             </div>
             ${resultsHtml}
         `;
@@ -1207,43 +1208,41 @@ function updateTrainingUI(status) {
         // Parse common errors and provide helpful solutions
         if (errorMsg.includes('missing diagnosis') || errorMsg.includes('Insufficient samples')) {
             errorDetails = `
-                <div class="mt-4 p-4 bg-yellow-50 rounded-lg text-sm">
-                    <div class="font-medium text-primary-900 mb-2">💡 Possible Solutions:</div>
-                    <ul class="list-disc list-inside space-y-1 text-primary-700">
-                        <li>Some CHAT files may be missing diagnosis labels</li>
-                        <li>Try selecting different datasets</li>
-                        <li>Ensure datasets have proper CHAT format with diagnosis codes</li>
-                        <li>Check that files contain participant diagnosis information</li>
+                <div class="mt-3 p-3 bg-primary-50 border border-primary-200 rounded-xl text-xs">
+                    <div class="font-medium text-primary-700 mb-2">Possible solutions</div>
+                    <ul class="space-y-1 text-primary-600">
+                        <li>· Some CHAT files may be missing diagnosis labels</li>
+                        <li>· Try selecting different datasets</li>
+                        <li>· Ensure datasets have proper CHAT format with diagnosis codes</li>
+                        <li>· Check that files contain participant diagnosis information</li>
                     </ul>
                 </div>
             `;
         } else if (errorMsg.includes('No features extracted')) {
             errorDetails = `
-                <div class="mt-4 p-4 bg-yellow-50 rounded-lg text-sm">
-                    <div class="font-medium text-primary-900 mb-2">💡 Possible Solutions:</div>
-                    <ul class="list-disc list-inside space-y-1 text-primary-700">
-                        <li>Check that selected datasets contain .cha files</li>
-                        <li>Verify CHAT files are properly formatted</li>
-                        <li>Try extracting features first to diagnose issues</li>
+                <div class="mt-3 p-3 bg-primary-50 border border-primary-200 rounded-xl text-xs">
+                    <div class="font-medium text-primary-700 mb-2">Possible solutions</div>
+                    <ul class="space-y-1 text-primary-600">
+                        <li>· Check that selected datasets contain .cha files</li>
+                        <li>· Verify CHAT files are properly formatted</li>
+                        <li>· Try extracting features first to diagnose issues</li>
                     </ul>
                 </div>
             `;
         }
 
         statusContent.innerHTML = `
-            <div class="text-red-500 text-base">
-                <div class="text-lg mb-2 flex items-center gap-2">
-                    <span class="text-2xl">✗</span>
-                    <span>Training Failed</span>
-                </div>
-                <div class="text-sm mt-2 p-3 bg-red-50 rounded-lg text-red-700">
-                    ${errorMsg}
-                </div>
-                ${errorDetails}
+            <div class="flex items-center gap-2 text-red-600 text-sm font-medium mb-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                Training failed
             </div>
+            <div class="text-xs mt-1 p-3 bg-red-50 border border-red-100 rounded-xl text-red-700">
+                ${errorMsg}
+            </div>
+            ${errorDetails}
         `;
     } else {
-        statusContent.innerHTML = `<div class="text-primary-500 text-base">${status.message}</div>`;
+        statusContent.innerHTML = `<div class="text-sm text-primary-500">${status.message}</div>`;
     }
 }
 
@@ -1252,7 +1251,7 @@ async function loadAvailableModels() {
     const container = document.getElementById('availableModelsContainer');
     if (!container) return;
 
-    container.innerHTML = '<div class="text-center py-8"><div class="spinner mx-auto"></div></div>';
+    container.innerHTML = '<div class="text-center py-12"><div class="spinner mx-auto"></div></div>';
 
     try {
         const response = await fetch(`${getApiUrl()}/models`);
@@ -1289,28 +1288,28 @@ async function loadAvailableModels() {
 
                 modelsHtml += `
                     <div class="mb-8">
-                        <h3 class="text-2xl font-medium text-primary-900 mb-4 flex items-center gap-3">
-                            ${componentName}
-                            <span class="px-3 py-1 bg-${color}-100 text-${color}-700 text-sm rounded-full">${models.length} model${models.length > 1 ? 's' : ''}</span>
-                        </h3>
-                        <div class="bg-white rounded-2xl overflow-hidden border border-primary-200">
+                        <div class="flex items-center gap-3 mb-4">
+                            <h3 class="text-base font-medium text-primary-900">${componentName}</h3>
+                            <span class="px-2 py-0.5 bg-primary-100 text-primary-600 text-xs rounded-full">${models.length} model${models.length > 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="bg-white rounded-xl overflow-hidden border border-primary-200">
                             <div class="overflow-x-auto">
                                 <table class="w-full">
-                                    <thead class="bg-primary-50">
+                                    <thead class="bg-primary-50 border-b border-primary-200">
                                         <tr>
-                                            <th class="px-6 py-4 text-left text-sm font-semibold text-primary-900">Model Type</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Accuracy</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">F1 Score</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Precision</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Recall</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">ROC-AUC</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Features</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Samples</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Created</th>
-                                            <th class="px-6 py-4 text-center text-sm font-semibold text-primary-900">Actions</th>
+                                            <th class="px-5 py-3 text-left text-xs font-medium text-primary-500 uppercase tracking-wide">Model Type</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">Accuracy</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">F1 Score</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">Precision</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">Recall</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">ROC-AUC</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">Features</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">Samples</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">Created</th>
+                                            <th class="px-5 py-3 text-center text-xs font-medium text-primary-500 uppercase tracking-wide">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="divide-y divide-primary-200">
+                                    <tbody class="divide-y divide-primary-100">
                 `;
 
                 for (const model of models) {
@@ -1324,27 +1323,27 @@ async function loadAvailableModels() {
                     const time = new Date(model.created_at).toLocaleTimeString();
 
                     modelsHtml += `
-                        <tr class="hover:bg-primary-50 transition-colors ${isBest ? 'bg-primary-100' : ''}">
-                            <td class="px-6 py-4">
+                        <tr class="hover:bg-primary-50 transition-colors ${isBest ? 'bg-primary-50' : ''}">
+                            <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-base font-medium text-primary-900">${model.type}</span>
-                                    ${isBest ? '<span class="px-2 py-0.5 bg-primary-600 text-white text-xs rounded-full">Best</span>' : ''}
+                                    <span class="text-sm font-medium text-primary-900">${model.type}</span>
+                                    ${isBest ? '<span class="px-2 py-0.5 bg-primary-900 text-white text-xs rounded-full">Best</span>' : ''}
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-700">${accuracy}%</td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-700">${f1}%</td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-700">${precision}%</td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-700">${recall}%</td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-700">${rocAuc}${rocAuc !== 'N/A' ? '%' : ''}</td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-700">${model.n_features}</td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-700">${model.training_samples}</td>
-                            <td class="px-6 py-4 text-center text-sm text-primary-600">${date}<br><span class="text-xs">${time}</span></td>
-                            <td class="px-6 py-4 text-center">
+                            <td class="px-5 py-3.5 text-center text-sm text-primary-700">${accuracy}%</td>
+                            <td class="px-5 py-3.5 text-center text-sm text-primary-700">${f1}%</td>
+                            <td class="px-5 py-3.5 text-center text-sm text-primary-700">${precision}%</td>
+                            <td class="px-5 py-3.5 text-center text-sm text-primary-700">${recall}%</td>
+                            <td class="px-5 py-3.5 text-center text-sm text-primary-700">${rocAuc}${rocAuc !== 'N/A' ? '%' : ''}</td>
+                            <td class="px-5 py-3.5 text-center text-sm text-primary-600">${model.n_features}</td>
+                            <td class="px-5 py-3.5 text-center text-sm text-primary-600">${model.training_samples}</td>
+                            <td class="px-5 py-3.5 text-center text-xs text-primary-500">${date}<br>${time}</td>
+                            <td class="px-5 py-3.5 text-center">
                                 <div class="flex items-center justify-center gap-2">
-                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-xs" onclick='showModelDetails(${JSON.stringify(model)})'>
+                                    <button class="px-3 py-1.5 bg-primary-900 text-white rounded-lg hover:bg-primary-800 transition-colors text-xs font-medium" onclick='showModelDetails(${JSON.stringify(model)})'>
                                         View
                                     </button>
-                                    <button class="px-3 py-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors text-xs" onclick="deleteModel('${model.name}')">
+                                    <button class="px-3 py-1.5 text-red-500 border border-red-200 hover:bg-red-50 rounded-lg transition-colors text-xs" onclick="deleteModel('${model.name}')">
                                         Delete
                                     </button>
                                 </div>
@@ -1366,14 +1365,18 @@ async function loadAvailableModels() {
         } else {
             container.innerHTML = `
                 <div class="text-center py-16">
-                    <div class="text-6xl mb-4">📦</div>
-                    <div class="text-xl text-primary-600 mb-2">No models trained yet</div>
-                    <div class="text-base text-primary-500">Train your first model to get started</div>
+                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="text-sm font-medium text-primary-700 mb-1">No models trained yet</div>
+                    <div class="text-xs text-primary-400">Train your first model to get started</div>
                 </div>
             `;
         }
     } catch (error) {
-        container.innerHTML = `<div class="text-red-500 text-base p-6">Error loading models: ${error.message}</div>`;
+        container.innerHTML = `<div class="text-sm text-red-500 p-4">Error loading models: ${error.message}</div>`;
     }
 }
 
@@ -1418,93 +1421,84 @@ function showModelDetails(model) {
     const matthews = model.matthews_corr ? model.matthews_corr.toFixed(4) : 'N/A';
 
     content.innerHTML = `
-        <div class="space-y-8">
+        <div class="space-y-7">
             <!-- Model Info -->
-            <div class="bg-primary-50 rounded-2xl p-6">
-                <h3 class="text-2xl font-medium text-primary-900 mb-4">${model.type} Model</h3>
-                <div class="grid grid-cols-2 gap-4 text-sm">
-                    <div><span class="text-primary-600">Component:</span> <span class="font-medium">${model.component || 'pragmatic_conversational'}</span></div>
-                    <div><span class="text-primary-600">Features:</span> <span class="font-medium">${model.n_features}</span></div>
-                    <div><span class="text-primary-600">Training Samples:</span> <span class="font-medium">${model.training_samples}</span></div>
-                    <div><span class="text-primary-600">Created:</span> <span class="font-medium">${new Date(model.created_at).toLocaleString()}</span></div>
+            <div class="bg-primary-50 border border-primary-200 rounded-xl p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <h3 class="text-base font-medium text-primary-900">${model.type} Model</h3>
+                </div>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div><span class="text-primary-400">Component:</span> <span class="font-medium text-primary-700">${model.component || 'pragmatic_conversational'}</span></div>
+                    <div><span class="text-primary-400">Features:</span> <span class="font-medium text-primary-700">${model.n_features}</span></div>
+                    <div><span class="text-primary-400">Training Samples:</span> <span class="font-medium text-primary-700">${model.training_samples}</span></div>
+                    <div><span class="text-primary-400">Created:</span> <span class="font-medium text-primary-700">${new Date(model.created_at).toLocaleString()}</span></div>
                 </div>
             </div>
             
             <!-- Performance Metrics -->
             <div>
-                <h3 class="text-xl font-medium text-primary-900 mb-3">Performance Metrics</h3>
-                <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
-                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
-                        <div class="text-xl font-semibold text-primary-900">${accuracy}%</div>
-                        <div class="text-xs text-primary-600 mt-1">Accuracy</div>
+                <p class="text-xs font-medium text-primary-400 uppercase tracking-wide mb-3">Performance Metrics</p>
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-2.5">
+                    <div class="bg-primary-50 border border-primary-200 rounded-xl p-3 text-center">
+                        <div class="text-lg font-semibold text-primary-900">${accuracy}%</div>
+                        <div class="text-xs text-primary-400 mt-1">Accuracy</div>
                     </div>
-                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
-                        <div class="text-xl font-semibold text-primary-900">${f1}%</div>
-                        <div class="text-xs text-primary-600 mt-1">F1 Score</div>
+                    <div class="bg-primary-50 border border-primary-200 rounded-xl p-3 text-center">
+                        <div class="text-lg font-semibold text-primary-900">${f1}%</div>
+                        <div class="text-xs text-primary-400 mt-1">F1 Score</div>
                     </div>
-                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
-                        <div class="text-xl font-semibold text-primary-900">${precision}%</div>
-                        <div class="text-xs text-primary-600 mt-1">Precision</div>
+                    <div class="bg-primary-50 border border-primary-200 rounded-xl p-3 text-center">
+                        <div class="text-lg font-semibold text-primary-900">${precision}%</div>
+                        <div class="text-xs text-primary-400 mt-1">Precision</div>
                     </div>
-                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
-                        <div class="text-xl font-semibold text-primary-900">${recall}%</div>
-                        <div class="text-xs text-primary-600 mt-1">Recall</div>
+                    <div class="bg-primary-50 border border-primary-200 rounded-xl p-3 text-center">
+                        <div class="text-lg font-semibold text-primary-900">${recall}%</div>
+                        <div class="text-xs text-primary-400 mt-1">Recall</div>
                     </div>
-                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
-                        <div class="text-xl font-semibold text-primary-900">${rocAuc}${rocAuc !== 'N/A' ? '%' : ''}</div>
-                        <div class="text-xs text-primary-600 mt-1">ROC-AUC</div>
+                    <div class="bg-primary-50 border border-primary-200 rounded-xl p-3 text-center">
+                        <div class="text-lg font-semibold text-primary-900">${rocAuc}${rocAuc !== 'N/A' ? '%' : ''}</div>
+                        <div class="text-xs text-primary-400 mt-1">ROC-AUC</div>
                     </div>
-                    <div class="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
-                        <div class="text-xl font-semibold text-primary-900">${matthews}</div>
-                        <div class="text-xs text-primary-600 mt-1">Matthews</div>
+                    <div class="bg-primary-50 border border-primary-200 rounded-xl p-3 text-center">
+                        <div class="text-lg font-semibold text-primary-900">${matthews}</div>
+                        <div class="text-xs text-primary-400 mt-1">Matthews</div>
                     </div>
                 </div>
             </div>
             
             <!-- Confusion Matrix -->
             <div>
-                <h3 class="text-xl font-medium text-primary-900 mb-3">Confusion Matrix</h3>
+                <p class="text-xs font-medium text-primary-400 uppercase tracking-wide mb-3">Confusion Matrix</p>
                 ${confusionMatrixHtml}
             </div>
             ${model.shap ? `
             <!-- SHAP Explanations -->
-                    <div class="mt-10">
-                        <h3 class="text-2xl font-medium text-primary-900 mb-4">
-                            Global SHAP Explanations
-                        </h3>
-            
-                        <p class="text-sm text-primary-600 mb-6">
-                            Feature importance across the full training dataset
-                        </p>
-            
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
-                                <h4 class="text-lg font-medium mb-3">Beeswarm</h4>
+                    <div>
+                        <p class="text-xs font-medium text-primary-400 uppercase tracking-wide mb-3">Global SHAP Explanations</p>
+                        <p class="text-sm text-primary-500 mb-5">Feature importance across the full training dataset</p>
+                        <div class="grid md:grid-cols-2 gap-5">
+                            <div class="bg-white border border-primary-200 rounded-xl p-5">
+                                <h4 class="text-sm font-medium text-primary-700 mb-3">Beeswarm</h4>
                                 <img
                                     src="${getApiUrl()}${model.shap.beeswarm}?t=${Date.now()}"
-                                    class="w-full rounded-xl border"
+                                    class="w-full rounded-lg border border-primary-100"
                                 />
                             </div>
-            
-                            <div class="bg-white rounded-2xl p-6 border border-primary-200">
-                                <h4 class="text-lg font-medium mb-3">Mean |SHAP| Importance</h4>
+                            <div class="bg-white border border-primary-200 rounded-xl p-5">
+                                <h4 class="text-sm font-medium text-primary-700 mb-3">Mean |SHAP| Importance</h4>
                                 <img
                                     src="${getApiUrl()}${model.shap.bar}?t=${Date.now()}"
-                                    class="w-full rounded-xl border"
+                                    class="w-full rounded-lg border border-primary-100"
                                 />
                             </div>
                         </div>
                     </div>
                 ` : `
                 <!-- No SHAP -->
-                <div class="mt-10 bg-primary-50 border border-primary-200 rounded-2xl p-6">
-                    <h3 class="text-lg font-medium text-primary-900 mb-2">
-                        SHAP Explanations
-                    </h3>
-                    <p class="text-sm text-primary-600">
-                        SHAP explanations are not available for this model.
-                        <br />
-                        This may be due to model type limitations (e.g., SVM) or skipped training.
+                <div class="bg-primary-50 border border-primary-200 rounded-xl p-5">
+                    <h3 class="text-sm font-medium text-primary-700 mb-1.5">SHAP Explanations</h3>
+                    <p class="text-xs text-primary-500">
+                        Not available for this model. This may be due to model type limitations (e.g., SVM) or skipped training.
                     </p>
                 </div>
                 `}
@@ -2046,58 +2040,68 @@ async function loadModelsForPrediction() {
 // Annotated Transcript Rendering
 // ==============================
 
-// Feature type categories and colors
+// Feature type categories (aligned with ANNOTATION_CATEGORIES)
 const FEATURE_CATEGORIES = {
     'Turn-Taking': {
         types: ['turn_start', 'turn_end', 'overlap', 'interruption', 'long_pause', 'response_latency'],
-        color: '#2196F3',
-        icon: '🔄'
+        color: '#3B5B8B'
     },
     'Pragmatic Markers': {
         types: ['echolalia', 'pronoun_reversal', 'stereotyped_phrase', 'social_greeting', 'question'],
-        color: '#F44336',
-        icon: '💬'
+        color: '#8B2B35'
     },
     'Conversational': {
         types: ['topic_shift', 'topic_maintenance', 'repair_initiation', 'repair_completion', 'clarification_request'],
-        color: '#4CAF50',
-        icon: '🗣️'
+        color: '#2A6040'
     },
     'Linguistic': {
         types: ['complex_sentence', 'simple_sentence', 'filled_pause', 'discourse_marker'],
-        color: '#9C27B0',
-        icon: '📝'
+        color: '#4A3080'
     },
     'General': {
         types: ['feature_region'],
-        color: '#607D8B',
-        icon: '📍'
+        color: '#5A6470'
     }
 };
 
-// Color mapping for annotation types
+// Muted, professional color mapping for annotation types
+// Organised by category: Turn-taking (slate), Pragmatic (crimson), Conversational (forest), Linguistic (indigo), General (grey)
 const ANNOTATION_COLORS = {
-    'turn_start': '#2196F3',
-    'turn_end': '#1976D2',
-    'overlap': '#03A9F4',
-    'interruption': '#00BCD4',
-    'long_pause': '#0097A7',
-    'response_latency': '#00838F',
-    'echolalia': '#F44336',
-    'pronoun_reversal': '#E91E63',
-    'stereotyped_phrase': '#FF5722',
-    'social_greeting': '#FF9800',
-    'question': '#FFC107',
-    'topic_shift': '#4CAF50',
-    'topic_maintenance': '#8BC34A',
-    'repair_initiation': '#CDDC39',
-    'repair_completion': '#009688',
-    'clarification_request': '#00BFA5',
-    'complex_sentence': '#9C27B0',
-    'simple_sentence': '#E1BEE7',
-    'filled_pause': '#7B1FA2',
-    'discourse_marker': '#AB47BC',
-    'feature_region': '#607D8B'
+    // Turn-taking — slate blue
+    'turn_start':        '#3B5B8B',
+    'turn_end':          '#4A6A9A',
+    'overlap':           '#5A7AAA',
+    'interruption':      '#6A8AAA',
+    'long_pause':        '#3A5878',
+    'response_latency':  '#4A6888',
+    // Pragmatic Markers — muted crimson
+    'echolalia':         '#8B2B35',
+    'pronoun_reversal':  '#9B3545',
+    'stereotyped_phrase':'#AA4555',
+    'social_greeting':   '#B85C5C',
+    'question':          '#9B6050',
+    // Conversational — forest green
+    'topic_shift':       '#2A6040',
+    'topic_maintenance': '#3A7050',
+    'repair_initiation': '#2E6B55',
+    'repair_completion': '#3A7860',
+    'clarification_request': '#347A6A',
+    // Linguistic — deep indigo
+    'complex_sentence':  '#4A3080',
+    'simple_sentence':   '#7868A8',
+    'filled_pause':      '#5A3888',
+    'discourse_marker':  '#6848A0',
+    // General
+    'feature_region':    '#5A6470'
+};
+
+// Category metadata for grouping chips
+const ANNOTATION_CATEGORIES = {
+    'Turn-taking':   { color: '#3B5B8B', types: ['turn_start','turn_end','overlap','interruption','long_pause','response_latency'] },
+    'Pragmatic':     { color: '#8B2B35', types: ['echolalia','pronoun_reversal','stereotyped_phrase','social_greeting','question'] },
+    'Conversational':{ color: '#2A6040', types: ['topic_shift','topic_maintenance','repair_initiation','repair_completion','clarification_request'] },
+    'Linguistic':    { color: '#4A3080', types: ['complex_sentence','simple_sentence','filled_pause','discourse_marker'] },
+    'General':       { color: '#5A6470', types: ['feature_region'] }
 };
 
 let currentTranscriptData = null;
@@ -2139,35 +2143,60 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
         Object.values(annotationSummary).reduce((sum, count) => sum + count, 0) : 0;
     annotationCount.textContent = `${totalAnnotations} Feature${totalAnnotations !== 1 ? 's' : ''} Marked`;
 
-    // Render feature summary chips
+    // Render feature summary chips — grouped by category
     summaryPanel.innerHTML = '';
 
     if (annotationSummary && Object.keys(annotationSummary).length > 0) {
         const featureEntries = Object.entries(annotationSummary).sort((a, b) => b[1] - a[1]);
 
+        // Group by category
+        const grouped = {};
         featureEntries.forEach(([featureType, count]) => {
-            const category = getFeatureCategory(featureType);
-            const color = ANNOTATION_COLORS[featureType] || category.color;
+            const catName = getFeatureCategoryName(featureType);
+            if (!grouped[catName]) grouped[catName] = [];
+            grouped[catName].push({ featureType, count });
+        });
 
-            const chip = document.createElement('button');
-            chip.className = 'feature-chip px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105 cursor-pointer';
-            chip.style.backgroundColor = color + '20';
-            chip.style.borderLeft = `4px solid ${color}`;
-            chip.style.color = '#1a1a1a';
-            chip.dataset.featureType = featureType;
-            chip.innerHTML = `
-                <span class="font-semibold">${formatFeatureName(featureType)}</span>
-                <span class="ml-2 px-2 py-0.5 rounded-full text-xs" style="background-color: ${color}; color: white;">
-                    ${count}
-                </span>
+        Object.entries(grouped).forEach(([catName, features]) => {
+            const catColor = (ANNOTATION_CATEGORIES[catName] || {}).color || '#5A6470';
+
+            // Category label
+            const catLabel = document.createElement('div');
+            catLabel.className = 'w-full flex items-center gap-2 mt-3 mb-1.5 first:mt-0';
+            catLabel.innerHTML = `
+                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background-color:${catColor}"></span>
+                <span class="text-xs font-medium uppercase tracking-wider" style="color:${catColor}">${catName}</span>
+                <span class="flex-1 h-px bg-primary-100"></span>
             `;
+            summaryPanel.appendChild(catLabel);
 
-            chip.addEventListener('click', () => {
-                filterByFeatureType(featureType);
-                filterSelect.value = featureType;
+            // Chips for this category
+            features.forEach(({ featureType, count }) => {
+                const chip = document.createElement('button');
+                chip.className = 'feature-chip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer';
+                chip.style.background = '#f8f9fa';
+                chip.style.border = '1px solid #e9ecef';
+                chip.style.color = '#343a40';
+                chip.dataset.featureType = featureType;
+                chip.innerHTML = `
+                    <span class="font-medium">${formatFeatureName(featureType)}</span>
+                    <span class="inline-flex items-center justify-center w-4 h-4 rounded-full text-white text-xs font-semibold" style="background-color:${catColor};font-size:10px">${count}</span>
+                `;
+                chip.addEventListener('click', () => {
+                    // Active state
+                    summaryPanel.querySelectorAll('.feature-chip').forEach(c => {
+                        c.style.background = '#f8f9fa';
+                        c.style.border = '1px solid #e9ecef';
+                        c.style.color = '#343a40';
+                    });
+                    chip.style.background = catColor + '14';
+                    chip.style.border = `1px solid ${catColor}50`;
+                    chip.style.color = '#212529';
+                    filterByFeatureType(featureType);
+                    filterSelect.value = featureType;
+                });
+                summaryPanel.appendChild(chip);
             });
-
-            summaryPanel.appendChild(chip);
         });
 
         // Populate filter dropdown
@@ -2179,7 +2208,7 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
             filterSelect.appendChild(option);
         });
     } else {
-        summaryPanel.innerHTML = '<p class="text-sm text-primary-500">No features detected</p>';
+        summaryPanel.innerHTML = '<p class="text-xs text-primary-400">No pragmatic features detected in this transcript.</p>';
         filterSelect.innerHTML = '<option value="all">All Features</option>';
     }
 
@@ -2206,34 +2235,68 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
 }
 
 function enhanceAnnotations(container) {
+    // --- Annotation interactivity ---
     const annotations = container.querySelectorAll('.annotation, [class*="annotation"]');
 
     annotations.forEach(ann => {
-        // Add click handler for highlighting
+        // Style inline annotations using the muted palette
+        const type = ann.getAttribute('data-type') || ann.dataset.type || '';
+        const color = ANNOTATION_COLORS[type];
+        if (color) {
+            ann.style.backgroundColor = color + '22';
+            ann.style.color = color;
+            ann.style.borderBottom = `1px solid ${color}60`;
+        }
+
         ann.addEventListener('click', function () {
-            // Remove previous highlights
             container.querySelectorAll('.annotation-highlighted').forEach(el => {
                 el.classList.remove('annotation-highlighted');
             });
-
-            // Highlight this annotation
             this.classList.add('annotation-highlighted');
-
-            // Scroll into view
             this.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
-
-        // Add hover effect
-        ann.addEventListener('mouseenter', function () {
-            this.style.transform = 'scale(1.05)';
-            this.style.zIndex = '10';
-        });
-
-        ann.addEventListener('mouseleave', function () {
-            this.style.transform = 'scale(1)';
-            this.style.zIndex = '1';
-        });
     });
+
+    // --- Timestamp extraction (safe — no errors if absent) ---
+    try {
+        const utterances = container.querySelectorAll('.utterance');
+        utterances.forEach(utt => {
+            // 1. Check for data attributes from the backend
+            let startMs = utt.getAttribute('data-start') || utt.getAttribute('data-timestamp');
+            let endMs   = utt.getAttribute('data-end');
+
+            // 2. If not in attributes, look for CHAT bullet timing pattern •start_end• in text nodes
+            if (!startMs) {
+                const textEl = utt.querySelector('.text');
+                if (textEl) {
+                    // CHAT timing: bullet char (U+0015) or escaped as •digits_digits•
+                    const raw = textEl.textContent || '';
+                    const m = raw.match(/[•\u0015](\d+)_(\d+)[•\u0015]/);
+                    if (m) {
+                        startMs = m[1];
+                        endMs   = m[2];
+                        // Strip the timing from the visible text
+                        textEl.innerHTML = textEl.innerHTML.replace(/[•\u0015]\d+_\d+[•\u0015]/g, '').trim();
+                    }
+                }
+            }
+
+            if (startMs) {
+                const fmt = ms => {
+                    const s = Math.floor(parseInt(ms, 10) / 1000);
+                    const m2 = Math.floor(s / 60);
+                    const s2 = s % 60;
+                    return `${m2}:${String(s2).padStart(2, '0')}`;
+                };
+                const label = document.createElement('span');
+                label.className = 'ts-label';
+                label.textContent = endMs ? `${fmt(startMs)}–${fmt(endMs)}` : fmt(startMs);
+                utt.appendChild(label);
+            }
+        });
+    } catch (_) {
+        // Timestamp extraction is best-effort; never throw
+    }
 }
 
 function setupTranscriptInteractivity() {
@@ -2264,27 +2327,7 @@ function setupTranscriptInteractivity() {
         clearBtn.addEventListener('click', clearFilters);
     }
 
-    // Toggle view
-    const toggleView = document.getElementById('toggleTranscriptView');
-    if (toggleView) {
-        toggleView.addEventListener('click', toggleTranscriptView);
-    }
 
-    // Toggle feature summary
-    const toggleSummary = document.getElementById('toggleFeatureSummary');
-    if (toggleSummary) {
-        toggleSummary.addEventListener('click', () => {
-            const content = document.getElementById('featureSummaryContent');
-            const toggleText = document.getElementById('summaryToggleText');
-            if (content.style.display === 'none') {
-                content.style.display = 'grid';
-                toggleText.textContent = 'Hide';
-            } else {
-                content.style.display = 'none';
-                toggleText.textContent = 'Show';
-            }
-        });
-    }
 
     // Semantic coherence toggle
     const coherenceToggle = document.getElementById('semanticCoherenceToggle');
@@ -2436,37 +2479,8 @@ function toggleTranscriptView() {
     }
 }
 
-function renderTranscriptStats(summary) {
-    const statsPanel = document.getElementById('transcriptStats');
-    const statsContent = document.getElementById('statsContent');
-
-    if (!statsPanel || !statsContent) return;
-
-    const totalFeatures = Object.values(summary).reduce((sum, count) => sum + count, 0);
-    const uniqueFeatureTypes = Object.keys(summary).length;
-    const mostCommon = Object.entries(summary).sort((a, b) => b[1] - a[1])[0];
-
-    statsContent.innerHTML = `
-        <div class="stat-card p-4 bg-primary-50 rounded-lg">
-            <div class="text-2xl font-bold text-primary-900">${totalFeatures}</div>
-            <div class="text-sm text-primary-600 mt-1">Total Annotations</div>
-        </div>
-        <div class="stat-card p-4 bg-primary-50 rounded-lg">
-            <div class="text-2xl font-bold text-primary-900">${uniqueFeatureTypes}</div>
-            <div class="text-sm text-primary-600 mt-1">Feature Types</div>
-        </div>
-        <div class="stat-card p-4 bg-primary-50 rounded-lg">
-            <div class="text-2xl font-bold text-primary-900">${mostCommon ? mostCommon[1] : 0}</div>
-            <div class="text-sm text-primary-600 mt-1">Most Common</div>
-            <div class="text-xs text-primary-500 mt-1">${mostCommon ? formatFeatureName(mostCommon[0]) : 'N/A'}</div>
-        </div>
-        <div class="stat-card p-4 bg-primary-50 rounded-lg">
-            <div class="text-2xl font-bold text-primary-900">${(totalFeatures / uniqueFeatureTypes).toFixed(1)}</div>
-            <div class="text-sm text-primary-600 mt-1">Avg per Type</div>
-        </div>
-    `;
-
-    statsPanel.classList.remove('hidden');
+function renderTranscriptStats() {
+    // Statistics panel removed from UI
 }
 
 function getFeatureCategory(featureType) {
@@ -2476,6 +2490,15 @@ function getFeatureCategory(featureType) {
         }
     }
     return FEATURE_CATEGORIES['General'];
+}
+
+function getFeatureCategoryName(featureType) {
+    for (const [categoryName, category] of Object.entries(ANNOTATION_CATEGORIES)) {
+        if (category.types.includes(featureType)) {
+            return categoryName;
+        }
+    }
+    return 'General';
 }
 
 function formatFeatureName(featureType) {
@@ -2621,7 +2644,7 @@ function showCoherenceSummary(data) {
     if (!summaryEl) {
         summaryEl = document.createElement('div');
         summaryEl.id = 'coherenceSummary';
-        summaryEl.className = 'mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200';
+        summaryEl.className = 'mt-4 p-4 bg-primary-50 border border-primary-200 rounded-xl';
 
         const container = document.getElementById('annotatedTranscript').parentElement;
         container.appendChild(summaryEl);
@@ -2634,20 +2657,24 @@ function showCoherenceSummary(data) {
     summaryEl.innerHTML = `
         <div class="flex items-center justify-between">
             <div>
-                <h4 class="text-sm font-semibold text-primary-900 mb-2">Semantic Coherence Analysis</h4>
-                <div class="flex gap-4 text-sm">
-                    <span class="text-green-700">
-                        <strong>${coherentCount}</strong> coherent transitions
+                <p class="text-xs font-medium text-primary-500 uppercase tracking-wide mb-2">Semantic Coherence</p>
+                <div class="flex flex-wrap gap-4 text-xs">
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <strong class="text-primary-800">${coherentCount}</strong>
+                        <span class="text-primary-500">coherent transitions</span>
                     </span>
-                    <span class="text-red-700">
-                        <strong>${incoherentCount}</strong> incoherent transitions
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-red-400"></span>
+                        <strong class="text-primary-800">${incoherentCount}</strong>
+                        <span class="text-primary-500">incoherent transitions</span>
                     </span>
-                    <span class="text-primary-700">
+                    <span class="flex items-center gap-1.5 text-primary-600">
                         Overall: <strong>${overallScore}%</strong>
                     </span>
                 </div>
             </div>
-            <button onclick="clearSemanticCoherence()" class="px-3 py-1 text-xs bg-white text-primary-700 rounded hover:bg-primary-100 transition-colors">
+            <button onclick="clearSemanticCoherence()" class="px-3 py-1.5 text-xs border border-primary-200 bg-white text-primary-600 rounded-lg hover:border-primary-400 hover:text-primary-900 transition-colors">
                 Clear
             </button>
         </div>

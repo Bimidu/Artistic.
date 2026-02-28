@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ASD Detection System",
-  description: "Advanced machine learning system for analyzing speech patterns to support autism spectrum disorder detection using multi-modal feature extraction for children",
+  title: "Artistic — Speech Analysis for Early ASD Support",
+  description: "Artistic analyzes speech recordings and conversation transcripts to surface early markers of autism spectrum disorder, with transparent AI explanations built for clinicians and researchers.",
 };
 
 export default function RootLayout({

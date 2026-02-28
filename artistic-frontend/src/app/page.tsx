@@ -42,234 +42,365 @@ export default function Home() {
   return (
     <>
       {/* Header */}
-      <header className="bg-lime-950">
-        <div className="max-w-7xl mx-auto px-12 py-4">
+      <header className="bg-primary-900 border-b border-primary-800">
+        <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <div className="text-4xl text-white">Artistic</div>
-              <div className="text-lg text-primary-400 hidden sm:block">ASD Detection System</div>
+            <div className="flex items-center gap-3">
+              <div className="text-xl font-medium text-white tracking-tight">Artistic</div>
+              <div className="hidden sm:block h-4 w-px bg-primary-700"></div>
+              <div className="hidden sm:block text-sm text-primary-500">Speech Analysis Platform</div>
             </div>
 
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-6">
               <div className="toggle-switch" id="modeToggle">
                 <div className="toggle-option active" data-mode="user">User Mode</div>
                 <div className="toggle-option" data-mode="training">Training Mode</div>
                 <div className="toggle-slider" id="toggleSlider"></div>
               </div>
 
-              <div className="flex items-center gap-3 text-base text-primary-600">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-400" id="statusDot"></span>
+              <div className="flex items-center gap-2 text-sm text-primary-500">
+                <span className="w-2 h-2 rounded-full bg-red-400" id="statusDot"></span>
                 <span id="statusText">Disconnected</span>
               </div>
-              <div>
-                <button
-                  onClick={() => router.push('/guideline')}
-                  className="px-5 py-2 bg-white text-lime-900 rounded-xl hover:bg-lime-100"
-                >
-                  Feature Guidelines
-                </button>
-              </div>
+
+              <button
+                onClick={() => router.push('/guideline')}
+                className="px-4 py-2 text-sm border border-primary-700 text-primary-400 rounded-lg hover:border-primary-500 hover:text-white transition-all"
+              >
+                Feature Guide
+              </button>
             </div>
           </div>
         </div>
 
         {/* API Configuration Bar */}
         <div className="bg-white hidden" id="apiConfigBar">
-          <div className="max-w-7xl mx-auto px-12 py-2">
+          <div className="max-w-7xl mx-auto px-8 py-2">
             <div className="flex items-center gap-6 justify-between">
               <div className="flex items-center gap-4 flex-1">
                 <label className="text-sm text-primary-600 whitespace-nowrap">API URL</label>
-                <input type="text" className="flex-1 px-4 py-2 bg-primary-50 rounded-full text-sm focus:outline-none focus:bg-primary-100 transition-all" id="apiUrl" defaultValue={process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'} />
+                <input type="text" className="flex-1 px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none focus:bg-primary-100 transition-all" id="apiUrl" defaultValue={process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'} />
               </div>
-              <button className="px-6 py-2 bg-primary-900 text-white rounded-full text-sm hover:bg-primary-800 transition-all" onClick={() => window.testConnection?.()}>Test Connection</button>
+              <button className="px-5 py-2 bg-primary-900 text-white rounded-lg text-sm hover:bg-primary-800 transition-all" onClick={() => window.testConnection?.()}>Test Connection</button>
             </div>
           </div>
         </div>
       </header>
 
       {/* Landing Section */}
-      <div id="landingSection" className="bg-gradient-to-b from-lime-900/20 to-white">
-        <div className="max-w-7xl mx-auto px-12 py-20">
-          {/* Hero */}
-          <div className="text-center mb-20">
-            <h1 className="text-6xl font-normal text-lime-950 mb-6">
-              ASD Detection Through Speech Analysis
+      <div id="landingSection" className="bg-white">
+
+        {/* Hero */}
+        <div className="max-w-7xl mx-auto px-8 pt-24 pb-20">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-100 rounded-full text-xs font-medium text-primary-600 mb-8 tracking-wide uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-lime-600"></span>
+              AI-powered speech screening
+            </div>
+            <h1 className="text-6xl font-normal text-primary-900 mb-6 leading-tight" style={{ letterSpacing: '-0.03em' }}>
+              Smarter speech<br />screening starts here.
             </h1>
-            <p className="text-xl text-lime-800 max-w-3xl mx-auto leading-relaxed">
-              Advanced machine learning system for analyzing speech patterns to support
-              autism spectrum disorder detection using multi-modal feature extraction for children
+            <p className="text-lg text-primary-600 max-w-2xl mx-auto leading-relaxed mb-10">
+              Artistic analyzes speech recordings and conversation transcripts to surface early markers of autism spectrum disorder — with transparent, explainable AI built for clinicians and researchers.
             </p>
+            <div className="flex items-center justify-center gap-3 text-sm text-primary-500">
+              <span className="flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Upload audio or CHAT files
+              </span>
+              <span className="text-primary-300">·</span>
+              <span className="flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Get an AI-powered assessment
+              </span>
+              <span className="text-primary-300">·</span>
+              <span className="flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Understand every prediction
+              </span>
+            </div>
           </div>
+        </div>
 
-          {/* Components Grid */}
-          <div className="mb-16">
-            <h2 className="text-4xl font-light text-lime-950 text-center mb-12">
-              Four-Component Analysis Framework
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="border-t border-primary-100"></div>
+        </div>
+
+        {/* How it works */}
+        <div className="max-w-7xl mx-auto px-8 py-20">
+          <div className="mb-12 text-center">
+            <p className="text-xs font-medium text-primary-500 uppercase tracking-widest mb-2">How it works</p>
+            <h2 className="text-3xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>
+              From upload to insight in three steps
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* Component 1: Pragmatic & Conversational */}
-              <div className="bg-white rounded-2xl p-8 transition-shadow">
-                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                  <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 relative">
+            {/* Connector line - desktop only */}
+            <div className="hidden md:block absolute top-10 left-[calc(33.33%+1rem)] right-[calc(33.33%+1rem)] h-px bg-primary-200" style={{ zIndex: 0 }}></div>
+
+            {/* Step 1 */}
+            <div className="relative flex flex-col items-start">
+              <div className="flex items-center gap-4 mb-5 w-full">
+                <div className="w-10 h-10 rounded-full bg-primary-900 text-white flex items-center justify-center text-sm font-medium flex-shrink-0" style={{ zIndex: 1 }}>
+                  01
+                </div>
+                <div className="flex-1 h-px bg-primary-200 md:hidden"></div>
+              </div>
+              <div className="bg-primary-50 border border-primary-200 rounded-2xl p-7 w-full hover:border-primary-300 transition-colors">
+                <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-medium text-lime-950 mb-3">Pragmatic &amp; Conversational</h3>
-                <p className="text-sm text-lime-700 leading-relaxed">
-                  Analyzes turn-taking, topic maintenance, conversational repairs, and social communication patterns in dialogue
+                <h3 className="text-base font-medium text-primary-900 mb-2">Upload your file</h3>
+                <p className="text-sm text-primary-600 leading-relaxed">
+                  Drop an audio recording (WAV, MP3, FLAC) or a CHAT transcript file from your session directly into the tool — no conversion or formatting needed.
                 </p>
               </div>
-              {/* Component 2: Acoustic & Prosodic */}
-              <div className="bg-white rounded-2xl p-8 transition-shadow">
-                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                  <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+            </div>
+
+            {/* Step 2 */}
+            <div className="relative flex flex-col items-start">
+              <div className="flex items-center gap-4 mb-5 w-full">
+                <div className="w-10 h-10 rounded-full bg-primary-900 text-white flex items-center justify-center text-sm font-medium flex-shrink-0" style={{ zIndex: 1 }}>
+                  02
+                </div>
+                <div className="flex-1 h-px bg-primary-200 md:hidden"></div>
+              </div>
+              <div className="bg-primary-50 border border-primary-200 rounded-2xl p-7 w-full hover:border-primary-300 transition-colors">
+                <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-medium text-lime-950 mb-3">Acoustic &amp; Prosodic</h3>
-                <p className="text-sm text-lime-700 leading-relaxed">
-                  Examines pitch variation, speech rhythm, intonation patterns, and vocal quality characteristics
+                <h3 className="text-base font-medium text-primary-900 mb-2">Artistic runs the analysis</h3>
+                <p className="text-sm text-primary-600 leading-relaxed">
+                  Our AI examines conversation flow, voice patterns, and language structure — then combines all signals into a single, calibrated ASD screening result.
                 </p>
               </div>
-              {/* Component 3: Syntactic & Semantic */}
-              <div className="bg-white rounded-2xl p-8 transition-shadow">
-                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                  <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative flex flex-col items-start">
+              <div className="flex items-center gap-4 mb-5 w-full">
+                <div className="w-10 h-10 rounded-full bg-primary-900 text-white flex items-center justify-center text-sm font-medium flex-shrink-0" style={{ zIndex: 1 }}>
+                  03
                 </div>
-                <h3 className="text-xl font-medium text-lime-950 mb-3">Syntactic &amp; Semantic</h3>
-                <p className="text-sm text-lime-700 leading-relaxed">
-                  Evaluates sentence structure complexity, grammatical patterns, and semantic coherence in language use
-                </p>
+                <div className="flex-1 h-px bg-primary-200 md:hidden"></div>
               </div>
-              {/* Component 4: Multi-Modal Fusion */}
-              <div className="bg-white rounded-2xl p-8 transition-shadow">
-                <div className="w-16 h-16 bg-lime-100 rounded-2xl flex items-center justify-center mb-6">
-                  <svg className="w-10 h-10 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+              <div className="bg-primary-50 border border-primary-200 rounded-2xl p-7 w-full hover:border-primary-300 transition-colors">
+                <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center mb-4">
+                  <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-medium text-lime-950 mb-3">Multi-Modal Fusion</h3>
-                <p className="text-sm text-lime-700 leading-relaxed">
-                  Integrates insights from all components using ensemble learning for comprehensive analysis
+                <h3 className="text-base font-medium text-primary-900 mb-2">Review the full picture</h3>
+                <p className="text-sm text-primary-600 leading-relaxed">
+                  See an annotated transcript, a plain-language explanation of what drove the prediction, and explore what-if scenarios to understand the result in depth.
                 </p>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Key Features */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="border-t border-primary-100"></div>
+        </div>
+
+        {/* What Artistic analyzes */}
+        <div className="max-w-7xl mx-auto px-8 py-16">
+          <div className="mb-10">
+            <p className="text-xs font-medium text-primary-500 uppercase tracking-widest mb-2">What we analyze</p>
+            <h2 className="text-3xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>
+              Every dimension of your child&apos;s speech
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Card 1 */}
+            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
+              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
+                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </div>
-              <h4 className="text-lg font-medium text-lime-950 mb-2">Real-time Analysis</h4>
-              <p className="text-sm text-lime-700">Instant processing of audio files and text transcripts</p>
+              <h3 className="text-base font-medium text-primary-900 mb-2">Conversation patterns</h3>
+              <p className="text-sm text-primary-600 leading-relaxed">
+                How your child takes turns, stays on topic, and responds in back-and-forth dialogue
+              </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            {/* Card 2 */}
+            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
+              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
+                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
               </div>
-              <h4 className="text-lg font-medium text-lime-950 mb-2">Explainable AI</h4>
-              <p className="text-sm text-lime-700">SHAP values and counterfactual explanations</p>
+              <h3 className="text-base font-medium text-primary-900 mb-2">Voice &amp; rhythm</h3>
+              <p className="text-sm text-primary-600 leading-relaxed">
+                Pitch variation, speech pacing, and fluency — the vocal nuances that clinical screening values
+              </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-lime-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <svg className="w-7 h-7 text-lime-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            {/* Card 3 */}
+            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
+              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
+                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h4 className="text-lg font-medium text-lime-950 mb-2">Flexible Training</h4>
-              <p className="text-sm text-lime-700">Custom model training with multiple ML algorithms</p>
+              <h3 className="text-base font-medium text-primary-900 mb-2">Language structure</h3>
+              <p className="text-sm text-primary-600 leading-relaxed">
+                Sentence complexity, grammatical patterns, and coherence across the conversation
+              </p>
+            </div>
+            {/* Card 4 */}
+            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
+              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
+                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+                </svg>
+              </div>
+              <h3 className="text-base font-medium text-primary-900 mb-2">Unified assessment</h3>
+              <p className="text-sm text-primary-600 leading-relaxed">
+                All signals combined into a single, evidence-based prediction — with no black-box guesswork
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature Highlights */}
+        <div className="bg-primary-50 border-t border-primary-100">
+          <div className="max-w-7xl mx-auto px-8 py-12">
+            <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-primary-200">
+              <div className="py-6 md:py-0 md:px-12 first:pl-0 last:pr-0">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-primary-900 mb-1">Results in seconds</h4>
+                    <p className="text-sm text-primary-600 leading-relaxed">Upload a file and get a full AI-powered analysis immediately — no waiting, no setup</p>
+                  </div>
+                </div>
+              </div>
+              <div className="py-6 md:py-0 md:px-12">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-primary-900 mb-1">Transparent predictions</h4>
+                    <p className="text-sm text-primary-600 leading-relaxed">Every result comes with SHAP explanations and counterfactual analysis — so you always know why</p>
+                  </div>
+                </div>
+              </div>
+              <div className="py-6 md:py-0 md:px-12">
+                <div className="flex items-start gap-4">
+                  <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-primary-900 mb-1">Built for research</h4>
+                    <p className="text-sm text-primary-600 leading-relaxed">Train custom models on your own datasets with full control over features and algorithms</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-12 py-12">
+      <div className="max-w-7xl mx-auto px-8 py-12">
         {/* User Mode */}
         <div className="mode-content" id="userMode">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Input Section */}
-            <div className="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
-              <div className="px-10 py-8 bg-white">
-                <h2 className="text-5xl text-primary-900">Analyze Speech</h2>
+            <div className="bg-white border border-primary-200 rounded-2xl overflow-hidden">
+              <div className="px-8 py-6 border-b border-primary-100">
+                <h2 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Analyze Speech</h2>
               </div>
-              <div className="bg-primary-100">
-                <div className="flex px-10 gap-4">
-                  <button className="tab px-8 py-5 text-lg border-b-2 border-primary-900 text-primary-900" data-input="audio">Audio Upload</button>
-                  <button className="tab px-8 py-5 text-lg border-b-2 border-transparent text-primary-500 hover:text-primary-900 transition-colors" data-input="file">CHAT File</button>
+              <div className="bg-primary-50 border-b border-primary-100">
+                <div className="flex px-8">
+                  <button className="tab px-6 py-4 text-sm font-medium border-b-2 border-primary-900 text-primary-900" data-input="audio">Audio Upload</button>
+                  <button className="tab px-6 py-4 text-sm font-medium border-b-2 border-transparent text-primary-500 hover:text-primary-700 transition-colors" data-input="file">CHAT File</button>
                 </div>
               </div>
-              <div className="p-10">
+              <div className="p-8">
                 {/* Audio Upload */}
                 <div className="input-panel" id="audioPanel">
-                  <div className="upload-area bg-white rounded-3xl p-16 text-center cursor-pointer" id="audioUploadArea">
-                    <svg className="mx-auto h-20 w-20 text-primary-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                  <div className="upload-area bg-primary-50 border border-dashed border-primary-300 rounded-2xl p-12 text-center cursor-pointer hover:bg-primary-100 hover:border-primary-400 transition-all" id="audioUploadArea">
+                    <svg className="mx-auto h-10 w-10 text-primary-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                       <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <p className="mt-6 text-2xl text-primary-900">Drop audio file here</p>
-                    <p className="mt-3 text-base text-primary-500">Supports WAV, MP3, FLAC, OGG</p>
+                    <p className="mt-4 text-base text-primary-700">Drop audio file here</p>
+                    <p className="mt-1 text-sm text-primary-500">WAV, MP3, FLAC, OGG</p>
                   </div>
                   <input type="file" className="hidden" id="audioFileInput" accept=".wav,.mp3,.flac" />
-                  <div id="selectedAudioFile" className="mt-4 text-base text-accent-600"></div>
+                  <div id="selectedAudioFile" className="mt-3 text-sm text-accent-600"></div>
 
                   {/* In-browser Recording Controls */}
-                  <div id="audioRecordSection" className="mt-8 bg-white rounded-2xl p-6 border border-primary-200">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <h3 className="text-lg font-medium text-primary-900">Record Audio</h3>
-                      </div>
-                      <div className="flex items-center gap-3">
+                  <div id="audioRecordSection" className="mt-6 bg-primary-50 rounded-xl p-5 border border-primary-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-medium text-primary-900">Record Audio</h3>
+                      <div className="flex items-center gap-2">
                         <button
                           id="audioRecordButton"
                           type="button"
-                          className="px-4 py-2 rounded-full bg-primary-900 text-white text-sm hover:bg-primary-800 transition-colors"
+                          className="px-4 py-1.5 rounded-full bg-primary-900 text-white text-xs font-medium hover:bg-primary-800 transition-colors"
                         >
                           Start recording
                         </button>
                         <button
                           id="audioStopButton"
                           type="button"
-                          className="px-4 py-2 rounded-full bg-red-100 text-red-700 text-sm hover:bg-red-200 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          className="px-4 py-1.5 rounded-full bg-red-100 text-red-700 text-xs font-medium hover:bg-red-200 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                           disabled
                         >
                           Stop &amp; analyze
                         </button>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between text-sm text-primary-600">
+                    <div className="flex items-center justify-between text-xs text-primary-500">
                       <div id="audioRecordStatus" className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-gray-300" id="audioRecordIndicator"></span>
+                        <span className="w-2 h-2 rounded-full bg-gray-300" id="audioRecordIndicator"></span>
                         <span id="audioRecordStatusText">Microphone idle</span>
                       </div>
-                      <div id="audioRecordTimer" className="font-mono text-primary-700 hidden">00:00</div>
+                      <div id="audioRecordTimer" className="font-mono text-primary-600 hidden">00:00</div>
                     </div>
-                    <p id="audioRecordError" className="mt-3 text-sm text-red-600 hidden"></p>
+                    <p id="audioRecordError" className="mt-2 text-xs text-red-600 hidden"></p>
                   </div>
 
-                  <button className="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onClick={() => window.predictFromAudio?.()} id="predictAudioBtn" disabled>
+                  <button className="mt-6 w-full px-6 py-4 bg-primary-900 text-white rounded-xl text-sm font-medium hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onClick={() => window.predictFromAudio?.()} id="predictAudioBtn" disabled>
                     Analyze Audio
                   </button>
                 </div>
 
                 {/* CHAT File Upload */}
                 <div className="input-panel hidden" id="filePanel">
-                  <div className="upload-area bg-white rounded-3xl p-16 text-center cursor-pointer" id="chaUploadArea">
-                    <svg className="mx-auto h-20 w-20 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="upload-area bg-primary-50 border border-dashed border-primary-300 rounded-2xl p-12 text-center cursor-pointer hover:bg-primary-100 hover:border-primary-400 transition-all" id="chaUploadArea">
+                    <svg className="mx-auto h-10 w-10 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <p className="mt-6 text-2xl text-primary-900">Drop CHAT file here</p>
-                    <p className="mt-3 text-base text-primary-500">Supports .cha files</p>
+                    <p className="mt-4 text-base text-primary-700">Drop CHAT file here</p>
+                    <p className="mt-1 text-sm text-primary-500">Supports .cha files</p>
                   </div>
                   <input type="file" className="hidden" id="chaFileInput" accept=".cha,.CHA,text/plain" />
-                  <div id="selectedChaFile" className="mt-4 text-base text-accent-600"></div>
-                  <button className="mt-8 w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onClick={() => window.predictFromChatFile?.()} id="predictChaBtn" disabled>
+                  <div id="selectedChaFile" className="mt-3 text-sm text-accent-600"></div>
+                  <button className="mt-6 w-full px-6 py-4 bg-primary-900 text-white rounded-xl text-sm font-medium hover:bg-primary-800 transition-all disabled:opacity-40 disabled:cursor-not-allowed" onClick={() => window.predictFromChatFile?.()} id="predictChaBtn" disabled>
                     Analyze File
                   </button>
                 </div>
@@ -277,12 +408,12 @@ export default function Home() {
             </div>
 
             {/* Results Section */}
-            <div className="bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
-              <div className="px-10 py-8 bg-white">
-                <h2 className="text-5xl text-primary-900">Analysis Results</h2>
+            <div className="bg-white border border-primary-200 rounded-2xl overflow-hidden">
+              <div className="px-8 py-6 border-b border-primary-100">
+                <h2 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Analysis Results</h2>
               </div>
-              <div className="p-10" id="resultsArea">
-                <div className="text-center py-24 text-primary-400 text-xl">
+              <div className="p-8" id="resultsArea">
+                <div className="text-center py-20 text-primary-400 text-sm">
                   Upload an audio file or CHAT transcript to see results
                 </div>
               </div>
@@ -290,13 +421,13 @@ export default function Home() {
           </div>
 
           {/* Waveform Display */}
-          <div id="waveformSectionResults" className="hidden mt-12 bg-primary-50 rounded-3xl overflow-hidden">
-            <div className="px-10 py-6 bg-white">
-              <h3 className="text-2xl text-primary-900 mb-1">Child Speech Waveform</h3>
+          <div id="waveformSectionResults" className="hidden mt-8 bg-white border border-primary-200 rounded-2xl overflow-hidden">
+            <div className="px-8 py-6 border-b border-primary-100">
+              <h3 className="text-lg font-normal text-primary-900 mb-0.5" style={{ letterSpacing: '-0.02em' }}>Child Speech Waveform</h3>
               <p className="text-sm text-primary-500">Visual representation of the child&apos;s speech audio</p>
             </div>
-            <div className="px-10 pb-10 bg-primary-50">
-              <div className="bg-white rounded-2xl p-6 border border-primary-200">
+            <div className="p-8">
+              <div className="bg-white rounded-xl p-5 border border-primary-200">
                 <div className="mb-3 p-3 bg-lime-50 border-l-4 border-lime-600 rounded">
                   <p className="text-sm text-lime-900">
                     <strong>Note:</strong> Acoustic and prosodic features are extracted as global statistical summaries from the entire speech signal, not from specific time segments.
@@ -342,96 +473,82 @@ export default function Home() {
           </div>
 
           {/* Annotated Transcript */}
-          <div className="mt-12 border-t-2 border-black bg-primary-50 rounded-b-s3xl overflow-hidden hidden" id="annotationCard">
-            <div className="px-10 py-8 bg-white flex items-center justify-between">
-              <h2 className="text-5xl text-primary-900">Annotated Pragmatic Transcript</h2>
-              <div className="flex items-center gap-3">
-                <span id="annotationCount" className="px-6 py-3 bg-accent-100 text-accent-700 text-base rounded-full">Features Marked</span>
-                <button id="toggleTranscriptView" className="px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 transition-colors text-sm">
-                  <span id="viewToggleText">Compact View</span>
-                </button>
+          <div className="mt-8 hidden bg-white border border-primary-200 rounded-2xl overflow-hidden" id="annotationCard">
+
+            {/* Title row — same style as Analyze Speech header */}
+            <div className="px-8 py-6 border-b border-primary-100 flex items-center justify-between">
+              <h2 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Annotated Transcript</h2>
+              <span id="annotationCount" className="px-3 py-1 bg-primary-100 text-primary-600 text-xs font-medium rounded-full">Features Marked</span>
+            </div>
+
+            {/* Controls strip — same style as the tab bar */}
+            <div className="bg-primary-50 border-b border-primary-100 px-8 py-3">
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="flex-1 min-w-[180px]">
+                  <input type="text" id="transcriptSearch" placeholder="Search transcript..." className="w-full px-3 py-1.5 bg-white border border-primary-200 rounded-lg text-sm focus:outline-none focus:border-primary-400 transition-all" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <label className="text-xs text-primary-500 whitespace-nowrap">Filter:</label>
+                  <select id="featureFilter" className="px-3 py-1.5 bg-white border border-primary-200 rounded-lg text-sm focus:outline-none focus:border-primary-400 transition-all">
+                    <option value="all">All Features</option>
+                  </select>
+                </div>
+                <button id="clearFilters" className="px-3 py-1.5 text-xs border border-primary-200 text-primary-500 rounded-lg hover:border-primary-400 hover:text-primary-800 transition-colors bg-white">Clear</button>
+                <label className="flex items-center gap-1.5 cursor-pointer ml-auto">
+                  <input type="checkbox" id="semanticCoherenceToggle" className="w-3.5 h-3.5 text-primary-600 rounded" />
+                  <span className="text-xs text-primary-500 whitespace-nowrap">Semantic Coherence</span>
+                </label>
               </div>
             </div>
-            <div className="p-10">
-              {/* Feature Summary Panel */}
-              <div id="featureSummaryPanel" className="mb-6 bg-white rounded-2xl p-6 border border-primary-200">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-medium text-primary-900">Detected Features</h3>
-                  <button id="toggleFeatureSummary" className="text-primary-600 hover:text-primary-900 transition-colors text-sm">
-                    <span id="summaryToggleText">Hide</span>
-                  </button>
-                </div>
-                <div id="featureSummaryContent" className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
-              </div>
 
-              {/* Controls Panel */}
-              <div className="mb-6 bg-white rounded-2xl p-6 border border-primary-200">
-                <div className="flex flex-wrap items-center gap-4">
-                  <div className="flex-1 min-w-[200px]">
-                    <input type="text" id="transcriptSearch" placeholder="Search transcript..." className="w-full px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <label className="text-sm text-primary-700">Filter by feature:</label>
-                    <select id="featureFilter" className="px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all">
-                      <option value="all">All Features</option>
-                    </select>
-                  </div>
-                  <button id="clearFilters" className="px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 transition-colors text-sm">Clear Filters</button>
-                  <div className="flex items-center gap-2">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" id="semanticCoherenceToggle" className="w-5 h-5 text-primary-600 rounded" />
-                      <span className="text-sm text-primary-700">Semantic Coherence</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
+            {/* Detected Features section */}
+            <div id="featureSummaryPanel" className="px-8 py-5 border-b border-primary-100">
+              <p className="text-xs font-medium text-primary-400 uppercase tracking-widest mb-3">Detected Features</p>
+              <div id="featureSummaryContent" className="flex flex-wrap gap-2 items-start"></div>
+            </div>
 
-              {/* Transcript Display */}
-              <div id="annotatedTranscript" className="bg-white rounded-2xl p-8 border border-primary-200 max-h-[600px] overflow-y-auto transcript-container"></div>
+            {/* Transcript body */}
+            <div className="p-8">
+              <div id="annotatedTranscript" className="transcript-container max-h-[560px] overflow-y-auto"></div>
 
-              {/* Statistics Panel */}
-              <div id="transcriptStats" className="mt-6 bg-white rounded-2xl p-6 border border-primary-200 hidden">
-                <h3 className="text-lg font-medium text-primary-900 mb-4">Transcript Statistics</h3>
-                <div id="statsContent" className="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-              </div>
             </div>
           </div>
 
           {/* Local SHAP Explanation */}
-          <div id="localShapSection" className="mt-12 hidden">
-            <h3 className="text-3xl font-medium text-primary-900 mb-4">Why this prediction was made</h3>
-            <p className="text-sm text-primary-600 mb-6">
+          <div id="localShapSection" className="mt-8 hidden">
+            <h3 className="text-xl font-medium text-primary-900 mb-2">Why this prediction was made</h3>
+            <p className="text-sm text-primary-600 mb-5">
               This waterfall plot explains how each conversational feature contributed to the final ASD / TD prediction for this specific transcript.
             </p>
-            <div className="bg-white rounded-2xl p-6 border border-primary-200">
+            <div className="bg-white rounded-xl p-5 border border-primary-200">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img id="localShapWaterfall" className="w-full rounded-xl border border-primary-100" alt="Local SHAP Waterfall Explanation" />
             </div>
           </div>
 
           {/* Counterfactual Explanation */}
-          <div id="counterfactualSection" className="mt-12 hidden">
-            <h3 className="text-3xl font-medium text-primary-900 mb-4">What would change this prediction?</h3>
-            <p className="text-sm text-primary-600 mb-6">
+          <div id="counterfactualSection" className="mt-8 hidden">
+            <h3 className="text-xl font-medium text-primary-900 mb-2">What would change this prediction?</h3>
+            <p className="text-sm text-primary-600 mb-5">
               This analysis shows the smallest realistic changes required to flip the model&apos;s prediction to the opposite class.
             </p>
-            <div id="whatIfBox" className="bg-primary-50 border border-primary-200 rounded-2xl p-6 mb-6 text-primary-900"></div>
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-white rounded-2xl p-5 border border-primary-200">
+            <div id="whatIfBox" className="bg-primary-50 border border-primary-200 rounded-xl p-5 mb-5 text-primary-900"></div>
+            <div className="grid md:grid-cols-3 gap-4 mb-5">
+              <div className="bg-white rounded-xl p-5 border border-primary-200">
                 <p className="text-sm text-primary-600">Prediction flipped</p>
                 <p id="cfFlipped" className="text-xl font-bold"></p>
               </div>
-              <div className="bg-white rounded-2xl p-5 border border-primary-200">
+              <div className="bg-white rounded-xl p-5 border border-primary-200">
                 <p className="text-sm text-primary-600">Overall change (L2)</p>
                 <p id="cfL2" className="text-xl font-bold"></p>
               </div>
-              <div className="bg-white rounded-2xl p-5 border border-primary-200">
+              <div className="bg-white rounded-xl p-5 border border-primary-200">
                 <p className="text-sm text-primary-600">Features changed</p>
                 <p id="cfTotal" className="text-xl font-bold"></p>
               </div>
             </div>
-            <div className="bg-white rounded-2xl p-6 border border-primary-200">
-              <h4 className="text-xl font-medium text-primary-900 mb-4">Most influential feature changes</h4>
+            <div className="bg-white rounded-xl p-5 border border-primary-200">
+              <h4 className="text-base font-medium text-primary-900 mb-4">Most influential feature changes</h4>
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b text-left">
@@ -447,8 +564,8 @@ export default function Home() {
           </div>
 
           {/* Interactive Counterfactual Chat */}
-          <div id="cfChatSection" className="mt-10 bg-primary-50 border border-primary-200 rounded-2xl p-6 hidden">
-            <h3 className="text-2xl font-medium text-primary-900 mb-3">Explore a What-If Scenario</h3>
+          <div id="cfChatSection" className="mt-8 bg-primary-50 border border-primary-200 rounded-xl p-6 hidden">
+            <h3 className="text-lg font-medium text-primary-900 mb-2">Explore a What-If Scenario</h3>
             <p className="text-sm text-primary-600 mb-5">
               Ask a hypothetical question about a conversational behavior to explore how it might influence the model&apos;s decision.
               <span className="italic"> (Simulated response – future extension)</span>
@@ -459,7 +576,7 @@ export default function Home() {
                 <option>What if average turn length decreased slightly?</option>
                 <option>What if semantic coherence improved?</option>
               </select>
-              <button onClick={() => window.simulateCounterfactualChat?.()} className="px-6 py-2 rounded-xl bg-primary-600 text-white text-sm hover:bg-primary-700 transition">Ask</button>
+              <button onClick={() => window.simulateCounterfactualChat?.()} className="px-6 py-2 rounded-xl bg-primary-900 text-white text-sm hover:bg-primary-800 transition">Ask</button>
             </div>
             <div id="cfChatResponse" className="hidden bg-white border border-primary-200 rounded-xl p-5 text-sm text-primary-900"></div>
           </div>
@@ -468,54 +585,52 @@ export default function Home() {
         {/* Training Mode */}
         <div className="mode-content hidden" id="trainingMode">
           {/* Training mode tabs row */}
-          <div className="bg-primary-100 border-b-2 border-primary-200">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex gap-4">
-                <button type="button" className="training-tab px-8 py-5 text-lg border-b-2 border-primary-900 text-primary-900" data-training-tab="feature-extraction">Feature Extraction</button>
-                <button type="button" className="training-tab px-8 py-5 text-lg border-b-2 border-transparent text-primary-500 hover:text-primary-900 transition-colors" data-training-tab="training">Training</button>
-                <button type="button" className="training-tab px-8 py-5 text-lg border-b-2 border-transparent text-primary-500 hover:text-primary-900 transition-colors" data-training-tab="trained-models">Trained Models</button>
-              </div>
+          <div className="bg-primary-50 border-b border-primary-200 rounded-t-xl">
+            <div className="flex gap-1 px-2 pt-2">
+              <button type="button" className="training-tab px-6 py-3 text-sm font-medium border-b-2 border-primary-900 text-primary-900 rounded-t-lg" data-training-tab="feature-extraction">Feature Extraction</button>
+              <button type="button" className="training-tab px-6 py-3 text-sm font-medium border-b-2 border-transparent text-primary-500 hover:text-primary-700 transition-colors rounded-t-lg" data-training-tab="training">Training</button>
+              <button type="button" className="training-tab px-6 py-3 text-sm font-medium border-b-2 border-transparent text-primary-500 hover:text-primary-700 transition-colors rounded-t-lg" data-training-tab="trained-models">Trained Models</button>
             </div>
           </div>
 
           {/* Feature Extraction Section */}
-          <div className="training-tab-panel py-12" id="trainingTabFeatureExtraction" data-training-tab="feature-extraction">
-            <div className="mb-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
-              <div className="px-10 py-8 bg-white flex items-center justify-between">
-                <h2 className="text-5xl text-primary-900">Feature Extraction</h2>
-                <button className="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onClick={() => window.loadDatasets?.()}>Refresh</button>
+          <div className="training-tab-panel py-8" id="trainingTabFeatureExtraction" data-training-tab="feature-extraction">
+            <div className="bg-white border border-primary-200 rounded-2xl overflow-hidden">
+              <div className="px-8 py-6 border-b border-primary-100 flex items-center justify-between">
+                <h2 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Feature Extraction</h2>
+                <button className="px-5 py-2 bg-primary-900 text-white rounded-lg text-sm font-medium hover:bg-primary-800 transition-all" onClick={() => window.loadDatasets?.()}>Refresh</button>
               </div>
-              <div className="p-10">
-                <p className="text-lg text-primary-600 mb-6">
+              <div className="p-8">
+                <p className="text-sm text-primary-600 mb-6">
                   Select datasets from your file system to extract features. Extracted features will be saved to CSV files.
                 </p>
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="bg-white rounded-2xl p-6" style={{ maxHeight: '500px', overflowY: 'auto' }}>
-                    <h3 className="text-2xl text-primary-900 mb-4">Select Datasets to Extract</h3>
+                <div className="grid lg:grid-cols-2 gap-6">
+                  <div className="bg-primary-50 border border-primary-200 rounded-xl p-6" style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                    <h3 className="text-base font-medium text-primary-900 mb-4">Select Datasets to Extract</h3>
                     <div id="extractionDatasetList">
-                      <div className="text-center py-16 text-primary-400 text-xl">Click Refresh to load datasets</div>
+                      <div className="text-center py-12 text-primary-400 text-sm">Click Refresh to load datasets</div>
                     </div>
                   </div>
-                  <div className="bg-white rounded-2xl p-6">
-                    <h3 className="text-2xl text-primary-900 mb-4">Extraction Settings</h3>
-                    <div className="mb-6">
-                      <label className="block text-lg text-primary-900 mb-3">Component</label>
-                      <select className="w-full px-6 py-4 bg-primary-50 rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="extractionComponent">
+                  <div className="bg-primary-50 border border-primary-200 rounded-xl p-6">
+                    <h3 className="text-base font-medium text-primary-900 mb-5">Extraction Settings</h3>
+                    <div className="mb-5">
+                      <label className="block text-sm font-medium text-primary-700 mb-2">Component</label>
+                      <select className="w-full px-4 py-3 bg-white border border-primary-200 rounded-xl text-sm focus:outline-none focus:border-primary-400 transition-all" id="extractionComponent">
                         <option value="pragmatic_conversational">Pragmatic &amp; Conversational</option>
                         <option value="acoustic_prosodic">Acoustic &amp; Prosodic</option>
                         <option value="syntactic_semantic">Syntactic &amp; Semantic</option>
                       </select>
-                      <p className="text-sm text-primary-500 mt-2">Select which component&apos;s features to extract</p>
+                      <p className="text-xs text-primary-500 mt-2">Select which component&apos;s features to extract</p>
                     </div>
-                    <div className="mb-6">
-                      <label className="block text-lg text-primary-900 mb-3">Max Samples per Dataset</label>
-                      <input type="number" id="maxSamplesExtraction" min="1" className="w-full px-6 py-4 bg-primary-50 rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" placeholder="Leave empty for all samples" />
-                      <p className="text-sm text-primary-500 mt-2">Limit samples for large datasets (e.g., TD). Leave empty to extract all.</p>
+                    <div className="mb-5">
+                      <label className="block text-sm font-medium text-primary-700 mb-2">Max Samples per Dataset</label>
+                      <input type="number" id="maxSamplesExtraction" min="1" className="w-full px-4 py-3 bg-white border border-primary-200 rounded-xl text-sm focus:outline-none focus:border-primary-400 transition-all" placeholder="Leave empty for all samples" />
+                      <p className="text-xs text-primary-500 mt-2">Limit samples for large datasets. Leave empty to extract all.</p>
                     </div>
-                    <button className="w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onClick={() => window.extractFeatures?.()}>
+                    <button className="w-full px-6 py-4 bg-primary-900 text-white rounded-xl text-sm font-medium hover:bg-primary-800 transition-all" onClick={() => window.extractFeatures?.()}>
                       Extract Features
                     </button>
-                    <div className="mt-6 bg-primary-50 rounded-xl p-4 hidden" id="extractionStatus">
+                    <div className="mt-4 bg-white border border-primary-200 rounded-xl p-4 hidden" id="extractionStatus">
                       <div id="extractionStatusContent"></div>
                     </div>
                   </div>
@@ -525,107 +640,103 @@ export default function Home() {
           </div>
 
           {/* Training Section */}
-          <div className="training-tab-panel hidden py-12" id="trainingTabTraining" data-training-tab="training">
-            <div className="mb-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
-              <div className="px-10 py-8 bg-white flex items-center justify-between">
-                <h2 className="text-5xl text-primary-900">Training</h2>
-                <button className="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onClick={() => window.loadAvailableDatasetsForTraining?.()}>Refresh</button>
+          <div className="training-tab-panel hidden py-8" id="trainingTabTraining" data-training-tab="training">
+            <div className="bg-white border border-primary-200 rounded-2xl overflow-hidden">
+              <div className="px-8 py-6 border-b border-primary-100 flex items-center justify-between">
+                <h2 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Training</h2>
+                <button className="px-5 py-2 bg-primary-900 text-white rounded-lg text-sm font-medium hover:bg-primary-800 transition-all" onClick={() => window.loadAvailableDatasetsForTraining?.()}>Refresh</button>
               </div>
-              <div className="p-10">
-                <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+              <div className="p-8">
+                <div className="grid lg:grid-cols-2 gap-6 items-stretch">
                   {/* Dataset Selection for Training */}
-                  <div className="bg-white rounded-2xl p-6 flex flex-col">
-                    <h3 className="text-2xl text-primary-900 mb-4 flex-shrink-0">Available Datasets (from CSV)</h3>
+                  <div className="bg-primary-50 border border-primary-200 rounded-xl p-6 flex flex-col">
+                    <h3 className="text-base font-medium text-primary-900 mb-4 flex-shrink-0">Available Datasets (from CSV)</h3>
                     <div id="datasetList" className="flex-1 overflow-y-auto min-h-0">
-                      <div className="text-center py-16 text-primary-400 text-xl">Click Refresh to load datasets</div>
+                      <div className="text-center py-12 text-primary-400 text-sm">Click Refresh to load datasets</div>
                     </div>
                   </div>
                   {/* Training Controls */}
-                  <div className="bg-white rounded-2xl p-6">
-                    <h3 className="text-2xl text-primary-900 mb-4">Training Controls</h3>
-                    <div className="mb-8">
-                      <label className="block text-xl text-primary-900 mb-4">Component</label>
-                      <select className="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" id="trainingComponent">
+                  <div className="bg-primary-50 border border-primary-200 rounded-xl p-6">
+                    <h3 className="text-base font-medium text-primary-900 mb-5">Training Controls</h3>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-primary-700 mb-2">Component</label>
+                      <select className="w-full px-4 py-3 bg-white border border-primary-200 rounded-xl text-sm focus:outline-none focus:border-primary-400 transition-all" id="trainingComponent">
                         <option value="pragmatic_conversational">Pragmatic &amp; Conversational</option>
                         <option value="acoustic_prosodic">Acoustic &amp; Prosodic</option>
                         <option value="syntactic_semantic">Syntactic &amp; Semantic (Dummy Features)</option>
                       </select>
-                      <p className="text-sm text-primary-500 mt-2">Note: Acoustic &amp; Syntactic use placeholder features for testing</p>
+                      <p className="text-xs text-primary-500 mt-2">Note: Acoustic &amp; Syntactic use placeholder features for testing</p>
                     </div>
-                    <div className="mb-8">
-                      <label className="block text-xl text-primary-900 mb-4">Feature Selection</label>
-                      <div className="space-y-4">
-                        <label className="flex items-center cursor-pointer p-5 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                          <input type="checkbox" id="featureSelectionEnabled" defaultChecked className="w-5 h-5 text-primary-600 rounded" />
-                          <span className="ml-4 text-lg text-primary-900">Enable feature selection</span>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-primary-700 mb-3">Feature Selection</label>
+                      <div className="space-y-3">
+                        <label className="flex items-center cursor-pointer p-4 bg-white border border-primary-200 rounded-xl hover:border-primary-300 transition-colors">
+                          <input type="checkbox" id="featureSelectionEnabled" defaultChecked className="w-4 h-4 text-primary-600 rounded" />
+                          <span className="ml-3 text-sm text-primary-900">Enable feature selection</span>
                         </label>
                         <div id="featureCountSection">
-                          <label className="block text-base text-primary-700 mb-2">Number of features to select</label>
-                          <input type="number" id="nFeatures" defaultValue="30" min="1" max="218" className="w-full px-6 py-4 bg-white rounded-2xl text-base focus:outline-none focus:bg-primary-100 transition-all" />
-                          <p className="text-sm text-primary-500 mt-2">Default: 30 (max: 218 for pragmatic, 20 for others)</p>
+                          <label className="block text-xs text-primary-600 mb-2">Number of features to select</label>
+                          <input type="number" id="nFeatures" defaultValue="30" min="1" max="218" className="w-full px-4 py-3 bg-white border border-primary-200 rounded-xl text-sm focus:outline-none focus:border-primary-400 transition-all" />
+                          <p className="text-xs text-primary-500 mt-2">Default: 30 (max: 218 for pragmatic, 20 for others)</p>
                         </div>
                       </div>
                     </div>
-                    <div className="mb-8">
-                      <label className="block text-xl text-primary-900 mb-4">Counterfactual Explanations</label>
-                      <div className="space-y-4">
-                        <label className="flex items-center cursor-pointer p-5 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                          <input type="checkbox" id="enableAutoencoder" className="w-5 h-5 text-primary-600 rounded" />
-                          <div className="ml-4 flex-1">
-                            <span className="text-lg text-primary-900">Enable counterfactual autoencoder</span>
-                            <p className="text-sm text-primary-500 mt-1">Train autoencoder for counterfactual explanations (may crash on macOS - disabled by default)</p>
-                          </div>
-                        </label>
-                      </div>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-primary-700 mb-3">Counterfactual Explanations</label>
+                      <label className="flex items-center cursor-pointer p-4 bg-white border border-primary-200 rounded-xl hover:border-primary-300 transition-colors">
+                        <input type="checkbox" id="enableAutoencoder" className="w-4 h-4 text-primary-600 rounded" />
+                        <div className="ml-3 flex-1">
+                          <span className="text-sm text-primary-900">Enable counterfactual autoencoder</span>
+                          <p className="text-xs text-primary-500 mt-0.5">Train autoencoder for counterfactual explanations (may crash on macOS)</p>
+                        </div>
+                      </label>
                     </div>
-                    <div className="mb-8">
-                      <label className="block text-xl text-primary-900 mb-4">Model Types</label>
-                      <p className="text-sm text-primary-500 mb-3">Available models change based on selected component</p>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-primary-700 mb-3">Model Types</label>
+                      <p className="text-xs text-primary-500 mb-3">Available models change based on selected component</p>
                       <div id="modelTypesContainer" className="grid grid-cols-2 gap-3">
-                        <label className="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                          <input type="checkbox" value="svm" defaultChecked className="w-5 h-5 text-primary-600 rounded" />
-                          <span className="ml-3 text-base text-primary-900">SVM</span>
+                        <label className="flex items-center cursor-pointer p-4 bg-white border border-primary-200 rounded-xl hover:border-primary-300 transition-colors">
+                          <input type="checkbox" value="svm" defaultChecked className="w-4 h-4 text-primary-600 rounded" />
+                          <span className="ml-3 text-sm text-primary-900">SVM</span>
                         </label>
-                        <label className="flex items-center cursor-pointer p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                          <input type="checkbox" value="logistic" defaultChecked className="w-5 h-5 text-primary-600 rounded" />
-                          <span className="ml-3 text-base text-primary-900">Logistic Regression</span>
+                        <label className="flex items-center cursor-pointer p-4 bg-white border border-primary-200 rounded-xl hover:border-primary-300 transition-colors">
+                          <input type="checkbox" value="logistic" defaultChecked className="w-4 h-4 text-primary-600 rounded" />
+                          <span className="ml-3 text-sm text-primary-900">Logistic Regression</span>
                         </label>
                       </div>
                     </div>
-                    <div className="mb-8">
-                      <label className="block text-xl text-primary-900 mb-4">Training Parameters</label>
-                      <div className="space-y-4">
-                        <div className="bg-white rounded-2xl p-4">
-                          <label className="block text-sm text-primary-700 mb-2">Test Set Size (%)</label>
-                          <input type="number" id="testSize" defaultValue="20" min="10" max="40" step="5" className="w-full px-4 py-3 bg-primary-50 rounded-xl text-base focus:outline-none focus:bg-primary-100 transition-all" />
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-primary-700 mb-3">Training Parameters</label>
+                      <div className="space-y-3">
+                        <div className="bg-white border border-primary-200 rounded-xl p-4">
+                          <label className="block text-xs text-primary-600 mb-2">Test Set Size (%)</label>
+                          <input type="number" id="testSize" defaultValue="20" min="10" max="40" step="5" className="w-full px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none border border-primary-200 focus:border-primary-400 transition-all" />
                           <p className="text-xs text-primary-500 mt-1">Percentage of data reserved for testing</p>
                         </div>
-                        <div className="bg-white rounded-2xl p-4">
-                          <label className="block text-sm text-primary-700 mb-2">Random Seed</label>
-                          <input type="number" id="randomState" defaultValue="42" min="0" max="999" className="w-full px-4 py-3 bg-primary-50 rounded-xl text-base focus:outline-none focus:bg-primary-100 transition-all" />
+                        <div className="bg-white border border-primary-200 rounded-xl p-4">
+                          <label className="block text-xs text-primary-600 mb-2">Random Seed</label>
+                          <input type="number" id="randomState" defaultValue="42" min="0" max="999" className="w-full px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none border border-primary-200 focus:border-primary-400 transition-all" />
                           <p className="text-xs text-primary-500 mt-1">For reproducible results</p>
                         </div>
                       </div>
                     </div>
                     {/* Advanced Options */}
-                    <div className="mb-8">
-                      <button onClick={() => window.toggleHyperparameters?.()} className="w-full flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-primary-100 transition-colors">
-                        <span className="text-xl text-primary-900">Advanced Hyperparameters</span>
-                        <svg id="hyperparamChevron" className="w-6 h-6 text-primary-600 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="mb-6">
+                      <button onClick={() => window.toggleHyperparameters?.()} className="w-full flex items-center justify-between p-4 bg-white border border-primary-200 rounded-xl hover:border-primary-300 transition-colors">
+                        <span className="text-sm font-medium text-primary-900">Advanced Hyperparameters</span>
+                        <svg id="hyperparamChevron" className="w-4 h-4 text-primary-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                         </svg>
                       </button>
-                      <div id="hyperparamSection" className="hidden mt-4 space-y-4">
-                        <div className="bg-white rounded-2xl p-4">
-                          <p className="text-sm text-primary-600 mb-4">Customize hyperparameters for each selected model type. Leave default for recommended values.</p>
-                          <div id="hyperparamControls" className="space-y-6"></div>
+                      <div id="hyperparamSection" className="hidden mt-3 space-y-3">
+                        <div className="bg-white border border-primary-200 rounded-xl p-4">
+                          <p className="text-xs text-primary-600 mb-4">Customize hyperparameters for each selected model type. Leave default for recommended values.</p>
+                          <div id="hyperparamControls" className="space-y-4"></div>
                         </div>
                       </div>
                     </div>
-                    <div>
-                      <button className="w-full px-8 py-5 bg-primary-900 text-white rounded-2xl text-xl hover:bg-primary-800 transition-all" onClick={() => window.startTraining?.()}>Start Training</button>
-                    </div>
-                    <div className="mt-8 bg-primary-50 rounded-xl p-4 hidden" id="trainingStatus">
+                    <button className="w-full px-6 py-4 bg-primary-900 text-white rounded-xl text-sm font-medium hover:bg-primary-800 transition-all" onClick={() => window.startTraining?.()}>Start Training</button>
+                    <div className="mt-4 bg-white border border-primary-200 rounded-xl p-4 hidden" id="trainingStatus">
                       <div id="trainingStatusContent"></div>
                     </div>
                   </div>
@@ -635,15 +746,15 @@ export default function Home() {
           </div>
 
           {/* Trained Models Section */}
-          <div className="training-tab-panel hidden py-12" id="trainingTabTrainedModels" data-training-tab="trained-models">
-            <div className="mt-12 bg-primary-50 border-t-2 border-black rounded-b-3xl overflow-hidden">
-              <div className="px-10 py-8 bg-white flex items-center justify-between">
-                <h2 className="text-5xl text-primary-900">Trained Models</h2>
-                <button className="px-6 py-3 bg-primary-900 text-white rounded-2xl text-base hover:bg-primary-800 transition-all" onClick={() => window.loadAvailableModels?.()}>Refresh</button>
+          <div className="training-tab-panel hidden py-8" id="trainingTabTrainedModels" data-training-tab="trained-models">
+            <div className="bg-white border border-primary-200 rounded-2xl overflow-hidden">
+              <div className="px-8 py-6 border-b border-primary-100 flex items-center justify-between">
+                <h2 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Trained Models</h2>
+                <button className="px-5 py-2 bg-primary-900 text-white rounded-lg text-sm font-medium hover:bg-primary-800 transition-all" onClick={() => window.loadAvailableModels?.()}>Refresh</button>
               </div>
-              <div className="p-10">
+              <div className="p-8">
                 <div id="availableModelsContainer">
-                  <div className="text-center py-16 text-primary-400 text-xl">Click Refresh to load trained models</div>
+                  <div className="text-center py-16 text-primary-400 text-sm">Click Refresh to load trained models</div>
                 </div>
               </div>
             </div>
@@ -653,11 +764,11 @@ export default function Home() {
 
       {/* Model Details Modal */}
       <div id="modelDetailsModal" className="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onClick={(e) => window.closeModelDetails?.(e)}>
-        <div className="bg-white rounded-3xl max-w-5xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-          <div className="sticky top-0 bg-white px-8 py-6 border-b border-primary-200 flex items-center justify-between">
-            <h2 className="text-3xl font-medium text-primary-900">Model Performance Details</h2>
-            <button onClick={() => window.closeModelDetails?.()} className="text-primary-600 hover:text-primary-900 transition-colors">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="bg-white rounded-2xl max-w-5xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="sticky top-0 bg-white px-8 py-5 border-b border-primary-200 flex items-center justify-between rounded-t-2xl">
+            <h2 className="text-xl font-medium text-primary-900">Model Performance Details</h2>
+            <button onClick={() => window.closeModelDetails?.()} className="text-primary-400 hover:text-primary-900 transition-colors p-1">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -665,7 +776,6 @@ export default function Home() {
           <div className="p-8" id="modalContent"></div>
         </div>
       </div>
-
     </>
   );
 }
