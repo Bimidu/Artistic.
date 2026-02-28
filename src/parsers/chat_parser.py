@@ -30,6 +30,27 @@ from src.parsers.diagnosis_mapper import DiagnosisMapper
 logger = get_logger(__name__)
 
 
+def _to_dict(obj: Any) -> Dict[str, Any]:
+    """
+    Convert pylangacq Headers or other dict-like objects to a plain dict.
+    In some environments (e.g. hosted), reader.headers() returns a Headers
+    object that does not support .get(), causing 'Headers' object has no
+    attribute 'get'. Normalizing to dict fixes this.
+    """
+    if obj is None:
+        return {}
+    if isinstance(obj, dict):
+        return obj
+    try:
+        if hasattr(obj, "keys"):
+            return {str(k): obj[k] for k in obj.keys()}
+        if hasattr(obj, "__iter__") and not isinstance(obj, (str, bytes)):
+            return dict(obj)
+    except Exception:
+        pass
+    return {}
+
+
 @dataclass
 class Utterance:
     """
@@ -264,14 +285,15 @@ class CHATParser:
             logger.warning(f"No headers found in {file_path.name}")
             return metadata
         
-        # Extract from first file (usually only one file per reader)
-        # Handle both dict and list formats from pylangacq
+        # Extract from first file (usually only one file per reader).
+        # Normalize to dict: pylangacq can return Headers objects that don't support .get() in some environments.
         if isinstance(headers, dict):
-            file_headers = list(headers.values())[0] if headers else {}
+            raw = list(headers.values())[0] if headers else None
         elif isinstance(headers, list) and headers:
-            file_headers = headers[0] if headers[0] else {}
+            raw = headers[0] if headers[0] else None
         else:
-            file_headers = {}
+            raw = headers
+        file_headers = _to_dict(raw)
         
         # Extract participant ID
         pid = file_headers.get('PID', '')
@@ -346,22 +368,21 @@ class CHATParser:
         """
         participants = {}
         
-        # Get headers
+        # Get headers (same normalization as _extract_metadata)
         headers = reader.headers()
         if not headers:
             return participants
             
-        # Get first file headers
-        if isinstance(headers, list) and headers:
-            file_headers = headers[0]
-        elif isinstance(headers, dict):
-            file_headers = list(headers.values())[0] if headers else {}
+        if isinstance(headers, dict):
+            raw = list(headers.values())[0] if headers else None
+        elif isinstance(headers, list) and headers:
+            raw = headers[0] if headers[0] else None
         else:
-            file_headers = {}
+            raw = headers
+        file_headers = _to_dict(raw)
             
         # Extract participants dict from headers
-        # key 'Participants' usually corresponds to @ID fields in pylangacq
-        participant_data = file_headers.get('Participants', {})
+        participant_data = _to_dict(file_headers.get('Participants'))
         
         if not participant_data:
             # Fallback to reader.participants() which might just be codes
@@ -370,7 +391,8 @@ class CHATParser:
             return participants
             
         for speaker_code, info in participant_data.items():
-            if not isinstance(info, dict):
+            info = _to_dict(info)
+            if not info:
                 continue
                 
             participants[speaker_code] = {
@@ -434,9 +456,11 @@ class CHATParser:
         # Get utterances from reader
         for utterance in reader.utterances():
             try:
-                # Extract speaker and text
+                # Extract speaker and text (tiers may be Headers object without .get in some environments)
                 speaker = utterance.participant
-                text = utterance.tiers.get('utterance', '')
+                tiers_raw = getattr(utterance, 'tiers', None)
+                tiers = _to_dict(tiers_raw)
+                text = tiers.get('utterance', '')
                 
                 # Clean text: remove 0-prefixed words (CHAT convention for omitted/null elements)
                 # Example: "0do you know" -> "you know"
@@ -457,9 +481,7 @@ class CHATParser:
                 if not text and tokens:
                     text = ' '.join(token.word for token in tokens if token.word)
                 
-                # Get tiers (morphology, grammar, timing, etc.)
-                tiers = utterance.tiers or {}
-                
+                # tiers already normalized above
                 # Extract morphology (%mor) - try from tiers first, then from tokens
                 morphology = tiers.get('mor')
                 if not morphology and tokens:
