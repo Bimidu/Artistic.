@@ -1,6 +1,7 @@
 function getApiUrl() {
     const el = document.getElementById("apiUrl");
-    return el ? el.value.replace(/\/$/, "") : "http://localhost:8000";
+    if (el && el.value) return el.value.replace(/\/$/, "");
+    return (typeof window !== "undefined" && window.__ARTISTIC_API_URL) || "http://localhost:8000";
 }
 
 // DOM is already loaded by React when this script injects, so call immediately

@@ -3,7 +3,13 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 export default function GuidelinePage() {
+    useEffect(() => {
+        (window as unknown as { __ARTISTIC_API_URL?: string }).__ARTISTIC_API_URL = apiUrl;
+    }, []);
+
     useEffect(() => {
         const script = document.createElement('script');
         script.src = '/guidelines.js';
@@ -21,7 +27,7 @@ export default function GuidelinePage() {
                             <div className="text-lg text-white hidden sm:block">ASD Detection System</div>
                         </div>
                         <div className="flex items-center gap-8">
-                            <input type="hidden" id="apiUrl" defaultValue="http://localhost:8000" />
+                            <input type="hidden" id="apiUrl" defaultValue={apiUrl} />
                             <Link
                                 href="/"
                                 className="px-5 py-2 rounded-xl border border-lime-400 text-lime-300 hover:bg-lime-900 hover:text-white transition-all duration-200 text-sm font-medium"
