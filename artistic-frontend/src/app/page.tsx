@@ -143,8 +143,6 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 relative">
-            {/* Connector line - desktop only */}
-            <div className="hidden md:block absolute top-10 left-[calc(33.33%+1rem)] right-[calc(33.33%+1rem)] h-px bg-primary-200" style={{ zIndex: 0 }}></div>
 
             {/* Step 1 */}
             <div className="relative flex flex-col items-start">
