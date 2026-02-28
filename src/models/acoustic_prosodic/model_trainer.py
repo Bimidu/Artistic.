@@ -21,30 +21,17 @@ logger = get_logger(__name__)
 class AcousticProsodicTrainer:
     """
     Trains ML models on acoustic & prosodic features.
-    COMPONENT-SPECIFIC: Only XGBoost and Random Forest (optimized for acoustic data).
+    COMPONENT-SPECIFIC: Uses two main models (Random Forest + AdaBoost),
+    mirroring the pragmatic/conversational component design.
     """
 
     # COMPONENT-SPECIFIC: Acoustic/Prosodic models
-    # Only XGBoost and Random Forest supported for this component
-    # These models work well with continuous acoustic features (pitch, energy, spectral)
-    ALLOWED_MODEL_TYPES = ['xgboost', 'random_forest']
-    
+    # Only Random Forest and AdaBoost are used as the two main models
+    # These ensemble models work well with continuous acoustic features
+    ALLOWED_MODEL_TYPES = ['random_forest', 'adaboost']
+
     # Acoustic-optimized hyperparameters (fine-tuned for prosodic/spectral features)
     MODEL_CONFIGS = {
-        'xgboost': {
-            'n_estimators': 120,             # Moderate for acoustic features
-            'max_depth': 8,                  # Moderate depth
-            'learning_rate': 0.08,           # Slower learning for generalization
-            'subsample': 0.8,                # Use 80% of data
-            'colsample_bytree': 0.8,         # Use 80% of features
-            'min_child_weight': 3,           # Regularization for acoustic noise
-            'gamma': 0.2,                    # Pruning for generalization
-            'reg_alpha': 0.4,                # L1 regularization
-            'reg_lambda': 1.8,               # L2 regularization
-            'random_state': 42,
-            'n_jobs': -1,
-            'eval_metric': 'logloss',
-        },
         'random_forest': {
             'n_estimators': 150,             # Many trees for acoustic stability
             'max_depth': 12,                 # Moderate depth for acoustic patterns
@@ -56,6 +43,16 @@ class AcousticProsodicTrainer:
             'n_jobs': -1,
             'class_weight': 'balanced',
         },
+        'xgboost': {
+        'n_estimators': 150,        # Adequate for acoustic complexity
+        'max_depth': 6,             # Capture prosodic interactions
+        'learning_rate': 0.1,       # Conservative for small dataset
+        'subsample': 0.8,           # Reduce overfitting
+        'colsample_bytree': 0.8,    # Feature sampling for 26 features
+        'reg_alpha': 0.1,           # L1 regularization
+        'reg_lambda': 1,            # L2 regularization
+        'random_state': 42
+    }
     }
 
     def __init__(self):
@@ -153,13 +150,13 @@ class AcousticProsodicTrainer:
         # Get parameters (use custom if provided, otherwise use acoustic-optimized defaults)
         params = custom_params if custom_params else self.MODEL_CONFIGS
 
-        # Define COMPONENT-SPECIFIC models (only XGBoost and Random Forest)
+        # Define COMPONENT-SPECIFIC models (only Random Forest and AdaBoost)
         models = {
-            "xgboost": XGBClassifier(
-                **params.get('xgboost', self.MODEL_CONFIGS['xgboost'])
-            ),
             "random_forest": RandomForestClassifier(
                 **params.get('random_forest', self.MODEL_CONFIGS['random_forest'])
+            ),
+            "adaboost": AdaBoostClassifier(
+                **params.get('adaboost', self.MODEL_CONFIGS['adaboost'])
             ),
         }
 
