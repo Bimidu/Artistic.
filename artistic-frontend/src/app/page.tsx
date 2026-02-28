@@ -42,13 +42,14 @@ export default function Home() {
   return (
     <>
       {/* Header */}
-      <header className="bg-primary-900 border-b border-primary-800">
-        <div className="max-w-7xl mx-auto px-8 py-4">
+      <header className="relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/navbar_bg.jpg)' }}>
+        <div className="absolute inset-0 bg-primary-900/10" aria-hidden="true" />
+        <div className="relative z-10 max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="text-xl font-medium text-white tracking-tight">Artistic</div>
+              <div className="text-3xl font-medium text-black tracking-tight">Artistic.</div>
               <div className="hidden sm:block h-4 w-px bg-primary-700"></div>
-              <div className="hidden sm:block text-sm text-primary-500">Speech Analysis Platform</div>
+              <div className="hidden sm:block text-sm text-primary-900">Speech Analysis Platform</div>
             </div>
 
             <div className="flex items-center gap-6">
@@ -58,14 +59,14 @@ export default function Home() {
                 <div className="toggle-slider" id="toggleSlider"></div>
               </div>
 
-              <div className="flex items-center gap-2 text-sm text-primary-500">
+              <div className="flex items-center gap-2 text-sm text-primary-700">
                 <span className="w-2 h-2 rounded-full bg-red-400" id="statusDot"></span>
                 <span id="statusText">Disconnected</span>
               </div>
 
               <button
                 onClick={() => router.push('/guideline')}
-                className="px-4 py-2 text-sm border border-primary-700 text-primary-400 rounded-lg hover:border-primary-500 hover:text-white transition-all"
+                className="px-4 py-2 text-sm bg-black text-primary-400 rounded-full font-bold hover:border-primary-500 hover:text-white transition-all"
               >
                 Feature Guide
               </button>
@@ -74,7 +75,7 @@ export default function Home() {
         </div>
 
         {/* API Configuration Bar */}
-        <div className="bg-white hidden" id="apiConfigBar">
+        <div className="relative z-10 bg-white hidden" id="apiConfigBar">
           <div className="max-w-7xl mx-auto px-8 py-2">
             <div className="flex items-center gap-6 justify-between">
               <div className="flex items-center gap-4 flex-1">
