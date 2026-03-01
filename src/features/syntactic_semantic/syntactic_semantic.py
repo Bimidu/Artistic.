@@ -31,6 +31,7 @@ Features implemented:
 Author: Randil Haturusinghe
 """
 
+import sys
 import re
 import numpy as np
 import pandas as pd
@@ -75,7 +76,7 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         except OSError:
             self.logger.warning("spaCy model not found. Installing...")
             import subprocess
-            subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+            subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"], check=True)
             self.nlp = spacy.load("en_core_web_sm")
 
         # Initialize NLTK WordNet (for semantic analysis)
