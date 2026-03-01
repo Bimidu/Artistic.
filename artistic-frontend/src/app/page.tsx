@@ -662,9 +662,8 @@ export default function Home() {
                       <select className="w-full px-4 py-3 bg-white border border-primary-200 rounded-xl text-sm focus:outline-none focus:border-primary-400 transition-all" id="trainingComponent">
                         <option value="pragmatic_conversational">Pragmatic &amp; Conversational</option>
                         <option value="acoustic_prosodic">Acoustic &amp; Prosodic</option>
-                        <option value="syntactic_semantic">Syntactic &amp; Semantic (Dummy Features)</option>
+                        <option value="syntactic_semantic">Syntactic &amp; Semantic</option>
                       </select>
-                      <p className="text-xs text-primary-500 mt-2">Note: Acoustic &amp; Syntactic use placeholder features for testing</p>
                     </div>
                     <div className="mb-6">
                       <label className="block text-sm font-medium text-primary-700 mb-3">Feature Selection</label>
