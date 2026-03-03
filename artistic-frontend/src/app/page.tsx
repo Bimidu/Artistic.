@@ -65,6 +65,13 @@ export default function Home() {
               </div>
 
               <button
+                onClick={() => router.push('/how-it-works')}
+                className="px-4 py-2 text-sm bg-white/20 text-primary-900 border border-primary-300 rounded-full font-semibold hover:bg-white hover:text-black transition-all"
+              >
+                How It Works
+              </button>
+
+              <button
                 onClick={() => router.push('/guideline')}
                 className="px-4 py-2 text-sm bg-black text-primary-400 rounded-full font-bold hover:border-primary-500 hover:text-white transition-all"
               >
