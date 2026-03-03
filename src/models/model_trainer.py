@@ -52,7 +52,7 @@ class ModelTrainer:
     MAXIMUM SIMPLICITY: Basically decision stumps - targeting 75-80% accuracy.
     """
 
-    # ABSOLUTE MINIMUM COMPLEXITY - almost as simple as a coin flip
+    # ABSOLUTE MINIMUM COMPLEXITY
     DEFAULT_PARAMS = {
         'random_forest': {
             'n_estimators': 1,               # Single tree!

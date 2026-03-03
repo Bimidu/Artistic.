@@ -48,7 +48,7 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="text-3xl font-medium text-black tracking-tight">Artistic.</div>
-              <div className="hidden sm:block h-4 w-px bg-primary-700"></div>
+              <div className="hidden sm:block h-6 w-px bg-primary-700"></div>
               <div className="hidden sm:block text-sm text-primary-900">Speech Analysis Platform</div>
             </div>
 
@@ -153,16 +153,20 @@ export default function Home() {
                 </div>
                 <div className="flex-1 h-px bg-primary-200 md:hidden"></div>
               </div>
-              <div className="bg-primary-50 border border-primary-200 rounded-2xl p-7 w-full hover:border-primary-300 transition-colors">
-                <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                  </svg>
+              <div className="group relative overflow-hidden rounded-2xl w-full border border-primary-200 bg-primary-50 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-sm">
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: 'url(/images/navbar_bg.jpg)' }} aria-hidden="true" />
+                <div className="absolute inset-0 bg-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                <div className="relative z-10 h-full backdrop-blur-md bg-white/70 p-7 w-full transition-colors duration-300 group-hover:bg-white/60">
+                  <div className="w-9 h-9 bg-white/90 border border-primary-200 rounded-xl flex items-center justify-center mb-4">
+                    <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                  </div>
+                  <h3 className="text-base font-medium text-primary-900 mb-2">Upload your file</h3>
+                  <p className="text-sm text-primary-600 leading-relaxed">
+                    Drop an audio recording (WAV, MP3, FLAC) or a CHAT transcript file from your session directly into the tool — no conversion or formatting needed.
+                  </p>
                 </div>
-                <h3 className="text-base font-medium text-primary-900 mb-2">Upload your file</h3>
-                <p className="text-sm text-primary-600 leading-relaxed">
-                  Drop an audio recording (WAV, MP3, FLAC) or a CHAT transcript file from your session directly into the tool — no conversion or formatting needed.
-                </p>
               </div>
             </div>
 
@@ -174,16 +178,20 @@ export default function Home() {
                 </div>
                 <div className="flex-1 h-px bg-primary-200 md:hidden"></div>
               </div>
-              <div className="bg-primary-50 border border-primary-200 rounded-2xl p-7 w-full hover:border-primary-300 transition-colors">
-                <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+              <div className="group relative overflow-hidden rounded-2xl w-full border border-primary-200 bg-primary-50 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-sm">
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: 'url(/images/navbar_bg.jpg)' }} aria-hidden="true" />
+                <div className="absolute inset-0 bg-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                <div className="relative z-10 h-full backdrop-blur-md bg-white/70 p-7 w-full transition-colors duration-300 group-hover:bg-white/60">
+                  <div className="w-9 h-9 bg-white/90 border border-primary-200 rounded-xl flex items-center justify-center mb-4">
+                    <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-base font-medium text-primary-900 mb-2">Artistic runs the analysis</h3>
+                  <p className="text-sm text-primary-600 leading-relaxed">
+                    Our AI examines conversation flow, voice patterns, and language structure — then combines all signals into a single, calibrated ASD screening result.
+                  </p>
                 </div>
-                <h3 className="text-base font-medium text-primary-900 mb-2">Artistic runs the analysis</h3>
-                <p className="text-sm text-primary-600 leading-relaxed">
-                  Our AI examines conversation flow, voice patterns, and language structure — then combines all signals into a single, calibrated ASD screening result.
-                </p>
               </div>
             </div>
 
@@ -195,16 +203,20 @@ export default function Home() {
                 </div>
                 <div className="flex-1 h-px bg-primary-200 md:hidden"></div>
               </div>
-              <div className="bg-primary-50 border border-primary-200 rounded-2xl p-7 w-full hover:border-primary-300 transition-colors">
-                <div className="w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
+              <div className="group relative overflow-hidden rounded-2xl w-full border border-primary-200 bg-primary-50 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-sm">
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: 'url(/images/navbar_bg.jpg)' }} aria-hidden="true" />
+                <div className="absolute inset-0 bg-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                <div className="relative z-10 h-full backdrop-blur-md bg-white/70 p-7 w-full transition-colors duration-300 group-hover:bg-white/60">
+                  <div className="w-9 h-9 bg-white/90 border border-primary-200 rounded-xl flex items-center justify-center mb-4">
+                    <svg className="w-4 h-4 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-base font-medium text-primary-900 mb-2">Review the full picture</h3>
+                  <p className="text-sm text-primary-600 leading-relaxed">
+                    See an annotated transcript, a plain-language explanation of what drove the prediction, and explore what-if scenarios to understand the result in depth.
+                  </p>
                 </div>
-                <h3 className="text-base font-medium text-primary-900 mb-2">Review the full picture</h3>
-                <p className="text-sm text-primary-600 leading-relaxed">
-                  See an annotated transcript, a plain-language explanation of what drove the prediction, and explore what-if scenarios to understand the result in depth.
-                </p>
               </div>
             </div>
           </div>
@@ -225,52 +237,68 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {/* Card 1 */}
-            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
-              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
+            <div className="group relative overflow-hidden rounded-2xl border border-primary-200 bg-primary-50 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-sm">
+              <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: 'url(/images/navbar_bg.jpg)' }} aria-hidden="true" />
+              <div className="absolute inset-0 bg-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+              <div className="relative z-10 h-full backdrop-blur-md bg-white/70 p-7 transition-colors duration-300 group-hover:bg-white/60">
+                <div className="w-10 h-10 bg-white/90 border border-primary-200 rounded-xl flex items-center justify-center mb-5">
+                  <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                </div>
+                <h3 className="text-base font-medium text-primary-900 mb-2">Conversation patterns</h3>
+                <p className="text-sm text-primary-600 leading-relaxed">
+                  How your child takes turns, stays on topic, and responds in back-and-forth dialogue
+                </p>
               </div>
-              <h3 className="text-base font-medium text-primary-900 mb-2">Conversation patterns</h3>
-              <p className="text-sm text-primary-600 leading-relaxed">
-                How your child takes turns, stays on topic, and responds in back-and-forth dialogue
-              </p>
             </div>
             {/* Card 2 */}
-            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
-              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
+            <div className="group relative overflow-hidden rounded-2xl border border-primary-200 bg-primary-50 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-sm">
+              <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: 'url(/images/bg3.jpg)' }} aria-hidden="true" />
+              <div className="absolute inset-0 bg-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+              <div className="relative z-10 h-full backdrop-blur-md bg-white/70 p-7 transition-colors duration-300 group-hover:bg-white/60">
+                <div className="w-10 h-10 bg-white/90 border border-primary-200 rounded-xl flex items-center justify-center mb-5">
+                  <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                  </svg>
+                </div>
+                <h3 className="text-base font-medium text-primary-900 mb-2">Voice &amp; rhythm</h3>
+                <p className="text-sm text-primary-600 leading-relaxed">
+                  Pitch variation, speech pacing, and fluency — the vocal nuances that clinical screening values
+                </p>
               </div>
-              <h3 className="text-base font-medium text-primary-900 mb-2">Voice &amp; rhythm</h3>
-              <p className="text-sm text-primary-600 leading-relaxed">
-                Pitch variation, speech pacing, and fluency — the vocal nuances that clinical screening values
-              </p>
             </div>
             {/* Card 3 */}
-            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
-              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+            <div className="group relative overflow-hidden rounded-2xl border border-primary-200 bg-primary-50 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-sm">
+              <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: 'url(/images/bg2.jpg)' }} aria-hidden="true" />
+              <div className="absolute inset-0 bg-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+              <div className="relative z-10 h-full backdrop-blur-md bg-white/70 p-7 transition-colors duration-300 group-hover:bg-white/60">
+                <div className="w-10 h-10 bg-white/90 border border-primary-200 rounded-xl flex items-center justify-center mb-5">
+                  <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h3 className="text-base font-medium text-primary-900 mb-2">Language structure</h3>
+                <p className="text-sm text-primary-600 leading-relaxed">
+                  Sentence complexity, grammatical patterns, and coherence across the conversation
+                </p>
               </div>
-              <h3 className="text-base font-medium text-primary-900 mb-2">Language structure</h3>
-              <p className="text-sm text-primary-600 leading-relaxed">
-                Sentence complexity, grammatical patterns, and coherence across the conversation
-              </p>
             </div>
             {/* Card 4 */}
-            <div className="bg-white border border-primary-200 rounded-2xl p-7 hover:border-primary-400 hover:shadow-sm transition-all">
-              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
-                <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
-                </svg>
+            <div className="group relative overflow-hidden rounded-2xl border border-primary-200 bg-primary-50 transition-all duration-300 group-hover:border-primary-300 group-hover:shadow-sm">
+              <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: 'url(/images/bg3.jpg)' }} aria-hidden="true" />
+              <div className="absolute inset-0 bg-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+              <div className="relative z-10 h-full backdrop-blur-md bg-white/70 p-7 transition-colors duration-300 group-hover:bg-white/60">
+                <div className="w-10 h-10 bg-white/90 border border-primary-200 rounded-xl flex items-center justify-center mb-5">
+                  <svg className="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+                  </svg>
+                </div>
+                <h3 className="text-base font-medium text-primary-900 mb-2">Unified assessment</h3>
+                <p className="text-sm text-primary-600 leading-relaxed">
+                  All signals combined into a single, evidence-based prediction — with no black-box guesswork
+                </p>
               </div>
-              <h3 className="text-base font-medium text-primary-900 mb-2">Unified assessment</h3>
-              <p className="text-sm text-primary-600 leading-relaxed">
-                All signals combined into a single, evidence-based prediction — with no black-box guesswork
-              </p>
             </div>
           </div>
         </div>

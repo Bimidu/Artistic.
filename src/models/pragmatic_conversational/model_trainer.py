@@ -84,7 +84,6 @@ class PragmaticConversationalTrainer:
     
     # COMPONENT-SPECIFIC: Pragmatic/Conversational models
     # Only SVM and Logistic Regression supported for this component
-    # These models are robust, interpretable, and less prone to overfitting
     ALLOWED_MODEL_TYPES = ['svm', 'logistic']
     
     # ANTI-OVERFITTING pragmatic-optimized hyperparameters
