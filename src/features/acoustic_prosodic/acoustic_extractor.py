@@ -14,9 +14,10 @@ Features include:
 Author: Implementation based on pragmatic features pattern
 """
 
+import tempfile
 import pandas as pd
 import numpy as np
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List, Tuple
 from pathlib import Path
 
 from src.utils.logger import get_logger
@@ -208,7 +209,74 @@ class AcousticFeatureExtractor:
         
         logger.info(f"Extracted features from {len(data)} audio files")
         return pd.DataFrame(data)
-    
+
+    def extract_from_prepared_groups(
+        self,
+        prepared_items: List[Tuple[List[Path], str, str]],
+        sample_rate: int = 16000,
+    ) -> pd.DataFrame:
+        """
+        Extract one row per merged group: load N audios, concatenate, extract features once.
+
+        Args:
+            prepared_items: List of (list of audio paths, diagnosis, dataset_name).
+            sample_rate: Target sample rate for concatenation (must match extractor expectation).
+
+        Returns:
+            DataFrame with one row per merged sample (diagnosis and dataset set).
+        """
+        try:
+            import librosa
+            import soundfile as sf
+        except ImportError as e:
+            logger.error(f"extract_from_prepared_groups requires librosa and soundfile: {e}")
+            return pd.DataFrame()
+
+        from src.parsers.chat_parser import TranscriptData
+
+        data = []
+        for idx, (group_paths, diagnosis, dataset_name) in enumerate(prepared_items):
+            try:
+                segments = []
+                for ap in group_paths:
+                    ap = Path(ap)
+                    if not ap.exists():
+                        logger.warning(f"Missing file in group: {ap}")
+                        continue
+                    y, sr = librosa.load(str(ap), sr=sample_rate, mono=True)
+                    segments.append(y)
+                if not segments:
+                    continue
+                merged = np.concatenate(segments)
+                with tempfile.NamedTemporaryFile(suffix=".wav", delete=False, prefix="merged_acoustic_") as f:
+                    tmp_path = Path(f.name)
+                try:
+                    sf.write(str(tmp_path), merged, sample_rate)
+                    dummy = TranscriptData(
+                        file_path=tmp_path,
+                        participant_id="CHI",
+                        utterances=[],
+                        metadata={},
+                    )
+                    features = self.audio_feature_extractor.extract(transcript=dummy, audio_path=tmp_path).features
+                finally:
+                    if tmp_path.exists():
+                        tmp_path.unlink(missing_ok=True)
+                features["diagnosis"] = diagnosis
+                features["dataset"] = dataset_name
+                features["file_path"] = "|".join(str(p) for p in group_paths)
+                features["participant_id"] = f"merged_{idx}"
+                data.append(features)
+            except Exception as e:
+                logger.error(f"Error processing merged group {idx}: {e}")
+                continue
+
+        if not data:
+            logger.warning("No features extracted from any prepared groups")
+            return pd.DataFrame()
+        logger.info(f"Extracted features from {len(data)} merged groups")
+        return pd.DataFrame(data)
+
     def extract_with_audio(
         self,
         transcript: TranscriptData,
@@ -257,4 +325,3 @@ class AcousticFeatureExtractor:
         
         logger.debug(f"Extracted {len(result.features)} acoustic features")
         return feature_set
-

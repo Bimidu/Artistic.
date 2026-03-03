@@ -246,6 +246,13 @@ class FeatureExtractionRequest(BaseModel):
         default=None,
         description="Maximum samples per dataset (for large datasets like TD)"
     )
+    # Acoustic-only: merge N audios per sample, cap per diagnosis (used when component=acoustic_prosodic)
+    use_merged_acoustic_sampling: bool = Field(
+        default=True,
+        description="If True and component is acoustic_prosodic, merge n_per_group audios per sample and cap at max_merged_per_diagnosis per diagnosis."
+    )
+    n_per_group: int = Field(default=5, description="Number of audio files to merge per training sample (acoustic only)")
+    max_merged_per_diagnosis: int = Field(default=80, description="Max merged samples per diagnosis, ASD and TD (acoustic only)")
 
 
 class TrainingRequest(BaseModel):
@@ -1785,44 +1792,75 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
     all_dfs = []
     dataset_names = []
     
-    for dataset_path in request.dataset_paths:
-        path = Path(dataset_path)
-        if not path.exists():
-            path = config.paths.data_dir / dataset_path
-        
-        if not path.exists():
-            logger.warning(f"Dataset path not found: {dataset_path}")
-            continue
-        
-        dataset_name = path.name
-        dataset_names.append(dataset_name)
-        
-        try:
-            # Check if this is a large dataset (TD)
-            is_td_dataset = 'td' in path.name.lower()
-            
-            # Use request parameter, or fall back to config default
-            max_samples = request.max_samples_per_dataset or config.datasets.max_samples_td
-            max_samples_for_extraction = max_samples if is_td_dataset else None
-            
-            logger.info(f"Extracting {component} features from {dataset_name}...")
-            
-            # Extract features
-            if component == 'acoustic_prosodic' and hasattr(extractor, 'extract_from_directory'):
-                df = extractor.extract_from_directory(path, max_samples=max_samples_for_extraction)
+    # Acoustic-only: merged sampling (merge N audios per sample, cap per diagnosis)
+    if component == 'acoustic_prosodic' and getattr(request, 'use_merged_acoustic_sampling', True):
+        paths_to_scan = []
+        for dataset_path in request.dataset_paths:
+            path = Path(dataset_path)
+            if not path.exists():
+                path = config.paths.data_dir / dataset_path
+            if path.exists():
+                paths_to_scan.append(path)
             else:
-                df = extractor.extract_from_directory(path)
-                # Sample after extraction for other extractors
-                if is_td_dataset and max_samples and len(df) > max_samples:
-                    logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
-                    df = df.sample(n=max_samples, random_state=42)
+                logger.warning(f"Dataset path not found: {dataset_path}")
+        if paths_to_scan:
+            try:
+                from src.pipeline.acoustic_dataset_preparation import prepare_acoustic_training_data
+                prepared = prepare_acoustic_training_data(
+                    paths_to_scan,
+                    n_per_group=getattr(request, 'n_per_group', 5),
+                    max_merged_per_diagnosis=getattr(request, 'max_merged_per_diagnosis', 80),
+                    random_state=42,
+                )
+                if prepared:
+                    df = extractor.extract_from_prepared_groups(prepared)
+                    if not df.empty:
+                        dataset_names = df['dataset'].unique().tolist()
+                        all_dfs.append(df)
+                        logger.info(f"Extracted {len(df)} merged acoustic samples from {len(paths_to_scan)} dataset(s)")
+            except Exception as e:
+                logger.error(f"Acoustic merged extraction failed: {e}", exc_info=True)
+    
+    if not all_dfs:
+        # Per-dataset extraction (original flow, or when merged produced nothing)
+        for dataset_path in request.dataset_paths:
+            path = Path(dataset_path)
+            if not path.exists():
+                path = config.paths.data_dir / dataset_path
             
-            if not df.empty:
-                df['dataset'] = dataset_name
-                all_dfs.append(df)
-                logger.info(f"Extracted {len(df)} samples from {dataset_name}")
-        except Exception as e:
-            logger.error(f"Error extracting from {dataset_path}: {e}")
+            if not path.exists():
+                logger.warning(f"Dataset path not found: {dataset_path}")
+                continue
+            
+            dataset_name = path.name
+            dataset_names.append(dataset_name)
+            
+            try:
+                # Check if this is a large dataset (TD)
+                is_td_dataset = 'td' in path.name.lower()
+                
+                # Use request parameter, or fall back to config default
+                max_samples = request.max_samples_per_dataset or config.datasets.max_samples_td
+                max_samples_for_extraction = max_samples if is_td_dataset else None
+                
+                logger.info(f"Extracting {component} features from {dataset_name}...")
+                
+                # Extract features
+                if component == 'acoustic_prosodic' and hasattr(extractor, 'extract_from_directory'):
+                    df = extractor.extract_from_directory(path, max_samples=max_samples_for_extraction)
+                else:
+                    df = extractor.extract_from_directory(path)
+                    # Sample after extraction for other extractors
+                    if is_td_dataset and max_samples and len(df) > max_samples:
+                        logger.info(f"Sampling {max_samples} from {len(df)} TD samples")
+                        df = df.sample(n=max_samples, random_state=42)
+                
+                if not df.empty:
+                    df['dataset'] = dataset_name
+                    all_dfs.append(df)
+                    logger.info(f"Extracted {len(df)} samples from {dataset_name}")
+            except Exception as e:
+                logger.error(f"Error extracting from {dataset_path}: {e}")
     
     if not all_dfs:
         raise HTTPException(
@@ -2003,6 +2041,14 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
             raise ValueError("No features available for selected datasets. Please extract features first.")
         
         combined_df = pd.concat(all_dfs, ignore_index=True)
+        for col in combined_df.columns:
+            if col != 'diagnosis':
+                combined_df[col] = combined_df[col].apply(
+                    lambda x: float(ast.literal_eval(x)[0])
+                    if isinstance(x, str) and x.startswith('[')
+                    else x
+                )
+
         logger.info(f"Combined features: {len(combined_df)} samples")
         
         # Clean up the data before preprocessing
@@ -2062,7 +2108,9 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         
         if len(combined_df) < 10:
             raise ValueError(f"Insufficient samples after filtering: {len(combined_df)} (need at least 10)")
-        
+        print("Class distribution before split:")
+        print(combined_df['diagnosis'].value_counts())
+
         # Step 2: Preprocess data
         training_state['progress'] = 10
         training_state['message'] = 'Preprocessing data...'
@@ -2078,7 +2126,22 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         
         # Fit and transform - skip validation since we already cleaned the data
         X_train, X_test, y_train, y_test = preprocessor.fit_transform(combined_df, validate=False)
+        X_train = force_numeric_dataframe(X_train)
+        X_test = force_numeric_dataframe(X_test)
+
         logger.info(f"Training set: {X_train.shape}, Test set: {X_test.shape}")
+
+        # ==========================
+        # LEAKAGE CHECK
+        # ==========================
+
+        train_hash = pd.util.hash_pandas_object(X_train, index=False)
+        test_hash = pd.util.hash_pandas_object(X_test, index=False)
+
+        overlap = len(set(train_hash) & set(test_hash))
+
+        logger.warning(f"[LeakCheck] Identical rows overlap between train and test: {overlap}/{len(X_test)}")
+
         logger.info(f"Feature selection: {feature_selection}, Features used: {X_train.shape[1]}")
         
         # Save preprocessor as dict to avoid pickling issues
@@ -2137,6 +2200,7 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
                     tune_hyperparameters=False
                 )
                 model = trainer.train_model(X_train, y_train, config_obj)
+                print(f"Model object id for {model_type}:", id(model))
             trained_models[model_type] = model
             
             # Evaluate
