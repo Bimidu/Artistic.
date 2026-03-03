@@ -12,7 +12,7 @@ Key metrics:
 
 Author: Bimidu Gunathilake
 """
-
+from collections import Counter
 import pandas as pd
 import numpy as np
 from typing import Dict, List, Tuple, Optional, Any
@@ -152,6 +152,19 @@ class ModelEvaluator:
         
         # Make predictions
         y_pred = model.predict(X_test)
+
+        # Make predictions
+        y_pred = model.predict(X_test)
+
+        # DEBUG: Check prediction distribution
+        from collections import Counter
+        print("\nDEBUG PREDICTION CHECK")
+        print("Predictions distribution:", Counter(y_pred))
+        print("True distribution:", Counter(y_test))
+        if X_train is not None:
+            y_pred_train = model.predict(X_train)
+            print("Train Predictions distribution:", Counter(y_pred_train))
+        print()
         
         # Calculate metrics
         accuracy = accuracy_score(y_test, y_pred)

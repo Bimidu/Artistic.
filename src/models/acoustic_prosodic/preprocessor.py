@@ -43,6 +43,26 @@ class AcousticProsodicPreprocessor:
         y = df[label_col]
         X = df.drop(columns=[label_col])
 
+        # --------- 2.1 Drop recording-dominant acoustic features ----------
+        DROP_COLS = [
+            "acoustic_duration_sec",
+            "acoustic_energy_mean",
+            "acoustic_energy_std",
+            "acoustic_intensity_mean",
+            "acoustic_intensity_std",
+            "acoustic_intensity_range",
+            "acoustic_silence_ratio",
+            "acoustic_spectral_centroid_mean",
+            "acoustic_spectral_centroid_std",
+            "acoustic_spectral_rolloff_mean",
+            "acoustic_spectral_rolloff_std",
+            "acoustic_spectral_bandwidth_mean",
+            "acoustic_spectral_bandwidth_std",
+        ]
+
+        X = X.drop(columns=[c for c in DROP_COLS if c in X.columns], errors="ignore")
+
+
         # --------- 3. Replace NaN and infinite values ----------
         X = X.replace([np.inf, -np.inf], np.nan).fillna(0.0)
 
