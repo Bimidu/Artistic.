@@ -582,18 +582,18 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
                 # Extract features
                 features = self.extract_from_transcript(transcript)
 
-                # Add metadata
-                if transcript.diagnosis:
-                    features['diagnosis'] = transcript.diagnosis
-                else:
+                # Add metadata — use parsed diagnosis from CHAT header first,
+                # fall back to path heuristics only when header is empty
+                diagnosis = transcript.diagnosis
+                if not diagnosis:
                     # Try to infer from directory structure
                     path_str = str(cha_file).upper()
                     if '/ASD/' in path_str or '_ASD_' in path_str or '\\ASD\\' in path_str:
-                        features['diagnosis'] = 'ASD'
+                        diagnosis = 'ASD'
                     elif '/TD/' in path_str or '/TYP/' in path_str or '_TD_' in path_str or '\\TD\\' in path_str or '\\TYP\\' in path_str:
-                        features['diagnosis'] = 'TD'
-                    else:
-                        features['diagnosis'] = None
+                        diagnosis = 'TD'
+
+                features['diagnosis'] = diagnosis
 
                 features['file_path'] = str(cha_file)
                 features['participant_id'] = cha_file.stem

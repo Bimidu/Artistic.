@@ -178,6 +178,66 @@ class SyntacticSemanticPreprocessor:
 
         return X_train, X_test, y_train, y_test
 
+    def fit_transform_presplit(
+        self,
+        X_train: pd.DataFrame,
+        X_test: pd.DataFrame,
+        y_train: pd.Series,
+        y_test: pd.Series,
+        validate: bool = True
+    ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+        """
+        Preprocess already-split data without performing another train/test split.
+
+        Use this when the outer pipeline has already split the data (e.g. from
+        train_by_category) to avoid creating a second, inconsistent split.
+
+        Args:
+            X_train: Pre-split training features
+            X_test: Pre-split test features
+            y_train: Pre-split training labels
+            y_test: Pre-split test labels
+            validate: Whether to validate data first
+
+        Returns:
+            Tuple of (X_train, X_test, y_train, y_test) after cleaning/scaling/selection
+        """
+        self.logger.info("Preprocessing pre-split syntactic/semantic data (IMPLEMENTED)")
+
+        # Identify feature columns from training data
+        self.feature_columns_ = [
+            col for col in X_train.columns
+            if col not in [self.target_column, 'participant_id', 'file_path']
+        ]
+
+        # Clean training data
+        X_train = self.cleaner.fit_transform(X_train, self.feature_columns_)
+
+        # Clean test data (using fitted cleaner)
+        X_test = self.cleaner.transform(X_test, self.feature_columns_)
+
+        # Scale features
+        X_train = self.scaler.fit_transform(X_train, self.feature_columns_)
+        X_test = self.scaler.transform(X_test, self.feature_columns_)
+
+        # Feature selection if enabled
+        if self.feature_selection and self.selector:
+            self.selected_features_ = self.select_syntactic_semantic_features(
+                X_train, y_train, self.feature_columns_
+            )
+            X_train = X_train[self.selected_features_]
+            X_test = X_test[self.selected_features_]
+        else:
+            self.selected_features_ = self.feature_columns_
+
+        self.logger.info(
+            f"Syntactic/semantic pre-split preprocessing complete (IMPLEMENTED) - "
+            f"Train: {X_train.shape}, Test: {X_test.shape}, "
+            f"Features: {len(self.selected_features_)}"
+        )
+
+        return X_train, X_test, y_train, y_test
+
     def validate_syntactic_semantic_features(self, df: pd.DataFrame) -> Dict[str, Any]:
         """
         Validate syntactic/semantic features with full implementation.

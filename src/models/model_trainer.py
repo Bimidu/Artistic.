@@ -384,7 +384,7 @@ class ModelTrainer:
 
             elif category == 'syntactic_semantic':
                 try:
-                    models = self.syntactic_trainer.train_multiple_models(X_train, y_train)
+                    models = self.syntactic_trainer.train_multiple_models(X_train, y_train, X_test, y_test)
                     category_models[category] = {
                         'status': 'placeholder',
                         'models': models,

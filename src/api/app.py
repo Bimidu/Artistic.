@@ -2106,9 +2106,14 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         from src.models import ModelTrainer, ModelConfig, ModelEvaluator
         from src.models.pragmatic_conversational import PragmaticConversationalTrainer
         from src.models.pragmatic_conversational.model_trainer import PragmaticModelConfig
+        from src.models.syntactic_semantic import SyntacticSemanticTrainer
+        from src.models.syntactic_semantic.model_trainer import SyntacticSemanticModelConfig
         evaluator = ModelEvaluator()
+
+        # Select the right trainer for this component
         pragmatic_trainer = PragmaticConversationalTrainer() if component == 'pragmatic_conversational' else None
-        trainer = ModelTrainer() if pragmatic_trainer is None else None
+        syntactic_trainer = SyntacticSemanticTrainer() if component == 'syntactic_semantic' else None
+        trainer = ModelTrainer() if (pragmatic_trainer is None and syntactic_trainer is None) else None
         
         trained_models = {}
         model_reports = {}
@@ -2129,7 +2134,7 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
             if class_weight == 'balanced':
                 if model_type == 'lightgbm':
                     hyperparams.setdefault('is_unbalance', True)
-                elif model_type in ('svm', 'logistic', 'random_forest', 'gradient_boosting'):
+                elif model_type in ('svm', 'logistic', 'random_forest'):
                     hyperparams.setdefault('class_weight', 'balanced')
                 elif model_type == 'mlp':
                     # sklearn MLP doesn't support class_weight natively; handled via sample_weight below
@@ -2144,6 +2149,15 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
                     use_rfecv=True,
                 )
                 result = pragmatic_trainer.train_model(X_train, y_train, X_test, y_test, config_obj)
+                model = result['model']
+            elif syntactic_trainer is not None:
+                # Use the dedicated SyntacticSemanticTrainer which has proper
+                # hyperparameters (is_unbalance=True, n_estimators=200, etc.)
+                config_obj = SyntacticSemanticModelConfig(
+                    model_type=model_type,
+                    hyperparameters=hyperparams
+                )
+                result = syntactic_trainer.train_model(X_train, y_train, X_test, y_test, config_obj, model_name=f"{component}_{model_type}")
                 model = result['model']
             else:
                 # Strip internal control keys (e.g. _use_sample_weight) before passing to sklearn

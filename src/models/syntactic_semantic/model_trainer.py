@@ -145,7 +145,7 @@ class SyntacticSemanticTrainer:
             Trained model with evaluation results
         """
         if config is None:
-            config = SyntacticSemanticModelConfig(model_type='random_forest')
+            config = SyntacticSemanticModelConfig(model_type='lightgbm')
 
         model_name = model_name or f"syntactic_semantic_{config.model_type}"
 
@@ -158,12 +158,12 @@ class SyntacticSemanticTrainer:
         # Create model
         model = self._create_model(config.model_type, params)
 
-        # Compute sample weights to handle class imbalance (e.g. 58 ASD vs 23 TD)
-        from sklearn.utils.class_weight import compute_sample_weight
-        sample_weights = compute_sample_weight(class_weight='balanced', y=y_train)
-
-        # Train model (GradientBoosting needs sample_weight; LightGBM uses is_unbalance)
+        # Train model
+        # LightGBM uses is_unbalance=True (set in DEFAULT_PARAMS) for class balancing
+        # GradientBoosting needs explicit sample_weight for class balancing
         if config.model_type == 'gradient_boosting':
+            from sklearn.utils.class_weight import compute_sample_weight
+            sample_weights = compute_sample_weight(class_weight='balanced', y=y_train)
             model.fit(X_train, y_train, sample_weight=sample_weights)
         else:
             model.fit(X_train, y_train)
@@ -174,12 +174,11 @@ class SyntacticSemanticTrainer:
         # Evaluate if test data provided
         evaluation_results = {}
         if X_test is not None and y_test is not None:
-            y_pred = model.predict(X_test)
-            y_pred_proba = model.predict_proba(X_test)[:, 1] if hasattr(model, 'predict_proba') else None
-
-            evaluation_results = self.evaluator.evaluate_model(
-                y_test, y_pred, y_pred_proba, model_name
+            report = self.evaluator.evaluate(
+                model, X_test, y_test,
+                model_name=model_name
             )
+            evaluation_results = report.to_dict()
 
         self.logger.info(f"{model_name} training complete (IMPLEMENTED)")
 
