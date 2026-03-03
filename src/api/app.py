@@ -258,9 +258,9 @@ class FeatureExtractionRequest(BaseModel):
 class TrainingRequest(BaseModel):
     """Request for model training."""
     dataset_names: List[str] = Field(..., description="Dataset names to use from CSV (not paths)")
-    model_types: List[str] = Field(
-        default=['random_forest', 'xgboost'],
-        description="Model types to train"
+    model_types: Optional[List[str]] = Field(
+        default=None,
+        description="Model types to train. Defaults to component-appropriate types if not specified."
     )
     component: str = Field(
         default='pragmatic_conversational',
@@ -1068,7 +1068,7 @@ async def predict_from_text(request: TextPredictionRequestWithOptions):
                     elif component == 'syntactic_semantic':
                         from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
                         extractor = SyntacticSemanticFeatures()
-                        features = extractor.extract_from_transcript(processed.transcript_data).features
+                        features = extractor.extract_from_transcript(processed.transcript_data)
                     else:  # pragmatic_conversational
                         features = feature_extractor.extract_from_transcript(processed.transcript_data).features
 
@@ -1329,7 +1329,7 @@ async def predict_from_transcript(
                     elif component == 'syntactic_semantic':
                         from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
                         extractor = SyntacticSemanticFeatures()
-                        features = extractor.extract_from_transcript(transcript).features
+                        features = extractor.extract_from_transcript(transcript)
                     else:
                         features = feature_extractor.extract_from_transcript(transcript).features
                     
@@ -2389,6 +2389,9 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         )
     
     # Validate model types for component
+    # Fill in component-appropriate defaults if model_types not specified
+    if not request.model_types:
+        request.model_types = COMPONENT_MODEL_TYPES[request.component]
     allowed_models = COMPONENT_MODEL_TYPES[request.component]
     invalid_models = [mt for mt in request.model_types if mt not in allowed_models]
     
