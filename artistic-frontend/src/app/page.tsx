@@ -725,6 +725,20 @@ export default function Home() {
                       </label>
                     </div>
                     <div className="mb-6">
+                      <label className="block text-sm font-medium text-primary-700 mb-3">Class Balancing</label>
+                      <select
+                        id="classWeightSelect"
+                        className="w-full px-4 py-3 bg-white border border-primary-200 rounded-xl text-sm focus:outline-none focus:border-primary-400 transition-all"
+                        defaultValue="balanced"
+                      >
+                        <option value="balanced">Balanced — compensate for class imbalance (recommended)</option>
+                        <option value="none">None — treat all samples equally</option>
+                      </select>
+                      <p className="text-xs text-primary-500 mt-2">
+                        Use <strong>Balanced</strong> when your dataset has significantly more ASD than TD samples. Prevents the model from always predicting ASD.
+                      </p>
+                    </div>
+                    <div className="mb-6">
                       <label className="block text-sm font-medium text-primary-700 mb-3">Model Types</label>
                       <p className="text-xs text-primary-500 mb-3">Available models change based on selected component</p>
                       <div id="modelTypesContainer" className="grid grid-cols-2 gap-3">

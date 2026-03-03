@@ -279,6 +279,10 @@ class TrainingRequest(BaseModel):
         default=None,
         description="Custom hyperparameters for each model type"
     )
+    class_weight: Optional[str] = Field(
+        default=None,
+        description="Class weighting strategy: 'balanced' to compensate for class imbalance, or None to disable"
+    )
     enable_autoencoder: Optional[bool] = Field(
         default=None,
         description="Enable counterfactual autoencoder training (None = auto-detect based on OS)"
@@ -1925,7 +1929,7 @@ def force_numeric_dataframe(X: pd.DataFrame) -> pd.DataFrame:
 
     return X
 
-def run_training_task(dataset_names: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, enable_autoencoder: Optional[bool] = None):
+def run_training_task(dataset_names: List[str], model_types: List[str], component: str, n_features: int = 30, feature_selection: bool = True, test_size: float = 0.2, random_state: int = 42, custom_hyperparameters: Optional[Dict[str, Dict[str, Any]]] = None, class_weight: Optional[str] = None, enable_autoencoder: Optional[bool] = None):
     """Background task for model training."""
     global training_state
     
@@ -2120,6 +2124,17 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
             if custom_hyperparameters and model_type in custom_hyperparameters:
                 hyperparams = custom_hyperparameters[model_type]
                 logger.info(f"Using custom hyperparameters for {model_type}: {hyperparams}")
+
+            # Inject class_weight if requested (and not already set by custom_hyperparameters)
+            if class_weight == 'balanced':
+                if model_type == 'lightgbm':
+                    hyperparams.setdefault('is_unbalance', True)
+                elif model_type in ('svm', 'logistic', 'random_forest', 'gradient_boosting'):
+                    hyperparams.setdefault('class_weight', 'balanced')
+                elif model_type == 'mlp':
+                    # sklearn MLP doesn't support class_weight natively; handled via sample_weight below
+                    hyperparams.setdefault('_use_sample_weight', True)
+                logger.info(f"Class balancing applied for {model_type}")
             
             if pragmatic_trainer is not None:
                 config_obj = PragmaticModelConfig(
@@ -2131,12 +2146,19 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
                 result = pragmatic_trainer.train_model(X_train, y_train, X_test, y_test, config_obj)
                 model = result['model']
             else:
+                # Strip internal control keys (e.g. _use_sample_weight) before passing to sklearn
+                use_sample_weight = hyperparams.pop('_use_sample_weight', False)
                 config_obj = ModelConfig(
                     model_type=model_type,
                     hyperparameters=hyperparams,
                     tune_hyperparameters=False
                 )
                 model = trainer.train_model(X_train, y_train, config_obj)
+                # For MLP (no native class_weight), refit with sample_weight
+                if use_sample_weight:
+                    from sklearn.utils.class_weight import compute_sample_weight
+                    sw = compute_sample_weight(class_weight='balanced', y=y_train)
+                    model.fit(X_train, y_train, sample_weight=sw)
             trained_models[model_type] = model
             
             # Evaluate
@@ -2315,6 +2337,7 @@ async def train_models(request: TrainingRequest, background_tasks: BackgroundTas
         request.test_size,
         request.random_state,
         request.custom_hyperparameters,
+        request.class_weight,
         request.enable_autoencoder
     )
     

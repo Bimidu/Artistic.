@@ -88,21 +88,22 @@ class SyntacticSemanticTrainer:
     # Syntactic/semantic-optimized hyperparameters
     SYNTACTIC_SEMANTIC_DEFAULT_PARAMS = {
         'lightgbm': {
-            'n_estimators': 100,           # Moderate number
-            'max_depth': 6,                # Shallow for simple patterns
-            'learning_rate': 0.08,         # Learning rate for generalization
-            'subsample': 0.85,             # Sampling ratio
-            'colsample_bytree': 0.85,      # Feature sampling
-            'reg_alpha': 0.3,              # L1 regularization
-            'reg_lambda': 1.5,             # L2 regularization
+            'n_estimators': 50,
+            'max_depth': 4,
+            'learning_rate': 0.08,
+            'subsample': 0.85,
+            'colsample_bytree': 0.85,
+            'reg_alpha': 0.5,
+            'reg_lambda': 2.0,
+            'is_unbalance': True,
             'random_state': 42,
             'n_jobs': -1,
             'verbose': -1,
         },
         'gradient_boosting': {
-            'n_estimators': 150,           # Moderate number
-            'learning_rate': 0.08,         # Learning rate for generalization
-            'max_depth': 3,                # Shallow trees for stability
+            'n_estimators': 80,
+            'learning_rate': 0.08,
+            'max_depth': 3,
             'min_samples_split': 5,
             'min_samples_leaf': 2,
             'subsample': 0.9,
@@ -157,8 +158,15 @@ class SyntacticSemanticTrainer:
         # Create model
         model = self._create_model(config.model_type, params)
 
-        # Train model
-        model.fit(X_train, y_train)
+        # Compute sample weights to handle class imbalance (e.g. 58 ASD vs 23 TD)
+        from sklearn.utils.class_weight import compute_sample_weight
+        sample_weights = compute_sample_weight(class_weight='balanced', y=y_train)
+
+        # Train model (GradientBoosting needs sample_weight; LightGBM uses is_unbalance)
+        if config.model_type == 'gradient_boosting':
+            model.fit(X_train, y_train, sample_weight=sample_weights)
+        else:
+            model.fit(X_train, y_train)
 
         # Store model
         self.models_[model_name] = model

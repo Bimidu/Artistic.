@@ -986,6 +986,9 @@ async function startTraining() {
     const randomState = parseInt(document.getElementById('randomState').value) || 42;
     const enableAutoencoder = document.getElementById('enableAutoencoder').checked;
     const customHyperparams = getCustomHyperparameters();
+    const classWeightRaw = document.getElementById('classWeightSelect')?.value || 'balanced';
+    const classWeight = classWeightRaw === 'none' ? null : classWeightRaw;
+
 
     const statusEl = document.getElementById('trainingStatus');
     const statusContent = document.getElementById('trainingStatusContent');
@@ -1005,6 +1008,7 @@ async function startTraining() {
                 test_size: testSize,
                 random_state: randomState,
                 enable_autoencoder: enableAutoencoder,
+                class_weight: classWeight,
                 custom_hyperparameters: customHyperparams
             })
         });
@@ -2068,40 +2072,40 @@ const FEATURE_CATEGORIES = {
 // Organised by category: Turn-taking (slate), Pragmatic (crimson), Conversational (forest), Linguistic (indigo), General (grey)
 const ANNOTATION_COLORS = {
     // Turn-taking — slate blue
-    'turn_start':        '#3B5B8B',
-    'turn_end':          '#4A6A9A',
-    'overlap':           '#5A7AAA',
-    'interruption':      '#6A8AAA',
-    'long_pause':        '#3A5878',
-    'response_latency':  '#4A6888',
+    'turn_start': '#3B5B8B',
+    'turn_end': '#4A6A9A',
+    'overlap': '#5A7AAA',
+    'interruption': '#6A8AAA',
+    'long_pause': '#3A5878',
+    'response_latency': '#4A6888',
     // Pragmatic Markers — muted crimson
-    'echolalia':         '#8B2B35',
-    'pronoun_reversal':  '#9B3545',
-    'stereotyped_phrase':'#AA4555',
-    'social_greeting':   '#B85C5C',
-    'question':          '#9B6050',
+    'echolalia': '#8B2B35',
+    'pronoun_reversal': '#9B3545',
+    'stereotyped_phrase': '#AA4555',
+    'social_greeting': '#B85C5C',
+    'question': '#9B6050',
     // Conversational — forest green
-    'topic_shift':       '#2A6040',
+    'topic_shift': '#2A6040',
     'topic_maintenance': '#3A7050',
     'repair_initiation': '#2E6B55',
     'repair_completion': '#3A7860',
     'clarification_request': '#347A6A',
     // Linguistic — deep indigo
-    'complex_sentence':  '#4A3080',
-    'simple_sentence':   '#7868A8',
-    'filled_pause':      '#5A3888',
-    'discourse_marker':  '#6848A0',
+    'complex_sentence': '#4A3080',
+    'simple_sentence': '#7868A8',
+    'filled_pause': '#5A3888',
+    'discourse_marker': '#6848A0',
     // General
-    'feature_region':    '#5A6470'
+    'feature_region': '#5A6470'
 };
 
 // Category metadata for grouping chips
 const ANNOTATION_CATEGORIES = {
-    'Turn-taking':   { color: '#3B5B8B', types: ['turn_start','turn_end','overlap','interruption','long_pause','response_latency'] },
-    'Pragmatic':     { color: '#8B2B35', types: ['echolalia','pronoun_reversal','stereotyped_phrase','social_greeting','question'] },
-    'Conversational':{ color: '#2A6040', types: ['topic_shift','topic_maintenance','repair_initiation','repair_completion','clarification_request'] },
-    'Linguistic':    { color: '#4A3080', types: ['complex_sentence','simple_sentence','filled_pause','discourse_marker'] },
-    'General':       { color: '#5A6470', types: ['feature_region'] }
+    'Turn-taking': { color: '#3B5B8B', types: ['turn_start', 'turn_end', 'overlap', 'interruption', 'long_pause', 'response_latency'] },
+    'Pragmatic': { color: '#8B2B35', types: ['echolalia', 'pronoun_reversal', 'stereotyped_phrase', 'social_greeting', 'question'] },
+    'Conversational': { color: '#2A6040', types: ['topic_shift', 'topic_maintenance', 'repair_initiation', 'repair_completion', 'clarification_request'] },
+    'Linguistic': { color: '#4A3080', types: ['complex_sentence', 'simple_sentence', 'filled_pause', 'discourse_marker'] },
+    'General': { color: '#5A6470', types: ['feature_region'] }
 };
 
 let currentTranscriptData = null;
@@ -2263,7 +2267,7 @@ function enhanceAnnotations(container) {
         utterances.forEach(utt => {
             // 1. Check for data attributes from the backend
             let startMs = utt.getAttribute('data-start') || utt.getAttribute('data-timestamp');
-            let endMs   = utt.getAttribute('data-end');
+            let endMs = utt.getAttribute('data-end');
 
             // 2. If not in attributes, look for CHAT bullet timing pattern •start_end• in text nodes
             if (!startMs) {
@@ -2274,7 +2278,7 @@ function enhanceAnnotations(container) {
                     const m = raw.match(/[•\u0015](\d+)_(\d+)[•\u0015]/);
                     if (m) {
                         startMs = m[1];
-                        endMs   = m[2];
+                        endMs = m[2];
                         // Strip the timing from the visible text
                         textEl.innerHTML = textEl.innerHTML.replace(/[•\u0015]\d+_\d+[•\u0015]/g, '').trim();
                     }
