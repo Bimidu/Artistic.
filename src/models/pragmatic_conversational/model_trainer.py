@@ -23,7 +23,6 @@ import joblib
 # ML models - pragmatic-optimized
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import SVC
-from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, StratifiedKFold
 from sklearn.metrics import make_scorer, f1_score as sk_f1_score
@@ -55,7 +54,7 @@ class PragmaticModelConfig:
         cv_folds: Number of cross-validation folds for tuning
         random_state: Random state for reproducibility
     """
-    model_type: Literal['svm', 'logistic']
+    model_type: Literal['svm']
     pragmatic_preprocessing: Dict[str, Any] = field(default_factory=lambda: {
         'handle_social_features': True,
         'normalize_conversational_features': True,
@@ -83,8 +82,8 @@ class PragmaticConversationalTrainer:
     """
     
     # COMPONENT-SPECIFIC: Pragmatic/Conversational models
-    # Only SVM and Logistic Regression supported for this component
-    ALLOWED_MODEL_TYPES = ['svm', 'logistic']
+    # Only SVM supported for this component
+    ALLOWED_MODEL_TYPES = ['svm']
     
     # ANTI-OVERFITTING pragmatic-optimized hyperparameters
     # Balanced regularization tuned for performance on pragmatic/conversational data
@@ -97,15 +96,6 @@ class PragmaticConversationalTrainer:
             'class_weight': 'balanced',    # Handle class imbalance
             'random_state': 42,
             'cache_size': 500,             # Faster training
-        },
-        'logistic': {
-            'C': 1.0,                      # Moderate regularization (increased from 0.3)
-            'penalty': 'l2',               # L2 only for better convergence
-            'solver': 'lbfgs',             # LBFGS for L2 (faster than saga)
-            'max_iter': 2000,              # Sufficient iterations
-            'random_state': 42,
-            'n_jobs': -1,
-            'class_weight': 'balanced',    # Handle class imbalance
         },
     }
     
@@ -142,7 +132,14 @@ class PragmaticConversationalTrainer:
         if config.use_rfecv and n_features > 30:
             self.logger.info(f"Applying RFECV (n_features={n_features})")
             rfecv = RFECV(
-                estimator=LogisticRegression(C=1.0, max_iter=1000, random_state=config.random_state, n_jobs=-1),
+                estimator=SVC(
+                    kernel='linear',
+                    C=1.0,
+                    probability=True,
+                    class_weight='balanced',
+                    random_state=config.random_state,
+                    cache_size=500,
+                ),
                 step=5,
                 cv=StratifiedKFold(3, shuffle=True, random_state=config.random_state),
                 scoring='f1_weighted',
@@ -156,19 +153,12 @@ class PragmaticConversationalTrainer:
         if config.tune_hyperparameters:
             self.logger.info(f"Running RandomizedSearchCV for {model_type}")
             param_prefix = 'model__'
-            param_distributions = (
-                {
-                    f'{param_prefix}C': [0.5, 1.0, 2.0, 3.0, 5.0],
-                    f'{param_prefix}gamma': [0.005, 0.01, 0.05, 0.1, 'scale'],
-                    f'{param_prefix}class_weight': ['balanced'],
-                }
-                if model_type == 'svm'
-                else {
-                    f'{param_prefix}C': [0.5, 1.0, 2.0, 3.0, 5.0],
-                    f'{param_prefix}solver': ['lbfgs', 'saga'],
-                    f'{param_prefix}class_weight': ['balanced'],
-                }
-            )
+            # Only SVM is supported for pragmatic component
+            param_distributions = {
+                f'{param_prefix}C': [0.5, 1.0, 2.0, 3.0, 5.0],
+                f'{param_prefix}gamma': [0.005, 0.01, 0.05, 0.1, 'scale'],
+                f'{param_prefix}class_weight': ['balanced'],
+            }
             scorer = make_scorer(sk_f1_score, average='weighted')
             search = RandomizedSearchCV(
                 pipeline,
@@ -261,7 +251,7 @@ class PragmaticConversationalTrainer:
         self.logger.info("Training multiple pragmatic models (IMPLEMENTED)")
         
         if model_configs is None:
-            # Component-specific: Only XGBoost and Random Forest
+            # Component-specific: only SVM
             model_configs = [
                 PragmaticModelConfig(model_type=mt) for mt in self.ALLOWED_MODEL_TYPES
             ]
@@ -303,7 +293,6 @@ class PragmaticConversationalTrainer:
         """Create model instance based on type (component-specific with anti-overfitting)."""
         model_classes = {
             'svm': SVC,
-            'logistic': LogisticRegression,
         }
         
         if model_type not in model_classes:
@@ -491,7 +480,7 @@ class PragmaticConversationalTrainer:
         
         print("\n[WRENCH] Implemented Features:")
         print("1. [CHECK] Pragmatic-specific model training")
-        print("2. [CHECK] Multiple model support (RF, XGB, LightGBM, SVM, Logistic)")
+        print("2. [CHECK] SVM model support with pragmatic-optimized regularization")
         print("3. [CHECK] Pragmatic feature validation")
         print("4. [CHECK] Feature importance analysis")
         print("5. [CHECK] Model evaluation and comparison")
@@ -499,7 +488,6 @@ class PragmaticConversationalTrainer:
         
         print("\n[CHART] Component-Specific Models:")
         print("SVM (RBF) - Primary model (non-linear patterns with strong regularization)")
-        print("Logistic Regression (ElasticNet) - Secondary model (interpretable with L1+L2 regularization)")
         
         print("\n[TARGET] Pragmatic Features Supported:")
         print("- Turn-taking patterns (15 features)")

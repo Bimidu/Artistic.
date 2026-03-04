@@ -1055,7 +1055,6 @@ function updateModelCheckboxes() {
     const modelInfo = {
         'random_forest': { label: 'Random Forest' },
         'xgboost': { label: 'XGBoost' },
-        'logistic': { label: 'Logistic Regression' },
         'gradient_boosting': { label: 'Gradient Boosting' },
         'adaboost': { label: 'AdaBoost' },
         'lightgbm': { label: 'LightGBM' },
@@ -1641,20 +1640,7 @@ const DEFAULT_HYPERPARAMS = {
             effect: 'Lower = more conservative updates. Higher = faster adaptation, risk of overfitting.'
         }
     },
-    'logistic': {
-        'C': {
-            value: 1.0, type: 'number', min: 0.001, max: 100, step: 0.001,
-            description: 'Inverse regularization strength',
-            range: 'Typical: 0.01-10',
-            effect: 'Higher = less regularization, more complex model. Lower = more regularization, simpler model.'
-        },
-        'max_iter': {
-            value: 1000, type: 'number', min: 100, max: 5000,
-            description: 'Maximum iterations for solver convergence',
-            range: 'Typical: 100-2000',
-            effect: 'Higher = more attempts to converge. Too low may not converge. Too high wastes time.'
-        }
-    },
+    // Note: logistic regression is no longer offered as a selectable model type
     'svm': {
         'C': {
             value: 1.0, type: 'number', min: 0.001, max: 100, step: 0.001,
@@ -1694,7 +1680,7 @@ function toggleHyperparameters() {
 
 function updateHyperparamControls() {
     const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
-        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value))
+        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'gradient_boosting', 'adaboost'].includes(cb.value))
         .map(cb => cb.value);
 
     const container = document.getElementById('hyperparamControls');
@@ -1713,7 +1699,6 @@ function updateHyperparamControls() {
             'lightgbm': 'LightGBM',
             'gradient_boosting': 'Gradient Boosting',
             'adaboost': 'AdaBoost',
-            'logistic': 'Logistic Regression',
             'svm': 'SVM'
         };
 
@@ -1777,7 +1762,7 @@ function updateHyperparamControls() {
 
 function getCustomHyperparameters() {
     const selectedModels = Array.from(document.querySelectorAll('input[type="checkbox"][value]:checked'))
-        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value))
+        .filter(cb => ['random_forest', 'xgboost', 'lightgbm', 'svm', 'gradient_boosting', 'adaboost'].includes(cb.value))
         .map(cb => cb.value);
 
     const customParams = {};
@@ -1803,7 +1788,7 @@ function getCustomHyperparameters() {
 (function _initModelCheckboxListeners() {
     const modelCheckboxes = document.querySelectorAll('input[type="checkbox"][value]');
     modelCheckboxes.forEach(cb => {
-        if (['random_forest', 'xgboost', 'lightgbm', 'svm', 'logistic', 'gradient_boosting', 'adaboost'].includes(cb.value)) {
+        if (['random_forest', 'xgboost', 'lightgbm', 'svm', 'gradient_boosting', 'adaboost'].includes(cb.value)) {
             cb.addEventListener('change', () => {
                 const section = document.getElementById('hyperparamSection');
                 if (!section.classList.contains('hidden')) {

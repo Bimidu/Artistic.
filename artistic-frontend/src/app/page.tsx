@@ -746,10 +746,6 @@ export default function Home() {
                           <input type="checkbox" value="svm" defaultChecked className="w-4 h-4 text-primary-600 rounded" />
                           <span className="ml-3 text-sm text-primary-900">SVM</span>
                         </label>
-                        <label className="flex items-center cursor-pointer p-4 bg-white border border-primary-200 rounded-xl hover:border-primary-300 transition-colors">
-                          <input type="checkbox" value="logistic" defaultChecked className="w-4 h-4 text-primary-600 rounded" />
-                          <span className="ml-3 text-sm text-primary-900">Logistic Regression</span>
-                        </label>
                       </div>
                     </div>
                     <div className="mb-6">

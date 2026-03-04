@@ -51,7 +51,7 @@ ASSETS_DIR = Path("assets")
 
 # Component-specific model type mapping
 COMPONENT_MODEL_TYPES = {
-    'pragmatic_conversational': ['svm', 'logistic'],
+    'pragmatic_conversational': ['svm'],
     'acoustic_prosodic': ['xgboost', 'random_forest'],
     'syntactic_semantic': ['lightgbm', 'gradient_boosting']
 }
@@ -2447,7 +2447,7 @@ async def get_component_models():
     return {
         'components': COMPONENT_MODEL_TYPES,
         'description': {
-            'pragmatic_conversational': 'SVM and Logistic Regression with strong regularization for generalization',
+            'pragmatic_conversational': 'SVM with strong regularization for generalization',
             'acoustic_prosodic': 'XGBoost and Random Forest optimized for continuous acoustic features',
             'syntactic_semantic': 'LightGBM and Gradient Boosting for syntactic patterns'
         }
