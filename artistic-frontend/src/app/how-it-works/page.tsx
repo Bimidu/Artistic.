@@ -872,6 +872,7 @@ const NAV_SECTIONS = [
   { id: 'pipeline', label: 'The Pipeline', icon: '→' },
   { id: 'input', label: '1 · Input Layer', icon: '↑' },
   { id: 'extraction', label: '2 · Feature Extraction', icon: '⊙' },
+  { id: 'acoustic', label: '   Acoustic Detail', icon: '◦' },
   { id: 'pragmatic', label: '   Pragmatic Detail', icon: '◦' },
   { id: 'training', label: '3 · Model Training', icon: '▣' },
   { id: 'fusion', label: '4 · Prediction & Fusion', icon: '◈' },
@@ -1450,6 +1451,77 @@ export default function HowItWorksPage() {
                             {cat.count} features
                           </span>
                           <span className="text-xs text-gray-400 font-mono">Sub-module {idx + 1} of 6</span>
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1 max-w-2xl">{cat.summary}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setOpenCategory(cat)}
+                      className={`flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${cat.borderColor} bg-white ${cat.color} hover:bg-gray-900 hover:text-white hover:border-gray-900`}
+                    >
+                      View All {cat.count} Features →
+                    </button>
+                  </div>
+
+                  <div className="bg-white px-6 py-5">
+                    <div className="mb-4">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Extraction Method</p>
+                      <p className="text-sm text-gray-600">{cat.method}</p>
+                    </div>
+
+                    {/* Feature preview chips */}
+                    <div>
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Sample Features</p>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.features.slice(0, 8).map(f => (
+                          <span key={f.name} className={`text-xs font-mono px-2.5 py-1 rounded-lg ${cat.bgColor} ${cat.color} border ${cat.borderColor}`}>
+                            {f.name}
+                          </span>
+                        ))}
+                        {cat.features.length > 8 && (
+                          <button
+                            onClick={() => setOpenCategory(cat)}
+                            className="text-xs px-2.5 py-1 rounded-lg text-gray-400 bg-gray-100 hover:bg-gray-200 transition-colors"
+                          >
+                            +{cat.features.length - 8} more
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── SECTION: ACOUSTIC DETAIL ── */}
+          <section id="acoustic" ref={setRef('acoustic')}>
+            <div className="inline-flex items-center gap-2 bg-sky-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
+              Acoustic Component — Full Detail
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">153 acoustic features, explained</h2>
+            <p className="text-gray-500 mb-4 max-w-2xl">
+              The acoustic component is organised into 8 sub-modules, each targeting a distinct aspect of speech acoustics and prosody. Click <strong>View All Features</strong> on any category to open a full searchable table with plain-English descriptions, extraction methods, and ASD relevance for every feature.
+            </p>
+            <p className="text-sm text-gray-400 mb-10">
+              All features are extracted from isolated child audio segments using <code className="bg-gray-100 px-1 rounded text-xs">librosa</code> and computed as global statistical summaries (mean, std, min, max) over the entire recording.
+            </p>
+
+            <div className="space-y-8">
+              {ACOUSTIC_CATEGORIES.map((cat, idx) => (
+                <div key={cat.id} className={`border ${cat.borderColor} rounded-2xl overflow-hidden`}>
+                  <div className={`${cat.bgColor} px-6 py-5 flex items-start justify-between flex-wrap gap-4`}>
+                    <div className="flex items-start gap-4">
+                      <div className={`w-10 h-10 bg-white rounded-xl border ${cat.borderColor} flex items-center justify-center`}>
+                        <AcousticIcon id={cat.id} className={`${cat.color.replace('text-', 'fill-').replace('fill-current', '')} w-6 h-6`} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <h3 className={`text-lg font-bold ${cat.color}`}>{cat.label}</h3>
+                          <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white border ${cat.borderColor} ${cat.color}`}>
+                            {cat.count} features
+                          </span>
+                          <span className="text-xs text-gray-400 font-mono">Sub-module {idx + 1} of 8</span>
                         </div>
                         <p className="text-sm text-gray-600 mt-1 max-w-2xl">{cat.summary}</p>
                       </div>
