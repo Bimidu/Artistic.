@@ -259,7 +259,93 @@ function PragmaticIcon({ id, className }: { id: string; className?: string }) {
       return <IconBubble className={className} />;
   }
 }
+// ── ACOUSTIC ICONS ───────────────────────────────────────────────────────────
+function IconPitch({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path d="M3 14 Q6 6 9 12 Q12 18 15 10 Q18 4 21 10" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
 
+function IconSpectral({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path d="M3 18 L6 14 L9 10 L12 6 L15 10 L18 14 L21 18" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3 18h18" className="stroke-current" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconMFCC({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <rect x="3" y="14" width="3" height="7" rx="0.5" className="fill-current opacity-40" />
+      <rect x="7" y="10" width="3" height="11" rx="0.5" className="fill-current opacity-60" />
+      <rect x="11" y="6" width="3" height="15" rx="0.5" className="fill-current opacity-80" />
+      <rect x="15" y="9" width="3" height="12" rx="0.5" className="fill-current opacity-60" />
+      <rect x="19" y="13" width="3" height="8" rx="0.5" className="fill-current opacity-40" />
+    </svg>
+  );
+}
+
+function IconVoice({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <circle cx="12" cy="8" r="4" className="stroke-current" strokeWidth="1.5" fill="none" />
+      <path d="M6 21v-1a6 6 0 0112 0v1" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <path d="M18 11.5a2.5 2.5 0 010 5" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconEnergy({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path d="M13 2L4 14h7l-1 8 9-12h-7l2-8z" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconRhythm({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path d="M3 12h3l2-6 4 12 2-8 2 4 2-2h3" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconFormant({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <ellipse cx="9" cy="12" rx="3" ry="5" className="stroke-current" strokeWidth="1.5" fill="none" />
+      <ellipse cx="16" cy="10" rx="2.5" ry="4" className="stroke-current" strokeWidth="1.5" fill="none" />
+      <path d="M3 20h18" className="stroke-current" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconChroma({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <circle cx="12" cy="12" r="8" className="stroke-current" strokeWidth="1.5" fill="none" />
+      <path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3L6.3 17.7" className="stroke-current" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  );
+}
+function AcousticIcon({ id, className }: { id: string; className?: string }) {
+  switch (id) {
+    case 'pitch': return <IconPitch className={className} />;
+    case 'mfcc': return <IconMFCC className={className} />;
+    case 'spectral': return <IconSpectral className={className} />;
+    case 'voice_quality': return <IconVoice className={className} />;
+    case 'formants': return <IconFormant className={className} />;
+    case 'energy': return <IconEnergy className={className} />;
+    case 'rhythm': return <IconRhythm className={className} />;
+    case 'chroma': return <IconChroma className={className} />;
+    default: return <IconWaveform className={className} />;
+  }
+}
 // ── TURN-TAKING (44 features) ────────────────────────────────────────────────
 const TURN_TAKING_FEATURES: Feature[] = [
   { name: 'total_turns', label: 'Total Conversation Turns', description: 'The total number of back-and-forth exchanges between all speakers during the recording.', method: 'Counted directly from transcript speaker labels in the CHAT file', asdRelevance: 'Sets the baseline length and richness of the interaction for normalizing other features.' },
@@ -501,6 +587,93 @@ const AUDIO_PRAGMATIC_FEATURES: Feature[] = [
   { name: 'audio_silence_duration', label: 'Total Silence Duration', description: 'The total amount of time spent in silence throughout the recording.', method: 'Total recording duration minus total speech duration', asdRelevance: 'High silence duration confirms reduced engagement.' },
   { name: 'audio_speech_to_silence_ratio', label: 'Speech-to-Silence Ratio (Audio)', description: 'How much speech there is compared to silence — a direct measure of verbal engagement in the session.', method: 'Total speech duration divided by total silence duration', asdRelevance: 'Low ratio is a strong ASD signal; high ratio indicates an active, verbally engaged child.' },
 ];
+// ── ACOUSTIC FEATURE SETS ────────────────────────────────────────────────────
+
+const PITCH_FEATURES: Feature[] = [
+  { name: 'f0_mean', label: 'Average Pitch (F0)', description: 'The average fundamental frequency of the child\'s voice across the whole recording — essentially their average pitch in Hz.', method: 'pyin algorithm via librosa.pyin(); voiced frames extracted at 10ms hop length; mean computed over all voiced frames', asdRelevance: 'Atypical mean pitch (both higher and lower than typical) has been documented in ASD, potentially reflecting differences in laryngeal control or emotional prosody.' },
+  { name: 'f0_std', label: 'Pitch Variability', description: 'How much the child\'s pitch varies over the course of the recording. High variability means the pitch goes up and down a lot; low variability means it stays at a similar level throughout.', method: 'Standard deviation of F0 values across all voiced frames', asdRelevance: 'Reduced pitch variability (monotone speech) is one of the most consistent prosodic ASD markers, reflecting limited use of intonation to convey meaning and emotion.' },
+  { name: 'f0_min', label: 'Lowest Pitch Observed', description: 'The lowest pitch value recorded at any point during the child\'s speech.', method: 'Minimum F0 across all voiced frames with voicing confidence > 0.5', asdRelevance: 'Contrasted with maximum pitch to compute the pitch range; low minimum may indicate a compressed tonal range.' },
+  { name: 'f0_max', label: 'Highest Pitch Observed', description: 'The highest pitch value at any point during the recording.', method: 'Maximum F0 across all voiced frames with voicing confidence > 0.5', asdRelevance: 'Children with ASD may show restricted high-pitch excursions, reflecting reduced use of question intonation and exclamatory contours.' },
+  { name: 'f0_range', label: 'Pitch Range', description: 'The total span from lowest to highest pitch — a direct measure of how much the voice rises and falls overall.', method: 'f0_max minus f0_min across all voiced frames', asdRelevance: 'Narrowed pitch range is a hallmark prosodic feature of ASD; contrasts with typical children\'s broader intonational contours.' },
+  { name: 'f0_median', label: 'Median Pitch', description: 'The middle value of all pitch measurements — more robust than the mean when extreme values are present.', method: 'Median F0 across all voiced frames', asdRelevance: 'Provides a stable estimate of habitual speaking pitch, less sensitive to isolated high or low excursions.' },
+  { name: 'f0_iqr', label: 'Pitch Spread (IQR)', description: 'The range of the middle 50% of pitch values — capturing typical pitch movement without being distorted by extreme highs or lows.', method: 'Interquartile range (Q75 minus Q25) of F0 distribution', asdRelevance: 'A tighter IQR confirms monotone speech even when a few pitch outliers inflate the total range.' },
+  { name: 'f0_skewness', label: 'Pitch Distribution Shape (Skew)', description: 'Whether pitch values cluster more towards high or low ends — whether the voice tends to stay flat and occasionally spike up, or stays high and occasionally dips.', method: 'Statistical skewness of the F0 distribution across voiced frames', asdRelevance: 'Asymmetric pitch distributions may reflect atypical intonation patterns, such as terminal rises on non-questions (common in ASD).' },
+  { name: 'f0_kurtosis', label: 'Pitch Distribution Peakedness', description: 'Whether pitch values cluster tightly around a single level or spread broadly across a range.', method: 'Statistical kurtosis of the F0 distribution', asdRelevance: 'High kurtosis (peaked distribution) indicates flat, monotone prosody; low kurtosis indicates more varied pitch use.' },
+  { name: 'f0_voiced_ratio', label: 'Proportion of Voiced Speech', description: 'What fraction of the speech signal has a detectable pitch — i.e., how much of the recording is voiced (vs. unvoiced consonants or silence).', method: 'Proportion of frames with pyin voicing confidence above 0.5 threshold', asdRelevance: 'Low voiced ratio may indicate atypical phonation, frequent whispering, or unusually high use of unvoiced speech sounds.' },
+];
+
+const MFCC_FEATURES: Feature[] = [
+  { name: 'mfcc_1_mean', label: 'MFCC 1 — Average (Overall Energy)', description: 'The first MFCC coefficient, which broadly captures the overall energy or loudness of the speech spectrum. It is the most fundamental descriptor of the frequency envelope shape.', method: 'librosa.feature.mfcc() with n_mfcc=13, n_fft=2048, hop_length=512; mean of coefficient 1 across all frames', asdRelevance: 'MFCC 1 relates to overall vocal tract configuration; atypical values may reflect structural or habitual differences in phonation.' },
+  { name: 'mfcc_2_mean', label: 'MFCC 2 — Average (Spectral Tilt)', description: 'The second MFCC, capturing the broad spectral tilt — whether the speech energy is concentrated in low or high frequencies.', method: 'Mean of MFCC coefficient 2 across all frames', asdRelevance: 'Spectral tilt differences have been documented in ASD, reflecting differences in resonance and articulation.' },
+  { name: 'mfcc_3_mean', label: 'MFCC 3–13 — Spectral Shape Details', description: 'The higher-order MFCCs (3 through 13) capture progressively finer details of the spectral shape — the characteristic "texture" of the voice that distinguishes different vowels, consonants, and speaker identities.', method: 'Mean of each MFCC coefficient 3–13 across all frames', asdRelevance: 'The full MFCC vector encodes articulatory patterns; systematic differences between ASD and TD children have been found in several coefficients, particularly related to vowel formant patterns.' },
+  { name: 'mfcc_1_std', label: 'MFCC 1 — Variability', description: 'How much the first MFCC coefficient varies over time — capturing temporal changes in overall spectral energy.', method: 'Standard deviation of MFCC coefficient 1 across all frames', asdRelevance: 'Low MFCC variability across all coefficients indicates less dynamic, more monotonous speech production.' },
+  { name: 'mfcc_delta_mean', label: 'MFCC Delta — Average Rate of Change', description: 'The average rate at which the MFCCs change from frame to frame — capturing how dynamically the spectral characteristics of speech shift over time.', method: 'librosa.feature.delta() applied to MFCC matrix; mean of delta features across all frames', asdRelevance: 'Low MFCC delta values indicate slow-changing, less dynamic spectral transitions — associated with less varied articulation in ASD.' },
+  { name: 'mfcc_delta_std', label: 'MFCC Delta — Variability', description: 'How much the rate of spectral change varies — whether transitions are consistently smooth or occasionally abrupt.', method: 'Standard deviation of MFCC delta features across all frames', asdRelevance: 'Captures inconsistency in articulatory transitions; ASD speech may show atypical variability patterns.' },
+  { name: 'mfcc_delta2_mean', label: 'MFCC Delta-Delta — Acceleration', description: 'The second derivative of the MFCCs — how fast the rate of change itself changes. This captures the acceleration of spectral transitions.', method: 'librosa.feature.delta(order=2) applied to MFCC matrix; mean across all frames', asdRelevance: 'Delta-delta features encode articulatory acceleration; differences in ASD may reflect motor speech coordination differences.' },
+  { name: 'mfcc_delta2_std', label: 'MFCC Delta-Delta — Variability', description: 'How variable the acceleration of spectral transitions is.', method: 'Standard deviation of second-order delta MFCC features', asdRelevance: 'Irregular articulatory acceleration may indicate motor speech differences in ASD.' },
+  { name: 'mfcc_covariance_trace', label: 'MFCC Covariance (Overall Spectral Complexity)', description: 'A single number summarising how much the different MFCC coefficients move together — capturing overall spectral complexity and variability.', method: 'Trace (sum of diagonal) of the MFCC covariance matrix computed across all frames', asdRelevance: 'Children with ASD may show reduced overall spectral complexity, consistent with less varied articulation and more monotone speech.' },
+];
+
+const SPECTRAL_FEATURES: Feature[] = [
+  { name: 'spectral_centroid_mean', label: 'Average Spectral Centroid (Brightness)', description: 'The "centre of mass" of the sound spectrum — essentially how bright or dark the voice sounds. A high centroid means the energy is concentrated in higher frequencies (brighter, sharper); a low centroid means energy is in lower frequencies (darker, fuller).', method: 'librosa.feature.spectral_centroid(); mean across all frames', asdRelevance: 'Spectral centroid reflects overall vocal quality and articulation; atypical brightness has been documented in ASD speech samples.' },
+  { name: 'spectral_centroid_std', label: 'Spectral Centroid Variability', description: 'How much the brightness of the voice varies over time.', method: 'Standard deviation of spectral centroid across frames', asdRelevance: 'Low variability indicates monotone, less expressive speech.' },
+  { name: 'spectral_rolloff_mean', label: 'Average Spectral Rolloff (Energy Distribution)', description: 'The frequency below which 85% of the signal energy falls — a measure of how energy is spread across high and low frequencies.', method: 'librosa.feature.spectral_rolloff(roll_percent=0.85); mean across all frames', asdRelevance: 'Rolloff captures the balance of low vs. high frequency energy, reflecting articulatory precision.' },
+  { name: 'spectral_rolloff_std', label: 'Spectral Rolloff Variability', description: 'How much the high-to-low frequency energy balance varies over time.', method: 'Standard deviation of spectral rolloff across frames', asdRelevance: 'High variability may indicate inconsistent articulatory effort.' },
+  { name: 'spectral_bandwidth_mean', label: 'Average Spectral Bandwidth', description: 'How wide the energy is spread across the frequency spectrum — a narrow bandwidth means energy is concentrated at a few frequencies; a wide bandwidth means energy is spread across many.', method: 'librosa.feature.spectral_bandwidth(); mean across all frames', asdRelevance: 'Unusual spectral bandwidth (very narrow or very wide) can indicate atypical vocal tract configuration.' },
+  { name: 'spectral_bandwidth_std', label: 'Spectral Bandwidth Variability', description: 'How much the width of the energy distribution varies over time.', method: 'Standard deviation of spectral bandwidth across frames', asdRelevance: 'Low bandwidth variability is consistent with less dynamic articulation patterns.' },
+  { name: 'spectral_contrast_mean', label: 'Average Spectral Contrast', description: 'The difference in energy between peaks and valleys across different frequency bands — a measure of how "clear" or "rich" the spectral structure of the voice is.', method: 'librosa.feature.spectral_contrast(); mean across frequency bands and time frames', asdRelevance: 'Reduced spectral contrast may indicate less clear formant structure, consistent with atypical articulation.' },
+  { name: 'zero_crossing_rate_mean', label: 'Average Zero-Crossing Rate', description: 'How often the audio signal crosses from positive to negative (or vice versa) per second — a measure related to the noisiness or tonality of the speech signal.', method: 'librosa.feature.zero_crossing_rate(); mean across all frames', asdRelevance: 'High zero-crossing rates are associated with fricatives and noisy segments; unusual rates may reflect articulatory differences.' },
+  { name: 'zero_crossing_rate_std', label: 'Zero-Crossing Rate Variability', description: 'How much the noisiness/tonality of the speech signal varies over time.', method: 'Standard deviation of zero-crossing rate across frames', asdRelevance: 'Captures variability in speech segment types; low variability may indicate restricted phonetic inventory.' },
+  { name: 'spectral_flatness_mean', label: 'Average Spectral Flatness (Tonality)', description: 'How similar the spectral energy distribution is to white noise — a flat spectrum (score near 1) means the speech is noisy and unstructured; a peaked spectrum (score near 0) means it is tonal and voiced.', method: 'librosa.feature.spectral_flatness(); mean across all frames', asdRelevance: 'High spectral flatness may indicate breathy or noisy voice quality, which has been associated with certain ASD vocal profiles.' },
+];
+
+const VOICE_QUALITY_FEATURES: Feature[] = [
+  { name: 'jitter_local', label: 'Jitter (Pitch Irregularity)', description: 'How much the pitch period (time between each vocal fold vibration) varies from one cycle to the next — a measure of voice stability and smoothness.', method: 'Computed from F0 contour: mean absolute difference between consecutive F0 periods, normalised by mean period length', asdRelevance: 'Elevated jitter indicates an unstable, rough voice quality; voice quality differences including jitter have been documented in ASD.' },
+  { name: 'shimmer_local', label: 'Shimmer (Amplitude Irregularity)', description: 'How much the amplitude (loudness) of each vocal fold vibration cycle varies from the previous one — a measure of voice smoothness and consistency.', method: 'Computed from RMS energy contour: mean absolute difference between consecutive amplitude values, normalised by mean amplitude', asdRelevance: 'Elevated shimmer indicates an unstable, breathy voice quality; combined with jitter, captures overall voice perturbation.' },
+  { name: 'hnr_mean', label: 'Harmonics-to-Noise Ratio (Voice Clarity)', description: 'How much of the voice signal is periodic (harmonic, tonal) vs. random noise — a high ratio means a clear, smooth voice; a low ratio means a breathy, rough, or hoarse voice.', method: 'Estimated via autocorrelation peak ratio: maximum autocorrelation value divided by zero-lag value, converted to dB', asdRelevance: 'Low HNR indicates breathiness or roughness; HNR differences have been found in ASD speech and may reflect hypotonia or laryngeal differences.' },
+  { name: 'hnr_std', label: 'Voice Clarity Variability', description: 'How much the clarity of the voice changes over time.', method: 'Standard deviation of frame-level HNR estimates', asdRelevance: 'High variability in voice quality may indicate inconsistent phonation effort.' },
+  { name: 'cpp_mean', label: 'Cepstral Peak Prominence (Voice Strength)', description: 'A measure of how strongly the periodic component of the voice stands out from the background noise — often considered the most robust single measure of voice quality.', method: 'Computed from real cepstrum: prominence of cepstral peak at F0 lag relative to regression line', asdRelevance: 'Low CPP is strongly associated with breathy/dysphonic voice quality; differences in ASD may reflect motor control of the larynx.' },
+];
+const FORMANT_FEATURES: Feature[] = [
+  { name: 'f1_mean', label: 'First Formant (F1) — Average', description: 'The average frequency of the first resonance of the vocal tract — F1 is primarily controlled by jaw height and corresponds to vowel openness (low F1 = closed vowels like "ee"; high F1 = open vowels like "ah").', method: 'Estimated via LPC (Linear Predictive Coding) analysis using scipy.signal; peak detection in LPC spectral envelope; mean across all voiced frames', asdRelevance: 'Formant differences reflect differences in articulatory postures; systematic F1 shifts have been found in ASD, potentially reflecting reduced vowel space and less precise articulation.' },
+  { name: 'f1_std', label: 'F1 Variability', description: 'How much the first formant varies over time — reflecting how dynamically the jaw opens and closes during speech.', method: 'Standard deviation of F1 estimates across voiced frames', asdRelevance: 'Low F1 variability indicates less dynamic jaw movement, consistent with reduced articulatory precision.' },
+  { name: 'f2_mean', label: 'Second Formant (F2) — Average', description: 'The average frequency of the second vocal tract resonance — F2 is primarily controlled by tongue advancement (back vs. front) and is the key distinguisher between front vowels like "ee" and back vowels like "oo".', method: 'LPC peak detection; second resonance frequency; mean across voiced frames', asdRelevance: 'F2 is the most diagnostically sensitive formant for vowel space; reduced F2 range indicates centralised, less distinct vowel production — documented in ASD.' },
+  { name: 'f2_std', label: 'F2 Variability', description: 'How much the second formant varies — a direct measure of tongue front-back movement range during speech.', method: 'Standard deviation of F2 estimates across voiced frames', asdRelevance: 'The combination of F1 and F2 variability defines the "vowel space" — reduced vowel space area is a robust ASD marker.' },
+  { name: 'f3_mean', label: 'Third Formant (F3) — Average', description: 'The average frequency of the third vocal tract resonance — F3 is associated with tongue tip position and contributes to distinguishing sounds like "r" and "l".', method: 'LPC peak detection; third resonance frequency; mean across voiced frames', asdRelevance: 'F3 differences contribute to the overall acoustic profile; unusual F3 values may reflect atypical tongue-tip articulation patterns.' },
+  { name: 'f3_std', label: 'F3 Variability', description: 'How much the third formant varies over time.', method: 'Standard deviation of F3 estimates across voiced frames', asdRelevance: 'Together with F1 and F2 variability, F3 variability characterises the full articulatory dynamism of the speech.' },
+  { name: 'f1_f2_ratio', label: 'F1/F2 Ratio (Vowel Space Shape)', description: 'The ratio of the first to second formant — a simple single-number summary of the overall vowel space configuration.', method: 'Mean F1 divided by mean F2 across all voiced frames', asdRelevance: 'A compressed F1/F2 ratio indicates more centralised vowel production — a consistent finding in ASD articulatory research.' },
+  { name: 'vowel_space_area', label: 'Vowel Space Area', description: 'A measure of how large and distinct the vowel space is — computed from the spread of F1 and F2 values. A larger area means more clearly differentiated vowels; a smaller area means vowels are produced more similarly to each other.', method: 'Area of convex hull of (F1, F2) data points across all voiced frames', asdRelevance: 'Reduced vowel space area is one of the most robust acoustic findings in ASD — children with ASD produce less distinct vowels, making speech less intelligible.' },
+  { name: 'formant_dispersion', label: 'Formant Dispersion', description: 'How evenly spaced the formants are — a measure related to vocal tract length and configuration.', method: 'Mean distance between successive formant frequencies (F2-F1, F3-F2, F4-F3)', asdRelevance: 'Unusual formant dispersion may reflect atypical vocal tract configuration or resonance patterns.' },
+  { name: 'f4_mean', label: 'Fourth Formant (F4) — Average', description: 'The fourth resonance of the vocal tract — higher formants carry subtler speaker-identity and vocal quality information.', method: 'LPC peak detection; fourth resonance frequency; mean across voiced frames', asdRelevance: 'F4 contributes to the overall vocal quality profile and speaker-specific characteristics.' },
+  { name: 'formant_bandwidth_f1', label: 'F1 Bandwidth (Vowel Definition)', description: 'How broad or narrow the first formant resonance peak is — a narrow bandwidth means a well-defined, clear resonance; a wide bandwidth means a less distinct, more diffuse resonance.', method: 'Half-power bandwidth of F1 LPC peak', asdRelevance: 'Wide formant bandwidths indicate less precise resonance patterns, potentially related to reduced articulatory tension or coordination.' },
+];
+
+const ENERGY_FEATURES: Feature[] = [
+  { name: 'rms_mean', label: 'Average Speech Energy (Loudness)', description: 'The average root-mean-square energy of the speech signal — the best single measure of how loud the speech is overall.', method: 'librosa.feature.rms(); mean of RMS energy across all frames', asdRelevance: 'Unusually quiet or unusually loud speech are both documented in ASD; RMS energy provides the baseline loudness measure.' },
+  { name: 'rms_std', label: 'Loudness Variability', description: 'How much the loudness of the speech varies over time.', method: 'Standard deviation of RMS energy across all frames', asdRelevance: 'Low loudness variability indicates flat, monotone speech delivery with reduced prosodic emphasis.' },
+  { name: 'rms_max', label: 'Peak Loudness', description: 'The loudest moment in the recording.', method: 'Maximum RMS energy value across all frames', asdRelevance: 'Combined with mean and minimum, characterises the dynamic range of the child\'s speech.' },
+  { name: 'rms_min', label: 'Minimum Loudness', description: 'The quietest voiced moment in the recording.', method: 'Minimum RMS energy across voiced frames (above silence threshold)', asdRelevance: 'Very quiet speech may indicate reduced confidence or engagement.' },
+  { name: 'dynamic_range', label: 'Dynamic Range', description: 'The span from quietest to loudest — how much the voice varies in intensity throughout the recording.', method: 'rms_max minus rms_min (in dB)', asdRelevance: 'Reduced dynamic range indicates less use of loudness variation for emphasis, consistent with monotone speech in ASD.' },
+  { name: 'energy_skewness', label: 'Energy Distribution Shape', description: 'Whether energy levels are skewed — whether most speech is at a consistent level with rare loud moments, or the other way around.', method: 'Statistical skewness of the RMS energy distribution across frames', asdRelevance: 'Asymmetric energy distributions may reflect atypical prosodic emphasis patterns.' },
+];
+
+const RHYTHM_FEATURES: Feature[] = [
+  { name: 'tempo', label: 'Speech Tempo (BPM)', description: 'The estimated tempo of the speech in beats per minute — capturing the overall rhythmic rate of speech production.', method: 'librosa.beat.tempo() applied to onset strength envelope', asdRelevance: 'Atypical speech tempo (both faster and slower than typical) has been documented in ASD; rhythm differences are a hallmark of ASD prosody.' },
+  { name: 'onset_rate', label: 'Speech Onset Rate', description: 'How many new speech sounds begin per second — a measure of the rate at which the mouth starts new acoustic events.', method: 'librosa.onset.onset_detect() applied to audio; onset count divided by total duration', asdRelevance: 'Reduced onset rate may indicate slower, more deliberate speech; high rates may indicate rapid, pressured speech.' },
+  { name: 'onset_strength_mean', label: 'Average Onset Strength', description: 'On average, how strongly each new speech sound begins — whether articulation starts with clear, strong onsets or soft, gradual ones.', method: 'librosa.onset.onset_strength(); mean across all frames', asdRelevance: 'Weak onset strength may indicate reduced articulatory precision and effort.' },
+  { name: 'onset_strength_std', label: 'Onset Strength Variability', description: 'How much the strength of speech onsets varies throughout the recording.', method: 'Standard deviation of onset strength across frames', asdRelevance: 'Low variability indicates consistent but potentially monotone articulation.' },
+  { name: 'silence_proportion', label: 'Proportion of Silence in Audio', description: 'What fraction of the total audio file is silent — not just inter-turn silence, but all silence including within-utterance pauses.', method: 'Proportion of frames with RMS energy below 10% of mean RMS energy', asdRelevance: 'High silence proportion confirms reduced verbal participation and frequent mid-speech pausing.' },
+  { name: 'speech_rate_local', label: 'Local Speech Rate Variability', description: 'How much the speed of speech varies within segments — whether the child speaks at a consistent pace or accelerates and decelerates within utterances.', method: 'Standard deviation of per-utterance speech rates (syllable count / duration)', asdRelevance: 'Unusual speech rate variability — either very regular (robotic) or very irregular — is associated with atypical prosody in ASD.' },
+];
+
+const CHROMA_FEATURES: Feature[] = [
+  { name: 'chroma_mean', label: 'Average Chroma Features', description: 'The average distribution of energy across the 12 musical pitch classes (C, C#, D, ...) — capturing harmonic characteristics of the speech.', method: 'librosa.feature.chroma_stft() with 12 bins; mean of each chroma bin across all frames', asdRelevance: 'While chroma features are primarily designed for music, they capture harmonic regularities in speech that differ between typical and atypical vocal production.' },
+  { name: 'chroma_std', label: 'Chroma Variability', description: 'How much the harmonic content of the speech varies over time.', method: 'Standard deviation of chroma features across frames', asdRelevance: 'Low chroma variability indicates less harmonic variation in the voice, consistent with less dynamic prosody.' },
+  { name: 'chroma_cqt_mean', label: 'Constant-Q Chroma (Harmonic Precision)', description: 'A more precise version of chroma analysis using a constant-Q transform — capturing harmonic structure with better frequency resolution.', method: 'librosa.feature.chroma_cqt(); mean across all frames', asdRelevance: 'CQT chroma captures finer harmonic regularities in the voice, providing a more sensitive measure of tonal variation.' },
+  { name: 'chroma_cens_mean', label: 'CENS Chroma (Normalised Harmonic Summary)', description: 'A smoothed, normalised version of chroma features that removes short-term variations — capturing the stable harmonic character of the voice.', method: 'librosa.feature.chroma_cens(); mean across all frames', asdRelevance: 'CENS provides a robust summary of long-term harmonic patterns, complementing the more transient standard chroma.' },
+  { name: 'tonnetz_mean', label: 'Tonal Centroid (Harmonic Space Position)', description: 'A measure of where the speech falls in tonal space — capturing the balance of harmonic relationships in the voice.', method: 'librosa.feature.tonnetz(); mean across 6 tonal dimensions across all frames', asdRelevance: 'Tonal centroid features capture harmonic regularities that may differ systematically between ASD and TD speech.' },
+  { name: 'tonnetz_std', label: 'Tonal Centroid Variability', description: 'How much the harmonic space position varies over time.', method: 'Standard deviation of tonnetz features across frames', asdRelevance: 'Captures dynamic harmonic variation — low variability reflects less tonal movement in speech.' },
+];
 
 // ── CATEGORY METADATA ────────────────────────────────────────────────────────
 interface FeatureCategory {
@@ -590,7 +763,109 @@ const PRAGMATIC_CATEGORIES: FeatureCategory[] = [
     features: AUDIO_PRAGMATIC_FEATURES,
   },
 ];
+// ── ACOUSTIC CATEGORY METADATA ───────────────────────────────────────────────
+interface FeatureCategory {
+  id: string;
+  label: string;
+  count: number;
+  color: string;
+  bgColor: string;
+  borderColor: string;
+  summary: string;
+  method: string;
+  features: Feature[];
+}
 
+const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
+  {
+    id: 'pitch',
+    label: 'Pitch (Fundamental Frequency)',
+    count: 10,
+    color: 'text-sky-700',
+    bgColor: 'bg-sky-50',
+    borderColor: 'border-sky-200',
+    summary: 'Measures the fundamental frequency (F0) of the voice — how high or low the voice is, how much it varies, and the overall pitch range. Pitch is the primary carrier of prosodic information.',
+    method: 'pyin probabilistic YIN algorithm via librosa.pyin() — the most accurate open-source pitch estimator, using probabilistic thresholding to distinguish voiced from unvoiced frames at 10ms resolution.',
+    features: PITCH_FEATURES,
+  },
+  {
+    id: 'mfcc',
+    label: 'MFCCs (Spectral Envelope)',
+    count: 26,
+    color: 'text-indigo-700',
+    bgColor: 'bg-indigo-50',
+    borderColor: 'border-indigo-200',
+    summary: 'Mel-frequency cepstral coefficients — the standard representation of the overall spectral shape (vocal tract filter) of speech. MFCCs capture the "fingerprint" of articulation and vocal quality in a compact set of numbers.',
+    method: 'librosa.feature.mfcc() with n_mfcc=13, n_fft=2048, hop_length=512, mel filterbank. Delta and delta-delta features computed via librosa.feature.delta(). Mean and standard deviation computed for each coefficient and its derivatives.',
+    features: MFCC_FEATURES,
+  },
+  {
+    id: 'spectral',
+    label: 'Spectral Features',
+    count: 10,
+    color: 'text-teal-700',
+    bgColor: 'bg-teal-50',
+    borderColor: 'border-teal-200',
+    summary: 'Measures the frequency-domain properties of the speech signal — where the energy sits in the spectrum, how spread out it is, and how tonal vs. noisy the voice sounds.',
+    method: 'librosa spectral feature functions: spectral_centroid(), spectral_rolloff(), spectral_bandwidth(), spectral_contrast(), spectral_flatness(), zero_crossing_rate(). All computed per frame with mean and std aggregation.',
+    features: SPECTRAL_FEATURES,
+  },
+  {
+    id: 'voice_quality',
+    label: 'Voice Quality',
+    count: 5,
+    color: 'text-rose-700',
+    bgColor: 'bg-rose-50',
+    borderColor: 'border-rose-200',
+    summary: 'Measures the smoothness and regularity of vocal fold vibration — capturing breathiness, roughness, and overall phonation quality that are independent of pitch and loudness.',
+    method: 'Jitter and shimmer computed from F0 contour and RMS energy contour respectively. HNR estimated via autocorrelation peak ratio. CPP from cepstral analysis of the speech signal.',
+    features: VOICE_QUALITY_FEATURES,
+  },
+  {
+    id: 'formants',
+    label: 'Formants (Vowel Space)',
+    count: 11,
+    color: 'text-amber-700',
+    bgColor: 'bg-amber-50',
+    borderColor: 'border-amber-200',
+    summary: 'Measures the resonance frequencies of the vocal tract — the characteristic peaks in the spectrum that define vowel quality and articulatory precision. The vowel space defined by F1 and F2 is one of the most diagnostically sensitive acoustic measures.',
+    method: 'Linear Predictive Coding (LPC) analysis via scipy.signal.lpc() with order 2 + sample_rate/1000. Peak detection on LPC spectral envelope to identify formant frequencies. Computed on voiced frames only.',
+    features: FORMANT_FEATURES,
+  },
+  {
+    id: 'energy',
+    label: 'Energy & Intensity',
+    count: 6,
+    color: 'text-orange-700',
+    bgColor: 'bg-orange-50',
+    borderColor: 'border-orange-200',
+    summary: 'Measures the loudness and dynamic intensity of the speech signal — how loud the overall speech is, how much it varies, and what the dynamic range is.',
+    method: 'librosa.feature.rms() computed with frame_length=2048, hop_length=512. Statistical aggregation (mean, std, max, min) across all frames. Dynamic range computed from max to min in dB scale.',
+    features: ENERGY_FEATURES,
+  },
+  {
+    id: 'rhythm',
+    label: 'Rhythm & Timing',
+    count: 6,
+    color: 'text-green-700',
+    bgColor: 'bg-green-50',
+    borderColor: 'border-green-200',
+    summary: 'Measures the temporal structure of the speech — how fast speech is produced, how often new sounds begin, and what proportion of the recording is silence.',
+    method: 'librosa.beat.tempo() on onset strength envelope. librosa.onset.onset_detect() for onset events. Silence detection via RMS energy thresholding at 10% of mean energy. Per-utterance speech rate from syllable count estimates.',
+    features: RHYTHM_FEATURES,
+  },
+  {
+    id: 'chroma',
+    label: 'Chroma & Tonal Features',
+    count: 6,
+    color: 'text-purple-700',
+    bgColor: 'bg-purple-50',
+    borderColor: 'border-purple-200',
+    summary: 'Measures the harmonic and tonal structure of the speech signal — capturing which pitch classes are prominent and how the harmonic content moves over time.',
+    method: 'librosa.feature.chroma_stft(), chroma_cqt(), chroma_cens(), and tonnetz(). All computed per frame using the short-time Fourier transform, constant-Q transform, and energy normalised variants respectively.',
+    features: CHROMA_FEATURES,
+  },
+];
 // ── SECTION NAV CONFIG ───────────────────────────────────────────────────────
 const NAV_SECTIONS = [
   { id: 'overview', label: 'System Overview', icon: '◆' },
@@ -751,7 +1026,7 @@ export default function HowItWorksPage() {
                 }`}
               >
                 <span className="text-xs opacity-60 w-4">{s.icon}</span>
-                <span className={s.id === 'pragmatic' ? 'text-xs' : ''}>{s.label}</span>
+                <span className={s.id === 'acoustic' || s.id === 'pragmatic' ? 'text-xs' : ''}>{s.label}</span>
               </button>
             ))}
           </nav>
@@ -772,7 +1047,7 @@ export default function HowItWorksPage() {
               <p className="text-xl text-gray-500 leading-relaxed mb-8">
                 Artistic is an AI-powered speech analysis platform that analyses recorded conversations and transcripts to surface patterns associated with Autism Spectrum Disorder (ASD). It extracts over 400 measurable features from speech, then uses machine learning to produce a transparent, explainable prediction.
               </p>
-              
+
             </div>
           </section>
 
@@ -853,15 +1128,15 @@ export default function HowItWorksPage() {
                 <div className="p-6 space-y-4">
                   <div>
                     <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Step 1 — Transcription</p>
-                    <p className="text-sm text-gray-700">The audio is passed to <strong>OpenAI Whisper</strong> (<code className="bg-gray-100 px-1 rounded text-xs">src/audio/transcriber.py</code>), which automatically transcribes the speech into text. The model also provides word-level timestamps for each segment.</p>
+                    <p className="text-sm text-gray-700">The audio is passed to <strong>OpenAI Whisper</strong> (<code className="bg-gray-100 px-1 rounded text-xs">src/audio/transcriber.py</code>), which transcribes the speech into text with word-level timestamps for each segment.</p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Step 2 — Child audio isolation</p>
-                    <p className="text-sm text-gray-700"><code className="bg-gray-100 px-1 rounded text-xs">ChildAudioExtractor</code> uses timing data to segment out just the child&apos;s speech from the full recording before acoustic analysis — ensuring acoustic features reflect the child&apos;s voice, not the adult&apos;s.</p>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Step 3 — Child audio isolation</p>
+                    <p className="text-sm text-gray-700"><code className="bg-gray-100 px-1 rounded text-xs">ChildAudioExtractor</code> uses timing data to segment out just the child&apos;s speech segments before acoustic analysis, ensuring acoustic features reflect only the child&apos;s voice.</p>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Step 3 — Dual feature paths</p>
-                    <p className="text-sm text-gray-700">The <strong>audio signal</strong> goes to acoustic feature extraction. The <strong>transcript</strong> from Whisper goes to pragmatic and syntactic extraction — both happen in parallel.</p>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Step 4 — Dual feature paths</p>
+                    <p className="text-sm text-gray-700">The <strong>audio signal</strong> goes to acoustic feature extraction. The <strong>transcript</strong> goes to pragmatic and syntactic extraction — both happen in parallel.</p>
                   </div>
                 </div>
               </div>
@@ -933,6 +1208,34 @@ export default function HowItWorksPage() {
             </p>
 
             <div className="space-y-6">
+            {/* Component 1 — Acoustic */}
+              <div className="border-2 border-sky-300 bg-sky-50/40 rounded-2xl p-6">
+                <div className="flex items-start justify-between flex-wrap gap-4">
+                  <div>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-sky-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                      <h3 className="text-xl font-bold text-gray-900">Acoustic / Prosodic Component</h3>
+                      <span className="text-xs bg-sky-100 text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full font-semibold">~166 features</span>
+                      <span className="text-xs bg-gray-900 text-white px-2 py-0.5 rounded-full font-semibold">fully documented below ↓</span>
+                    </div>
+                    <p className="text-sm text-gray-600 max-w-2xl">Analyses <em>how</em> speech sounds — pitch, rhythm, voice quality, spectral characteristics, and timing. All features are extracted from the isolated child audio segments using the <strong>librosa</strong> library. Features are computed as <strong>global statistical summaries</strong> (mean, standard deviation, min, max) over the entire recording — not time-segmented.</p>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">src/features/acoustic_prosodic/</span>
+                </div>
+                <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {ACOUSTIC_CATEGORIES.map(c => (
+                    <div key={c.id} className={`bg-white rounded-xl border ${c.borderColor} p-3 flex items-center gap-3`}>
+                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${c.bgColor} ${c.color} border ${c.borderColor} flex-shrink-0`}>
+                        <AcousticIcon id={c.id} className="w-4 h-4" />
+                      </span>
+                      <div>
+                        <div className={`text-sm font-semibold ${c.color}`}>{c.label}</div>
+                        <div className="text-xs font-mono text-gray-500 mt-0.5">{c.count} features</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
 {/* Component 3 — Pragmatic */}
 <div className="border-2 border-emerald-300 bg-emerald-50/40 rounded-2xl p-6">
                 <div className="flex items-start justify-between flex-wrap gap-4">
@@ -964,40 +1267,6 @@ export default function HowItWorksPage() {
                 </div>
               </div>
 
-              {/* Component 1 — Acoustic */}
-              <div className="border-2 border-dashed border-sky-200 bg-sky-50/40 rounded-2xl p-6">
-                <div className="flex items-start justify-between flex-wrap gap-4">
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-sky-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                      <h3 className="text-xl font-bold text-gray-900">Acoustic / Prosodic Component</h3>
-                      <span className="text-xs bg-sky-100 text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full font-semibold">~166 features</span>
-                    </div>
-                    <p className="text-sm text-gray-600 max-w-2xl">Analyses <em>how</em> speech sounds — pitch, rhythm, voice quality, spectral characteristics, and timing. All features are extracted from the isolated child audio segments using the <strong>librosa</strong> library.</p>
-                  </div>
-                  <span className="text-xs text-gray-400 font-mono">src/features/acoustic_prosodic/</span>
-                </div>
-                <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {[
-                    { group: 'Pitch (F0)', count: 10, detail: 'pyin algorithm via librosa' },
-                    { group: 'MFCC (1–13)', count: 26, detail: 'mel-frequency cepstral coefficients' },
-                    { group: 'Spectral', count: 8, detail: 'centroid, rolloff, bandwidth, ZCR' },
-                    { group: 'Voice Quality', count: 5, detail: 'jitter, shimmer, HNR' },
-                    { group: 'Formants', count: 11, detail: 'F1–F4 via STFT peak-picking' },
-                    { group: 'Energy', count: 6, detail: 'RMS intensity, variability' },
-                    { group: 'Rhythm', count: 3, detail: 'tempo, onset rate, silence' },
-                    { group: 'Chroma & Tonnetz', count: 18, detail: 'harmonic structure' },
-                  ].map(g => (
-                    <div key={g.group} className="bg-white rounded-xl border border-sky-200 p-3">
-                      <div className="text-sm font-semibold text-gray-800">{g.group}</div>
-                      <div className="text-xs text-sky-700 font-mono mt-0.5">{g.count} features</div>
-                      <div className="text-xs text-gray-400 mt-0.5">{g.detail}</div>
-                    </div>
-                  ))}
-                </div>
-                
-              </div>
-
               {/* Component 2 — Syntactic */}
               <div className="border-2 border-dashed border-violet-200 bg-violet-50/40 rounded-2xl p-6">
                 <div className="flex items-start justify-between flex-wrap gap-4">
@@ -1027,13 +1296,132 @@ export default function HowItWorksPage() {
                     </div>
                   ))}
                 </div>
-               
+
               </div>
 
-              
+
             </div>
           </section>
+{/* ── ACOUSTIC DETAIL (NEW) ── */}
+          <section id="acoustic" ref={setRef('acoustic')}>
+            <div className="inline-flex items-center gap-2 bg-sky-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
+              Acoustic Component — Full Detail
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">~166 acoustic features, explained</h2>
+            <p className="text-gray-500 mb-4 max-w-2xl">
+              The acoustic component is organised into 8 sub-modules, each targeting a distinct aspect of the speech signal. All features are computed as <strong>global statistical summaries</strong> (mean, standard deviation, min, max, etc.) over the entire child audio recording — not time-segmented windows. Click <strong>View All Features</strong> on any category to open a full searchable table.
+            </p>
 
+            {/* Key design callout */}
+            <div className="bg-sky-50 border border-sky-200 rounded-2xl p-5 mb-10 flex items-start gap-4">
+              <div className="w-9 h-9 bg-sky-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <IconWaveform className="w-5 h-5 text-sky-700" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-sky-900 mb-1">Design principle: global statistical summaries</p>
+                <p className="text-sm text-sky-800">
+                  Unlike the pragmatic component which analyses conversation turn-by-turn, the acoustic component extracts features across the <strong>entire speech signal</strong>. For example, &quot;pitch variability&quot; is the standard deviation of F0 across all voiced frames — not an analysis of individual words or sentences. This approach is robust to varying recording lengths and avoids overfitting to specific conversation segments.
+                </p>
+              </div>
+            </div>
+
+            {/* Acoustic preprocessing callout */}
+            <div className="bg-gray-900 text-white rounded-2xl p-6 mb-10">
+              <p className="text-xs text-gray-400 mb-4 font-semibold uppercase tracking-wide">Acoustic Preprocessing Pipeline</p>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                {[
+                  { step: '01', title: 'Load & Resample', desc: 'librosa.load() at 22050Hz; mono conversion if stereo', code: 'sr=22050, mono=True' },
+                  { step: '02', title: 'Pre-emphasis', desc: 'High-frequency boost filter to compensate for spectral roll-off of speech', code: 'y = np.append(y[0], y[1:] - 0.97*y[:-1])' },
+                  { step: '03', title: 'Child isolation', desc: 'Segment audio to child speaker regions only using Whisper timing', code: 'ChildAudioExtractor' },
+                  { step: '04', title: 'Feature extraction', desc: 'Per-module extraction with global statistical aggregation', code: 'mean, std, min, max' },
+                ].map(s => (
+                  <div key={s.step} className="bg-gray-800 rounded-xl p-4">
+                    <div className="text-xs font-mono text-gray-400 mb-1">{s.step}</div>
+                    <div className="font-semibold text-white mb-1">{s.title}</div>
+                    <div className="text-xs text-gray-400 mb-2">{s.desc}</div>
+                    <code className="text-xs text-green-400 bg-gray-900 px-2 py-1 rounded block">{s.code}</code>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-8">
+              {ACOUSTIC_CATEGORIES.map((cat, idx) => (
+                <div key={cat.id} className={`border ${cat.borderColor} rounded-2xl overflow-hidden`}>
+                  <div className={`${cat.bgColor} px-6 py-5 flex items-start justify-between flex-wrap gap-4`}>
+                    <div className="flex items-start gap-4">
+                      <div className={`w-10 h-10 bg-white rounded-xl border ${cat.borderColor} flex items-center justify-center`}>
+                        <AcousticIcon id={cat.id} className={`w-6 h-6 ${cat.color}`} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <h3 className={`text-lg font-bold ${cat.color}`}>{cat.label}</h3>
+                          <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white border ${cat.borderColor} ${cat.color}`}>
+                            {cat.count} features
+                          </span>
+                          <span className="text-xs text-gray-400 font-mono">Sub-module {idx + 1} of 8</span>
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1 max-w-2xl">{cat.summary}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setOpenCategory(cat)}
+                      className={`flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${cat.borderColor} bg-white ${cat.color} hover:bg-gray-900 hover:text-white hover:border-gray-900`}
+                    >
+                      View All {cat.count} Features →
+                    </button>
+                  </div>
+
+                  <div className="bg-white px-6 py-5">
+                    <div className="mb-4">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Extraction Method</p>
+                      <p className="text-sm text-gray-600">{cat.method}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Sample Features</p>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.features.slice(0, 6).map(f => (
+                          <span key={f.name} className={`text-xs font-mono px-2.5 py-1 rounded-lg ${cat.bgColor} ${cat.color} border ${cat.borderColor}`}>
+                            {f.name}
+                          </span>
+                        ))}
+                        {cat.features.length > 6 && (
+                          <button onClick={() => setOpenCategory(cat)} className="text-xs px-2.5 py-1 rounded-lg text-gray-400 bg-gray-100 hover:bg-gray-200 transition-colors">
+                            +{cat.features.length - 6} more
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* ASD relevance summary box */}
+            <div className="mt-10 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+              <h3 className="font-bold text-gray-900 mb-4">Acoustic ASD Markers — Summary of Evidence</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                {[
+                  { marker: 'Reduced pitch variability', evidence: 'One of the most replicated findings — monotone speech reflecting limited prosodic use for social/emotional communication', strength: 'Strong' },
+                  { marker: 'Narrowed vowel space (F1/F2)', evidence: 'Systematic reduction in vowel space area documented across multiple ASD studies, indicating less precise articulation', strength: 'Strong' },
+                  { marker: 'Elevated jitter & shimmer', evidence: 'Voice perturbation measures differ between ASD and TD groups, potentially reflecting laryngeal motor differences', strength: 'Moderate' },
+                  { marker: 'Atypical speech rate', evidence: 'Both unusually slow and unusually fast speech documented in ASD subgroups; rate variability is diagnostically relevant', strength: 'Moderate' },
+                  { marker: 'Unusual spectral characteristics', evidence: 'MFCC profiles and spectral centroid differences found in multiple automatic speech analysis studies', strength: 'Moderate' },
+                  { marker: 'Reduced dynamic range', evidence: 'Flat loudness profile consistent with reduced prosodic marking of emphasis and contrast', strength: 'Moderate' },
+                ].map(m => (
+                  <div key={m.marker} className="bg-white rounded-xl border border-gray-200 p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <span className="font-semibold text-gray-900 text-sm">{m.marker}</span>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ml-2 ${m.strength === 'Strong' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                        {m.strength}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 leading-relaxed">{m.evidence}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
           {/* ── SECTION: PRAGMATIC DETAIL ── */}
           <section id="pragmatic" ref={setRef('pragmatic')}>
             <div className="inline-flex items-center gap-2 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
