@@ -7,6 +7,7 @@ export default function Home() {
   const router = useRouter();
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  const showModeToggle = process.env.NODE_ENV !== 'production';
 
   useEffect(() => {
     (window as unknown as { __ARTISTIC_API_URL?: string }).__ARTISTIC_API_URL = apiUrl;
@@ -53,11 +54,13 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-6">
-              <div className="toggle-switch" id="modeToggle">
-                <div className="toggle-option active" data-mode="user">User Mode</div>
-                <div className="toggle-option" data-mode="training">Training Mode</div>
-                <div className="toggle-slider" id="toggleSlider"></div>
-              </div>
+              {showModeToggle && (
+                <div className="toggle-switch" id="modeToggle">
+                  <div className="toggle-option active" data-mode="user">User Mode</div>
+                  <div className="toggle-option" data-mode="training">Training Mode</div>
+                  <div className="toggle-slider" id="toggleSlider"></div>
+                </div>
+              )}
 
               <div className="flex items-center gap-2 text-sm text-primary-700">
                 <span className="w-2 h-2 rounded-full bg-red-400" id="statusDot"></span>
