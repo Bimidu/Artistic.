@@ -2047,6 +2047,10 @@ const FEATURE_CATEGORIES = {
         types: ['complex_sentence', 'simple_sentence', 'filled_pause', 'discourse_marker'],
         color: '#4A3080'
     },
+    'Syntactic & Semantic': {
+        types: ['complex_syntax', 'grammatical_error', 'low_semantic_density', 'semantic_mismatch'],
+        color: '#00796B'
+    },
     'General': {
         types: ['feature_region'],
         color: '#5A6470'
@@ -2080,6 +2084,11 @@ const ANNOTATION_COLORS = {
     'simple_sentence': '#7868A8',
     'filled_pause': '#5A3888',
     'discourse_marker': '#6848A0',
+    // Syntactic & Semantic — teal family
+    'complex_syntax': '#00796B',
+    'grammatical_error': '#D84315',
+    'low_semantic_density': '#546E7A',
+    'semantic_mismatch': '#5D4037',
     // General
     'feature_region': '#5A6470'
 };
@@ -2090,6 +2099,7 @@ const ANNOTATION_CATEGORIES = {
     'Pragmatic': { color: '#8B2B35', types: ['echolalia', 'pronoun_reversal', 'stereotyped_phrase', 'social_greeting', 'question'] },
     'Conversational': { color: '#2A6040', types: ['topic_shift', 'topic_maintenance', 'repair_initiation', 'repair_completion', 'clarification_request'] },
     'Linguistic': { color: '#4A3080', types: ['complex_sentence', 'simple_sentence', 'filled_pause', 'discourse_marker'] },
+    'Syntactic & Semantic': { color: '#00796B', types: ['complex_syntax', 'grammatical_error', 'low_semantic_density', 'semantic_mismatch'] },
     'General': { color: '#5A6470', types: ['feature_region'] }
 };
 
@@ -2197,7 +2207,7 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
             filterSelect.appendChild(option);
         });
     } else {
-        summaryPanel.innerHTML = '<p class="text-xs text-primary-400">No pragmatic features detected in this transcript.</p>';
+        summaryPanel.innerHTML = '<p class="text-xs text-primary-400">No features detected in this transcript.</p>';
         filterSelect.innerHTML = '<option value="all">All Features</option>';
     }
 

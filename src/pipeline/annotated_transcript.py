@@ -40,6 +40,32 @@ from src.features.pragmatic_conversational.turn_taking import (
 
 logger = get_logger(__name__)
 
+# ---------------------------------------------------------------------------
+# Module-level spaCy cache
+# spacy.load() must only be called ONCE per process.  Calling it inside a
+# per-request method in a forked uvicorn worker can leak semaphores.
+# KMP_DUPLICATE_LIB_OK=TRUE in run_api.py prevents the OpenMP segfault that
+# previously occurred on macOS when CTranslate2 and spaCy share libomp.
+# ---------------------------------------------------------------------------
+_SPACY_NLP = None
+_SPACY_LOAD_ATTEMPTED = False
+
+
+def _get_spacy_nlp():
+    """Return a cached spaCy Language object, or None if unavailable."""
+    global _SPACY_NLP, _SPACY_LOAD_ATTEMPTED
+    if _SPACY_LOAD_ATTEMPTED:
+        return _SPACY_NLP
+    _SPACY_LOAD_ATTEMPTED = True
+    try:
+        import spacy
+        _SPACY_NLP = spacy.load("en_core_web_sm")
+        logger.info("spaCy en_core_web_sm loaded and cached for syntactic/semantic annotation")
+    except Exception as exc:
+        logger.warning(f"spaCy not available — syntactic/semantic per-utterance annotations disabled: {exc}")
+        _SPACY_NLP = None
+    return _SPACY_NLP
+
 
 class AnnotationType(Enum):
     """Types of feature annotations."""
@@ -70,6 +96,12 @@ class AnnotationType(Enum):
     SIMPLE_SENTENCE = "simple_sentence"
     FILLED_PAUSE = "filled_pause"
     DISCOURSE_MARKER = "discourse_marker"
+
+    # Syntactic & Semantic features
+    COMPLEX_SYNTAX = "complex_syntax"
+    GRAMMATICAL_ERROR = "grammatical_error"
+    LOW_SEMANTIC_DENSITY = "low_semantic_density"
+    SEMANTIC_MISMATCH = "semantic_mismatch"
     
     # General
     FEATURE_REGION = "feature_region"
@@ -141,6 +173,12 @@ ANNOTATION_COLORS = {
     AnnotationType.SIMPLE_SENTENCE: "#E1BEE7",
     AnnotationType.FILLED_PAUSE: "#7B1FA2",
     AnnotationType.DISCOURSE_MARKER: "#AB47BC",
+
+    # Syntactic & Semantic (teal family)
+    AnnotationType.COMPLEX_SYNTAX: "#00796B",
+    AnnotationType.GRAMMATICAL_ERROR: "#D84315",
+    AnnotationType.LOW_SEMANTIC_DENSITY: "#546E7A",
+    AnnotationType.SEMANTIC_MISMATCH: "#5D4037",
     
     # General
     AnnotationType.FEATURE_REGION: "#607D8B",
@@ -171,6 +209,11 @@ ANNOTATION_SYMBOLS = {
     AnnotationType.SIMPLE_SENTENCE: "[SP]",
     AnnotationType.FILLED_PAUSE: "[FP]",
     AnnotationType.DISCOURSE_MARKER: "[DM]",
+
+    AnnotationType.COMPLEX_SYNTAX: "[SYN]",
+    AnnotationType.GRAMMATICAL_ERROR: "[GRM]",
+    AnnotationType.LOW_SEMANTIC_DENSITY: "[SEM-]",
+    AnnotationType.SEMANTIC_MISMATCH: "[INC]",
     
     AnnotationType.FEATURE_REGION: "[*]",
 }
@@ -650,6 +693,10 @@ class TranscriptAnnotator:
         self.INTERRUPTION_THRESHOLD = self.turn_extractor.INTERRUPTION_THRESHOLD_MS / 1000.0
         self.LONG_PAUSE_THRESHOLD = self.turn_extractor.LONG_PAUSE_THRESHOLD_SEC
         self.VERY_LONG_PAUSE_THRESHOLD = self.pause_extractor.VERY_LONG_PAUSE_THRESHOLD
+
+        # Load spaCy once and cache — safe on macOS because KMP_DUPLICATE_LIB_OK=TRUE
+        # is set in run_api.py before any native libraries are imported.
+        self._nlp = _get_spacy_nlp()
         
         logger.info(f"TranscriptAnnotator initialized for {component}")
     
@@ -657,7 +704,8 @@ class TranscriptAnnotator:
         self,
         transcript: TranscriptData,
         features: Optional[Dict[str, Any]] = None,
-        include_patterns: bool = True
+        include_patterns: bool = True,
+        syntactic_features: Optional[Dict[str, Any]] = None
     ) -> AnnotatedTranscript:
         """
         Generate annotations for a transcript.
@@ -666,6 +714,8 @@ class TranscriptAnnotator:
             transcript: Transcript to annotate
             features: Optional extracted features for context
             include_patterns: Whether to detect patterns in text
+            syntactic_features: Optional extracted syntactic/semantic features;
+                when provided, per-utterance syntactic/semantic annotations are added.
             
         Returns:
             AnnotatedTranscript with all annotations
@@ -692,6 +742,15 @@ class TranscriptAnnotator:
                 transcript, features
             )
             annotated.add_annotations(feature_annotations)
+
+        # Add per-utterance syntactic/semantic annotations via spaCy.
+        # Runs regardless of whether syntactic_features were passed — analysis
+        # is done directly from the transcript text.
+        try:
+            ss_annotations = self._annotate_syntactic_semantic(transcript)
+            annotated.add_annotations(ss_annotations)
+        except Exception as ss_err:
+            logger.warning(f"Syntactic/semantic annotation skipped: {ss_err}")
         
         logger.info(f"Generated {len(annotated.annotations)} annotations")
         
@@ -728,7 +787,127 @@ class TranscriptAnnotator:
                     break
         
         return annotations
-    
+
+    def _annotate_syntactic_semantic(
+        self,
+        transcript: TranscriptData
+    ) -> List[FeatureAnnotation]:
+        """
+        Generate per-utterance syntactic & semantic annotations using spaCy.
+
+        Flags on each child utterance:
+        - COMPLEX_SYNTAX: deep dependency tree or high subordination
+        - GRAMMATICAL_ERROR: missing verb or subject in non-trivial utterances
+        - LOW_SEMANTIC_DENSITY: fewer than 2 content words for the utterance length
+        - SEMANTIC_MISMATCH: low semantic similarity to neighbouring utterances
+
+        Returns [] if spaCy is unavailable.
+        """
+        nlp = self._nlp
+        if nlp is None:
+            return []
+
+        annotations: List[FeatureAnnotation] = []
+
+        child_indices = [
+            idx for idx, u in enumerate(transcript.utterances)
+            if u.speaker == 'CHI' and u.text and u.text.strip()
+        ]
+
+        if not child_indices:
+            return annotations
+
+        docs = [
+            (idx, nlp(transcript.utterances[idx].text))
+            for idx in child_indices
+        ]
+
+        def _dep_depth(token) -> int:
+            depth, cur = 0, token
+            while cur.head != cur and depth < 20:
+                depth += 1
+                cur = cur.head
+            return depth
+
+        for order, (idx, doc) in enumerate(docs):
+            text = transcript.utterances[idx].text
+            text_len = len(text)
+
+            # --- COMPLEX_SYNTAX ---
+            depths = [_dep_depth(t) for t in doc]
+            avg_depth = sum(depths) / len(depths) if depths else 0
+            sub_count = sum(
+                1 for t in doc if t.dep_ in ('advcl', 'acl', 'ccomp', 'xcomp', 'relcl')
+            )
+            if avg_depth >= 3.5 or sub_count >= 2:
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.COMPLEX_SYNTAX,
+                    start_pos=0, end_pos=text_len, utterance_idx=idx,
+                    feature_name="complex_syntax",
+                    description=(
+                        f"Complex syntactic structure (avg dep. depth {avg_depth:.1f}, "
+                        f"{sub_count} subordinate clause(s))"
+                    ),
+                    metadata={'avg_depth': avg_depth, 'subordinate_count': sub_count}
+                ))
+
+            # --- GRAMMATICAL_ERROR ---
+            has_verb = any(t.pos_ == 'VERB' for t in doc)
+            has_subj = any(t.dep_ in ('nsubj', 'nsubjpass') for t in doc)
+            if len(doc) > 3 and (not has_verb or not has_subj):
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.GRAMMATICAL_ERROR,
+                    start_pos=0, end_pos=text_len, utterance_idx=idx,
+                    feature_name="grammatical_error",
+                    description=(
+                        "Possible grammatical error "
+                        f"({'missing verb' if not has_verb else 'missing subject'})"
+                    ),
+                    metadata={'has_verb': has_verb, 'has_subject': has_subj}
+                ))
+
+            # --- LOW_SEMANTIC_DENSITY ---
+            content_words = [t for t in doc if t.pos_ in ('NOUN', 'VERB', 'ADJ', 'ADV')]
+            if len(doc) > 4 and len(content_words) <= 1:
+                annotations.append(FeatureAnnotation(
+                    annotation_type=AnnotationType.LOW_SEMANTIC_DENSITY,
+                    start_pos=0, end_pos=text_len, utterance_idx=idx,
+                    feature_name="low_semantic_density",
+                    description=(
+                        f"Low semantic density: {len(content_words)} content word(s) "
+                        f"in a {len(doc)}-token utterance"
+                    ),
+                    metadata={'content_word_count': len(content_words), 'total_tokens': len(doc)}
+                ))
+
+            # --- SEMANTIC_MISMATCH ---
+            prev_doc = docs[order - 1][1] if order > 0 else None
+            next_doc = docs[order + 1][1] if order < len(docs) - 1 else None
+            sims = []
+            if prev_doc is not None and doc.has_vector and prev_doc.has_vector:
+                sims.append(doc.similarity(prev_doc))
+            if next_doc is not None and doc.has_vector and next_doc.has_vector:
+                sims.append(doc.similarity(next_doc))
+            if sims:
+                avg_sim = sum(sims) / len(sims)
+                if avg_sim < 0.25:
+                    annotations.append(FeatureAnnotation(
+                        annotation_type=AnnotationType.SEMANTIC_MISMATCH,
+                        start_pos=0, end_pos=text_len, utterance_idx=idx,
+                        feature_name="semantic_mismatch",
+                        description=(
+                            f"Low semantic coherence with adjacent utterances "
+                            f"(avg similarity {avg_sim:.2f})"
+                        ),
+                        metadata={'avg_similarity': avg_sim}
+                    ))
+
+        logger.info(
+            f"Syntactic/semantic annotation: {len(annotations)} annotations "
+            f"on {len(child_indices)} child utterances"
+        )
+        return annotations
+
     def _detect_patterns(
         self,
         utterance: Utterance,
