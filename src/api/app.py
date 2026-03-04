@@ -442,8 +442,9 @@ def is_model_compatible_with_input(model_name: str, input_type: str) -> bool:
     component = get_model_component(model_name)
 
     if input_type == 'audio':
-        # Audio can use pragmatic or acoustic models
-        return component in ['pragmatic_conversational', 'acoustic_prosodic']
+        # Audio can use pragmatic, acoustic, or syntactic_semantic models.
+        # Syntactic/semantic features are extracted from the Whisper transcription.
+        return component in ['pragmatic_conversational', 'acoustic_prosodic', 'syntactic_semantic']
     elif input_type in ['text', 'chat_file']:
         # Text/chat can use pragmatic or semantic models (not acoustic)
         return component in ['pragmatic_conversational', 'syntactic_semantic']
@@ -536,11 +537,12 @@ def get_component_weights_for_input_type(input_type: str) -> Dict[str, float]:
         Dictionary of component weights
     """
     if input_type == 'audio':
-        # Audio input: acoustic works, semantic doesn't (no text analysis)
+        # Audio input: acoustic works, AND syntactic_semantic also works because
+        # audio is transcribed by Whisper first — the resulting text can be analyzed.
         return {
-            'pragmatic_conversational': 0.4,
-            'acoustic_prosodic': 0.4,
-            'syntactic_semantic': 0.0,  # No semantic features from audio alone
+            'pragmatic_conversational': 0.35,
+            'acoustic_prosodic': 0.40,
+            'syntactic_semantic': 0.25,
         }
     elif input_type in ['text', 'chat_file']:
         # Text/chat input: semantic works, acoustic doesn't (no audio)
@@ -755,8 +757,11 @@ async def predict_from_audio(
                             transcription_result=processed.transcription_result
                         ).features
                     elif component == 'syntactic_semantic':
-                        # Skip semantic for audio (no text analysis)
-                        continue
+                        # Extract syntactic/semantic features from the Whisper transcript.
+                        # Audio is transcribed first, so text IS available for analysis.
+                        from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+                        ss_extractor = SyntacticSemanticFeatures()
+                        features = ss_extractor.extract(processed.transcript_data).features
                     else:  # pragmatic_conversational
                         features = feature_extractor.extract_with_audio(
                             processed.transcript_data,
