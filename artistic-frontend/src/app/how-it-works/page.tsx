@@ -1215,7 +1215,7 @@ export default function HowItWorksPage() {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-8 h-8 bg-sky-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
                       <h3 className="text-xl font-bold text-gray-900">Acoustic / Prosodic Component</h3>
-                      <span className="text-xs bg-sky-100 text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full font-semibold">~166 features</span>
+                      <span className="text-xs bg-sky-100 text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full font-semibold">153 features</span>
                       <span className="text-xs bg-gray-900 text-white px-2 py-0.5 rounded-full font-semibold">fully documented below ↓</span>
                     </div>
                     <p className="text-sm text-gray-600 max-w-2xl">Analyses <em>how</em> speech sounds — pitch, rhythm, voice quality, spectral characteristics, and timing. All features are extracted from the isolated child audio segments using the <strong>librosa</strong> library. Features are computed as <strong>global statistical summaries</strong> (mean, standard deviation, min, max) over the entire recording — not time-segmented.</p>
@@ -1307,7 +1307,7 @@ export default function HowItWorksPage() {
             <div className="inline-flex items-center gap-2 bg-sky-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
               Acoustic Component — Full Detail
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">~166 acoustic features, explained</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">153 acoustic features, explained</h2>
             <p className="text-gray-500 mb-4 max-w-2xl">
               The acoustic component is organised into 8 sub-modules, each targeting a distinct aspect of the speech signal. All features are computed as <strong>global statistical summaries</strong> (mean, standard deviation, min, max, etc.) over the entire child audio recording — not time-segmented windows. Click <strong>View All Features</strong> on any category to open a full searchable table.
             </p>
