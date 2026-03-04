@@ -763,24 +763,13 @@ const PRAGMATIC_CATEGORIES: FeatureCategory[] = [
     features: AUDIO_PRAGMATIC_FEATURES,
   },
 ];
-// ── ACOUSTIC CATEGORY METADATA ───────────────────────────────────────────────
-interface FeatureCategory {
-  id: string;
-  label: string;
-  count: number;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-  summary: string;
-  method: string;
-  features: Feature[];
-}
 
 const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
   {
     id: 'pitch',
     label: 'Pitch (Fundamental Frequency)',
     count: 10,
+    icon: '',
     color: 'text-sky-700',
     bgColor: 'bg-sky-50',
     borderColor: 'border-sky-200',
@@ -792,6 +781,7 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     id: 'mfcc',
     label: 'MFCCs (Spectral Envelope)',
     count: 26,
+    icon: '',
     color: 'text-indigo-700',
     bgColor: 'bg-indigo-50',
     borderColor: 'border-indigo-200',
@@ -803,6 +793,7 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     id: 'spectral',
     label: 'Spectral Features',
     count: 10,
+    icon: '',
     color: 'text-teal-700',
     bgColor: 'bg-teal-50',
     borderColor: 'border-teal-200',
@@ -814,6 +805,7 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     id: 'voice_quality',
     label: 'Voice Quality',
     count: 5,
+    icon: '',
     color: 'text-rose-700',
     bgColor: 'bg-rose-50',
     borderColor: 'border-rose-200',
@@ -825,6 +817,7 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     id: 'formants',
     label: 'Formants (Vowel Space)',
     count: 11,
+    icon: '',
     color: 'text-amber-700',
     bgColor: 'bg-amber-50',
     borderColor: 'border-amber-200',
@@ -836,6 +829,7 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     id: 'energy',
     label: 'Energy & Intensity',
     count: 6,
+    icon: '',
     color: 'text-orange-700',
     bgColor: 'bg-orange-50',
     borderColor: 'border-orange-200',
@@ -847,6 +841,7 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     id: 'rhythm',
     label: 'Rhythm & Timing',
     count: 6,
+    icon: '',
     color: 'text-green-700',
     bgColor: 'bg-green-50',
     borderColor: 'border-green-200',
@@ -858,6 +853,7 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     id: 'chroma',
     label: 'Chroma & Tonal Features',
     count: 6,
+    icon: '',
     color: 'text-purple-700',
     bgColor: 'bg-purple-50',
     borderColor: 'border-purple-200',
