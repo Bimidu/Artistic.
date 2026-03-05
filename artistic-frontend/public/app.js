@@ -469,9 +469,175 @@ async function testConnection() {
     }
 }
 
+// ---------------------------------------------------------------------------
+// Audio prediction pipeline steps (used to render the progress indicator)
+// ---------------------------------------------------------------------------
+const AUDIO_PIPELINE_STEPS = [
+    {
+        id: 'prepare',
+        label: 'Preparing',
+        sub: 'Upload & format conversion',
+        minPct: 0, maxPct: 13,
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>`
+    },
+    {
+        id: 'transcribe',
+        label: 'Transcribing Speech',
+        sub: 'Whisper speech-to-text',
+        minPct: 13, maxPct: 32,
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>`
+    },
+    {
+        id: 'pragmatic',
+        label: 'Pragmatic & Conversational',
+        sub: 'Turn-taking, topic coherence',
+        minPct: 32, maxPct: 52,
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>`
+    },
+    {
+        id: 'acoustic',
+        label: 'Acoustic & Prosodic',
+        sub: 'Pitch, rhythm, voice features',
+        minPct: 52, maxPct: 72,
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>`
+    },
+    {
+        id: 'syntactic',
+        label: 'Syntactic & Semantic',
+        sub: 'Language structure & meaning',
+        minPct: 72, maxPct: 77,
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>`
+    },
+    {
+        id: 'finalise',
+        label: 'Finalising Results',
+        sub: 'Fusion, annotation & report',
+        minPct: 77, maxPct: 100,
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>`
+    },
+];
+
+function _stepStatus(step, pct) {
+    if (pct >= step.maxPct) return 'done';
+    if (pct >= step.minPct) return 'active';
+    return 'pending';
+}
+
+function showAudioProgressUI(elementId) {
+    const stepsHtml = AUDIO_PIPELINE_STEPS.map(s => `
+        <div id="apstep-${s.id}" class="flex items-center gap-4 py-3.5 border-b border-primary-50 last:border-0">
+            <div class="ap-step-icon flex-shrink-0 w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center transition-all duration-400">
+                <svg class="ap-icon-svg w-4 h-4 text-primary-300 transition-colors duration-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">${s.icon}</svg>
+                <svg class="ap-icon-check hidden w-4 h-4 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <div class="ap-icon-spin hidden w-3.5 h-3.5 rounded-full border-2 border-primary-900 border-t-transparent animate-spin"></div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <div class="ap-step-label text-sm text-primary-400 font-normal transition-all duration-300">${s.label}</div>
+                <div class="ap-step-sub text-xs text-primary-300 mt-0.5 transition-all duration-300">${s.sub}</div>
+            </div>
+            <div class="ap-step-badge flex-shrink-0"></div>
+        </div>
+    `).join('');
+
+    document.getElementById(elementId).innerHTML = `
+        <div id="audioProgressContainer">
+            <div class="mb-1">
+                <p class="text-xs font-medium text-primary-500 uppercase tracking-widest mb-5">Analysing your recording</p>
+                <div class="flex items-start justify-between gap-4 mb-4">
+                    <div class="flex-1 min-w-0">
+                        <div id="apStageName" class="text-base font-medium text-primary-900 mb-1">Starting…</div>
+                        <div id="apDetailMsg" class="text-sm text-primary-500 leading-relaxed">Preparing to analyse audio</div>
+                    </div>
+                    <div class="text-right flex-shrink-0">
+                        <div id="apPct" class="text-3xl font-normal text-primary-900 tabular-nums" style="letter-spacing:-0.03em">0%</div>
+                        <div id="apElapsed" class="text-xs text-primary-400 mt-0.5">0s elapsed</div>
+                    </div>
+                </div>
+                <div class="w-full h-1.5 bg-primary-100 rounded-full overflow-hidden mb-1">
+                    <div id="apBar" class="h-full rounded-full bg-primary-900 transition-all duration-700 ease-out" style="width:0%"></div>
+                </div>
+            </div>
+
+            <div class="mt-6 border border-primary-100 rounded-2xl px-5 bg-primary-50/40">
+                ${stepsHtml}
+            </div>
+
+            <div class="mt-5 flex items-center gap-2 text-xs text-primary-400">
+                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Analysis typically takes 3–7 minutes depending on file length — you can leave this tab open
+            </div>
+        </div>
+    `;
+}
+
+let _apStartTime = null;
+
+function updateAudioProgressUI(pct, stage, detail) {
+    const bar = document.getElementById('apBar');
+    const pctEl = document.getElementById('apPct');
+    const stageEl = document.getElementById('apStageName');
+    const detailEl = document.getElementById('apDetailMsg');
+    const elapsedEl = document.getElementById('apElapsed');
+    if (!bar) return;
+
+    bar.style.width = `${pct}%`;
+    pctEl.textContent = `${pct}%`;
+    stageEl.textContent = stage || 'Processing…';
+    if (detail) detailEl.textContent = detail;
+
+    if (_apStartTime) {
+        const sec = Math.round((Date.now() - _apStartTime) / 1000);
+        const min = Math.floor(sec / 60);
+        elapsedEl.textContent = min > 0 ? `${min}m ${sec % 60}s elapsed` : `${sec}s elapsed`;
+    }
+
+    AUDIO_PIPELINE_STEPS.forEach(s => {
+        const el = document.getElementById(`apstep-${s.id}`);
+        if (!el) return;
+        const iconBox  = el.querySelector('.ap-step-icon');
+        const iconSvg  = el.querySelector('.ap-icon-svg');
+        const iconCheck = el.querySelector('.ap-icon-check');
+        const iconSpin  = el.querySelector('.ap-icon-spin');
+        const labelEl  = el.querySelector('.ap-step-label');
+        const subEl    = el.querySelector('.ap-step-sub');
+        const badgeEl  = el.querySelector('.ap-step-badge');
+        const st = _stepStatus(s, pct);
+
+        // Reset all state classes
+        iconBox.classList.remove(
+            'bg-white', 'bg-primary-900', 'bg-lime-50',
+            'border-primary-200', 'border-primary-900', 'border-lime-200'
+        );
+        iconSvg.classList.remove('text-primary-300', 'text-white');
+        iconSvg.classList.add('hidden');
+        iconCheck.classList.add('hidden');
+        iconSpin.classList.add('hidden');
+        badgeEl.innerHTML = '';
+
+        if (st === 'done') {
+            iconBox.classList.add('bg-lime-50', 'border-lime-200');
+            iconCheck.classList.remove('hidden');
+            labelEl.className = 'ap-step-label text-sm text-primary-700 font-medium transition-all duration-300';
+            subEl.className   = 'ap-step-sub text-xs text-primary-400 mt-0.5 transition-all duration-300';
+            badgeEl.innerHTML = `<span class="text-xs text-lime-700 font-medium">Done</span>`;
+        } else if (st === 'active') {
+            iconBox.classList.add('bg-primary-900', 'border-primary-900');
+            iconSpin.classList.remove('hidden'); // spinner replaces the svg icon
+            labelEl.className = 'ap-step-label text-sm text-primary-900 font-medium transition-all duration-300';
+            subEl.className   = 'ap-step-sub text-xs text-primary-500 mt-0.5 transition-all duration-300';
+            badgeEl.innerHTML = `<span class="inline-flex items-center gap-1 text-xs text-primary-500"><span class="w-1.5 h-1.5 rounded-full bg-primary-900 animate-pulse"></span>Running</span>`;
+        } else {
+            iconBox.classList.add('bg-white', 'border-primary-200');
+            iconSvg.classList.remove('hidden');
+            iconSvg.classList.add('text-primary-300');
+            labelEl.className = 'ap-step-label text-sm text-primary-400 font-normal transition-all duration-300';
+            subEl.className   = 'ap-step-sub text-xs text-primary-300 mt-0.5 transition-all duration-300';
+        }
+    });
+}
+
 async function predictFromAudio() {
     const fileInput = document.getElementById('audioFileInput');
-    // Always use default participant ID on backend; no manual model selection, always fusion
     const useFusion = true;
 
     if (!fileInput.files[0]) {
@@ -479,52 +645,66 @@ async function predictFromAudio() {
         return;
     }
 
-    // Store audio file for waveform display
     currentAudioFile = fileInput.files[0];
-
-    // Display waveform immediately
     await displayWaveform(currentAudioFile);
 
-    showLoading('resultsArea');
+    showAudioProgressUI('resultsArea');
+    _apStartTime = Date.now();
+    updateAudioProgressUI(0, 'Starting…', 'Sending audio file to server');
 
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('use_fusion', useFusion);
 
+    let jobId = null;
     try {
-        const response = await fetch(`${getApiUrl()}/predict/audio`, {
+        const startResp = await fetch(`${getApiUrl()}/predict/audio/start`, {
             method: 'POST',
-            body: formData
+            body: formData,
         });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            displayResults(data);
-            // Ensure waveform is still visible after results with feature info
-            if (currentAudioFile) {
-                await displayWaveform(currentAudioFile, data);
-            }
-        } else {
-            let message = 'Prediction failed';
-            if (data) {
-                if (typeof data.detail === 'string') {
-                    message = data.detail;
-                } else if (Array.isArray(data.detail) && data.detail[0]?.msg) {
-                    message = data.detail[0].msg;
-                } else if (typeof data.message === 'string') {
-                    message = data.message;
-                }
-            }
-            // Hard fallback for short/invalid audio so the user always sees a useful explanation
-            if (response.status === 400 && message === 'Prediction failed') {
-                message = 'Not enough speech data in the recording to generate a reliable prediction. Please record or upload at least 5 seconds of clear child speech.';
-            }
-            displayError(message);
+        if (!startResp.ok) {
+            const err = await startResp.json().catch(() => ({}));
+            const msg = (typeof err.detail === 'string' ? err.detail : null)
+                || 'Failed to start prediction job.';
+            displayError(msg);
+            return;
         }
-    } catch (error) {
-        displayError('Connection error: ' + error.message);
+        const startData = await startResp.json();
+        jobId = startData.job_id;
+    } catch (err) {
+        displayError('Connection error: ' + err.message);
+        return;
     }
+
+    // Open SSE stream to receive progress updates
+    const sse = new EventSource(`${getApiUrl()}/predict/audio/progress/${jobId}`);
+
+    sse.onmessage = async (event) => {
+        let data;
+        try { data = JSON.parse(event.data); } catch { return; }
+
+        updateAudioProgressUI(data.progress || 0, data.stage, data.detail);
+
+        if (data.status === 'completed') {
+            sse.close();
+            updateAudioProgressUI(100, 'Complete', 'Analysis finished successfully');
+            // Brief pause so the user sees 100% before results replace the bar
+            await new Promise(r => setTimeout(r, 600));
+            displayResults(data.result);
+            if (currentAudioFile) {
+                await displayWaveform(currentAudioFile, data.result);
+            }
+        } else if (data.status === 'error') {
+            sse.close();
+            const msg = data.error || 'An error occurred during analysis.';
+            displayError(msg);
+        }
+    };
+
+    sse.onerror = () => {
+        sse.close();
+        displayError('Lost connection to server. Please try again.');
+    };
 }
 
 async function predictFromText() {

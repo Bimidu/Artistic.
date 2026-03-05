@@ -18,10 +18,11 @@ Author: Bimidu Gunathilake
 """
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, status, Form, BackgroundTasks
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse, HTMLResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Callable
+import asyncio
 import os
 import pandas as pd
 import numpy as np
@@ -33,6 +34,7 @@ import io
 import json
 import shutil
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from fastapi.staticfiles import StaticFiles
 
 from src.models.model_registry import ModelRegistry, ModelMetadata
@@ -96,6 +98,11 @@ model_fusion = ModelFusion(method='weighted')
 FEATURE_CSV_PATH = Path("assets/feature_explanations/feature_explanations_literal.csv")
 
 MIN_AUDIO_DURATION_SECONDS = 5.0
+
+# Per-job progress state for audio prediction SSE streaming
+# Each entry: {status, progress, stage, detail, result, error}
+prediction_jobs: Dict[str, Dict] = {}
+_prediction_executor = ThreadPoolExecutor(max_workers=4)
 
 
 def convert_audio_to_wav(input_path: Path) -> Path:
@@ -1024,6 +1031,369 @@ async def predict_from_audio(
             except Exception as cleanup_error:
                 logger.warning(f"Failed to clean up temporary audio file {path}: {cleanup_error}")
 
+
+# ---------------------------------------------------------------------------
+# Audio prediction with real-time SSE progress streaming
+# ---------------------------------------------------------------------------
+
+def _set_job_progress(job_id: str, progress: int, stage: str, detail: str) -> None:
+    """Thread-safe progress update for a prediction job."""
+    if job_id in prediction_jobs:
+        prediction_jobs[job_id].update({
+            'progress': progress,
+            'stage': stage,
+            'detail': detail,
+        })
+
+
+def _run_audio_prediction_sync(
+    job_id: str,
+    contents: bytes,
+    suffix: str,
+    filename: str,
+    participant_id: str,
+    use_fusion: bool,
+) -> None:
+    """
+    Synchronous audio prediction pipeline that emits progress updates.
+    Runs in a thread-pool so it does not block the event loop.
+    """
+    upd = lambda p, s, d: _set_job_progress(job_id, p, s, d)  # noqa: E731
+    tmp_path: Optional[Path] = None
+    pipeline_audio_path: Optional[Path] = None
+
+    try:
+        upd(3, "Uploading", "Saving audio file to disk…")
+        with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
+            tmp_file.write(contents)
+            tmp_path = Path(tmp_file.name)
+
+        upd(6, "Converting", "Converting audio to WAV format…")
+        pipeline_audio_path = convert_audio_to_wav(tmp_path)
+
+        upd(10, "Initialising", "Loading speech recognition model…")
+        handler = get_input_handler()
+
+        upd(13, "Transcribing", "Transcribing speech with Whisper — this may take a minute…")
+        processed = handler.process(pipeline_audio_path, participant_id=participant_id)
+
+        duration = processed.metadata.get('duration', 0) or 0
+        if duration < MIN_AUDIO_DURATION_SECONDS:
+            prediction_jobs[job_id].update({
+                'status': 'error',
+                'error': (
+                    f"Not enough speech data. Please upload at least "
+                    f"{MIN_AUDIO_DURATION_SECONDS:.0f} seconds of clear child speech."
+                ),
+            })
+            return
+
+        if not processed.transcript_data or len(processed.transcript_data.utterances) == 0:
+            prediction_jobs[job_id].update({
+                'status': 'error',
+                'error': "No speech detected. Please ensure the recording contains clear child speech.",
+            })
+            return
+
+        if len(processed.transcript_data.valid_utterances) == 0:
+            prediction_jobs[job_id].update({
+                'status': 'error',
+                'error': "No valid utterances found. Please ensure the recording contains clear child speech.",
+            })
+            return
+
+        upd(32, "Transcribed", f"Speech transcribed — {len(processed.transcript_data.utterances)} utterances detected")
+
+        if use_fusion:
+            component_predictions = []
+            component_weights = get_component_weights_for_input_type('audio')
+
+            components_ordered = [
+                ('pragmatic_conversational', 38, 50, "Analysing pragmatic & conversational patterns…"),
+                ('acoustic_prosodic',        52, 65, "Analysing acoustic & prosodic features…"),
+                ('syntactic_semantic',        67, 72, "Analysing syntactic & semantic structure…"),
+            ]
+
+            for component, prog_start, prog_end, detail_msg in components_ordered:
+                if component_weights.get(component, 0) == 0:
+                    logger.info(f"Skipping {component} for audio input (weight=0)")
+                    continue
+
+                upd(prog_start, f"Extracting — {component.replace('_', ' ').title()}", detail_msg)
+                try:
+                    if component == 'acoustic_prosodic':
+                        from src.features.acoustic_prosodic.acoustic_extractor import AcousticFeatureExtractor
+                        extractor = AcousticFeatureExtractor()
+                        features = extractor.extract_with_audio(
+                            processed.transcript_data,
+                            audio_path=processed.audio_path,
+                            transcription_result=processed.transcription_result,
+                        ).features
+                    elif component == 'syntactic_semantic':
+                        from src.features.syntactic_semantic.syntactic_semantic import SyntacticSemanticFeatures
+                        ss_extractor = SyntacticSemanticFeatures()
+                        features = ss_extractor.extract(processed.transcript_data).features
+                    else:
+                        features = feature_extractor.extract_with_audio(
+                            processed.transcript_data,
+                            audio_path=processed.audio_path,
+                            transcription_result=processed.transcription_result,
+                        ).features
+
+                    features_df = pd.DataFrame([features])
+                    model, preprocessor, used_model_name = get_model_and_preprocessor(component=component)
+
+                    if preprocessor is not None:
+                        if isinstance(preprocessor, dict):
+                            features_df = preprocess_with_dict(features_df, preprocessor)
+                        else:
+                            features_df = preprocessor.transform(features_df)
+
+                    prediction = model.predict(features_df)[0]
+                    proba = model.predict_proba(features_df)[0] if hasattr(model, 'predict_proba') else None
+
+                    if proba is not None:
+                        classes = model.classes_ if hasattr(model, 'classes_') else ['ASD', 'TD']
+                        if isinstance(classes[0], (int, np.integer)):
+                            label_map = {0: 'TD', 1: 'ASD'}
+                            class_labels = [label_map.get(c, str(c)) for c in classes]
+                        else:
+                            class_labels = [str(c) for c in classes]
+                        probabilities = {str(cls): float(prob) for cls, prob in zip(class_labels, proba)}
+                        confidence = float(np.max(proba))
+                        asd_prob = probabilities.get('ASD', proba[1] if len(proba) > 1 else proba[0])
+                    else:
+                        probabilities = {str(prediction): 1.0}
+                        confidence = 1.0
+                        asd_prob = 1.0 if str(prediction).upper() == 'ASD' else 0.0
+
+                    component_predictions.append(ComponentPrediction(
+                        component=component,
+                        prediction=str(prediction),
+                        probability=asd_prob,
+                        probabilities=probabilities,
+                        confidence=confidence,
+                        model_name=used_model_name,
+                    ))
+                    upd(prog_end, f"Done — {component.replace('_', ' ').title()}", f"{component.replace('_', ' ').title()} analysis complete")
+                    logger.info(f"{component}: {prediction} ({confidence:.2f})")
+
+                except Exception as e:
+                    logger.warning(f"Component {component} failed: {e}")
+                    continue
+
+            if not component_predictions:
+                prediction_jobs[job_id].update({'status': 'error', 'error': "No components available for prediction"})
+                return
+
+            upd(75, "Fusing", "Combining component predictions with weighted fusion…")
+            fused = model_fusion.fuse(component_predictions, component_weights_override=component_weights)
+
+            upd(80, "Annotating", "Generating annotated transcript — analysing conversation patterns…")
+            feature_set = feature_extractor.extract_with_audio(
+                processed.transcript_data,
+                audio_path=processed.audio_path,
+                transcription_result=processed.transcription_result,
+            )
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features,
+            )
+
+            upd(97, "Finalising", "Wrapping up results…")
+            result_data = {
+                'prediction': fused.final_prediction,
+                'confidence': fused.confidence,
+                'probabilities': fused.final_probabilities,
+                'model_used': 'fusion',
+                'models_used': [cp.model_name for cp in component_predictions],
+                'component_breakdown': [
+                    {
+                        'component': cp.component,
+                        'prediction': cp.prediction,
+                        'confidence': cp.confidence,
+                        'probabilities': cp.probabilities,
+                        'model_name': cp.model_name,
+                    }
+                    for cp in component_predictions
+                ],
+                'features_extracted': len(feature_set.features),
+                'transcript': processed.raw_text,
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'audio',
+                'duration': processed.metadata.get('duration', 0),
+            }
+
+        else:
+            # Single-component path (mirrors the existing predict_from_audio logic)
+            upd(36, "Extracting features", "Extracting pragmatic features…")
+            selected_component = None
+            feature_set = feature_extractor.extract_with_audio(
+                processed.transcript_data,
+                audio_path=processed.audio_path,
+                transcription_result=processed.transcription_result,
+            )
+
+            upd(65, "Predicting", "Running model prediction…")
+            features_df = pd.DataFrame([feature_set.features])
+            models = model_registry.list_models()
+            compatible_models = [m for m in models if is_model_compatible_with_input(m, 'audio')]
+            if not compatible_models:
+                prediction_jobs[job_id].update({'status': 'error', 'error': "No compatible models found for audio input."})
+                return
+
+            best_f1 = -1
+            best_model = None
+            for m in compatible_models:
+                try:
+                    metadata = model_registry.get_model_metadata(m)
+                    if metadata.f1_score > best_f1:
+                        best_f1 = metadata.f1_score
+                        best_model = m
+                except Exception:
+                    pass
+            model_name_used = best_model or compatible_models[0]
+            model, preprocessor, used_model_name = get_model_and_preprocessor(model_name=model_name_used)
+
+            if preprocessor is not None:
+                if isinstance(preprocessor, dict):
+                    features_df = preprocess_with_dict(features_df, preprocessor)
+                else:
+                    features_df = preprocessor.transform(features_df)
+
+            result = make_prediction(model, features_df, used_model_name)
+
+            upd(78, "Annotating", "Generating annotated transcript…")
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features,
+            )
+
+            upd(97, "Finalising", "Wrapping up results…")
+            result_data = {
+                **result,
+                'features_extracted': len(feature_set.features),
+                'transcript': processed.raw_text,
+                'annotated_transcript_html': annotated.to_html(),
+                'annotation_summary': annotated._get_annotation_summary(),
+                'input_type': 'audio',
+                'duration': processed.metadata.get('duration', 0),
+                'model_used': used_model_name,
+                'component': get_model_component(used_model_name),
+            }
+
+        prediction_jobs[job_id].update({
+            'status': 'completed',
+            'progress': 100,
+            'stage': 'Complete',
+            'detail': 'Analysis finished successfully',
+            'result': result_data,
+        })
+
+    except Exception as e:
+        logger.error(f"Audio prediction job {job_id} failed: {e}")
+        prediction_jobs[job_id].update({
+            'status': 'error',
+            'error': str(e),
+        })
+    finally:
+        for path in {tmp_path, pipeline_audio_path}:
+            try:
+                if path and path.exists():
+                    path.unlink()
+            except Exception:
+                pass
+
+
+@app.post("/predict/audio/start", tags=["User Mode"])
+async def start_audio_prediction(
+    file: UploadFile = File(...),
+    participant_id: Optional[str] = Form("CHI"),
+    use_fusion: bool = Form(False),
+):
+    """
+    Start an asynchronous audio prediction job and return a job ID.
+    Poll /predict/audio/progress/{job_id} (SSE) for real-time progress.
+    """
+    if not file.filename.lower().endswith(('.wav', '.mp3', '.flac', '.ogg', '.m4a')):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Only audio files (.wav, .mp3, .flac, .ogg, .m4a) are supported",
+        )
+
+    job_id = str(uuid.uuid4())
+    prediction_jobs[job_id] = {
+        'status': 'processing',
+        'progress': 0,
+        'stage': 'Queued',
+        'detail': 'Job accepted, starting shortly…',
+        'result': None,
+        'error': None,
+    }
+
+    contents = await file.read()
+    suffix = Path(file.filename).suffix
+    filename = file.filename
+
+    loop = asyncio.get_event_loop()
+    loop.run_in_executor(
+        _prediction_executor,
+        _run_audio_prediction_sync,
+        job_id, contents, suffix, filename, participant_id, use_fusion,
+    )
+
+    return {"job_id": job_id}
+
+
+@app.get("/predict/audio/progress/{job_id}", tags=["User Mode"])
+async def audio_prediction_progress(job_id: str):
+    """
+    SSE endpoint that streams progress updates for an audio prediction job.
+    Emits JSON events until status is 'completed' or 'error'.
+    """
+    if job_id not in prediction_jobs:
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    async def event_stream():
+        try:
+            while True:
+                job = prediction_jobs.get(job_id)
+                if job is None:
+                    break
+
+                payload = {
+                    'progress': job.get('progress', 0),
+                    'stage': job.get('stage', ''),
+                    'detail': job.get('detail', ''),
+                    'status': job.get('status', 'processing'),
+                    'result': job.get('result') if job.get('status') == 'completed' else None,
+                    'error': job.get('error'),
+                }
+                yield f"data: {json.dumps(payload)}\n\n"
+
+                if job.get('status') in ('completed', 'error'):
+                    # Keep the job in memory briefly so late consumers can fetch the result
+                    await asyncio.sleep(30)
+                    prediction_jobs.pop(job_id, None)
+                    break
+
+                await asyncio.sleep(0.6)
+        except asyncio.CancelledError:
+            pass
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+            "Connection": "keep-alive",
+        },
+    )
+
+
+# ---------------------------------------------------------------------------
 
 class TextPredictionRequestWithOptions(BaseModel):
     """Request for prediction from text with model selection."""
