@@ -529,7 +529,7 @@ function showAudioProgressUI(elementId) {
             <div class="ap-step-icon flex-shrink-0 w-9 h-9 bg-white border border-primary-200 rounded-xl flex items-center justify-center transition-all duration-400">
                 <svg class="ap-icon-svg w-4 h-4 text-primary-300 transition-colors duration-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">${s.icon}</svg>
                 <svg class="ap-icon-check hidden w-4 h-4 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <div class="ap-icon-spin hidden w-3.5 h-3.5 rounded-full border-2 border-primary-900 border-t-transparent animate-spin"></div>
+                <div class="ap-icon-spin hidden w-3.5 h-3.5 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
             </div>
             <div class="flex-1 min-w-0">
                 <div class="ap-step-label text-sm text-primary-400 font-normal transition-all duration-300">${s.label}</div>
