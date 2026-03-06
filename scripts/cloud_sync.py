@@ -8,6 +8,9 @@ Usage:
     # Upload all models to cloud
     python scripts/cloud_sync.py upload-models
 
+    # Upload models and force replace remote (overwrites even when content matches)
+    python scripts/cloud_sync.py upload-models --force
+
     # Upload all datasets to cloud
     python scripts/cloud_sync.py upload-datasets
 
@@ -46,10 +49,12 @@ logger = get_logger(__name__)
 reset_hf_manager()
 
 
-def upload_models():
+def upload_models(force_replace: bool = False):
     """Upload all models to HuggingFace Hub."""
     print("\n" + "="*70)
     print("UPLOADING MODELS TO HUGGINGFACE HUB")
+    if force_replace:
+        print("(force replace: will overwrite remote models with local)")
     print("="*70 + "\n")
     
     hf_manager = get_hf_manager()
@@ -59,7 +64,7 @@ def upload_models():
         print("   Please run: huggingface-cli login")
         return 1
     
-    results = hf_manager.upload_all_models()
+    results = hf_manager.upload_all_models(force_replace=force_replace)
     
     print("\n" + "="*70)
     print("UPLOAD RESULTS")
@@ -279,11 +284,17 @@ Setup:
         help='Model or dataset name (for download commands)'
     )
     
+    parser.add_argument(
+        '--force', '-f',
+        action='store_true',
+        help='Force replace: delete remote models before upload (ensures local overwrites remote)'
+    )
+    
     args = parser.parse_args()
     
     try:
         if args.command == 'upload-models':
-            return upload_models()
+            return upload_models(force_replace=args.force)
         elif args.command == 'upload-datasets':
             return upload_datasets()
         elif args.command == 'download-model':
