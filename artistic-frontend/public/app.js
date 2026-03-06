@@ -3161,15 +3161,15 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
             const energy = envelope[i];
             const isSpeech = energy > silenceThreshold;
 
-            // Color coding: active speech (teal) vs pause/silence (light gray)
+            // Color coding: active speech (dark green) vs pause/silence (light gray)
             if (isSpeech) {
-                // Gradient from light to darker teal based on energy level
+                // Gradient from light to darker green based on energy level
                 const maxEnergy = waveformData.energyStats?.max || 1;
                 const energyRatio = Math.min(energy / maxEnergy, 1);
-                // Light teal for low energy speech, darker for high energy
-                const r = Math.floor(94 + (energyRatio * 20)); // 94-114
-                const g = Math.floor(234 - (energyRatio * 30)); // 234-204
-                const b = Math.floor(212 - (energyRatio * 20)); // 212-192
+                // Light green for low energy speech, darker for high energy
+                const r = Math.floor(34 - (energyRatio * 15)); // 34-19 (dark green range)
+                const g = Math.floor(197 - (energyRatio * 50)); // 197-147 (green range)
+                const b = Math.floor(94 - (energyRatio * 30)); // 94-64 (green range)
                 ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
             } else {
                 // Light gray for silence/pause regions
