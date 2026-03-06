@@ -868,8 +868,8 @@ const NAV_SECTIONS = [
   { id: 'pipeline', label: 'The Pipeline', icon: '→' },
   { id: 'input', label: '1 · Input Layer', icon: '↑' },
   { id: 'extraction', label: '2 · Feature Extraction', icon: '⊙' },
-  { id: 'acoustic', label: '   Acoustic Detail', icon: '◦' },
   { id: 'pragmatic', label: '   Pragmatic Detail', icon: '◦' },
+  { id: 'acoustic', label: '   Acoustic Detail', icon: '◦' },
   { id: 'training', label: '3 · Model Training', icon: '▣' },
   { id: 'fusion', label: '4 · Prediction & Fusion', icon: '◈' },
   { id: 'interpretability', label: '5 · Interpretability', icon: '◉' },
@@ -1205,40 +1205,13 @@ export default function HowItWorksPage() {
             </p>
 
             <div className="space-y-6">
-            {/* Component 1 — Acoustic */}
-              <div className="border-2 border-sky-300 bg-sky-50/40 rounded-2xl p-6">
-                <div className="flex items-start justify-between flex-wrap gap-4">
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-sky-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                      <h3 className="text-xl font-bold text-gray-900">Acoustic / Prosodic Component</h3>
-                      <span className="text-xs bg-sky-100 text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full font-semibold">153 features</span>
-                      <span className="text-xs bg-gray-900 text-white px-2 py-0.5 rounded-full font-semibold">fully documented below ↓</span>
-                    </div>
-                    <p className="text-sm text-gray-600 max-w-2xl">Analyses <em>how</em> speech sounds — pitch, rhythm, voice quality, spectral characteristics, and timing. All features are extracted from the isolated child audio segments using the <strong>librosa</strong> library. Features are computed as <strong>global statistical summaries</strong> (mean, standard deviation, min, max) over the entire recording — not time-segmented.</p>
-                  </div>
-                  <span className="text-xs text-gray-400 font-mono">src/features/acoustic_prosodic/</span>
-                </div>
-                <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {ACOUSTIC_CATEGORIES.map(c => (
-                    <div key={c.id} className={`bg-white rounded-xl border ${c.borderColor} p-3 flex items-center gap-3`}>
-                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${c.bgColor} ${c.color} border ${c.borderColor} flex-shrink-0`}>
-                        <AcousticIcon id={c.id} className="w-4 h-4" />
-                      </span>
-                      <div>
-                        <div className={`text-sm font-semibold ${c.color}`}>{c.label}</div>
-                        <div className="text-xs font-mono text-gray-500 mt-0.5">{c.count} features</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-{/* Component 3 — Pragmatic */}
+
+{/* Component 1 — Pragmatic */}
 <div className="border-2 border-emerald-300 bg-emerald-50/40 rounded-2xl p-6">
                 <div className="flex items-start justify-between flex-wrap gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">3</div>
+                      <div className="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
                       <h3 className="text-xl font-bold text-gray-900">Pragmatic / Conversational Component</h3>
                       <span className="text-xs bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-semibold">207 features</span>
                       <span className="text-xs bg-gray-900 text-white px-2 py-0.5 rounded-full font-semibold">fully documented below ↓</span>
@@ -1263,13 +1236,40 @@ export default function HowItWorksPage() {
                   ))}
                 </div>
               </div>
-
-              {/* Component 2 — Syntactic */}
+{/* Component 2 — Acoustic */}
+              <div className="border-2 border-sky-300 bg-sky-50/40 rounded-2xl p-6">
+                <div className="flex items-start justify-between flex-wrap gap-4">
+                  <div>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-sky-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                      <h3 className="text-xl font-bold text-gray-900">Acoustic / Prosodic Component</h3>
+                      <span className="text-xs bg-sky-100 text-sky-700 border border-sky-200 px-2 py-0.5 rounded-full font-semibold">153 features</span>
+                      <span className="text-xs bg-gray-900 text-white px-2 py-0.5 rounded-full font-semibold">fully documented below ↓</span>
+                    </div>
+                    <p className="text-sm text-gray-600 max-w-2xl">Analyses <em>how</em> speech sounds — pitch, rhythm, voice quality, spectral characteristics, and timing. All features are extracted from the isolated child audio segments using the <strong>librosa</strong> library. Features are computed as <strong>global statistical summaries</strong> (mean, standard deviation, min, max) over the entire recording — not time-segmented.</p>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">src/features/acoustic_prosodic/</span>
+                </div>
+                <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {ACOUSTIC_CATEGORIES.map(c => (
+                    <div key={c.id} className={`bg-white rounded-xl border ${c.borderColor} p-3 flex items-center gap-3`}>
+                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${c.bgColor} ${c.color} border ${c.borderColor} flex-shrink-0`}>
+                        <AcousticIcon id={c.id} className="w-4 h-4" />
+                      </span>
+                      <div>
+                        <div className={`text-sm font-semibold ${c.color}`}>{c.label}</div>
+                        <div className="text-xs font-mono text-gray-500 mt-0.5">{c.count} features</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Component 3 — Syntactic */}
               <div className="border-2 border-dashed border-violet-200 bg-violet-50/40 rounded-2xl p-6">
                 <div className="flex items-start justify-between flex-wrap gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-violet-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                      <div className="w-8 h-8 bg-violet-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">3</div>
                       <h3 className="text-xl font-bold text-gray-900">Syntactic / Semantic Component</h3>
                       <span className="text-xs bg-violet-100 text-violet-700 border border-violet-200 px-2 py-0.5 rounded-full font-semibold">26 features</span>
                     </div>
@@ -1299,126 +1299,7 @@ export default function HowItWorksPage() {
 
             </div>
           </section>
-{/* ── ACOUSTIC DETAIL (NEW) ── */}
-          <section id="acoustic" ref={setRef('acoustic')}>
-            <div className="inline-flex items-center gap-2 bg-sky-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
-              Acoustic Component — Full Detail
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">153 acoustic features, explained</h2>
-            <p className="text-gray-500 mb-4 max-w-2xl">
-              The acoustic component is organised into 8 sub-modules, each targeting a distinct aspect of the speech signal. All features are computed as <strong>global statistical summaries</strong> (mean, standard deviation, min, max, etc.) over the entire child audio recording — not time-segmented windows. Click <strong>View All Features</strong> on any category to open a full searchable table.
-            </p>
 
-            {/* Key design callout */}
-            <div className="bg-sky-50 border border-sky-200 rounded-2xl p-5 mb-10 flex items-start gap-4">
-              <div className="w-9 h-9 bg-sky-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                <IconWaveform className="w-5 h-5 text-sky-700" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-sky-900 mb-1">Design principle: global statistical summaries</p>
-                <p className="text-sm text-sky-800">
-                  Unlike the pragmatic component which analyses conversation turn-by-turn, the acoustic component extracts features across the <strong>entire speech signal</strong>. For example, &quot;pitch variability&quot; is the standard deviation of F0 across all voiced frames — not an analysis of individual words or sentences. This approach is robust to varying recording lengths and avoids overfitting to specific conversation segments.
-                </p>
-              </div>
-            </div>
-
-            {/* Acoustic preprocessing callout */}
-            <div className="bg-gray-900 text-white rounded-2xl p-6 mb-10">
-              <p className="text-xs text-gray-400 mb-4 font-semibold uppercase tracking-wide">Acoustic Preprocessing Pipeline</p>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-                {[
-                  { step: '01', title: 'Load & Resample', desc: 'librosa.load() at 22050Hz; mono conversion if stereo', code: 'sr=22050, mono=True' },
-                  { step: '02', title: 'Pre-emphasis', desc: 'High-frequency boost filter to compensate for spectral roll-off of speech', code: 'y = np.append(y[0], y[1:] - 0.97*y[:-1])' },
-                  { step: '03', title: 'Child isolation', desc: 'Segment audio to child speaker regions only using Whisper timing', code: 'ChildAudioExtractor' },
-                  { step: '04', title: 'Feature extraction', desc: 'Per-module extraction with global statistical aggregation', code: 'mean, std, min, max' },
-                ].map(s => (
-                  <div key={s.step} className="bg-gray-800 rounded-xl p-4">
-                    <div className="text-xs font-mono text-gray-400 mb-1">{s.step}</div>
-                    <div className="font-semibold text-white mb-1">{s.title}</div>
-                    <div className="text-xs text-gray-400 mb-2">{s.desc}</div>
-                    <code className="text-xs text-green-400 bg-gray-900 px-2 py-1 rounded block">{s.code}</code>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-8">
-              {ACOUSTIC_CATEGORIES.map((cat, idx) => (
-                <div key={cat.id} className={`border ${cat.borderColor} rounded-2xl overflow-hidden`}>
-                  <div className={`${cat.bgColor} px-6 py-5 flex items-start justify-between flex-wrap gap-4`}>
-                    <div className="flex items-start gap-4">
-                      <div className={`w-10 h-10 bg-white rounded-xl border ${cat.borderColor} flex items-center justify-center`}>
-                        <AcousticIcon id={cat.id} className={`w-6 h-6 ${cat.color}`} />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <h3 className={`text-lg font-bold ${cat.color}`}>{cat.label}</h3>
-                          <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white border ${cat.borderColor} ${cat.color}`}>
-                            {cat.count} features
-                          </span>
-                          <span className="text-xs text-gray-400 font-mono">Sub-module {idx + 1} of 8</span>
-                        </div>
-                        <p className="text-sm text-gray-600 mt-1 max-w-2xl">{cat.summary}</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => setOpenCategory(cat)}
-                      className={`flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${cat.borderColor} bg-white ${cat.color} hover:bg-gray-900 hover:text-white hover:border-gray-900`}
-                    >
-                      View All {cat.count} Features →
-                    </button>
-                  </div>
-
-                  <div className="bg-white px-6 py-5">
-                    <div className="mb-4">
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Extraction Method</p>
-                      <p className="text-sm text-gray-600">{cat.method}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Sample Features</p>
-                      <div className="flex flex-wrap gap-2">
-                        {cat.features.slice(0, 6).map(f => (
-                          <span key={f.name} className={`text-xs font-mono px-2.5 py-1 rounded-lg ${cat.bgColor} ${cat.color} border ${cat.borderColor}`}>
-                            {f.name}
-                          </span>
-                        ))}
-                        {cat.features.length > 6 && (
-                          <button onClick={() => setOpenCategory(cat)} className="text-xs px-2.5 py-1 rounded-lg text-gray-400 bg-gray-100 hover:bg-gray-200 transition-colors">
-                            +{cat.features.length - 6} more
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* ASD relevance summary box */}
-            <div className="mt-10 bg-gray-50 border border-gray-200 rounded-2xl p-6">
-              <h3 className="font-bold text-gray-900 mb-4">Acoustic ASD Markers — Summary of Evidence</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                {[
-                  { marker: 'Reduced pitch variability', evidence: 'One of the most replicated findings — monotone speech reflecting limited prosodic use for social/emotional communication', strength: 'Strong' },
-                  { marker: 'Narrowed vowel space (F1/F2)', evidence: 'Systematic reduction in vowel space area documented across multiple ASD studies, indicating less precise articulation', strength: 'Strong' },
-                  { marker: 'Elevated jitter & shimmer', evidence: 'Voice perturbation measures differ between ASD and TD groups, potentially reflecting laryngeal motor differences', strength: 'Moderate' },
-                  { marker: 'Atypical speech rate', evidence: 'Both unusually slow and unusually fast speech documented in ASD subgroups; rate variability is diagnostically relevant', strength: 'Moderate' },
-                  { marker: 'Unusual spectral characteristics', evidence: 'MFCC profiles and spectral centroid differences found in multiple automatic speech analysis studies', strength: 'Moderate' },
-                  { marker: 'Reduced dynamic range', evidence: 'Flat loudness profile consistent with reduced prosodic marking of emphasis and contrast', strength: 'Moderate' },
-                ].map(m => (
-                  <div key={m.marker} className="bg-white rounded-xl border border-gray-200 p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <span className="font-semibold text-gray-900 text-sm">{m.marker}</span>
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ml-2 ${m.strength === 'Strong' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                        {m.strength}
-                      </span>
-                    </div>
-                    <p className="text-xs text-gray-500 leading-relaxed">{m.evidence}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
           {/* ── SECTION: PRAGMATIC DETAIL ── */}
           <section id="pragmatic" ref={setRef('pragmatic')}>
             <div className="inline-flex items-center gap-2 bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
