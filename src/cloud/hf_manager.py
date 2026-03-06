@@ -303,7 +303,8 @@ class HuggingFaceManager:
         self,
         model_name: str,
         model_dir: Optional[Path] = None,
-        commit_message: Optional[str] = None
+        commit_message: Optional[str] = None,
+        force_replace: bool = False
     ) -> bool:
         """
         Upload a trained model to Hugging Face Hub.
@@ -312,6 +313,8 @@ class HuggingFaceManager:
             model_name: Name of model to upload
             model_dir: Directory containing model files (None = use registry)
             commit_message: Optional commit message
+            force_replace: If True, delete existing remote files before upload to ensure
+                local models replace remote ones (avoids HF Hub skipping "unchanged" content)
         
         Returns:
             bool: True if successful, False otherwise
@@ -348,6 +351,25 @@ class HuggingFaceManager:
             
             # Upload model folder
             commit_msg = commit_message or f"Upload model: {model_name}"
+            
+            # When force_replace=True, delete existing remote folder first, then upload.
+            # (HF Hub skips upload when content is identical; delete+upload in same commit
+            # still gets skipped. Two separate commits ensure the replace goes through.)
+            if force_replace:
+                try:
+                    self.logger.info(f"Force replace: deleting existing {model_name} on remote")
+                    self.api.delete_folder(
+                        path_in_repo=model_name,
+                        repo_id=self.config.model_repo,
+                        repo_type="model",
+                        token=token,
+                        commit_message=f"Delete {model_name} before replace"
+                    )
+                except HfHubHTTPError as e:
+                    if e.response.status_code != 404:
+                        raise
+                    # 404 = folder doesn't exist yet, which is fine
+                    self.logger.debug(f"Model {model_name} not on remote yet, will upload")
             
             self.logger.info(f"Uploading model: {model_name}")
             self.api.upload_folder(
@@ -435,9 +457,13 @@ class HuggingFaceManager:
             self.logger.error(f"Unexpected error downloading model: {e}")
             return None
     
-    def upload_all_models(self) -> Dict[str, bool]:
+    def upload_all_models(self, force_replace: bool = False) -> Dict[str, bool]:
         """
         Upload all models from the local registry to HF Hub.
+        
+        Args:
+            force_replace: If True, replace remote models even when content matches
+                (deletes remote first, then uploads)
         
         Returns:
             Dict mapping model_name to success status
@@ -445,14 +471,14 @@ class HuggingFaceManager:
         results = {}
         models_dir = config.paths.models_dir
         
-        # Find all model directories
+        # Find all model directories (exclude registry.json and other non-dir files)
         model_dirs = [d for d in models_dir.iterdir() if d.is_dir()]
         
         self.logger.info(f"Uploading {len(model_dirs)} models to HF Hub...")
         
         for model_dir in model_dirs:
             model_name = model_dir.name
-            success = self.upload_model(model_name, model_dir)
+            success = self.upload_model(model_name, model_dir, force_replace=force_replace)
             results[model_name] = success
         
         successful = sum(1 for v in results.values() if v)
