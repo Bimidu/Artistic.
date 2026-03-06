@@ -10,7 +10,8 @@ def serialize_counterfactual(
     changes = []
 
     for f, d, o, c in zip(feature_names, deltas, original, counterfactual):
-        if abs(d) > 1e-4:
+
+        if abs(d) > 0.01:
             changes.append({
                 "feature": f,
                 "from": float(o),

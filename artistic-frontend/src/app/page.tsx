@@ -553,70 +553,101 @@ export default function Home() {
 
           {/* Local SHAP Explanation */}
           <div id="localShapSection" className="mt-8 hidden">
-            <h3 className="text-xl font-medium text-primary-900 mb-2">Why this prediction was made</h3>
-            <p className="text-sm text-primary-600 mb-5">
-              This waterfall plot explains how each conversational feature contributed to the final ASD / TD prediction for this specific transcript.
-            </p>
-            <div className="bg-white rounded-xl p-5 border border-primary-200">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img id="localShapWaterfall" className="w-full rounded-xl border border-primary-100" alt="Local SHAP Waterfall Explanation" />
+              <h3 className="text-xl font-medium text-primary-900 mb-2">
+                Why this prediction was made
+              </h3>
+              <p className="text-sm text-primary-600 mb-5">
+                This waterfall plot explains how each conversational feature contributed
+                to the final ASD / TD prediction for this specific transcript.
+              </p>
+              <div className="bg-white rounded-xl p-5 border border-primary-200">
+                {/* SHAP GRID CONTAINER */}
+                <div
+                  id="localShapContainer"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+                >
+                </div>
+              </div>
             </div>
-          </div>
 
           {/* Counterfactual Explanation */}
           <div id="counterfactualSection" className="mt-8 hidden">
-            <h3 className="text-xl font-medium text-primary-900 mb-2">What would change this prediction?</h3>
-            <p className="text-sm text-primary-600 mb-5">
-              This analysis shows the smallest realistic changes required to flip the model&apos;s prediction to the opposite class.
-            </p>
-            <div id="whatIfBox" className="bg-primary-50 border border-primary-200 rounded-xl p-5 mb-5 text-primary-900"></div>
-            <div className="grid md:grid-cols-3 gap-4 mb-5">
-              <div className="bg-white rounded-xl p-5 border border-primary-200">
-                <p className="text-sm text-primary-600">Prediction flipped</p>
-                <p id="cfFlipped" className="text-xl font-bold"></p>
+              <h3 className="text-xl font-semibold text-primary-900 mb-2">
+                What would change this prediction?
+              </h3>
+
+              <p className="text-sm text-primary-600 mb-5">
+                This analysis shows the smallest realistic changes required to flip the model's prediction to the opposite class.
+              </p>
+
+              {/* SINGLE MODEL COUNTERFACTUAL */}
+              <div id="cfSingleContainer">
+
+                <div id="whatIfBox" className="bg-primary-50 border border-primary-200 rounded-xl p-5 mb-5 text-primary-900"></div>
+
+                <div className="grid md:grid-cols-3 gap-4 mb-5">
+                  <div className="bg-white rounded-xl p-5 border border-primary-200">
+                    <p className="text-sm text-primary-600">Prediction flipped</p>
+                    <p id="cfFlipped" className="text-xl font-bold"></p>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-5 border border-primary-200">
+                    <p className="text-sm text-primary-600">Overall change (L2)</p>
+                    <p id="cfL2" className="text-xl font-bold"></p>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-5 border border-primary-200">
+                    <p className="text-sm text-primary-600">Features changed</p>
+                    <p id="cfTotal" className="text-xl font-bold"></p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-xl p-5 border border-primary-200">
+                  <h4 className="text-base font-medium text-primary-900 mb-4">
+                    Most influential feature changes
+                  </h4>
+
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b text-left">
+                          <th className="py-2">Component</th>
+                          <th className="py-2">Feature</th>
+                          <th className="py-2">Original</th>
+                          <th className="py-2">Counterfactual</th>
+                          <th className="py-2">Change</th>
+                      </tr>
+                    </thead>
+
+                    <tbody id="cfTableBody"></tbody>
+                  </table>
+                </div>
+
               </div>
-              <div className="bg-white rounded-xl p-5 border border-primary-200">
-                <p className="text-sm text-primary-600">Overall change (L2)</p>
-                <p id="cfL2" className="text-xl font-bold"></p>
-              </div>
-              <div className="bg-white rounded-xl p-5 border border-primary-200">
-                <p className="text-sm text-primary-600">Features changed</p>
-                <p id="cfTotal" className="text-xl font-bold"></p>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl p-5 border border-primary-200">
-              <h4 className="text-base font-medium text-primary-900 mb-4">Most influential feature changes</h4>
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b text-left">
-                    <th className="py-2">Feature</th>
-                    <th className="py-2">Original</th>
-                    <th className="py-2">Counterfactual</th>
-                    <th className="py-2">Change</th>
-                  </tr>
-                </thead>
-                <tbody id="cfTableBody"></tbody>
-              </table>
-            </div>
+
+              {/* FUSION COUNTERFACTUAL GRID */}
+              <div
+                id="cfFusionContainer"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 hidden"
+              ></div>
           </div>
 
-          {/* Interactive Counterfactual Chat */}
-          <div id="cfChatSection" className="mt-8 bg-primary-50 border border-primary-200 rounded-xl p-6 hidden">
-            <h3 className="text-lg font-medium text-primary-900 mb-2">Explore a What-If Scenario</h3>
-            <p className="text-sm text-primary-600 mb-5">
-              Ask a hypothetical question about a conversational behavior to explore how it might influence the model&apos;s decision.
-              <span className="italic"> (Simulated response – future extension)</span>
-            </p>
-            <div className="flex flex-col md:flex-row gap-4 mb-4">
-              <select id="cfQuestion" className="flex-1 px-4 py-2 rounded-xl border border-primary-300 bg-white text-sm focus:outline-none">
-                <option>What if the number of &quot;uhm&quot; continuation markers increased by 0.3?</option>
-                <option>What if average turn length decreased slightly?</option>
-                <option>What if semantic coherence improved?</option>
-              </select>
-              <button onClick={() => window.simulateCounterfactualChat?.()} className="px-6 py-2 rounded-xl bg-primary-900 text-white text-sm hover:bg-primary-800 transition">Ask</button>
-            </div>
-            <div id="cfChatResponse" className="hidden bg-white border border-primary-200 rounded-xl p-5 text-sm text-primary-900"></div>
-          </div>
+            {/* Interactive Counterfactual Chat */}
+              <div className="flex gap-3 mt-10" id="cfChatSection">
+                  <input
+                      id="cfUserInput"
+                      placeholder="Ask: What happens if pauses increase?"
+                      className="flex-1 px-4 py-2 border bg-white border-primary-200 rounded-xl"
+                  />
+                  <button
+                      onClick={() => window.askCounterfactualGPT?.()}
+                      className="px-6 py-2 bg-primary-600 text-white rounded-xl"
+                  >
+                      Ask
+                  </button>
+              </div>
+              <div id="cfChatResponse"
+                   className="hidden mt-4 bg-white border border-primary-200 rounded-xl p-5">
+              </div>
         </div>
 
         {/* Training Mode */}

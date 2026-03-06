@@ -10,14 +10,14 @@ def generate_counterfactual(
     model,
     x_instance: np.ndarray,
     feature_names,
-    component: str,
+    ae_key: str,
     predicted_class: int
 ):
-    ae_path = Path("models/counterfactuals") / f"{component}_ae.pt"
+    ae_path = Path("models/counterfactuals") / f"{ae_key}_ae.pt"
 
     if not ae_path.exists():
         logger.warning(
-            f"[CF] Autoencoder not found for component={component}. "
+            f"[CF] Autoencoder not found for component={ae_key}. "
             f"Skipping counterfactual generation."
         )
         return None

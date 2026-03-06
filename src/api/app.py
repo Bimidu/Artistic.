@@ -46,6 +46,9 @@ from src.pipeline.model_fusion import ModelFusion, ComponentPrediction
 from src.utils.logger import get_logger
 from src.interpretability.counterfactuals.cf_service import generate_counterfactual
 from src.interpretability.counterfactuals.train_autoencoder import train_autoencoder
+from src.interpretability.counterfactuals.cf_chat_parser import parse_clinician_question
+from src.interpretability.counterfactuals.cf_explainer import generate_cf_explanation
+from src.interpretability.counterfactuals.feature_resolver import resolve_feature
 from config import config
 
 logger = get_logger(__name__)
@@ -1739,20 +1742,119 @@ async def predict_from_transcript(
                         probabilities = {str(prediction): 1.0}
                         confidence = 1.0
                         asd_prob = 1.0 if str(prediction).upper() == 'ASD' else 0.0
-                    
+
                     component_predictions.append(ComponentPrediction(
                         component=component,
                         prediction=str(prediction),
                         probability=asd_prob,
                         probabilities=probabilities,
                         confidence=confidence,
-                        model_name=used_model_name
+                        model_name=used_model_name,
+                        model=model,
+                        features_df=features_df,
+                        feature_names=list(features_df.columns)
                     ))
                     
                     logger.info(f"{component}: {prediction} ({confidence:.2f})")
                 
                 except Exception as e:
                     logger.warning(f"Component {component} failed: {e}")
+                    continue
+
+            global LAST_PREDICTION_CONTEXT
+
+            LAST_PREDICTION_CONTEXT = {
+                "mode": "fusion",
+                "components": {}
+            }
+
+            for cp in component_predictions:
+                LAST_PREDICTION_CONTEXT["components"][cp.component] = {
+                    "model": cp.model,
+                    "features": cp.features_df.values[0].copy(),
+                    "feature_names": cp.feature_names,
+                    "prediction": cp.prediction,
+                    "model_name": cp.model_name
+                }
+
+            request_id = str(uuid.uuid4())
+            fusion_shap = []
+
+            for cp in component_predictions:
+
+                try:
+
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    background_path = Path("assets/shap") / model_name / "background.npy"
+
+                    if not background_path.exists():
+                        continue
+
+                    background = np.load(background_path, allow_pickle=True)
+
+                    shap_dir = Path("assets/shap/local") / request_id / component
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=feature_names,
+                        model_type=model_name.split("_")[-1]
+                    )
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values,
+                        save_dir=shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    fusion_shap.append({
+                        "component": component,
+                        "waterfall": f"/assets/shap/local/{request_id}/{component}/waterfall.png"
+                    })
+
+                except Exception as shap_error:
+                    logger.warning(f"SHAP failed for {component}: {shap_error}")
+
+            # for counterfactuals
+            fusion_counterfactuals = []
+
+            for cp in component_predictions:
+
+                try:
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    cf_result = generate_counterfactual(
+                        model=model,
+                        x_instance=features_df.values[0],
+                        feature_names=feature_names,
+                        ae_key=model_name,
+                        predicted_class=predicted_class
+                    )
+
+                    # Only append if CF generated
+                    if cf_result is not None:
+                        fusion_counterfactuals.append({
+                            "component": component,
+                            "counterfactual": cf_result
+                        })
+
+                except Exception as cf_error:
+                    logger.warning(
+                        f"[CF] Counterfactual failed for component={component}: {cf_error}"
+                    )
                     continue
             
             if not component_predictions:
@@ -1791,29 +1893,39 @@ async def predict_from_transcript(
             
             # Clean up temp file
             tmp_path.unlink()
-            
-            return {
+
+            response_data = {
                 'prediction': fused.final_prediction,
                 'confidence': fused.confidence,
                 'probabilities': fused.final_probabilities,
                 'model_used': 'fusion',
-                'models_used': [cp.model_name for cp in component_predictions],  # List all models used
+                'models_used': [cp.model_name for cp in component_predictions],
+
                 'component_breakdown': [
                     {
                         'component': cp.component,
                         'prediction': cp.prediction,
                         'confidence': cp.confidence,
                         'probabilities': cp.probabilities,
-                        'model_name': cp.model_name
+                        'model_name': cp.model_name,
                     }
                     for cp in component_predictions
                 ],
+
                 'participant_id': transcript.participant_id,
                 'features_extracted': len(feature_extractor.extract_from_transcript(transcript).features),
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
                 'input_type': 'chat_file',
             }
+
+            if fusion_shap:
+                response_data['fusion_shap'] = fusion_shap
+
+            if fusion_counterfactuals:
+                response_data['fusion_counterfactual'] = fusion_counterfactuals
+
+            return response_data
         
         else:
             # Single component prediction
@@ -1937,6 +2049,16 @@ async def predict_from_transcript(
             
             result = make_prediction(model, features_df, used_model_name)
 
+            predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+            LAST_PREDICTION_CONTEXT = {
+                "model": model,
+                "features": features_df.values[0].copy(),
+                "feature_names": selected_features,
+                "prediction": result["prediction"],
+                "model_name": used_model_name
+            }
+
             # SHAP explanation (optional, may not be available for all models)
             request_id = str(uuid.uuid4())
             local_shap_dir = Path("assets/shap/local") / request_id
@@ -1946,9 +2068,7 @@ async def predict_from_transcript(
                 # Load background data saved during training
                 background_path = Path("assets/shap") / used_model_name / "background.npy"
                 if background_path.exists():
-                    background = np.load(background_path)
-
-                    predicted_class = 1 if result["prediction"] == "ASD" else 0
+                    background = np.load(background_path, allow_pickle=True)
 
                     shap_manager = SHAPManager(
                         model=model,
@@ -1971,14 +2091,14 @@ async def predict_from_transcript(
                 logger.warning(f"SHAP explanation not available: {shap_error}")
                 # Continue without SHAP
 
-            #Generate Counterfactuals
-            component = "_".join(used_model_name.split("_")[:-1])
-            logger.info(component)
+            # Generate Counterfactuals
+            ae_key = used_model_name
+            logger.info(ae_key)
             cf_result = generate_counterfactual(
                 model=model,
                 x_instance=features_df.values[0],
                 feature_names=selected_features,
-                component=component,
+                ae_key=ae_key,
                 predicted_class=predicted_class
             )
             
@@ -1990,7 +2110,7 @@ async def predict_from_transcript(
             
             # Clean up temp file
             tmp_path.unlink()
-            
+
             response_data = {
                 **result,
                 'participant_id': transcript.participant_id,
@@ -2612,6 +2732,29 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
                     sw = compute_sample_weight(class_weight='balanced', y=y_train)
                     model.fit(X_train, y_train, sample_weight=sw)
             trained_models[model_type] = model
+
+            # ============================
+            # Train Autoencoder PER MODEL
+            # ============================
+
+            if enable_autoencoder:
+                from pathlib import Path
+                from src.interpretability.counterfactuals.train_autoencoder import train_autoencoder
+
+                model_name = f"{component}_{model_type}"
+
+                logger.info(f"[AE] Training autoencoder for model={model_name}")
+
+                ae_path = train_autoencoder(
+                    X_train=X_train.values,
+                    model_name=model_name,  # IMPORTANT: per model
+                    save_dir=Path("models/counterfactuals"),
+                    epochs=100,
+                    lr=1e-3,
+                    device="cpu"
+                )
+
+                logger.info(f"[AE] Autoencoder saved at {ae_path}")
             
             # Evaluate
             training_state['message'] = f'Evaluating {model_type}...'
@@ -3222,6 +3365,121 @@ def get_feature_guidelines():
         "rows": df.fillna("").to_dict(orient="records")
     }
 
+@app.post("/counterfactual/chat")
+async def counterfactual_chat(req: dict):
+
+    if not LAST_PREDICTION_CONTEXT:
+        raise HTTPException(400, "Run a prediction first")
+
+    question = req["question"]
+
+    # GPT parses question
+    parsed = parse_clinician_question(question)
+
+    parsed_feature = parsed["feature"]
+
+    logger.info(f"Parsed feature (LLM): {parsed_feature}")
+
+    # semantic + fuzzy resolution
+    mapped_feature = resolve_feature(parsed_feature)
+
+    logger.info(
+        f"Mapped clinician feature '{parsed_feature}' → '{mapped_feature}'"
+    )
+
+    delta = parsed["delta"]
+    if parsed["direction"] == "decrease":
+        delta *= -1
+
+    context = LAST_PREDICTION_CONTEXT
+
+    # -------------------------------------------------
+    # FUSION MODE
+    # -------------------------------------------------
+    if context.get("mode") == "fusion":
+
+        for component, comp_data in context["components"].items():
+
+            model = comp_data["model"]
+            x = comp_data["features"].copy()
+            feature_names = comp_data["feature_names"]
+
+            if mapped_feature in feature_names:
+
+                logger.info(
+                    f"Feature '{mapped_feature}' belongs to component '{component}'"
+                )
+
+                idx = feature_names.index(mapped_feature)
+
+                # simulate change
+                x[idx] += delta
+
+                proba = model.predict_proba([x])[0]
+                pred = model.predict([x])[0]
+                confidence = float(max(proba))
+
+                explanation = generate_cf_explanation(
+                    question,
+                    mapped_feature,
+                    delta,
+                    str(pred),
+                    confidence
+                )
+
+                return {
+                    "component": component,
+                    "interpreted_feature": mapped_feature,
+                    "delta": delta,
+                    "new_prediction": str(pred),
+                    "confidence": confidence,
+                    "explanation": explanation
+                }
+
+        raise HTTPException(
+            400,
+            f"Feature '{parsed_feature}' could not be mapped to any component."
+        )
+
+    # -------------------------------------------------
+    # SINGLE MODEL MODE (existing behaviour)
+    # -------------------------------------------------
+
+    model = context["model"]
+    x = context["features"].copy()
+    feature_names = context["feature_names"]
+
+    logger.info(f"Feature names: {feature_names}")
+
+    if mapped_feature not in feature_names:
+        raise HTTPException(
+            400,
+            f"Feature '{parsed_feature}' could not be mapped to model features."
+        )
+
+    idx = feature_names.index(mapped_feature)
+
+    x[idx] += delta
+
+    proba = model.predict_proba([x])[0]
+    pred = model.predict([x])[0]
+    confidence = float(max(proba))
+
+    explanation = generate_cf_explanation(
+        question,
+        mapped_feature,
+        delta,
+        str(pred),
+        confidence
+    )
+
+    return {
+        "interpreted_feature": mapped_feature,
+        "delta": delta,
+        "new_prediction": str(pred),
+        "confidence": confidence,
+        "explanation": explanation
+    }
 
 # Startup and shutdown events
 @app.on_event("startup")

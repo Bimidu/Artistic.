@@ -44,6 +44,10 @@ class ComponentPrediction:
     probabilities: Dict[str, float]
     model_name: str = ""
     confidence: float = 1.0
+    # NEW optional fields for SHAP
+    model: Optional[Any] = None
+    features_df: Optional[pd.DataFrame] = None
+    feature_names: Optional[list] = None
     
     @property
     def is_asd(self) -> bool:

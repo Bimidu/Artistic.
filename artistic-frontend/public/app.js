@@ -168,6 +168,7 @@ window.loadAvailableModels = loadAvailableModels;
 window.toggleHyperparameters = toggleHyperparameters;
 window.simulateCounterfactualChat = simulateCounterfactualChat;
 window.closeModelDetails = closeModelDetails;
+window.askCounterfactualGPT = askCounterfactualGPT;
 
 // Run once on initial page load (Home mounts this script after DOM is ready)
 initHomeUiBindings();
@@ -922,11 +923,46 @@ function displayResults(data) {
     // Local SHAP Waterfall
     // ==============================
     const localShapSection = document.getElementById('localShapSection');
-    const localShapImg = document.getElementById('localShapWaterfall');
+    const localShapContainer = document.getElementById('localShapContainer');
 
+    localShapContainer.innerHTML = "";
+
+    // SINGLE MODEL
     if (data.local_shap && data.local_shap.waterfall) {
-        localShapImg.src =
-            getApiUrl() + data.local_shap.waterfall + '?t=' + Date.now();
+
+        const img = document.createElement("img");
+        img.src = getApiUrl() + data.local_shap.waterfall + '?t=' + Date.now();
+        img.className = "shap-image";
+
+        localShapContainer.appendChild(img);
+        localShapSection.classList.remove('hidden');
+
+    }
+
+    // FUSION MODEL
+    else if (data.fusion_shap && data.fusion_shap.length) {
+
+        data.fusion_shap.forEach(comp => {
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "fusion-shap-block";
+
+            const title = document.createElement("h4");
+            title.className = "text-sm font-medium text-primary-800 mb-2";
+            title.textContent = comp.component
+                .replace(/_/g, " ")
+                .replace(/\b\w/g, c => c.toUpperCase());
+
+            const img = document.createElement("img");
+            img.src = getApiUrl() + comp.waterfall + '?t=' + Date.now();
+            img.className = "w-full rounded-xl border border-primary-100";
+
+            wrapper.appendChild(title);
+            wrapper.appendChild(img);
+
+            localShapContainer.appendChild(wrapper);
+        });
+
         localShapSection.classList.remove('hidden');
     } else {
         localShapSection.classList.add('hidden');
@@ -941,8 +977,36 @@ function displayResults(data) {
     }
 
     //Counterfactuals
+    // SINGLE MODEL
     if (data.counterfactual) {
+
         renderCounterfactual(data.counterfactual);
+
+        document
+            .getElementById("cfChatSection")
+            .classList.remove("hidden");
+    }
+
+
+    // FUSION MODEL
+    else if (data.fusion_counterfactual && data.fusion_counterfactual.length) {
+
+        const tbody = document.getElementById("cfTableBody");
+        tbody.innerHTML = "";
+
+        let first = true;
+
+        data.fusion_counterfactual.forEach(cf => {
+
+            renderCounterfactual(
+                cf.counterfactual,
+                cf.component,
+                !first
+            );
+
+            first = false;
+        });
+
         document
             .getElementById("cfChatSection")
             .classList.remove("hidden");
@@ -2083,61 +2147,89 @@ function generateWhatIfText(counterfactual) {
 `;
 }
 
-function renderCounterfactual(counterfactual) {
+function renderCounterfactual(counterfactual, componentName = null, append = false) {
     if (!counterfactual) return;
 
-    // Show section
-    document
-        .getElementById("counterfactualSection")
-        .classList.remove("hidden");
+    const section = document.getElementById("counterfactualSection");
+    section.classList.remove("hidden");
 
-    // What-if text
-    document.getElementById("whatIfBox").innerHTML =
-        generateWhatIfText(counterfactual);
+    if (!append) {
+        document.getElementById("whatIfBox").innerHTML =
+            generateWhatIfText(counterfactual);
 
-    // Summary
-    document.getElementById("cfFlipped").textContent =
-        counterfactual.prediction_flipped ? "Yes " : "No ";
+        document.getElementById("cfFlipped").textContent =
+            counterfactual.prediction_flipped ? "Yes" : "No";
 
-    document.getElementById("cfL2").textContent =
-        counterfactual.l2_change.toFixed(3);
+        document.getElementById("cfL2").textContent =
+            counterfactual.l2_change.toFixed(3);
 
-    document.getElementById("cfTotal").textContent =
-        counterfactual.total_features_changed;
+        document.getElementById("cfTotal").textContent =
+            counterfactual.total_features_changed;
+    }
 
-    // Table
     const tbody = document.getElementById("cfTableBody");
-    tbody.innerHTML = "";
 
-    counterfactual.top_changes.forEach(change => {
+    if (!append) {
+        tbody.innerHTML = "";
+    }
+
+    const changes = counterfactual.top_changes;
+    const rowspan = changes.length;
+
+    changes.forEach((change, index) => {
+
         const row = document.createElement("tr");
         row.className = "border-b last:border-b-0";
 
+        let componentCell = "";
+
+        // Only create component cell for first row
+        // Color mapping for components
+        const componentColors = {
+            syntactic_semantic: "bg-blue-100 text-blue-800",
+            pragmatic_conversational: "bg-green-100 text-green-800",
+            acoustic_prosodic: "bg-purple-100 text-purple-800"
+        };
+
+        // Get color for current component
+        let colorClass = componentColors[componentName] || "bg-gray-100 text-gray-800";
+
+        if (componentName && index === 0) {
+            componentCell = `
+                <td rowspan="${rowspan}" 
+                    class="align-middle text-center px-4">
+                    
+                    <div class="${colorClass} text-xs font-semibold px-3 py-2 rounded-lg inline-block">
+                        ${componentName.replace(/_/g," ").toUpperCase()}
+                    </div>
+                </td>
+            `;
+        }
+
         row.innerHTML = `
+            ${componentCell}
+
             <td class="py-2 font-medium">
                 ${change.feature.replaceAll("_", " ")}
             </td>
+
             <td class="py-2">
                 ${change.from.toFixed(3)}
             </td>
+
             <td class="py-2">
                 ${change.to.toFixed(3)}
             </td>
-            <td class="py-2 ${change.change > 0 ? "text-green-600" : "text-red-600"
-            }">
+
+            <td class="py-2 ${change.change > 0 ? "text-green-600" : "text-red-600"}">
                 ${change.change > 0 ? "+" : ""}
                 ${change.change.toFixed(3)}
             </td>
         `;
 
         tbody.appendChild(row);
-
     });
-
-
 }
-
-
 
 // Load models for prediction dropdowns
 async function loadModelsForPrediction() {
@@ -3567,6 +3659,46 @@ function setupWaveformTooltips(canvas, waveformData) {
     canvas.addEventListener('mouseleave', () => {
         tooltip.style.display = 'none';
     });
+}
+
+async function askCounterfactualGPT() {
+
+    const input = document.getElementById("cfUserInput");
+    const responseBox = document.getElementById("cfChatResponse");
+
+    const question = input?.value?.trim();
+    if (!question) return;
+
+    responseBox?.classList.remove("hidden");
+    if (responseBox) responseBox.innerHTML = "Thinking...";
+
+    try {
+        const res = await fetch(`${getApiUrl()}/counterfactual/chat`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ question })
+        });
+
+        const data = await res.json();
+
+        if (responseBox) {
+            responseBox.innerHTML = `
+                <strong>Result:</strong><br>
+                Prediction: ${data.new_prediction}<br>
+                Confidence: ${(data.confidence * 100).toFixed(1)}%<br><br>
+                <strong>Clinical Explanation:</strong><br>
+                ${data.explanation}
+            `;
+        }
+
+    } catch (err) {
+        console.error(err);
+        if (responseBox) {
+            responseBox.innerHTML = "Failed to generate explanation.";
+        }
+    }
 }
 
 // Test connection on load
