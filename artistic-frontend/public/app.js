@@ -448,6 +448,8 @@ function handleFileSelect(file, input, selected, allowedExtensions) {
 }
 
 // API calls
+let _connectionPollTimer = null;
+
 async function testConnection() {
     const statusDot = document.getElementById('statusDot');
     const statusText = document.getElementById('statusText');
@@ -459,7 +461,11 @@ async function testConnection() {
             statusDot.className = 'w-2.5 h-2.5 rounded-full bg-green-400 status-connected';
             statusText.textContent = `Connected (${data.models_available} models, ${data.features_supported} features)`;
 
-            // Load models for prediction dropdowns
+            if (_connectionPollTimer !== null) {
+                clearTimeout(_connectionPollTimer);
+                _connectionPollTimer = null;
+            }
+
             loadModelsForPrediction();
         } else {
             throw new Error('Not healthy');
@@ -467,6 +473,13 @@ async function testConnection() {
     } catch (error) {
         statusDot.className = 'w-2.5 h-2.5 rounded-full bg-red-400';
         statusText.textContent = 'Disconnected';
+
+        if (_connectionPollTimer === null) {
+            _connectionPollTimer = setTimeout(function poll() {
+                _connectionPollTimer = null;
+                testConnection();
+            }, 1000);
+        }
     }
 }
 
@@ -595,13 +608,13 @@ function updateAudioProgressUI(pct, stage, detail) {
     AUDIO_PIPELINE_STEPS.forEach(s => {
         const el = document.getElementById(`apstep-${s.id}`);
         if (!el) return;
-        const iconBox  = el.querySelector('.ap-step-icon');
-        const iconSvg  = el.querySelector('.ap-icon-svg');
+        const iconBox = el.querySelector('.ap-step-icon');
+        const iconSvg = el.querySelector('.ap-icon-svg');
         const iconCheck = el.querySelector('.ap-icon-check');
-        const iconSpin  = el.querySelector('.ap-icon-spin');
-        const labelEl  = el.querySelector('.ap-step-label');
-        const subEl    = el.querySelector('.ap-step-sub');
-        const badgeEl  = el.querySelector('.ap-step-badge');
+        const iconSpin = el.querySelector('.ap-icon-spin');
+        const labelEl = el.querySelector('.ap-step-label');
+        const subEl = el.querySelector('.ap-step-sub');
+        const badgeEl = el.querySelector('.ap-step-badge');
         const st = _stepStatus(s, pct);
 
         // Reset all state classes
@@ -619,20 +632,20 @@ function updateAudioProgressUI(pct, stage, detail) {
             iconBox.classList.add('bg-lime-50', 'border-lime-200');
             iconCheck.classList.remove('hidden');
             labelEl.className = 'ap-step-label text-sm text-primary-700 font-medium transition-all duration-300';
-            subEl.className   = 'ap-step-sub text-xs text-primary-400 mt-0.5 transition-all duration-300';
+            subEl.className = 'ap-step-sub text-xs text-primary-400 mt-0.5 transition-all duration-300';
             badgeEl.innerHTML = `<span class="text-xs text-lime-700 font-medium">Done</span>`;
         } else if (st === 'active') {
             iconBox.classList.add('bg-primary-900', 'border-primary-900');
             iconSpin.classList.remove('hidden'); // spinner replaces the svg icon
             labelEl.className = 'ap-step-label text-sm text-primary-900 font-medium transition-all duration-300';
-            subEl.className   = 'ap-step-sub text-xs text-primary-500 mt-0.5 transition-all duration-300';
+            subEl.className = 'ap-step-sub text-xs text-primary-500 mt-0.5 transition-all duration-300';
             badgeEl.innerHTML = `<span class="inline-flex items-center gap-1 text-xs text-primary-500"><span class="w-1.5 h-1.5 rounded-full bg-primary-900 animate-pulse"></span>Running</span>`;
         } else {
             iconBox.classList.add('bg-white', 'border-primary-200');
             iconSvg.classList.remove('hidden');
             iconSvg.classList.add('text-primary-300');
             labelEl.className = 'ap-step-label text-sm text-primary-400 font-normal transition-all duration-300';
-            subEl.className   = 'ap-step-sub text-xs text-primary-300 mt-0.5 transition-all duration-300';
+            subEl.className = 'ap-step-sub text-xs text-primary-300 mt-0.5 transition-all duration-300';
         }
     });
 }
@@ -3253,15 +3266,15 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
             const energy = envelope[i];
             const isSpeech = energy > silenceThreshold;
 
-            // Color coding: active speech (teal) vs pause/silence (light gray)
+            // Color coding: active speech (dark green) vs pause/silence (light gray)
             if (isSpeech) {
-                // Gradient from light to darker teal based on energy level
+                // Gradient from light to darker green based on energy level
                 const maxEnergy = waveformData.energyStats?.max || 1;
                 const energyRatio = Math.min(energy / maxEnergy, 1);
-                // Light teal for low energy speech, darker for high energy
-                const r = Math.floor(94 + (energyRatio * 20)); // 94-114
-                const g = Math.floor(234 - (energyRatio * 30)); // 234-204
-                const b = Math.floor(212 - (energyRatio * 20)); // 212-192
+                // Light green for low energy speech, darker for high energy
+                const r = Math.floor(34 - (energyRatio * 15)); // 34-19 (dark green range)
+                const g = Math.floor(197 - (energyRatio * 50)); // 197-147 (green range)
+                const b = Math.floor(94 - (energyRatio * 30)); // 94-64 (green range)
                 ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
             } else {
                 // Light gray for silence/pause regions

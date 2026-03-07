@@ -458,57 +458,84 @@ export default function Home() {
           </div>
 
           {/* Waveform Display */}
+         {/* Waveform Display */}
           <div id="waveformSectionResults" className="hidden mt-8 bg-white border border-primary-200 rounded-2xl overflow-hidden">
-            <div className="px-8 py-6 border-b border-primary-100">
-              <h3 className="text-lg font-normal text-primary-900 mb-0.5" style={{ letterSpacing: '-0.02em' }}>Child Speech Waveform</h3>
-              <p className="text-sm text-primary-500">Visual representation of the child&apos;s speech audio</p>
+
+            {/* Header */}
+            <div className="px-8 py-6 border-b border-primary-100 flex items-center justify-between">
+              <div>
+                <h3 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Speech Waveform</h3>
+                <p className="text-sm text-primary-400 mt-0.5">Visual representation of the child&apos;s speech audio</p>
+              </div>
+              <audio id="waveformAudioResults" controls className="h-9 max-w-[220px]" />
             </div>
-            <div className="p-8">
-              <div className="bg-white rounded-xl p-5 border border-primary-200">
-                <div className="mb-3 p-3 bg-lime-50 border-l-4 border-lime-600 rounded">
-                  <p className="text-sm text-lime-900">
-                    <strong>Note:</strong> Acoustic and prosodic features are extracted as global statistical summaries from the entire speech signal, not from specific time segments.
-                  </p>
+
+            <div className="p-8 space-y-5">
+
+              {/* Notice */}
+              <div className="flex items-start gap-3 px-4 py-3 rounded-xl bg-primary-50 border border-primary-100">
+                <svg className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                </svg>
+                <p className="text-xs text-primary-600 leading-relaxed">
+                  Acoustic and prosodic features are extracted as{' '}
+                  <span className="font-semibold text-primary-800">global statistical summaries</span>{' '}
+                  from the entire speech signal, not from specific time segments.
+                </p>
+              </div>
+
+              {/* Canvas — clean dark panel, no border */}
+              <div
+                className="relative rounded-xl overflow-hidden"
+                style={{ background: 'linear-gradient(160deg,#0d1117 0%,#111827 100%)' }}
+              >
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px)',
+                    backgroundSize: '40px 40px',
+                  }}
+                />
+                <canvas
+                  id="waveformCanvasResults"
+                  className="relative w-full"
+                  style={{ height: '160px', display: 'block' }}
+                />
+              </div>
+
+              {/* Legend */}
+              <div className="px-1 space-y-2">
+                <div className="flex flex-wrap gap-x-5 gap-y-2">
+                  {[
+                    { color: '#6366f1', label: 'Raw speech signal (amplitude over time)' },
+                    { color: '#94a3b8', label: 'Relative speech energy (loudness distribution)' },
+                    { color: '#f59e0b', label: 'Detected speech-silence boundaries' },
+                    { color: '#22c55e', label: 'Detected speech activity timeline' },
+                  ].map(({ color, label }) => (
+                    <div key={label} className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ background: color }} />
+                      <span className="text-xs text-primary-500">{label}</span>
+                    </div>
+                  ))}
                 </div>
-                <canvas id="waveformCanvasResults" className="w-full" style={{ height: '150px' }}></canvas>
-                <div className="mt-3 px-2">
-                  <div className="flex flex-wrap items-center gap-4 text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-3 bg-blue-500 rounded-sm"></div>
-                      <span className="text-primary-700">Raw speech signal (amplitude over time)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-3 bg-gray-300 rounded-sm"></div>
-                      <span className="text-primary-700">Relative speech energy (loudness distribution)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-3 bg-orange-400 rounded-sm"></div>
-                      <span className="text-primary-700">Detected speech-silence boundaries</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-3 bg-teal-500 rounded-sm"></div>
-                      <span className="text-primary-700">Detected speech activity timeline (used for pause and rhythm analysis)</span>
-                    </div>
-                  </div>
-                  <p className="mt-2 text-xs text-primary-600 italic">
-                    These visual elements represent signal-level properties of the audio.
-                    Acoustic and prosodic features are computed as global statistical summaries.
-                  </p>
-                </div>
-                <div className="mt-4 p-4 bg-primary-50 rounded-lg border border-primary-200">
-                  <p className="text-sm font-medium text-primary-800 mb-2">Observed Speech Characteristics:</p>
-                  <div id="waveformSummaryResults" className="text-sm text-primary-700 leading-relaxed">
-                    <p>Analyzing speech characteristics...</p>
-                  </div>
-                </div>
-                <div className="mt-4 flex items-center justify-between text-sm text-primary-600">
-                  <span id="waveformInfoResults">Loading waveform...</span>
-                  <audio id="waveformAudioResults" controls className="max-w-xs"></audio>
+                <p className="text-xs text-primary-600 italic">
+                  These visual elements represent signal-level properties. Acoustic and prosodic features are computed as global statistical summaries.
+                </p>
+              </div>
+
+              {/* Observed characteristics */}
+              <div className="rounded-xl border border-primary-100 bg-primary-50 p-5">
+                <p className="text-xs font-medium text-primary-600 uppercase tracking-widest mb-3">Observed Speech Characteristics</p>
+                <div id="waveformSummaryResults" className="text-sm text-primary-700 leading-relaxed">
+                  <p>Analyzing speech characteristics...</p>
                 </div>
               </div>
+
+              <p id="waveformInfoResults" className="text-xs text-primary-600">Loading waveform...</p>
+
             </div>
           </div>
-
           {/* Annotated Transcript */}
           <div className="mt-8 hidden bg-white border border-primary-200 rounded-2xl overflow-hidden" id="annotationCard">
 

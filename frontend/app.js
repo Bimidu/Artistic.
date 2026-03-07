@@ -2734,13 +2734,13 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     const stepX = width / waveform.length;
     
     // Draw background
-    ctx.fillStyle = '#F3F4F6';
-    ctx.fillRect(0, 0, width, waveformHeight);
+    ctx.fillStyle = '#0d1117';
+ctx.fillRect(0, 0, width, waveformHeight);
     
     // Draw subtle silence shading (low energy regions = pauses)
     // This provides visual context for speech vs silence without implying feature extraction
     if (waveformData.silenceRegions && waveformData.silenceRegions.length > 0) {
-        ctx.fillStyle = 'rgba(156, 163, 175, 0.15)'; // Very subtle gray shading
+        ctx.fillStyle = 'rgba(255,255,255,0.04)'; // Very subtle gray shading
         waveformData.silenceRegions.forEach(region => {
             const x = (region.idx / waveform.length) * width;
             ctx.fillRect(x, 0, stepX, waveformHeight);
@@ -2830,13 +2830,14 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     ctx.stroke();
     
     // Draw center line (zero amplitude reference)
-    ctx.strokeStyle = '#9CA3AF';
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, centerY);
     ctx.lineTo(width, centerY);
     ctx.stroke();
     
+
     // Draw speech activity bar below waveform
     // This provides an intuitive visual summary of speech vs silence regions
     // Design: Thin horizontal bar with color-coded segments
@@ -2844,7 +2845,7 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     const silenceThreshold = waveformData.energyStats?.avg * 0.3 || 0.1;
     
     // Draw activity bar background
-    ctx.fillStyle = '#E5E7EB';
+    ctx.fillStyle = '#1f2937';
     ctx.fillRect(0, activityBarY, width, activityBarHeight);
     
     // Draw speech activity segments
@@ -2863,13 +2864,13 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
                 const maxEnergy = waveformData.energyStats?.max || 1;
                 const energyRatio = Math.min(energy / maxEnergy, 1);
                 // Light teal for low energy speech, darker for high energy
-                const r = Math.floor(94 + (energyRatio * 20)); // 94-114
-                const g = Math.floor(234 - (energyRatio * 30)); // 234-204
-                const b = Math.floor(212 - (energyRatio * 20)); // 212-192
-                ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                    const r = Math.floor(251 - (energyRatio * 15)); // rose
+    const g = Math.floor(113 - (energyRatio * 30));
+    const b = Math.floor(133 - (energyRatio * 30));
+    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
             } else {
                 // Light gray for silence/pause regions
-                ctx.fillStyle = '#D1D5DB';
+                ctx.fillStyle = '#374151';
             }
             
             ctx.fillRect(x, activityBarY, Math.max(segmentWidth, 1), activityBarHeight);
@@ -2878,7 +2879,7 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     
     // Draw time markers at bottom (for temporal reference only)
     if (waveformData.duration) {
-        ctx.fillStyle = '#6B7280';
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
         ctx.font = '10px sans-serif';
         ctx.textAlign = 'center';
         const timeMarkers = 5;
