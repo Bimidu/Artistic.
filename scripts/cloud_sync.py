@@ -60,7 +60,7 @@ def upload_models(force_replace: bool = False):
     hf_manager = get_hf_manager()
     
     if not hf_manager.is_authenticated:
-        print("❌ Error: Not authenticated with HuggingFace Hub")
+        print(" Error: Not authenticated with HuggingFace Hub")
         print("   Please run: huggingface-cli login")
         return 1
     
@@ -89,7 +89,7 @@ def upload_datasets():
     hf_manager = get_hf_manager()
     
     if not hf_manager.is_authenticated:
-        print("❌ Error: Not authenticated with HuggingFace Hub")
+        print(" Error: Not authenticated with HuggingFace Hub")
         print("   Please run: huggingface-cli login")
         return 1
     
@@ -116,7 +116,7 @@ def download_model(model_name: str):
     hf_manager = get_hf_manager()
     
     if not hf_manager.is_authenticated:
-        print("❌ Error: Not authenticated with HuggingFace Hub")
+        print(" Error: Not authenticated with HuggingFace Hub")
         print("   Please run: huggingface-cli login")
         return 1
     
@@ -143,7 +143,7 @@ def download_dataset(dataset_name: str):
     hf_manager = get_hf_manager()
     
     if not hf_manager.is_authenticated:
-        print("❌ Error: Not authenticated with HuggingFace Hub")
+        print(" Error: Not authenticated with HuggingFace Hub")
         print("   Please run: huggingface-cli login")
         return 1
     
@@ -166,7 +166,7 @@ def list_models():
     hf_manager = get_hf_manager()
     
     if not hf_manager.is_authenticated:
-        print("❌ Error: Not authenticated with HuggingFace Hub")
+        print(" Error: Not authenticated with HuggingFace Hub")
         print("   Please run: huggingface-cli login")
         return 1
     
@@ -191,7 +191,7 @@ def list_datasets():
     hf_manager = get_hf_manager()
     
     if not hf_manager.is_authenticated:
-        print("❌ Error: Not authenticated with HuggingFace Hub")
+        print(" Error: Not authenticated with HuggingFace Hub")
         print("   Please run: huggingface-cli login")
         return 1
     
@@ -227,7 +227,7 @@ def show_status():
         print(f"\nCloud Models:       {len(info.get('cloud_models', []))}")
         print(f"Cloud Datasets:     {len(info.get('cloud_datasets', []))}")
     else:
-        print("\n⚠️  Cloud storage not available")
+        print("\n  Cloud storage not available")
         print("   Run 'huggingface-cli login' to authenticate")
     
     # Show local status
@@ -322,7 +322,7 @@ Setup:
         return 130
     except Exception as e:
         logger.error(f"Unexpected error: {e}", exc_info=True)
-        print(f"\n❌ Error: {e}")
+        print(f"\n Error: {e}")
         return 1
 
 
