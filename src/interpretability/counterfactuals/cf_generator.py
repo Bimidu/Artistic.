@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 from .autoencoder import FeatureAutoencoder
 
-
 class CounterfactualGenerator:
     def __init__(
         self,
@@ -20,47 +19,68 @@ class CounterfactualGenerator:
         self.ae.load_state_dict(torch.load(autoencoder_path))
         self.ae.eval()
 
+    def _realism_score(self, x):
+        """Autoencoder reconstruction error"""
+        x_t = torch.tensor(x, dtype=torch.float32)
+
+        with torch.no_grad():
+            z = self.ae.encode(x_t)
+            recon = self.ae.decode(z)
+
+        return torch.mean((recon - x_t) ** 2).item()
+
     def generate(
         self,
         x: np.ndarray,
         target_class: int,
-        max_steps: int = 500,
-        step_size: float = 0.01
+        max_iter: int = 3000,
+        step_scale: float = 0.3
     ):
-        x_cf = torch.tensor(
-            x,
-            dtype=torch.float32,
-            requires_grad=True
-        )
+        """
+        Gradient-free counterfactual search
+        """
 
-        optimizer = torch.optim.Adam([x_cf], lr=step_size)
+        x = x.copy()
 
-        for _ in range(max_steps):
-            optimizer.zero_grad()
+        best_cf = x.copy()
+        best_score = -np.inf
 
-            # Classifier prediction
+        original = x.copy()
+
+        for _ in range(max_iter):
+
+            # random perturbation
+            candidate = x + np.random.normal(
+                loc=0,
+                scale=step_scale,
+                size=x.shape
+            )
+
+            # classifier probability
             X_df = pd.DataFrame(
-                x_cf.detach().numpy().reshape(1, -1),
+                candidate.reshape(1, -1),
                 columns=self.feature_names
             )
 
             proba = self.model.predict_proba(X_df)[0][target_class]
 
-            loss_pred = -torch.tensor(proba)
+            # proximity penalty (prefer minimal changes)
+            proximity = np.linalg.norm(candidate - original)
 
-            # Realism loss (autoencoder reconstruction)
-            z_cf = self.ae.encode(x_cf)
-            x_recon = self.ae.decode(z_cf)
+            # realism penalty
+            realism = self._realism_score(candidate)
 
-            loss_realism = torch.mean((x_recon - x_cf) ** 2)
+            # final score
+            score = proba - 0.2 * proximity - 0.1 * realism
 
-            loss = loss_pred + 0.1 * loss_realism
-            loss.backward()
-            optimizer.step()
+            if score > best_score:
+                best_score = score
+                best_cf = candidate
 
+            # stop if prediction flipped
             if proba > self.threshold:
-                break
+                return candidate
 
-        return x_cf.detach().numpy()
+        return best_cf
 
 

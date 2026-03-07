@@ -15,6 +15,8 @@ declare global {
     startTraining?: () => void | Promise<void>;
     loadAvailableModels?: () => void | Promise<void>;
 
+    askCounterfactualGPT?: () => void | Promise<void>;
+
     toggleHyperparameters?: () => void;
     simulateCounterfactualChat?: () => void;
     closeModelDetails?: (event?: unknown) => void;

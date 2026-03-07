@@ -862,6 +862,214 @@ const ACOUSTIC_CATEGORIES: FeatureCategory[] = [
     features: CHROMA_FEATURES,
   },
 ];
+// ── SYNTACTIC / SEMANTIC FEATURES ───────────────────────────────────────────
+const SYNTACTIC_COMPLEXITY_FEATURES: Feature[] = [
+  { name: 'avg_dependency_depth', label: 'Average Dependency Depth', description: 'On average, how many levels deep each word sits in the grammatical parse tree — a direct measure of how structurally layered the sentences are.', method: 'spaCy en_core_web_sm dependency parser; for every token, walk up token.head links until root and count steps; mean across all tokens in all child utterances', asdRelevance: 'Shallower dependency trees indicate simpler sentence structures, consistent with reduced syntactic complexity in ASD language profiles.' },
+  { name: 'max_dependency_depth', label: 'Maximum Dependency Depth', description: 'The deepest any single word goes in the parse tree — the most structurally complex point found anywhere in the child\'s speech.', method: 'Maximum of all per-token dependency depths across all child utterances', asdRelevance: 'A low maximum depth indicates the child never produces deeply nested constructions — useful for identifying whether complex structures are entirely absent.' },
+  { name: 'avg_dependency_distance', label: 'Average Dependency Distance', description: 'On average, how far apart (in words) a word is from the word it grammatically depends on. Longer distances indicate more complex embedded structures.', method: 'For every non-root token: abs(token.i − token.head.i); mean across all such pairs', asdRelevance: 'Short average dependency distances are associated with simple, direct constructions; children with ASD often produce shorter dependency chains.' },
+  { name: 'clause_complexity', label: 'Clause Complexity', description: 'On average, how many explicit clause markers (words like "because", "when", "if", "that") appear per utterance — a direct count of clause-linking complexity.', method: 'Count of tokens with spaCy dep_ == "mark" (clause markers) divided by total number of child utterances', asdRelevance: 'Low clause complexity indicates the child rarely uses subordinate clauses, reflecting limited sentence elaboration ability.' },
+  { name: 'subordination_index', label: 'Subordination Index', description: 'On average, how many subordinate clauses (embedded relative clauses, complement clauses, adverbial clauses) appear per utterance.', method: 'Count of tokens whose spaCy dep_ is in [advcl, acl, ccomp, xcomp, relcl] divided by number of utterances', asdRelevance: 'Subordination is a hallmark of complex language; a low index is associated with less mature grammar and ASD communication profiles.' },
+  { name: 'coordination_index', label: 'Coordination Index', description: 'On average, how many coordinate clauses (clauses joined with "and", "but", "or") appear per utterance — a measure of sentence chaining.', method: 'Count of tokens with spaCy dep_ == "conj" divided by total utterances', asdRelevance: 'Children with ASD sometimes favour coordination over subordination as a simpler sentence-building strategy.' },
+];
+
+const GRAMMATICAL_ACCURACY_FEATURES: Feature[] = [
+  { name: 'grammatical_error_rate', label: 'Grammatical Error Rate', description: 'What fraction of the child\'s utterances are judged to be incomplete or structurally problematic — utterances that lack a verb or a subject (for sentences of more than 3 words).', method: 'Proportion of child utterances where spaCy finds no VERB token, or finds no nsubj/nsubjpass dependency for utterances longer than 3 tokens', asdRelevance: 'High error rates indicate frequent production of incomplete or ungrammatical sentences, which is closely linked to ASD language impairment.' },
+  { name: 'tense_consistency_score', label: 'Tense Consistency Score', description: 'How consistently the child sticks to one tense — a high score means the child mostly uses one tense throughout; a low score means tenses are mixed.', method: 'spaCy POS tags: VBD/VBN = past, VBP/VBZ/VBG = present, MD = modal; tense consistency = frequency of the most common tense divided by total tense-marked verbs', asdRelevance: 'Tense inconsistency can reflect difficulty with temporal reference tracking, documented in ASD language research.' },
+  { name: 'tense_variety', label: 'Tense Variety', description: 'How many different tenses the child uses across the session, normalised by total tense-marked verbs.', method: 'Count of distinct tense categories (past, present, modal) divided by total tense-marked verb count', asdRelevance: 'Limited tense variety indicates restricted temporal reference range — some children with ASD remain fixed to a single tense.' },
+  { name: 'structure_diversity', label: 'Sentence Structure Diversity', description: 'How many different grammatical root types the child uses — for example, whether sentences are always headed by verbs (commands) vs. a mix of verbs, nouns, and adjectives.', method: 'Count of distinct ROOT POS tags across all utterances divided by total utterance count', asdRelevance: 'Low structure diversity indicates stereotyped sentence templates, a feature of restricted language use in ASD.' },
+  { name: 'pos_tag_diversity', label: 'Part-of-Speech Diversity', description: 'How many different grammatical categories (noun, verb, adjective, adverb, preposition, etc.) the child uses, normalised by total tokens — how varied the grammar of the speech is.', method: 'Count of distinct spaCy POS tags used across all child utterances divided by total token count', asdRelevance: 'Low POS diversity indicates a narrow grammatical repertoire, consistent with reduced expressive language complexity in ASD.' },
+];
+
+const SENTENCE_STRUCTURE_FEATURES: Feature[] = [
+  { name: 'avg_parse_tree_height', label: 'Average Parse Tree Height', description: 'On average, how tall the grammatical parse tree for each utterance is — the maximum depth from root to the deepest leaf, indicating how structurally layered the sentences are.', method: 'For each utterance, compute max dependency depth over all tokens; mean across all utterances', asdRelevance: 'Shallower average tree heights indicate simpler overall sentence architecture.' },
+  { name: 'noun_phrase_complexity', label: 'Noun Phrase Complexity', description: 'On average, how many words are in each noun phrase (e.g. "the big blue car" = 4 words). Longer NPs indicate richer noun-phrase elaboration.', method: 'spaCy noun_chunks; mean length of all noun chunks (in tokens) across all child utterances', asdRelevance: 'Short noun phrases indicate limited use of modifiers such as adjectives and determiners, associated with less elaborate language.' },
+  { name: 'verb_phrase_complexity', label: 'Verb Phrase Complexity', description: 'On average, how many direct child tokens each verb has — how richly specified the verb predicates are (e.g. auxiliary verbs, adverbs, and direct objects all add to VP complexity).', method: 'For each VERB token, count len(list(token.children)); mean across all verbs in child utterances', asdRelevance: 'Simpler verb phrases reflect less elaborated predicate structure, common in ASD expressive language.' },
+  { name: 'prepositional_phrase_ratio', label: 'Prepositional Phrase Rate', description: 'How many prepositions per utterance the child uses on average — prepositions introduce spatial, temporal, and logical relationships.', method: 'Count of tokens with spaCy POS == "ADP" divided by total utterance count', asdRelevance: 'Low prepositional phrase use reflects reduced production of relational and spatial language.' },
+];
+
+const SEMANTIC_MEANING_FEATURES: Feature[] = [
+  { name: 'semantic_coherence', label: 'Semantic Coherence (NLP Embeddings)', description: 'On average, how similar in meaning the child\'s consecutive utterances are to each other — does what the child says next relate to what they just said?', method: 'spaCy en_core_web_sm word-vector similarity: docs[i-1].similarity(docs[i]) for all consecutive child utterances; mean of scores', asdRelevance: 'Lower coherence at the utterance level indicates disjointed, internally incoherent speech — complementary to the pragmatic turn-by-turn coherence measure.' },
+  { name: 'semantic_density', label: 'Semantic Density', description: 'On average, how many content words (nouns, verbs, adjectives, adverbs) appear per utterance — how much meaningful information is packed into each utterance.', method: 'Count of tokens with spaCy POS in [NOUN, VERB, ADJ, ADV] per utterance; mean across all child utterances', asdRelevance: 'Low semantic density indicates utterances that are short or consist mainly of function words, reflecting reduced expressive content.' },
+  { name: 'lexical_diversity_semantic', label: 'Lexical Diversity (Content Words)', description: 'The ratio of unique content words to total content words used by the child — a measure of content vocabulary richness.', method: 'Count of distinct lemmatised content words divided by total content word tokens across all child utterances', asdRelevance: 'Low diversity signals repetitive, narrow content vocabulary — a consistent ASD language marker.' },
+  { name: 'thematic_consistency', label: 'Thematic Consistency', description: 'What fraction of the content words the child uses are words they have used before (across the session) — a measure of whether the child repeatedly returns to the same vocabulary.', method: 'Fraction of distinct lemmatised content words that appear more than once, out of all distinct content word types used', asdRelevance: 'Very high thematic consistency combined with low diversity suggests restricted, perseverative vocabulary — hallmark of ASD restricted interests.' },
+];
+
+const VOCABULARY_SEMANTIC_FEATURES: Feature[] = [
+  { name: 'vocabulary_abstractness', label: 'Vocabulary Abstractness', description: 'What proportion of the child\'s content words are abstract (higher-level concepts) vs. concrete (physical objects and actions).', method: 'NLTK WordNet hypernym tree depth as proxy: synsets with min_depth() > 5 classified as abstract; ratio = abstract / (abstract + concrete) for all content word synsets', asdRelevance: 'Children with ASD often favour concrete, object-centred language and show reduced use of abstract concepts, especially in social and emotional domains.' },
+  { name: 'semantic_field_diversity', label: 'Semantic Field Diversity', description: 'How many distinct semantic categories (e.g. "animals", "movement", "artifacts") the child\'s vocabulary spans, normalised by total content words.', method: 'NLTK WordNet: for each content word synset, take the name of its first hypernym as its semantic field; count distinct fields divided by total content tokens', asdRelevance: 'Low semantic field diversity confirms a restricted vocabulary domain — often centred on a narrow set of special interests.' },
+  { name: 'word_sense_diversity', label: 'Word Sense Diversity', description: 'On average, how many different meanings (senses) the words the child uses have — a measure of vocabulary richness in terms of polysemy.', method: 'NLTK WordNet: for each content word, count len(wordnet.synsets(lemma)); mean across all content words with synsets', asdRelevance: 'Low sense diversity indicates simpler, more unambiguous vocabulary choices — consistent with literal language use in ASD.' },
+  { name: 'content_word_ratio', label: 'Content Word Ratio', description: 'What fraction of all the child\'s words are content words (nouns, verbs, adjectives, adverbs) rather than function words (the, and, is, of).', method: 'Content tokens (POS in NOUN/VERB/ADJ/ADV) divided by total tokens across all child utterances', asdRelevance: 'An unusually low ratio indicates heavily function-word-dominated speech; an unusually high ratio may indicate telegraphic speech — both are found in ASD profiles.' },
+];
+
+const ADVANCED_SEMANTIC_FEATURES: Feature[] = [
+  { name: 'semantic_role_diversity', label: 'Semantic Role Diversity', description: 'How many different semantic argument roles (subject, object, indirect object, prepositional object, agent, attribute) the child uses, expressed as a rate per utterance.', method: 'Count of distinct spaCy dep_ labels in [nsubj, dobj, iobj, pobj, agent, attr] found across all child tokens, divided by number of utterances', asdRelevance: 'Low semantic role diversity indicates the child rarely fills multiple argument positions, reflecting limited syntactic-semantic integration.' },
+  { name: 'entity_density', label: 'Named Entity Density', description: 'On average, how many named entities (people, places, organisations, times, quantities) appear per utterance — a measure of how information-dense and referentially specific the speech is.', method: 'spaCy named entity recognition (NER): len(doc.ents) summed across all child utterances, divided by utterance count', asdRelevance: 'Low entity density indicates the child rarely refers to specific people, places, or events, which may reflect limited narrative and referential language in ASD.' },
+  { name: 'verb_argument_complexity', label: 'Verb Argument Complexity', description: 'On average, how many argument slots each verb the child uses takes — verbs with more arguments (subjects, objects, locatives) are more syntactically complex.', method: 'For each VERB token in child utterances, count children with dep_ in [nsubj, dobj, iobj, prep]; mean across all verb tokens', asdRelevance: 'Low argument complexity indicates the child predominantly uses simple intransitive verbs, reflecting reduced predicate structure and narrative complexity.' },
+];
+
+const SYNTACTIC_CATEGORIES: FeatureCategory[] = [
+  {
+    id: 'complexity',
+    label: 'Syntactic Complexity',
+    count: 6,
+    icon: '',
+    color: 'text-violet-700',
+    bgColor: 'bg-violet-50',
+    borderColor: 'border-violet-200',
+    summary: 'Measures how structurally layered the child\'s sentences are — how deeply words nest in the grammatical parse tree, and how often subordinate and coordinate clauses are used.',
+    method: 'spaCy dependency parser (en_core_web_sm). Dependency depth computed by walking token.head links to root. Subordination detected via dep_ in [advcl, acl, ccomp, xcomp, relcl]. Coordination via dep_ == "conj". Clause markers via dep_ == "mark".',
+    features: SYNTACTIC_COMPLEXITY_FEATURES,
+  },
+  {
+    id: 'grammar',
+    label: 'Grammatical Accuracy',
+    count: 5,
+    icon: '',
+    color: 'text-indigo-700',
+    bgColor: 'bg-indigo-50',
+    borderColor: 'border-indigo-200',
+    summary: 'Measures how grammatically well-formed the child\'s utterances are — whether sentences are complete, whether tense is used consistently, and how varied the sentence structures are.',
+    method: 'spaCy POS and dependency tags. Grammatical error detection checks for missing VERB or nsubj. Tense categorised from spaCy Penn tags: VBD/VBN = past, VBP/VBZ/VBG = present, MD = modal.',
+    features: GRAMMATICAL_ACCURACY_FEATURES,
+  },
+  {
+    id: 'structure',
+    label: 'Sentence Structure',
+    count: 4,
+    icon: '',
+    color: 'text-sky-700',
+    bgColor: 'bg-sky-50',
+    borderColor: 'border-sky-200',
+    summary: 'Measures the internal shape of individual sentences — how tall the parse tree is, how complex the noun and verb phrases are, and how often relational prepositions are used.',
+    method: 'spaCy noun_chunks for NP complexity (mean chunk length). Verb dependencies (token.children) for VP complexity. ADP POS tag for prepositions. Max tree depth per utterance for parse tree height.',
+    features: SENTENCE_STRUCTURE_FEATURES,
+  },
+  {
+    id: 'semantic',
+    label: 'Semantic Features',
+    count: 4,
+    icon: '',
+    color: 'text-teal-700',
+    bgColor: 'bg-teal-50',
+    borderColor: 'border-teal-200',
+    summary: 'Measures how meaningful and coherent the child\'s language is — using neural word embeddings to quantify semantic similarity between consecutive utterances and the richness of content.',
+    method: 'spaCy word vectors (300-dimensional GloVe embeddings via en_core_web_sm). Cosine similarity via doc.similarity() between consecutive utterances. Content words identified by POS NOUN/VERB/ADJ/ADV. Lemmatisation for type counting.',
+    features: SEMANTIC_MEANING_FEATURES,
+  },
+  {
+    id: 'vocabulary',
+    label: 'Vocabulary Semantics',
+    count: 4,
+    icon: '',
+    color: 'text-emerald-700',
+    bgColor: 'bg-emerald-50',
+    borderColor: 'border-emerald-200',
+    summary: 'Measures the semantic properties of the words the child uses — whether vocabulary is abstract or concrete, how many distinct semantic fields are covered, and how polysemous the words are.',
+    method: 'NLTK WordNet via wordnet.synsets(lemma). Abstractness via synset.min_depth(): depth > 5 = abstract. Semantic field via first hypernym name. Word sense diversity = mean len(synsets) per content word.',
+    features: VOCABULARY_SEMANTIC_FEATURES,
+  },
+  {
+    id: 'advanced',
+    label: 'Advanced Semantic',
+    count: 3,
+    icon: '',
+    color: 'text-rose-700',
+    bgColor: 'bg-rose-50',
+    borderColor: 'border-rose-200',
+    summary: 'Measures deeper semantic structure — what argument roles the child fills in sentences, how many named entities they reference, and how complex their verb argument structures are.',
+    method: 'spaCy dependency labels for semantic roles: nsubj, dobj, iobj, pobj, agent, attr. Named entity recognition via doc.ents. Verb argument complexity: children with dep_ in [nsubj, dobj, iobj, prep] per VERB token.',
+    features: ADVANCED_SEMANTIC_FEATURES,
+  },
+];
+
+// ── SYNTACTIC ICONS ──────────────────────────────────────────────────────────
+function IconTreeComplexity({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <circle cx="12" cy="4" r="1.5" className="fill-current" />
+      <path d="M12 5.5v3" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="7" cy="11" r="1.5" className="fill-current" />
+      <circle cx="17" cy="11" r="1.5" className="fill-current" />
+      <path d="M12 8.5L7 11M12 8.5L17 11" className="stroke-current" strokeWidth="1.3" strokeLinecap="round" />
+      <circle cx="4.5" cy="17" r="1.5" className="fill-current" />
+      <circle cx="9.5" cy="17" r="1.5" className="fill-current" />
+      <circle cx="14.5" cy="17" r="1.5" className="fill-current" />
+      <circle cx="19.5" cy="17" r="1.5" className="fill-current" />
+      <path d="M7 12L4.5 17M7 12L9.5 17M17 12L14.5 17M17 12L19.5 17" className="stroke-current" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconGrammar({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path d="M5 7h14" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M5 12h9" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M5 17h6" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M16 15l2 2 3-3" className="stroke-current" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
+}
+
+function IconParseTree({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <rect x="9" y="2" width="6" height="4" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <rect x="3" y="10" width="5" height="4" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <rect x="16" y="10" width="5" height="4" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <rect x="3" y="18" width="4" height="4" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <rect x="9" y="18" width="4" height="4" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <path d="M12 6v4M12 6L5.5 10M12 6L18.5 10" className="stroke-current" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M5.5 14v4M8 14L11 18" className="stroke-current" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconEmbedding({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <circle cx="12" cy="12" r="3" className="stroke-current" strokeWidth="1.5" fill="none" />
+      <circle cx="5" cy="6" r="2" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <circle cx="19" cy="6" r="2" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <circle cx="5" cy="18" r="2" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <circle cx="19" cy="18" r="2" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <path d="M7 7.5L9.5 10M14.5 10L17 7.5M7 16.5L9.5 14M14.5 14L17 16.5" className="stroke-current" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconBook({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path d="M4 4h6a3 3 0 013 3v13a3 3 0 00-3-3H4V4z" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinejoin="round" />
+      <path d="M20 4h-6a3 3 0 00-3 3v13a3 3 0 013-3h6V4z" className="stroke-current" strokeWidth="1.5" fill="none" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconEntity({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <rect x="3" y="3" width="5" height="5" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <rect x="16" y="3" width="5" height="5" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <rect x="9.5" y="16" width="5" height="5" rx="1" className="stroke-current" strokeWidth="1.3" fill="none" />
+      <path d="M8 5.5h8M5.5 8v4a4 4 0 004 4h5a4 4 0 004-4V8" className="stroke-current" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+    </svg>
+  );
+}
+
+function SyntacticIcon({ id, className }: { id: string; className?: string }) {
+  switch (id) {
+    case 'complexity': return <IconTreeComplexity className={className} />;
+    case 'grammar': return <IconGrammar className={className} />;
+    case 'structure': return <IconParseTree className={className} />;
+    case 'semantic': return <IconEmbedding className={className} />;
+    case 'vocabulary': return <IconBook className={className} />;
+    case 'advanced': return <IconEntity className={className} />;
+    default: return <IconTreeComplexity className={className} />;
+  }
+}
+
 // ── SECTION NAV CONFIG ───────────────────────────────────────────────────────
 const NAV_SECTIONS = [
   { id: 'overview', label: 'System Overview', icon: '◆' },
@@ -870,6 +1078,7 @@ const NAV_SECTIONS = [
   { id: 'extraction', label: '2 · Feature Extraction', icon: '⊙' },
   { id: 'acoustic', label: '   Acoustic Detail', icon: '◦' },
   { id: 'pragmatic', label: '   Pragmatic Detail', icon: '◦' },
+  { id: 'syntactic', label: '   Syntactic Detail', icon: '◦' },
   { id: 'training', label: '3 · Model Training', icon: '▣' },
   { id: 'fusion', label: '4 · Prediction & Fusion', icon: '◈' },
   { id: 'interpretability', label: '5 · Interpretability', icon: '◉' },
@@ -1016,11 +1225,10 @@ export default function HowItWorksPage() {
               <button
                 key={s.id}
                 onClick={() => scrollTo(s.id)}
-                className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all flex items-center gap-2 ${
-                  activeSection === s.id
-                    ? 'bg-gray-900 text-white font-medium'
-                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
-                }`}
+                className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all flex items-center gap-2 ${activeSection === s.id
+                  ? 'bg-gray-900 text-white font-medium'
+                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
+                  }`}
               >
                 <span className="text-xs opacity-60 w-4">{s.icon}</span>
                 <span className={s.id === 'acoustic' || s.id === 'pragmatic' ? 'text-xs' : ''}>{s.label}</span>
@@ -1205,7 +1413,7 @@ export default function HowItWorksPage() {
             </p>
 
             <div className="space-y-6">
-            {/* Component 1 — Acoustic */}
+              {/* Component 1 — Acoustic */}
               <div className="border-2 border-sky-300 bg-sky-50/40 rounded-2xl p-6">
                 <div className="flex items-start justify-between flex-wrap gap-4">
                   <div>
@@ -1233,8 +1441,8 @@ export default function HowItWorksPage() {
                   ))}
                 </div>
               </div>
-{/* Component 3 — Pragmatic */}
-<div className="border-2 border-emerald-300 bg-emerald-50/40 rounded-2xl p-6">
+              {/* Component 3 — Pragmatic */}
+              <div className="border-2 border-emerald-300 bg-emerald-50/40 rounded-2xl p-6">
                 <div className="flex items-start justify-between flex-wrap gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
@@ -1271,7 +1479,7 @@ export default function HowItWorksPage() {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-8 h-8 bg-violet-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
                       <h3 className="text-xl font-bold text-gray-900">Syntactic / Semantic Component</h3>
-                      <span className="text-xs bg-violet-100 text-violet-700 border border-violet-200 px-2 py-0.5 rounded-full font-semibold">26 features</span>
+                      <span className="text-xs bg-violet-100 text-violet-700 border border-violet-200 px-2 py-0.5 rounded-full font-semibold">27 features</span>
                     </div>
                     <p className="text-sm text-gray-600 max-w-2xl">Analyses sentence grammar and word meaning — how complex the sentence structures are, how grammatically accurate the speech is, and how semantically coherent the language is. Uses <strong>spaCy</strong> for parsing and <strong>NLTK WordNet</strong> for semantic analysis.</p>
                   </div>
@@ -1299,7 +1507,7 @@ export default function HowItWorksPage() {
 
             </div>
           </section>
-{/* ── ACOUSTIC DETAIL (NEW) ── */}
+          {/* ── ACOUSTIC DETAIL (NEW) ── */}
           <section id="acoustic" ref={setRef('acoustic')}>
             <div className="inline-flex items-center gap-2 bg-sky-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
               Acoustic Component — Full Detail
@@ -1558,6 +1766,131 @@ export default function HowItWorksPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* ── SECTION: SYNTACTIC DETAIL ── */}
+          <section id="syntactic" ref={setRef('syntactic')}>
+            <div className="inline-flex items-center gap-2 bg-violet-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
+              Syntactic Component — Full Detail
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">27 syntactic &amp; semantic features, explained</h2>
+            <p className="text-gray-500 mb-4 max-w-2xl">
+              The syntactic &amp; semantic component is organised into 6 sub-modules, each targeting a distinct dimension of grammar and meaning. Click <strong>View All Features</strong> on any category to open a full searchable table.
+            </p>
+            <p className="text-sm text-gray-400 mb-10">
+              All features are extracted from the child&apos;s utterances using <code className="bg-gray-100 px-1 rounded text-xs">spaCy en_core_web_sm</code> for grammatical parsing and <code className="bg-gray-100 px-1 rounded text-xs">NLTK WordNet</code> for semantic analysis, run on clean text after CHAT markup is stripped.
+            </p>
+
+            {/* Design principle callout */}
+            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5 mb-10 flex items-start gap-4">
+              <div className="w-9 h-9 bg-violet-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <IconTreeComplexity className="w-5 h-5 text-violet-700" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-violet-900 mb-1">Design principle: utterance-level NLP analysis</p>
+                <p className="text-sm text-violet-800">
+                  Unlike the acoustic component (which aggregates over the whole audio signal) or the pragmatic component (which analyses conversation structure turn-by-turn), the syntactic &amp; semantic component analyses each <strong>individual child utterance</strong> as a sentence, then aggregates statistics. spaCy parses the full dependency tree of each utterance; WordNet annotates the semantic properties of individual words. Features are means, ratios, and diversity scores aggregated across all child utterances in the session.
+                </p>
+              </div>
+            </div>
+
+            {/* Preprocessing pipeline */}
+            <div className="bg-gray-950 rounded-2xl p-6 mb-10">
+              <p className="text-xs text-gray-400 mb-4 font-semibold uppercase tracking-wide">Syntactic &amp; Semantic Preprocessing Pipeline</p>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                {[
+                  { step: '01', title: 'Utterance Cleaning', desc: 'Strip CHAT markup, disfluency markers, and non-speech tokens from raw transcript text', code: 'CHATParser → .text field' },
+                  { step: '02', title: 'spaCy Parsing', desc: 'Full dependency parse, POS tagging, noun chunking, and NER on each cleaned utterance', code: 'nlp = spacy.load("en_core_web_sm")' },
+                  { step: '03', title: 'WordNet Lookup', desc: 'For each content word: retrieve synsets, compute hypernym depth, collect semantic fields', code: 'wordnet.synsets(token.lemma_)' },
+                  { step: '04', title: 'Feature Aggregation', desc: 'Mean, max, ratio, and diversity statistics computed across all parsed child utterances', code: 'np.mean / Counter / set()' },
+                ].map(s => (
+                  <div key={s.step} className="bg-gray-800 rounded-xl p-4">
+                    <div className="text-xs font-mono text-gray-400 mb-1">{s.step}</div>
+                    <div className="font-semibold text-white mb-1">{s.title}</div>
+                    <div className="text-xs text-gray-400 mb-2">{s.desc}</div>
+                    <code className="text-xs text-green-400 bg-gray-900 px-2 py-1 rounded block">{s.code}</code>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Sub-module cards */}
+            <div className="space-y-8">
+              {SYNTACTIC_CATEGORIES.map((cat, idx) => (
+                <div key={cat.id} className={`border ${cat.borderColor} rounded-2xl overflow-hidden`}>
+                  <div className={`${cat.bgColor} px-6 py-5 flex items-start justify-between flex-wrap gap-4`}>
+                    <div className="flex items-start gap-4">
+                      <div className={`w-10 h-10 bg-white rounded-xl border ${cat.borderColor} flex items-center justify-center`}>
+                        <SyntacticIcon id={cat.id} className={`w-6 h-6 ${cat.color}`} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <h3 className={`text-lg font-bold ${cat.color}`}>{cat.label}</h3>
+                          <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white border ${cat.borderColor} ${cat.color}`}>
+                            {cat.count} features
+                          </span>
+                          <span className="text-xs text-gray-400 font-mono">Sub-module {idx + 1} of 6</span>
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1 max-w-2xl">{cat.summary}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setOpenCategory(cat)}
+                      className={`flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${cat.borderColor} bg-white ${cat.color} hover:bg-gray-900 hover:text-white hover:border-gray-900`}
+                    >
+                      View All {cat.count} Features &rarr;
+                    </button>
+                  </div>
+
+                  <div className="bg-white px-6 py-5">
+                    <div className="mb-4">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Extraction Method</p>
+                      <p className="text-sm text-gray-600">{cat.method}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Sample Features</p>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.features.slice(0, 6).map(f => (
+                          <span key={f.name} className={`text-xs font-mono px-2.5 py-1 rounded-lg ${cat.bgColor} ${cat.color} border ${cat.borderColor}`}>
+                            {f.name}
+                          </span>
+                        ))}
+                        {cat.features.length > 6 && (
+                          <button onClick={() => setOpenCategory(cat)} className="text-xs px-2.5 py-1 rounded-lg text-gray-400 bg-gray-100 hover:bg-gray-200 transition-colors">
+                            +{cat.features.length - 6} more
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* ASD markers summary */}
+            <div className="mt-10 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+              <h3 className="font-bold text-gray-900 mb-4">Syntactic &amp; Semantic ASD Markers — Summary of Evidence</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                {[
+                  { marker: 'Reduced syntactic complexity', evidence: 'Children with ASD consistently produce shorter dependency trees and fewer subordinate clauses, reflecting simpler sentence architectures across multiple corpora', strength: 'Strong' },
+                  { marker: 'Lower semantic coherence', evidence: 'Word-embedding similarity between consecutive utterances is reduced in ASD, indicating less topically integrated speech at the utterance level', strength: 'Moderate' },
+                  { marker: 'Reduced vocabulary abstractness', evidence: 'ASD language tends to be more concrete and object-focused; reduced use of abstract conceptual vocabulary is documented across developmental studies', strength: 'Moderate' },
+                  { marker: 'Restricted semantic field diversity', evidence: 'Children with ASD use vocabulary from a narrower set of semantic categories, consistent with restricted and repetitive interests', strength: 'Strong' },
+                  { marker: 'Higher grammatical error rate', evidence: 'Incomplete or structurally atypical sentences are more frequent in ASD, particularly in younger children or those with comorbid language impairment', strength: 'Moderate' },
+                  { marker: 'Low verb argument complexity', evidence: 'Reduced use of multi-argument verb constructions reflects simplified predicate structure — children with ASD are more likely to use intransitive, simple predicates', strength: 'Moderate' },
+                ].map(m => (
+                  <div key={m.marker} className="bg-white rounded-xl border border-gray-200 p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <span className="font-semibold text-gray-900 text-sm">{m.marker}</span>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ml-2 ${m.strength === 'Strong' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                        {m.strength}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 leading-relaxed">{m.evidence}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
