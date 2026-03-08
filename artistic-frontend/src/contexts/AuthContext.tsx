@@ -20,6 +20,7 @@ interface AuthContextType {
   register: (email: string, password: string, fullName: string) => Promise<void>;
   logout: () => void;
   loginWithGoogle: () => void;
+  resetPassword: (email: string, newPassword: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -136,6 +137,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     window.location.href = `${apiUrl}/auth/google/login`;
   };
 
+  const resetPassword = async (email: string, newPassword: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/auth/reset-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          new_password: newPassword,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail || 'Password reset failed');
+      }
+    } catch (error) {
+      console.error('Password reset error:', error);
+      throw error;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -146,6 +170,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         register,
         logout,
         loginWithGoogle,
+        resetPassword,
       }}
     >
       {children}
