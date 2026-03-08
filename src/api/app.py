@@ -3110,6 +3110,245 @@ async def analyze_semantic_coherence(
         )
 
 
+@app.post("/analyze/syntactic-semantic-detailed", tags=["User Mode"])
+async def analyze_syntactic_semantic_detailed(
+    text: str = Form(...)
+):
+    """
+    Perform detailed syntactic and semantic analysis of a transcript.
+
+    Returns:
+    - POS tag distribution (counts and percentages)
+    - Sentence-level complexity metrics
+    - Grammar/structure issues
+    - Fluency metrics (pauses, fillers, repetitions)
+    - Vocabulary richness
+    - Word frequencies for word clouds
+    """
+    try:
+        import spacy
+        from collections import Counter
+        from src.parsers.chat_parser import CHATParser, Utterance, TranscriptData
+        from pathlib import Path
+
+        # Load spaCy model
+        try:
+            nlp = spacy.load("en_core_web_sm")
+        except OSError:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="spaCy model not available. Please install en_core_web_sm"
+            )
+
+        # Parse the text into a transcript
+        parser = CHATParser()
+
+        try:
+            transcript = parser.parse_text(text)
+        except:
+            # If CHAT parsing fails, create a simple transcript
+            lines = [line.strip() for line in text.split('\n') if line.strip()]
+            utterances = []
+            for line in lines:
+                if ':' in line:
+                    parts = line.split(':', 1)
+                    speaker = parts[0].strip().replace('*', '')
+                    text_content = parts[1].strip()
+                else:
+                    speaker = 'CHI'
+                    text_content = line
+
+                utterances.append(Utterance(
+                    speaker=speaker,
+                    text=text_content,
+                    timing=None,
+                    end_timing=None
+                ))
+
+            transcript = TranscriptData(
+                file_path=Path("temp_analysis"),
+                participant_id='CHI',
+                utterances=utterances,
+                diagnosis=None,
+                metadata={}
+            )
+
+        # Get child utterances
+        child_utterances = [u for u in transcript.utterances if u.speaker == transcript.participant_id]
+
+        if not child_utterances:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="No child utterances found in transcript"
+            )
+
+        # Initialize result structure
+        result = {
+            'pos_distribution': {},
+            'sentences': [],
+            'fluency_metrics': {},
+            'vocabulary_metrics': {},
+            'word_frequencies': {},
+            'grammar_issues': []
+        }
+
+        # Process each utterance
+        all_pos_tags = []
+        all_words = []
+        all_content_words = []
+        pauses_count = 0
+        filler_words = ['um', 'uh', 'like', 'you know', 'i mean', 'sort of', 'kind of']
+        filler_count = 0
+        repetitions = []
+
+        for idx, utterance in enumerate(child_utterances):
+            if not utterance.text or not utterance.text.strip():
+                continue
+
+            # Parse with spaCy
+            doc = nlp(utterance.text)
+
+            # Collect POS tags
+            for token in doc:
+                all_pos_tags.append(token.pos_)
+                if not token.is_punct and not token.is_space:
+                    all_words.append(token.text.lower())
+                if token.pos_ in ['NOUN', 'VERB', 'ADJ', 'ADV']:
+                    all_content_words.append(token.lemma_.lower())
+
+            # Count pauses (represented by ... or # or (pause))
+            pauses_count += utterance.text.count('...')
+            pauses_count += utterance.text.count('#')
+            pauses_count += utterance.text.lower().count('(pause)')
+
+            # Count filler words
+            text_lower = utterance.text.lower()
+            for filler in filler_words:
+                filler_count += text_lower.count(filler)
+
+            # Sentence complexity metrics
+            sentence_length = len([t for t in doc if not t.is_punct])
+            clause_count = sum(1 for t in doc if t.dep_ in ['mark', 'advcl', 'acl', 'ccomp'])
+            max_depth = max((get_token_depth(token) for token in doc), default=0)
+
+            # Check for grammar issues
+            has_verb = any(token.pos_ == 'VERB' for token in doc)
+            has_subject = any(token.dep_ in ['nsubj', 'nsubjpass'] for token in doc)
+            is_incomplete = len(doc) > 3 and (not has_verb or not has_subject)
+
+            # Detect rare/advanced words (more than 2 syllables, not common)
+            rare_words = []
+            for token in doc:
+                if token.pos_ in ['NOUN', 'VERB', 'ADJ', 'ADV'] and len(token.text) > 7:
+                    rare_words.append({
+                        'word': token.text,
+                        'pos': token.idx,
+                        'length': len(token.text)
+                    })
+
+            # Detect pauses in this sentence
+            sentence_pauses = []
+            if '...' in utterance.text:
+                for match_idx in range(len(utterance.text)):
+                    if utterance.text[match_idx:match_idx+3] == '...':
+                        sentence_pauses.append({'pos': match_idx, 'type': 'ellipsis'})
+
+            sentence_data = {
+                'index': idx,
+                'text': utterance.text,
+                'length': sentence_length,
+                'clause_count': clause_count + 1,  # Add 1 for main clause
+                'dependency_depth': max_depth,
+                'has_grammar_issue': is_incomplete,
+                'grammar_issue_type': 'incomplete_sentence' if is_incomplete else None,
+                'rare_words': rare_words,
+                'pauses': sentence_pauses,
+                'complexity_score': (sentence_length / 10) + (clause_count * 0.2) + (max_depth / 5)
+            }
+
+            result['sentences'].append(sentence_data)
+
+            if is_incomplete:
+                result['grammar_issues'].append({
+                    'sentence_index': idx,
+                    'text': utterance.text,
+                    'issue': 'Incomplete sentence structure',
+                    'severity': 'medium'
+                })
+
+        # Calculate POS distribution
+        pos_counter = Counter(all_pos_tags)
+        total_tokens = len(all_pos_tags)
+        result['pos_distribution'] = {
+            pos: {
+                'count': count,
+                'percentage': round((count / total_tokens) * 100, 2) if total_tokens > 0 else 0
+            }
+            for pos, count in pos_counter.most_common()
+        }
+
+        # Calculate fluency metrics
+        total_words = len(all_words)
+        result['fluency_metrics'] = {
+            'total_pauses': pauses_count,
+            'pause_rate': round(pauses_count / len(child_utterances), 2) if child_utterances else 0,
+            'filler_word_count': filler_count,
+            'filler_word_rate': round((filler_count / total_words) * 100, 2) if total_words > 0 else 0,
+            'avg_words_per_utterance': round(total_words / len(child_utterances), 2) if child_utterances else 0
+        }
+
+        # Calculate vocabulary metrics
+        unique_words = set(all_words)
+        unique_content_words = set(all_content_words)
+        result['vocabulary_metrics'] = {
+            'total_words': total_words,
+            'unique_words': len(unique_words),
+            'type_token_ratio': round(len(unique_words) / total_words, 3) if total_words > 0 else 0,
+            'content_words': len(all_content_words),
+            'unique_content_words': len(unique_content_words),
+            'content_word_diversity': round(len(unique_content_words) / len(all_content_words), 3) if all_content_words else 0
+        }
+
+        # Calculate word frequencies for word cloud (top 50 content words)
+        content_word_counter = Counter(all_content_words)
+        result['word_frequencies'] = dict(content_word_counter.most_common(50))
+
+        # Calculate average sentence complexity
+        if result['sentences']:
+            avg_length = sum(s['length'] for s in result['sentences']) / len(result['sentences'])
+            avg_clauses = sum(s['clause_count'] for s in result['sentences']) / len(result['sentences'])
+            avg_depth = sum(s['dependency_depth'] for s in result['sentences']) / len(result['sentences'])
+
+            result['overall_metrics'] = {
+                'avg_sentence_length': round(avg_length, 2),
+                'avg_clauses_per_sentence': round(avg_clauses, 2),
+                'avg_dependency_depth': round(avg_depth, 2),
+                'total_sentences': len(result['sentences']),
+                'grammar_issue_rate': round(len(result['grammar_issues']) / len(result['sentences']) * 100, 2)
+            }
+
+        return result
+
+    except Exception as e:
+        logger.error(f"Syntactic/semantic analysis failed: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Analysis failed: {str(e)}"
+        )
+
+
+def get_token_depth(token) -> int:
+    """Helper function to get dependency depth of a token."""
+    depth = 0
+    current = token
+    while current.head != current:
+        depth += 1
+        current = current.head
+        if depth > 20:  # Safety limit
+            break
+    return depth
+
+
 @app.post("/training/inspect-features", tags=["Training Mode"])
 async def inspect_features(
     file: UploadFile = File(...),

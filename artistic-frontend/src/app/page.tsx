@@ -545,6 +545,152 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Syntactic and Semantic Feature Analysis */}
+          <div className="mt-8 hidden bg-white border border-primary-200 rounded-2xl overflow-hidden" id="syntacticSemanticSection">
+            {/* Header */}
+            <div className="px-8 py-6 border-b border-primary-100">
+              <h2 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>
+                Syntactic and Semantic Feature Analysis
+              </h2>
+              <p className="text-sm text-primary-500 mt-1">
+                Detailed analysis of grammatical structure, vocabulary, and language patterns
+              </p>
+            </div>
+
+            <div className="p-8 space-y-8">
+              {/* B. Syntactic Features */}
+              <div>
+                <h3 className="text-lg font-medium text-primary-900 mb-4">B. Syntactic Features</h3>
+
+                {/* Sentence Complexity */}
+                <div className="mb-6">
+                  <h4 className="text-base font-medium text-primary-700 mb-3">Sentence Complexity</h4>
+                  <div className="grid md:grid-cols-3 gap-4 mb-4">
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Avg Sentence Length</p>
+                      <p id="avgSentenceLength" className="text-2xl font-bold text-primary-900">-</p>
+                      <p className="text-xs text-primary-500 mt-1">words per sentence</p>
+                    </div>
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Avg Clauses per Sentence</p>
+                      <p id="avgClauses" className="text-2xl font-bold text-primary-900">-</p>
+                      <p className="text-xs text-primary-500 mt-1">clauses</p>
+                    </div>
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Avg Dependency Depth</p>
+                      <p id="avgDepth" className="text-2xl font-bold text-primary-900">-</p>
+                      <p className="text-xs text-primary-500 mt-1">tree depth</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* POS Distribution */}
+                <div className="mb-6">
+                  <h4 className="text-base font-medium text-primary-700 mb-3">Part-of-Speech Distribution</h4>
+                  <div className="bg-primary-50 border border-primary-200 rounded-xl p-5">
+                    <canvas id="posDistributionChart" className="w-full" style={{ maxHeight: '300px' }}></canvas>
+                  </div>
+                </div>
+
+                {/* Grammar Issues */}
+                <div className="mb-6">
+                  <h4 className="text-base font-medium text-primary-700 mb-3">Grammar & Structure Issues</h4>
+                  <div className="bg-primary-50 border border-primary-200 rounded-xl p-5">
+                    <div id="grammarIssuesContainer" className="space-y-3">
+                      <p className="text-sm text-primary-500">Analyzing grammar patterns...</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Fluency Metrics */}
+                <div className="mb-6">
+                  <h4 className="text-base font-medium text-primary-700 mb-3">Fluency Metrics</h4>
+                  <div className="grid md:grid-cols-4 gap-4">
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Total Pauses</p>
+                      <p id="totalPauses" className="text-2xl font-bold text-gray-600">-</p>
+                    </div>
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Pause Rate</p>
+                      <p id="pauseRate" className="text-2xl font-bold text-gray-600">-</p>
+                      <p className="text-xs text-primary-500 mt-1">per utterance</p>
+                    </div>
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Filler Words</p>
+                      <p id="fillerCount" className="text-2xl font-bold text-primary-900">-</p>
+                    </div>
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Filler Rate</p>
+                      <p id="fillerRate" className="text-2xl font-bold text-primary-900">-</p>
+                      <p className="text-xs text-primary-500 mt-1">% of words</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* C. Semantic Features */}
+              <div>
+                <h3 className="text-lg font-medium text-primary-900 mb-4">C. Semantic Features</h3>
+
+                {/* Vocabulary Richness */}
+                <div className="mb-6">
+                  <h4 className="text-base font-medium text-primary-700 mb-3">Vocabulary Richness</h4>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Type-Token Ratio</p>
+                      <p id="typeTokenRatio" className="text-2xl font-bold text-primary-900">-</p>
+                      <p className="text-xs text-primary-500 mt-1">unique words / total</p>
+                    </div>
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Total Words</p>
+                      <p id="totalWords" className="text-2xl font-bold text-primary-900">-</p>
+                    </div>
+                    <div className="bg-primary-50 border border-primary-200 rounded-xl p-4">
+                      <p className="text-xs text-primary-500 mb-1">Unique Words</p>
+                      <p id="uniqueWords" className="text-2xl font-bold text-primary-900">-</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Word Cloud */}
+                <div className="mb-6">
+                  <h4 className="text-base font-medium text-primary-700 mb-3">Semantic Topics (Word Cloud)</h4>
+                  <div className="bg-primary-50 border border-primary-200 rounded-xl p-5">
+                    <div id="wordCloudContainer" className="min-h-[300px] flex items-center justify-center">
+                      <p className="text-sm text-primary-500">Generating word cloud...</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Highlighted Transcript with Color Coding */}
+                <div className="mb-6">
+                  <h4 className="text-base font-medium text-primary-700 mb-3">Color-Coded Transcript</h4>
+                  <div className="bg-white border border-primary-200 rounded-xl p-5">
+                    {/* Legend */}
+                    <div className="flex flex-wrap gap-4 mb-4 pb-4 border-b border-primary-100">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 rounded" style={{ backgroundColor: '#ef4444' }}></div>
+                        <span className="text-xs text-primary-600">Syntax Errors</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 rounded" style={{ backgroundColor: '#3b82f6' }}></div>
+                        <span className="text-xs text-primary-600">Rare/Advanced Words</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 rounded" style={{ backgroundColor: '#9ca3af' }}></div>
+                        <span className="text-xs text-primary-600">Pauses</span>
+                      </div>
+                    </div>
+                    {/* Transcript */}
+                    <div id="colorCodedTranscript" className="max-h-[400px] overflow-y-auto space-y-3">
+                      <p className="text-sm text-primary-500">Loading transcript...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Local SHAP Explanation */}
           <div id="localShapSection" className="mt-8 hidden">
               <h3 className="text-xl font-medium text-primary-900 mb-2">

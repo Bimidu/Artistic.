@@ -987,6 +987,11 @@ function displayResults(data) {
         // Store transcript text for semantic coherence analysis
         const transcriptText = data.transcript || extractTranscriptFromHTML(data.annotated_transcript_html);
         renderAnnotatedTranscript(data.annotated_transcript_html, data.annotation_summary || {}, transcriptText);
+
+        // Trigger detailed syntactic/semantic analysis
+        if (transcriptText) {
+            analyzeSyntacticSemantic(transcriptText);
+        }
     }
 
     //Counterfactuals
@@ -1029,6 +1034,286 @@ function displayResults(data) {
 }
 
 window.displayResults = displayResults;
+
+// Load Chart.js from CDN if not already loaded
+if (typeof Chart === 'undefined') {
+    const chartScript = document.createElement('script');
+    chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+    chartScript.async = false;
+    document.head.appendChild(chartScript);
+}
+
+async function analyzeSyntacticSemantic(transcriptText) {
+    const apiUrl = window.__ARTISTIC_API_URL || 'http://localhost:8000';
+
+    try {
+        const formData = new FormData();
+        formData.append('text', transcriptText);
+
+        const response = await fetch(`${apiUrl}/analyze/syntactic-semantic-detailed`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`Analysis failed: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        displaySyntacticSemanticAnalysis(data);
+    } catch (error) {
+        console.error('Syntactic/semantic analysis error:', error);
+        // Show section but with error message
+        document.getElementById('syntacticSemanticSection').classList.remove('hidden');
+        document.getElementById('avgSentenceLength').textContent = 'Error';
+        document.getElementById('avgClauses').textContent = 'Error';
+        document.getElementById('avgDepth').textContent = 'Error';
+    }
+}
+
+function displaySyntacticSemanticAnalysis(data) {
+    // Show the section
+    document.getElementById('syntacticSemanticSection').classList.remove('hidden');
+
+    // Display overall metrics
+    if (data.overall_metrics) {
+        document.getElementById('avgSentenceLength').textContent = data.overall_metrics.avg_sentence_length || '-';
+        document.getElementById('avgClauses').textContent = data.overall_metrics.avg_clauses_per_sentence || '-';
+        document.getElementById('avgDepth').textContent = data.overall_metrics.avg_dependency_depth || '-';
+    }
+
+    // Display fluency metrics
+    if (data.fluency_metrics) {
+        document.getElementById('totalPauses').textContent = data.fluency_metrics.total_pauses || '0';
+        document.getElementById('pauseRate').textContent = data.fluency_metrics.pause_rate || '0';
+        document.getElementById('fillerCount').textContent = data.fluency_metrics.filler_word_count || '0';
+        document.getElementById('fillerRate').textContent = data.fluency_metrics.filler_word_rate + '%' || '0%';
+    }
+
+    // Display vocabulary metrics
+    if (data.vocabulary_metrics) {
+        document.getElementById('typeTokenRatio').textContent = data.vocabulary_metrics.type_token_ratio || '-';
+        document.getElementById('totalWords').textContent = data.vocabulary_metrics.total_words || '-';
+        document.getElementById('uniqueWords').textContent = data.vocabulary_metrics.unique_words || '-';
+    }
+
+    // Create POS distribution chart
+    if (data.pos_distribution) {
+        createPOSDistributionChart(data.pos_distribution);
+    }
+
+    // Display grammar issues
+    if (data.grammar_issues) {
+        displayGrammarIssues(data.grammar_issues);
+    }
+
+    // Create word cloud
+    if (data.word_frequencies) {
+        createWordCloud(data.word_frequencies);
+    }
+
+    // Display color-coded transcript
+    if (data.sentences) {
+        displayColorCodedTranscript(data.sentences);
+    }
+}
+
+function createPOSDistributionChart(posDistribution) {
+    const canvas = document.getElementById('posDistributionChart');
+    if (!canvas) return;
+
+    // Prepare data for chart
+    const labels = [];
+    const counts = [];
+    const colors = [
+        '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f97316',
+        '#f59e0b', '#eab308', '#84cc16', '#22c55e', '#10b981',
+        '#14b8a6', '#06b6d4', '#0ea5e9', '#3b82f6', '#6366f1'
+    ];
+
+    // Get top 10 POS tags by count
+    const sortedPOS = Object.entries(posDistribution)
+        .sort((a, b) => b[1].count - a[1].count)
+        .slice(0, 10);
+
+    sortedPOS.forEach(([pos, data]) => {
+        labels.push(pos);
+        counts.push(data.count);
+    });
+
+    // Destroy existing chart if any
+    if (window.posChart) {
+        window.posChart.destroy();
+    }
+
+    // Create new chart
+    window.posChart = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Count',
+                data: counts,
+                backgroundColor: colors.slice(0, labels.length),
+                borderColor: colors.slice(0, labels.length).map(c => c.replace(')', ', 0.8)')),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const pos = context.label;
+                            const data = posDistribution[pos];
+                            return `${data.count} tokens (${data.percentage}%)`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+}
+
+function displayGrammarIssues(grammarIssues) {
+    const container = document.getElementById('grammarIssuesContainer');
+    if (!container) return;
+
+    if (!grammarIssues || grammarIssues.length === 0) {
+        container.innerHTML = '<p class="text-sm text-green-600">✓ No significant grammar issues detected</p>';
+        return;
+    }
+
+    let html = '<div class="space-y-3">';
+    grammarIssues.forEach((issue, idx) => {
+        html += `
+            <div class="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <div class="w-6 h-6 rounded-full bg-red-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="text-xs font-bold text-red-700">${idx + 1}</span>
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-red-900 mb-1">${issue.issue}</p>
+                    <p class="text-sm text-red-700 italic">"${issue.text}"</p>
+                </div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function createWordCloud(wordFrequencies) {
+    const container = document.getElementById('wordCloudContainer');
+    if (!container) return;
+
+    if (!wordFrequencies || Object.keys(wordFrequencies).length === 0) {
+        container.innerHTML = '<p class="text-sm text-primary-500">No word frequency data available</p>';
+        return;
+    }
+
+    // Simple word cloud using font sizes
+    const maxFreq = Math.max(...Object.values(wordFrequencies));
+    const minFreq = Math.min(...Object.values(wordFrequencies));
+    const range = maxFreq - minFreq || 1;
+
+    let html = '<div class="flex flex-wrap gap-3 justify-center items-center p-4">';
+
+    Object.entries(wordFrequencies).forEach(([word, freq]) => {
+        const normalizedSize = ((freq - minFreq) / range);
+        const fontSize = 12 + (normalizedSize * 32); // 12px to 44px
+        const opacity = 0.5 + (normalizedSize * 0.5); // 0.5 to 1.0
+        const color = `rgba(79, 70, 229, ${opacity})`; // Primary color with varying opacity
+
+        html += `
+            <span
+                class="font-medium cursor-default transition-all hover:scale-110"
+                style="font-size: ${fontSize}px; color: ${color};"
+                title="${word}: ${freq} occurrences"
+            >
+                ${word}
+            </span>
+        `;
+    });
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function displayColorCodedTranscript(sentences) {
+    const container = document.getElementById('colorCodedTranscript');
+    if (!container) return;
+
+    if (!sentences || sentences.length === 0) {
+        container.innerHTML = '<p class="text-sm text-primary-500">No transcript data available</p>';
+        return;
+    }
+
+    let html = '';
+
+    sentences.forEach((sentence, idx) => {
+        let sentenceHtml = sentence.text;
+
+        // Highlight rare/advanced words (blue)
+        if (sentence.rare_words && sentence.rare_words.length > 0) {
+            sentence.rare_words.forEach(rareWord => {
+                const regex = new RegExp(`\\b${rareWord.word}\\b`, 'gi');
+                sentenceHtml = sentenceHtml.replace(regex,
+                    `<span class="bg-blue-100 text-blue-800 px-1 rounded" title="Rare/Advanced word">${rareWord.word}</span>`
+                );
+            });
+        }
+
+        // Highlight pauses (grey)
+        sentenceHtml = sentenceHtml.replace(/\.\.\./g,
+            '<span class="bg-gray-200 text-gray-700 px-1 rounded" title="Pause">...</span>'
+        );
+        sentenceHtml = sentenceHtml.replace(/#/g,
+            '<span class="bg-gray-200 text-gray-700 px-1 rounded" title="Pause">#</span>'
+        );
+
+        // Add sentence with border if grammar issue
+        const borderClass = sentence.has_grammar_issue
+            ? 'border-l-4 border-red-400 bg-red-50'
+            : 'border-l-4 border-primary-200 bg-white';
+
+        html += `
+            <div class="${borderClass} pl-4 py-3 rounded-r">
+                <div class="flex items-start justify-between mb-1">
+                    <span class="text-xs font-medium text-primary-500">Sentence ${idx + 1}</span>
+                    <div class="flex gap-2 text-xs text-primary-500">
+                        <span title="Word count">${sentence.length} words</span>
+                        <span>•</span>
+                        <span title="Clause count">${sentence.clause_count} clauses</span>
+                        <span>•</span>
+                        <span title="Complexity score">${sentence.complexity_score.toFixed(2)} complexity</span>
+                    </div>
+                </div>
+                <p class="text-sm text-primary-900 leading-relaxed">${sentenceHtml}</p>
+                ${sentence.has_grammar_issue ?
+                    `<p class="text-xs text-red-600 mt-2">⚠ ${sentence.grammar_issue_type || 'Grammar issue detected'}</p>`
+                    : ''}
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
 
 function displayError(message) {
     let additionalHelp = '';
