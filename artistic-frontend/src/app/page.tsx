@@ -558,9 +558,9 @@ export default function Home() {
             </div>
 
             <div className="p-8 space-y-8">
-              {/* B. Syntactic Features */}
+              {/* Syntactic Features */}
               <div>
-                <h3 className="text-lg font-medium text-primary-900 mb-4">B. Syntactic Features</h3>
+                <h3 className="text-lg font-medium text-primary-900 mb-4">Syntactic Features</h3>
 
                 {/* Sentence Complexity */}
                 <div className="mb-6">
@@ -628,9 +628,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* C. Semantic Features */}
+              {/* Semantic Features */}
               <div>
-                <h3 className="text-lg font-medium text-primary-900 mb-4">C. Semantic Features</h3>
+                <h3 className="text-lg font-medium text-primary-900 mb-4">Semantic Features</h3>
 
                 {/* Vocabulary Richness */}
                 <div className="mb-6">

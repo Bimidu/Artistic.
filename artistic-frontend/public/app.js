@@ -1122,13 +1122,51 @@ function createPOSDistributionChart(posDistribution) {
     const canvas = document.getElementById('posDistributionChart');
     if (!canvas) return;
 
+    // Map POS tags to full names
+    const posTagNames = {
+        'NOUN': 'Noun',
+        'VERB': 'Verb',
+        'ADJ': 'Adjective',
+        'ADV': 'Adverb',
+        'PRON': 'Pronoun',
+        'DET': 'Determiner',
+        'ADP': 'Adposition',
+        'AUX': 'Auxiliary',
+        'CONJ': 'Conjunction',
+        'CCONJ': 'Coordinating Conjunction',
+        'SCONJ': 'Subordinating Conjunction',
+        'NUM': 'Numeral',
+        'PART': 'Particle',
+        'INTJ': 'Interjection',
+        'PUNCT': 'Punctuation',
+        'SYM': 'Symbol',
+        'X': 'Other',
+        'PROPN': 'Proper Noun',
+        'SPACE': 'Space'
+    };
+
     // Prepare data for chart
     const labels = [];
     const counts = [];
+    const originalPOS = []; // Keep track of original tags for tooltip
+
+    // Lighter colors (using Tailwind-style -100 to -200 range)
     const colors = [
-        '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f97316',
-        '#f59e0b', '#eab308', '#84cc16', '#22c55e', '#10b981',
-        '#14b8a6', '#06b6d4', '#0ea5e9', '#3b82f6', '#6366f1'
+        '#dbeafe', // blue-100
+        '#e0e7ff', // indigo-100
+        '#ede9fe', // violet-100
+        '#fce7f3', // pink-100
+        '#ffe4e6', // rose-100
+        '#fed7aa', // orange-100
+        '#fef3c7', // amber-100
+        '#fef9c3', // yellow-100
+        '#d9f99d', // lime-100
+        '#bbf7d0', // green-100
+        '#99f6e4', // teal-100
+        '#a5f3fc', // cyan-100
+        '#bae6fd', // sky-100
+        '#ddd6fe', // purple-100
+        '#fbcfe8'  // fuchsia-100
     ];
 
     // Get top 10 POS tags by count
@@ -1137,7 +1175,8 @@ function createPOSDistributionChart(posDistribution) {
         .slice(0, 10);
 
     sortedPOS.forEach(([pos, data]) => {
-        labels.push(pos);
+        originalPOS.push(pos);
+        labels.push(posTagNames[pos] || pos);
         counts.push(data.count);
     });
 
@@ -1155,7 +1194,10 @@ function createPOSDistributionChart(posDistribution) {
                 label: 'Count',
                 data: counts,
                 backgroundColor: colors.slice(0, labels.length),
-                borderColor: colors.slice(0, labels.length).map(c => c.replace(')', ', 0.8)')),
+                borderColor: colors.slice(0, labels.length).map(c => {
+                    // Darken the border slightly
+                    return c.replace('100', '200');
+                }),
                 borderWidth: 1
             }]
         },
@@ -1172,7 +1214,8 @@ function createPOSDistributionChart(posDistribution) {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            const pos = context.label;
+                            const idx = context.dataIndex;
+                            const pos = originalPOS[idx];
                             const data = posDistribution[pos];
                             return `${data.count} tokens (${data.percentage}%)`;
                         }
@@ -1184,6 +1227,20 @@ function createPOSDistributionChart(posDistribution) {
                     beginAtZero: true,
                     ticks: {
                         precision: 0
+                    },
+                    title: {
+                        display: true,
+                        text: 'Count',
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
                     }
                 }
             }
