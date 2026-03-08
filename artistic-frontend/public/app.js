@@ -1028,6 +1028,8 @@ function displayResults(data) {
 
 }
 
+window.displayResults = displayResults;
+
 function displayError(message) {
     let additionalHelp = '';
 
