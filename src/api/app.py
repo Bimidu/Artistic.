@@ -50,6 +50,10 @@ from src.interpretability.counterfactuals.cf_chat_parser import parse_clinician_
 from src.interpretability.counterfactuals.cf_explainer import generate_cf_explanation
 from src.interpretability.counterfactuals.feature_resolver import resolve_feature
 from config import config
+from src.database import connect_to_mongo, close_mongo_connection
+from src.auth.routes import router as auth_router
+from src.auth.google_oauth import router as google_oauth_router
+from src.auth.report_routes import router as report_router
 
 logger = get_logger(__name__)
 ASSETS_DIR = Path("assets")
@@ -84,6 +88,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include authentication routes
+app.include_router(auth_router)
+app.include_router(google_oauth_router)
+app.include_router(report_router)
 
 # Initialize components
 model_registry = ModelRegistry()
@@ -3486,6 +3495,14 @@ async def counterfactual_chat(req: dict):
 async def startup_event():
     """Run on application startup."""
     logger.info("ASD Detection API v2.0 starting up...")
+
+    # Initialize MongoDB connection
+    try:
+        await connect_to_mongo()
+        logger.info("✓ MongoDB connection established - Authentication features available")
+    except Exception as e:
+        logger.warning(f"MongoDB connection failed: {e}. Authentication features will be unavailable.")
+
     logger.info(f"Models directory: {model_registry.registry_dir}")
     logger.info(f"Available models: {len(model_registry.list_models())}")
     logger.info(f"Supported features: {len(feature_extractor.all_feature_names)}")
@@ -3496,6 +3513,8 @@ async def startup_event():
 async def shutdown_event():
     """Run on application shutdown."""
     logger.info("ASD Detection API shutting down...")
+
+    await close_mongo_connection()
 
 
 if __name__ == "__main__":

@@ -1,10 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import ReportSaveIntegration from '@/components/ReportSaveIntegration';
+import AuthModal from '@/components/AuthModal';
+import ProfileSidebar from '@/components/ProfileSidebar';
+import Header from '@/components/Header';
 
 export default function Home() {
-  const router = useRouter();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showProfileSidebar, setShowProfileSidebar] = useState(false);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
   const showModeToggle = process.env.NODE_ENV !== 'production';
@@ -18,13 +22,11 @@ export default function Home() {
       window.__artisticInitHomeUi?.();
     };
 
-    // If the script already ran in this session, just re-bind to the new DOM.
     if (typeof window.__artisticInitHomeUi === 'function') {
       runInit();
       return;
     }
 
-    // Otherwise load it once, then initialize.
     const existing = document.getElementById('artistic-app-js') as HTMLScriptElement | null;
     if (existing) {
       existing.addEventListener('load', runInit, { once: true });
@@ -38,65 +40,30 @@ export default function Home() {
     script.async = true;
     script.addEventListener('load', runInit, { once: true });
     document.body.appendChild(script);
+
+    const saveReportScript = document.createElement('script');
+    saveReportScript.id = 'save-report-addon-js';
+    saveReportScript.src = '/save-report-addon.js';
+    saveReportScript.async = true;
+    document.body.appendChild(saveReportScript);
   }, []);
 
   return (
     <>
+      {/* Report Save Integration  */}
+      <ReportSaveIntegration />
+
       {/* Header */}
-      <header className="relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/navbar_bg.jpg)' }}>
-        <div className="absolute inset-0 bg-primary-900/10" aria-hidden="true" />
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="text-3xl font-medium text-black tracking-tight">Artistic.</div>
-              <div className="hidden sm:block h-6 w-px bg-primary-700"></div>
-              <div className="hidden sm:block text-sm text-primary-900">Speech Analysis Platform</div>
-            </div>
+      <Header
+        showModeToggle={showModeToggle}
+        apiUrl={apiUrl}
+        onShowAuthModal={() => setShowAuthModal(true)}
+        onShowProfileSidebar={() => setShowProfileSidebar(true)}
+      />
 
-            <div className="flex items-center gap-6">
-              {showModeToggle && (
-                <div className="toggle-switch" id="modeToggle">
-                  <div className="toggle-option active" data-mode="user">User Mode</div>
-                  <div className="toggle-option" data-mode="training">Training Mode</div>
-                  <div className="toggle-slider" id="toggleSlider"></div>
-                </div>
-              )}
-
-              <div className="flex items-center gap-2 text-sm text-primary-700">
-                <span className="w-2 h-2 rounded-full bg-red-400" id="statusDot"></span>
-                <span id="statusText">Disconnected</span>
-              </div>
-
-              <button
-                onClick={() => router.push('/how-it-works')}
-                className="px-4 py-2 text-sm bg-white/20 text-primary-900 border border-primary-300 rounded-full font-semibold hover:bg-white hover:text-black transition-all"
-              >
-                How It Works
-              </button>
-
-              <button
-                onClick={() => router.push('/guideline')}
-                className="px-4 py-2 text-sm bg-black text-primary-400 rounded-full font-bold hover:border-primary-500 hover:text-white transition-all"
-              >
-                Feature Guide
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* API Configuration Bar */}
-        <div className="relative z-10 bg-white hidden" id="apiConfigBar">
-          <div className="max-w-7xl mx-auto px-8 py-2">
-            <div className="flex items-center gap-6 justify-between">
-              <div className="flex items-center gap-4 flex-1">
-                <label className="text-sm text-primary-600 whitespace-nowrap">API URL</label>
-                <input type="text" className="flex-1 px-4 py-2 bg-primary-50 rounded-lg text-sm focus:outline-none focus:bg-primary-100 transition-all" id="apiUrl" defaultValue={process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'} />
-              </div>
-              <button className="px-5 py-2 bg-primary-900 text-white rounded-lg text-sm hover:bg-primary-800 transition-all" onClick={() => window.testConnection?.()}>Test Connection</button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Modals */}
+      <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      <ProfileSidebar isOpen={showProfileSidebar} onClose={() => setShowProfileSidebar(false)} />
 
       {/* Landing Section */}
       <div id="landingSection" className="bg-white">
