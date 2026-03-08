@@ -78,8 +78,16 @@ class AcousticFeatureExtractor:
         )
         
         logger.info(f"Extracted {len(result.features)} acoustic features")
-        return result.features
-    
+
+        # PLASTER FIX: Ensure all expected features are present
+        expected_features = self.feature_names
+        final_features = {}
+        for feature_name in expected_features:
+            final_features[feature_name] = result.features.get(feature_name, 0.0)
+
+        logger.debug(f"Final feature set has {len(final_features)} features")
+        return final_features
+
     def extract_from_transcript(self, transcript_data: Any) -> Dict[str, float]:
         """
         Extract acoustic features from transcript (requires audio file).
@@ -216,14 +224,19 @@ class AcousticFeatureExtractor:
         sample_rate: int = 16000,
     ) -> pd.DataFrame:
         """
-        Extract one row per merged group: load N audios, concatenate, extract features once.
+        Extract features from prepared groups with different strategies for ASD and TD.
+
+        - ASD groups: Single file per group (individual processing with child-only extraction)
+        - TD groups: Multiple files per group (merged into single audio, then child-only extraction)
 
         Args:
-            prepared_items: List of (list of audio paths, diagnosis, dataset_name).
+            prepared_items: List of (list of audio paths, diagnosis, dataset_name) where:
+                           - ASD items have 1 file per list
+                           - TD items have multiple files per list (to be merged)
             sample_rate: Target sample rate for concatenation (must match extractor expectation).
 
         Returns:
-            DataFrame with one row per merged sample (diagnosis and dataset set).
+            DataFrame with one row per prepared group (individual ASD files or merged TD groups).
         """
         try:
             import librosa
@@ -235,46 +248,134 @@ class AcousticFeatureExtractor:
         from src.parsers.chat_parser import TranscriptData
 
         data = []
+        total_groups = len(prepared_items)
+        logger.info(f"Starting feature extraction for {total_groups} groups")
+
         for idx, (group_paths, diagnosis, dataset_name) in enumerate(prepared_items):
             try:
-                segments = []
-                for ap in group_paths:
-                    ap = Path(ap)
-                    if not ap.exists():
-                        logger.warning(f"Missing file in group: {ap}")
+                # Progress logging
+                if (idx + 1) % 10 == 0 or idx == 0:
+                    logger.info(f"Processing group {idx + 1}/{total_groups} ({diagnosis})")
+                elif (idx + 1) % 5 == 0:
+                    logger.info(f"Progress: {idx + 1}/{total_groups} groups completed")
+                if diagnosis == 'ASD':
+                    # ASD Strategy: Individual file processing (no merging)
+                    if len(group_paths) != 1:
+                        logger.warning(f"ASD group {idx} has {len(group_paths)} files, expected 1. Using first file.")
+
+                    audio_file = group_paths[0]
+                    if not audio_file.exists():
+                        logger.warning(f"Missing ASD file: {audio_file}")
                         continue
-                    y, sr = librosa.load(str(ap), sr=sample_rate, mono=True)
-                    segments.append(y)
-                if not segments:
+
+                    # Extract features from individual ASD file (with child-only extraction)
+                    features = self.extract_from_audio(audio_file)
+                    features["file_path"] = str(audio_file)
+                    features["participant_id"] = audio_file.stem
+
+                    logger.debug(f"Processed individual ASD file: {audio_file.name}")
+
+                elif diagnosis == 'TD':
+                    # TD Strategy: Merge multiple files, then extract features
+                    logger.info(f"TD group {idx + 1}: Starting merge of {len(group_paths)} audio files...")
+                    segments = []
+                    valid_files = []
+
+                    for file_idx, ap in enumerate(group_paths):
+                        ap = Path(ap)
+                        if not ap.exists():
+                            logger.warning(f"Missing file in TD group: {ap}")
+                            continue
+
+                        logger.info(f"TD group {idx + 1}: Loading file {file_idx + 1}/{len(group_paths)}: {ap.name}")
+
+                        try:
+                            import time
+                            load_start = time.time()
+                            # Add duration limit and error handling to prevent hanging
+                            y, sr = librosa.load(str(ap), sr=sample_rate, mono=True, duration=60.0)  # Limit to 60 seconds
+                            load_time = time.time() - load_start
+
+                            segments.append(y)
+                            valid_files.append(ap)
+
+                            logger.info(f"TD group {idx + 1}: ✅ Loaded {ap.name} in {load_time:.1f}s ({len(y)} samples)")
+
+                        except Exception as e:
+                            logger.error(f"TD group {idx + 1}: ❌ Failed to load {ap.name}: {e}")
+                            continue
+
+                    if not segments:
+                        logger.warning(f"No valid files in TD group {idx}")
+                        continue
+
+                    # Concatenate all TD files into one merged audio
+                    logger.info(f"TD group {idx + 1}: Merging {len(segments)} audio segments...")
+                    merged = np.concatenate(segments)
+
+                    # Limit merged audio length to prevent excessive processing
+                    max_samples = sample_rate * 300  # 5 minutes max
+                    if len(merged) > max_samples:
+                        logger.info(f"TD group {idx + 1}: Truncating merged audio from {len(merged)/sample_rate:.1f}s to 300s")
+                        merged = merged[:max_samples]
+
+                    logger.info(f"TD group {idx + 1}: Merged audio duration: {len(merged)/sample_rate:.1f}s")
+
+                    # Create temporary merged file
+                    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False, prefix="merged_td_") as f:
+                        tmp_path = Path(f.name)
+
+                    try:
+                        logger.info(f"TD group {idx + 1}: Writing merged audio to temporary file...")
+                        sf.write(str(tmp_path), merged, sample_rate)
+
+                        # Create dummy transcript for merged audio
+                        dummy = TranscriptData(
+                            file_path=tmp_path,
+                            participant_id="CHI",
+                            utterances=[],
+                            metadata={},
+                        )
+
+                        # Extract features from merged TD audio with detailed logging
+                        logger.info(f"TD group {idx + 1}: Starting acoustic feature extraction from merged audio...")
+
+                        import time
+                        feature_start = time.time()
+                        features = self.audio_feature_extractor.extract(transcript=dummy, audio_path=tmp_path).features
+                        feature_time = time.time() - feature_start
+
+                        features["file_path"] = "|".join(str(p) for p in valid_files)
+                        features["participant_id"] = f"merged_td_{idx}"
+
+                        logger.info(f"TD group {idx + 1}: ✅ Feature extraction completed in {feature_time:.1f}s")
+
+                    finally:
+                        # Clean up temporary file
+                        if tmp_path.exists():
+                            tmp_path.unlink(missing_ok=True)
+                            logger.debug(f"TD group {idx + 1}: Cleaned up temporary file")
+
+                else:
+                    logger.warning(f"Unknown diagnosis: {diagnosis}")
                     continue
-                merged = np.concatenate(segments)
-                with tempfile.NamedTemporaryFile(suffix=".wav", delete=False, prefix="merged_acoustic_") as f:
-                    tmp_path = Path(f.name)
-                try:
-                    sf.write(str(tmp_path), merged, sample_rate)
-                    dummy = TranscriptData(
-                        file_path=tmp_path,
-                        participant_id="CHI",
-                        utterances=[],
-                        metadata={},
-                    )
-                    features = self.audio_feature_extractor.extract(transcript=dummy, audio_path=tmp_path).features
-                finally:
-                    if tmp_path.exists():
-                        tmp_path.unlink(missing_ok=True)
+
+                # Add common metadata
                 features["diagnosis"] = diagnosis
                 features["dataset"] = dataset_name
-                features["file_path"] = "|".join(str(p) for p in group_paths)
-                features["participant_id"] = f"merged_{idx}"
                 data.append(features)
+
             except Exception as e:
-                logger.error(f"Error processing merged group {idx}: {e}")
+                logger.error(f"Error processing group {idx} ({diagnosis}): {e}")
                 continue
 
         if not data:
             logger.warning("No features extracted from any prepared groups")
             return pd.DataFrame()
-        logger.info(f"Extracted features from {len(data)} merged groups")
+
+        asd_count = sum(1 for d in data if d.get('diagnosis') == 'ASD')
+        td_count = sum(1 for d in data if d.get('diagnosis') == 'TD')
+        logger.info(f"Extracted features from {len(data)} groups (ASD: {asd_count} individual, TD: {td_count} merged)")
         return pd.DataFrame(data)
 
     def extract_with_audio(

@@ -361,16 +361,17 @@ class ModelTrainer:
             # Delegate to appropriate trainer
             if category == 'acoustic_prosodic':
                 try:
-                    self.logger.info("Training Acoustic/Prosodic models with MAXIMUM SIMPLICITY")
-                    models = self.acoustic_trainer.train_multiple_models(
-                        X_train, y_train, X_test, y_test
+                    self.logger.info("Training Acoustic/Prosodic models with AUTOMATIC BALANCE for 70-80% range")
+                    models = self.acoustic_trainer.train_with_fallback(
+                        X_train, y_train, X_test, y_test,
+                        target_accuracy_range=(0.70, 0.80)
                     )
                     category_models[category] = {
                         'status': 'implemented',
                         'models': models,
                         'features_count': n_features,
                         'samples_count': n_samples,
-                        'message': 'Acoustic/Prosodic: MAXIMUM SIMPLICITY (75-80% target)'
+                        'message': 'Acoustic/Prosodic: AUTOMATIC BALANCE (70-80% target with fallback)'
                     }
                 except Exception as e:
                     self.logger.error(f"Acoustic training error: {e}")

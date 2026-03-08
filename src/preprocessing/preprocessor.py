@@ -149,19 +149,24 @@ class DataPreprocessor:
         )
 
         # Step 4: Clean train and test data separately
-        df_train_clean = self.cleaner.clean(
+        df_train_clean, updated_feature_columns_train = self.cleaner.clean(
             df_train,
             target_column=self.target_column,
             feature_columns=self.feature_columns_
         )
-        df_test_clean = self.cleaner.clean(
+        df_test_clean, updated_feature_columns_test = self.cleaner.clean(
             df_test,
             target_column=self.target_column,
             feature_columns=self.feature_columns_
         )
+
+        # Use the intersection of features that remained after cleaning both sets
+        self.feature_columns_ = list(set(updated_feature_columns_train) & set(updated_feature_columns_test))
+
         self.logger.info(
             "Data cleaned - "
-            f"Train: {df_train_clean.shape}, Test: {df_test_clean.shape}"
+            f"Train: {df_train_clean.shape}, Test: {df_test_clean.shape}, "
+            f"Features: {len(self.feature_columns_)}"
         )
 
         # Step 5: Split into features and target for train and test
@@ -207,7 +212,7 @@ class DataPreprocessor:
             raise ValueError("Preprocessor not fitted. Call fit_transform first.")
         
         # Clean data
-        df_clean = self.cleaner.clean(
+        df_clean, _ = self.cleaner.clean(
             df,
             target_column=self.target_column,
             feature_columns=self.feature_columns_
@@ -270,20 +275,23 @@ class DataPreprocessor:
             df_val_fold = df.iloc[val_idx]
 
             # Clean train and validation data separately for this fold
-            df_train_clean = self.cleaner.clean(
+            df_train_clean, updated_features_train = self.cleaner.clean(
                 df_train_fold,
                 target_column=self.target_column,
                 feature_columns=self.feature_columns_
             )
-            df_val_clean = self.cleaner.clean(
+            df_val_clean, updated_features_val = self.cleaner.clean(
                 df_val_fold,
                 target_column=self.target_column,
                 feature_columns=self.feature_columns_
             )
 
-            X_train_fold = df_train_clean[self.feature_columns_]
+            # Use intersection of features that remained after cleaning both sets
+            fold_features = list(set(updated_features_train) & set(updated_features_val))
+
+            X_train_fold = df_train_clean[fold_features]
             y_train_fold = df_train_clean[self.target_column]
-            X_val_fold = df_val_clean[self.feature_columns_]
+            X_val_fold = df_val_clean[fold_features]
             y_val_fold = df_val_clean[self.target_column]
 
             # Feature selection per fold, using only training portion

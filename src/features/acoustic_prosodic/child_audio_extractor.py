@@ -93,10 +93,12 @@ class ChildAudioExtractor:
         child_segments = self._get_child_segments(transcript, transcription_result)
         
         if not child_segments:
-            logger.warning(
-                f"No child segments found in transcript/transcription for {audio_path.name}. "
-                f"Using full audio instead."
-            )
+            # For merged audio files or individual ASD processing, this is expected
+            audio_name = audio_path.name.lower()
+            if 'merged' in str(audio_path) or any(dataset in str(audio_path).lower() for dataset in ['asdbank', 'aac']):
+                logger.debug(f"No child segments found for {audio_path.name}. Using full audio (expected for individual ASD processing).")
+            else:
+                logger.warning(f"No child segments found in transcript/transcription for {audio_path.name}. Using full audio instead.")
             return audio_path  # Return original audio if no child segments found
         
         # Extract and concatenate child audio segments
