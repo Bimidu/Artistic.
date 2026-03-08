@@ -65,7 +65,7 @@ export default function ProfileSidebar({ isOpen, onClose }: ProfileSidebarProps)
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity"
+        className="fixed inset-0 backdrop-blur-sm z-40 transition-opacity"
         onClick={onClose}
       />
 
