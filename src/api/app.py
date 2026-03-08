@@ -817,7 +817,10 @@ async def predict_from_audio(
                         probability=asd_prob,
                         probabilities=probabilities,
                         confidence=confidence,
-                        model_name=used_model_name
+                        model_name=used_model_name,
+                        model=model,
+                        features_df=features_df,
+                        feature_names=list(features_df.columns)
                     ))
 
                     logger.info(f"{component}: {prediction} ({confidence:.2f})")
@@ -825,6 +828,101 @@ async def predict_from_audio(
                 except Exception as e:
                     logger.warning(f"Component {component} failed: {e}")
                     continue
+
+            global LAST_PREDICTION_CONTEXT
+
+            LAST_PREDICTION_CONTEXT = {
+                "mode": "fusion",
+                "components": {}
+            }
+
+            for cp in component_predictions:
+                LAST_PREDICTION_CONTEXT["components"][cp.component] = {
+                    "model": cp.model,
+                    "features": cp.features_df.values[0].copy(),
+                    "feature_names": cp.feature_names,
+                    "prediction": cp.prediction,
+                    "model_name": cp.model_name
+                }
+            #shap
+            request_id = str(uuid.uuid4())
+            fusion_shap = []
+
+            for cp in component_predictions:
+
+                try:
+
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    background_path = Path("assets/shap") / model_name / "background.npy"
+
+                    if not background_path.exists():
+                        continue
+
+                    background = np.load(background_path, allow_pickle=True)
+
+                    shap_dir = Path("assets/shap/local") / request_id / component
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=feature_names,
+                        model_type=model_name.split("_")[-1]
+                    )
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values,
+                        save_dir=shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    fusion_shap.append({
+                        "component": component,
+                        "waterfall": f"/assets/shap/local/{request_id}/{component}/waterfall.png"
+                    })
+
+                except Exception as shap_error:
+                    logger.warning(f"SHAP failed for {component}: {shap_error}")
+
+            #counterfactuals
+            fusion_counterfactuals = []
+
+            for cp in component_predictions:
+
+                try:
+
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    cf_result = generate_counterfactual(
+                        model=model,
+                        x_instance=features_df.values[0],
+                        feature_names=feature_names,
+                        ae_key=model_name,
+                        predicted_class=predicted_class
+                    )
+
+                    if cf_result is not None:
+                        fusion_counterfactuals.append({
+                            "component": component,
+                            "counterfactual": cf_result
+                        })
+
+                except Exception as cf_error:
+                    logger.warning(
+                        f"[CF] Counterfactual failed for component={component}: {cf_error}"
+                    )
 
             if not component_predictions:
                 raise ValueError("No components available for prediction")
@@ -843,22 +941,24 @@ async def predict_from_audio(
                 features=feature_set.features
             )
 
-            return {
+            response_data = {
                 'prediction': fused.final_prediction,
                 'confidence': fused.confidence,
                 'probabilities': fused.final_probabilities,
                 'model_used': 'fusion',
-                'models_used': [cp.model_name for cp in component_predictions],  # List all models used
+                'models_used': [cp.model_name for cp in component_predictions],
+
                 'component_breakdown': [
                     {
                         'component': cp.component,
                         'prediction': cp.prediction,
                         'confidence': cp.confidence,
                         'probabilities': cp.probabilities,
-                        'model_name': cp.model_name
+                        'model_name': cp.model_name,
                     }
                     for cp in component_predictions
                 ],
+
                 'features_extracted': len(feature_set.features),
                 'transcript': processed.raw_text,
                 'annotated_transcript_html': annotated.to_html(),
@@ -866,6 +966,15 @@ async def predict_from_audio(
                 'input_type': 'audio',
                 'duration': processed.metadata.get('duration', 0),
             }
+
+            if fusion_shap:
+                response_data['fusion_shap'] = fusion_shap
+
+            if fusion_counterfactuals:
+                response_data['fusion_counterfactual'] = fusion_counterfactuals
+
+            return response_data
+
         else:
             # Single component prediction
             # Determine which component/model to use and extract appropriate features
@@ -1064,6 +1173,7 @@ def _run_audio_prediction_sync(
     upd = lambda p, s, d: _set_job_progress(job_id, p, s, d)  # noqa: E731
     tmp_path: Optional[Path] = None
     pipeline_audio_path: Optional[Path] = None
+    global LAST_PREDICTION_CONTEXT
 
     try:
         upd(3, "Uploading", "Saving audio file to disk…")
@@ -1177,6 +1287,9 @@ def _run_audio_prediction_sync(
                         probabilities=probabilities,
                         confidence=confidence,
                         model_name=used_model_name,
+                        model=model,
+                        features_df=features_df,
+                        feature_names=list(features_df.columns)
                     ))
                     upd(prog_end, f"Done — {component.replace('_', ' ').title()}", f"{component.replace('_', ' ').title()} analysis complete")
                     logger.info(f"{component}: {prediction} ({confidence:.2f})")
@@ -1191,6 +1304,95 @@ def _run_audio_prediction_sync(
 
             upd(75, "Fusing", "Combining component predictions with weighted fusion…")
             fused = model_fusion.fuse(component_predictions, component_weights_override=component_weights)
+
+            LAST_PREDICTION_CONTEXT = {
+                "mode": "fusion",
+                "components": {}
+            }
+
+            for cp in component_predictions:
+                LAST_PREDICTION_CONTEXT["components"][cp.component] = {
+                    "model": cp.model,
+                    "features": cp.features_df.values[0].copy(),
+                    "feature_names": cp.feature_names,
+                    "prediction": cp.prediction,
+                    "model_name": cp.model_name
+                }
+
+            # SHAP explanations
+            request_id = str(uuid.uuid4())
+            fusion_shap = []
+
+            for cp in component_predictions:
+                try:
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    background_path = Path("assets/shap") / model_name / "background.npy"
+
+                    if not background_path.exists():
+                        logger.warning(f"SHAP background missing for {model_name}")
+                        continue
+
+                    background = np.load(background_path, allow_pickle=True)
+
+                    shap_dir = Path("assets/shap/local") / request_id / component
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=feature_names,
+                        model_type=model_name.split("_")[-1]
+                    )
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values,
+                        save_dir=shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    fusion_shap.append({
+                        "component": component,
+                        "waterfall": f"/assets/shap/local/{request_id}/{component}/waterfall.png"
+                    })
+
+                except Exception as e:
+                    logger.warning(f"SHAP failed for {component}: {e}")
+
+            # Counterfactual explanations
+            fusion_counterfactuals = []
+
+            for cp in component_predictions:
+                try:
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    cf_result = generate_counterfactual(
+                        model=model,
+                        x_instance=features_df.values[0],
+                        feature_names=feature_names,
+                        ae_key=model_name,
+                        predicted_class=predicted_class
+                    )
+
+                    if cf_result is not None:
+                        fusion_counterfactuals.append({
+                            "component": component,
+                            "counterfactual": cf_result
+                        })
+
+                except Exception as e:
+                    logger.warning(f"[CF] Counterfactual failed for {component}: {e}")
 
             upd(80, "Annotating", "Generating annotated transcript — analysing conversation patterns…")
             feature_set = feature_extractor.extract_with_audio(
@@ -1227,6 +1429,12 @@ def _run_audio_prediction_sync(
                 'input_type': 'audio',
                 'duration': processed.metadata.get('duration', 0),
             }
+            #add shap to result if available
+            if fusion_shap:
+                result_data['fusion_shap'] = fusion_shap
+            #add counterfactuals to result if available
+            if fusion_counterfactuals:
+                result_data['fusion_counterfactual'] = fusion_counterfactuals
 
         else:
             # Single-component path (mirrors the existing predict_from_audio logic)
@@ -1267,6 +1475,83 @@ def _run_audio_prediction_sync(
 
             result = make_prediction(model, features_df, used_model_name)
 
+            LAST_PREDICTION_CONTEXT = {
+                "mode": "single",
+                "model": model,
+                "features": features_df.values[0].copy(),
+                "feature_names": list(features_df.columns),
+                "prediction": result["prediction"],
+                "model_name": used_model_name
+            }
+
+            # ===============================
+            # SHAP EXPLANATION
+            # ===============================
+            local_shap_data = None
+
+            try:
+                request_id = str(uuid.uuid4())
+
+                background_path = Path("assets/shap") / used_model_name / "background.npy"
+
+                if background_path.exists():
+                    background = np.load(background_path)
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=list(features_df.columns),
+                        model_type=used_model_name.split("_")[-1]
+                    )
+
+                    predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+                    shap_dir = Path("assets/shap/local") / request_id
+                    shap_dir.mkdir(parents=True, exist_ok=True)
+
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values[0],
+                        save_dir=shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    local_shap_data = {
+                        "request_id": request_id,
+                        "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
+                    }
+
+            except Exception as e:
+                logger.warning(f"Audio SHAP explanation not available: {e}")
+
+            # ===============================
+            # COUNTERFACTUAL
+            # ===============================
+            cf_result = None
+
+            try:
+
+                component = "_".join(used_model_name.split("_")[:-1])
+
+                predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+                cf_result = generate_counterfactual(
+                    model=model,
+                    x_instance=features_df.values[0],
+                    feature_names=list(features_df.columns),
+                    ae_key=used_model_name,
+                    predicted_class=predicted_class
+                )
+
+            except Exception as e:
+                logger.warning(f"Counterfactual failed: {e}")
+
+            # continue with transcript annotation
+            upd(78, "Annotating", "Generating annotated transcript…")
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features,
+            )
+
             upd(78, "Annotating", "Generating annotated transcript…")
             annotated = transcript_annotator.annotate(
                 processed.transcript_data,
@@ -1285,6 +1570,13 @@ def _run_audio_prediction_sync(
                 'model_used': used_model_name,
                 'component': get_model_component(used_model_name),
             }
+
+            #add shap to results if available
+            if local_shap_data:
+                result_data["local_shap"] = local_shap_data
+            #add counterfactuals to results if available
+            if cf_result:
+                result_data["counterfactual"] = cf_result
 
         prediction_jobs[job_id].update({
             'status': 'completed',
