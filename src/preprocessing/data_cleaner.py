@@ -78,7 +78,7 @@ class DataCleaner:
         df: pd.DataFrame,
         target_column: str = 'diagnosis',
         feature_columns: Optional[List[str]] = None,
-    ) -> pd.DataFrame:
+    ) -> Tuple[pd.DataFrame, List[str]]:
         """
         Clean the dataset.
         
@@ -88,7 +88,7 @@ class DataCleaner:
             feature_columns: List of feature columns (None = auto-detect)
         
         Returns:
-            pd.DataFrame: Cleaned DataFrame
+            Tuple of (cleaned DataFrame, updated feature columns list)
         """
         self.logger.info(f"Starting data cleaning for dataset with shape {df.shape}")
         
@@ -98,24 +98,53 @@ class DataCleaner:
         if feature_columns is None:
             feature_columns = [col for col in df.columns if col != target_column]
         
-        # Handle missing values
+        original_feature_count = len(feature_columns)
+
+        # Handle missing values (this may drop columns)
         df_clean = self._handle_missing_values(df_clean, feature_columns, target_column)
         
-        # Handle outliers
-        df_clean = self._handle_outliers(df_clean, feature_columns)
-        
-        # Remove any remaining NaN rows (only in feature columns)
+        # Update feature columns list after potential column drops
+        updated_feature_columns = [col for col in feature_columns if col in df_clean.columns]
+
+        # Handle outliers with updated feature list
+        df_clean = self._handle_outliers(df_clean, updated_feature_columns)
+
+        # Remove any remaining NaN rows (only in remaining feature columns)
         initial_rows = len(df_clean)
-        df_clean = df_clean.dropna(subset=feature_columns)
+        df_clean = df_clean.dropna(subset=updated_feature_columns)
         removed_rows = initial_rows - len(df_clean)
         
         if removed_rows > 0:
             self.logger.warning(f"Removed {removed_rows} rows with NaN in feature columns")
         
-        self.logger.info(f"Cleaning complete - Final shape: {df_clean.shape}")
-        
-        return df_clean
-    
+        dropped_features = original_feature_count - len(updated_feature_columns)
+        if dropped_features > 0:
+            self.logger.info(f"Dropped {dropped_features} features during cleaning")
+
+        self.logger.info(f"Cleaning complete - Final shape: {df_clean.shape}, Features: {len(updated_feature_columns)}")
+
+        return df_clean, updated_feature_columns
+
+    def clean_simple(
+        self,
+        df: pd.DataFrame,
+        target_column: str = 'diagnosis',
+        feature_columns: Optional[List[str]] = None,
+    ) -> pd.DataFrame:
+        """
+        Clean the dataset (simplified interface for backward compatibility).
+
+        Args:
+            df: Input DataFrame
+            target_column: Name of target variable
+            feature_columns: List of feature columns (None = auto-detect)
+
+        Returns:
+            pd.DataFrame: Cleaned DataFrame
+        """
+        cleaned_df, _ = self.clean(df, target_column, feature_columns)
+        return cleaned_df
+
     def _handle_missing_values(
         self,
         df: pd.DataFrame,
@@ -137,6 +166,44 @@ class DataCleaner:
             f"Found missing values in {len(features_with_missing)} features"
         )
         
+        # Identify features with ALL missing values (completely empty)
+        total_rows = len(df_clean)
+        completely_missing_features = missing_counts[missing_counts == total_rows].index.tolist()
+
+        if completely_missing_features:
+            # PLASTER FIX: During inference (single sample), don't drop features that the model might expect
+            # Only drop if we're processing multiple samples (training scenario)
+            if total_rows > 1:
+                self.logger.warning(
+                    f"Found {len(completely_missing_features)} features with ALL missing values. "
+                    f"These will be dropped: {completely_missing_features[:10]}{'...' if len(completely_missing_features) > 10 else ''}"
+                )
+                # Drop completely missing features
+                df_clean = df_clean.drop(columns=completely_missing_features)
+                # Update feature columns list
+                feature_columns = [col for col in feature_columns if col not in completely_missing_features]
+            else:
+                # For single sample inference, fill missing features with 0 instead of dropping
+                self.logger.warning(
+                    f"Single sample inference: Found {len(completely_missing_features)} missing features. "
+                    f"Filling with zeros instead of dropping."
+                )
+                for feature in completely_missing_features:
+                    if feature in df_clean.columns:
+                        df_clean[feature] = df_clean[feature].fillna(0.0)
+
+        # Re-check for missing values after dropping completely missing features
+        if not feature_columns:
+            self.logger.error("No valid features remaining after removing completely missing features")
+            return df_clean
+
+        missing_counts = df_clean[feature_columns].isna().sum()
+        features_with_missing = missing_counts[missing_counts > 0]
+
+        if len(features_with_missing) == 0:
+            self.logger.info("No missing values remaining after dropping empty features")
+            return df_clean
+
         # Handle based on strategy
         if self.missing_strategy == 'drop':
             # Drop rows with any missing values
@@ -144,12 +211,18 @@ class DataCleaner:
             self.logger.info(f"Dropped rows with missing values - New shape: {df_clean.shape}")
         
         elif self.imputer is not None:
-            # Impute missing values
-            df_clean[feature_columns] = self.imputer.fit_transform(
-                df_clean[feature_columns]
-            )
-            self.logger.info(f"Imputed missing values using {self.missing_strategy}")
-        
+            # Impute missing values only for features that have some non-missing values
+            try:
+                df_clean[feature_columns] = self.imputer.fit_transform(
+                    df_clean[feature_columns]
+                )
+                self.logger.info(f"Imputed missing values using {self.missing_strategy}")
+            except Exception as e:
+                self.logger.error(f"Imputation failed: {e}")
+                # Fallback: drop rows with missing values
+                self.logger.info("Falling back to dropping rows with missing values")
+                df_clean = df_clean.dropna(subset=feature_columns)
+
         return df_clean
     
     def _handle_outliers(

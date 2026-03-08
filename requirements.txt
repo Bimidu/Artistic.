@@ -51,6 +51,16 @@ uvicorn[standard]>=0.20.0  # ASGI server (local dev)
 python-multipart>=0.0.5    # For file uploads
 
 # ============================================================================
+# Authentication & Database
+# ============================================================================
+motor>=3.3.0               # Async MongoDB driver for FastAPI
+python-jose[cryptography]>=3.3.0  # JWT token handling
+passlib[bcrypt]>=1.7.4     # Password hashing with bcrypt
+httpx>=0.25.0              # Async HTTP client (for Google OAuth)
+google-auth>=2.23.0        # Google authentication
+google-auth-oauthlib>=1.1.0  # Google OAuth flow
+
+# ============================================================================
 # Data Visualization
 # ============================================================================
 matplotlib>=3.7.0          # Plotting library
