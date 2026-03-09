@@ -346,6 +346,65 @@ export default function Home() {
               <div className="p-8">
                 {/* Audio Upload */}
                 <div className="input-panel" id="audioPanel">
+
+                  {/* Recording Instructions */}
+                  <div className="mb-5 rounded-2xl border border-primary-200 bg-primary-50 overflow-hidden">
+                    {/* Header */}
+                    <div className="flex items-center gap-3 px-5 py-3.5 border-b border-primary-100 bg-white">
+                      <div className="w-7 h-7 bg-primary-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                        </svg>
+                      </div>
+                      <p className="text-xs font-medium text-primary-500 uppercase tracking-widest">Recording guidelines</p>
+                    </div>
+                    {/* Steps */}
+                    <div className="px-5 py-4 space-y-3.5">
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary-900 text-white flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">1</div>
+                        <p className="text-sm text-primary-700 leading-relaxed">
+                          <span className="font-medium text-primary-900">Conversation partner required.</span>{' '}
+                          The recording must include the child speaking with a parent, guardian, or familiar adult — not the child alone.
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary-900 text-white flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">2</div>
+                        <p className="text-sm text-primary-700 leading-relaxed">
+                          <span className="font-medium text-primary-900">Minimum 5 minutes.</span>{' '}
+                          A longer, uninterrupted conversation gives the model enough turn-taking, pause, and topic data for a reliable result.
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary-900 text-white flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">3</div>
+                        <p className="text-sm text-primary-700 leading-relaxed">
+                          <span className="font-medium text-primary-900">Keep it natural.</span>{' '}
+                          Use everyday topics — activities, food, toys, stories. Avoid scripted or one-word-answer tasks.
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary-900 text-white flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">4</div>
+                        <p className="text-sm text-primary-700 leading-relaxed">
+                          <span className="font-medium text-primary-900">Mix question types.</span>{' '}
+                          Try open questions{' '}<span className="italic text-primary-500">&quot;What did you do today?&quot;</span>,
+                          descriptive prompts{' '}<span className="italic text-primary-500">&quot;Tell me about your drawing&quot;</span>,
+                          and follow-up questions{' '}<span className="italic text-primary-500">&quot;And then what happened?&quot;</span>.
+                        </p>
+                      </div>
+                    </div>
+                    {/* Footer */}
+                    <div className="px-5 py-3 border-t border-primary-100 bg-white flex items-center gap-4">
+                      {['WAV', 'MP3', 'FLAC', 'OGG', 'M4A'].map(fmt => (
+                        <span key={fmt} className="flex items-center gap-1 text-xs text-primary-500">
+                          <svg className="w-3 h-3 text-lime-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                          </svg>
+                          {fmt}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
                   <div className="upload-area bg-primary-50 border border-dashed border-primary-300 rounded-2xl p-12 text-center cursor-pointer hover:bg-primary-100 hover:border-primary-400 transition-all" id="audioUploadArea">
                     <svg className="mx-auto h-10 w-10 text-primary-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                       <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -359,7 +418,10 @@ export default function Home() {
                   {/* In-browser Recording Controls */}
                   <div id="audioRecordSection" className="mt-6 bg-primary-50 rounded-xl p-5 border border-primary-200">
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-sm font-medium text-primary-900">Record Audio</h3>
+                      <div>
+                        <h3 className="text-sm font-medium text-primary-900">Record Audio</h3>
+                        <p className="text-xs text-primary-500 mt-0.5">At least 5 min · with a conversation partner</p>
+                      </div>
                       <div className="flex items-center gap-2">
                         <button
                           id="audioRecordButton"
