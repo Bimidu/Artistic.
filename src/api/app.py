@@ -3313,6 +3313,37 @@ async def analyze_syntactic_semantic_detailed(
         content_word_counter = Counter(all_content_words)
         result['word_frequencies'] = dict(content_word_counter.most_common(50))
 
+        # Calculate partial_repetition_ratio
+        # This measures how often the child repeats part of what was recently said
+        partial_repetition_count = 0
+        for idx in range(len(child_utterances)):
+            if idx == 0:
+                continue
+
+            current_text = child_utterances[idx].text.lower().strip()
+            current_words = set(current_text.split())
+
+            # Check overlap with the 3 most recent utterances
+            for prev_idx in range(max(0, idx - 3), idx):
+                prev_text = child_utterances[prev_idx].text.lower().strip()
+                prev_words = set(prev_text.split())
+
+                if not prev_words or not current_words:
+                    continue
+
+                # Calculate word overlap
+                overlap = len(current_words & prev_words)
+                total = len(current_words)
+
+                if total > 0:
+                    overlap_ratio = overlap / total
+                    # Consider it partial repetition if 40-60% overlap (not exact, not completely different)
+                    if 0.4 <= overlap_ratio <= 0.6:
+                        partial_repetition_count += 1
+                        break  # Only count once per utterance
+
+        partial_repetition_ratio = round(partial_repetition_count / len(child_utterances), 3) if child_utterances else 0
+
         # Calculate average sentence complexity
         if result['sentences']:
             avg_length = sum(s['length'] for s in result['sentences']) / len(result['sentences'])
@@ -3324,7 +3355,8 @@ async def analyze_syntactic_semantic_detailed(
                 'avg_clauses_per_sentence': round(avg_clauses, 2),
                 'avg_dependency_depth': round(avg_depth, 2),
                 'total_sentences': len(result['sentences']),
-                'grammar_issue_rate': round(len(result['grammar_issues']) / len(result['sentences']) * 100, 2)
+                'grammar_issue_rate': round(len(result['grammar_issues']) / len(result['sentences']) * 100, 2),
+                'partial_repetition_ratio': partial_repetition_ratio
             }
 
         return result
