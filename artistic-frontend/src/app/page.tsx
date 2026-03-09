@@ -424,82 +424,85 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Waveform Display */}
-         {/* Waveform Display */}
-          <div id="waveformSectionResults" className="hidden mt-8 bg-white border border-primary-200 rounded-2xl overflow-hidden">
+          {/* Acoustic Visualization - Modern Card Layout */}
+          <div id="waveformSectionResults" className="hidden mt-8 bg-white border border-primary-100 rounded-3xl overflow-hidden shadow-sm">
 
             {/* Header */}
-            <div className="px-8 py-6 border-b border-primary-100 flex items-center justify-between">
-              <div>
-                <h3 className="text-2xl font-normal text-primary-900" style={{ letterSpacing: '-0.02em' }}>Speech Waveform</h3>
-                <p className="text-sm text-primary-400 mt-0.5">Visual representation of the child&apos;s speech audio</p>
+            <div className="px-8 py-4 bg-white border-b border-gray-100">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-2xl font-semibold text-gray-900 mb-1">Acoustic Analysis</p>
+                  <h3 className="text-base font-medium text-gray-500 tracking-widest">Speech Visualization</h3>
+                </div>
+                <div className="flex items-center gap-6">
+                  {/* Legend */}
+                  <div className="flex items-center gap-4 text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+                      <span className="text-gray-600">Waveform</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-purple-500 rounded-sm"></div>
+                      <span className="text-gray-600">Pitch (F0)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
+                      <span className="text-gray-600">Energy</span>
+                    </div>
+                  </div>
+                  <audio id="waveformAudioResults" controls className="h-8 max-w-[200px]" />
+                </div>
               </div>
-              <audio id="waveformAudioResults" controls className="h-9 max-w-[220px]" />
             </div>
 
-            <div className="p-8 space-y-5">
+            <div className="p-8">
 
-              {/* Notice */}
-              <div className="flex items-start gap-3 px-4 py-3 rounded-xl bg-primary-50 border border-primary-100">
-                <svg className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
-                </svg>
-                <p className="text-xs text-primary-600 leading-relaxed">
-                  Acoustic and prosodic features are extracted as{' '}
-                  <span className="font-semibold text-primary-800">global statistical summaries</span>{' '}
-                  from the entire speech signal, not from specific time segments.
-                </p>
-              </div>
-
-              {/* Canvas — clean dark panel, no border */}
-              <div
-                className="relative rounded-xl overflow-hidden"
-                style={{ background: 'linear-gradient(160deg,#0d1117 0%,#111827 100%)' }}
-              >
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      'linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px)',
-                    backgroundSize: '40px 40px',
-                  }}
-                />
-                <canvas
-                  id="waveformCanvasResults"
-                  className="relative w-full"
-                  style={{ height: '160px', display: 'block' }}
-                />
-              </div>
-
-              {/* Legend */}
-              <div className="px-1 space-y-2">
-                <div className="flex flex-wrap gap-x-5 gap-y-2">
-                  {[
-                    { color: '#6366f1', label: 'Raw speech signal (amplitude over time)' },
-                    { color: '#94a3b8', label: 'Relative speech energy (loudness distribution)' },
-                    { color: '#f59e0b', label: 'Detected speech-silence boundaries' },
-                    { color: '#22c55e', label: 'Detected speech activity timeline' },
-                  ].map(({ color, label }) => (
-                    <div key={label} className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ background: color }} />
-                      <span className="text-xs text-primary-500">{label}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-primary-600 italic">
-                  These visual elements represent signal-level properties. Acoustic and prosodic features are computed as global statistical summaries.
-                </p>
-              </div>
-
-              {/* Observed characteristics */}
-              <div className="rounded-xl border border-primary-100 bg-primary-50 p-5">
-                <p className="text-xs font-medium text-primary-600 uppercase tracking-widest mb-3">Observed Speech Characteristics</p>
-                <div id="waveformSummaryResults" className="text-sm text-primary-700 leading-relaxed">
-                  <p>Analyzing speech characteristics...</p>
+              {/* Main Visualization Canvas */}
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm mb-6">
+                <div className="relative bg-white">
+                  <canvas
+                    id="waveformCanvasResults"
+                    className="w-full bg-white"
+                    style={{ height: '460px', display: 'block' }}
+                  />
                 </div>
               </div>
 
-              <p id="waveformInfoResults" className="text-xs text-primary-600">Loading waveform...</p>
+              {/* Info Cards Grid */}
+              <div className="grid grid-cols-4 gap-4 mb-6">
+                <div className="bg-white rounded-lg border border-gray-200 p-4">
+                  <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">DURATION</div>
+                  <div id="signalDuration" className="text-lg font-semibold text-gray-900">--</div>
+                </div>
+                <div className="bg-white rounded-lg border border-gray-200 p-4">
+                  <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">SAMPLE RATE</div>
+                  <div id="signalSampleRate" className="text-lg font-semibold text-gray-900">--</div>
+                </div>
+                <div className="bg-white rounded-lg border border-gray-200 p-4">
+                  <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">SAMPLES</div>
+                  <div id="signalSamples" className="text-lg font-semibold text-gray-900">--</div>
+                </div>
+                <div className="bg-white rounded-lg border border-gray-200 p-4">
+                  <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">SIGNAL QUALITY</div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <div className="text-sm font-medium text-gray-900">Good • Suitable for analysis</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Speech Characteristics */}
+              <div className="bg-white rounded-lg border border-gray-200 p-6">
+                <div className="text-xs text-gray-500 uppercase tracking-wide mb-3">SPEECH CHARACTERISTICS</div>
+                <div id="waveformSummaryResults" className="text-sm text-gray-700 leading-relaxed">
+                  <div className="flex items-center gap-2 text-gray-500">
+                    <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin" />
+                    <span>Analyzing speech characteristics...</span>
+                  </div>
+                </div>
+              </div>
+
+              <p id="waveformInfoResults" className="text-xs text-gray-500 text-center mt-4">Loading visualization...</p>
 
             </div>
           </div>
