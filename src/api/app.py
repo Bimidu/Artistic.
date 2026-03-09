@@ -841,7 +841,10 @@ async def predict_from_audio(
                         probability=asd_prob,
                         probabilities=probabilities,
                         confidence=confidence,
-                        model_name=used_model_name
+                        model_name=used_model_name,
+                        model=model,
+                        features_df=features_df,
+                        feature_names=list(features_df.columns)
                     ))
 
                     logger.info(f"{component}: {prediction} ({confidence:.2f})")
@@ -849,6 +852,101 @@ async def predict_from_audio(
                 except Exception as e:
                     logger.warning(f"Component {component} failed: {e}")
                     continue
+
+            global LAST_PREDICTION_CONTEXT
+
+            LAST_PREDICTION_CONTEXT = {
+                "mode": "fusion",
+                "components": {}
+            }
+
+            for cp in component_predictions:
+                LAST_PREDICTION_CONTEXT["components"][cp.component] = {
+                    "model": cp.model,
+                    "features": cp.features_df.values[0].copy(),
+                    "feature_names": cp.feature_names,
+                    "prediction": cp.prediction,
+                    "model_name": cp.model_name
+                }
+            #shap
+            request_id = str(uuid.uuid4())
+            fusion_shap = []
+
+            for cp in component_predictions:
+
+                try:
+
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    background_path = Path("assets/shap") / model_name / "background.npy"
+
+                    if not background_path.exists():
+                        continue
+
+                    background = np.load(background_path, allow_pickle=True)
+
+                    shap_dir = Path("assets/shap/local") / request_id / component
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=feature_names,
+                        model_type=model_name.split("_")[-1]
+                    )
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values,
+                        save_dir=shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    fusion_shap.append({
+                        "component": component,
+                        "waterfall": f"/assets/shap/local/{request_id}/{component}/waterfall.png"
+                    })
+
+                except Exception as shap_error:
+                    logger.warning(f"SHAP failed for {component}: {shap_error}")
+
+            #counterfactuals
+            fusion_counterfactuals = []
+
+            for cp in component_predictions:
+
+                try:
+
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    cf_result = generate_counterfactual(
+                        model=model,
+                        x_instance=features_df.values[0],
+                        feature_names=feature_names,
+                        ae_key=model_name,
+                        predicted_class=predicted_class
+                    )
+
+                    if cf_result is not None:
+                        fusion_counterfactuals.append({
+                            "component": component,
+                            "counterfactual": cf_result
+                        })
+
+                except Exception as cf_error:
+                    logger.warning(
+                        f"[CF] Counterfactual failed for component={component}: {cf_error}"
+                    )
 
             if not component_predictions:
                 raise ValueError("No components available for prediction")
@@ -867,22 +965,24 @@ async def predict_from_audio(
                 features=feature_set.features
             )
 
-            return {
+            response_data = {
                 'prediction': fused.final_prediction,
                 'confidence': fused.confidence,
                 'probabilities': fused.final_probabilities,
                 'model_used': 'fusion',
-                'models_used': [cp.model_name for cp in component_predictions],  # List all models used
+                'models_used': [cp.model_name for cp in component_predictions],
+
                 'component_breakdown': [
                     {
                         'component': cp.component,
                         'prediction': cp.prediction,
                         'confidence': cp.confidence,
                         'probabilities': cp.probabilities,
-                        'model_name': cp.model_name
+                        'model_name': cp.model_name,
                     }
                     for cp in component_predictions
                 ],
+
                 'features_extracted': len(feature_set.features),
                 'transcript': processed.raw_text,
                 'annotated_transcript_html': annotated.to_html(),
@@ -890,6 +990,15 @@ async def predict_from_audio(
                 'input_type': 'audio',
                 'duration': processed.metadata.get('duration', 0),
             }
+
+            if fusion_shap:
+                response_data['fusion_shap'] = fusion_shap
+
+            if fusion_counterfactuals:
+                response_data['fusion_counterfactual'] = fusion_counterfactuals
+
+            return response_data
+
         else:
             # Single component prediction
             # Determine which component/model to use and extract appropriate features
@@ -1088,6 +1197,7 @@ def _run_audio_prediction_sync(
     upd = lambda p, s, d: _set_job_progress(job_id, p, s, d)  # noqa: E731
     tmp_path: Optional[Path] = None
     pipeline_audio_path: Optional[Path] = None
+    global LAST_PREDICTION_CONTEXT
 
     try:
         upd(3, "Uploading", "Saving audio file to disk…")
@@ -1201,6 +1311,9 @@ def _run_audio_prediction_sync(
                         probabilities=probabilities,
                         confidence=confidence,
                         model_name=used_model_name,
+                        model=model,
+                        features_df=features_df,
+                        feature_names=list(features_df.columns)
                     ))
                     upd(prog_end, f"Done — {component.replace('_', ' ').title()}", f"{component.replace('_', ' ').title()} analysis complete")
                     logger.info(f"{component}: {prediction} ({confidence:.2f})")
@@ -1215,6 +1328,95 @@ def _run_audio_prediction_sync(
 
             upd(75, "Fusing", "Combining component predictions with weighted fusion…")
             fused = model_fusion.fuse(component_predictions, component_weights_override=component_weights)
+
+            LAST_PREDICTION_CONTEXT = {
+                "mode": "fusion",
+                "components": {}
+            }
+
+            for cp in component_predictions:
+                LAST_PREDICTION_CONTEXT["components"][cp.component] = {
+                    "model": cp.model,
+                    "features": cp.features_df.values[0].copy(),
+                    "feature_names": cp.feature_names,
+                    "prediction": cp.prediction,
+                    "model_name": cp.model_name
+                }
+
+            # SHAP explanations
+            request_id = str(uuid.uuid4())
+            fusion_shap = []
+
+            for cp in component_predictions:
+                try:
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    background_path = Path("assets/shap") / model_name / "background.npy"
+
+                    if not background_path.exists():
+                        logger.warning(f"SHAP background missing for {model_name}")
+                        continue
+
+                    background = np.load(background_path, allow_pickle=True)
+
+                    shap_dir = Path("assets/shap/local") / request_id / component
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=feature_names,
+                        model_type=model_name.split("_")[-1]
+                    )
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values,
+                        save_dir=shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    fusion_shap.append({
+                        "component": component,
+                        "waterfall": f"/assets/shap/local/{request_id}/{component}/waterfall.png"
+                    })
+
+                except Exception as e:
+                    logger.warning(f"SHAP failed for {component}: {e}")
+
+            # Counterfactual explanations
+            fusion_counterfactuals = []
+
+            for cp in component_predictions:
+                try:
+                    model = cp.model
+                    features_df = cp.features_df
+                    feature_names = cp.feature_names
+                    component = cp.component
+                    model_name = cp.model_name
+
+                    predicted_class = 1 if cp.prediction == "ASD" else 0
+
+                    cf_result = generate_counterfactual(
+                        model=model,
+                        x_instance=features_df.values[0],
+                        feature_names=feature_names,
+                        ae_key=model_name,
+                        predicted_class=predicted_class
+                    )
+
+                    if cf_result is not None:
+                        fusion_counterfactuals.append({
+                            "component": component,
+                            "counterfactual": cf_result
+                        })
+
+                except Exception as e:
+                    logger.warning(f"[CF] Counterfactual failed for {component}: {e}")
 
             upd(80, "Annotating", "Generating annotated transcript — analysing conversation patterns…")
             feature_set = feature_extractor.extract_with_audio(
@@ -1251,6 +1453,12 @@ def _run_audio_prediction_sync(
                 'input_type': 'audio',
                 'duration': processed.metadata.get('duration', 0),
             }
+            #add shap to result if available
+            if fusion_shap:
+                result_data['fusion_shap'] = fusion_shap
+            #add counterfactuals to result if available
+            if fusion_counterfactuals:
+                result_data['fusion_counterfactual'] = fusion_counterfactuals
 
         else:
             # Single-component path (mirrors the existing predict_from_audio logic)
@@ -1291,6 +1499,83 @@ def _run_audio_prediction_sync(
 
             result = make_prediction(model, features_df, used_model_name)
 
+            LAST_PREDICTION_CONTEXT = {
+                "mode": "single",
+                "model": model,
+                "features": features_df.values[0].copy(),
+                "feature_names": list(features_df.columns),
+                "prediction": result["prediction"],
+                "model_name": used_model_name
+            }
+
+            # ===============================
+            # SHAP EXPLANATION
+            # ===============================
+            local_shap_data = None
+
+            try:
+                request_id = str(uuid.uuid4())
+
+                background_path = Path("assets/shap") / used_model_name / "background.npy"
+
+                if background_path.exists():
+                    background = np.load(background_path)
+
+                    shap_manager = SHAPManager(
+                        model=model,
+                        background_data=background,
+                        feature_names=list(features_df.columns),
+                        model_type=used_model_name.split("_")[-1]
+                    )
+
+                    predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+                    shap_dir = Path("assets/shap/local") / request_id
+                    shap_dir.mkdir(parents=True, exist_ok=True)
+
+                    shap_manager.generate_local_waterfall(
+                        X_instance=features_df.values[0],
+                        save_dir=shap_dir,
+                        predicted_class=predicted_class
+                    )
+
+                    local_shap_data = {
+                        "request_id": request_id,
+                        "waterfall": f"/assets/shap/local/{request_id}/waterfall.png"
+                    }
+
+            except Exception as e:
+                logger.warning(f"Audio SHAP explanation not available: {e}")
+
+            # ===============================
+            # COUNTERFACTUAL
+            # ===============================
+            cf_result = None
+
+            try:
+
+                component = "_".join(used_model_name.split("_")[:-1])
+
+                predicted_class = 1 if result["prediction"] == "ASD" else 0
+
+                cf_result = generate_counterfactual(
+                    model=model,
+                    x_instance=features_df.values[0],
+                    feature_names=list(features_df.columns),
+                    ae_key=used_model_name,
+                    predicted_class=predicted_class
+                )
+
+            except Exception as e:
+                logger.warning(f"Counterfactual failed: {e}")
+
+            # continue with transcript annotation
+            upd(78, "Annotating", "Generating annotated transcript…")
+            annotated = transcript_annotator.annotate(
+                processed.transcript_data,
+                features=feature_set.features,
+            )
+
             upd(78, "Annotating", "Generating annotated transcript…")
             annotated = transcript_annotator.annotate(
                 processed.transcript_data,
@@ -1309,6 +1594,13 @@ def _run_audio_prediction_sync(
                 'model_used': used_model_name,
                 'component': get_model_component(used_model_name),
             }
+
+            #add shap to results if available
+            if local_shap_data:
+                result_data["local_shap"] = local_shap_data
+            #add counterfactuals to results if available
+            if cf_result:
+                result_data["counterfactual"] = cf_result
 
         prediction_jobs[job_id].update({
             'status': 'completed',
@@ -3108,6 +3400,277 @@ async def analyze_semantic_coherence(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Semantic coherence analysis failed: {str(e)}"
         )
+
+
+@app.post("/analyze/syntactic-semantic-detailed", tags=["User Mode"])
+async def analyze_syntactic_semantic_detailed(
+    text: str = Form(...)
+):
+    """
+    Perform detailed syntactic and semantic analysis of a transcript.
+
+    Returns:
+    - POS tag distribution (counts and percentages)
+    - Sentence-level complexity metrics
+    - Grammar/structure issues
+    - Fluency metrics (pauses, fillers, repetitions)
+    - Vocabulary richness
+    - Word frequencies for word clouds
+    """
+    try:
+        import spacy
+        from collections import Counter
+        from src.parsers.chat_parser import CHATParser, Utterance, TranscriptData
+        from pathlib import Path
+
+        # Load spaCy model
+        try:
+            nlp = spacy.load("en_core_web_sm")
+        except OSError:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="spaCy model not available. Please install en_core_web_sm"
+            )
+
+        # Parse the text into a transcript
+        parser = CHATParser()
+
+        try:
+            transcript = parser.parse_text(text)
+        except:
+            # If CHAT parsing fails, create a simple transcript
+            lines = [line.strip() for line in text.split('\n') if line.strip()]
+            utterances = []
+            for line in lines:
+                if ':' in line:
+                    parts = line.split(':', 1)
+                    speaker = parts[0].strip().replace('*', '')
+                    text_content = parts[1].strip()
+                else:
+                    speaker = 'CHI'
+                    text_content = line
+
+                utterances.append(Utterance(
+                    speaker=speaker,
+                    text=text_content,
+                    timing=None,
+                    end_timing=None
+                ))
+
+            transcript = TranscriptData(
+                file_path=Path("temp_analysis"),
+                participant_id='CHI',
+                utterances=utterances,
+                diagnosis=None,
+                metadata={}
+            )
+
+        # Get child utterances
+        child_utterances = [u for u in transcript.utterances if u.speaker == transcript.participant_id]
+
+        if not child_utterances:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="No child utterances found in transcript"
+            )
+
+        # Initialize result structure
+        result = {
+            'pos_distribution': {},
+            'sentences': [],
+            'fluency_metrics': {},
+            'vocabulary_metrics': {},
+            'word_frequencies': {},
+            'grammar_issues': []
+        }
+
+        # Process each utterance
+        all_pos_tags = []
+        all_words = []
+        all_content_words = []
+        pauses_count = 0
+        filler_words = ['um', 'uh', 'like', 'you know', 'i mean', 'sort of', 'kind of']
+        filler_count = 0
+        repetitions = []
+
+        for idx, utterance in enumerate(child_utterances):
+            if not utterance.text or not utterance.text.strip():
+                continue
+
+            # Parse with spaCy
+            doc = nlp(utterance.text)
+
+            # Collect POS tags
+            for token in doc:
+                all_pos_tags.append(token.pos_)
+                if not token.is_punct and not token.is_space:
+                    all_words.append(token.text.lower())
+                if token.pos_ in ['NOUN', 'VERB', 'ADJ', 'ADV']:
+                    all_content_words.append(token.lemma_.lower())
+
+            # Count pauses (represented by ... or # or (pause))
+            pauses_count += utterance.text.count('...')
+            pauses_count += utterance.text.count('#')
+            pauses_count += utterance.text.lower().count('(pause)')
+
+            # Count filler words
+            text_lower = utterance.text.lower()
+            for filler in filler_words:
+                filler_count += text_lower.count(filler)
+
+            # Sentence complexity metrics
+            sentence_length = len([t for t in doc if not t.is_punct])
+            clause_count = sum(1 for t in doc if t.dep_ in ['mark', 'advcl', 'acl', 'ccomp'])
+            max_depth = max((get_token_depth(token) for token in doc), default=0)
+
+            # Check for grammar issues
+            has_verb = any(token.pos_ == 'VERB' for token in doc)
+            has_subject = any(token.dep_ in ['nsubj', 'nsubjpass'] for token in doc)
+            is_incomplete = len(doc) > 3 and (not has_verb or not has_subject)
+
+            # Detect rare/advanced words (more than 2 syllables, not common)
+            rare_words = []
+            for token in doc:
+                if token.pos_ in ['NOUN', 'VERB', 'ADJ', 'ADV'] and len(token.text) > 7:
+                    rare_words.append({
+                        'word': token.text,
+                        'pos': token.idx,
+                        'length': len(token.text)
+                    })
+
+            # Detect pauses in this sentence
+            sentence_pauses = []
+            if '...' in utterance.text:
+                for match_idx in range(len(utterance.text)):
+                    if utterance.text[match_idx:match_idx+3] == '...':
+                        sentence_pauses.append({'pos': match_idx, 'type': 'ellipsis'})
+
+            sentence_data = {
+                'index': idx,
+                'text': utterance.text,
+                'length': sentence_length,
+                'clause_count': clause_count + 1,  # Add 1 for main clause
+                'dependency_depth': max_depth,
+                'has_grammar_issue': is_incomplete,
+                'grammar_issue_type': 'incomplete_sentence' if is_incomplete else None,
+                'rare_words': rare_words,
+                'pauses': sentence_pauses,
+                'complexity_score': (sentence_length / 10) + (clause_count * 0.2) + (max_depth / 5)
+            }
+
+            result['sentences'].append(sentence_data)
+
+            if is_incomplete:
+                result['grammar_issues'].append({
+                    'sentence_index': idx,
+                    'text': utterance.text,
+                    'issue': 'Incomplete sentence structure',
+                    'severity': 'medium'
+                })
+
+        # Calculate POS distribution
+        pos_counter = Counter(all_pos_tags)
+        total_tokens = len(all_pos_tags)
+        result['pos_distribution'] = {
+            pos: {
+                'count': count,
+                'percentage': round((count / total_tokens) * 100, 2) if total_tokens > 0 else 0
+            }
+            for pos, count in pos_counter.most_common()
+        }
+
+        # Calculate fluency metrics
+        total_words = len(all_words)
+        result['fluency_metrics'] = {
+            'total_pauses': pauses_count,
+            'pause_rate': round(pauses_count / len(child_utterances), 2) if child_utterances else 0,
+            'filler_word_count': filler_count,
+            'filler_word_rate': round((filler_count / total_words) * 100, 2) if total_words > 0 else 0,
+            'avg_words_per_utterance': round(total_words / len(child_utterances), 2) if child_utterances else 0
+        }
+
+        # Calculate vocabulary metrics
+        unique_words = set(all_words)
+        unique_content_words = set(all_content_words)
+        result['vocabulary_metrics'] = {
+            'total_words': total_words,
+            'unique_words': len(unique_words),
+            'type_token_ratio': round(len(unique_words) / total_words, 3) if total_words > 0 else 0,
+            'content_words': len(all_content_words),
+            'unique_content_words': len(unique_content_words),
+            'content_word_diversity': round(len(unique_content_words) / len(all_content_words), 3) if all_content_words else 0
+        }
+
+        # Calculate word frequencies for word cloud (top 50 content words)
+        content_word_counter = Counter(all_content_words)
+        result['word_frequencies'] = dict(content_word_counter.most_common(50))
+
+        # Calculate partial_repetition_ratio
+        # This measures how often the child repeats part of what was recently said
+        partial_repetition_count = 0
+        for idx in range(len(child_utterances)):
+            if idx == 0:
+                continue
+
+            current_text = child_utterances[idx].text.lower().strip()
+            current_words = set(current_text.split())
+
+            # Check overlap with the 3 most recent utterances
+            for prev_idx in range(max(0, idx - 3), idx):
+                prev_text = child_utterances[prev_idx].text.lower().strip()
+                prev_words = set(prev_text.split())
+
+                if not prev_words or not current_words:
+                    continue
+
+                # Calculate word overlap
+                overlap = len(current_words & prev_words)
+                total = len(current_words)
+
+                if total > 0:
+                    overlap_ratio = overlap / total
+                    # Consider it partial repetition if 40-60% overlap (not exact, not completely different)
+                    if 0.4 <= overlap_ratio <= 0.6:
+                        partial_repetition_count += 1
+                        break  # Only count once per utterance
+
+        partial_repetition_ratio = round(partial_repetition_count / len(child_utterances), 3) if child_utterances else 0
+
+        # Calculate average sentence complexity
+        if result['sentences']:
+            avg_length = sum(s['length'] for s in result['sentences']) / len(result['sentences'])
+            avg_clauses = sum(s['clause_count'] for s in result['sentences']) / len(result['sentences'])
+            avg_depth = sum(s['dependency_depth'] for s in result['sentences']) / len(result['sentences'])
+
+            result['overall_metrics'] = {
+                'avg_sentence_length': round(avg_length, 2),
+                'avg_clauses_per_sentence': round(avg_clauses, 2),
+                'avg_dependency_depth': round(avg_depth, 2),
+                'total_sentences': len(result['sentences']),
+                'grammar_issue_rate': round(len(result['grammar_issues']) / len(result['sentences']) * 100, 2),
+                'partial_repetition_ratio': partial_repetition_ratio
+            }
+
+        return result
+
+    except Exception as e:
+        logger.error(f"Syntactic/semantic analysis failed: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Analysis failed: {str(e)}"
+        )
+
+
+def get_token_depth(token) -> int:
+    """Helper function to get dependency depth of a token."""
+    depth = 0
+    current = token
+    while current.head != current:
+        depth += 1
+        current = current.head
+        if depth > 20:  # Safety limit
+            break
+    return depth
 
 
 @app.post("/training/inspect-features", tags=["Training Mode"])

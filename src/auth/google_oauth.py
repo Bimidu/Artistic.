@@ -6,8 +6,6 @@ Handles Google OAuth 2.0 authentication flow.
 
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import RedirectResponse
-from google.oauth2 import id_token
-from google.auth.transport import requests
 import os
 from src.auth.models import get_password_hash
 from src.auth.jwt import create_access_token
@@ -15,6 +13,9 @@ from src.database import get_database
 import uuid
 from datetime import datetime
 from src.utils.logger import get_logger
+import httpx
+from jose import jwt, JWTError
+import time
 
 logger = get_logger(__name__)
 
@@ -25,6 +26,60 @@ GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI", "http://localhost:8000/auth/google/callback")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
+async def verify_google_token_async(token: str, client_id: str) -> dict:
+    """
+    Verify Google ID token asynchronously using httpx.
+
+    Args:
+        token: The Google ID token to verify
+        client_id: Expected Google OAuth client ID
+
+    Returns:
+        dict: Decoded token payload with user info
+
+    Raises:
+        ValueError: If token verification fails
+    """
+    try:
+        unverified = jwt.decode(
+            token,
+            "",
+            options={
+                "verify_signature": False,
+                "verify_aud": False,
+                "verify_iat": False,
+                "verify_exp": False,
+                "verify_nbf": False,
+                "verify_iss": False,
+                "verify_sub": False,
+                "verify_jti": False,
+                "verify_at_hash": False
+            }
+        )
+
+        logger.info(f"Token issuer: {unverified.get('iss')}")
+        logger.info(f"Token audience: {unverified.get('aud')}")
+        logger.info(f"Expected client_id: {client_id}")
+
+        # Verify basic claims manually
+        if unverified.get("iss") not in ["https://accounts.google.com", "accounts.google.com"]:
+            raise ValueError("Invalid issuer")
+
+        if unverified.get("aud") != client_id:
+            raise ValueError(f"Invalid audience: expected {client_id}, got {unverified.get('aud')}")
+
+        # Check expiration
+        if unverified.get("exp", 0) < time.time():
+            raise ValueError("Token expired")
+
+        return unverified
+
+    except JWTError as e:
+        logger.error(f"Failed to decode Google token: {e}")
+        raise ValueError(f"Invalid token: {e}")
+    except Exception as e:
+        logger.error(f"Unexpected error verifying Google token: {e}")
+        raise ValueError(f"Token verification failed: {e}")
 
 @router.get("/login")
 async def google_login():
@@ -49,24 +104,38 @@ async def google_login():
         "&prompt=consent"
     )
 
-    return RedirectResponse(url=google_auth_url)
+    logger.info(f"Redirecting to Google OAuth: {google_auth_url[:100]}...")
+    logger.info(f"GOOGLE_CLIENT_ID: {GOOGLE_CLIENT_ID[:20]}...")
+    logger.info(f"GOOGLE_REDIRECT_URI: {GOOGLE_REDIRECT_URI}")
+
+    return RedirectResponse(url=google_auth_url, status_code=302)
 
 
 @router.get("/callback")
-async def google_callback(code: str):
+async def google_callback(code: str = None, error: str = None):
     """
     Handle Google OAuth callback
 
     Exchanges authorization code for tokens, verifies user,
     and creates/updates user in database.
     """
+    logger.info(f"Google OAuth callback received - code: {code is not None}, error: {error}")
+
+    if error:
+        logger.error(f"Google OAuth returned error: {error}")
+        return RedirectResponse(url=f"{FRONTEND_URL}/?error=google_auth_{error}")
+
+    if not code:
+        logger.error("No authorization code received from Google")
+        return RedirectResponse(url=f"{FRONTEND_URL}/?error=no_auth_code")
+
     if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
         raise HTTPException(
             status_code=status.HTTP_501_NOT_IMPLEMENTED,
             detail="Google OAuth is not configured"
         )
 
-    import httpx
+    start_time = time.time()
 
     # Exchange authorization code for tokens
     token_url = "https://oauth2.googleapis.com/token"
@@ -79,9 +148,11 @@ async def google_callback(code: str):
     }
 
     try:
-        async with httpx.AsyncClient() as client:
+        logger.info("Starting token exchange with Google...")
+        async with httpx.AsyncClient(timeout=10.0) as client:
             response = await client.post(token_url, data=data)
             tokens = response.json()
+        logger.info(f"Token exchange completed in {time.time() - start_time:.2f}s")
 
         if "error" in tokens:
             logger.error(f"Google OAuth token exchange failed: {tokens}")
@@ -91,11 +162,10 @@ async def google_callback(code: str):
             )
 
         # Verify ID token and extract user info
-        idinfo = id_token.verify_oauth2_token(
-            tokens["id_token"],
-            requests.Request(),
-            GOOGLE_CLIENT_ID
-        )
+        logger.info("Starting ID token verification...")
+        verify_start = time.time()
+        idinfo = await verify_google_token_async(tokens["id_token"], GOOGLE_CLIENT_ID)
+        logger.info(f"ID token verification completed in {time.time() - verify_start:.2f}s")
 
         email = idinfo["email"]
         name = idinfo.get("name", email.split("@")[0])
@@ -118,8 +188,11 @@ async def google_callback(code: str):
         )
 
     # Find or create user in database
+    logger.info(f"Looking up user in database: {email}")
+    db_start = time.time()
     db = get_database()
     user = await db.users.find_one({"email": email})
+    logger.info(f"Database lookup completed in {time.time() - db_start:.2f}s")
 
     if user:
         # Update Google ID and avatar if not set
@@ -162,10 +235,15 @@ async def google_callback(code: str):
         logger.info(f"New user created via Google: {user_id}")
 
     # Create JWT access token
+    logger.info("Creating JWT access token...")
+    jwt_start = time.time()
     access_token = create_access_token(
         data={"sub": user["_id"], "email": user["email"], "role": user.get("role", "user")}
     )
+    logger.info(f"JWT token created in {time.time() - jwt_start:.2f}s")
 
     # Redirect to frontend with token
     redirect_url = f"{FRONTEND_URL}/auth/google/callback?token={access_token}"
-    return RedirectResponse(url=redirect_url)
+    logger.info(f"Total OAuth callback processing time: {time.time() - start_time:.2f}s")
+    logger.info(f"Redirecting to: {redirect_url[:60]}...")
+    return RedirectResponse(url=redirect_url, status_code=302)

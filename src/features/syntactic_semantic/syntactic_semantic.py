@@ -180,6 +180,7 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             'semantic_density',
             'lexical_diversity_semantic',
             'thematic_consistency',
+            'partial_repetition_ratio',
 
             # Vocabulary semantic features
             'vocabulary_abstractness',
@@ -467,6 +468,7 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             'semantic_density': 0.0,
             'lexical_diversity_semantic': 0.0,
             'thematic_consistency': 0.0,
+            'partial_repetition_ratio': 0.0,
         }
 
         if not docs:
@@ -503,6 +505,36 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             word_freq = Counter(all_content_words)
             repeated_words = sum(1 for count in word_freq.values() if count > 1)
             features['thematic_consistency'] = repeated_words / len(word_freq) if word_freq else 0.0
+
+        # Partial repetition ratio (40-60% word overlap with recent utterances)
+        partial_repetition_count = 0
+        for idx in range(len(utterances)):
+            if idx == 0:
+                continue
+
+            current_text = utterances[idx].text.lower().strip() if utterances[idx].text else ""
+            current_words = set(current_text.split())
+
+            # Check overlap with the 3 most recent utterances
+            for prev_idx in range(max(0, idx - 3), idx):
+                prev_text = utterances[prev_idx].text.lower().strip() if utterances[prev_idx].text else ""
+                prev_words = set(prev_text.split())
+
+                if not prev_words or not current_words:
+                    continue
+
+                # Calculate word overlap
+                overlap = len(current_words & prev_words)
+                total = len(current_words)
+
+                if total > 0:
+                    overlap_ratio = overlap / total
+                    # Consider it partial repetition if 40-60% overlap
+                    if 0.4 <= overlap_ratio <= 0.6:
+                        partial_repetition_count += 1
+                        break  # Only count once per utterance
+
+        features['partial_repetition_ratio'] = partial_repetition_count / len(utterances) if utterances else 0.0
 
         return features
 
