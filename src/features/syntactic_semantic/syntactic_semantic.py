@@ -69,24 +69,86 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         """Initialize syntactic/semantic feature extractor."""
         super().__init__()
 
-        # Load spaCy model for NLP analysis
-        try:
-            self.nlp = spacy.load("en_core_web_sm")
-        except OSError:
-            self.logger.warning("spaCy model not found. Installing...")
-            import subprocess
-            subprocess.run(["python3", "-m", "spacy", "download", "en_core_web_sm"], check=True)
-            self.nlp = spacy.load("en_core_web_sm")
+        # Load spaCy model for NLP analysis with robust error handling
+        self.nlp = None
+        self._load_spacy_model()
 
-        # Initialize NLTK WordNet (for semantic analysis)
-        try:
-            wordnet.synsets('test')
-        except LookupError:
-            import nltk
-            nltk.download('wordnet', quiet=True)
-            nltk.download('omw-1.4', quiet=True)
+        # Initialize NLTK WordNet (for semantic analysis) with fallback
+        self._initialize_wordnet()
 
         self.logger.info("SyntacticSemanticFeatures initialized")
+
+    def _load_spacy_model(self):
+        """Load spaCy model with robust error handling and fallbacks."""
+        model_names = ["en_core_web_sm", "en_core_web_md", "en_core_web_lg"]
+
+        # Try to load an existing model
+        for model_name in model_names:
+            try:
+                import spacy
+                self.nlp = spacy.load(model_name)
+                self.logger.info(f"Loaded spaCy model: {model_name}")
+                return
+            except OSError:
+                continue
+
+        # PLASTER FIX: Skip installation during inference/API usage
+        # Only attempt installation if we're in a development/training context
+        if hasattr(self, '_skip_installation') or self._is_api_context():
+            self.logger.warning("spaCy model not found, using fallback mode (no installation attempted)")
+            self.nlp = None
+            return
+
+        # If no model found, try to install en_core_web_sm (only in dev context)
+        self.logger.warning("No spaCy model found. Attempting installation...")
+        try:
+            import subprocess
+            import sys
+
+            # Use sys.executable to ensure we use the correct Python
+            result = subprocess.run(
+                [sys.executable, "-m", "spacy", "download", "en_core_web_sm"],
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=60  # 1 minute timeout
+            )
+            self.logger.info("spaCy model installation completed")
+
+            # Try to load after installation
+            import spacy
+            self.nlp = spacy.load("en_core_web_sm")
+            self.logger.info("Successfully loaded spaCy model after installation")
+
+        except Exception as e:
+            self.logger.warning(f"Could not install or load spaCy model: {e}")
+            self.logger.warning("Syntactic/semantic features will use fallback values")
+            self.nlp = None
+
+    def _is_api_context(self):
+        """Check if we're running in an API context where installation should be avoided."""
+        import inspect
+
+        # Look for API-related frames in the stack
+        for frame_info in inspect.stack():
+            filename = frame_info.filename.lower()
+            if any(api_indicator in filename for api_indicator in ['app.py', 'api', 'fastapi', 'uvicorn']):
+                return True
+        return False
+
+    def _initialize_wordnet(self):
+        """Initialize NLTK WordNet with fallback."""
+        try:
+            wordnet.synsets('test')
+            self.logger.debug("NLTK WordNet available")
+        except LookupError:
+            try:
+                import nltk
+                nltk.download('wordnet', quiet=True)
+                nltk.download('omw-1.4', quiet=True)
+                self.logger.info("Downloaded NLTK WordNet data")
+            except Exception as e:
+                self.logger.warning(f"Could not download NLTK data: {e}")
 
     @property
     def feature_names(self) -> List[str]:
@@ -118,6 +180,7 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             'semantic_density',
             'lexical_diversity_semantic',
             'thematic_consistency',
+            'partial_repetition_ratio',
 
             # Vocabulary semantic features
             'vocabulary_abstractness',
@@ -151,6 +214,15 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
                 features={name: 0.0 for name in self.feature_names},
                 feature_type='syntactic_semantic',
                 metadata={'error': 'No valid child utterances'}
+            )
+
+        # Check if spaCy is available for processing
+        if self.nlp is None:
+            self.logger.warning("spaCy not available, returning default syntactic/semantic features")
+            return FeatureResult(
+                features={name: 0.0 for name in self.feature_names},
+                feature_type='syntactic_semantic',
+                metadata={'error': 'spaCy model not available', 'child_utterances': len(child_utterances)}
             )
 
         # Parse utterances with spaCy
@@ -192,11 +264,19 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
 
     def _parse_utterances(self, utterances: List[Utterance]) -> List:
         """Parse utterances with spaCy."""
+        if self.nlp is None:
+            self.logger.warning("spaCy not available for parsing")
+            return []
+
         docs = []
         for utterance in utterances:
             if utterance.text and utterance.text.strip():
-                doc = self.nlp(utterance.text)
-                docs.append(doc)
+                try:
+                    doc = self.nlp(utterance.text)
+                    docs.append(doc)
+                except Exception as e:
+                    self.logger.warning(f"Error parsing utterance: {e}")
+                    continue
         return docs
 
     def _calculate_syntactic_complexity(self, docs: List) -> Dict[str, float]:
@@ -388,6 +468,7 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             'semantic_density': 0.0,
             'lexical_diversity_semantic': 0.0,
             'thematic_consistency': 0.0,
+            'partial_repetition_ratio': 0.0,
         }
 
         if not docs:
@@ -424,6 +505,36 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             word_freq = Counter(all_content_words)
             repeated_words = sum(1 for count in word_freq.values() if count > 1)
             features['thematic_consistency'] = repeated_words / len(word_freq) if word_freq else 0.0
+
+        # Partial repetition ratio (40-60% word overlap with recent utterances)
+        partial_repetition_count = 0
+        for idx in range(len(utterances)):
+            if idx == 0:
+                continue
+
+            current_text = utterances[idx].text.lower().strip() if utterances[idx].text else ""
+            current_words = set(current_text.split())
+
+            # Check overlap with the 3 most recent utterances
+            for prev_idx in range(max(0, idx - 3), idx):
+                prev_text = utterances[prev_idx].text.lower().strip() if utterances[prev_idx].text else ""
+                prev_words = set(prev_text.split())
+
+                if not prev_words or not current_words:
+                    continue
+
+                # Calculate word overlap
+                overlap = len(current_words & prev_words)
+                total = len(current_words)
+
+                if total > 0:
+                    overlap_ratio = overlap / total
+                    # Consider it partial repetition if 40-60% overlap
+                    if 0.4 <= overlap_ratio <= 0.6:
+                        partial_repetition_count += 1
+                        break  # Only count once per utterance
+
+        features['partial_repetition_ratio'] = partial_repetition_count / len(utterances) if utterances else 0.0
 
         return features
 
