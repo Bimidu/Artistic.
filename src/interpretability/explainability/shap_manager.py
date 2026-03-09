@@ -138,15 +138,28 @@ class SHAPManager:
         explainer = self._get_explainer()
         shap_values = explainer.shap_values(X_instance)
 
-        # universal selector
+        # ------------------------------
+        # Handle different SHAP formats
+        # ------------------------------
         if isinstance(shap_values, list):
-            shap_values = (
-                shap_values[predicted_class]
-                if len(shap_values) > predicted_class
-                else shap_values[0]
-            )
+            # TreeExplainer sometimes returns list[class]
+            shap_vals = shap_values[predicted_class][0]
 
-        shap_vals = shap_values[0]
+        elif isinstance(shap_values, np.ndarray):
+
+            if shap_values.ndim == 3:
+                # shape = (samples, features, classes)
+                shap_vals = shap_values[0, :, predicted_class]
+
+            elif shap_values.ndim == 2:
+                # shape = (samples, features)
+                shap_vals = shap_values[0]
+
+            else:
+                raise ValueError(f"Unexpected SHAP shape {shap_values.shape}")
+
+        else:
+            raise ValueError(f"Unknown SHAP output type: {type(shap_values)}")
 
         base_value = explainer.expected_value
         if isinstance(base_value, (list, np.ndarray)):
