@@ -4351,10 +4351,19 @@ async function askCounterfactualGPT() {
 
         const data = await res.json();
 
+        // Convert numeric prediction → label
+        let predictionLabel = data.new_prediction;
+
+        if (data.new_prediction === 1 || data.new_prediction === "1") {
+            predictionLabel = "ASD";
+        } else if (data.new_prediction === 0 || data.new_prediction === "0") {
+            predictionLabel = "TD";
+        }
+
         if (responseBox) {
             responseBox.innerHTML = `
                 <strong>Result:</strong><br>
-                Prediction: ${data.new_prediction}<br>
+                Prediction: ${predictionLabel}<br>
                 Confidence: ${(data.confidence * 100).toFixed(1)}%<br><br>
                 <strong>Clinical Explanation:</strong><br>
                 ${data.explanation}
