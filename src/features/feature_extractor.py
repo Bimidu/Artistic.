@@ -535,7 +535,8 @@ class FeatureExtractor:
         self,
         directory: str | Path,
         pattern: str = "**/*.cha",
-        output_file: Optional[Path] = None
+        output_file: Optional[Path] = None,
+        max_files: Optional[int] = None
     ) -> pd.DataFrame:
         """
         Extract features from all transcripts in a directory.
@@ -566,8 +567,28 @@ class FeatureExtractor:
                 if f.is_file() and f.suffix.lower() in audio_extensions
             ]
             logger.info(f"Found {len(audio_files)} audio files in {directory} (no .cha files)")
+
+            # Optionally limit the number of audio files processed
+            if max_files is not None and len(audio_files) > max_files:
+                logger.info(
+                    f"Limiting audio feature extraction to {max_files} of "
+                    f"{len(audio_files)} files"
+                )
+                rng = np.random.default_rng(42)
+                indices = rng.choice(len(audio_files), size=max_files, replace=False)
+                audio_files = [audio_files[i] for i in indices]
         else:
             logger.info(f"Found {len(cha_files)} transcript files in {directory}")
+
+            # Optionally limit the number of transcript files processed
+            if max_files is not None and len(cha_files) > max_files:
+                logger.info(
+                    f"Limiting transcript feature extraction to {max_files} of "
+                    f"{len(cha_files)} files"
+                )
+                rng = np.random.default_rng(42)
+                indices = rng.choice(len(cha_files), size=max_files, replace=False)
+                cha_files = [cha_files[i] for i in indices]
         
         # Process .cha files if available
         if cha_files:

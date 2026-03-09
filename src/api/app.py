@@ -2652,8 +2652,13 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
             dataset_names.append(dataset_name)
             
             try:
-                # Check if this is a large dataset (TD)
-                is_td_dataset = 'td' in path.name.lower()
+                # Check if this is the pooled TD dataset (data/td)
+                resolved_path = path.resolve()
+                data_dir = config.paths.data_dir.resolve()
+                is_td_dataset = (
+                    resolved_path.name.lower() == 'td'
+                    and resolved_path.parent == data_dir
+                )
                 
                 # Use request parameter, or fall back to config default
                 max_samples = request.max_samples_per_dataset or config.datasets.max_samples_td
@@ -2664,6 +2669,9 @@ async def extract_features_for_training(request: FeatureExtractionRequest):
                 # Extract features
                 if component == 'acoustic_prosodic' and hasattr(extractor, 'extract_from_directory'):
                     df = extractor.extract_from_directory(path, max_samples=max_samples_for_extraction)
+                elif component == 'pragmatic_conversational' and hasattr(extractor, 'extract_from_directory'):
+                    # Limit number of TD files processed at the directory level
+                    df = extractor.extract_from_directory(path, max_files=max_samples_for_extraction)
                 else:
                     df = extractor.extract_from_directory(path)
                     # Sample after extraction for other extractors
