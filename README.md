@@ -373,4 +373,4 @@ If you use this system in your research, please cite:
 For questions or collaboration:
 - Pragmatic & Conversational: Bimidu Gunathilake
 - Acoustic & Prosodic: Team Member A
-- Syntactic & Semantic: Team Member B
+- Syntactic & Semantic: Randil Haturusinghe
