@@ -834,9 +834,7 @@ export default function Home() {
                 id="cfFusionContainer"
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 hidden"
               ></div>
-          </div>
-
-            {/* Interactive Counterfactual Chat */}
+              {/* Interactive Counterfactual Chat */}
               <div className="flex gap-3 mt-10" id="cfChatSection">
                   <input
                       id="cfUserInput"
@@ -853,6 +851,7 @@ export default function Home() {
               <div id="cfChatResponse"
                    className="hidden mt-4 bg-white border border-primary-200 rounded-xl p-5">
               </div>
+          </div>
         </div>
 
         {/* Training Mode */}
