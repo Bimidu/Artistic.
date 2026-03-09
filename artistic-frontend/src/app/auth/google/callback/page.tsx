@@ -1,55 +1,43 @@
 'use client';
 
 import { useEffect, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 function GoogleCallbackContent() {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const token = searchParams.get('token');
     console.log('[OAuth Callback] Token received:', token ? 'YES' : 'NO');
 
-    if (token) {
-      console.log('[OAuth Callback] Storing token and redirecting...');
-
-      // Store token immediately
-      localStorage.setItem('authToken', token);
-
-      // Fetch user details from backend
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      console.log('[OAuth Callback] Fetching user from:', `${apiUrl}/auth/me`);
-
-      fetch(`${apiUrl}/auth/me`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      })
-        .then((res) => {
-          console.log('[OAuth Callback] Response status:', res.status);
-          if (!res.ok) {
-            throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-          }
-          return res.json();
-        })
-        .then((user) => {
-          console.log('[OAuth Callback] User data received:', user);
-          // Store user data
-          localStorage.setItem('authUser', JSON.stringify(user));
-
-          console.log('[OAuth Callback] Redirecting to home...');
-          // Redirect to home page
-          window.location.href = '/';
-        })
-        .catch((error) => {
-          console.error('[OAuth Callback] Error:', error);
-          window.location.href = '/?error=auth_failed';
-        });
-    } else {
-      console.log('[OAuth Callback] No token found, redirecting with error');
+    if (!token) {
+      console.error('[OAuth Callback] No token in URL params');
       window.location.href = '/?error=no_token';
+      return;
     }
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+    localStorage.setItem('authToken', token);
+
+    console.log('[OAuth Callback] Fetching user profile...');
+    fetch(`${apiUrl}/auth/me`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    })
+      .then((res) => {
+        console.log('[OAuth Callback] /auth/me status:', res.status);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((user) => {
+        console.log('[OAuth Callback] User profile fetched, storing and redirecting...');
+        localStorage.setItem('authUser', JSON.stringify(user));
+        window.location.href = '/';
+      })
+      .catch((error) => {
+        console.error('[OAuth Callback] Failed to fetch user profile:', error);
+        window.location.href = '/';
+      });
   }, [searchParams]);
 
   return (

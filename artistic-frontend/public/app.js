@@ -3705,30 +3705,23 @@ function estimatePitch(frame, sampleRate) {
 }
 
 /**
- * Render three stacked graphs: Waveform, Pitch Contour, and Energy Curve
+ * Render overlaid graphs: Waveform, Pitch Contour, and Energy Curve
  *
- * Enhanced visualization showing:
- * - Top: Waveform (amplitude vs time)
- * - Middle: Pitch Contour (F0 vs time)
- * - Bottom: Energy Curve (RMS energy vs time)
+ * Enhanced visualization showing (toggleable):
+ * - Waveform (amplitude vs time) - Blue
+ * - Pitch Contour (F0 vs time) - Purple
+ * - Energy Curve (RMS energy vs time) - Green
  *
  * Design rationale:
- * - Three separate but aligned graphs show different acoustic properties
- * - Maintains temporal alignment for cross-feature analysis
+ * - All graphs overlaid on same canvas for easy comparison
+ * - Toggle controls allow showing/hiding individual visualizations
  * - Color-coded for easy distinction
  * - Suitable for acoustic and prosodic feature understanding
  */
 function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = null) {
     const ctx = canvas.getContext('2d');
     const width = canvas.width = canvas.offsetWidth;
-    const totalHeight = canvas.height = 450; // Increased height for three graphs
-
-    // Divide canvas into three sections
-    const sectionHeight = 140;
-    const margin = 10;
-    const waveformY = 0;
-    const pitchY = sectionHeight + margin;
-    const energyY = 2 * (sectionHeight + margin);
+    const totalHeight = canvas.height = 280; // Single canvas height
 
     // Clear canvas
     ctx.clearRect(0, 0, width, totalHeight);
@@ -3741,135 +3734,112 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
         return;
     }
 
+    // Get toggle states
+    const showWaveform = document.getElementById('toggleWaveform')?.checked ?? true;
+    const showPitch = document.getElementById('togglePitch')?.checked ?? true;
+    const showEnergy = document.getElementById('toggleEnergy')?.checked ?? true;
+
     const waveform = waveformData.waveform;
     const stepX = width / waveform.length;
+    const centerY = totalHeight / 2;
+    const padding = 40; // Padding for labels
 
-    // Draw section backgrounds with matching legend colors
-    const gradient1 = ctx.createLinearGradient(0, waveformY, 0, waveformY + sectionHeight);
-    gradient1.addColorStop(0, 'rgba(59, 130, 246, 0.03)');  // Blue
-    gradient1.addColorStop(1, 'rgba(59, 130, 246, 0.01)');
-    ctx.fillStyle = gradient1;
-    ctx.fillRect(0, waveformY, width, sectionHeight);
+    // Draw subtle background gradient
+    const bgGradient = ctx.createLinearGradient(0, 0, 0, totalHeight);
+    bgGradient.addColorStop(0, 'rgba(249, 250, 251, 0.5)');
+    bgGradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
+    ctx.fillStyle = bgGradient;
+    ctx.fillRect(0, 0, width, totalHeight);
 
-    const gradient2 = ctx.createLinearGradient(0, pitchY, 0, pitchY + sectionHeight);
-    gradient2.addColorStop(0, 'rgba(139, 92, 246, 0.03)');  // Purple
-    gradient2.addColorStop(1, 'rgba(139, 92, 246, 0.01)');
-    ctx.fillStyle = gradient2;
-    ctx.fillRect(0, pitchY, width, sectionHeight);
-
-    const gradient3 = ctx.createLinearGradient(0, energyY, 0, energyY + sectionHeight);
-    gradient3.addColorStop(0, 'rgba(34, 197, 94, 0.03)');   // Green
-    gradient3.addColorStop(1, 'rgba(34, 197, 94, 0.01)');
-    ctx.fillStyle = gradient3;
-    ctx.fillRect(0, energyY, width, sectionHeight);
-
-    // Draw section separators with light styling
-    ctx.strokeStyle = 'rgba(156, 163, 175, 0.2)';
+    // Draw center line
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(0, pitchY - margin/2);
-    ctx.lineTo(width, pitchY - margin/2);
-    ctx.moveTo(0, energyY - margin/2);
-    ctx.lineTo(width, energyY - margin/2);
+    ctx.moveTo(0, centerY);
+    ctx.lineTo(width, centerY);
     ctx.stroke();
 
-    // Section 1: WAVEFORM with clean styling
-    ctx.save();
+    // Calculate pitch and energy data for overlaying
+    let pitchData = [];
+    let maxPitch = 0, minPitch = 0, pitchRange = 1;
+    let maxEnergy = 1;
 
-    // Section label - clean style like in the image
-    ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
-    ctx.fillRect(20, waveformY + 8, 100, 18);
+    if (waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
+        const envelope = waveformData.energyEnvelope;
+        maxEnergy = waveformData.energyStats?.max || 1;
 
-    ctx.fillStyle = '#6B7280';
-    ctx.font = '11px Inter, system-ui, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText('WAVEFORM', 25, waveformY + 18);
+        // Simulate pitch contour based on energy patterns
+        pitchData = envelope.map((energy, i) => {
+            if (energy > (waveformData.energyStats?.avg * 0.3 || 0.1)) {
+                const baseFreq = 150 + Math.sin(i * 0.1) * 50;
+                return baseFreq + (energy * 100);
+            }
+            return 0;
+        });
 
-    const centerY1 = waveformY + sectionHeight / 2;
-
-    // Draw waveform with enhanced styling
-    const waveformGradient = ctx.createLinearGradient(0, centerY1 - 50, 0, centerY1 + 50);
-    waveformGradient.addColorStop(0, 'rgba(59, 130, 246, 0.8)');
-    waveformGradient.addColorStop(0.5, 'rgba(59, 130, 246, 1)');
-    waveformGradient.addColorStop(1, 'rgba(99, 102, 241, 0.8)');
-
-    ctx.strokeStyle = waveformGradient;
-    ctx.lineWidth = 1.8;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.beginPath();
-
-    for (let i = 0; i < waveform.length; i++) {
-        const x = i * stepX;
-        const maxY = centerY1 - (waveform[i].max * sectionHeight * 0.35);
-        const minY = centerY1 - (waveform[i].min * sectionHeight * 0.35);
-
-        if (i === 0) {
-            ctx.moveTo(x, maxY);
-        } else {
-            ctx.lineTo(x, maxY);
+        const validPitches = pitchData.filter(p => p > 0);
+        if (validPitches.length > 0) {
+            maxPitch = Math.max(...validPitches);
+            minPitch = Math.min(...validPitches);
+            pitchRange = maxPitch - minPitch || 1;
         }
     }
 
-    for (let i = waveform.length - 1; i >= 0; i--) {
-        const x = i * stepX;
-        const minY = centerY1 - (waveform[i].min * sectionHeight * 0.35);
-        ctx.lineTo(x, minY);
+    // RENDER ENERGY (drawn first, appears behind)
+    if (showEnergy && waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
+        ctx.save();
+        const envelope = waveformData.energyEnvelope;
+
+        // Draw energy curve
+        const energyGradient = ctx.createLinearGradient(0, 0, width, 0);
+        energyGradient.addColorStop(0, 'rgba(34, 197, 94, 0.7)');
+        energyGradient.addColorStop(0.5, 'rgba(34, 197, 94, 0.9)');
+        energyGradient.addColorStop(1, 'rgba(22, 163, 74, 0.7)');
+
+        ctx.strokeStyle = energyGradient;
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+
+        for (let i = 0; i < envelope.length; i++) {
+            const x = i * stepX;
+            const normalizedEnergy = envelope[i] / maxEnergy;
+            const y = centerY - (normalizedEnergy * (totalHeight / 2 - padding));
+
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+        ctx.stroke();
+
+        // Fill area under curve
+        ctx.beginPath();
+        ctx.moveTo(0, centerY);
+        for (let i = 0; i < envelope.length; i++) {
+            const x = i * stepX;
+            const normalizedEnergy = envelope[i] / maxEnergy;
+            const y = centerY - (normalizedEnergy * (totalHeight / 2 - padding));
+            ctx.lineTo(x, y);
+        }
+        ctx.lineTo(width, centerY);
+        ctx.closePath();
+
+        const areaGradient = ctx.createLinearGradient(0, padding, 0, centerY);
+        areaGradient.addColorStop(0, 'rgba(34, 197, 94, 0.2)');
+        areaGradient.addColorStop(1, 'rgba(34, 197, 94, 0.05)');
+        ctx.fillStyle = areaGradient;
+        ctx.fill();
+
+        ctx.restore();
     }
 
-    ctx.closePath();
+    // RENDER PITCH
+    if (showPitch && pitchData.length > 0) {
+        ctx.save();
 
-    // Modern fill with gradient
-    const fillGradient = ctx.createLinearGradient(0, centerY1 - 30, 0, centerY1 + 30);
-    fillGradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)');
-    fillGradient.addColorStop(0.5, 'rgba(59, 130, 246, 0.05)');
-    fillGradient.addColorStop(1, 'rgba(99, 102, 241, 0.15)');
-    ctx.fillStyle = fillGradient;
-    ctx.fill();
-    ctx.stroke();
-
-    // Modern center line with glow effect
-    ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
-    ctx.lineWidth = 0.5;
-    ctx.beginPath();
-    ctx.moveTo(0, centerY1);
-    ctx.lineTo(width, centerY1);
-    ctx.stroke();
-    ctx.restore();
-
-    // Section 2: PITCH with clean styling
-    ctx.save();
-
-    // Section label - clean style like in the image
-    ctx.fillStyle = 'rgba(139, 92, 246, 0.08)';
-    ctx.fillRect(20, pitchY + 8, 120, 18);
-
-    ctx.fillStyle = '#6B7280';
-    ctx.font = '11px Inter, system-ui, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText('PITCH • F0 EST.', 25, pitchY + 18);
-
-    // Extract pitch data from energy envelope (simplified)
-    if (waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
-        const envelope = waveformData.energyEnvelope;
-        const centerY2 = pitchY + sectionHeight / 2;
-
-        // Simulate pitch contour based on energy patterns
-        // In a real implementation, this would use actual F0 extraction
-        const pitchData = envelope.map((energy, i) => {
-            if (energy > (waveformData.energyStats?.avg * 0.3 || 0.1)) {
-                // Voiced speech - simulate pitch variation
-                const baseFreq = 150 + Math.sin(i * 0.1) * 50; // Simulated F0
-                return baseFreq + (energy * 100); // Energy influences pitch
-            }
-            return 0; // Unvoiced
-        });
-
-        const maxPitch = Math.max(...pitchData.filter(p => p > 0));
-        const minPitch = Math.min(...pitchData.filter(p => p > 0));
-        const pitchRange = maxPitch - minPitch || 1;
-
-        // Modern pitch line with purple gradient to match legend
         const pitchGradient = ctx.createLinearGradient(0, 0, width, 0);
         pitchGradient.addColorStop(0, 'rgba(139, 92, 246, 0.8)');
         pitchGradient.addColorStop(0.5, 'rgba(139, 92, 246, 1)');
@@ -3881,105 +3851,73 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
         ctx.lineJoin = 'round';
         ctx.beginPath();
 
-        let lastValidY = centerY2;
+        let started = false;
         for (let i = 0; i < pitchData.length; i++) {
             const x = i * stepX;
             const pitch = pitchData[i];
 
             if (pitch > 0) {
                 const normalizedPitch = (pitch - minPitch) / pitchRange;
-                const y = centerY2 + (sectionHeight * 0.3) - (normalizedPitch * sectionHeight * 0.6);
+                const y = centerY - (normalizedPitch * (totalHeight / 2 - padding) * 0.7);
 
-                if (i === 0) {
+                if (!started) {
                     ctx.moveTo(x, y);
+                    started = true;
                 } else {
                     ctx.lineTo(x, y);
                 }
-                lastValidY = y;
             }
         }
         ctx.stroke();
-
-        // Pitch range labels with modern styling
-        ctx.fillStyle = 'rgba(75, 85, 99, 0.7)';
-        ctx.font = '10px Inter, system-ui, sans-serif';
-        ctx.textAlign = 'right';
-        if (maxPitch > 0) {
-            ctx.fillText(`${Math.round(maxPitch)}Hz`, width - 8, pitchY + 25);
-            ctx.fillText(`${Math.round(minPitch)}Hz`, width - 8, pitchY + sectionHeight - 8);
-        }
+        ctx.restore();
     }
-    ctx.restore();
 
-    // Section 3: ENERGY with clean styling
-    ctx.save();
+    // RENDER WAVEFORM (drawn last, appears in front)
+    if (showWaveform) {
+        ctx.save();
 
-    // Section label - clean style like in the image
-    ctx.fillStyle = 'rgba(5, 150, 105, 0.08)';
-    ctx.fillRect(20, energyY + 8, 100, 18);
+        const waveformGradient = ctx.createLinearGradient(0, centerY - 80, 0, centerY + 80);
+        waveformGradient.addColorStop(0, 'rgba(59, 130, 246, 0.8)');
+        waveformGradient.addColorStop(0.5, 'rgba(59, 130, 246, 1)');
+        waveformGradient.addColorStop(1, 'rgba(99, 102, 241, 0.8)');
 
-    ctx.fillStyle = '#6B7280';
-    ctx.font = '11px Inter, system-ui, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText('ENERGY • RMS', 25, energyY + 18);
-
-    if (waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
-        const envelope = waveformData.energyEnvelope;
-        const centerY3 = energyY + sectionHeight / 2;
-        const maxEnergy = waveformData.energyStats?.max || 1;
-
-        // Modern energy line with green gradient to match legend
-        const energyGradient = ctx.createLinearGradient(0, 0, width, 0);
-        energyGradient.addColorStop(0, 'rgba(34, 197, 94, 0.8)');
-        energyGradient.addColorStop(0.5, 'rgba(34, 197, 94, 1)');
-        energyGradient.addColorStop(1, 'rgba(22, 163, 74, 0.8)');
-
-        ctx.strokeStyle = energyGradient;
-        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = waveformGradient;
+        ctx.lineWidth = 1.5;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.beginPath();
 
-        // Draw energy curve
-        for (let i = 0; i < envelope.length; i++) {
+        for (let i = 0; i < waveform.length; i++) {
             const x = i * stepX;
-            const normalizedEnergy = envelope[i] / maxEnergy;
-            const y = centerY3 + (sectionHeight * 0.4) - (normalizedEnergy * sectionHeight * 0.8);
+            const maxY = centerY - (waveform[i].max * (totalHeight / 2 - padding) * 0.8);
+            const minY = centerY - (waveform[i].min * (totalHeight / 2 - padding) * 0.8);
 
             if (i === 0) {
-                ctx.moveTo(x, y);
+                ctx.moveTo(x, maxY);
             } else {
-                ctx.lineTo(x, y);
+                ctx.lineTo(x, maxY);
             }
         }
-        ctx.stroke();
 
-        // Modern fill area under curve with gradient
-        ctx.beginPath();
-        ctx.moveTo(0, centerY3 + sectionHeight * 0.4);
-        for (let i = 0; i < envelope.length; i++) {
+        for (let i = waveform.length - 1; i >= 0; i--) {
             const x = i * stepX;
-            const normalizedEnergy = envelope[i] / maxEnergy;
-            const y = centerY3 + (sectionHeight * 0.4) - (normalizedEnergy * sectionHeight * 0.8);
-            ctx.lineTo(x, y);
+            const minY = centerY - (waveform[i].min * (totalHeight / 2 - padding) * 0.8);
+            ctx.lineTo(x, minY);
         }
-        ctx.lineTo(width, centerY3 + sectionHeight * 0.4);
+
         ctx.closePath();
 
-        const areaGradient = ctx.createLinearGradient(0, centerY3 - 40, 0, centerY3 + 40);
-        areaGradient.addColorStop(0, 'rgba(34, 197, 94, 0.2)');
-        areaGradient.addColorStop(1, 'rgba(34, 197, 94, 0.05)');
-        ctx.fillStyle = areaGradient;
+        // Fill with gradient
+        const fillGradient = ctx.createLinearGradient(0, centerY - 60, 0, centerY + 60);
+        fillGradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)');
+        fillGradient.addColorStop(0.5, 'rgba(59, 130, 246, 0.05)');
+        fillGradient.addColorStop(1, 'rgba(99, 102, 241, 0.15)');
+        ctx.fillStyle = fillGradient;
         ctx.fill();
+        ctx.stroke();
 
-        // Energy level labels with modern styling
-        ctx.fillStyle = 'rgba(75, 85, 99, 0.7)';
-        ctx.font = '10px Inter, system-ui, sans-serif';
-        ctx.textAlign = 'right';
-        ctx.fillText('High', width - 8, energyY + 25);
-        ctx.fillText('Low', width - 8, energyY + sectionHeight - 8);
+        ctx.restore();
     }
-    ctx.restore();
 
     // Draw modern time markers at bottom
     if (waveformData.duration) {
@@ -4229,6 +4167,31 @@ async function displayWaveform(audioFile, featureInfo = null) {
         window.removeEventListener('resize', resizeHandler);
         window.addEventListener('resize', resizeHandler);
 
+        // Add toggle event listeners
+        const toggleWaveform = document.getElementById('toggleWaveform');
+        const togglePitch = document.getElementById('togglePitch');
+        const toggleEnergy = document.getElementById('toggleEnergy');
+
+        const toggleHandler = () => {
+            if (waveformCanvasResults) {
+                renderWaveform(waveformCanvasResults, waveformData, '#3B82F6', featureInfo);
+                setupWaveformTooltips(waveformCanvasResults, waveformData);
+            }
+        };
+
+        if (toggleWaveform) {
+            toggleWaveform.removeEventListener('change', toggleHandler);
+            toggleWaveform.addEventListener('change', toggleHandler);
+        }
+        if (togglePitch) {
+            togglePitch.removeEventListener('change', toggleHandler);
+            togglePitch.addEventListener('change', toggleHandler);
+        }
+        if (toggleEnergy) {
+            toggleEnergy.removeEventListener('change', toggleHandler);
+            toggleEnergy.addEventListener('change', toggleHandler);
+        }
+
     } catch (error) {
         console.error('Error displaying waveform:', error);
         if (waveformInfoResults) waveformInfoResults.textContent = 'Error loading waveform';
@@ -4257,8 +4220,8 @@ function simulateCounterfactualChat() {
 }
 
 /**
- * Setup hover tooltips for the three-graph waveform visualization
- * Provides interactive feedback for waveform, pitch contour, and energy curve sections
+ * Setup hover tooltips for the overlaid waveform visualization
+ * Provides interactive feedback for waveform, pitch contour, and energy curve
  */
 function setupWaveformTooltips(canvas, waveformData) {
     // Remove existing tooltip if present
@@ -4274,67 +4237,63 @@ function setupWaveformTooltips(canvas, waveformData) {
         position: fixed;
         background: rgba(17, 24, 39, 0.92);
         color: white;
-        padding: 6px 10px;
-        border-radius: 4px;
+        padding: 8px 12px;
+        border-radius: 6px;
         font-size: 11px;
         pointer-events: none;
         z-index: 1000;
         display: none;
-        white-space: nowrap;
+        white-space: pre-line;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         transition: opacity 0.15s ease;
+        line-height: 1.5;
     `;
     document.body.appendChild(tooltip);
 
-    // New layout coordinates for three sections
-    const sectionHeight = 140;
-    const margin = 10;
-    const waveformY = 0;
-    const pitchY = sectionHeight + margin;
-    const energyY = 2 * (sectionHeight + margin);
-    const totalHeight = 450;
-
+    const totalHeight = 280;
     const silenceThreshold = waveformData.energyStats?.avg * 0.3 || 0.1;
-    const avgEnergy = waveformData.energyStats?.avg || 0.1;
     const maxEnergy = waveformData.energyStats?.max || 1;
 
-    /**
-     * Get descriptive information for different sections
-     */
-    function getSectionDescription(y, energy, segmentIndex, duration) {
+    // Get toggle states
+    const getTooltipInfo = (energy, segmentIndex, duration) => {
         const time = duration ? (segmentIndex / waveformData.energyEnvelope.length) * duration : 0;
+        const showWaveform = document.getElementById('toggleWaveform')?.checked ?? true;
+        const showPitch = document.getElementById('togglePitch')?.checked ?? true;
+        const showEnergy = document.getElementById('toggleEnergy')?.checked ?? true;
 
-        if (y >= waveformY && y <= waveformY + sectionHeight) {
-            // Waveform section
+        const info = [];
+        info.push(`Time: ${time.toFixed(2)}s`);
+
+        if (showWaveform) {
             const isSpeech = energy > silenceThreshold;
-            return `Waveform at ${time.toFixed(1)}s: ${isSpeech ? 'Active speech' : 'Pause/silence'}`;
-        } else if (y >= pitchY && y <= pitchY + sectionHeight) {
-            // Pitch section
+            info.push(`Waveform: ${isSpeech ? 'Active speech' : 'Pause/silence'}`);
+        }
+
+        if (showPitch) {
             const isSpeech = energy > silenceThreshold;
             if (isSpeech) {
-                // Simulate pitch value based on energy
                 const baseFreq = 150 + Math.sin(segmentIndex * 0.1) * 50;
                 const simulatedPitch = baseFreq + (energy * 100);
-                return `Pitch at ${time.toFixed(1)}s: ~${Math.round(simulatedPitch)}Hz`;
+                info.push(`Pitch: ~${Math.round(simulatedPitch)}Hz`);
             } else {
-                return `Pitch at ${time.toFixed(1)}s: Unvoiced (silence)`;
+                info.push(`Pitch: Unvoiced`);
             }
-        } else if (y >= energyY && y <= energyY + sectionHeight) {
-            // Energy section
+        }
+
+        if (showEnergy) {
             const energyRatio = energy / maxEnergy;
             let level = 'Low';
             if (energyRatio > 0.7) level = 'High';
             else if (energyRatio > 0.3) level = 'Moderate';
-            return `Energy at ${time.toFixed(1)}s: ${level} intensity`;
+            info.push(`Energy: ${level}`);
         }
 
-        return null;
-    }
+        return info.join('\n');
+    };
 
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
 
         if (!waveformData.energyEnvelope) {
             tooltip.style.display = 'none';
@@ -4346,60 +4305,20 @@ function setupWaveformTooltips(canvas, waveformData) {
 
         if (segmentIndex >= 0 && segmentIndex < waveformData.energyEnvelope.length) {
             const energy = waveformData.energyEnvelope[segmentIndex];
-            const description = getSectionDescription(y, energy, segmentIndex, waveformData.duration);
+            const description = getTooltipInfo(energy, segmentIndex, waveformData.duration);
 
-            // Show tooltip if within any of the three sections
-            if (description && y >= 0 && y <= totalHeight) {
-                tooltip.textContent = description;
+            tooltip.textContent = description;
 
-                // Position tooltip near cursor with offset (10px right, 12px below)
-                const offsetX = 10;
-                const offsetY = 12;
-                let tooltipX = e.clientX + offsetX;
-                let tooltipY = e.clientY + offsetY;
+            // Position tooltip near cursor with offset
+            const offsetX = 10;
+            const offsetY = 12;
+            let tooltipX = e.clientX + offsetX;
+            let tooltipY = e.clientY + offsetY;
 
-                // Show tooltip first to measure dimensions
-                tooltip.style.display = 'block';
-                tooltip.style.visibility = 'hidden'; // Temporarily hide to measure
-                tooltip.style.left = tooltipX + 'px';
-                tooltip.style.top = tooltipY + 'px';
-
-                // Get tooltip dimensions after it's in the DOM
-                const tooltipRect = tooltip.getBoundingClientRect();
-                const tooltipWidth = tooltipRect.width;
-                const tooltipHeight = tooltipRect.height;
-
-                // Keep tooltip within viewport bounds
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-
-                // Adjust horizontal position if tooltip would go off-screen right
-                if (tooltipX + tooltipWidth > viewportWidth) {
-                    tooltipX = e.clientX - tooltipWidth - offsetX; // Position to the left of cursor
-                }
-
-                // Adjust horizontal position if tooltip would go off-screen left
-                if (tooltipX < 0) {
-                    tooltipX = offsetX;
-                }
-
-                // Adjust vertical position if tooltip would go off-screen bottom
-                if (tooltipY + tooltipHeight > viewportHeight) {
-                    tooltipY = e.clientY - tooltipHeight - offsetY; // Position above cursor
-                }
-
-                // Adjust vertical position if tooltip would go off-screen top
-                if (tooltipY < 0) {
-                    tooltipY = offsetY;
-                }
-
-                // Apply final position and make visible
-                tooltip.style.left = tooltipX + 'px';
-                tooltip.style.top = tooltipY + 'px';
-                tooltip.style.visibility = 'visible';
-            } else {
-                tooltip.style.display = 'none';
-            }
+            tooltip.style.display = 'block';
+            tooltip.style.left = tooltipX + 'px';
+            tooltip.style.top = tooltipY + 'px';
+            tooltip.style.visibility = 'visible';
         } else {
             tooltip.style.display = 'none';
         }

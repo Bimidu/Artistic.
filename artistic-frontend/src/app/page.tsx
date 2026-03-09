@@ -497,20 +497,67 @@ export default function Home() {
                   <h3 className="text-base font-medium text-gray-500 tracking-widest">Speech Visualization</h3>
                 </div>
                 <div className="flex items-center gap-6">
-                  {/* Legend */}
-                  <div className="flex items-center gap-4 text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-                      <span className="text-gray-600">Waveform</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-purple-500 rounded-sm"></div>
-                      <span className="text-gray-600">Pitch (F0)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
-                      <span className="text-gray-600">Energy</span>
-                    </div>
+                  {/* Modern Toggle Controls */}
+                  <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-2.5 border border-gray-200">
+                    {/* Waveform Toggle */}
+                    <label className="flex items-center gap-2.5 cursor-pointer group">
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          id="toggleWaveform"
+                          className="sr-only peer"
+                          defaultChecked
+                        />
+                        <div className="w-9 h-5 bg-gray-300 rounded-full peer-checked:bg-blue-500 transition-all duration-300 ease-in-out shadow-inner"></div>
+                        <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all duration-300 ease-in-out peer-checked:translate-x-4 shadow-md"></div>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 bg-blue-500 rounded-full shadow-sm"></div>
+                        <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900 transition-colors">Waveform</span>
+                      </div>
+                    </label>
+
+                    {/* Separator */}
+                    <div className="w-px h-5 bg-gray-300"></div>
+
+                    {/* Pitch Toggle */}
+                    <label className="flex items-center gap-2.5 cursor-pointer group">
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          id="togglePitch"
+                          className="sr-only peer"
+                          defaultChecked
+                        />
+                        <div className="w-9 h-5 bg-gray-300 rounded-full peer-checked:bg-purple-500 transition-all duration-300 ease-in-out shadow-inner"></div>
+                        <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all duration-300 ease-in-out peer-checked:translate-x-4 shadow-md"></div>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 bg-purple-500 rounded-full shadow-sm"></div>
+                        <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900 transition-colors">Pitch</span>
+                      </div>
+                    </label>
+
+                    {/* Separator */}
+                    <div className="w-px h-5 bg-gray-300"></div>
+
+                    {/* Energy Toggle */}
+                    <label className="flex items-center gap-2.5 cursor-pointer group">
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          id="toggleEnergy"
+                          className="sr-only peer"
+                          defaultChecked
+                        />
+                        <div className="w-9 h-5 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-all duration-300 ease-in-out shadow-inner"></div>
+                        <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all duration-300 ease-in-out peer-checked:translate-x-4 shadow-md"></div>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 bg-green-500 rounded-full shadow-sm"></div>
+                        <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900 transition-colors">Energy</span>
+                      </div>
+                    </label>
                   </div>
                   <audio id="waveformAudioResults" controls className="h-8 max-w-[200px]" />
                 </div>
@@ -525,7 +572,7 @@ export default function Home() {
                   <canvas
                     id="waveformCanvasResults"
                     className="w-full bg-white"
-                    style={{ height: '460px', display: 'block' }}
+                    style={{ height: '280px', display: 'block' }}
                   />
                 </div>
               </div>

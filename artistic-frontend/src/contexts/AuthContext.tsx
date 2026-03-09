@@ -37,11 +37,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const storedToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('authUser');
 
-    if (storedToken && storedUser) {
+    if (storedToken) {
       setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+        setLoading(false);
+      } else {
+        fetch(`${apiUrl}/auth/me`, {
+          headers: { 'Authorization': `Bearer ${storedToken}` },
+        })
+          .then((res) => (res.ok ? res.json() : null))
+          .then((userData) => {
+            if (userData) {
+              setUser(userData);
+              localStorage.setItem('authUser', JSON.stringify(userData));
+            } else {
+              localStorage.removeItem('authToken');
+              setToken(null);
+            }
+          })
+          .catch(() => {
+            localStorage.removeItem('authToken');
+            setToken(null);
+          })
+          .finally(() => setLoading(false));
+      }
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   // Sync auth state across tabs
