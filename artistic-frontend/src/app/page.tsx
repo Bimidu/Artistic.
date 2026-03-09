@@ -431,8 +431,8 @@ export default function Home() {
             <div className="px-8 py-4 bg-white border-b border-gray-100">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-1">ACOUSTIC ANALYSIS</p>
-                  <h3 className="text-xl font-semibold text-gray-900">Speech Visualization</h3>
+                  <p className="text-2xl font-semibold text-gray-900 mb-1">Acoustic Analysis</p>
+                  <h3 className="text-base font-medium text-gray-500 tracking-widest">Speech Visualization</h3>
                 </div>
                 <div className="flex items-center gap-6">
                   {/* Legend */}
