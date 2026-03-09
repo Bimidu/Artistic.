@@ -3725,22 +3725,22 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     const waveform = waveformData.waveform;
     const stepX = width / waveform.length;
 
-    // Draw section backgrounds with subtle light gradients
+    // Draw section backgrounds with matching legend colors
     const gradient1 = ctx.createLinearGradient(0, waveformY, 0, waveformY + sectionHeight);
-    gradient1.addColorStop(0, 'rgba(59, 130, 246, 0.03)');
-    gradient1.addColorStop(1, 'rgba(99, 102, 241, 0.03)');
+    gradient1.addColorStop(0, 'rgba(59, 130, 246, 0.03)');  // Blue
+    gradient1.addColorStop(1, 'rgba(59, 130, 246, 0.01)');
     ctx.fillStyle = gradient1;
     ctx.fillRect(0, waveformY, width, sectionHeight);
 
     const gradient2 = ctx.createLinearGradient(0, pitchY, 0, pitchY + sectionHeight);
-    gradient2.addColorStop(0, 'rgba(220, 38, 38, 0.03)');
-    gradient2.addColorStop(1, 'rgba(239, 68, 68, 0.03)');
+    gradient2.addColorStop(0, 'rgba(139, 92, 246, 0.03)');  // Purple
+    gradient2.addColorStop(1, 'rgba(139, 92, 246, 0.01)');
     ctx.fillStyle = gradient2;
     ctx.fillRect(0, pitchY, width, sectionHeight);
 
     const gradient3 = ctx.createLinearGradient(0, energyY, 0, energyY + sectionHeight);
-    gradient3.addColorStop(0, 'rgba(5, 150, 105, 0.03)');
-    gradient3.addColorStop(1, 'rgba(16, 185, 129, 0.03)');
+    gradient3.addColorStop(0, 'rgba(34, 197, 94, 0.03)');   // Green
+    gradient3.addColorStop(1, 'rgba(34, 197, 94, 0.01)');
     ctx.fillStyle = gradient3;
     ctx.fillRect(0, energyY, width, sectionHeight);
 
@@ -3754,17 +3754,17 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     ctx.lineTo(width, energyY - margin/2);
     ctx.stroke();
 
-    // Section 1: WAVEFORM with modern styling for light background
+    // Section 1: WAVEFORM with clean styling
     ctx.save();
 
-    // Section label with background
-    ctx.fillStyle = 'rgba(59, 130, 246, 0.1)';
-    ctx.fillRect(8, waveformY + 6, 180, 22);
+    // Section label - clean style like in the image
+    ctx.fillStyle = 'rgba(59, 130, 246, 0.08)';
+    ctx.fillRect(20, waveformY + 8, 100, 18);
 
-    ctx.fillStyle = 'rgba(59, 130, 246, 1)';
-    ctx.font = 'bold 11px Inter, system-ui, sans-serif';
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '11px Inter, system-ui, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('WAVEFORM • Amplitude', 15, waveformY + 19);
+    ctx.fillText('WAVEFORM', 25, waveformY + 18);
 
     const centerY1 = waveformY + sectionHeight / 2;
 
@@ -3818,17 +3818,17 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     ctx.stroke();
     ctx.restore();
 
-    // Section 2: PITCH CONTOUR with modern styling for light background
+    // Section 2: PITCH with clean styling
     ctx.save();
 
-    // Section label with background
-    ctx.fillStyle = 'rgba(220, 38, 38, 0.1)';
-    ctx.fillRect(8, pitchY + 6, 180, 22);
+    // Section label - clean style like in the image
+    ctx.fillStyle = 'rgba(139, 92, 246, 0.08)';
+    ctx.fillRect(20, pitchY + 8, 120, 18);
 
-    ctx.fillStyle = 'rgba(220, 38, 38, 1)';
-    ctx.font = 'bold 11px Inter, system-ui, sans-serif';
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '11px Inter, system-ui, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('PITCH • Fundamental F0', 15, pitchY + 19);
+    ctx.fillText('PITCH • F0 EST.', 25, pitchY + 18);
 
     // Extract pitch data from energy envelope (simplified)
     if (waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
@@ -3850,11 +3850,11 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
         const minPitch = Math.min(...pitchData.filter(p => p > 0));
         const pitchRange = maxPitch - minPitch || 1;
 
-        // Modern pitch line with gradient
+        // Modern pitch line with purple gradient to match legend
         const pitchGradient = ctx.createLinearGradient(0, 0, width, 0);
-        pitchGradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)');
-        pitchGradient.addColorStop(0.5, 'rgba(239, 68, 68, 1)');
-        pitchGradient.addColorStop(1, 'rgba(248, 113, 113, 0.8)');
+        pitchGradient.addColorStop(0, 'rgba(139, 92, 246, 0.8)');
+        pitchGradient.addColorStop(0.5, 'rgba(139, 92, 246, 1)');
+        pitchGradient.addColorStop(1, 'rgba(168, 85, 247, 0.8)');
 
         ctx.strokeStyle = pitchGradient;
         ctx.lineWidth = 2.5;
@@ -3892,28 +3892,28 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
     }
     ctx.restore();
 
-    // Section 3: ENERGY CURVE with modern styling for light background
+    // Section 3: ENERGY with clean styling
     ctx.save();
 
-    // Section label with background
-    ctx.fillStyle = 'rgba(5, 150, 105, 0.1)';
-    ctx.fillRect(8, energyY + 6, 180, 22);
+    // Section label - clean style like in the image
+    ctx.fillStyle = 'rgba(5, 150, 105, 0.08)';
+    ctx.fillRect(20, energyY + 8, 100, 18);
 
-    ctx.fillStyle = 'rgba(5, 150, 105, 1)';
-    ctx.font = 'bold 11px Inter, system-ui, sans-serif';
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '11px Inter, system-ui, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('ENERGY • RMS Intensity', 15, energyY + 19);
+    ctx.fillText('ENERGY • RMS', 25, energyY + 18);
 
     if (waveformData.energyEnvelope && waveformData.energyEnvelope.length > 0) {
         const envelope = waveformData.energyEnvelope;
         const centerY3 = energyY + sectionHeight / 2;
         const maxEnergy = waveformData.energyStats?.max || 1;
 
-        // Modern energy line with gradient
+        // Modern energy line with green gradient to match legend
         const energyGradient = ctx.createLinearGradient(0, 0, width, 0);
-        energyGradient.addColorStop(0, 'rgba(5, 150, 105, 0.8)');
-        energyGradient.addColorStop(0.5, 'rgba(16, 185, 129, 1)');
-        energyGradient.addColorStop(1, 'rgba(52, 211, 153, 0.8)');
+        energyGradient.addColorStop(0, 'rgba(34, 197, 94, 0.8)');
+        energyGradient.addColorStop(0.5, 'rgba(34, 197, 94, 1)');
+        energyGradient.addColorStop(1, 'rgba(22, 163, 74, 0.8)');
 
         ctx.strokeStyle = energyGradient;
         ctx.lineWidth = 2.5;
@@ -3948,8 +3948,8 @@ function renderWaveform(canvas, waveformData, color = '#3B82F6', featureInfo = n
         ctx.closePath();
 
         const areaGradient = ctx.createLinearGradient(0, centerY3 - 40, 0, centerY3 + 40);
-        areaGradient.addColorStop(0, 'rgba(5, 150, 105, 0.2)');
-        areaGradient.addColorStop(1, 'rgba(5, 150, 105, 0.05)');
+        areaGradient.addColorStop(0, 'rgba(34, 197, 94, 0.2)');
+        areaGradient.addColorStop(1, 'rgba(34, 197, 94, 0.05)');
         ctx.fillStyle = areaGradient;
         ctx.fill();
 
@@ -4174,10 +4174,12 @@ async function displayWaveform(audioFile, featureInfo = null) {
         // Update individual signal info fields
         const signalDuration = document.getElementById('signalDuration');
         const signalSampleRate = document.getElementById('signalSampleRate');
+        const signalSamples = document.getElementById('signalSamples');
         const signalFeatures = document.getElementById('signalFeatures');
 
         if (signalDuration) signalDuration.textContent = `${duration}s`;
         if (signalSampleRate) signalSampleRate.textContent = `${waveformData.sampleRate}Hz`;
+        if (signalSamples) signalSamples.textContent = `${waveformData.sampleCount.toLocaleString()}k`;
         if (signalFeatures) {
             const featureCount = featureInfo?.features_extracted || 'Audio Analysis';
             signalFeatures.textContent = featureCount;
