@@ -82,7 +82,6 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
         """Load spaCy model with robust error handling and fallbacks."""
         model_names = ["en_core_web_sm", "en_core_web_md", "en_core_web_lg"]
 
-        # Try to load an existing model
         for model_name in model_names:
             try:
                 import spacy
@@ -92,7 +91,7 @@ class SyntacticSemanticFeatures(BaseFeatureExtractor):
             except OSError:
                 continue
 
-        # PLASTER FIX: Skip installation during inference/API usage
+        # Skip installation during inference/API usage
         # Only attempt installation if we're in a development/training context
         if hasattr(self, '_skip_installation') or self._is_api_context():
             self.logger.warning("spaCy model not found, using fallback mode (no installation attempted)")

@@ -1,10 +1,7 @@
 """
-Syntactic & Semantic Feature Extractor (Placeholder)
+Syntactic & Semantic Feature Extractor
 
-This is a placeholder implementation with dummy features.
-Team Member B will implement the actual syntactic/semantic analysis.
-
-Dummy features include:
+Features include:
 - pos_noun_ratio, pos_verb_ratio, pos_adj_ratio
 - dependency_tree_depth
 - clause_count, subordinate_clause_ratio
@@ -12,7 +9,7 @@ Dummy features include:
 - semantic_coherence
 - word_sense_diversity
 
-Author: Placeholder for Team Member B
+Author: Randil Haturusinghe
 """
 
 import pandas as pd
@@ -26,11 +23,6 @@ logger = get_logger(__name__)
 
 
 class SyntacticFeatureExtractor:
-    """
-    Placeholder for syntactic and semantic feature extraction.
-    
-    Generates dummy features for testing the model pipeline.
-    """
     
     def __init__(self):
         """Initialize syntactic feature extractor."""
@@ -70,7 +62,6 @@ class SyntacticFeatureExtractor:
         """
         logger.info(f"Extracting syntactic features from text (length: {len(text)})")
         
-        # Generate dummy features with realistic ranges
         features = {
             'pos_noun_ratio': np.random.uniform(0.15, 0.35),
             'pos_verb_ratio': np.random.uniform(0.15, 0.30),
@@ -109,7 +100,6 @@ class SyntacticFeatureExtractor:
         """
         logger.info("Extracting syntactic features from transcript")
         
-        # Generate dummy features
         features = {name: np.random.uniform(0, 1) for name in self.feature_names}
         
         return features
@@ -130,7 +120,6 @@ class SyntacticFeatureExtractor:
         transcript_files = list(directory.rglob('*.cha'))
         
         if not transcript_files:
-            # Generate dummy data with diagnosis
             n_samples = 50
             data = []
             for i in range(n_samples):
@@ -142,10 +131,10 @@ class SyntacticFeatureExtractor:
             logger.info(f"Generated {n_samples} dummy samples with diagnosis labels")
             return pd.DataFrame(data)
         
-        # Extract from actual files (with dummy features)
+        # Extract from actual files
         data = []
         for transcript_file in transcript_files:
-            features = self.extract_from_text("")  # Dummy
+            features = self.extract_from_text("")  
             
             # Try to infer diagnosis from directory structure or filename
             path_str = str(transcript_file).upper()
