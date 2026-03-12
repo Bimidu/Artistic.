@@ -105,6 +105,17 @@ class CloudConfig:
 
 
 @dataclass
+class TranscriptionConfig:
+    """
+    Configuration for speech transcription/diarization engines.
+    """
+    default_engine: str = os.getenv("TRANSCRIPTION_ENGINE_DEFAULT", "deepgram")
+    deepgram_model: str = os.getenv("DEEPGRAM_MODEL", "nova-3")
+    local_oss_model_size: str = os.getenv("LOCAL_OSS_MODEL_SIZE", "large-v3")
+    local_oss_device: str = os.getenv("LOCAL_OSS_DEVICE", "cpu")
+
+
+@dataclass
 class LoggingConfig:
     """
     Configuration for logging settings.
@@ -189,6 +200,7 @@ class Config:
         self.logging = LoggingConfig()
         self.datasets = DatasetConfig()
         self.cloud = CloudConfig()
+        self.transcription = TranscriptionConfig()
     
     def to_dict(self) -> Dict[str, Any]:
         """
@@ -204,6 +216,7 @@ class Config:
             "logging": self.logging.__dict__,
             "datasets": self.datasets.__dict__,
             "cloud": self.cloud.__dict__,
+            "transcription": self.transcription.__dict__,
         }
     
     def __repr__(self) -> str:
@@ -224,5 +237,6 @@ __all__ = [
     "LoggingConfig",
     "DatasetConfig",
     "CloudConfig",
+    "TranscriptionConfig",
 ]
 

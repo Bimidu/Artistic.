@@ -342,8 +342,17 @@ class AnnotatedTranscript:
             )
             
             speaker = html.escape(utterance.speaker)
+            start_attr = (
+                f' data-start="{int(utterance.timing * 1000)}"'
+                if utterance.timing is not None else ""
+            )
+            end_attr = (
+                f' data-end="{int(utterance.end_timing * 1000)}"'
+                if utterance.end_timing is not None else ""
+            )
+            role = "child" if utterance.speaker == "CHI" else ("adult" if utterance.speaker in {"MOT", "INV"} else "other")
             html_parts.append(
-                f'<div class="utterance">'
+                f'<div class="utterance" data-speaker-role="{role}"{start_attr}{end_attr}>'
                 f'<span class="speaker">*{speaker}:</span> '
                 f'<span class="text">{annotated_html}</span>'
                 f'</div>'
@@ -370,7 +379,10 @@ class AnnotatedTranscript:
                 {
                     'idx': idx,
                     'speaker': u.speaker,
+                    'speaker_role': "child" if u.speaker == "CHI" else ("adult" if u.speaker in {"MOT", "INV"} else "other"),
                     'text': u.text,
+                    'start_ms': int(u.timing * 1000) if u.timing is not None else None,
+                    'end_ms': int(u.end_timing * 1000) if u.end_timing is not None else None,
                     'annotations': [
                         {
                             'type': a.annotation_type.value,

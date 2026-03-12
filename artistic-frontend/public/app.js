@@ -18,6 +18,27 @@ function updateToggleSlider() {
     toggleSlider.style.transform = `translateX(${relativeLeft - 4}px)`;
 }
 
+function getSelectedTranscriptionEngine() {
+    const select = document.getElementById('transcriptionEngineSelect');
+    if (!select) return 'deepgram';
+    return select.value || 'deepgram';
+}
+
+function initTranscriptionEngineSelector() {
+    const select = document.getElementById('transcriptionEngineSelect');
+    if (!select) return;
+    const storageKey = 'artistic_transcription_engine';
+    const saved = localStorage.getItem(storageKey);
+    if (saved && (saved === 'deepgram' || saved === 'local_oss')) {
+        select.value = saved;
+    }
+    if (select.dataset.artisticBound === '1') return;
+    select.dataset.artisticBound = '1';
+    select.addEventListener('change', () => {
+        localStorage.setItem(storageKey, select.value || 'deepgram');
+    });
+}
+
 function initHomeUiBindings() {
     // Mode switching with toggle (User / Training)
     const modeToggle = document.getElementById('modeToggle');
@@ -118,6 +139,7 @@ function initHomeUiBindings() {
     // File upload area bindings (idempotent)
     setupUploadArea('audioUploadArea', 'audioFileInput', 'selectedAudioFile', ['.wav', '.mp3', '.flac', '.ogg', '.m4a']);
     setupUploadArea('chaUploadArea', 'chaFileInput', 'selectedChaFile', ['.cha']);
+    initTranscriptionEngineSelector();
 
     // Initialize audio recording (idempotent)
     const recordSection = document.getElementById('audioRecordSection');
@@ -653,6 +675,7 @@ function updateAudioProgressUI(pct, stage, detail) {
 async function predictFromAudio() {
     const fileInput = document.getElementById('audioFileInput');
     const useFusion = true;
+    const transcriptionEngine = getSelectedTranscriptionEngine();
 
     if (!fileInput.files[0]) {
         alert('Please select an audio file');
@@ -669,6 +692,7 @@ async function predictFromAudio() {
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('use_fusion', useFusion);
+    formData.append('transcription_engine', transcriptionEngine);
 
     let jobId = null;
     try {
@@ -1001,11 +1025,17 @@ function displayResults(data) {
     }
 
     // Show annotated transcript with interactive features
-    if (data.annotated_transcript_html) {
+    if (data.annotated_transcript_html || data.structured_transcript) {
         document.getElementById('annotationCard').classList.remove('hidden');
         // Store transcript text for semantic coherence analysis
-        const transcriptText = data.transcript || extractTranscriptFromHTML(data.annotated_transcript_html);
-        renderAnnotatedTranscript(data.annotated_transcript_html, data.annotation_summary || {}, transcriptText);
+        const transcriptText = data.transcript || extractTranscriptFromHTML(data.annotated_transcript_html || '');
+        renderAnnotatedTranscript(
+            data.annotated_transcript_html || '',
+            data.annotation_summary || {},
+            transcriptText,
+            data.structured_transcript || null,
+            data.transcription_engine || null
+        );
 
         // Trigger detailed syntactic/semantic analysis
         if (transcriptText) {
@@ -2926,7 +2956,49 @@ let isCompactView = true; // Always start in compact mode
 let semanticCoherenceData = null;
 let isSemanticCoherenceActive = false;
 
-function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptText = null) {
+function escapeHtml(text) {
+    return String(text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function formatTime(seconds) {
+    const total = Math.max(0, Math.floor(seconds));
+    const minutes = Math.floor(total / 60);
+    const secs = String(total % 60).padStart(2, '0');
+    return `${minutes}:${secs}`;
+}
+
+function buildStructuredTranscriptHtml(structuredTranscript) {
+    if (!structuredTranscript || !Array.isArray(structuredTranscript.utterances)) {
+        return '<p class="text-sm text-primary-500">Transcript is unavailable.</p>';
+    }
+    return structuredTranscript.utterances.map((utt) => {
+        const role = utt.speaker_role || (utt.speaker_code === 'CHI' ? 'child' : 'adult');
+        const speakerCode = utt.speaker_code || 'CHI';
+        const startMs = Number.isFinite(utt.start_ms) ? utt.start_ms : null;
+        const endMs = Number.isFinite(utt.end_ms) ? utt.end_ms : null;
+        const timeLabel = (startMs !== null && endMs !== null) ? `${formatTime(startMs / 1000)}-${formatTime(endMs / 1000)}` : '';
+        return `
+            <div class="utterance" data-start="${startMs ?? ''}" data-end="${endMs ?? ''}" data-speaker-role="${role}">
+                <span class="speaker">*${speakerCode}:</span>
+                <span class="text">${escapeHtml(utt.text || '')}</span>
+                ${timeLabel ? `<span class="ts-label">${timeLabel}</span>` : ''}
+            </div>
+        `;
+    }).join('\n');
+}
+
+function renderAnnotatedTranscript(
+    htmlContent,
+    annotationSummary,
+    transcriptText = null,
+    structuredTranscript = null,
+    transcriptionEngine = null
+) {
     const container = document.getElementById('annotatedTranscript');
     const summaryPanel = document.getElementById('featureSummaryContent');
     const filterSelect = document.getElementById('featureFilter');
@@ -2938,7 +3010,7 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
     }
 
     // Store current data
-    currentTranscriptData = { html: htmlContent, summary: annotationSummary || {} };
+    currentTranscriptData = { html: htmlContent, summary: annotationSummary || {}, structured: structuredTranscript };
     currentTranscriptText = transcriptText;
 
     // Parse the HTML to extract annotation data
@@ -2958,6 +3030,10 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
     const totalAnnotations = annotationSummary ?
         Object.values(annotationSummary).reduce((sum, count) => sum + count, 0) : 0;
     annotationCount.textContent = `${totalAnnotations} Feature${totalAnnotations !== 1 ? 's' : ''} Marked`;
+    if (transcriptionEngine) {
+        const engineLabel = transcriptionEngine === 'local_oss' ? 'Local OSS' : 'Deepgram';
+        annotationCount.textContent += ` · ${engineLabel}`;
+    }
 
     // Render feature summary chips — grouped by category
     summaryPanel.innerHTML = '';
@@ -3029,7 +3105,13 @@ function renderAnnotatedTranscript(htmlContent, annotationSummary, transcriptTex
     }
 
     // Render transcript with enhanced styling
-    container.innerHTML = transcriptDiv.innerHTML || htmlContent;
+    if (transcriptDiv && (transcriptDiv.innerHTML || '').trim()) {
+        container.innerHTML = transcriptDiv.innerHTML;
+    } else if (htmlContent && htmlContent.trim()) {
+        container.innerHTML = htmlContent;
+    } else {
+        container.innerHTML = buildStructuredTranscriptHtml(structuredTranscript);
+    }
 
     // Always apply compact view by default
     container.classList.add('compact-view');
@@ -3077,6 +3159,23 @@ function enhanceAnnotations(container) {
     try {
         const utterances = container.querySelectorAll('.utterance');
         utterances.forEach(utt => {
+            const speakerEl = utt.querySelector('.speaker');
+            const speakerText = (speakerEl?.textContent || '').replace('*', '').replace(':', '').trim().toUpperCase();
+            const role = utt.getAttribute('data-speaker-role')
+                || (speakerText === 'CHI' ? 'child' : (speakerText === 'MOT' || speakerText === 'INV' ? 'adult' : 'other'));
+            utt.setAttribute('data-speaker-role', role);
+            utt.classList.add(`speaker-role-${role}`);
+            if (speakerEl) {
+                speakerEl.setAttribute('data-speaker-code', speakerText || 'UNK');
+                if (role === 'child') {
+                    speakerEl.textContent = '*Child:';
+                } else if (role === 'adult') {
+                    speakerEl.textContent = '*Adult:';
+                } else {
+                    speakerEl.textContent = '*Other:';
+                }
+            }
+
             // 1. Check for data attributes from the backend
             let startMs = utt.getAttribute('data-start') || utt.getAttribute('data-timestamp');
             let endMs = utt.getAttribute('data-end');
@@ -3098,6 +3197,9 @@ function enhanceAnnotations(container) {
             }
 
             if (startMs) {
+                if (utt.querySelector('.ts-label')) {
+                    return;
+                }
                 const fmt = ms => {
                     const s = Math.floor(parseInt(ms, 10) / 1000);
                     const m2 = Math.floor(s / 60);

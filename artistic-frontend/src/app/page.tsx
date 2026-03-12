@@ -414,6 +414,19 @@ export default function Home() {
                   </div>
                   <input type="file" className="hidden" id="audioFileInput" accept=".wav,.mp3,.flac" />
                   <div id="selectedAudioFile" className="mt-3 text-sm text-accent-600"></div>
+                  <div className="mt-4">
+                    <label htmlFor="transcriptionEngineSelect" className="block text-xs font-medium text-primary-600 mb-1.5">
+                      Transcription Engine
+                    </label>
+                    <select
+                      id="transcriptionEngineSelect"
+                      className="w-full px-3 py-2 bg-white border border-primary-200 rounded-lg text-sm focus:outline-none focus:border-primary-400 transition-all"
+                      defaultValue="deepgram"
+                    >
+                      <option value="deepgram">Deepgram (Paid, Highest Accuracy)</option>
+                      <option value="local_oss">Local OSS (WhisperX + diarization)</option>
+                    </select>
+                  </div>
 
                   {/* In-browser Recording Controls */}
                   <div id="audioRecordSection" className="mt-6 bg-primary-50 rounded-xl p-5 border border-primary-200">

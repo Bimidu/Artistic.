@@ -221,6 +221,9 @@ class InputHandler:
             metadata={
                 'transcription_segments': len(result.transcription.segments),
                 'duration': result.transcription.duration,
+                'transcription_backend': result.transcription.metadata.get('backend'),
+                'transcription_engine': result.transcription.metadata.get('engine'),
+                'speaker_map': result.transcription.metadata.get('speaker_map', {}),
             }
         )
     

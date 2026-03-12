@@ -484,11 +484,31 @@ select:focus {
   display: inline-block;
 }
 
+.transcript-container .utterance.speaker-role-child {
+  border-left-color: #5f3dc4;
+}
+
+.transcript-container .utterance.speaker-role-adult {
+  border-left-color: #1971c2;
+}
+
+.transcript-container .utterance.speaker-role-child .speaker {
+  color: #5f3dc4;
+  background: #f3f0ff;
+  border-color: #e5dbff;
+}
+
+.transcript-container .utterance.speaker-role-adult .speaker {
+  color: #1971c2;
+  background: #e7f5ff;
+  border-color: #d0ebff;
+}
+
 /* Timestamp label */
 .transcript-container .ts-label {
   font-family: ui-monospace, 'Courier New', monospace;
   font-size: 0.65rem;
-  color: #adb5bd;
+  color: #6c757d;
   margin-left: 8px;
   white-space: nowrap;
   flex-shrink: 0;

@@ -16,6 +16,7 @@ Author: Bimidu Gunathilake
 from pathlib import Path
 from typing import Dict, Optional, Any, Tuple, List
 from dataclasses import dataclass, field
+from collections import Counter
 import numpy as np
 
 from src.utils.logger import get_logger
@@ -174,14 +175,27 @@ class AudioProcessor:
                 metadata={'error': 'Transcriber not available'}
             )
         
-        # Step 2: Identify speakers using pitch analysis (if audio available)
-        if transcription.segments and LIBROSA_AVAILABLE:
+        # Step 2: Legacy speaker assignment for backends without diarization labels.
+        backend = str(transcription.metadata.get("backend", ""))
+        has_speaker_labels = any(seg.speaker for seg in transcription.segments)
+        if (
+            transcription.segments
+            and LIBROSA_AVAILABLE
+            and not has_speaker_labels
+            and backend in {"whisper", "faster-whisper", "google", "vosk"}
+        ):
             transcription = self._identify_speakers_by_pitch(
                 transcription,
                 audio_path
             )
+
+        # Step 3: Normalize speaker roles to a stable conversation schema.
+        transcription = self._normalize_speaker_roles(
+            transcription,
+            participant_id=participant_id,
+        )
         
-        # Step 3: Convert to TranscriptData format
+        # Step 4: Convert to TranscriptData format
         transcript_data = self._transcription_to_transcript_data(
             transcription,
             audio_path,
@@ -189,7 +203,7 @@ class AudioProcessor:
             diagnosis
         )
         
-        # Step 4: Generate CHAT file content
+        # Step 5: Generate CHAT file content
         chat_content = transcription.to_chat_format(participant_id)
         
         logger.info(
@@ -207,8 +221,73 @@ class AudioProcessor:
                 'participant_id': participant_id,
                 'diagnosis': diagnosis,
                 'duration': transcription.duration,
+                'transcription_engine': transcription.metadata.get("engine"),
+                'speaker_map': transcription.metadata.get("speaker_map", {}),
             }
         )
+
+    def _normalize_speaker_roles(
+        self,
+        transcription: TranscriptionResult,
+        participant_id: str,
+    ) -> TranscriptionResult:
+        """
+        Normalize diarized speakers to stable conversation roles.
+
+        Rule set:
+        - First detected primary speaker is ADULT (MOT).
+        - Second primary speaker is CHILD (CHI).
+        - Additional speakers are OTHER (OTH).
+        """
+        if not transcription.segments:
+            return transcription
+
+        duration_by_speaker: Counter[str] = Counter()
+        first_seen_by_speaker: Dict[str, float] = {}
+        for seg in transcription.segments:
+            raw = str(seg.speaker).strip() if seg.speaker is not None else ""
+            if not raw:
+                continue
+            duration_by_speaker[raw] += max(0.0, float(seg.end_time) - float(seg.start_time))
+            first_seen_by_speaker.setdefault(raw, float(seg.start_time))
+
+        if not duration_by_speaker:
+            for seg in transcription.segments:
+                seg.speaker = participant_id
+            transcription.metadata["speaker_map"] = {participant_id: participant_id}
+            transcription.metadata["speaker_roles"] = {participant_id: "child"}
+            return transcription
+
+        primary = [s for s, _ in duration_by_speaker.most_common(2)]
+        if len(primary) == 1:
+            adult_raw = primary[0]
+            child_raw = None
+        else:
+            first_primary = min(primary, key=lambda s: first_seen_by_speaker.get(s, float("inf")))
+            adult_raw = first_primary
+            child_raw = primary[1] if primary[0] == adult_raw else primary[0]
+
+        speaker_map: Dict[str, str] = {}
+        speaker_roles: Dict[str, str] = {}
+        for speaker in duration_by_speaker.keys():
+            if speaker == adult_raw:
+                speaker_map[speaker] = "MOT"
+                speaker_roles[speaker] = "adult"
+            elif child_raw is not None and speaker == child_raw:
+                speaker_map[speaker] = "CHI"
+                speaker_roles[speaker] = "child"
+            else:
+                speaker_map[speaker] = "OTH"
+                speaker_roles[speaker] = "other"
+
+        for seg in transcription.segments:
+            raw = str(seg.speaker).strip() if seg.speaker is not None else ""
+            seg.speaker = speaker_map.get(raw, "OTH" if raw else participant_id)
+
+        transcription.metadata["speaker_map"] = speaker_map
+        transcription.metadata["speaker_roles"] = speaker_roles
+        transcription.metadata["engine"] = transcription.metadata.get("engine", transcription.metadata.get("backend"))
+        return transcription
     
     def _transcription_to_transcript_data(
         self,

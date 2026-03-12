@@ -28,6 +28,7 @@ import tempfile
 import json
 
 import numpy as np
+import httpx
 
 from src.utils.logger import get_logger
 
@@ -70,6 +71,13 @@ try:
 except ImportError:
     PYDUB_AVAILABLE = False
     logger.warning("PyDub not available. Install with: pip install pydub")
+
+try:
+    import whisperx
+    WHISPERX_AVAILABLE = True
+except ImportError:
+    WHISPERX_AVAILABLE = False
+    logger.debug("WhisperX not available. Install with: pip install whisperx pyannote.audio")
 
 
 @dataclass
@@ -228,7 +236,7 @@ class AudioTranscriber:
         Initialize the audio transcriber.
         
         Args:
-            backend: Transcription backend ('faster-whisper', 'whisper', 'vosk', 'google')
+            backend: Transcription backend ('faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'whisperx')
             model_size: Model size ('tiny', 'base', 'small', 'medium', 'large')
             device: Device to use ('cpu' or 'cuda')
             language: Target language code
@@ -269,8 +277,23 @@ class AudioTranscriber:
                     "SpeechRecognition is not installed. Install with: pip install SpeechRecognition"
                 )
             self.recognizer = sr.Recognizer()
+        elif backend == 'deepgram':
+            self.deepgram_api_key = os.getenv("DEEPGRAM_API_KEY", "").strip()
+            self.deepgram_model = os.getenv("DEEPGRAM_MODEL", "nova-3")
+            if not self.deepgram_api_key:
+                raise ImportError(
+                    "DEEPGRAM_API_KEY is not configured. Set it in your environment."
+                )
+        elif backend == 'whisperx':
+            if not WHISPERX_AVAILABLE:
+                raise ImportError(
+                    "whisperx is not installed. Install with: pip install whisperx pyannote.audio"
+                )
         else:
-            raise ValueError(f"Unknown backend: {backend}. Supported: 'faster-whisper', 'whisper', 'vosk', 'google'")
+            raise ValueError(
+                "Unknown backend: "
+                f"{backend}. Supported: 'faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'whisperx'"
+            )
     
     def _load_whisper_model(self):
         """Load Whisper model (lazy loading) with crash protection."""
@@ -585,6 +608,10 @@ class AudioTranscriber:
             return self._transcribe_vosk(audio_path, **kwargs)
         elif self.backend == 'google':
             return self._transcribe_google(audio_path, **kwargs)
+        elif self.backend == 'deepgram':
+            return self._transcribe_deepgram(audio_path, **kwargs)
+        elif self.backend == 'whisperx':
+            return self._transcribe_whisperx(audio_path, **kwargs)
         else:
             raise ValueError(f"Unknown backend: {self.backend}")
     
@@ -699,6 +726,221 @@ class AudioTranscriber:
         except sr.RequestError as e:
             logger.error(f"Google Speech Recognition error: {e}")
             raise
+
+    def _transcribe_deepgram(
+        self,
+        audio_path: Path,
+        num_speakers: int = 2,
+        **kwargs
+    ) -> TranscriptionResult:
+        """Transcribe using Deepgram Nova with diarization and utterances."""
+        with open(audio_path, "rb") as f:
+            audio_bytes = f.read()
+
+        params = {
+            "model": self.deepgram_model,
+            "language": self.language,
+            "diarize": "true",
+            "utterances": "true",
+            "punctuate": "true",
+            "smart_format": "true",
+        }
+        if num_speakers and num_speakers > 0:
+            params["diarize_version"] = "latest"
+
+        headers = {
+            "Authorization": f"Token {self.deepgram_api_key}",
+            "Content-Type": "audio/wav",
+        }
+        with httpx.Client(timeout=300.0) as client:
+            response = client.post(
+                "https://api.deepgram.com/v1/listen",
+                params=params,
+                headers=headers,
+                content=audio_bytes,
+            )
+            response.raise_for_status()
+            payload = response.json()
+
+        results = payload.get("results", {}) or {}
+        utterances = results.get("utterances", []) or []
+        channels = results.get("channels", []) or []
+        alternatives = channels[0].get("alternatives", []) if channels else []
+        primary_alt = alternatives[0] if alternatives else {}
+
+        all_word_timestamps: List[WordTimestamp] = []
+        all_segments: List[Segment] = []
+        full_text_parts: List[str] = []
+
+        if utterances:
+            for utt in utterances:
+                words = []
+                speaker = utt.get("speaker")
+                speaker_label = f"spk_{speaker}" if speaker is not None else None
+                for w in utt.get("words", []) or []:
+                    wt = WordTimestamp(
+                        word=str(w.get("word", "")).strip(),
+                        start_time=float(w.get("start", 0.0)),
+                        end_time=float(w.get("end", 0.0)),
+                        confidence=float(w.get("confidence", 1.0) or 1.0),
+                    )
+                    words.append(wt)
+                    all_word_timestamps.append(wt)
+                text = str(utt.get("transcript", "")).strip()
+                if text:
+                    full_text_parts.append(text)
+                all_segments.append(
+                    Segment(
+                        text=text,
+                        start_time=float(utt.get("start", 0.0)),
+                        end_time=float(utt.get("end", 0.0)),
+                        speaker=speaker_label,
+                        confidence=float(utt.get("confidence", 1.0) or 1.0),
+                        words=words,
+                    )
+                )
+        else:
+            text = str(primary_alt.get("transcript", "")).strip()
+            if text:
+                full_text_parts.append(text)
+            words = []
+            for w in primary_alt.get("words", []) or []:
+                wt = WordTimestamp(
+                    word=str(w.get("word", "")).strip(),
+                    start_time=float(w.get("start", 0.0)),
+                    end_time=float(w.get("end", 0.0)),
+                    confidence=float(w.get("confidence", 1.0) or 1.0),
+                )
+                words.append(wt)
+                all_word_timestamps.append(wt)
+            end_time = words[-1].end_time if words else 0.0
+            all_segments.append(
+                Segment(
+                    text=text,
+                    start_time=0.0,
+                    end_time=end_time,
+                    confidence=float(primary_alt.get("confidence", 0.0) or 0.0),
+                    words=words,
+                )
+            )
+
+        duration = all_segments[-1].end_time if all_segments else 0.0
+        return TranscriptionResult(
+            text=" ".join(part for part in full_text_parts if part),
+            segments=all_segments,
+            language=self.language,
+            duration=duration,
+            confidence=float(np.mean([s.confidence for s in all_segments])) if all_segments else 0.0,
+            metadata={
+                "backend": "deepgram",
+                "engine": "deepgram",
+                "model": self.deepgram_model,
+                "file_path": str(audio_path),
+            },
+            word_timestamps=all_word_timestamps,
+        )
+
+    def _transcribe_whisperx(
+        self,
+        audio_path: Path,
+        num_speakers: int = 2,
+        **kwargs
+    ) -> TranscriptionResult:
+        """Transcribe with local WhisperX + alignment + diarization."""
+        device = "cuda" if self.device == "cuda" else "cpu"
+        compute_type = "float16" if device == "cuda" else "int8"
+        batch_size = int(kwargs.get("batch_size", 8))
+
+        model = whisperx.load_model(
+            self.model_size,
+            device=device,
+            compute_type=compute_type,
+            language=self.language,
+        )
+        audio = whisperx.load_audio(str(audio_path))
+        result = model.transcribe(audio, batch_size=batch_size)
+
+        align_model, align_metadata = whisperx.load_align_model(
+            language_code=result.get("language", self.language),
+            device=device,
+        )
+        result = whisperx.align(
+            result["segments"],
+            align_model,
+            align_metadata,
+            audio,
+            device,
+            return_char_alignments=False,
+        )
+
+        diarization_enabled = False
+        hf_token = os.getenv("HF_TOKEN") or os.getenv("HUGGINGFACE_TOKEN")
+        if hf_token:
+            try:
+                diarize_model = whisperx.DiarizationPipeline(use_auth_token=hf_token, device=device)
+                diarize_segments = diarize_model(
+                    audio,
+                    min_speakers=2,
+                    max_speakers=max(2, num_speakers),
+                )
+                result = whisperx.assign_word_speakers(diarize_segments, result)
+                diarization_enabled = True
+            except Exception as diar_err:
+                logger.warning(f"WhisperX diarization unavailable, proceeding without diarization: {diar_err}")
+        else:
+            logger.warning("HF_TOKEN/HUGGINGFACE_TOKEN missing; WhisperX diarization disabled")
+
+        all_word_timestamps: List[WordTimestamp] = []
+        all_segments: List[Segment] = []
+        full_text_parts: List[str] = []
+
+        for seg in result.get("segments", []) or []:
+            words = []
+            for w in seg.get("words", []) or []:
+                if "start" not in w or "end" not in w:
+                    continue
+                wt = WordTimestamp(
+                    word=str(w.get("word", "")).strip(),
+                    start_time=float(w.get("start", 0.0)),
+                    end_time=float(w.get("end", 0.0)),
+                    confidence=float(w.get("score", 1.0) or 1.0),
+                )
+                words.append(wt)
+                all_word_timestamps.append(wt)
+
+            text = str(seg.get("text", "")).strip()
+            if text:
+                full_text_parts.append(text)
+
+            speaker = seg.get("speaker")
+            speaker_label = speaker if isinstance(speaker, str) else (f"spk_{speaker}" if speaker is not None else None)
+            all_segments.append(
+                Segment(
+                    text=text,
+                    start_time=float(seg.get("start", 0.0)),
+                    end_time=float(seg.get("end", 0.0)),
+                    speaker=speaker_label,
+                    confidence=float(seg.get("avg_logprob", 0.0) or 0.0),
+                    words=words,
+                )
+            )
+
+        duration = all_segments[-1].end_time if all_segments else 0.0
+        return TranscriptionResult(
+            text=" ".join(part for part in full_text_parts if part),
+            segments=all_segments,
+            language=result.get("language", self.language),
+            duration=duration,
+            confidence=float(np.mean([s.confidence for s in all_segments])) if all_segments else 0.0,
+            metadata={
+                "backend": "whisperx",
+                "engine": "local_oss",
+                "model_size": self.model_size,
+                "diarization_enabled": diarization_enabled,
+                "file_path": str(audio_path),
+            },
+            word_timestamps=all_word_timestamps,
+        )
     
     def _prepare_audio_for_sr(self, audio_path: Path) -> Path:
         """Prepare audio file for SpeechRecognition (convert to WAV if needed)."""
@@ -735,21 +977,19 @@ class AudioTranscriber:
         Returns:
             TranscriptionResult with speaker labels
         """
-        # First, get base transcription
-        result = self.transcribe(audio_path, **kwargs)
-        
-        # Simple speaker assignment based on segment patterns
-        # In a real implementation, this would use a proper diarization model
-        speakers = ['CHI', 'INV']  # Child and Investigator
-        
-        for i, segment in enumerate(result.segments):
-            # Simple alternating pattern (placeholder for real diarization)
-            # In practice, you'd use pyannote or similar
-            segment.speaker = speakers[i % len(speakers)]
-        
-        result.metadata['diarization'] = 'simple_alternating'
+        result = self.transcribe(audio_path, num_speakers=num_speakers, **kwargs)
         result.metadata['num_speakers'] = num_speakers
-        
+
+        if self.backend in {"deepgram", "whisperx"}:
+            result.metadata['diarization'] = 'model_based'
+            return result
+
+        # Legacy fallback for non-diarization backends only.
+        speakers = ['CHI', 'INV']
+        for i, segment in enumerate(result.segments):
+            segment.speaker = speakers[i % len(speakers)]
+
+        result.metadata['diarization'] = 'simple_alternating'
         return result
 
 
