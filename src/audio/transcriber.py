@@ -279,7 +279,7 @@ class AudioTranscriber:
             self.recognizer = sr.Recognizer()
         elif backend == 'deepgram':
             self.deepgram_api_key = os.getenv("DEEPGRAM_API_KEY", "").strip()
-            self.deepgram_model = os.getenv("DEEPGRAM_MODEL", "nova-3")
+            self.deepgram_model = os.getenv("DEEPGRAM_MODEL", "nova-2")
             if not self.deepgram_api_key:
                 raise ImportError(
                     "DEEPGRAM_API_KEY is not configured. Set it in your environment."
@@ -733,25 +733,38 @@ class AudioTranscriber:
         num_speakers: int = 2,
         **kwargs
     ) -> TranscriptionResult:
-        """Transcribe using Deepgram Nova with diarization and utterances."""
+        """Transcribe using Deepgram with speaker diarization.
+
+        Uses utterances=true so Deepgram performs its own turn-level
+        segmentation and attaches speaker IDs at the utterance level.
+        Each utterance's transcript is taken verbatim — no word re-joining —
+        so the text is exactly what Deepgram returns.
+
+        smart_format is intentionally omitted: it can merge/reorder utterances
+        in ways that destroy the diarization boundary information.
+        """
         with open(audio_path, "rb") as f:
             audio_bytes = f.read()
 
         params = {
             "model": self.deepgram_model,
             "language": self.language,
-            "diarize": "true",
-            "utterances": "true",
-            "punctuate": "true",
-            "smart_format": "true",
+            "diarize": True,
+            "utterances": True,
+            "punctuate": True,
+            "diarize_min_speakers": num_speakers,
+            "diarize_max_speakers": num_speakers,
         }
-        if num_speakers and num_speakers > 0:
-            params["diarize_version"] = "latest"
 
         headers = {
             "Authorization": f"Token {self.deepgram_api_key}",
             "Content-Type": "audio/wav",
         }
+        logger.info(
+            f"Deepgram request — model={self.deepgram_model} "
+            f"diarize=true utterances=true punctuate=true"
+        )
+
         with httpx.Client(timeout=300.0) as client:
             response = client.post(
                 "https://api.deepgram.com/v1/listen",
@@ -761,72 +774,141 @@ class AudioTranscriber:
             )
             response.raise_for_status()
             payload = response.json()
+            raw_payload = json.dumps(payload, ensure_ascii=False)
+            max_log_chars = 20000
+            if len(raw_payload) > max_log_chars:
+                logger.info(
+                    f"Deepgram raw response (truncated to {max_log_chars} chars): "
+                    f"{raw_payload[:max_log_chars]}... [truncated {len(raw_payload) - max_log_chars} chars]"
+                )
+            else:
+                logger.info(f"Deepgram raw response: {raw_payload}")
 
         results = payload.get("results", {}) or {}
         utterances = results.get("utterances", []) or []
         channels = results.get("channels", []) or []
         alternatives = channels[0].get("alternatives", []) if channels else []
         primary_alt = alternatives[0] if alternatives else {}
+        full_transcript = str(primary_alt.get("transcript", "")).strip()
+
+        # Log exactly what Deepgram returned so we can diagnose diarization issues
+        if utterances:
+            raw_speakers = [u.get("speaker") for u in utterances]
+            unique_spk = sorted(set(s for s in raw_speakers if s is not None))
+            logger.info(
+                f"Deepgram returned {len(utterances)} utterances. "
+                f"Unique speaker IDs: {unique_spk}. "
+                f"Per-utterance speakers: {raw_speakers}"
+            )
+        else:
+            word_list = primary_alt.get("words", []) or []
+            raw_word_spk = [w.get("speaker") for w in word_list]
+            unique_spk = sorted(set(s for s in raw_word_spk if s is not None))
+            logger.warning(
+                f"Deepgram returned 0 utterances; {len(word_list)} words. "
+                f"Unique word-level speaker IDs: {unique_spk}. "
+                f"Falling back to word-level grouping."
+            )
 
         all_word_timestamps: List[WordTimestamp] = []
         all_segments: List[Segment] = []
         full_text_parts: List[str] = []
 
         if utterances:
+            # Primary path: use Deepgram's own utterance segmentation verbatim.
             for utt in utterances:
-                words = []
-                speaker = utt.get("speaker")
-                speaker_label = f"spk_{speaker}" if speaker is not None else None
+                speaker_id = utt.get("speaker")          # integer 0, 1, … or None
+                spk_label = f"spk_{speaker_id}" if speaker_id is not None else None
+                utt_text = str(utt.get("transcript", "")).strip()
+                utt_start = float(utt.get("start", 0.0))
+                utt_end = float(utt.get("end", 0.0))
+                utt_conf = float(utt.get("confidence", 1.0) or 1.0)
+
+                seg_words: List[WordTimestamp] = []
                 for w in utt.get("words", []) or []:
                     wt = WordTimestamp(
-                        word=str(w.get("word", "")).strip(),
+                        word=str(w.get("punctuated_word") or w.get("word", "")).strip(),
                         start_time=float(w.get("start", 0.0)),
                         end_time=float(w.get("end", 0.0)),
                         confidence=float(w.get("confidence", 1.0) or 1.0),
                     )
-                    words.append(wt)
+                    seg_words.append(wt)
                     all_word_timestamps.append(wt)
-                text = str(utt.get("transcript", "")).strip()
-                if text:
-                    full_text_parts.append(text)
-                all_segments.append(
-                    Segment(
-                        text=text,
-                        start_time=float(utt.get("start", 0.0)),
-                        end_time=float(utt.get("end", 0.0)),
-                        speaker=speaker_label,
-                        confidence=float(utt.get("confidence", 1.0) or 1.0),
-                        words=words,
-                    )
-                )
+
+                if utt_text:
+                    full_text_parts.append(utt_text)
+
+                all_segments.append(Segment(
+                    text=utt_text,
+                    start_time=utt_start,
+                    end_time=utt_end,
+                    speaker=spk_label,
+                    confidence=utt_conf,
+                    words=seg_words,
+                ))
+
         else:
-            text = str(primary_alt.get("transcript", "")).strip()
-            if text:
-                full_text_parts.append(text)
-            words = []
-            for w in primary_alt.get("words", []) or []:
-                wt = WordTimestamp(
-                    word=str(w.get("word", "")).strip(),
-                    start_time=float(w.get("start", 0.0)),
-                    end_time=float(w.get("end", 0.0)),
-                    confidence=float(w.get("confidence", 1.0) or 1.0),
-                )
-                words.append(wt)
-                all_word_timestamps.append(wt)
-            end_time = words[-1].end_time if words else 0.0
-            all_segments.append(
-                Segment(
-                    text=text,
-                    start_time=0.0,
-                    end_time=end_time,
-                    confidence=float(primary_alt.get("confidence", 0.0) or 0.0),
-                    words=words,
-                )
-            )
+            # Fallback: group words by speaker change when utterances are absent.
+            raw_words = primary_alt.get("words", []) or []
+
+            if not raw_words:
+                if full_transcript:
+                    all_segments.append(Segment(
+                        text=full_transcript, start_time=0.0, end_time=0.0,
+                        confidence=float(primary_alt.get("confidence", 0.0) or 0.0),
+                    ))
+            else:
+                cur_spk = None
+                cur_words_raw: list = []
+                cur_wts: List[WordTimestamp] = []
+
+                def _flush(spk_id, words_raw, wts) -> Segment:
+                    seg_text = " ".join(
+                        str(w.get("punctuated_word") or w.get("word", "")).strip()
+                        for w in words_raw
+                    ).strip()
+                    return Segment(
+                        text=seg_text,
+                        start_time=float(words_raw[0].get("start", 0.0)),
+                        end_time=float(words_raw[-1].get("end", 0.0)),
+                        speaker=f"spk_{spk_id}" if spk_id is not None else None,
+                        confidence=float(
+                            sum(float(w.get("confidence", 1.0) or 1.0) for w in words_raw)
+                            / len(words_raw)
+                        ),
+                        words=list(wts),
+                    )
+
+                for w in raw_words:
+                    spk = w.get("speaker")
+                    wt = WordTimestamp(
+                        word=str(w.get("punctuated_word") or w.get("word", "")).strip(),
+                        start_time=float(w.get("start", 0.0)),
+                        end_time=float(w.get("end", 0.0)),
+                        confidence=float(w.get("confidence", 1.0) or 1.0),
+                    )
+                    all_word_timestamps.append(wt)
+                    if spk != cur_spk and cur_words_raw:
+                        all_segments.append(_flush(cur_spk, cur_words_raw, cur_wts))
+                        cur_words_raw = []
+                        cur_wts = []
+                    cur_spk = spk
+                    cur_words_raw.append(w)
+                    cur_wts.append(wt)
+                if cur_words_raw:
+                    all_segments.append(_flush(cur_spk, cur_words_raw, cur_wts))
+
+                full_text_parts = [s.text for s in all_segments if s.text]
+
+        if not all_segments and full_transcript:
+            all_segments.append(Segment(
+                text=full_transcript, start_time=0.0, end_time=0.0,
+                confidence=float(primary_alt.get("confidence", 0.0) or 0.0),
+            ))
 
         duration = all_segments[-1].end_time if all_segments else 0.0
         return TranscriptionResult(
-            text=" ".join(part for part in full_text_parts if part),
+            text=" ".join(full_text_parts) if full_text_parts else full_transcript,
             segments=all_segments,
             language=self.language,
             duration=duration,

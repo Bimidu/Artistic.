@@ -137,6 +137,7 @@ def convert_audio_to_wav(input_path: Path) -> Path:
             from pydub import AudioSegment  # type: ignore
             
             audio = AudioSegment.from_file(input_path)
+            audio = audio.set_channels(1)  # mono — required for Deepgram diarization
             with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_wav:
                 audio.export(tmp_wav.name, format="wav")
                 wav_path = Path(tmp_wav.name)
@@ -178,7 +179,7 @@ def get_input_handler(transcription_engine: str = "deepgram"):
             selected_engine = "local_oss"
     if selected_engine == "deepgram":
         backend = "deepgram"
-        model_size = os.getenv("DEEPGRAM_MODEL", "nova-3")
+        model_size = os.getenv("DEEPGRAM_MODEL", "nova-2")
     else:
         backend = "whisperx"
         model_size = os.getenv("LOCAL_OSS_MODEL_SIZE", "large-v3")
