@@ -279,7 +279,7 @@ class AudioTranscriber:
             self.recognizer = sr.Recognizer()
         elif backend == 'deepgram':
             self.deepgram_api_key = os.getenv("DEEPGRAM_API_KEY", "").strip()
-            self.deepgram_model = os.getenv("DEEPGRAM_MODEL", "nova-2")
+            self.deepgram_model = os.getenv("DEEPGRAM_MODEL", "nova-3")
             if not self.deepgram_api_key:
                 raise ImportError(
                     "DEEPGRAM_API_KEY is not configured. Set it in your environment."
@@ -790,23 +790,24 @@ class AudioTranscriber:
         alternatives = channels[0].get("alternatives", []) if channels else []
         primary_alt = alternatives[0] if alternatives else {}
         full_transcript = str(primary_alt.get("transcript", "")).strip()
+        raw_words = primary_alt.get("words", []) or []
 
         # Log exactly what Deepgram returned so we can diagnose diarization issues
+        raw_utt_speakers = [u.get("speaker") for u in utterances]
+        raw_word_speakers = [w.get("speaker") for w in raw_words]
+        unique_utt_spk = sorted(set(s for s in raw_utt_speakers if s is not None))
+        unique_word_spk = sorted(set(s for s in raw_word_speakers if s is not None))
         if utterances:
-            raw_speakers = [u.get("speaker") for u in utterances]
-            unique_spk = sorted(set(s for s in raw_speakers if s is not None))
             logger.info(
                 f"Deepgram returned {len(utterances)} utterances. "
-                f"Unique speaker IDs: {unique_spk}. "
-                f"Per-utterance speakers: {raw_speakers}"
+                f"Unique utterance speaker IDs: {unique_utt_spk}. "
+                f"Unique word speaker IDs: {unique_word_spk}. "
+                f"Per-utterance speakers: {raw_utt_speakers}"
             )
         else:
-            word_list = primary_alt.get("words", []) or []
-            raw_word_spk = [w.get("speaker") for w in word_list]
-            unique_spk = sorted(set(s for s in raw_word_spk if s is not None))
             logger.warning(
-                f"Deepgram returned 0 utterances; {len(word_list)} words. "
-                f"Unique word-level speaker IDs: {unique_spk}. "
+                f"Deepgram returned 0 utterances; {len(raw_words)} words. "
+                f"Unique word-level speaker IDs: {unique_word_spk}. "
                 f"Falling back to word-level grouping."
             )
 
@@ -814,18 +815,50 @@ class AudioTranscriber:
         all_segments: List[Segment] = []
         full_text_parts: List[str] = []
 
+        def _majority_speaker(words_raw: List[Dict[str, Any]]) -> Optional[int]:
+            speaker_counts: Dict[int, int] = {}
+            for w in words_raw:
+                spk = w.get("speaker")
+                if spk is None:
+                    continue
+                try:
+                    spk_int = int(spk)
+                except (TypeError, ValueError):
+                    continue
+                speaker_counts[spk_int] = speaker_counts.get(spk_int, 0) + 1
+            if not speaker_counts:
+                return None
+            return max(speaker_counts.items(), key=lambda kv: kv[1])[0]
+
+        def _majority_speaker_in_range(start: float, end: float) -> Optional[int]:
+            overlapping_words: List[Dict[str, Any]] = []
+            for w in raw_words:
+                w_start = float(w.get("start", 0.0))
+                w_end = float(w.get("end", 0.0))
+                if w_end > start and w_start < end:
+                    overlapping_words.append(w)
+            return _majority_speaker(overlapping_words)
+
         if utterances:
-            # Primary path: use Deepgram's own utterance segmentation verbatim.
+            # Primary path: use Deepgram utterance segmentation, but infer speaker
+            # from word-level diarization first (do not trust utterance.speaker).
             for utt in utterances:
-                speaker_id = utt.get("speaker")          # integer 0, 1, … or None
-                spk_label = f"spk_{speaker_id}" if speaker_id is not None else None
                 utt_text = str(utt.get("transcript", "")).strip()
                 utt_start = float(utt.get("start", 0.0))
                 utt_end = float(utt.get("end", 0.0))
                 utt_conf = float(utt.get("confidence", 1.0) or 1.0)
+                utt_words_raw = utt.get("words", []) or []
+
+                speaker_id = _majority_speaker(utt_words_raw)
+                if speaker_id is None:
+                    speaker_id = _majority_speaker_in_range(utt_start, utt_end)
+                if speaker_id is None:
+                    # Last resort only; primary source is words[].speaker.
+                    speaker_id = utt.get("speaker")
+                spk_label = f"spk_{speaker_id}" if speaker_id is not None else None
 
                 seg_words: List[WordTimestamp] = []
-                for w in utt.get("words", []) or []:
+                for w in utt_words_raw:
                     wt = WordTimestamp(
                         word=str(w.get("punctuated_word") or w.get("word", "")).strip(),
                         start_time=float(w.get("start", 0.0)),
@@ -849,8 +882,6 @@ class AudioTranscriber:
 
         else:
             # Fallback: group words by speaker change when utterances are absent.
-            raw_words = primary_alt.get("words", []) or []
-
             if not raw_words:
                 if full_transcript:
                     all_segments.append(Segment(
