@@ -20,8 +20,8 @@ function updateToggleSlider() {
 
 function getSelectedTranscriptionEngine() {
     const select = document.getElementById('transcriptionEngineSelect');
-    if (!select) return 'deepgram';
-    return select.value || 'deepgram';
+    if (!select) return 'assemblyai';
+    return select.value || 'assemblyai';
 }
 
 function initTranscriptionEngineSelector() {
@@ -32,12 +32,12 @@ function initTranscriptionEngineSelector() {
     if (saved && (saved === 'deepgram' || saved === 'assemblyai')) {
         select.value = saved;
     } else if (saved && saved !== 'deepgram' && saved !== 'assemblyai') {
-        localStorage.setItem(storageKey, 'deepgram');
+        localStorage.setItem(storageKey, 'assemblyai');
     }
     if (select.dataset.artisticBound === '1') return;
     select.dataset.artisticBound = '1';
     select.addEventListener('change', () => {
-        localStorage.setItem(storageKey, select.value || 'deepgram');
+        localStorage.setItem(storageKey, select.value || 'assemblyai');
     });
 }
 

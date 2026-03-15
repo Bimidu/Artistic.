@@ -423,10 +423,10 @@ export default function Home() {
                       <select
                         id="transcriptionEngineSelect"
                         className="w-full px-3 py-2 bg-white border border-primary-200 rounded-lg text-sm focus:outline-none focus:border-primary-400 transition-all"
-                        defaultValue="deepgram"
+                        defaultValue="assemblyai"
                       >
-                        <option value="deepgram">Deepgram (Paid, Audio must be over 3 minutes)</option>
                         <option value="assemblyai">AssemblyAI (Paid, Cloud API, Highest Accuracy)</option>
+                        <option value="deepgram">Deepgram (Paid, Audio must be over 3 minutes)</option>
                       </select>
                     </div>
                   )}
