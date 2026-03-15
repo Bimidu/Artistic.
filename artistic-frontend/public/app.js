@@ -29,8 +29,10 @@ function initTranscriptionEngineSelector() {
     if (!select) return;
     const storageKey = 'artistic_transcription_engine';
     const saved = localStorage.getItem(storageKey);
-    if (saved && (saved === 'deepgram' || saved === 'assemblyai' || saved === 'local_oss')) {
+    if (saved && (saved === 'deepgram' || saved === 'assemblyai')) {
         select.value = saved;
+    } else if (saved && saved !== 'deepgram' && saved !== 'assemblyai') {
+        localStorage.setItem(storageKey, 'deepgram');
     }
     if (select.dataset.artisticBound === '1') return;
     select.dataset.artisticBound = '1';

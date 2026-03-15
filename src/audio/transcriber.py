@@ -35,6 +35,34 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
+# PyTorch 2.6+ changed torch.load default to weights_only=True, which can
+# break WhisperX/pyannote checkpoint loading unless safe globals are allowlisted.
+def _configure_torch_safe_globals_for_whisperx() -> None:
+    """Allowlist known OmegaConf classes needed by WhisperX/pyannote."""
+    try:
+        import torch  # type: ignore
+        from omegaconf.base import ContainerMetadata  # type: ignore
+        from omegaconf.dictconfig import DictConfig  # type: ignore
+        from omegaconf.listconfig import ListConfig  # type: ignore
+        from omegaconf.nodes import AnyNode, BooleanNode, FloatNode, IntegerNode, StringNode  # type: ignore
+
+        add_safe_globals = getattr(torch.serialization, "add_safe_globals", None)
+        if callable(add_safe_globals):
+            add_safe_globals([
+                ListConfig,
+                DictConfig,
+                ContainerMetadata,
+                AnyNode,
+                BooleanNode,
+                FloatNode,
+                IntegerNode,
+                StringNode,
+            ])
+            logger.debug("Configured torch safe globals for WhisperX checkpoint loading")
+    except Exception as e:
+        # Non-fatal: only affects environments with stricter torch serialization.
+        logger.debug(f"Could not configure torch safe globals for WhisperX: {e}")
+
 # Try to import speech recognition libraries
 try:
     import whisper
@@ -1171,6 +1199,7 @@ class AudioTranscriber:
         **kwargs
     ) -> TranscriptionResult:
         """Transcribe with local WhisperX + alignment + diarization."""
+        _configure_torch_safe_globals_for_whisperx()
         device = "cuda" if self.device == "cuda" else "cpu"
         compute_type = "float16" if device == "cuda" else "int8"
         batch_size = int(kwargs.get("batch_size", 8))
