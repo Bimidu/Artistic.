@@ -29,7 +29,7 @@ function initTranscriptionEngineSelector() {
     if (!select) return;
     const storageKey = 'artistic_transcription_engine';
     const saved = localStorage.getItem(storageKey);
-    if (saved && (saved === 'deepgram' || saved === 'local_oss')) {
+    if (saved && (saved === 'deepgram' || saved === 'assemblyai' || saved === 'local_oss')) {
         select.value = saved;
     }
     if (select.dataset.artisticBound === '1') return;
@@ -3031,7 +3031,9 @@ function renderAnnotatedTranscript(
         Object.values(annotationSummary).reduce((sum, count) => sum + count, 0) : 0;
     annotationCount.textContent = `${totalAnnotations} Feature${totalAnnotations !== 1 ? 's' : ''} Marked`;
     if (transcriptionEngine) {
-        const engineLabel = transcriptionEngine === 'local_oss' ? 'Local OSS' : 'Deepgram';
+        const engineLabel = transcriptionEngine === 'local_oss'
+            ? 'Local OSS'
+            : (transcriptionEngine === 'assemblyai' ? 'AssemblyAI' : 'Deepgram');
         annotationCount.textContent += ` · ${engineLabel}`;
     }
 

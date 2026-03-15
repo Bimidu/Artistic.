@@ -21,6 +21,7 @@ import re
 import sys
 import subprocess
 import pickle
+import time
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field
@@ -236,7 +237,7 @@ class AudioTranscriber:
         Initialize the audio transcriber.
         
         Args:
-            backend: Transcription backend ('faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'whisperx')
+            backend: Transcription backend ('faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'assemblyai', 'whisperx')
             model_size: Model size ('tiny', 'base', 'small', 'medium', 'large')
             device: Device to use ('cpu' or 'cuda')
             language: Target language code
@@ -284,6 +285,12 @@ class AudioTranscriber:
                 raise ImportError(
                     "DEEPGRAM_API_KEY is not configured. Set it in your environment."
                 )
+        elif backend == 'assemblyai':
+            self.assemblyai_api_key = os.getenv("ASSEMBLYAI_API_KEY", "").strip()
+            if not self.assemblyai_api_key:
+                raise ImportError(
+                    "ASSEMBLYAI_API_KEY is not configured. Set it in your environment."
+                )
         elif backend == 'whisperx':
             if not WHISPERX_AVAILABLE:
                 raise ImportError(
@@ -292,7 +299,7 @@ class AudioTranscriber:
         else:
             raise ValueError(
                 "Unknown backend: "
-                f"{backend}. Supported: 'faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'whisperx'"
+                f"{backend}. Supported: 'faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'assemblyai', 'whisperx'"
             )
     
     def _load_whisper_model(self):
@@ -610,6 +617,8 @@ class AudioTranscriber:
             return self._transcribe_google(audio_path, **kwargs)
         elif self.backend == 'deepgram':
             return self._transcribe_deepgram(audio_path, **kwargs)
+        elif self.backend == 'assemblyai':
+            return self._transcribe_assemblyai(audio_path, **kwargs)
         elif self.backend == 'whisperx':
             return self._transcribe_whisperx(audio_path, **kwargs)
         else:
@@ -953,6 +962,208 @@ class AudioTranscriber:
             word_timestamps=all_word_timestamps,
         )
 
+    def _transcribe_assemblyai(
+        self,
+        audio_path: Path,
+        num_speakers: int = 2,
+        **kwargs
+    ) -> TranscriptionResult:
+        """Transcribe using AssemblyAI async API with diarization enabled."""
+        headers = {"authorization": self.assemblyai_api_key}
+        upload_headers = {**headers, "content-type": "application/octet-stream"}
+
+        with open(audio_path, "rb") as f:
+            audio_bytes = f.read()
+
+        with httpx.Client(timeout=300.0) as client:
+            upload_response = client.post(
+                "https://api.assemblyai.com/v2/upload",
+                headers=upload_headers,
+                content=audio_bytes,
+            )
+            if upload_response.status_code >= 400:
+                raise RuntimeError(
+                    f"AssemblyAI upload failed ({upload_response.status_code}): {upload_response.text}"
+                )
+            upload_payload = upload_response.json()
+            upload_url = str(upload_payload.get("upload_url", "")).strip()
+            if not upload_url:
+                raise RuntimeError("AssemblyAI upload did not return upload_url")
+
+            speech_models_raw = os.getenv(
+                "ASSEMBLYAI_SPEECH_MODELS",
+                "universal-3-pro,universal-2",
+            )
+            speech_models = [
+                model.strip()
+                for model in speech_models_raw.split(",")
+                if model.strip()
+            ]
+
+            transcript_request = {
+                "audio_url": upload_url,
+                "speech_models": speech_models,
+                "language_detection": True,
+                "speaker_labels": True,
+            }
+            # Optional diarization hint; some accounts/plans may reject this field.
+            if kwargs.get("use_speakers_expected", False):
+                transcript_request["speakers_expected"] = max(1, int(num_speakers or 2))
+
+            create_response = client.post(
+                "https://api.assemblyai.com/v2/transcript",
+                headers=headers,
+                json=transcript_request,
+            )
+            if create_response.status_code >= 400:
+                raise RuntimeError(
+                    f"AssemblyAI transcript create failed ({create_response.status_code}): "
+                    f"{create_response.text}. Request payload: {json.dumps(transcript_request)}"
+                )
+            create_payload = create_response.json()
+            transcript_id = str(create_payload.get("id", "")).strip()
+            if not transcript_id:
+                raise RuntimeError("AssemblyAI transcript creation did not return id")
+
+            logger.info(
+                f"AssemblyAI request submitted — transcript_id={transcript_id}, "
+                f"speech_models={transcript_request.get('speech_models')}"
+            )
+
+            poll_interval = float(kwargs.get("poll_interval_seconds", 2.0))
+            max_wait_seconds = float(kwargs.get("max_wait_seconds", 600.0))
+            started_at = time.time()
+            status_payload: Dict[str, Any] = {}
+
+            while True:
+                status_response = client.get(
+                    f"https://api.assemblyai.com/v2/transcript/{transcript_id}",
+                    headers=headers,
+                )
+                status_response.raise_for_status()
+                status_payload = status_response.json()
+                status_value = str(status_payload.get("status", "")).lower()
+
+                if status_value == "completed":
+                    break
+                if status_value == "error":
+                    error_text = status_payload.get("error") or "unknown AssemblyAI error"
+                    raise RuntimeError(f"AssemblyAI transcription failed: {error_text}")
+                if time.time() - started_at > max_wait_seconds:
+                    raise TimeoutError(
+                        f"AssemblyAI transcription timed out after {max_wait_seconds:.0f}s"
+                    )
+                time.sleep(max(0.5, poll_interval))
+
+        full_text = str(status_payload.get("text", "") or "").strip()
+        utterances = status_payload.get("utterances", []) or []
+        raw_words = status_payload.get("words", []) or []
+
+        def _to_seconds(value: Any) -> float:
+            try:
+                return float(value) / 1000.0
+            except (TypeError, ValueError):
+                return 0.0
+
+        all_word_timestamps: List[WordTimestamp] = []
+        all_segments: List[Segment] = []
+
+        speaker_alias_map: Dict[str, str] = {}
+        speaker_counter = 0
+
+        def _speaker_to_label(speaker_raw: Any) -> Optional[str]:
+            nonlocal speaker_counter
+            if speaker_raw is None:
+                return None
+            speaker_key = str(speaker_raw).strip()
+            if not speaker_key:
+                return None
+            if speaker_key not in speaker_alias_map:
+                speaker_alias_map[speaker_key] = f"spk_{speaker_counter}"
+                speaker_counter += 1
+            return speaker_alias_map[speaker_key]
+
+        if utterances:
+            for utt in utterances:
+                utt_text = str(utt.get("text", "") or "").strip()
+                utt_start = _to_seconds(utt.get("start"))
+                utt_end = _to_seconds(utt.get("end"))
+                utt_conf = float(utt.get("confidence", 1.0) or 1.0)
+
+                seg_words: List[WordTimestamp] = []
+                word_speaker_counts: Dict[str, int] = {}
+                for w in utt.get("words", []) or []:
+                    wt = WordTimestamp(
+                        word=str(w.get("text", "") or "").strip(),
+                        start_time=_to_seconds(w.get("start")),
+                        end_time=_to_seconds(w.get("end")),
+                        confidence=float(w.get("confidence", 1.0) or 1.0),
+                    )
+                    seg_words.append(wt)
+                    all_word_timestamps.append(wt)
+                    w_spk = w.get("speaker")
+                    if w_spk is not None:
+                        key = str(w_spk).strip()
+                        if key:
+                            word_speaker_counts[key] = word_speaker_counts.get(key, 0) + 1
+
+                speaker_raw = None
+                if word_speaker_counts:
+                    speaker_raw = max(word_speaker_counts.items(), key=lambda kv: kv[1])[0]
+                if speaker_raw is None:
+                    speaker_raw = utt.get("speaker")
+
+                all_segments.append(
+                    Segment(
+                        text=utt_text,
+                        start_time=utt_start,
+                        end_time=utt_end,
+                        speaker=_speaker_to_label(speaker_raw),
+                        confidence=utt_conf,
+                        words=seg_words,
+                    )
+                )
+        else:
+            # Fallback if utterances are missing: create one segment and still collect words.
+            seg_words: List[WordTimestamp] = []
+            for w in raw_words:
+                wt = WordTimestamp(
+                    word=str(w.get("text", "") or "").strip(),
+                    start_time=_to_seconds(w.get("start")),
+                    end_time=_to_seconds(w.get("end")),
+                    confidence=float(w.get("confidence", 1.0) or 1.0),
+                )
+                seg_words.append(wt)
+                all_word_timestamps.append(wt)
+
+            segment_end = seg_words[-1].end_time if seg_words else 0.0
+            all_segments.append(
+                Segment(
+                    text=full_text,
+                    start_time=0.0,
+                    end_time=segment_end,
+                    speaker=None,
+                    confidence=float(status_payload.get("confidence", 0.0) or 0.0),
+                    words=seg_words,
+                )
+            )
+
+        duration = all_segments[-1].end_time if all_segments else 0.0
+        return TranscriptionResult(
+            text=full_text,
+            segments=all_segments,
+            language=self.language,
+            duration=duration,
+            confidence=float(np.mean([s.confidence for s in all_segments])) if all_segments else 0.0,
+            metadata={
+                "backend": "assemblyai",
+                "engine": "assemblyai",
+                "file_path": str(audio_path),
+                "transcript_id": status_payload.get("id"),
+            },
+            word_timestamps=all_word_timestamps,
+        )
+
     def _transcribe_whisperx(
         self,
         audio_path: Path,
@@ -1093,7 +1304,7 @@ class AudioTranscriber:
         result = self.transcribe(audio_path, num_speakers=num_speakers, **kwargs)
         result.metadata['num_speakers'] = num_speakers
 
-        if self.backend in {"deepgram", "whisperx"}:
+        if self.backend in {"deepgram", "assemblyai", "whisperx"}:
             result.metadata['diarization'] = 'model_based'
             return result
 

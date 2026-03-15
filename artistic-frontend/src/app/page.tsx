@@ -424,6 +424,7 @@ export default function Home() {
                       defaultValue="deepgram"
                     >
                       <option value="deepgram">Deepgram (Paid, Highest Accuracy)</option>
+                      <option value="assemblyai">AssemblyAI (Paid, Cloud API)</option>
                       <option value="local_oss">Local OSS (WhisperX + diarization)</option>
                     </select>
                   </div>

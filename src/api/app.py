@@ -170,16 +170,24 @@ def convert_audio_to_wav(input_path: Path) -> Path:
 def get_input_handler(transcription_engine: str = "deepgram"):
     """Get or create an input handler for the selected transcription engine."""
     selected_engine = (transcription_engine or "deepgram").strip().lower()
-    if selected_engine not in {"deepgram", "local_oss"}:
+    if selected_engine not in {"deepgram", "assemblyai", "local_oss"}:
         selected_engine = "deepgram"
 
     if selected_engine == "deepgram":
         if not os.getenv("DEEPGRAM_API_KEY", "").strip():
             logger.warning("DEEPGRAM_API_KEY missing; switching to local_oss engine")
             selected_engine = "local_oss"
+    if selected_engine == "assemblyai":
+        if not os.getenv("ASSEMBLYAI_API_KEY", "").strip():
+            logger.warning("ASSEMBLYAI_API_KEY missing; switching to local_oss engine")
+            selected_engine = "local_oss"
+
     if selected_engine == "deepgram":
         backend = "deepgram"
         model_size = os.getenv("DEEPGRAM_MODEL", "nova-2")
+    elif selected_engine == "assemblyai":
+        backend = "assemblyai"
+        model_size = os.getenv("ASSEMBLYAI_SPEECH_MODEL", "universal")
     else:
         backend = "whisperx"
         model_size = os.getenv("LOCAL_OSS_MODEL_SIZE", "large-v3")
@@ -280,7 +288,7 @@ def build_transcript_payload(processed) -> Dict[str, Any]:
 
 def normalize_transcription_engine(engine: Optional[str]) -> str:
     normalized = (engine or "deepgram").strip().lower()
-    return normalized if normalized in {"deepgram", "local_oss"} else "deepgram"
+    return normalized if normalized in {"deepgram", "assemblyai", "local_oss"} else "deepgram"
 
 
 # Pydantic models for API
