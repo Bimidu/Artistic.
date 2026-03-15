@@ -21,6 +21,7 @@ import re
 import sys
 import subprocess
 import pickle
+import time
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field
@@ -28,10 +29,39 @@ import tempfile
 import json
 
 import numpy as np
+import httpx
 
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
+
+# PyTorch 2.6+ changed torch.load default to weights_only=True, which can
+# break WhisperX/pyannote checkpoint loading unless safe globals are allowlisted.
+def _configure_torch_safe_globals_for_whisperx() -> None:
+    """Allowlist known OmegaConf classes needed by WhisperX/pyannote."""
+    try:
+        import torch  # type: ignore
+        from omegaconf.base import ContainerMetadata  # type: ignore
+        from omegaconf.dictconfig import DictConfig  # type: ignore
+        from omegaconf.listconfig import ListConfig  # type: ignore
+        from omegaconf.nodes import AnyNode, BooleanNode, FloatNode, IntegerNode, StringNode  # type: ignore
+
+        add_safe_globals = getattr(torch.serialization, "add_safe_globals", None)
+        if callable(add_safe_globals):
+            add_safe_globals([
+                ListConfig,
+                DictConfig,
+                ContainerMetadata,
+                AnyNode,
+                BooleanNode,
+                FloatNode,
+                IntegerNode,
+                StringNode,
+            ])
+            logger.debug("Configured torch safe globals for WhisperX checkpoint loading")
+    except Exception as e:
+        # Non-fatal: only affects environments with stricter torch serialization.
+        logger.debug(f"Could not configure torch safe globals for WhisperX: {e}")
 
 # Try to import speech recognition libraries
 try:
@@ -70,6 +100,13 @@ try:
 except ImportError:
     PYDUB_AVAILABLE = False
     logger.warning("PyDub not available. Install with: pip install pydub")
+
+try:
+    import whisperx
+    WHISPERX_AVAILABLE = True
+except ImportError:
+    WHISPERX_AVAILABLE = False
+    logger.debug("WhisperX not available. Install with: pip install whisperx pyannote.audio")
 
 
 @dataclass
@@ -228,7 +265,7 @@ class AudioTranscriber:
         Initialize the audio transcriber.
         
         Args:
-            backend: Transcription backend ('faster-whisper', 'whisper', 'vosk', 'google')
+            backend: Transcription backend ('faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'assemblyai', 'whisperx')
             model_size: Model size ('tiny', 'base', 'small', 'medium', 'large')
             device: Device to use ('cpu' or 'cuda')
             language: Target language code
@@ -269,8 +306,29 @@ class AudioTranscriber:
                     "SpeechRecognition is not installed. Install with: pip install SpeechRecognition"
                 )
             self.recognizer = sr.Recognizer()
+        elif backend == 'deepgram':
+            self.deepgram_api_key = os.getenv("DEEPGRAM_API_KEY", "").strip()
+            self.deepgram_model = os.getenv("DEEPGRAM_MODEL", "nova-3")
+            if not self.deepgram_api_key:
+                raise ImportError(
+                    "DEEPGRAM_API_KEY is not configured. Set it in your environment."
+                )
+        elif backend == 'assemblyai':
+            self.assemblyai_api_key = os.getenv("ASSEMBLYAI_API_KEY", "").strip()
+            if not self.assemblyai_api_key:
+                raise ImportError(
+                    "ASSEMBLYAI_API_KEY is not configured. Set it in your environment."
+                )
+        elif backend == 'whisperx':
+            if not WHISPERX_AVAILABLE:
+                raise ImportError(
+                    "whisperx is not installed. Install with: pip install whisperx pyannote.audio"
+                )
         else:
-            raise ValueError(f"Unknown backend: {backend}. Supported: 'faster-whisper', 'whisper', 'vosk', 'google'")
+            raise ValueError(
+                "Unknown backend: "
+                f"{backend}. Supported: 'faster-whisper', 'whisper', 'vosk', 'google', 'deepgram', 'assemblyai', 'whisperx'"
+            )
     
     def _load_whisper_model(self):
         """Load Whisper model (lazy loading) with crash protection."""
@@ -585,6 +643,12 @@ class AudioTranscriber:
             return self._transcribe_vosk(audio_path, **kwargs)
         elif self.backend == 'google':
             return self._transcribe_google(audio_path, **kwargs)
+        elif self.backend == 'deepgram':
+            return self._transcribe_deepgram(audio_path, **kwargs)
+        elif self.backend == 'assemblyai':
+            return self._transcribe_assemblyai(audio_path, **kwargs)
+        elif self.backend == 'whisperx':
+            return self._transcribe_whisperx(audio_path, **kwargs)
         else:
             raise ValueError(f"Unknown backend: {self.backend}")
     
@@ -699,6 +763,537 @@ class AudioTranscriber:
         except sr.RequestError as e:
             logger.error(f"Google Speech Recognition error: {e}")
             raise
+
+    def _transcribe_deepgram(
+        self,
+        audio_path: Path,
+        num_speakers: int = 2,
+        **kwargs
+    ) -> TranscriptionResult:
+        """Transcribe using Deepgram with speaker diarization.
+
+        Uses utterances=true so Deepgram performs its own turn-level
+        segmentation and attaches speaker IDs at the utterance level.
+        Each utterance's transcript is taken verbatim — no word re-joining —
+        so the text is exactly what Deepgram returns.
+
+        smart_format is intentionally omitted: it can merge/reorder utterances
+        in ways that destroy the diarization boundary information.
+        """
+        with open(audio_path, "rb") as f:
+            audio_bytes = f.read()
+
+        params = {
+            "model": self.deepgram_model,
+            "language": self.language,
+            "diarize": True,
+            "utterances": True,
+            "punctuate": True,
+            "diarize_min_speakers": num_speakers,
+            "diarize_max_speakers": num_speakers,
+        }
+
+        headers = {
+            "Authorization": f"Token {self.deepgram_api_key}",
+            "Content-Type": "audio/wav",
+        }
+        logger.info(
+            f"Deepgram request — model={self.deepgram_model} "
+            f"diarize=true utterances=true punctuate=true"
+        )
+
+        with httpx.Client(timeout=300.0) as client:
+            response = client.post(
+                "https://api.deepgram.com/v1/listen",
+                params=params,
+                headers=headers,
+                content=audio_bytes,
+            )
+            response.raise_for_status()
+            payload = response.json()
+            raw_payload = json.dumps(payload, ensure_ascii=False)
+            max_log_chars = 20000
+            if len(raw_payload) > max_log_chars:
+                logger.info(
+                    f"Deepgram raw response (truncated to {max_log_chars} chars): "
+                    f"{raw_payload[:max_log_chars]}... [truncated {len(raw_payload) - max_log_chars} chars]"
+                )
+            else:
+                logger.info(f"Deepgram raw response: {raw_payload}")
+
+        results = payload.get("results", {}) or {}
+        utterances = results.get("utterances", []) or []
+        channels = results.get("channels", []) or []
+        alternatives = channels[0].get("alternatives", []) if channels else []
+        primary_alt = alternatives[0] if alternatives else {}
+        full_transcript = str(primary_alt.get("transcript", "")).strip()
+        raw_words = primary_alt.get("words", []) or []
+
+        # Log exactly what Deepgram returned so we can diagnose diarization issues
+        raw_utt_speakers = [u.get("speaker") for u in utterances]
+        raw_word_speakers = [w.get("speaker") for w in raw_words]
+        unique_utt_spk = sorted(set(s for s in raw_utt_speakers if s is not None))
+        unique_word_spk = sorted(set(s for s in raw_word_speakers if s is not None))
+        if utterances:
+            logger.info(
+                f"Deepgram returned {len(utterances)} utterances. "
+                f"Unique utterance speaker IDs: {unique_utt_spk}. "
+                f"Unique word speaker IDs: {unique_word_spk}. "
+                f"Per-utterance speakers: {raw_utt_speakers}"
+            )
+        else:
+            logger.warning(
+                f"Deepgram returned 0 utterances; {len(raw_words)} words. "
+                f"Unique word-level speaker IDs: {unique_word_spk}. "
+                f"Falling back to word-level grouping."
+            )
+
+        all_word_timestamps: List[WordTimestamp] = []
+        all_segments: List[Segment] = []
+        full_text_parts: List[str] = []
+
+        def _majority_speaker(words_raw: List[Dict[str, Any]]) -> Optional[int]:
+            speaker_counts: Dict[int, int] = {}
+            for w in words_raw:
+                spk = w.get("speaker")
+                if spk is None:
+                    continue
+                try:
+                    spk_int = int(spk)
+                except (TypeError, ValueError):
+                    continue
+                speaker_counts[spk_int] = speaker_counts.get(spk_int, 0) + 1
+            if not speaker_counts:
+                return None
+            return max(speaker_counts.items(), key=lambda kv: kv[1])[0]
+
+        def _majority_speaker_in_range(start: float, end: float) -> Optional[int]:
+            overlapping_words: List[Dict[str, Any]] = []
+            for w in raw_words:
+                w_start = float(w.get("start", 0.0))
+                w_end = float(w.get("end", 0.0))
+                if w_end > start and w_start < end:
+                    overlapping_words.append(w)
+            return _majority_speaker(overlapping_words)
+
+        if utterances:
+            # Primary path: use Deepgram utterance segmentation, but infer speaker
+            # from word-level diarization first (do not trust utterance.speaker).
+            for utt in utterances:
+                utt_text = str(utt.get("transcript", "")).strip()
+                utt_start = float(utt.get("start", 0.0))
+                utt_end = float(utt.get("end", 0.0))
+                utt_conf = float(utt.get("confidence", 1.0) or 1.0)
+                utt_words_raw = utt.get("words", []) or []
+
+                speaker_id = _majority_speaker(utt_words_raw)
+                if speaker_id is None:
+                    speaker_id = _majority_speaker_in_range(utt_start, utt_end)
+                if speaker_id is None:
+                    # Last resort only; primary source is words[].speaker.
+                    speaker_id = utt.get("speaker")
+                spk_label = f"spk_{speaker_id}" if speaker_id is not None else None
+
+                seg_words: List[WordTimestamp] = []
+                for w in utt_words_raw:
+                    wt = WordTimestamp(
+                        word=str(w.get("punctuated_word") or w.get("word", "")).strip(),
+                        start_time=float(w.get("start", 0.0)),
+                        end_time=float(w.get("end", 0.0)),
+                        confidence=float(w.get("confidence", 1.0) or 1.0),
+                    )
+                    seg_words.append(wt)
+                    all_word_timestamps.append(wt)
+
+                if utt_text:
+                    full_text_parts.append(utt_text)
+
+                all_segments.append(Segment(
+                    text=utt_text,
+                    start_time=utt_start,
+                    end_time=utt_end,
+                    speaker=spk_label,
+                    confidence=utt_conf,
+                    words=seg_words,
+                ))
+
+        else:
+            # Fallback: group words by speaker change when utterances are absent.
+            if not raw_words:
+                if full_transcript:
+                    all_segments.append(Segment(
+                        text=full_transcript, start_time=0.0, end_time=0.0,
+                        confidence=float(primary_alt.get("confidence", 0.0) or 0.0),
+                    ))
+            else:
+                cur_spk = None
+                cur_words_raw: list = []
+                cur_wts: List[WordTimestamp] = []
+
+                def _flush(spk_id, words_raw, wts) -> Segment:
+                    seg_text = " ".join(
+                        str(w.get("punctuated_word") or w.get("word", "")).strip()
+                        for w in words_raw
+                    ).strip()
+                    return Segment(
+                        text=seg_text,
+                        start_time=float(words_raw[0].get("start", 0.0)),
+                        end_time=float(words_raw[-1].get("end", 0.0)),
+                        speaker=f"spk_{spk_id}" if spk_id is not None else None,
+                        confidence=float(
+                            sum(float(w.get("confidence", 1.0) or 1.0) for w in words_raw)
+                            / len(words_raw)
+                        ),
+                        words=list(wts),
+                    )
+
+                for w in raw_words:
+                    spk = w.get("speaker")
+                    wt = WordTimestamp(
+                        word=str(w.get("punctuated_word") or w.get("word", "")).strip(),
+                        start_time=float(w.get("start", 0.0)),
+                        end_time=float(w.get("end", 0.0)),
+                        confidence=float(w.get("confidence", 1.0) or 1.0),
+                    )
+                    all_word_timestamps.append(wt)
+                    if spk != cur_spk and cur_words_raw:
+                        all_segments.append(_flush(cur_spk, cur_words_raw, cur_wts))
+                        cur_words_raw = []
+                        cur_wts = []
+                    cur_spk = spk
+                    cur_words_raw.append(w)
+                    cur_wts.append(wt)
+                if cur_words_raw:
+                    all_segments.append(_flush(cur_spk, cur_words_raw, cur_wts))
+
+                full_text_parts = [s.text for s in all_segments if s.text]
+
+        if not all_segments and full_transcript:
+            all_segments.append(Segment(
+                text=full_transcript, start_time=0.0, end_time=0.0,
+                confidence=float(primary_alt.get("confidence", 0.0) or 0.0),
+            ))
+
+        duration = all_segments[-1].end_time if all_segments else 0.0
+        return TranscriptionResult(
+            text=" ".join(full_text_parts) if full_text_parts else full_transcript,
+            segments=all_segments,
+            language=self.language,
+            duration=duration,
+            confidence=float(np.mean([s.confidence for s in all_segments])) if all_segments else 0.0,
+            metadata={
+                "backend": "deepgram",
+                "engine": "deepgram",
+                "model": self.deepgram_model,
+                "file_path": str(audio_path),
+            },
+            word_timestamps=all_word_timestamps,
+        )
+
+    def _transcribe_assemblyai(
+        self,
+        audio_path: Path,
+        num_speakers: int = 2,
+        **kwargs
+    ) -> TranscriptionResult:
+        """Transcribe using AssemblyAI async API with diarization enabled."""
+        headers = {"authorization": self.assemblyai_api_key}
+        upload_headers = {**headers, "content-type": "application/octet-stream"}
+
+        with open(audio_path, "rb") as f:
+            audio_bytes = f.read()
+
+        with httpx.Client(timeout=300.0) as client:
+            upload_response = client.post(
+                "https://api.assemblyai.com/v2/upload",
+                headers=upload_headers,
+                content=audio_bytes,
+            )
+            if upload_response.status_code >= 400:
+                raise RuntimeError(
+                    f"AssemblyAI upload failed ({upload_response.status_code}): {upload_response.text}"
+                )
+            upload_payload = upload_response.json()
+            upload_url = str(upload_payload.get("upload_url", "")).strip()
+            if not upload_url:
+                raise RuntimeError("AssemblyAI upload did not return upload_url")
+
+            speech_models_raw = os.getenv(
+                "ASSEMBLYAI_SPEECH_MODELS",
+                "universal-3-pro,universal-2",
+            )
+            speech_models = [
+                model.strip()
+                for model in speech_models_raw.split(",")
+                if model.strip()
+            ]
+
+            transcript_request = {
+                "audio_url": upload_url,
+                "speech_models": speech_models,
+                "language_detection": True,
+                "speaker_labels": True,
+            }
+            # Optional diarization hint; some accounts/plans may reject this field.
+            if kwargs.get("use_speakers_expected", False):
+                transcript_request["speakers_expected"] = max(1, int(num_speakers or 2))
+
+            create_response = client.post(
+                "https://api.assemblyai.com/v2/transcript",
+                headers=headers,
+                json=transcript_request,
+            )
+            if create_response.status_code >= 400:
+                raise RuntimeError(
+                    f"AssemblyAI transcript create failed ({create_response.status_code}): "
+                    f"{create_response.text}. Request payload: {json.dumps(transcript_request)}"
+                )
+            create_payload = create_response.json()
+            transcript_id = str(create_payload.get("id", "")).strip()
+            if not transcript_id:
+                raise RuntimeError("AssemblyAI transcript creation did not return id")
+
+            logger.info(
+                f"AssemblyAI request submitted — transcript_id={transcript_id}, "
+                f"speech_models={transcript_request.get('speech_models')}"
+            )
+
+            poll_interval = float(kwargs.get("poll_interval_seconds", 2.0))
+            max_wait_seconds = float(kwargs.get("max_wait_seconds", 600.0))
+            started_at = time.time()
+            status_payload: Dict[str, Any] = {}
+
+            while True:
+                status_response = client.get(
+                    f"https://api.assemblyai.com/v2/transcript/{transcript_id}",
+                    headers=headers,
+                )
+                status_response.raise_for_status()
+                status_payload = status_response.json()
+                status_value = str(status_payload.get("status", "")).lower()
+
+                if status_value == "completed":
+                    break
+                if status_value == "error":
+                    error_text = status_payload.get("error") or "unknown AssemblyAI error"
+                    raise RuntimeError(f"AssemblyAI transcription failed: {error_text}")
+                if time.time() - started_at > max_wait_seconds:
+                    raise TimeoutError(
+                        f"AssemblyAI transcription timed out after {max_wait_seconds:.0f}s"
+                    )
+                time.sleep(max(0.5, poll_interval))
+
+        full_text = str(status_payload.get("text", "") or "").strip()
+        utterances = status_payload.get("utterances", []) or []
+        raw_words = status_payload.get("words", []) or []
+
+        def _to_seconds(value: Any) -> float:
+            try:
+                return float(value) / 1000.0
+            except (TypeError, ValueError):
+                return 0.0
+
+        all_word_timestamps: List[WordTimestamp] = []
+        all_segments: List[Segment] = []
+
+        speaker_alias_map: Dict[str, str] = {}
+        speaker_counter = 0
+
+        def _speaker_to_label(speaker_raw: Any) -> Optional[str]:
+            nonlocal speaker_counter
+            if speaker_raw is None:
+                return None
+            speaker_key = str(speaker_raw).strip()
+            if not speaker_key:
+                return None
+            if speaker_key not in speaker_alias_map:
+                speaker_alias_map[speaker_key] = f"spk_{speaker_counter}"
+                speaker_counter += 1
+            return speaker_alias_map[speaker_key]
+
+        if utterances:
+            for utt in utterances:
+                utt_text = str(utt.get("text", "") or "").strip()
+                utt_start = _to_seconds(utt.get("start"))
+                utt_end = _to_seconds(utt.get("end"))
+                utt_conf = float(utt.get("confidence", 1.0) or 1.0)
+
+                seg_words: List[WordTimestamp] = []
+                word_speaker_counts: Dict[str, int] = {}
+                for w in utt.get("words", []) or []:
+                    wt = WordTimestamp(
+                        word=str(w.get("text", "") or "").strip(),
+                        start_time=_to_seconds(w.get("start")),
+                        end_time=_to_seconds(w.get("end")),
+                        confidence=float(w.get("confidence", 1.0) or 1.0),
+                    )
+                    seg_words.append(wt)
+                    all_word_timestamps.append(wt)
+                    w_spk = w.get("speaker")
+                    if w_spk is not None:
+                        key = str(w_spk).strip()
+                        if key:
+                            word_speaker_counts[key] = word_speaker_counts.get(key, 0) + 1
+
+                speaker_raw = None
+                if word_speaker_counts:
+                    speaker_raw = max(word_speaker_counts.items(), key=lambda kv: kv[1])[0]
+                if speaker_raw is None:
+                    speaker_raw = utt.get("speaker")
+
+                all_segments.append(
+                    Segment(
+                        text=utt_text,
+                        start_time=utt_start,
+                        end_time=utt_end,
+                        speaker=_speaker_to_label(speaker_raw),
+                        confidence=utt_conf,
+                        words=seg_words,
+                    )
+                )
+        else:
+            # Fallback if utterances are missing: create one segment and still collect words.
+            seg_words: List[WordTimestamp] = []
+            for w in raw_words:
+                wt = WordTimestamp(
+                    word=str(w.get("text", "") or "").strip(),
+                    start_time=_to_seconds(w.get("start")),
+                    end_time=_to_seconds(w.get("end")),
+                    confidence=float(w.get("confidence", 1.0) or 1.0),
+                )
+                seg_words.append(wt)
+                all_word_timestamps.append(wt)
+
+            segment_end = seg_words[-1].end_time if seg_words else 0.0
+            all_segments.append(
+                Segment(
+                    text=full_text,
+                    start_time=0.0,
+                    end_time=segment_end,
+                    speaker=None,
+                    confidence=float(status_payload.get("confidence", 0.0) or 0.0),
+                    words=seg_words,
+                )
+            )
+
+        duration = all_segments[-1].end_time if all_segments else 0.0
+        return TranscriptionResult(
+            text=full_text,
+            segments=all_segments,
+            language=self.language,
+            duration=duration,
+            confidence=float(np.mean([s.confidence for s in all_segments])) if all_segments else 0.0,
+            metadata={
+                "backend": "assemblyai",
+                "engine": "assemblyai",
+                "file_path": str(audio_path),
+                "transcript_id": status_payload.get("id"),
+            },
+            word_timestamps=all_word_timestamps,
+        )
+
+    def _transcribe_whisperx(
+        self,
+        audio_path: Path,
+        num_speakers: int = 2,
+        **kwargs
+    ) -> TranscriptionResult:
+        """Transcribe with local WhisperX + alignment + diarization."""
+        _configure_torch_safe_globals_for_whisperx()
+        device = "cuda" if self.device == "cuda" else "cpu"
+        compute_type = "float16" if device == "cuda" else "int8"
+        batch_size = int(kwargs.get("batch_size", 8))
+
+        model = whisperx.load_model(
+            self.model_size,
+            device=device,
+            compute_type=compute_type,
+            language=self.language,
+        )
+        audio = whisperx.load_audio(str(audio_path))
+        result = model.transcribe(audio, batch_size=batch_size)
+
+        align_model, align_metadata = whisperx.load_align_model(
+            language_code=result.get("language", self.language),
+            device=device,
+        )
+        result = whisperx.align(
+            result["segments"],
+            align_model,
+            align_metadata,
+            audio,
+            device,
+            return_char_alignments=False,
+        )
+
+        diarization_enabled = False
+        hf_token = os.getenv("HF_TOKEN") or os.getenv("HUGGINGFACE_TOKEN")
+        if hf_token:
+            try:
+                diarize_model = whisperx.DiarizationPipeline(use_auth_token=hf_token, device=device)
+                diarize_segments = diarize_model(
+                    audio,
+                    min_speakers=2,
+                    max_speakers=max(2, num_speakers),
+                )
+                result = whisperx.assign_word_speakers(diarize_segments, result)
+                diarization_enabled = True
+            except Exception as diar_err:
+                logger.warning(f"WhisperX diarization unavailable, proceeding without diarization: {diar_err}")
+        else:
+            logger.warning("HF_TOKEN/HUGGINGFACE_TOKEN missing; WhisperX diarization disabled")
+
+        all_word_timestamps: List[WordTimestamp] = []
+        all_segments: List[Segment] = []
+        full_text_parts: List[str] = []
+
+        for seg in result.get("segments", []) or []:
+            words = []
+            for w in seg.get("words", []) or []:
+                if "start" not in w or "end" not in w:
+                    continue
+                wt = WordTimestamp(
+                    word=str(w.get("word", "")).strip(),
+                    start_time=float(w.get("start", 0.0)),
+                    end_time=float(w.get("end", 0.0)),
+                    confidence=float(w.get("score", 1.0) or 1.0),
+                )
+                words.append(wt)
+                all_word_timestamps.append(wt)
+
+            text = str(seg.get("text", "")).strip()
+            if text:
+                full_text_parts.append(text)
+
+            speaker = seg.get("speaker")
+            speaker_label = speaker if isinstance(speaker, str) else (f"spk_{speaker}" if speaker is not None else None)
+            all_segments.append(
+                Segment(
+                    text=text,
+                    start_time=float(seg.get("start", 0.0)),
+                    end_time=float(seg.get("end", 0.0)),
+                    speaker=speaker_label,
+                    confidence=float(seg.get("avg_logprob", 0.0) or 0.0),
+                    words=words,
+                )
+            )
+
+        duration = all_segments[-1].end_time if all_segments else 0.0
+        return TranscriptionResult(
+            text=" ".join(part for part in full_text_parts if part),
+            segments=all_segments,
+            language=result.get("language", self.language),
+            duration=duration,
+            confidence=float(np.mean([s.confidence for s in all_segments])) if all_segments else 0.0,
+            metadata={
+                "backend": "whisperx",
+                "engine": "local_oss",
+                "model_size": self.model_size,
+                "diarization_enabled": diarization_enabled,
+                "file_path": str(audio_path),
+            },
+            word_timestamps=all_word_timestamps,
+        )
     
     def _prepare_audio_for_sr(self, audio_path: Path) -> Path:
         """Prepare audio file for SpeechRecognition (convert to WAV if needed)."""
@@ -735,21 +1330,19 @@ class AudioTranscriber:
         Returns:
             TranscriptionResult with speaker labels
         """
-        # First, get base transcription
-        result = self.transcribe(audio_path, **kwargs)
-        
-        # Simple speaker assignment based on segment patterns
-        # In a real implementation, this would use a proper diarization model
-        speakers = ['CHI', 'INV']  # Child and Investigator
-        
-        for i, segment in enumerate(result.segments):
-            # Simple alternating pattern (placeholder for real diarization)
-            # In practice, you'd use pyannote or similar
-            segment.speaker = speakers[i % len(speakers)]
-        
-        result.metadata['diarization'] = 'simple_alternating'
+        result = self.transcribe(audio_path, num_speakers=num_speakers, **kwargs)
         result.metadata['num_speakers'] = num_speakers
-        
+
+        if self.backend in {"deepgram", "assemblyai", "whisperx"}:
+            result.metadata['diarization'] = 'model_based'
+            return result
+
+        # Legacy fallback for non-diarization backends only.
+        speakers = ['CHI', 'INV']
+        for i, segment in enumerate(result.segments):
+            segment.speaker = speakers[i % len(speakers)]
+
+        result.metadata['diarization'] = 'simple_alternating'
         return result
 
 

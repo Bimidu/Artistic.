@@ -342,8 +342,17 @@ class AnnotatedTranscript:
             )
             
             speaker = html.escape(utterance.speaker)
+            start_attr = (
+                f' data-start="{int(utterance.timing * 1000)}"'
+                if utterance.timing is not None else ""
+            )
+            end_attr = (
+                f' data-end="{int(utterance.end_timing * 1000)}"'
+                if utterance.end_timing is not None else ""
+            )
+            role = "child" if utterance.speaker == "CHI" else ("adult" if utterance.speaker in {"MOT", "INV"} else "other")
             html_parts.append(
-                f'<div class="utterance">'
+                f'<div class="utterance" data-speaker-role="{role}"{start_attr}{end_attr}>'
                 f'<span class="speaker">*{speaker}:</span> '
                 f'<span class="text">{annotated_html}</span>'
                 f'</div>'
@@ -370,7 +379,10 @@ class AnnotatedTranscript:
                 {
                     'idx': idx,
                     'speaker': u.speaker,
+                    'speaker_role': "child" if u.speaker == "CHI" else ("adult" if u.speaker in {"MOT", "INV"} else "other"),
                     'text': u.text,
+                    'start_ms': int(u.timing * 1000) if u.timing is not None else None,
+                    'end_ms': int(u.end_timing * 1000) if u.end_timing is not None else None,
                     'annotations': [
                         {
                             'type': a.annotation_type.value,
@@ -422,26 +434,41 @@ class AnnotatedTranscript:
         text: str,
         annotations: List[FeatureAnnotation]
     ) -> str:
-        """Generate HTML with highlighted spans."""
+        """Generate HTML with highlighted spans.
+
+        Annotations are rendered in start-position order.  When two annotations
+        overlap (e.g. multiple utterance-level annotations that each span the
+        whole text), only the non-overlapping portion of the later annotation is
+        rendered.  This prevents the same text from appearing multiple times in
+        the output.
+        """
         if not annotations:
             return html.escape(text)
-        
-        # Sort annotations by position
-        sorted_anns = sorted(annotations, key=lambda a: a.start_pos)
-        
+
+        # Sort by start position then by span length (shorter first so inner
+        # spans are processed before outer ones at the same start offset).
+        sorted_anns = sorted(annotations, key=lambda a: (a.start_pos, a.end_pos - a.start_pos))
+
         result_parts = []
         last_pos = 0
-        
+
         for ann in sorted_anns:
-            # Add text before this annotation
-            if ann.start_pos > last_pos:
-                result_parts.append(html.escape(text[last_pos:ann.start_pos]))
-            
-            # Add annotated span
+            # Clip the annotation to the portion not yet rendered.
+            effective_start = max(ann.start_pos, last_pos)
+            effective_end = min(ann.end_pos, len(text))
+
+            if effective_start >= effective_end:
+                # Fully covered by a previous annotation — skip to avoid duplication.
+                continue
+
+            # Plain text between last rendered position and this annotation.
+            if effective_start > last_pos:
+                result_parts.append(html.escape(text[last_pos:effective_start]))
+
             color = ann.color_code
-            span_text = html.escape(text[ann.start_pos:ann.end_pos])
+            span_text = html.escape(text[effective_start:effective_end])
             tooltip = html.escape(f"{ann.feature_name}: {ann.description}")
-            
+
             result_parts.append(
                 f'<span class="annotation" '
                 f'style="background-color: {color}20; border-bottom: 2px solid {color};" '
@@ -449,13 +476,13 @@ class AnnotatedTranscript:
                 f'data-type="{ann.annotation_type.value}">'
                 f'{span_text}</span>'
             )
-            
-            last_pos = ann.end_pos
-        
-        # Add remaining text
+
+            last_pos = effective_end
+
+        # Remaining plain text after all annotations.
         if last_pos < len(text):
             result_parts.append(html.escape(text[last_pos:]))
-        
+
         return "".join(result_parts)
     
     def _generate_html_legend(self) -> str:

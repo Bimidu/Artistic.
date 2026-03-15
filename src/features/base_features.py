@@ -170,11 +170,11 @@ class BaseFeatureExtractor(ABC):
         gaps = []
         
         for i in range(1, len(utterances)):
-            prev_time = utterances[i-1].timing
+            prev_end_time = utterances[i-1].end_timing
             curr_time = utterances[i].timing
             
-            if prev_time is not None and curr_time is not None:
-                gap = curr_time - prev_time
+            if prev_end_time is not None and curr_time is not None:
+                gap = curr_time - prev_end_time
                 if gap >= 0:  # Ignore negative gaps (timing errors)
                     gaps.append(gap)
         

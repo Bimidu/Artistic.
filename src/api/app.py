@@ -21,7 +21,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException, status, Form, Back
 from fastapi.responses import JSONResponse, HTMLResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from typing import Dict, List, Optional, Any, Callable
+from typing import Dict, List, Optional, Any, Callable, Tuple
 import asyncio
 import os
 import pandas as pd
@@ -103,7 +103,7 @@ feature_extractor = FeatureExtractor(
     categories=['turn_taking', 'topic_coherence', 'pause_latency', 'repair_detection', 
                 'pragmatic_linguistic', 'pragmatic_audio', 'acoustic_prosodic']
 )
-input_handler = None  # Lazy-loaded due to heavy model loading
+input_handlers: Dict[Tuple[str, str], InputHandler] = {}
 transcript_annotator = TranscriptAnnotator()
 model_fusion = ModelFusion(method='weighted')
 
@@ -137,6 +137,7 @@ def convert_audio_to_wav(input_path: Path) -> Path:
             from pydub import AudioSegment  # type: ignore
             
             audio = AudioSegment.from_file(input_path)
+            audio = audio.set_channels(1)  # mono — required for Deepgram diarization
             with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_wav:
                 audio.export(tmp_wav.name, format="wav")
                 wav_path = Path(tmp_wav.name)
@@ -166,51 +167,157 @@ def convert_audio_to_wav(input_path: Path) -> Path:
         logger.warning(f"Unexpected error during audio conversion to WAV for {input_path}: {e}")
         return input_path
 
-def get_input_handler():
-    """Lazy-load input handler with smart backend selection."""
-    global input_handler
-    if input_handler is None:
-        import platform
-        is_macos = platform.system() == 'Darwin'
-        
-        # Use faster-whisper on macOS to avoid PyTorch crashes
-        # On other platforms, try faster-whisper first, fallback to whisper
-        if is_macos:
-            logger.info("macOS detected: Using faster-whisper for audio transcription (avoids PyTorch crashes)")
-            backend = 'faster-whisper'
-        else:
-            backend = 'faster-whisper'  # Prefer faster-whisper everywhere
-        
-        try:
-            input_handler = InputHandler(
-                transcriber_backend=backend,
-                whisper_model_size='tiny',  # Use tiny for faster loading
-                device='cpu',
-                language='en'
-            )
-        except Exception as e:
-            logger.warning(f"Failed to initialize {backend}, trying fallback backends: {e}")
-            # Try fallback backends
-            for fallback_backend in ['google', 'vosk']:
-                try:
-                    logger.info(f"Trying {fallback_backend} as fallback...")
-                    input_handler = InputHandler(
-                        transcriber_backend=fallback_backend,
-                        language='en'
-                    )
-                    logger.info(f"✓ Initialized with {fallback_backend}")
-                    break
-                except Exception as fallback_error:
-                    logger.debug(f"{fallback_backend} failed: {fallback_error}")
-                    continue
-            
-            if input_handler is None:
-                logger.error("All transcription backends failed!")
-                raise RuntimeError(
-                    "Could not initialize any transcription backend. "
-                    "Install faster-whisper: pip install faster-whisper"
-                )
-    return input_handler
+def get_input_handler(transcription_engine: str = "deepgram"):
+    """Get or create an input handler for the selected transcription engine."""
+    is_production = str(
+        os.getenv("APP_ENV")
+        or os.getenv("ENVIRONMENT")
+        or os.getenv("ENV")
+        or os.getenv("NODE_ENV")
+        or ""
+    ).strip().lower() == "production"
+
+    selected_engine = (transcription_engine or "deepgram").strip().lower()
+    if selected_engine not in {"deepgram", "assemblyai"}:
+        selected_engine = "deepgram"
+    if is_production and selected_engine != "deepgram":
+        logger.info(
+            f"Production mode active; forcing transcription engine to deepgram (requested={selected_engine})"
+        )
+        selected_engine = "deepgram"
+
+    if selected_engine == "deepgram":
+        if not os.getenv("DEEPGRAM_API_KEY", "").strip():
+            if is_production:
+                raise RuntimeError("DEEPGRAM_API_KEY is required in production mode")
+            logger.warning("DEEPGRAM_API_KEY missing; switching to local_oss engine")
+            selected_engine = "local_oss"
+    if selected_engine == "assemblyai":
+        if not os.getenv("ASSEMBLYAI_API_KEY", "").strip():
+            logger.warning("ASSEMBLYAI_API_KEY missing; switching to local_oss engine")
+            selected_engine = "local_oss"
+
+    if selected_engine == "deepgram":
+        backend = "deepgram"
+        model_size = os.getenv("DEEPGRAM_MODEL", "nova-2")
+    elif selected_engine == "assemblyai":
+        backend = "assemblyai"
+        model_size = os.getenv("ASSEMBLYAI_SPEECH_MODEL", "universal")
+    else:
+        backend = "whisperx"
+        model_size = os.getenv("LOCAL_OSS_MODEL_SIZE", "large-v3")
+
+    cache_key = (selected_engine, model_size)
+    handler = input_handlers.get(cache_key)
+    if handler is not None:
+        return handler
+
+    try:
+        handler = InputHandler(
+            transcriber_backend=backend,
+            whisper_model_size=model_size,
+            device=os.getenv("LOCAL_OSS_DEVICE", "cpu"),
+            language='en'
+        )
+        input_handlers[cache_key] = handler
+        logger.info(f"Initialized input handler for engine={selected_engine}, backend={backend}")
+        return handler
+    except Exception as engine_error:
+        logger.warning(
+            f"Failed to initialize requested engine={selected_engine} (backend={backend}): {engine_error}"
+        )
+        if is_production:
+            raise RuntimeError(
+                f"Failed to initialize required production engine deepgram: {engine_error}"
+            ) from engine_error
+
+    # Last-resort fallback to existing local backend.
+    fallback_key = ("fallback", "faster-whisper")
+    fallback_handler = input_handlers.get(fallback_key)
+    if fallback_handler is not None:
+        return fallback_handler
+
+    fallback_handler = InputHandler(
+        transcriber_backend="faster-whisper",
+        whisper_model_size="base",
+        device="cpu",
+        language="en",
+    )
+    input_handlers[fallback_key] = fallback_handler
+    logger.warning("Falling back to faster-whisper handler")
+    return fallback_handler
+
+
+def build_transcript_payload(processed) -> Dict[str, Any]:
+    """Build structured transcript payload for frontend rendering."""
+    transcription = processed.transcription_result
+    if transcription is None:
+        return {"utterances": [], "speakers": {}, "words": []}
+
+    utterances: List[Dict[str, Any]] = []
+    words_flat: List[Dict[str, Any]] = []
+    speakers: Dict[str, Dict[str, str]] = {}
+    speaker_role_lookup = {
+        "CHI": "child",
+        "MOT": "adult",
+        "INV": "adult",
+        "OTH": "other",
+    }
+
+    for idx, seg in enumerate(transcription.segments):
+        speaker_code = (seg.speaker or "CHI").strip().upper()
+        speaker_role = speaker_role_lookup.get(speaker_code, "other")
+        speaker_display = "Child" if speaker_role == "child" else ("Adult" if speaker_role == "adult" else "Other")
+        utterance_words = []
+        for w in seg.words:
+            word_item = {
+                "word": w.word,
+                "start_ms": int(w.start_time * 1000),
+                "end_ms": int(w.end_time * 1000),
+                "confidence": float(w.confidence),
+                "speaker_code": speaker_code,
+            }
+            utterance_words.append(word_item)
+            words_flat.append(word_item)
+
+        utterances.append({
+            "id": f"utt_{idx}",
+            "speaker_code": speaker_code,
+            "speaker_role": speaker_role,
+            "speaker_display": speaker_display,
+            "start_ms": int(seg.start_time * 1000),
+            "end_ms": int(seg.end_time * 1000),
+            "text": seg.text,
+            "confidence": float(seg.confidence),
+            "words": utterance_words,
+        })
+
+        if speaker_code not in speakers:
+            speakers[speaker_code] = {
+                "role": speaker_role,
+                "display": speaker_display,
+            }
+
+    return {
+        "utterances": utterances,
+        "speakers": speakers,
+        "words": words_flat,
+    }
+
+
+def normalize_transcription_engine(engine: Optional[str]) -> str:
+    is_production = str(
+        os.getenv("APP_ENV")
+        or os.getenv("ENVIRONMENT")
+        or os.getenv("ENV")
+        or os.getenv("NODE_ENV")
+        or ""
+    ).strip().lower() == "production"
+    if is_production:
+        return "deepgram"
+
+    normalized = (engine or "deepgram").strip().lower()
+    return normalized if normalized in {"deepgram", "assemblyai"} else "deepgram"
 
 
 # Pydantic models for API
@@ -697,7 +804,8 @@ async def predict_from_audio(
     file: UploadFile = File(...),
     participant_id: Optional[str] = Form("CHI"),
     model_name: Optional[str] = Form(None),
-    use_fusion: bool = Form(False)
+    use_fusion: bool = Form(False),
+    transcription_engine: str = Form("deepgram"),
 ):
     """
     Predict ASD from uploaded audio file.
@@ -721,6 +829,7 @@ async def predict_from_audio(
     pipeline_audio_path: Optional[Path] = None
     
     try:
+        transcription_engine = normalize_transcription_engine(transcription_engine)
         # Save uploaded file temporarily
         with tempfile.NamedTemporaryFile(
             delete=False,
@@ -734,11 +843,14 @@ async def predict_from_audio(
         pipeline_audio_path = convert_audio_to_wav(tmp_path)
         
         # Process audio
-        handler = get_input_handler()
+        handler = get_input_handler(transcription_engine=transcription_engine)
         processed = handler.process(
             pipeline_audio_path,
-            participant_id=participant_id
+            participant_id=participant_id,
+            use_diarization=True,
+            num_speakers=2,
         )
+        transcript_payload = build_transcript_payload(processed)
         
         # Enforce minimum duration to ensure enough speech data
         duration = processed.metadata.get('duration', 0) or 0
@@ -987,6 +1099,8 @@ async def predict_from_audio(
                 'transcript': processed.raw_text,
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
+                'structured_transcript': transcript_payload,
+                'transcription_engine': processed.metadata.get('transcription_engine', transcription_engine),
                 'input_type': 'audio',
                 'duration': processed.metadata.get('duration', 0),
             }
@@ -1135,6 +1249,8 @@ async def predict_from_audio(
             'transcript': processed.raw_text,
             'annotated_transcript_html': annotated.to_html(),
             'annotation_summary': annotated._get_annotation_summary(),
+            'structured_transcript': transcript_payload,
+            'transcription_engine': processed.metadata.get('transcription_engine', transcription_engine),
             'input_type': 'audio',
             'duration': processed.metadata.get('duration', 0),
             'model_used': used_model_name,  # Explicitly state which model was used
@@ -1189,12 +1305,14 @@ def _run_audio_prediction_sync(
     filename: str,
     participant_id: str,
     use_fusion: bool,
+    transcription_engine: str,
 ) -> None:
     """
     Synchronous audio prediction pipeline that emits progress updates.
     Runs in a thread-pool so it does not block the event loop.
     """
     upd = lambda p, s, d: _set_job_progress(job_id, p, s, d)  # noqa: E731
+    transcription_engine = normalize_transcription_engine(transcription_engine)
     tmp_path: Optional[Path] = None
     pipeline_audio_path: Optional[Path] = None
     global LAST_PREDICTION_CONTEXT
@@ -1209,10 +1327,16 @@ def _run_audio_prediction_sync(
         pipeline_audio_path = convert_audio_to_wav(tmp_path)
 
         upd(10, "Initialising", "Loading speech recognition model…")
-        handler = get_input_handler()
+        handler = get_input_handler(transcription_engine=transcription_engine)
 
-        upd(13, "Transcribing", "Transcribing speech with Whisper — this may take a minute…")
-        processed = handler.process(pipeline_audio_path, participant_id=participant_id)
+        upd(13, "Transcribing", "Transcribing speech with diarization — this may take a minute…")
+        processed = handler.process(
+            pipeline_audio_path,
+            participant_id=participant_id,
+            use_diarization=True,
+            num_speakers=2,
+        )
+        transcript_payload = build_transcript_payload(processed)
 
         duration = processed.metadata.get('duration', 0) or 0
         if duration < MIN_AUDIO_DURATION_SECONDS:
@@ -1450,6 +1574,8 @@ def _run_audio_prediction_sync(
                 'transcript': processed.raw_text,
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
+                'structured_transcript': transcript_payload,
+                'transcription_engine': processed.metadata.get('transcription_engine', transcription_engine),
                 'input_type': 'audio',
                 'duration': processed.metadata.get('duration', 0),
             }
@@ -1589,6 +1715,8 @@ def _run_audio_prediction_sync(
                 'transcript': processed.raw_text,
                 'annotated_transcript_html': annotated.to_html(),
                 'annotation_summary': annotated._get_annotation_summary(),
+                'structured_transcript': transcript_payload,
+                'transcription_engine': processed.metadata.get('transcription_engine', transcription_engine),
                 'input_type': 'audio',
                 'duration': processed.metadata.get('duration', 0),
                 'model_used': used_model_name,
@@ -1630,6 +1758,7 @@ async def start_audio_prediction(
     file: UploadFile = File(...),
     participant_id: Optional[str] = Form("CHI"),
     use_fusion: bool = Form(False),
+    transcription_engine: str = Form("deepgram"),
 ):
     """
     Start an asynchronous audio prediction job and return a job ID.
@@ -1641,6 +1770,7 @@ async def start_audio_prediction(
             detail="Only audio files (.wav, .mp3, .flac, .ogg, .m4a) are supported",
         )
 
+    transcription_engine = normalize_transcription_engine(transcription_engine)
     job_id = str(uuid.uuid4())
     prediction_jobs[job_id] = {
         'status': 'processing',
@@ -1659,7 +1789,7 @@ async def start_audio_prediction(
     loop.run_in_executor(
         _prediction_executor,
         _run_audio_prediction_sync,
-        job_id, contents, suffix, filename, participant_id, use_fusion,
+        job_id, contents, suffix, filename, participant_id, use_fusion, transcription_engine,
     )
 
     return {"job_id": job_id}
