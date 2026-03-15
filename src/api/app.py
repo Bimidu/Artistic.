@@ -167,7 +167,7 @@ def convert_audio_to_wav(input_path: Path) -> Path:
         logger.warning(f"Unexpected error during audio conversion to WAV for {input_path}: {e}")
         return input_path
 
-def get_input_handler(transcription_engine: str = "deepgram"):
+def get_input_handler(transcription_engine: str = "assemblyai"):
     """Get or create an input handler for the selected transcription engine."""
     is_production = str(
         os.getenv("APP_ENV")
@@ -177,25 +177,25 @@ def get_input_handler(transcription_engine: str = "deepgram"):
         or ""
     ).strip().lower() == "production"
 
-    selected_engine = (transcription_engine or "deepgram").strip().lower()
+    selected_engine = (transcription_engine or "assemblyai").strip().lower()
     if selected_engine not in {"deepgram", "assemblyai"}:
-        selected_engine = "deepgram"
-    if is_production and selected_engine != "deepgram":
+        selected_engine = "assemblyai"
+    if is_production and selected_engine != "assemblyai":
         logger.info(
-            f"Production mode active; forcing transcription engine to deepgram (requested={selected_engine})"
+            f"Production mode active; forcing transcription engine to assemblyai (requested={selected_engine})"
         )
-        selected_engine = "deepgram"
+        selected_engine = "assemblyai"
 
     if selected_engine == "deepgram":
         if not os.getenv("DEEPGRAM_API_KEY", "").strip():
-            if is_production:
-                raise RuntimeError("DEEPGRAM_API_KEY is required in production mode")
-            logger.warning("DEEPGRAM_API_KEY missing; switching to local_oss engine")
-            selected_engine = "local_oss"
+            logger.warning("DEEPGRAM_API_KEY missing; switching to assemblyai engine")
+            selected_engine = "assemblyai"
     if selected_engine == "assemblyai":
         if not os.getenv("ASSEMBLYAI_API_KEY", "").strip():
-            logger.warning("ASSEMBLYAI_API_KEY missing; switching to local_oss engine")
-            selected_engine = "local_oss"
+            if is_production:
+                raise RuntimeError("ASSEMBLYAI_API_KEY is required in production mode")
+            logger.warning("ASSEMBLYAI_API_KEY missing; switching to deepgram engine")
+            selected_engine = "deepgram"
 
     if selected_engine == "deepgram":
         backend = "deepgram"
@@ -228,7 +228,7 @@ def get_input_handler(transcription_engine: str = "deepgram"):
         )
         if is_production:
             raise RuntimeError(
-                f"Failed to initialize required production engine deepgram: {engine_error}"
+                f"Failed to initialize required production engine assemblyai: {engine_error}"
             ) from engine_error
 
     # Last-resort fallback to existing local backend.
@@ -314,10 +314,10 @@ def normalize_transcription_engine(engine: Optional[str]) -> str:
         or ""
     ).strip().lower() == "production"
     if is_production:
-        return "deepgram"
+        return "assemblyai"
 
-    normalized = (engine or "deepgram").strip().lower()
-    return normalized if normalized in {"deepgram", "assemblyai"} else "deepgram"
+    normalized = (engine or "assemblyai").strip().lower()
+    return normalized if normalized in {"deepgram", "assemblyai"} else "assemblyai"
 
 
 # Pydantic models for API
@@ -805,7 +805,7 @@ async def predict_from_audio(
     participant_id: Optional[str] = Form("CHI"),
     model_name: Optional[str] = Form(None),
     use_fusion: bool = Form(False),
-    transcription_engine: str = Form("deepgram"),
+    transcription_engine: str = Form("assemblyai"),
 ):
     """
     Predict ASD from uploaded audio file.
@@ -1758,7 +1758,7 @@ async def start_audio_prediction(
     file: UploadFile = File(...),
     participant_id: Optional[str] = Form("CHI"),
     use_fusion: bool = Form(False),
-    transcription_engine: str = Form("deepgram"),
+    transcription_engine: str = Form("assemblyai"),
 ):
     """
     Start an asynchronous audio prediction job and return a job ID.
