@@ -2983,7 +2983,7 @@ function buildStructuredTranscriptHtml(structuredTranscript) {
         const speakerCode = utt.speaker_code || 'CHI';
         const startMs = Number.isFinite(utt.start_ms) ? utt.start_ms : null;
         const endMs = Number.isFinite(utt.end_ms) ? utt.end_ms : null;
-        const timeLabel = (startMs !== null && endMs !== null) ? `${formatTime(startMs / 1000)}-${formatTime(endMs / 1000)}` : '';
+        const timeLabel = startMs !== null ? formatTime(startMs / 1000) : '';
         return `
             <div class="utterance" data-start="${startMs ?? ''}" data-end="${endMs ?? ''}" data-speaker-role="${role}">
                 <span class="speaker">*${speakerCode}:</span>
@@ -3212,8 +3212,8 @@ function enhanceAnnotations(container) {
                 };
                 const label = document.createElement('span');
                 label.className = 'ts-label';
-                label.textContent = endMs ? `${fmt(startMs)}–${fmt(endMs)}` : fmt(startMs);
-                utt.appendChild(label);
+                label.textContent = fmt(startMs);
+                utt.insertBefore(label, utt.firstChild);
             }
         });
     } catch (_) {
