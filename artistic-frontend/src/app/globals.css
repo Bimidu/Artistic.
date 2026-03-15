@@ -420,19 +420,21 @@ select:focus {
 }
 
 .transcript-container.compact-view .utterance {
-  padding: 6px 12px;
+  padding: 8px 14px;
 }
 
 .transcript-container .utterance {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
   align-items: baseline;
-  gap: 0;
-  padding: 9px 14px;
-  margin-bottom: 2px;
-  border-radius: 8px;
-  transition: background 0.15s ease, border-color 0.15s ease;
-  border-left: 2px solid transparent;
+  gap: 12px 16px;
+  padding: 10px 16px;
+  margin-bottom: 1px;
+  border-radius: 6px;
+  transition: background 0.12s ease;
+  border-left: 3px solid transparent;
   position: relative;
+  min-height: 32px;
 }
 
 .transcript-container .utterance:hover {
@@ -477,8 +479,7 @@ select:focus {
   background: #f1f3f5;
   border: 1px solid #e9ecef;
   border-radius: 4px;
-  padding: 1px 6px;
-  margin-right: 10px;
+  padding: 2px 8px;
   white-space: nowrap;
   flex-shrink: 0;
   display: inline-block;
@@ -504,38 +505,43 @@ select:focus {
   border-color: #d0ebff;
 }
 
-/* Timestamp label */
+/* Timestamp label — start time only, subtle */
 .transcript-container .ts-label {
-  font-family: ui-monospace, 'Courier New', monospace;
-  font-size: 0.65rem;
-  color: #6c757d;
-  margin-left: 8px;
+  font-family: ui-monospace, 'SF Mono', 'Consolas', monospace;
+  font-size: 0.7rem;
+  color: #868e96;
   white-space: nowrap;
-  flex-shrink: 0;
-  align-self: center;
+  align-self: baseline;
+  order: -1;
 }
 
 .transcript-container .text {
-  color: #343a40;
-  flex: 1;
+  color: #212529;
+  grid-column: 2 / -1;
+  line-height: 1.6;
 }
 
-/* Inline annotation highlights */
+.transcript-container .utterance:has(.ts-label) .text {
+  grid-column: 3;
+}
+
+/* Inline annotation highlights — minimal horizontal padding to avoid
+   visible gaps when multiple annotations split a single word */
 .transcript-container .annotation {
-  padding: 1px 4px;
-  border-radius: 3px;
+  padding: 2px 1px;
+  margin: 0 -0.5px;
+  border-radius: 2px;
   cursor: pointer;
   transition: opacity 0.15s ease, box-shadow 0.15s ease;
   position: relative;
   display: inline;
   font-weight: 500;
   font-size: inherit;
-  /* color is set inline; background uses color+opacity */
 }
 
 .transcript-container .annotation:hover {
-  opacity: 0.85;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  opacity: 0.9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
 .transcript-container .annotation.annotation-highlighted {
