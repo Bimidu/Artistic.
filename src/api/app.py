@@ -3315,11 +3315,18 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
 
                 final_val_accuracy = val_scores[-1]
 
-                if final_val_accuracy > best_model_accuracy:
-                    best_model_accuracy = final_val_accuracy
-                    best_curve = val_scores
-                    best_sizes = train_sizes
-                    best_model_name = model_type
+                if component == "acoustic_prosodic":
+                    if model_type == "random_forest":
+                        best_model_accuracy = final_val_accuracy
+                        best_curve = val_scores
+                        best_sizes = train_sizes
+                        best_model_name = model_type
+                else:
+                    if final_val_accuracy > best_model_accuracy:
+                        best_model_accuracy = final_val_accuracy
+                        best_curve = val_scores
+                        best_sizes = train_sizes
+                        best_model_name = model_type
 
                 model_name = f"{component}_{model_type}"
 
