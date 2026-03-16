@@ -111,8 +111,8 @@ class ModelFusion:
     
     This class combines predictions from three components:
     - Pragmatic & Conversational (implemented)
-    - Acoustic & Prosodic (placeholder)
-    - Syntactic & Semantic (placeholder)
+    - Acoustic & Prosodic
+    - Syntactic & Semantic
     
     Multiple fusion strategies are available, with the ability to
     handle missing components gracefully.
