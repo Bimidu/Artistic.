@@ -37,14 +37,19 @@ class PathConfig:
     cache_dir: Path = field(default_factory=lambda: Path(os.getenv("CACHE_DIR", "./cache")))
     assets_dir: Path = field(default_factory=lambda: Path(os.getenv("ASSETS_DIR", "./assets")))
     shap_dir: Path = field(init=False)
+    plots_dir: Path = field(default_factory=lambda: Path(os.getenv("PLOTS_DIR", "./plots")))
     
     def __post_init__(self):
         """Create directories if they don't exist."""
-        for dir_path in [self.output_dir, self.models_dir, self.logs_dir, self.cache_dir, self.assets_dir,]:
+        for dir_path in [self.output_dir, self.models_dir, self.logs_dir, self.cache_dir, self.assets_dir,self.plots_dir,]:
             dir_path.mkdir(parents=True, exist_ok=True)
 
         self.shap_dir = self.assets_dir / "shap"
         self.shap_dir.mkdir(parents=True, exist_ok=True)
+
+        # Training curves directory
+        self.training_curves_dir = self.plots_dir / "training_curves"
+        self.training_curves_dir.mkdir(parents=True, exist_ok=True)
 
 
 @dataclass

@@ -56,7 +56,8 @@ from src.auth.google_oauth import router as google_oauth_router
 from src.auth.report_routes import router as report_router
 from src.interpretability.counterfactuals.counterfactual_metrics import CounterfactualMetrics
 from src.interpretability.counterfactuals.cf_logger import log_cf_metrics
-
+from src.utils.training_curves import generate_training_curve
+from src.utils.training_curves import generate_component_comparison_plot
 
 logger = get_logger(__name__)
 ASSETS_DIR = Path("assets")
@@ -68,6 +69,8 @@ COMPONENT_MODEL_TYPES = {
     'acoustic_prosodic': ['xgboost', 'random_forest'],
     'syntactic_semantic': ['lightgbm', 'gradient_boosting']
 }
+
+component_best_curves = {}
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -2996,6 +2999,7 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         training_state['message'] = 'Loading feature data...'
         training_state['results'] = {}
         training_state['error'] = None
+        validation_results = {}
         
         logger.info(f"Starting training: component={component}, models={model_types}, n_features={n_features}, feature_selection={feature_selection}")
         
@@ -3180,6 +3184,10 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
         if hasattr(preprocessor_dict['scaler'], 'logger'):
             preprocessor_dict['scaler'].logger = None
 
+        best_model_accuracy = -1
+        best_curve = None
+        best_sizes = None
+        best_model_name = None
         
         # Step 3: Train models
         from src.models import ModelTrainer, ModelConfig, ModelEvaluator
@@ -3290,7 +3298,61 @@ def run_training_task(dataset_names: List[str], model_types: List[str], componen
             model_reports[model_type] = report
             
             logger.info(f"{model_type} - Accuracy: {report.accuracy:.4f}, F1: {report.f1_score:.4f}")
-        
+
+            # TRAINING CURVE GENERATION
+
+            try:
+                curve_dir = config.paths.training_curves_dir
+                curve_dir.mkdir(parents=True, exist_ok=True)
+
+                curve_path, train_sizes, val_scores = generate_training_curve(
+                    model=model,
+                    X=X_train,
+                    y=y_train,
+                    model_name=f"{component}_{model_type}",
+                    save_dir=curve_dir
+                )
+
+                final_val_accuracy = val_scores[-1]
+
+                if final_val_accuracy > best_model_accuracy:
+                    best_model_accuracy = final_val_accuracy
+                    best_curve = val_scores
+                    best_sizes = train_sizes
+                    best_model_name = model_type
+
+                model_name = f"{component}_{model_type}"
+
+                validation_results[model_name] = {
+                    "sizes": train_sizes,
+                    "val": val_scores
+                }
+
+                logger.info(f"Training curve saved at {curve_path}")
+
+            except Exception as curve_error:
+                logger.warning(f"Training curve generation failed: {curve_error}")
+
+        component_best_curves[component] = {
+            "sizes": best_sizes,
+            "val": best_curve,
+            "model": best_model_name
+        }
+
+        logger.info(f"Best model for {component}: {best_model_name}")
+
+        try:
+
+            combined_plot_path = generate_component_comparison_plot(
+                component_best_curves,
+                config.paths.training_curves_dir
+            )
+
+            logger.info(f"Component comparison plot saved at {combined_plot_path}")
+
+        except Exception as e:
+            logger.warning(f"Component comparison plot failed: {e}")
+
         # Step 4: Save models to registry
         training_state['progress'] = 90
         training_state['message'] = 'Saving models...'
