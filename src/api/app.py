@@ -54,9 +54,13 @@ from src.database import connect_to_mongo, close_mongo_connection
 from src.auth.routes import router as auth_router
 from src.auth.google_oauth import router as google_oauth_router
 from src.auth.report_routes import router as report_router
+from src.interpretability.counterfactuals.counterfactual_metrics import CounterfactualMetrics
+from src.interpretability.counterfactuals.cf_logger import log_cf_metrics
+
 
 logger = get_logger(__name__)
 ASSETS_DIR = Path("assets")
+CF_METRICS = CounterfactualMetrics()
 
 # Component-specific model type mapping
 COMPONENT_MODEL_TYPES = {
@@ -1410,6 +1414,13 @@ def _run_audio_prediction_sync(
                     )
 
                     if cf_result is not None:
+
+                        CF_METRICS.update(
+                            cf_result,
+                            n_features=len(feature_names)
+                        )
+
+                    if cf_result is not None:
                         fusion_counterfactuals.append({
                             "component": component,
                             "counterfactual": cf_result
@@ -1459,6 +1470,22 @@ def _run_audio_prediction_sync(
             #add counterfactuals to result if available
             if fusion_counterfactuals:
                 result_data['fusion_counterfactual'] = fusion_counterfactuals
+
+            try:
+
+                summary = CF_METRICS.summary()
+
+                if summary:
+                    logger.info(
+                        f"[CF METRICS] Validity={summary.get('cf_validity', 0):.2f} | "
+                        f"Avg L2={summary.get('avg_l2', 0):.2f} | "
+                        f"Avg changed features={summary.get('avg_changed_features', 0):.2f} | "
+                        f"Normalized L2={summary.get('normalized_l2', 0):.2f}"
+                    )
+                    log_cf_metrics(summary)
+
+            except Exception as e:
+                logger.warning(f"CF metrics logging failed: {e}")
 
         else:
             # Single-component path (mirrors the existing predict_from_audio logic)
@@ -1551,7 +1578,6 @@ def _run_audio_prediction_sync(
             # COUNTERFACTUAL
             # ===============================
             cf_result = None
-
             try:
 
                 component = "_".join(used_model_name.split("_")[:-1])
@@ -1565,6 +1591,13 @@ def _run_audio_prediction_sync(
                     ae_key=used_model_name,
                     predicted_class=predicted_class
                 )
+
+                if cf_result is not None:
+
+                    CF_METRICS.update(
+                        cf_result,
+                        n_features=len(feature_names)
+                    )
 
             except Exception as e:
                 logger.warning(f"Counterfactual failed: {e}")
@@ -2160,6 +2193,14 @@ async def predict_from_transcript(
                         predicted_class=predicted_class
                     )
 
+                    if cf_result is not None:
+                        from src.api.app import CF_METRICS
+
+                        CF_METRICS.update(
+                            cf_result,
+                            n_features=len(feature_names)
+                        )
+
                     # Only append if CF generated
                     if cf_result is not None:
                         fusion_counterfactuals.append({
@@ -2241,8 +2282,25 @@ async def predict_from_transcript(
             if fusion_counterfactuals:
                 response_data['fusion_counterfactual'] = fusion_counterfactuals
 
+            try:
+
+                summary = CF_METRICS.summary()
+
+                if summary:
+                    logger.info(
+                        f"[CF METRICS] Validity={summary.get('cf_validity', 0):.2f} | "
+                        f"Avg L2={summary.get('avg_l2', 0):.2f} | "
+                        f"Avg changed features={summary.get('avg_changed_features', 0):.2f} | "
+                        f"Normalized L2={summary.get('normalized_l2', 0):.2f}"
+                    )
+                    log_cf_metrics(summary)
+
+            except Exception as e:
+                logger.warning(f"CF metrics logging failed: {e}")
+
             return response_data
-        
+
+
         else:
             # Single component prediction
             # Validate model compatibility with input type
@@ -2417,6 +2475,14 @@ async def predict_from_transcript(
                 ae_key=ae_key,
                 predicted_class=predicted_class
             )
+
+            if cf_result is not None:
+                from src.api.app import CF_METRICS
+
+                CF_METRICS.update(
+                    cf_result,
+                    n_features=len(feature_names)
+                )
             
             # Generate annotated transcript
             annotated = transcript_annotator.annotate(
@@ -3965,7 +4031,7 @@ def get_feature_guidelines():
 async def counterfactual_chat(req: dict):
 
     if not LAST_PREDICTION_CONTEXT:
-        raise HTTPException(400, "Run a prediction first")
+        raise HTTPException(400, "No prediction context found. Please run a prediction first")
 
     question = req["question"]
 
@@ -4013,6 +4079,12 @@ async def counterfactual_chat(req: dict):
 
                 proba = model.predict_proba([x])[0]
                 pred = model.predict([x])[0]
+
+                if hasattr(model, "classes_"):
+                    if isinstance(pred, (int, np.integer)):
+                        label_map = {0: "TD", 1: "ASD"}
+                        pred = label_map.get(pred, str(pred))
+
                 confidence = float(max(proba))
 
                 explanation = generate_cf_explanation(
@@ -4059,6 +4131,11 @@ async def counterfactual_chat(req: dict):
 
     proba = model.predict_proba([x])[0]
     pred = model.predict([x])[0]
+
+    if hasattr(model, "classes_"):
+        if isinstance(pred, (int, np.integer)):
+            label_map = {0: "TD", 1: "ASD"}
+            pred = label_map.get(pred, str(pred))
     confidence = float(max(proba))
 
     explanation = generate_cf_explanation(
