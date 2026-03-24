@@ -7,8 +7,8 @@ A multimodal machine learning system for Autism Spectrum Disorder (ASD) detectio
 This system implements a research-based approach to ASD detection using three independent feature extraction components:
 
 1. **Pragmatic & Conversational** (Implemented) - Turn-taking patterns, topic coherence, pause analysis, repair detection
-2. **Acoustic & Prosodic** (Placeholder) - Pitch, prosody, voice quality features from audio
-3. **Syntactic & Semantic** (Placeholder) - POS analysis, dependency parsing, semantic coherence
+2. **Acoustic & Prosodic** (Implemented) - Pitch, prosody, voice quality features from audio
+3. **Syntactic & Semantic** (Implemented) - POS analysis, dependency parsing, semantic coherence
 
 Each component independently extracts features and trains models. A fusion layer combines predictions from all components into a final ASD probability score.
 

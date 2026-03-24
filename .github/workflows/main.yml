@@ -18,7 +18,18 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd Artistic.
-            git pull origin main
+
+            git fetch origin
+
+            # Try normal pull (merge)
+            if git pull origin main; then
+              echo "Pull successful"
+            else
+              echo "Conflict detected, forcing reset..."
+              git reset --hard origin/main
+              git clean -fd
+            fi
+
             source venv/bin/activate
             pip install -r requirements.txt
             sudo systemctl restart artistic-api

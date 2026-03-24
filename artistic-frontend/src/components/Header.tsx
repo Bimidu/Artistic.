@@ -26,7 +26,7 @@ export default function Header({ showModeToggle, apiUrl, onShowAuthModal, onShow
           </div>
 
           <div className="flex items-center gap-6">
-            {showModeToggle && (
+            {(showModeToggle || user?.role === 'admin') && (
               <div className="toggle-switch" id="modeToggle">
                 <div className="toggle-option active" data-mode="user">User Mode</div>
                 <div className="toggle-option" data-mode="training">Training Mode</div>
