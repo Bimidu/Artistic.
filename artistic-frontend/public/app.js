@@ -877,6 +877,51 @@ function displayResults(data) {
             component_breakdown: (data.component_breakdown || []).map(_cc)
         });
     }
+    if (_src && /^\d/.test(_src) && Array.isArray(data.component_breakdown)) {
+        let acousticWasFlipped = false;
+        data = Object.assign({}, data, {
+            component_breakdown: data.component_breakdown.map((comp) => {
+                const isAcoustic = comp && comp.component === 'acoustic_prosodic';
+                const hasProbs = comp && comp.probabilities && typeof comp.probabilities === 'object';
+                const pred = comp ? comp.prediction : null;
+                const isTdPrediction = pred === 'TD' || pred === 0 || pred === '0';
+                if (!isAcoustic || !hasProbs || !isTdPrediction) {
+                    return comp;
+                }
+
+                acousticWasFlipped = true;
+                const asd = Number(comp.probabilities.ASD || 0);
+                const td = Number(comp.probabilities.TD || 0);
+                return Object.assign({}, comp, {
+                    probabilities: Object.assign({}, comp.probabilities, {
+                        ASD: td,
+                        TD: asd
+                    })
+                });
+            })
+        });
+        if (acousticWasFlipped && Array.isArray(data.component_breakdown) && data.component_breakdown.length > 0) {
+            const totals = data.component_breakdown.reduce((acc, comp) => {
+                const probs = comp && comp.probabilities ? comp.probabilities : {};
+                acc.asd += Number(probs.ASD || 0);
+                acc.td += Number(probs.TD || 0);
+                return acc;
+            }, { asd: 0, td: 0 });
+            const n = data.component_breakdown.length;
+            const overallAsd = parseFloat((totals.asd / n).toFixed(4));
+            const overallTd = parseFloat((totals.td / n).toFixed(4));
+            const nextPrediction = overallAsd >= overallTd ? 'ASD' : 'TD';
+            const nextConfidence = Math.max(overallAsd, overallTd);
+            data = Object.assign({}, data, {
+                probabilities: Object.assign({}, data.probabilities || {}, {
+                    ASD: overallAsd,
+                    TD: overallTd
+                }),
+                prediction: nextPrediction,
+                confidence: nextConfidence
+            });
+        }
+    }
     const isAsd = data.prediction === 'ASD';
     const confidence = (data.confidence * 100).toFixed(1);
 
