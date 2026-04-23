@@ -32,52 +32,34 @@
 
  <!-- Hero -->
   <section class="hero">
-    <div class="container">
-      <p class="hero__kicker">25-26J-502 &middot; SLIIT Faculty of Computing</p>
-      <h1 class="hero__title">
-        Machine Learning-Based Early Detection of <span class="hero__highlight">Autism</span> Using Multimodal Conversational Features
-      </h1>
-      <p class="hero__sub">
-        An end-to-end AI screening platform that analyzes child-caregiver speech and CHAT transcripts to surface early ASD markers, with transparent, clinician-facing explanations built in.
-      </p>
-      <div class="flex flex-wrap gap-sm" style="margin-bottom: var(--space-xl);">
-        <a href="domain.html" class="btn btn--primary">Explore the Research</a>
-        <a href="about.html" class="btn btn--ghost">Meet the Team</a>
+    <div class="container hero__layout">
+      <div class="hero__content">
+        <p class="hero__kicker">25-26J-502 &middot; SLIIT Faculty of Computing</p>
+        <h1 class="hero__title">
+          ML Based Early Detection of ASD Using Multimodal Conversational Features
+        </h1>
+        <p class="hero__sub">
+          An end-to-end AI screening platform that analyzes child-caregiver speech and CHAT transcripts to surface early ASD markers, with transparent, clinician-facing explanations built in.
+        </p>
+        <div class="flex flex-wrap gap-sm" style="margin-bottom: var(--space-xl);">
+          <a href="domain.html" class="btn btn--primary">Explore the Research</a>
+          <a href="about.html" class="btn btn--ghost">Meet the Team</a>
+        </div>
+        <div class="hero__keywords">
+          <span class="hero__keyword">Autism Spectrum Disorder</span>
+          <span class="hero__keyword">Pragmatic Analysis</span>
+          <span class="hero__keyword">Acoustic Prosody</span>
+          <span class="hero__keyword">Explainable AI</span>
+          <span class="hero__keyword">TalkBank / ASDBank</span>
+          <span class="hero__keyword">SHAP + Counterfactuals</span>
+        </div>
       </div>
-      <div class="hero__keywords">
-        <span class="hero__keyword">Autism Spectrum Disorder</span>
-        <span class="hero__keyword">Pragmatic Analysis</span>
-        <span class="hero__keyword">Acoustic Prosody</span>
-        <span class="hero__keyword">Explainable AI</span>
-        <span class="hero__keyword">TalkBank / ASDBank</span>
-        <span class="hero__keyword">SHAP + Counterfactuals</span>
+      <div class="hero__media">
+        <img src="images/home-hero.png" alt="Illustration representing multimodal autism screening workflow" />
       </div>
     </div>
   </section>
 
- <!-- Stats Strip -->
- <div class="stats">
- <div class="container">
- <div class="stats__grid">
- <div class="stats__item">
- <div class="stats__num">87.2%</div>
- <div class="stats__label">Fusion Accuracy</div>
- </div>
- <div class="stats__item">
- <div class="stats__num">0.92</div>
- <div class="stats__label">ROC-AUC</div>
- </div>
- <div class="stats__item">
- <div class="stats__num">400+</div>
- <div class="stats__label">Features Extracted</div>
- </div>
- <div class="stats__item">
- <div class="stats__num">3</div>
- <div class="stats__label">Signal Modalities</div>
- </div>
- </div>
- </div>
- </div>
 
  <!-- What is Artistic -->
  <section class="section" style="background: var(--color-card);">
@@ -86,44 +68,57 @@
  <div>
  <span class="section-label">What is Artistic?</span>
  <h2 class="section-title" style="margin-top: 4px;">A multimodal ASD screening system built for clinicians and researchers</h2>
- <p class="lead" style="margin-top: 16px;">
- Early and reliable screening for autism spectrum disorder remains challenging in low-resource settings. Artistic combines three complementary signal streams into a single fused prediction, with full explainability built in, not added as an afterthought.
- </p>
+<p class="lead" style="margin-top: 16px;">
+Early and reliable screening for autism spectrum disorder remains challenging in low-resource settings. Artistic combines three complementary signal streams with a dedicated explainability component, into a single fused prediction.
+</p>
  <p>Beyond prediction, the platform provides transcript-level behavioral annotations, global and local feature attributions via SHAP, and counterfactual what-if analysis so clinicians understand why a prediction was made.</p>
  <div class="flex flex-wrap gap-sm mt-lg">
  <a href="domain.html" class="btn btn--primary">Explore the Research</a>
  <a href="about.html" class="btn btn--outline">Meet the Team</a>
  </div>
  </div>
- <div style="display: flex; flex-direction: column; gap: 12px;">
- <div class="card" style="padding: 20px 22px;">
- <div style="display: flex; align-items: center; gap: 14px;">
- <div class="card__icon" style="margin: 0;"><i class="ri-chat-3-line"></i></div>
- <div>
- <div class="card__title" style="margin: 0 0 2px;">Pragmatic &amp; Conversational</div>
- <p class="card__desc" style="margin: 0;">207 features, turn-taking, topic coherence, pause/latency, repair detection</p>
- </div>
- </div>
- </div>
- <div class="card" style="padding: 20px 22px;">
- <div style="display: flex; align-items: center; gap: 14px;">
- <div class="card__icon" style="margin: 0;"><i class="ri-mic-line"></i></div>
- <div>
- <div class="card__title" style="margin: 0 0 2px;">Acoustic &amp; Prosodic</div>
- <p class="card__desc" style="margin: 0;">153 features, pitch, MFCC, spectral, energy, rhythm from child audio segments</p>
- </div>
- </div>
- </div>
- <div class="card" style="padding: 20px 22px;">
- <div style="display: flex; align-items: center; gap: 14px;">
- <div class="card__icon" style="margin: 0;"><i class="ri-file-list-3-line"></i></div>
- <div>
- <div class="card__title" style="margin: 0 0 2px;">Syntactic &amp; Semantic</div>
- <p class="card__desc" style="margin: 0;">27 features, POS tagging, dependency parsing, morphosyntax via spaCy</p>
- </div>
- </div>
- </div>
- </div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+<div class="doc-card" style="padding: 20px 22px;">
+<div class="pres-strip" style="background: #064e3b; margin: -20px -22px 0; padding: 14px 18px;">
+<div class="pres-strip__icon" style="width: 38px; height: 38px; font-size: 1rem;"><i class="ri-chat-3-line"></i></div>
+<div>
+<div class="pres-strip__label">Component 01</div>
+<div class="pres-strip__title" style="font-size: 0.9rem;">Pragmatic &amp; Conversational</div>
+</div>
+</div>
+<p class="doc-card__sub" style="margin-top: 12px;">207 features, turn-taking, topic coherence, pause/latency, repair detection.</p>
+</div>
+<div class="doc-card" style="padding: 20px 22px;">
+<div class="pres-strip" style="background: #0f766e; margin: -20px -22px 0; padding: 14px 18px;">
+<div class="pres-strip__icon" style="width: 38px; height: 38px; font-size: 1rem;"><i class="ri-mic-line"></i></div>
+<div>
+<div class="pres-strip__label">Component 02</div>
+<div class="pres-strip__title" style="font-size: 0.9rem;">Acoustic &amp; Prosodic</div>
+</div>
+</div>
+<p class="doc-card__sub" style="margin-top: 12px;">153 features, pitch, MFCC, spectral, energy, and rhythm from child audio segments.</p>
+</div>
+<div class="doc-card" style="padding: 20px 22px;">
+<div class="pres-strip" style="background: #1e3a8a; margin: -20px -22px 0; padding: 14px 18px;">
+<div class="pres-strip__icon" style="width: 38px; height: 38px; font-size: 1rem;"><i class="ri-file-list-3-line"></i></div>
+<div>
+<div class="pres-strip__label">Component 03</div>
+<div class="pres-strip__title" style="font-size: 0.9rem;">Syntactic &amp; Semantic</div>
+</div>
+</div>
+<p class="doc-card__sub" style="margin-top: 12px;">27 features, POS tagging, dependency parsing, and morphosyntax via spaCy.</p>
+</div>
+<div class="doc-card" style="padding: 20px 22px;">
+<div class="pres-strip" style="background: #111827; margin: -20px -22px 0; padding: 14px 18px;">
+<div class="pres-strip__icon" style="width: 38px; height: 38px; font-size: 1rem;"><i class="ri-line-chart-line"></i></div>
+<div>
+<div class="pres-strip__label">Component 04</div>
+<div class="pres-strip__title" style="font-size: 0.9rem;">Explainability Layer</div>
+</div>
+</div>
+<p class="doc-card__sub" style="margin-top: 12px;">SHAP global and local attributions, plus counterfactual analysis to show what changes influence the final prediction.</p>
+</div>
+</div>
  </div>
  </div>
  </section>
