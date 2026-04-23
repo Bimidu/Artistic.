@@ -271,13 +271,20 @@ class HuggingFaceManager:
             )
             
             dataset_path = Path(cache_path) / dataset_name
-            
+
             if not dataset_path.exists():
                 self.logger.error(f"Dataset not found in repo: {dataset_name}")
                 return None
-            
-            self.logger.info(f"✓ Dataset downloaded: {dataset_path}")
-            return dataset_path
+
+            # Materialize downloaded dataset into local data directory so all
+            # downstream tooling can access it from data/<dataset_name>.
+            local_dataset_path = config.paths.data_dir / dataset_name
+            local_dataset_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copytree(dataset_path, local_dataset_path, dirs_exist_ok=True)
+
+            self.logger.info(f"✓ Dataset downloaded to cache: {dataset_path}")
+            self.logger.info(f"✓ Dataset synced to local data dir: {local_dataset_path}")
+            return local_dataset_path
             
         except HfHubHTTPError as e:
             if e.response.status_code == 404:

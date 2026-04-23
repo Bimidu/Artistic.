@@ -17,6 +17,9 @@ Usage:
     # Download specific model from cloud
     python scripts/cloud_sync.py download-model <model_name>
 
+    # Download specific dataset from cloud
+    python scripts/cloud_sync.py download-dataset <dataset_name>
+
     # List cloud models
     python scripts/cloud_sync.py list-models
 
@@ -257,6 +260,7 @@ Examples:
   %(prog)s upload-models              Upload all models to cloud
   %(prog)s upload-datasets            Upload all datasets to cloud
   %(prog)s download-model model_name  Download specific model
+  %(prog)s download-dataset data_name Download specific dataset
   %(prog)s list-models                List cloud models
   %(prog)s status                     Show cloud status
 
