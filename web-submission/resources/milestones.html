@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Milestones, Artistic</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+ <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+ <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+ <nav class="navbar">
+ <div class="container">
+ <a class="navbar__brand" href="index.html"><span class="navbar__brand-dot"></span>Artistic</a>
+ <ul class="navbar__links">
+ <li><a href="index.html">Home</a></li>
+ <li><a href="domain.html">Domain</a></li>
+ <li><a href="milestones.html" class="active">Milestones</a></li>
+ <li><a href="documents.html">Documents</a></li>
+ <li><a href="presentations.html">Presentations</a></li>
+ <li><a href="about.html">About Us</a></li>
+ <li><a href="contact.html">Contact</a></li>
+ </ul>
+ </div>
+ </nav>
+
+ <section class="page-header">
+ <div class="container">
+ <div class="page-header__eyebrow">Project Timeline</div>
+ <h1 class="page-header__title">Milestones</h1>
+ <p class="page-header__desc">All formal assessments, select a milestone below to view details, dates, and deliverables.</p>
+ </div>
+ </section>
+
+ <!-- Tab system wrapper, radio inputs must be siblings of the nav and panels -->
+ <div class="ms-app">
+
+ <!-- Hidden radio inputs -->
+ <input type="radio" name="ms" id="ms1" class="tab-radio" checked>
+ <input type="radio" name="ms" id="ms2" class="tab-radio">
+ <input type="radio" name="ms" id="ms3" class="tab-radio">
+ <input type="radio" name="ms" id="ms4" class="tab-radio">
+ <input type="radio" name="ms" id="ms5" class="tab-radio">
+
+ <!-- Sticky milestone subnav -->
+ <div class="ms-subnav">
+ <div class="container">
+ <div class="ms-subnav__inner">
+ <label for="ms1" class="ms-tab">
+ <span class="ms-tab__num">01</span>
+ <span class="ms-tab__label">Project Proposal</span>
+ </label>
+ <label for="ms2" class="ms-tab">
+ <span class="ms-tab__num">02</span>
+ <span class="ms-tab__label">Progress Presentation 1</span>
+ </label>
+ <label for="ms3" class="ms-tab">
+ <span class="ms-tab__num">03</span>
+ <span class="ms-tab__label">Progress Presentation 2</span>
+ </label>
+ <label for="ms4" class="ms-tab">
+ <span class="ms-tab__num">04</span>
+ <span class="ms-tab__label">Final Assessment</span>
+ </label>
+ <label for="ms5" class="ms-tab">
+ <span class="ms-tab__num">05</span>
+ <span class="ms-tab__label">Viva</span>
+ </label>
+ </div>
+ </div>
+ </div>
+
+ <!-- M1, Project Proposal -->
+ <div class="ms-panel" id="msp1">
+ <section class="section" style="background: var(--color-surface);">
+ <div class="container" style="max-width: 860px;">
+ <div class="notice">Update the placeholder dates and marks with your actual milestone information before submission.</div>
+ <div class="doc-card">
+ <div class="pres-strip" style="background: #064e3b;">
+ <div class="pres-strip__icon"><i class="ri-layout-masonry-line"></i></div>
+ <div>
+ <div class="pres-strip__label">Milestone 01</div>
+ <div class="pres-strip__title">Project Proposal</div>
+ </div>
+ </div>
+ <div style="margin-top: var(--space-lg);">
+ <div class="milestone-meta">
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Submission Date</span><span class="milestone-meta__value">[DD Month YYYY]</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Marks Allocated</span><span class="milestone-meta__value">[X]%</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Format</span><span class="milestone-meta__value">Written Document + Presentation</span></div>
+ </div>
+ <h4 style="margin-bottom: 8px;">Description</h4>
+ <p>The Project Proposal is the first formal deliverable, outlining the research problem, motivation, and preliminary approach for the Artistic system. It establishes the research context (early ASD screening from speech), the chosen methodology (multimodal feature extraction and fusion), and the planned evaluation strategy using ASDBank corpora.</p>
+ <p>The proposal introduces the three-component architecture and justifies the choice of explainability methods (SHAP and counterfactuals) as core design requirements rather than post-hoc additions.</p>
+ <h4 style="margin-top: 20px; margin-bottom: 8px;">Key Deliverables</h4>
+ <ul style="font-size: 0.875rem; color: var(--color-mid);">
+ <li>Proposal document with problem statement, objectives, and literature survey</li>
+ <li>Preliminary system architecture diagram</li>
+ <li>Dataset selection rationale (TalkBank / ASDBank)</li>
+ <li>Project timeline and resource plan</li>
+ <li>Proposal presentation slides</li>
+ </ul>
+ </div>
+ <div class="doc-card__footer">
+ <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+ <span class="badge badge--grey">Milestone 01</span>
+ <span class="badge badge--pending">Pending</span>
+ </div>
+ <div style="display: flex; gap: 10px;">
+ <a href="documents.html" class="btn btn--outline btn--sm"><i class="ri-file-text-line"></i> Document</a>
+ <a href="presentations.html" class="btn btn--ghost btn--sm"><i class="ri-slideshow-line"></i> Slides</a>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+ </div>
+
+ <!-- M2, Progress Presentation 1 -->
+ <div class="ms-panel" id="msp2">
+ <section class="section" style="background: var(--color-surface);">
+ <div class="container" style="max-width: 860px;">
+ <div class="notice">Update the placeholder dates and marks with your actual milestone information before submission.</div>
+ <div class="doc-card">
+ <div class="pres-strip" style="background: #0f766e;">
+ <div class="pres-strip__icon"><i class="ri-bar-chart-box-line"></i></div>
+ <div>
+ <div class="pres-strip__label">Milestone 02</div>
+ <div class="pres-strip__title">Progress Presentation 1</div>
+ </div>
+ </div>
+ <div style="margin-top: var(--space-lg);">
+ <div class="milestone-meta">
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Presentation Date</span><span class="milestone-meta__value">[DD Month YYYY]</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Marks Allocated</span><span class="milestone-meta__value">[X]%</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Format</span><span class="milestone-meta__value">Live Presentation + Q&amp;A</span></div>
+ </div>
+ <h4 style="margin-bottom: 8px;">Description</h4>
+ <p>Demonstrates the initial implementation of the Artistic pipeline. The pragmatic-conversational feature extraction module is operational, the CHAT parser handles ASDBank corpora correctly, and a baseline SVM model has been trained and evaluated on cross-validated data.</p>
+ <p>This milestone covers the input handling pipeline, CHAT format parsing, and first results from the pragmatic component, including preliminary SHAP feature importance visualizations.</p>
+ <h4 style="margin-top: 20px; margin-bottom: 8px;">Key Deliverables</h4>
+ <ul style="font-size: 0.875rem; color: var(--color-mid);">
+ <li>Working CHAT parser and pragmatic feature extractor (207 features)</li>
+ <li>Baseline SVM model training and evaluation results</li>
+ <li>Initial SHAP global feature importance analysis</li>
+ <li>API endpoints for feature extraction and basic prediction</li>
+ <li>Progress Presentation 1 slide deck</li>
+ </ul>
+ </div>
+ <div class="doc-card__footer">
+ <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+ <span class="badge badge--grey">Milestone 02</span>
+ <span class="badge badge--pending">Pending</span>
+ </div>
+ <a href="presentations.html" class="btn btn--outline btn--sm"><i class="ri-slideshow-line"></i> Slides</a>
+ </div>
+ </div>
+ </div>
+ </section>
+ </div>
+
+ <!-- M3, Progress Presentation 2 -->
+ <div class="ms-panel" id="msp3">
+ <section class="section" style="background: var(--color-surface);">
+ <div class="container" style="max-width: 860px;">
+ <div class="notice">Update the placeholder dates and marks with your actual milestone information before submission.</div>
+ <div class="doc-card">
+ <div class="pres-strip" style="background: #1e3a8a;">
+ <div class="pres-strip__icon"><i class="ri-flask-line"></i></div>
+ <div>
+ <div class="pres-strip__label">Milestone 03</div>
+ <div class="pres-strip__title">Progress Presentation 2</div>
+ </div>
+ </div>
+ <div style="margin-top: var(--space-lg);">
+ <div class="milestone-meta">
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Presentation Date</span><span class="milestone-meta__value">[DD Month YYYY]</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Marks Allocated</span><span class="milestone-meta__value">[X]%</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Format</span><span class="milestone-meta__value">Live Presentation + Q&amp;A</span></div>
+ </div>
+ <h4 style="margin-bottom: 8px;">Description</h4>
+ <p>Demonstrates the full three-component system: acoustic-prosodic (153 features via librosa), syntactic-semantic (27 features via spaCy), the multimodal fusion layer, and the counterfactual explanation system.</p>
+ <p>All three component models are trained and the weighted fusion (50%/25%/25%) achieves 87.2% accuracy. The neural autoencoder for counterfactual generation is implemented and evaluated with 1.00 validity.</p>
+ <h4 style="margin-top: 20px; margin-bottom: 8px;">Key Deliverables</h4>
+ <ul style="font-size: 0.875rem; color: var(--color-mid);">
+ <li>Full three-component feature extraction pipeline</li>
+ <li>Multimodal fusion, 87.2% accuracy, 0.92 ROC-AUC</li>
+ <li>Counterfactual explanation system (neural autoencoder)</li>
+ <li>React/Next.js frontend with interactive SHAP visualizations</li>
+ <li>AssemblyAI transcription + speaker diarization integration</li>
+ </ul>
+ </div>
+ <div class="doc-card__footer">
+ <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+ <span class="badge badge--grey">Milestone 03</span>
+ <span class="badge badge--pending">Pending</span>
+ </div>
+ <a href="presentations.html" class="btn btn--outline btn--sm"><i class="ri-slideshow-line"></i> Slides</a>
+ </div>
+ </div>
+ </div>
+ </section>
+ </div>
+
+ <!-- M4, Final Assessment -->
+ <div class="ms-panel" id="msp4">
+ <section class="section" style="background: var(--color-surface);">
+ <div class="container" style="max-width: 860px;">
+ <div class="notice">Update the placeholder dates and marks with your actual milestone information before submission.</div>
+ <div class="doc-card">
+ <div class="pres-strip" style="background: #111827;">
+ <div class="pres-strip__icon"><i class="ri-award-line"></i></div>
+ <div>
+ <div class="pres-strip__label">Milestone 04</div>
+ <div class="pres-strip__title">Final Assessment</div>
+ </div>
+ </div>
+ <div style="margin-top: var(--space-lg);">
+ <div class="milestone-meta">
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Submission Date</span><span class="milestone-meta__value">[DD Month YYYY]</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Marks Allocated</span><span class="milestone-meta__value">[X]%</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Format</span><span class="milestone-meta__value">Final Report + Presentation + Demo</span></div>
+ </div>
+ <h4 style="margin-bottom: 8px;">Description</h4>
+ <p>The complete, production-ready Artistic system, research paper, and a live demonstration. The system is fully deployed as a FastAPI backend with a React/Next.js frontend, supporting audio upload, CHAT transcript input, and real-time prediction with SHAP and counterfactual explanations.</p>
+ <h4 style="margin-top: 20px; margin-bottom: 8px;">Key Deliverables</h4>
+ <ul style="font-size: 0.875rem; color: var(--color-mid);">
+ <li>Final research paper (IEEE-style)</li>
+ <li>Complete system codebase with documentation</li>
+ <li>Model registry with stored artifacts and evaluation metrics</li>
+ <li>Final presentation slides and live system demo</li>
+ <li>Individual member reports</li>
+ </ul>
+ </div>
+ <div class="doc-card__footer">
+ <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+ <span class="badge badge--grey">Milestone 04</span>
+ <span class="badge badge--pending">Pending</span>
+ </div>
+ <div style="display: flex; gap: 10px;">
+ <a href="documents.html" class="btn btn--primary btn--sm"><i class="ri-file-text-line"></i> Document</a>
+ <a href="presentations.html" class="btn btn--ghost btn--sm"><i class="ri-slideshow-line"></i> Slides</a>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+ </div>
+
+ <!-- M5, Viva -->
+ <div class="ms-panel" id="msp5">
+ <section class="section" style="background: var(--color-surface);">
+ <div class="container" style="max-width: 860px;">
+ <div class="notice">Update the placeholder dates and marks with your actual milestone information before submission.</div>
+ <div class="doc-card">
+ <div class="pres-strip" style="background: #312e81;">
+ <div class="pres-strip__icon"><i class="ri-question-answer-line"></i></div>
+ <div>
+ <div class="pres-strip__label">Milestone 05</div>
+ <div class="pres-strip__title">Viva</div>
+ </div>
+ </div>
+ <div style="margin-top: var(--space-lg);">
+ <div class="milestone-meta">
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Viva Date</span><span class="milestone-meta__value">[DD Month YYYY]</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Marks Allocated</span><span class="milestone-meta__value">[X]%</span></div>
+ <div class="milestone-meta__item"><span class="milestone-meta__label">Format</span><span class="milestone-meta__value">Individual Oral Examination</span></div>
+ </div>
+ <h4 style="margin-bottom: 8px;">Description</h4>
+ <p>Individual oral examination where each group member is assessed on their depth of understanding of the research, their component, and the system as a whole. Examiners will probe technical decisions, results interpretation, limitations, and future directions.</p>
+ <h4 style="margin-top: 20px; margin-bottom: 8px;">Preparation Areas</h4>
+ <ul style="font-size: 0.875rem; color: var(--color-mid);">
+ <li>Feature engineering decisions and rationale for each component</li>
+ <li>Model selection (SVM vs RF vs GB) and hyperparameter choices</li>
+ <li>Fusion strategy and weight justification (50%/25%/25%)</li>
+ <li>SHAP explanations and counterfactual validity</li>
+ <li>Limitations, ethical considerations, and future work</li>
+ </ul>
+ </div>
+ <div class="doc-card__footer">
+ <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+ <span class="badge badge--grey">Milestone 05</span>
+ <span class="badge badge--pending">Pending</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+ </div>
+
+ </div><!-- /.ms-app -->
+
+ <footer class="footer">
+ <div class="container">
+ <div class="footer__top">
+ <div>
+ <div class="footer__brand"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent);display:inline-block;"></span> Artistic</div>
+ <p class="footer__tagline">Machine Learning-Based Early Detection of Autism Using Multimodal Conversational Features. A research project at SLIIT.</p>
+ </div>
+ <div><div class="footer__col-title">Navigation</div><ul class="footer__links"><li><a href="index.html">Home</a></li><li><a href="domain.html">Domain</a></li><li><a href="milestones.html">Milestones</a></li><li><a href="documents.html">Documents</a></li></ul></div>
+ <div><div class="footer__col-title">More</div><ul class="footer__links"><li><a href="presentations.html">Presentations</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+ <div><div class="footer__col-title">Milestones</div><ul class="footer__links"><li><a href="milestones.html">Proposal</a></li><li><a href="milestones.html">Progress 1</a></li><li><a href="milestones.html">Progress 2</a></li><li><a href="milestones.html">Final Assessment</a></li></ul></div>
+ </div>
+ <div class="footer__bottom">
+ <p class="footer__copy">&copy; 2025 Artistic Research Team, SLIIT. All rights reserved.</p>
+ <span class="footer__badge">HTML &amp; CSS</span>
+ </div>
+ </div>
+ </footer>
+
+</body>
+</html>
