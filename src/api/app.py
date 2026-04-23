@@ -175,84 +175,28 @@ def convert_audio_to_wav(input_path: Path) -> Path:
         return input_path
 
 def get_input_handler(transcription_engine: str = "assemblyai"):
-    """Get or create an input handler for the selected transcription engine."""
-    is_production = str(
-        os.getenv("APP_ENV")
-        or os.getenv("ENVIRONMENT")
-        or os.getenv("ENV")
-        or os.getenv("NODE_ENV")
-        or ""
-    ).strip().lower() == "production"
-
-    selected_engine = (transcription_engine or "assemblyai").strip().lower()
-    if selected_engine not in {"deepgram", "assemblyai"}:
-        selected_engine = "assemblyai"
-    if is_production and selected_engine != "assemblyai":
-        logger.info(
-            f"Production mode active; forcing transcription engine to assemblyai (requested={selected_engine})"
+    """Get or create an AssemblyAI input handler (sole active backend)."""
+    # AssemblyAI is the sole active transcription backend.
+    if not os.getenv("ASSEMBLYAI_API_KEY", "").strip():
+        raise RuntimeError(
+            "ASSEMBLYAI_API_KEY is not configured. Set it in your .env file."
         )
-        selected_engine = "assemblyai"
 
-    if selected_engine == "deepgram":
-        if not os.getenv("DEEPGRAM_API_KEY", "").strip():
-            logger.warning("DEEPGRAM_API_KEY missing; switching to assemblyai engine")
-            selected_engine = "assemblyai"
-    if selected_engine == "assemblyai":
-        if not os.getenv("ASSEMBLYAI_API_KEY", "").strip():
-            if is_production:
-                raise RuntimeError("ASSEMBLYAI_API_KEY is required in production mode")
-            logger.warning("ASSEMBLYAI_API_KEY missing; switching to deepgram engine")
-            selected_engine = "deepgram"
-
-    if selected_engine == "deepgram":
-        backend = "deepgram"
-        model_size = os.getenv("DEEPGRAM_MODEL", "nova-2")
-    elif selected_engine == "assemblyai":
-        backend = "assemblyai"
-        model_size = os.getenv("ASSEMBLYAI_SPEECH_MODEL", "universal")
-    else:
-        backend = "whisperx"
-        model_size = os.getenv("LOCAL_OSS_MODEL_SIZE", "large-v3")
-
-    cache_key = (selected_engine, model_size)
+    model_size = os.getenv("ASSEMBLYAI_SPEECH_MODEL", "universal")
+    cache_key = ("assemblyai", model_size)
     handler = input_handlers.get(cache_key)
     if handler is not None:
         return handler
 
-    try:
-        handler = InputHandler(
-            transcriber_backend=backend,
-            whisper_model_size=model_size,
-            device=os.getenv("LOCAL_OSS_DEVICE", "cpu"),
-            language='en'
-        )
-        input_handlers[cache_key] = handler
-        logger.info(f"Initialized input handler for engine={selected_engine}, backend={backend}")
-        return handler
-    except Exception as engine_error:
-        logger.warning(
-            f"Failed to initialize requested engine={selected_engine} (backend={backend}): {engine_error}"
-        )
-        if is_production:
-            raise RuntimeError(
-                f"Failed to initialize required production engine assemblyai: {engine_error}"
-            ) from engine_error
-
-    # Last-resort fallback to existing local backend.
-    fallback_key = ("fallback", "faster-whisper")
-    fallback_handler = input_handlers.get(fallback_key)
-    if fallback_handler is not None:
-        return fallback_handler
-
-    fallback_handler = InputHandler(
-        transcriber_backend="faster-whisper",
-        whisper_model_size="base",
+    handler = InputHandler(
+        transcriber_backend="assemblyai",
+        whisper_model_size=model_size,
         device="cpu",
-        language="en",
+        language='en'
     )
-    input_handlers[fallback_key] = fallback_handler
-    logger.warning("Falling back to faster-whisper handler")
-    return fallback_handler
+    input_handlers[cache_key] = handler
+    logger.info("Initialized input handler: assemblyai")
+    return handler
 
 
 def build_transcript_payload(processed) -> Dict[str, Any]:
@@ -313,18 +257,8 @@ def build_transcript_payload(processed) -> Dict[str, Any]:
 
 
 def normalize_transcription_engine(engine: Optional[str]) -> str:
-    is_production = str(
-        os.getenv("APP_ENV")
-        or os.getenv("ENVIRONMENT")
-        or os.getenv("ENV")
-        or os.getenv("NODE_ENV")
-        or ""
-    ).strip().lower() == "production"
-    if is_production:
-        return "assemblyai"
-
-    normalized = (engine or "assemblyai").strip().lower()
-    return normalized if normalized in {"deepgram", "assemblyai"} else "assemblyai"
+    """Always returns 'assemblyai' — the sole active transcription backend."""
+    return "assemblyai"
 
 
 # Pydantic models for API

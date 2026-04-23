@@ -231,6 +231,10 @@ def _infer_diagnosis(audio_path: Path) -> Optional[str]:
     for part in dataset_parts:
         part_upper = part.upper()
 
+        # Check for known TD-only datasets by folder name
+        if part_upper in ('OCSC', 'RESCORLA-TD'):
+            return 'TD'
+
         # Check for known ASD dataset names
         if any(asd_name in part_upper for asd_name in ['ASDBANK_AAC', 'ASDBANK_EIGSTI', 'ASDBANK_FLUSBERG',
                                                        'ASDBANK_NADIG', 'ASDBANK_QUIGLEY', 'ASDBANK_ROLLINS']):

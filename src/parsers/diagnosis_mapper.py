@@ -80,6 +80,16 @@ class DiagnosisMapper:
             'description': 'Child-only audio extracted from ASD Bank AAC'
         },
 
+        # Typically Developing corpora
+        'OCSC': {
+            'default_diagnosis': 'TD',
+            'description': 'OCSC corpus — Typically Developing children (audio + CHAT)'
+        },
+        'Rescorla-TD': {
+            'default_diagnosis': 'TD',
+            'description': 'Rescorla TD corpus — Typically Developing children, age bins 36–156 months (audio + CHAT)'
+        },
+
     }
     
     def __init__(self):
@@ -176,6 +186,10 @@ class DiagnosisMapper:
         for part in file_path.parts:
             if part.startswith('asdbank_'):
                 return part
+            if part == "OCSC":
+                return "OCSC"
+            if part == "Rescorla-TD":
+                return "Rescorla-TD"
 
         if "td" in path_parts:
             return "td"

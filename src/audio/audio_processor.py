@@ -176,41 +176,8 @@ class AudioProcessor:
             )
         
         # Step 2: Speaker assignment.
-        backend = str(transcription.metadata.get("backend", ""))
-        has_speaker_labels = any(seg.speaker for seg in transcription.segments)
-        unique_speakers = {seg.speaker for seg in transcription.segments if seg.speaker}
-
-        if (
-            transcription.segments
-            and LIBROSA_AVAILABLE
-            and not has_speaker_labels
-            and backend in {"whisper", "faster-whisper", "google", "vosk"}
-        ):
-            # Non-diarizing backend — use pitch analysis to separate speakers.
-            transcription = self._identify_speakers_by_pitch(
-                transcription,
-                audio_path
-            )
-        elif (
-            transcription.segments
-            and LIBROSA_AVAILABLE
-            and len(unique_speakers) <= 1
-            and backend == "deepgram"
-        ):
-            # Deepgram returned only one speaker ID — diarization is not active
-            # on this API key.  Fall back to pitch-based identification so we
-            # still get some speaker separation.
-            logger.warning(
-                "Deepgram returned only 1 unique speaker ID — API key may not "
-                "have diarization enabled.  Falling back to pitch-based speaker "
-                "identification."
-            )
-            for seg in transcription.segments:
-                seg.speaker = None
-            transcription = self._identify_speakers_by_pitch(
-                transcription,
-                audio_path
-            )
+        # AssemblyAI always provides speaker labels via its diarization model,
+        # so no pitch-based fallback is needed.
 
         # Step 3: Normalize speaker roles to a stable conversation schema.
         transcription = self._normalize_speaker_roles(

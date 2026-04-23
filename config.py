@@ -160,7 +160,9 @@ class DatasetConfig:
         "asdbank_quigley_mcnalley",
         "asdbank_rollins",
         "typical_dev",
-        "asdbank_child_only"
+        "asdbank_child_only",
+        "OCSC",
+        "Rescorla-TD",
     ])
     
     # Limit TD dataset to avoid processing 4000+ files

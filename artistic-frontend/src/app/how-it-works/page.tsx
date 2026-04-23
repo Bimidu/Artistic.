@@ -1911,14 +1911,26 @@ export default function HowItWorksPage() {
                   <span className="w-6 h-6 bg-gray-900 text-white rounded-md flex items-center justify-center text-xs">
                     <IconChart className="w-4 h-4" />
                   </span>
-                  Training Data — ASDBank
+                  Training Data
                 </h3>
-                <p className="text-sm text-gray-600 mb-4">All models are trained on real clinical recordings from the <strong>ASDBank</strong> collection, hosted on TalkBank. Six corpora of child–adult conversations:</p>
-                <div className="space-y-2">
+                <p className="text-sm text-gray-600 mb-3">Models are trained on real clinical recordings from multiple corpora hosted on TalkBank. ASDBank corpora (ASD &amp; TD children):</p>
+                <div className="space-y-2 mb-4">
                   {['Eigsti', 'Flusberg', 'Nadig', 'Quigley-McNalley', 'Rollins', 'AAC'].map(c => (
                     <div key={c} className="flex items-center gap-3 text-sm">
                       <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
                       <span className="text-gray-700">ASDBank — {c} corpus</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-gray-600 mb-3">Additional TD corpora (audio + CHAT transcripts):</p>
+                <div className="space-y-2">
+                  {[
+                    { key: 'OCSC', label: 'OCSC corpus — Typically Developing children (audio + CHAT)' },
+                    { key: 'Rescorla-TD', label: 'Rescorla TD corpus — TD children aged 36–156 months (audio + CHAT)' },
+                  ].map(({ key, label }) => (
+                    <div key={key} className="flex items-center gap-3 text-sm">
+                      <div className="w-2 h-2 rounded-full bg-sky-400 flex-shrink-0" />
+                      <span className="text-gray-700">{label}</span>
                     </div>
                   ))}
                 </div>

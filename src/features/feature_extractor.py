@@ -496,19 +496,36 @@ class FeatureExtractor:
             DataFrame with one row per transcript
         """
         from src.parsers.chat_parser import CHATParser
-        
+
         if parser is None:
             parser = CHATParser()
-        
+
         feature_sets = []
         errors = []
-        
+
         iterator = tqdm(file_paths, desc="Extracting features") if show_progress else file_paths
-        
+
         for file_path in iterator:
             try:
                 transcript = parser.parse_file(file_path)
-                feature_set = self.extract_from_transcript(transcript)
+
+                # If a matching audio file exists alongside the .cha, use it for
+                # audio-only librosa features (speaking ratio, energy-based pauses).
+                # No transcription is run — the .cha text remains primary.
+                audio_extensions = ['.wav', '.mp3', '.flac', '.m4a', '.aac']
+                paired_audio = None
+                for ext in audio_extensions:
+                    candidate = file_path.with_suffix(ext)
+                    if candidate.exists():
+                        paired_audio = candidate
+                        break
+
+                if paired_audio is not None:
+                    logger.debug(f"Paired audio found for {file_path.name}: {paired_audio.name}")
+                    feature_set = self.extract_with_audio(transcript, audio_path=paired_audio)
+                else:
+                    feature_set = self.extract_from_transcript(transcript)
+
                 feature_sets.append(feature_set.to_dict())
             except Exception as e:
                 logger.error(f"Error processing {file_path.name}: {e}")
@@ -643,71 +660,20 @@ class FeatureExtractor:
             DataFrame with one row per audio file
         """
         from src.audio.audio_processor import AudioProcessor
-        
-        # Initialize audio processor with error handling
-        # On macOS, Whisper often crashes with PyTorch segfault
-        import platform
-        is_macos = platform.system() == 'Darwin'
-        
-        logger.info("Initializing audio processor for transcription...")
-        audio_processor = None
-        
-        # Priority order: faster-whisper > vosk > google > whisper (last due to crashes)
-        # faster-whisper uses CTranslate2 instead of PyTorch, avoids macOS crashes
-        backends_to_try = []
-        
-        if is_macos:
-            logger.info("macOS detected: Preferring faster-whisper (avoids PyTorch crashes)")
-            backends_to_try = [
-                ('faster-whisper', 'tiny'),
-                ('vosk', None),
-                ('google', None)
-            ]
-        else:
-            backends_to_try = [
-                ('faster-whisper', 'tiny'),
-                ('whisper', 'tiny'),
-                ('vosk', None),
-                ('google', None)
-            ]
-        
-        for backend, model_size in backends_to_try:
-            try:
-                logger.info(f"Trying {backend} backend...")
-                if backend in ('faster-whisper', 'whisper'):
-                    audio_processor = AudioProcessor(
-                        transcriber_backend=backend,
-                        whisper_model_size=model_size or 'tiny',
-                        device='cpu',
-                        language='en'
-                    )
-                else:
-                    audio_processor = AudioProcessor(
-                        transcriber_backend=backend,
-                        language='en'
-                    )
-                
-                if audio_processor.transcriber_available:
-                    logger.info(f"✓ Audio processor initialized with {backend}")
-                    if backend == 'google':
-                        logger.info("Note: Google Speech-to-Text requires internet connection")
-                    break
-            except (RuntimeError, OSError, ImportError) as e:
-                logger.debug(f"{backend} failed: {e}")
-                continue
-            except Exception as e:
-                logger.debug(f"{backend} error: {e}")
-                continue
-        
-        if audio_processor is None or not audio_processor.transcriber_available:
-            logger.error("All transcription backends failed!")
-            logger.error(
-                "Install one of:\n"
-                "1. faster-whisper (recommended for macOS): pip install faster-whisper\n"
-                "2. Vosk: pip install vosk (also download model from https://alphacephei.com/vosk/models)\n"
-                "3. Google: pip install SpeechRecognition\n"
-                "4. Whisper: pip install openai-whisper (may crash on macOS)"
+
+        logger.info("Initializing AssemblyAI audio processor for transcription...")
+        try:
+            audio_processor = AudioProcessor(
+                transcriber_backend='assemblyai',
+                language='en'
             )
+        except ImportError as e:
+            logger.error(f"AssemblyAI transcription unavailable: {e}")
+            logger.error("Set ASSEMBLYAI_API_KEY in your .env file.")
+            return pd.DataFrame()
+
+        if not audio_processor.transcriber_available:
+            logger.error("AssemblyAI transcriber not available — check ASSEMBLYAI_API_KEY.")
             return pd.DataFrame()
         
         feature_sets = []
@@ -768,35 +734,9 @@ class FeatureExtractor:
                         logger.warning(f"Transcription failed for {audio_path.name}")
                         transcription_failed = True
                 except (RuntimeError, OSError) as transcribe_error:
-                    # If Whisper crashes during model loading (segfault), try Google fallback
-                    error_msg = str(transcribe_error).lower()
-                    if 'whisper' in error_msg or 'model' in error_msg or 'pytorch' in error_msg:
-                        logger.warning(
-                            f"Whisper failed for {audio_path.name}: {transcribe_error}. "
-                            f"Switching to Google Speech-to-Text fallback..."
-                        )
-                        # Try Google Speech-to-Text as fallback
-                        try:
-                            google_processor = AudioProcessor(
-                                transcriber_backend='google',
-                                language='en'
-                            )
-                            audio_result = google_processor.process(
-                                audio_path,
-                                participant_id=participant_id,
-                                diagnosis=diagnosis
-                            )
-                            logger.info(f"✓ Google Speech-to-Text succeeded for {audio_path.name}")
-                            # Update audio_processor for future files
-                            audio_processor = google_processor
-                        except Exception as google_error:
-                            logger.error(f"Google fallback also failed: {google_error}")
-                            errors.append((audio_path, f"Both Whisper and Google failed"))
-                            continue
-                    else:
-                        logger.error(f"Transcription error for {audio_path.name}: {transcribe_error}")
-                        errors.append((audio_path, f"Transcription error: {transcribe_error}"))
-                        continue
+                    logger.error(f"AssemblyAI transcription error for {audio_path.name}: {transcribe_error}")
+                    errors.append((audio_path, f"Transcription error: {transcribe_error}"))
+                    continue
                 except Exception as transcribe_error:
                     # Other unexpected errors
                     logger.error(f"Unexpected transcription error for {audio_path.name}: {transcribe_error}")
