@@ -21,9 +21,12 @@ def diagnose_acoustic_processing():
     print("ACOUSTIC PROCESSING DIAGNOSTIC TEST")
     print("="*70)
 
-    # Set timeout (5 minutes max)
-    signal.signal(signal.SIGALRM, timeout_handler)
-    signal.alarm(300)  # 5 minute timeout
+    # Set timeout (5 minutes max) - Only works on Unix
+    if hasattr(signal, 'SIGALRM'):
+        signal.signal(signal.SIGALRM, timeout_handler)
+        signal.alarm(300)  # 5 minute timeout
+    else:
+        print("ℹ️  Note: Timeout protection not available on Windows, skipping signal setup.")
 
     try:
         print("Step 1: Testing preparation phase...")
@@ -86,7 +89,8 @@ def diagnose_acoustic_processing():
         import traceback
         traceback.print_exc()
     finally:
-        signal.alarm(0)  # Cancel timeout
+        if hasattr(signal, 'alarm'):
+            signal.alarm(0)  # Cancel timeout
 
     print("\n" + "="*70)
     print("DIAGNOSTIC COMPLETE")

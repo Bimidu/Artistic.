@@ -71,6 +71,7 @@ seaborn>=0.12.0            # Statistical visualization
 # Audio & Speech
 # ============================================================================
 librosa~=0.11.0
+praat-parselmouth>=0.4.5     # Praat bindings for true formant (LPC) extraction
 pydub~=0.25.1
 faster-whisper>=0.10.0     # CTranslate2-based Whisper
 openai-whisper>=20231117   # Whisper (PyTorch-based)

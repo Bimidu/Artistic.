@@ -344,8 +344,7 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             features.update(self._get_default_features())
         
         logger.debug(f"Extracted {len(features)} acoustic features")
-        
-        # PLASTER FIX: Ensure ALL expected features are present
+
         # This prevents missing feature errors during inference
         expected_features = self.feature_names
         for feature_name in expected_features:
@@ -439,8 +438,8 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             # Extract pitch using librosa's pyin algorithm
             f0, voiced_flag, voiced_probs = librosa.pyin(
                 audio,
-                fmin=librosa.note_to_hz('C2'),  # ~65 Hz
-                fmax=librosa.note_to_hz('C7'),  # ~2093 Hz
+                fmin=float(librosa.note_to_hz('C2')),  # ~65 Hz
+                fmax=float(librosa.note_to_hz('C7')),  # ~2093 Hz
                 frame_length=2048,
                 hop_length=512
             )
@@ -466,11 +465,11 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
                     features['acoustic_pitch_slope_std'] = 0.0
                 
                 # Pitch variability (coefficient of variation)
-                features['acoustic_pitch_variability'] = safe_divide(
+                features['acoustic_pitch_variability'] = float(safe_divide(
                     features['acoustic_pitch_std'],
                     features['acoustic_pitch_mean']
-                )
-                
+                ))
+
                 # Pitch contour standard deviation
                 features['acoustic_pitch_contour_std'] = features['acoustic_pitch_std']
                 
@@ -534,8 +533,8 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             try:
                 f0, _, _ = librosa.pyin(
                     audio,
-                    fmin=librosa.note_to_hz('C2'),
-                    fmax=librosa.note_to_hz('C7'),
+                    fmin=float(librosa.note_to_hz('C2')),
+                    fmax=float(librosa.note_to_hz('C7')),
                     frame_length=2048,
                     hop_length=512
                 )
@@ -548,9 +547,9 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
                     falling = np.sum(pitch_diff < -5)  # Threshold for falling
                     flat = total - rising - falling
                     
-                    features['acoustic_pitch_rising_ratio'] = safe_divide(rising, total)
-                    features['acoustic_pitch_falling_ratio'] = safe_divide(falling, total)
-                    features['acoustic_pitch_flat_ratio'] = safe_divide(flat, total)
+                    features['acoustic_pitch_rising_ratio'] = float(safe_divide(rising, total))
+                    features['acoustic_pitch_falling_ratio'] = float(safe_divide(falling, total))
+                    features['acoustic_pitch_flat_ratio'] = float(safe_divide(flat, total))
                 else:
                     features['acoustic_pitch_rising_ratio'] = 0.0
                     features['acoustic_pitch_falling_ratio'] = 0.0
@@ -583,8 +582,8 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             # Extract pitch for jitter calculation
             f0, _, _ = librosa.pyin(
                 audio,
-                fmin=librosa.note_to_hz('C2'),
-                fmax=librosa.note_to_hz('C7'),
+                fmin=float(librosa.note_to_hz('C2')),
+                fmax=float(librosa.note_to_hz('C7')),
                 frame_length=2048,
                 hop_length=512
             )
@@ -594,10 +593,10 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
                 # Jitter: period-to-period variation in F0
                 periods = 1.0 / f0_voiced  # Period in seconds
                 period_diff = np.abs(np.diff(periods))
-                features['acoustic_jitter'] = safe_divide(
-                    np.mean(period_diff),
-                    np.mean(periods)
-                )
+                features['acoustic_jitter'] = float(safe_divide(
+                    float(np.mean(period_diff)),
+                    float(np.mean(periods))
+                ))
             else:
                 features['acoustic_jitter'] = 0.0
             
@@ -607,10 +606,10 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             rms = librosa.feature.rms(y=audio, frame_length=frame_length, hop_length=hop_length)[0]
             if len(rms) > 1:
                 rms_diff = np.abs(np.diff(rms))
-                features['acoustic_shimmer'] = safe_divide(
-                    np.mean(rms_diff),
-                    np.mean(rms)
-                )
+                features['acoustic_shimmer'] = float(safe_divide(
+                    float(np.mean(rms_diff)),
+                    float(np.mean(rms))
+                ))
             else:
                 features['acoustic_shimmer'] = 0.0
             
@@ -739,29 +738,102 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
         audio: np.ndarray,
         sr: int
     ) -> Dict[str, float]:
-        """Extract formant-like features from spectral peaks."""
-        features = {}
-        
+        """Extract formant features (F1/F2/F3).
+
+        Preferred backend: Praat via praat-parselmouth (LPC formants).
+        Fallback backend: spectral-peak proxy (previous implementation).
+
+        Returns:
+            Dict containing:
+                - acoustic_formant_1_mean/std
+                - acoustic_formant_2_mean/std
+                - acoustic_formant_3_mean/std
+        """
+        try:
+            import parselmouth  # type: ignore
+
+            # Parselmouth expects float64 and works best with normalized audio.
+            y = np.asarray(audio, dtype=np.float64)
+            if y.size == 0:
+                raise ValueError("Empty audio")
+
+            peak = float(np.max(np.abs(y)))
+            if peak > 0:
+                y = y / peak
+
+            # Create Praat Sound
+            snd = parselmouth.Sound(y, sampling_frequency=float(sr))
+
+            # Praat formant (Burg).
+            # Tuned for child speech:
+            # - maximum_formant: 5500 Hz is a common Praat setting for children
+            # - window_length: 25 ms
+            # - time_step: 10 ms
+            formant = snd.to_formant_burg(
+                time_step=0.01,
+                max_number_of_formants=5,
+                maximum_formant=5500,
+                window_length=0.025,
+                pre_emphasis_from=50,
+            )
+
+            times = formant.xs()
+            f1: list[float] = []
+            f2: list[float] = []
+            f3: list[float] = []
+
+            for t in times:
+                v1 = formant.get_value_at_time(1, t)
+                v2 = formant.get_value_at_time(2, t)
+                v3 = formant.get_value_at_time(3, t)
+
+                # Parselmouth returns NaN for undefined values.
+                if v1 is not None and np.isfinite(v1) and v1 > 0:
+                    f1.append(float(v1))
+                if v2 is not None and np.isfinite(v2) and v2 > 0:
+                    f2.append(float(v2))
+                if v3 is not None and np.isfinite(v3) and v3 > 0:
+                    f3.append(float(v3))
+
+            # Reasonable defaults if extraction fails (same as old behavior)
+            features: Dict[str, float] = {
+                'acoustic_formant_1_mean': float(np.mean(f1)) if len(f1) else 300.0,
+                'acoustic_formant_1_std': float(np.std(f1)) if len(f1) else 0.0,
+                'acoustic_formant_2_mean': float(np.mean(f2)) if len(f2) else 1500.0,
+                'acoustic_formant_2_std': float(np.std(f2)) if len(f2) else 0.0,
+                'acoustic_formant_3_mean': float(np.mean(f3)) if len(f3) else 3000.0,
+                'acoustic_formant_3_std': float(np.std(f3)) if len(f3) else 0.0,
+            }
+
+            return features
+
+        except Exception as e:
+            # Fall back to the previous spectral-peak approach if parselmouth isn't
+            # installed or if Praat extraction fails for this file.
+            logger.debug(f"Parselmouth formant extraction unavailable/failed; falling back to spectral peaks: {e}")
+
+        # --- Fallback: spectral-peak proxy (previous implementation) ---
+        features: Dict[str, float] = {}
+
         try:
             # Get spectral magnitude with shorter window for efficiency
             stft = librosa.stft(audio, n_fft=1024, hop_length=512)
             magnitude = np.abs(stft)
-            
+
             # Find spectral peaks (formant-like)
             formant_1 = []
             formant_2 = []
             formant_3 = []
-            
+
             # Sample only every 10th frame for speed
             for frame in range(0, magnitude.shape[1], 10):
                 try:
                     frame_mag = magnitude[:, frame]
 
-                    # Simple peak finding using scipy-style approach
                     # Find local maxima
                     peaks = []
                     for i in range(1, len(frame_mag) - 1):
-                        if frame_mag[i] > frame_mag[i-1] and frame_mag[i] > frame_mag[i+1]:
+                        if frame_mag[i] > frame_mag[i - 1] and frame_mag[i] > frame_mag[i + 1]:
                             peaks.append(i)
 
                     if len(peaks) == 0:
@@ -795,8 +867,7 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
                         if len(f3_candidates) > 0:
                             formant_3.append(f3_candidates[0])
 
-                except (IndexError, ValueError) as e:
-                    # Skip this frame if there are indexing issues
+                except (IndexError, ValueError):
                     continue
 
             # Calculate statistics with safety checks
@@ -810,8 +881,7 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             features['acoustic_formant_3_std'] = float(np.std(formant_3)) if len(formant_3) > 0 else 0.0
 
         except Exception as e:
-            logger.debug(f"Error extracting formant features: {e}")  # Changed to debug level
-            # Return typical formant values as defaults
+            logger.debug(f"Error extracting formant features: {e}")
             features.update({
                 'acoustic_formant_1_mean': 300.0, 'acoustic_formant_1_std': 50.0,
                 'acoustic_formant_2_mean': 1500.0, 'acoustic_formant_2_std': 200.0,
@@ -883,8 +953,8 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             # Extract pitch for trajectory analysis
             f0, _, _ = librosa.pyin(
                 audio,
-                fmin=librosa.note_to_hz('C2'),
-                fmax=librosa.note_to_hz('C7'),
+                fmin=float(librosa.note_to_hz('C2')),
+                fmax=float(librosa.note_to_hz('C7')),
                 frame_length=2048,
                 hop_length=512
             )
@@ -1011,14 +1081,14 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             onset_env = librosa.onset.onset_strength(y=audio, sr=sr)
             onsets = librosa.onset.onset_detect(onset_envelope=onset_env, sr=sr)
             duration = len(audio) / sr
-            features['acoustic_onset_rate'] = safe_divide(len(onsets), duration)
-            
+            features['acoustic_onset_rate'] = float(safe_divide(len(onsets), duration))
+
             # Silence ratio (proportion of silence)
             intervals = librosa.effects.split(audio, top_db=30)
             if len(intervals) > 0:
                 speech_time = sum((e - s) for s, e in intervals) / sr
                 silence_time = max(duration - speech_time, 0.0)
-                features['acoustic_silence_ratio'] = safe_divide(silence_time, duration)
+                features['acoustic_silence_ratio'] = float(safe_divide(silence_time, duration))
             else:
                 features['acoustic_silence_ratio'] = 1.0  # All silence
                 
@@ -1045,8 +1115,8 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             # Extract pitch for advanced statistics
             f0, _, _ = librosa.pyin(
                 audio,
-                fmin=librosa.note_to_hz('C2'),
-                fmax=librosa.note_to_hz('C7'),
+                fmin=float(librosa.note_to_hz('C2')),
+                fmax=float(librosa.note_to_hz('C7')),
                 frame_length=2048,
                 hop_length=512
             )
@@ -1231,8 +1301,8 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             # Extract pitch and energy time series
             f0, _, _ = librosa.pyin(
                 audio,
-                fmin=librosa.note_to_hz('C2'),
-                fmax=librosa.note_to_hz('C7'),
+                fmin=float(librosa.note_to_hz('C2')),
+                fmax=float(librosa.note_to_hz('C7')),
                 frame_length=2048,
                 hop_length=512
             )
@@ -1323,11 +1393,11 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             
             # Percussive energy ratio
             total_energy = np.mean(rms_harmonic) + np.mean(rms_percussive)
-            features['acoustic_percussive_energy_ratio'] = safe_divide(
-                np.mean(rms_percussive),
-                total_energy
-            )
-            
+            features['acoustic_percussive_energy_ratio'] = float(safe_divide(
+                float(np.mean(rms_percussive)),
+                float(total_energy)
+            ))
+
         except Exception as e:
             logger.warning(f"Error extracting harmonic features: {e}")
             features.update({k: 0.0 for k in [
