@@ -386,18 +386,10 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             return self._get_default_features()
         
         try:
-            # Load audio with optimization for individual processing
-            audio_duration_limit = 120.0  # Limit to 2 minutes for faster processing
-            if any(dataset in str(audio_path).lower() for dataset in ['asdbank', 'aac']):
-                # For individual ASD files, use shorter duration for speed
-                audio_duration_limit = 60.0  # 1 minute max for ASD individual processing
-                logger.debug(f"Processing individual ASD file with 60s limit: {Path(audio_path).name}")
-
             audio, sr = librosa.load(
                 str(audio_path),
                 sr=self.sample_rate,
-                mono=True,
-                duration=audio_duration_limit
+                mono=True
             )
 
             if len(audio) == 0:

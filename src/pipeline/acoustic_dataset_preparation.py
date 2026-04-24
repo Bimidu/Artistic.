@@ -1,15 +1,8 @@
 """
 Acoustic Dataset Preparation for Training
 
-This module implements the merged audio approach for acoustic feature extraction,
-where multiple audio files are concatenated together to create more robust
-training samples for the acoustic/prosodic component.
-
-The approach:
-1. Groups audio files by diagnosis (ASD/TD) from multiple datasets
-2. Creates merged samples by concatenating n_per_group audio files
-3. Limits the total number of merged samples per diagnosis to prevent imbalance
-4. Ensures reproducible sampling with fixed random seed
+This module prepares acoustic/prosodic training inputs without audio merging.
+Each valid audio file is returned as an individual sample group.
 
 Author: ASD Detection Team
 Date: March 2026
@@ -27,25 +20,23 @@ logger = get_logger(__name__)
 
 def prepare_acoustic_training_data(
     dataset_paths: List[Path],
-    n_per_group: int = 20,  # TD: merge 20 files per group (updated from 10)
-    max_merged_per_diagnosis: int = 100,  # TD: Create 100 merged training samples
+    n_per_group: int = 20,
+    max_merged_per_diagnosis: int = 100,
     random_state: int = 42,
     min_audio_duration: float = 1.0,
     max_audio_duration: float = 300.0
 ) -> List[Tuple[List[Path], str, str]]:
     """
-    Prepare acoustic training data with different strategies for ASD and TD.
+    Prepare acoustic training data with non-merged sampling for ASD and TD.
 
     Strategy:
-    - ASD files: Individual processing (no merging, just child-only audio extraction)
-    - TD files: Merge 20 files into 1 group, create 100 such merged groups randomly
-
-    This approach handles the class imbalance where TD datasets are much larger than ASD.
+    - ASD files: Individual processing (no merging)
+    - TD files: Individual processing (no merging)
 
     Args:
         dataset_paths: List of dataset directory paths to scan
-        n_per_group: Number of TD files to merge per training sample (default: 20)
-        max_merged_per_diagnosis: Maximum merged groups for TD (default: 100)
+        n_per_group: Deprecated (kept for backward compatibility; unused).
+        max_merged_per_diagnosis: Deprecated (kept for backward compatibility; unused).
         random_state: Random seed for reproducible sampling
         min_audio_duration: Minimum audio duration in seconds (for filtering)
         max_audio_duration: Maximum audio duration in seconds (for filtering)
@@ -53,15 +44,18 @@ def prepare_acoustic_training_data(
     Returns:
         List of (audio_paths_list, diagnosis, dataset_name) tuples where:
         - ASD entries have 1 file per list (individual processing)
-        - TD entries have 20 files per list (merged processing)
+        - TD entries have 1 file per list (individual processing)
 
     Example:
         >>> paths = [Path("data/asdbank_eigsti"), Path("data/td")]
         >>> prepared = prepare_acoustic_training_data(paths)
-        >>> # Returns: [([asd1.wav], 'ASD', 'eigsti'), ([td1.wav, td2.wav, ...20 files], 'TD', 'td'), ...]
+        >>> # Returns: [([asd1.wav], 'ASD', 'eigsti'), ([td1.wav], 'TD', 'td'), ...]
     """
     logger.info(f"Preparing acoustic training data from {len(dataset_paths)} datasets")
-    logger.info(f"Config: n_per_group={n_per_group}, max_per_diagnosis={max_merged_per_diagnosis}")
+    logger.info(
+        "Config: non-merged mode enabled "
+        f"(legacy params ignored: n_per_group={n_per_group}, max_per_diagnosis={max_merged_per_diagnosis})"
+    )
 
     # Set random seed for reproducibility
     random.seed(random_state)
@@ -136,42 +130,19 @@ def prepare_acoustic_training_data(
 
             logger.info(f"Created {len(valid_asd_files)} individual ASD samples (no merging)")
 
-    # Strategy 2: TD - Merged files (10 files per group, 100 groups total)
+    # Strategy 2: TD - Individual files (no merging)
     td_files_with_datasets = audio_files_by_diagnosis['TD']
     if td_files_with_datasets:
         valid_td_files = _filter_valid_audio_files(td_files_with_datasets, min_audio_duration, max_audio_duration)
         logger.info(f"Valid TD files after filtering: {len(valid_td_files)}")
 
-        if len(valid_td_files) < n_per_group:
-            logger.warning(f"Not enough TD files ({len(valid_td_files)}) to create groups of {n_per_group}")
-        else:
-            # Shuffle TD files for random grouping
-            shuffled_td_files = valid_td_files.copy()
-            random.shuffle(shuffled_td_files)
+        if valid_td_files:
+            random.shuffle(valid_td_files)
+            for td_file, dataset_name in valid_td_files:
+                prepared_groups.append(([td_file], 'TD', dataset_name))
+            logger.info(f"Created {len(valid_td_files)} individual TD samples (no merging)")
 
-            # Create merged groups for TD (10 files per group, up to 100 groups)
-            td_groups_created = 0
-            for i in range(0, len(shuffled_td_files) - n_per_group + 1, n_per_group):
-                if td_groups_created >= max_merged_per_diagnosis:
-                    break
-
-                # Take next n_per_group files
-                group_files_with_datasets = shuffled_td_files[i:i + n_per_group]
-                group_files = [f[0] for f in group_files_with_datasets]  # Extract just the paths
-
-                # Use the most common dataset name for this group
-                dataset_names = [f[1] for f in group_files_with_datasets]
-                most_common_dataset = max(set(dataset_names), key=dataset_names.count)
-
-                # Add to prepared groups
-                prepared_groups.append((group_files, 'TD', most_common_dataset))
-                td_groups_created += 1
-
-                logger.debug(f"Created TD merged group {td_groups_created}: {len(group_files)} files from {most_common_dataset}")
-
-            logger.info(f"Created {td_groups_created} merged TD groups ({n_per_group} files per group)")
-
-    logger.info(f"Total prepared groups: {len(prepared_groups)} (ASD individual + TD merged)")
+    logger.info(f"Total prepared groups: {len(prepared_groups)} (ASD individual + TD individual)")
     return prepared_groups
 
 
@@ -313,7 +284,7 @@ def _filter_valid_audio_files(
 
 def get_merged_sample_info(prepared_groups: List[Tuple[List[Path], str, str]]) -> Dict:
     """
-    Get summary information about prepared merged samples.
+    Get summary information about prepared samples.
 
     Args:
         prepared_groups: Output from prepare_acoustic_training_data
