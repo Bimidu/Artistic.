@@ -329,9 +329,39 @@ p:last-child { margin-bottom: 0; }
 /* ── Badges / Chips ───────────────────────────────────────── */
 .badge {
   display: inline-flex; align-items: center;
-  font-size: 0.75rem; font-weight: 600;
-  padding: 3px 10px; border-radius: var(--radius-full);
+  gap: 10px;
+  font-size: 0.78rem; font-weight: 600;
+  padding: 6px 14px; border-radius: var(--radius-full);
   border: 1px solid transparent;
+}
+.tech-icon {
+  font-size: 1.55rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+}
+.tech-logo-img {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+.tech-icon.devicon-scikitlearn-plain { color: #f7931e; }
+.tech-icon.devicon-pytorch-original { color: #ee4c2c; }
+.tech-icon.devicon-pandas-original { color: #150458; }
+.tech-icon.devicon-numpy-original { color: #4dabcf; }
+.tech-icon.devicon-spacy-plain { color: #09a3d5; }
+.tech-icon.devicon-fastapi-plain { color: #05998b; }
+.tech-icon.devicon-sqlalchemy-plain { color: #d71f00; }
+.tech-icon.devicon-react-original { color: #61dafb; }
+.tech-icon.devicon-typescript-plain { color: #3178c6; }
+.tech-icon.devicon-tailwindcss-original { color: #06b6d4; }
+.tech-icon[class^="ri-"],
+.tech-icon[class*=" ri-"] {
+  color: var(--color-primary);
 }
 .badge--green   { color: var(--color-primary);   background: var(--color-primary-soft);  border-color: var(--color-accent-soft); }
 .badge--grey    { color: var(--color-mid);        background: var(--color-surface-2);     border-color: var(--color-border); }
@@ -339,6 +369,44 @@ p:last-child { margin-bottom: 0; }
 .badge--pending   { color: #92400e; background: #fef3c7; border-color: #fde68a; }
 
 .tech-grid { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-lg); }
+.tech-columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+.tech-column {
+  min-width: 0;
+  padding: 0 14px;
+  border-right: 1px solid var(--color-border);
+}
+.tech-column:last-child { border-right: none; }
+.tech-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  text-align: center;
+  min-height: 108px;
+  padding: 8px 6px;
+}
+.tech-item .tech-icon,
+.tech-item .tech-logo-img {
+  width: 2.1rem;
+  height: 2.1rem;
+  font-size: 2.1rem;
+}
+.tech-item__name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-mid);
+}
 
 /* ── Buttons ──────────────────────────────────────────────── */
 .btn {
@@ -689,6 +757,8 @@ details[open] .summary__arrow { transform: rotate(180deg); background: var(--col
   .team-grid { grid-template-columns: repeat(2, 1fr); }
   .hero__layout { grid-template-columns: 1fr; gap: 26px; }
   .hero__media img { max-width: 680px; margin: 0 auto; }
+  .tech-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tech-column:nth-child(2n) { border-right: none; }
 }
 @media (max-width: 768px) {
   .container { padding: 0 var(--space-md); }
@@ -707,10 +777,14 @@ details[open] .summary__arrow { transform: rotate(180deg); background: var(--col
   .footer__bottom { flex-direction: column; gap: var(--space-md); }
   .milestone-meta { flex-wrap: wrap; gap: var(--space-md); }
   .supervisor-card { flex-direction: column; text-align: center; }
+  .tech-stack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tech-column { padding: 0 10px; }
 }
 @media (max-width: 480px) {
   .nav-cards { grid-template-columns: 1fr; }
   .doc-grid  { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; }
   .footer__top { grid-template-columns: 1fr; }
+  .tech-columns { grid-template-columns: 1fr; }
+  .tech-column { border-right: none; padding: 0; }
 }

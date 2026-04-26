@@ -8,6 +8,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -290,32 +291,56 @@
  <span class="section-label">Technologies Used</span>
  <h2 class="section-title" style="margin-top: 4px;">The Tech Stack</h2>
  <p style="max-width: 520px;">A Python-first stack combining NLP, audio analysis, and machine learning with a FastAPI backend and React frontend.</p>
- <div style="display: flex; flex-direction: column; gap: 28px; margin-top: 32px;">
- <div>
- <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">Core ML &amp; Data</div>
- <div class="tech-grid" style="margin-top: 0;">
- <span class="badge badge--green">Python 3.10+</span><span class="badge badge--green">scikit-learn</span><span class="badge badge--green">XGBoost</span><span class="badge badge--green">SHAP</span><span class="badge badge--green">RFECV</span><span class="badge badge--green">Gaussian Mixture Models</span><span class="badge badge--green">PyTorch (Autoencoder)</span><span class="badge badge--green">pandas &amp; numpy</span>
- </div>
- </div>
- <div>
- <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">NLP &amp; Linguistics</div>
- <div class="tech-grid" style="margin-top: 0;">
- <span class="badge badge--green">spaCy (en_core_web_lg)</span><span class="badge badge--green">NLTK WordNet</span><span class="badge badge--green">LDA (Latent Dirichlet Allocation)</span><span class="badge badge--green">pylangacq (CHAT parser)</span><span class="badge badge--green">TalkBank / ASDBank</span><span class="badge badge--green">CHAT / CLAN format</span>
- </div>
- </div>
- <div>
- <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">Audio Processing</div>
- <div class="tech-grid" style="margin-top: 0;">
- <span class="badge badge--grey">librosa</span><span class="badge badge--grey">AssemblyAI</span><span class="badge badge--grey">ffmpeg</span><span class="badge badge--grey">pydub</span><span class="badge badge--grey">soundfile</span>
- </div>
- </div>
- <div>
- <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">Backend &amp; Frontend</div>
- <div class="tech-grid" style="margin-top: 0;">
- <span class="badge badge--grey">FastAPI</span><span class="badge badge--grey">Uvicorn</span><span class="badge badge--grey">pydantic</span><span class="badge badge--grey">SQLite / SQLAlchemy</span><span class="badge badge--grey">Hugging Face Hub</span><span class="badge badge--grey">React / Next.js</span><span class="badge badge--grey">TypeScript</span><span class="badge badge--grey">Tailwind CSS</span>
- </div>
- </div>
- </div>
+<div class="tech-columns" style="margin-top: 32px;">
+<div class="tech-column">
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">Core ML &amp; Data</div>
+<div class="tech-stack-grid">
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">Python 3.10+</span></div>
+<div class="tech-item"><i class="devicon-scikitlearn-plain tech-icon" aria-hidden="true"></i><span class="tech-item__name">scikit-learn</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">XGBoost</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">SHAP</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">RFECV</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">Gaussian Mixture Models</span></div>
+<div class="tech-item"><i class="devicon-pytorch-original tech-icon" aria-hidden="true"></i><span class="tech-item__name">PyTorch (Autoencoder)</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="" aria-hidden="true" /><span class="tech-item__name">pandas</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="" aria-hidden="true" /><span class="tech-item__name">NumPy</span></div>
+</div>
+</div>
+<div class="tech-column">
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">NLP &amp; Linguistics</div>
+<div class="tech-stack-grid">
+<div class="tech-item"><img class="tech-logo-img" src="https://spacy.io/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">spaCy (en_core_web_lg)</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">NLTK WordNet</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">LDA (Latent Dirichlet Allocation)</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">pylangacq (CHAT parser)</span></div>
+<div class="tech-item"><i class="ri-database-2-line tech-icon" aria-hidden="true"></i><span class="tech-item__name">TalkBank / ASDBank</span></div>
+<div class="tech-item"><i class="ri-file-text-line tech-icon" aria-hidden="true"></i><span class="tech-item__name">CHAT / CLAN format</span></div>
+</div>
+</div>
+<div class="tech-column">
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">Audio Processing</div>
+<div class="tech-stack-grid">
+<div class="tech-item"><img class="tech-logo-img" src="https://librosa.org/doc/latest/_static/librosa_logo_text.svg" alt="" aria-hidden="true" /><span class="tech-item__name">librosa</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.assemblyai.com/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">AssemblyAI</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://cdn.simpleicons.org/ffmpeg/007808" alt="" aria-hidden="true" /><span class="tech-item__name">FFmpeg</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">pydub</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">soundfile</span></div>
+</div>
+</div>
+<div class="tech-column">
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); margin-bottom: 12px;">Backend &amp; Frontend</div>
+<div class="tech-stack-grid">
+<div class="tech-item"><i class="devicon-fastapi-plain tech-icon" aria-hidden="true"></i><span class="tech-item__name">FastAPI</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://www.python.org/static/favicon.ico" alt="" aria-hidden="true" /><span class="tech-item__name">Uvicorn</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://cdn.simpleicons.org/pydantic/E92063" alt="" aria-hidden="true" /><span class="tech-item__name">pydantic</span></div>
+<div class="tech-item"><i class="devicon-sqlalchemy-plain tech-icon" aria-hidden="true"></i><span class="tech-item__name">SQLite / SQLAlchemy</span></div>
+<div class="tech-item"><img class="tech-logo-img" src="https://cdn.simpleicons.org/huggingface/FFD21E" alt="" aria-hidden="true" /><span class="tech-item__name">Hugging Face Hub</span></div>
+<div class="tech-item"><i class="devicon-react-original tech-icon" aria-hidden="true"></i><span class="tech-item__name">React / Next.js</span></div>
+<div class="tech-item"><i class="devicon-typescript-plain tech-icon" aria-hidden="true"></i><span class="tech-item__name">TypeScript</span></div>
+<div class="tech-item"><i class="devicon-tailwindcss-original tech-icon" aria-hidden="true"></i><span class="tech-item__name">Tailwind CSS</span></div>
+</div>
+</div>
+</div>
  </div>
  </section>
 
