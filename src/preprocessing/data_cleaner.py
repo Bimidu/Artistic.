@@ -1,14 +1,25 @@
 """
 Data Cleaning Module
 
-This module provides data cleaning functionality for pragmatic and conversational
-feature datasets, handling missing values, outliers, and data normalization.
+This module prepares raw feature DataFrames for machine learning by fixing
+common data quality issues that arise during feature extraction:
 
-Key functionalities:
-- Missing value imputation
-- Outlier handling
-- Feature scaling and normalization
-- Data transformation
+  Missing values  — features that could not be computed (e.g. timing features
+                    on transcripts without timestamps) are imputed with median
+                    values by default.  Completely empty columns are dropped
+                    at training time but filled with zeros at inference time so
+                    the model's expected feature shape is preserved.
+
+  Outliers        — extreme values caused by unusual recordings (very long
+                    silences, noisy audio) are clipped to ±3 standard deviations
+                    by default.  Clipping is preferred over removal because the
+                    dataset is small and losing rows is expensive.
+
+  Scaling         — FeatureScaler (also in this module) normalises feature values
+                    so that models like SVM that are sensitive to feature magnitude
+                    work correctly.  StandardScaler is the default; RobustScaler
+                    can be selected when the data contains residual outliers after
+                    the clipping step.
 
 Author: Bimidu Gunathilake
 """
@@ -171,8 +182,10 @@ class DataCleaner:
         completely_missing_features = missing_counts[missing_counts == total_rows].index.tolist()
 
         if completely_missing_features:
-            # PLASTER FIX: During inference (single sample), don't drop features that the model might expect
-            # Only drop if we're processing multiple samples (training scenario)
+            # At training time (multiple rows): drop the column entirely — it carries
+            # no signal.  At inference time (single row): filling with 0 is safer than
+            # dropping, because the loaded model expects a fixed feature set and would
+            # fail if columns are missing.
             if total_rows > 1:
                 self.logger.warning(
                     f"Found {len(completely_missing_features)} features with ALL missing values. "

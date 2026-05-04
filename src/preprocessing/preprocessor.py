@@ -1,14 +1,21 @@
 """
 Complete Data Preprocessing Pipeline
 
-This module provides an end-to-end preprocessing pipeline for all three
-feature categories:
+This module orchestrates every data-preparation step that must happen before
+a model can be trained or evaluated.  The steps are deliberately ordered to
+prevent data leakage:
 
-1. Acoustic & Prosodic Features (Team Member A - Placeholder)
-2. Syntactic & Semantic Features (Team Member B - Placeholder)
-3. Pragmatic & Conversational Features (Fully Implemented)
+  1. Validate  — check the dataset meets minimum quality requirements
+  2. Split     — divide into train/test *before* any fitting, so the test set
+                 is never seen during cleaning or feature selection
+  3. Clean     — impute missing values and handle outliers independently on
+                 each split (fit on train, apply to test)
+  4. Select    — pick the best features using the training set only
+  5. Scale     — normalise features using statistics from the training set only
 
-Combines validation, cleaning, feature selection, and train/test splitting.
+Fitting any of steps 3–5 on the full dataset before splitting would allow
+test-set statistics to influence training-set preparation, which is a form
+of data leakage that inflates evaluation metrics.
 
 Author: Bimidu Gunathilake
 """
@@ -111,7 +118,9 @@ class DataPreprocessor:
         """
         self.logger.info(f"Starting preprocessing pipeline for data with shape {df.shape}")
         
-        # Step 1: Validation (optional)
+        # --- Step 1: Validate ---
+        # Catch data-quality issues early (missing target, too few samples, etc.)
+        # before investing time in the rest of the pipeline.
         if validate:
             self.validation_report_ = self.validator.validate(
                 df,
@@ -125,7 +134,9 @@ class DataPreprocessor:
             
             self.logger.info("Data validation passed")
         
-        # Step 2: Identify feature columns (exclude metadata and target)
+        # --- Step 2: Identify feature columns ---
+        # Exclude known metadata columns and any non-numeric columns so that
+        # only actual feature values are passed to the ML pipeline.
         metadata_columns = [
             self.target_column, 'participant_id', 'file_path', 'dataset', 
             'age_months', 'session', 'date'
@@ -136,7 +147,9 @@ class DataPreprocessor:
         ]
         self.logger.info(f"Identified {len(self.feature_columns_)} feature columns")
 
-        # Step 3: Split into train/test on the raw data to avoid leakage
+        # --- Step 3: Train/test split on RAW data (leakage prevention) ---
+        # The split happens here, before any cleaning or scaling, so that the
+        # test set is never touched during any fitting step.
         df_train, df_test = train_test_split(
             df,
             test_size=self.test_size,
@@ -148,7 +161,9 @@ class DataPreprocessor:
             f"Train: {df_train.shape}, Test: {df_test.shape}"
         )
 
-        # Step 4: Clean train and test data separately
+        # --- Step 4: Clean each split independently ---
+        # Cleaning is fit-and-applied on train, and apply-only on test.
+        # The intersection of surviving columns is used to keep both sets aligned.
         df_train_clean, updated_feature_columns_train = self.cleaner.clean(
             df_train,
             target_column=self.target_column,
@@ -160,7 +175,7 @@ class DataPreprocessor:
             feature_columns=self.feature_columns_
         )
 
-        # Use the intersection of features that remained after cleaning both sets
+        # Keep only features that survived cleaning in both splits
         self.feature_columns_ = list(set(updated_feature_columns_train) & set(updated_feature_columns_test))
 
         self.logger.info(
@@ -169,13 +184,16 @@ class DataPreprocessor:
             f"Features: {len(self.feature_columns_)}"
         )
 
-        # Step 5: Split into features and target for train and test
+        # --- Step 5: Separate features from target ---
         X_train = df_train_clean[self.feature_columns_]
         y_train = df_train_clean[self.target_column]
         X_test = df_test_clean[self.feature_columns_]
         y_test = df_test_clean[self.target_column]
 
-        # Step 6: Feature selection (fit on training data only)
+        # --- Step 6: Feature selection (training set only) ---
+        # A Random Forest is trained on X_train to rank feature importance.
+        # Selecting here (not before the split) ensures the selector never sees
+        # test-set labels, which would bias feature ranking.
         if self.selector is not None:
             self.logger.info(f"Performing feature selection")
             self.selected_features_ = self.selector.select_from_model(
@@ -189,7 +207,9 @@ class DataPreprocessor:
         else:
             self.selected_features_ = self.feature_columns_
         
-        # Step 7: Scale features (fit on train, transform both)
+        # --- Step 7: Scale (fit on train, apply to both) ---
+        # Scaler statistics (mean, std, etc.) are computed from X_train only.
+        # X_test is transformed with the same parameters — never re-fitted.
         X_train = self.scaler.fit_transform(X_train, self.selected_features_)
         X_test = self.scaler.transform(X_test, self.selected_features_)
         self.logger.info("Features scaled")
@@ -257,11 +277,12 @@ class DataPreprocessor:
                 f"Identified {len(self.feature_columns_)} feature columns for K-fold"
             )
 
-        # Work with raw features/target; cleaning and selection will be done per fold
+        # The full cleaning/selection/scaling cycle is applied independently within
+        # each fold to avoid any information from the validation slice influencing
+        # the training-set statistics.
         X = df[self.feature_columns_]
         y = df[self.target_column]
 
-        # Create stratified folds on the raw data
         skf = StratifiedKFold(
             n_splits=n_splits,
             shuffle=True,
@@ -412,7 +433,8 @@ class DataPreprocessor:
         save_path = Path(save_path)
         save_path.parent.mkdir(parents=True, exist_ok=True)
         
-        # Temporarily remove loggers to allow pickling
+        # Python's pickle (used by joblib) cannot serialise logging.Logger objects,
+        # so loggers are temporarily detached before serialisation and restored after.
         scaler_logger = getattr(self.scaler, 'logger', None)
         cleaner_logger = getattr(self.cleaner, 'logger', None)
         selector_logger = getattr(self.selector, 'logger', None) if self.selector else None

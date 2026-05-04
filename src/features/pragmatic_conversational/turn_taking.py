@@ -48,10 +48,18 @@ class TurnTakingFeatures(BaseFeatureExtractor):
         >>> print(features.features['inter_turn_gap_mean'])
     """
     
-    # Thresholds for detecting overlaps and interruptions
-    OVERLAP_THRESHOLD_MS = 100  # Minimum overlap to count as overlap
-    INTERRUPTION_THRESHOLD_MS = 500  # Max gap before next turn to count as interruption
-    LONG_PAUSE_THRESHOLD_SEC = 1.0  # Threshold for "long" pauses
+    # Thresholds for detecting overlaps and interruptions.
+    # OVERLAP_THRESHOLD_MS: a gap of <100 ms between turn-end and next turn-start
+    #   is considered simultaneous speech.  Values smaller than ~100 ms are within
+    #   normal human reaction time and would produce excessive false positives.
+    # INTERRUPTION_THRESHOLD_MS: a speaker change happening within 500 ms of the
+    #   previous speaker still talking is treated as an interruption rather than a
+    #   normal smooth handoff.
+    # LONG_PAUSE_THRESHOLD_SEC: any inter-turn gap exceeding 1 s deviates from
+    #   typical conversational flow and is flagged as a notable pause.
+    OVERLAP_THRESHOLD_MS = 100
+    INTERRUPTION_THRESHOLD_MS = 500
+    LONG_PAUSE_THRESHOLD_SEC = 1.0
     
     @property
     def feature_names(self) -> List[str]:
@@ -209,9 +217,16 @@ class TurnTakingFeatures(BaseFeatureExtractor):
         )
     
     def _has_timing_info(self, utterances: List[Utterance]) -> bool:
-        """Check if utterances have timing information."""
+        """
+        Decide whether timing-based feature extraction is feasible.
+
+        CHAT files from the training corpus may or may not include onset/offset
+        timestamps.  When fewer than half the utterances are timed (e.g. manual
+        transcripts without media links), timing-dependent features fall back to
+        text-based approximations to avoid a large block of NaN values.
+        """
         timed_count = sum(1 for u in utterances if u.timing is not None)
-        return timed_count > len(utterances) * 0.5  # At least 50% have timing
+        return timed_count > len(utterances) * 0.5
     
     def _calculate_basic_counts(
         self,

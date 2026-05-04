@@ -1,9 +1,21 @@
 """
 Unified Input Handler Module
 
-This module provides a unified interface for processing both audio and text inputs
-through the ASD detection pipeline. It automatically determines the input type
-and routes it through the appropriate processing path.
+This module acts as the entry point for all data coming into the ASD detection
+pipeline. Regardless of whether the caller provides an audio file, a CHAT
+transcript (.cha), or raw plain text, everything exits this module as the same
+ProcessedInput container — a uniform format that the feature extractors and
+API endpoints expect.
+
+Routing logic:
+  .wav / .mp3 / ...  →  AudioProcessor (transcription + diarization) → ProcessedInput
+  .cha               →  CHATParser (structured parse)                 → ProcessedInput
+  .txt / raw string  →  sentence splitter                             → ProcessedInput
+
+Key design decision: audio feature extraction is deliberately NOT done here.
+The AudioProcessor only transcribes; each feature module (acoustic, pragmatic,
+etc.) extracts its own features from the raw audio file later. This separation
+keeps the input handler lightweight and avoids redundant passes over the audio.
 
 Author: Bimidu Gunathilake
 """
@@ -108,10 +120,11 @@ class InputHandler:
             device: Device for processing
             language: Target language
         """
-        # Initialize parsers
         self.chat_parser = CHATParser()
         
-        # Initialize audio processor (lazy loading)
+        # AudioProcessor is expensive to initialise (loads ML models) so it is
+        # created on first use via the `audio_processor` property. This keeps
+        # the InputHandler cheap to create in paths that never process audio.
         self._audio_processor = None
         self._audio_config = {
             'transcriber_backend': transcriber_backend,
@@ -161,6 +174,12 @@ class InputHandler:
         """
         Process any supported input type.
         
+        The dispatch order is:
+          1. If the input is a string that does not point to an existing file,
+             treat it as raw text (e.g. pasted transcript from a web form).
+          2. Otherwise resolve the path, detect the file type by extension,
+             and route to the appropriate private handler.
+        
         Args:
             input_source: Path to input file or raw text
             participant_id: Optional participant ID
@@ -170,9 +189,8 @@ class InputHandler:
         Returns:
             ProcessedInput with unified format
         """
-        # Determine if input is a file or raw text
+        # A string that doesn't resolve to a file path is treated as raw text input
         if isinstance(input_source, str) and not Path(input_source).exists():
-            # Treat as raw text
             return self._process_raw_text(input_source, participant_id, diagnosis)
         
         input_path = Path(input_source)
@@ -198,12 +216,17 @@ class InputHandler:
         diagnosis: Optional[str],
         **kwargs
     ) -> ProcessedInput:
-        """Process audio input - transcription only, features extracted later."""
+        """
+        Transcribe audio and package the result.
+
+        This method intentionally does nothing beyond transcription + diarization.
+        The audio path is preserved in ProcessedInput so that downstream feature
+        extractors (acoustic, pragmatic) can read the raw waveform themselves.
+        """
         logger.info(f"Processing audio input: {audio_path.name}")
         
         pid = participant_id or audio_path.stem
         
-        # Process audio (transcription only)
         result: AudioProcessingResult = self.audio_processor.process(
             audio_path,
             participant_id=pid,
@@ -280,7 +303,15 @@ class InputHandler:
         diagnosis: Optional[str],
         source_path: Optional[Path] = None
     ) -> ProcessedInput:
-        """Process raw text input."""
+        """
+        Convert plain text into a minimal TranscriptData.
+
+        Because plain text has no speaker labels or timing, every sentence is
+        attributed to the participant_id (defaulting to 'CHI'). This path is
+        primarily used for the /predict/text API endpoint where a clinician pastes
+        a child's speech directly. Timing-dependent features will fall back to
+        text-only estimates in this case.
+        """
         logger.info("Processing raw text input")
         
         from src.parsers.chat_parser import Utterance

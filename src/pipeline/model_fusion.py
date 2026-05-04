@@ -1,14 +1,30 @@
 """
 Model Fusion Module
 
-This module provides the fusion mechanism for combining predictions
-from multiple component models into a single ASD prediction.
+This module combines the outputs of three independent classification components
+into a single ASD/TD prediction.  Each component analyses a different aspect of
+the child's speech:
 
-Fusion strategies:
-1. Voting: Simple majority or weighted voting
-2. Averaging: Average probabilities from all components
-3. Stacking: Meta-learner on component predictions
-4. Weighted: Component-specific weights based on performance
+  - Pragmatic & Conversational  (turn-taking, repair, topic, pauses, linguistics)
+  - Acoustic & Prosodic         (pitch, MFCCs, voice quality, spectral features)
+  - Syntactic & Semantic        (parse depth, dependencies, semantic roles)
+
+Why fusion?  No single modality is sufficient for robust ASD detection.  Pragmatic
+features capture social communication patterns, acoustic features capture prosodic
+atypicalities, and syntactic features capture grammatical complexity.  Combining
+them reduces the impact of individual-model errors and provides more reliable
+predictions across diverse recordings.
+
+Fusion strategies available:
+  - weighted       : Weighted average of ASD probabilities (default; in production)
+  - averaging      : Unweighted mean probability
+  - voting         : Majority vote on class predictions
+  - max_confidence : Trust the component with highest confidence
+  - stacking       : Train a meta-learner on component probabilities
+
+Default weights give the pragmatic component the most influence (0.5) because it
+was trained on the most task-relevant features and showed the highest standalone
+performance in evaluation.
 
 Author: Bimidu Gunathilake
 """
@@ -242,8 +258,14 @@ class ModelFusion:
         predictions: List[ComponentPrediction],
         component_weights_override: Optional[Dict[str, float]] = None
     ) -> FusionResult:
-        """Weighted averaging based on component weights."""
-        # Use override weights if provided, otherwise use instance weights
+        """
+        Weighted average of ASD probabilities across components.
+
+        Components with a weight of 0 are skipped entirely (e.g. acoustic
+        features are zeroed out when the input is text-only).  The final
+        probability is normalised by the sum of active weights so that removing
+        a component does not artificially shift the result towards 0 or 1.
+        """
         weights_to_use = component_weights_override if component_weights_override is not None else self.component_weights
         
         total_weight = 0.0
@@ -251,17 +273,17 @@ class ModelFusion:
         
         for pred in predictions:
             weight = weights_to_use.get(pred.component, 0.33)
-            # Skip components with zero weight
+            # Components explicitly weighted at 0 are excluded from the fusion
             if weight == 0:
                 continue
             weighted_prob += pred.probability * weight
             total_weight += weight
         
-        # Normalize
+        # Normalise so that the result stays in [0, 1] regardless of how many
+        # components contributed (important when one component is absent)
         if total_weight > 0:
             weighted_prob /= total_weight
         else:
-            # Fallback: if all weights are 0, use simple average
             logger.warning("All component weights are 0, falling back to simple average")
             weighted_prob = np.mean([p.probability for p in predictions])
             total_weight = 1.0
@@ -308,13 +330,19 @@ class ModelFusion:
         self,
         predictions: List[ComponentPrediction]
     ) -> FusionResult:
-        """Use meta-learner on component predictions."""
+        """
+        Meta-learner stacking: each component's ASD probability is a feature.
+
+        The meta-learner (a Logistic Regression by default) is trained on held-out
+        component probability vectors and learns how to weight each component's
+        confidence against the true label.  If the meta-learner has not been trained
+        yet, this falls back to weighted fusion so the system stays functional.
+        """
         if self.meta_learner is None:
-            # Fall back to weighted if meta-learner not trained
             logger.warning("Meta-learner not trained, falling back to weighted fusion")
             return self._fuse_weighted(predictions)
         
-        # Create feature vector from component predictions
+        # Stack component probabilities into a 1 × n_components feature vector
         features = np.array([[p.probability for p in predictions]])
         
         # Get meta-learner prediction

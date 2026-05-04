@@ -1,16 +1,41 @@
 """
 Data Validation Module
 
-This module provides comprehensive data validation and quality checks
-for feature datasets before machine learning model training.
+This module acts as the first gate in the preprocessing pipeline.  Before
+any cleaning or model training begins, it checks that the dataset meets the
+minimum quality requirements for reliable ML results.
 
-Key functionalities:
-- Missing value detection
-- Data type validation
-- Range checks
-- Outlier detection
-- Class balance checks
-- Feature correlation analysis
+Checks performed and why each matters:
+
+  Sample size       — too few samples makes cross-validation folds too small
+                      and evaluation metrics unreliable.
+
+  Target column     — a missing or malformed target column would silently
+                      produce a trivially "fitted" model.
+
+  Missing values    — features with >30 % missing values are flagged as
+                      warnings; they may need dropping rather than imputing.
+
+  Data types        — non-numeric columns are flagged; most ML models
+                      cannot handle string features without encoding.
+
+  Outliers          — extreme values (>3 std devs) are noted but not
+                      treated here — that responsibility belongs to DataCleaner.
+
+  Class balance     — if one class outnumbers the other by >3:1 the model
+                      may simply predict the majority class.  A warning is
+                      raised so the trainer can enable class_weight='balanced'.
+
+  Feature variance  — near-zero-variance features carry no discriminative
+                      information and can cause numerical instability in some
+                      models (e.g. SVM with RBF kernel).
+
+  High correlation  — pairs with |r| > 0.95 are redundant; keeping both
+                      inflates feature importance scores and can slow training.
+
+A ValidationReport is returned.  If any hard errors are present (insufficient
+samples, missing target), fit_transform in the preprocessor will raise before
+proceeding.
 
 Author: Bimidu Gunathilake
 """

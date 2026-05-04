@@ -63,7 +63,10 @@ class RepairDetectionFeatures(BaseFeatureExtractor):
         >>> print(features.features['repair_success_rate'])
     """
     
-    # Self-repair markers (speaker corrects themselves)
+    # Self-repair markers: lexical phrases a speaker uses to rephrase their own
+    # utterance mid-stream.  ASD children repair less frequently and less
+    # effectively than typical peers, so both the presence and quality of these
+    # markers are informative.
     SELF_REPAIR_PATTERNS = [
         r'\bi mean\b',
         r'\bno wait\b',
@@ -75,7 +78,8 @@ class RepairDetectionFeatures(BaseFeatureExtractor):
         r'\blet me\s+rephrase\b',
     ]
     
-    # CHAT retrace markers indicate self-correction
+    # CHAT retrace markers: standard symbols inserted by CLAN transcribers to
+    # annotate retraces and reformulations in the .cha format
     CHAT_RETRACE_MARKERS = [
         r'\[/\]',      # Retrace without correction
         r'\[//\]',     # Retrace with correction
@@ -255,51 +259,66 @@ class RepairDetectionFeatures(BaseFeatureExtractor):
         
         logger.debug(f"Extracting repair features from {len(all_utterances)} utterances")
         
-        # Self-repair features
+        # Self-repair: speaker corrects their own utterance before it finishes
+        # (detected via lexical markers + CHAT retrace symbols).
+        # ASD children repair less frequently and less successfully than TD peers.
         self_repair_features = self._calculate_self_repair(
             all_utterances, child_utterances, adult_utterances
         )
         features.update(self_repair_features)
         
-        # Other-initiated repair
+        # Other-initiated repair: the listener signals a problem and the speaker
+        # then produces a corrected version.  High rates of adult-initiated repair
+        # towards the child indicate the child's utterances are often unclear.
         other_repair_features = self._calculate_other_initiated_repair(all_utterances)
         features.update(other_repair_features)
         
-        # Clarification request features
+        # Clarification requests: one speaker explicitly asks the other to repeat
+        # or clarify.  The direction matters — many child-to-adult requests may
+        # indicate comprehension difficulties; many adult-to-child requests suggest
+        # the child's speech is hard to understand.
         clarification_features = self._calculate_clarification_requests(
             all_utterances, child_utterances, adult_utterances
         )
         features.update(clarification_features)
         
-        # Confirmation check features
+        # Confirmation checks: speaker seeks acknowledgment that they were understood
+        # (e.g. "you know?", "right?")
         confirmation_features = self._calculate_confirmation_checks(
             all_utterances, child_utterances
         )
         features.update(confirmation_features)
         
-        # Repetition-based repair
+        # Repetition-based repair: speaker or listener repeats (verbatim or partially)
+        # the problematic utterance as a repair strategy
         repetition_features = self._calculate_repetition_repairs(all_utterances)
         features.update(repetition_features)
         
-        # Repair success metrics
+        # Repair success: determined by semantic similarity (spaCy) between the
+        # repaired and original utterance — if available — otherwise estimated from
+        # the presence of acknowledgment tokens after the repair
         success_features = self._calculate_repair_success(all_utterances)
         features.update(success_features)
         
-        # Repair sequences
+        # Repair sequences: how many consecutive turns were spent on a single
+        # repair episode; longer sequences suggest more persistent communication difficulty
         sequence_features = self._calculate_repair_sequences(all_utterances)
         features.update(sequence_features)
         
-        # Child-specific repair effectiveness
+        # Child-specific effectiveness: child_repair_effectiveness uses spaCy
+        # cosine similarity to measure how much the child's repair improved clarity
         child_features = self._calculate_child_repair_effectiveness(
             all_utterances, child_utterances
         )
         features.update(child_features)
         
-        # Repair strategy diversity
+        # Strategy diversity: whether the child uses multiple repair strategies
+        # or defaults to a single (often less effective) one
         strategy_features = self._calculate_repair_strategy_diversity(all_utterances)
         features.update(strategy_features)
         
-        # Communication breakdown
+        # Communication breakdowns: prolonged sequences with no successful repair —
+        # a strong indicator of pragmatic communication impairment
         breakdown_features = self._calculate_communication_breakdowns(all_utterances)
         features.update(breakdown_features)
         

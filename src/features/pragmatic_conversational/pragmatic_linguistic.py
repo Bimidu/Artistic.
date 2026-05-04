@@ -167,43 +167,58 @@ class PragmaticLinguisticFeatures(BaseFeatureExtractor):
                 metadata={'error': 'No valid child utterances'}
             )
         
-        # MLU and language development
+        # --- Language development metrics ---
+        # MLU (Mean Length of Utterance) is a well-established measure of language
+        # maturity.  Younger and more impaired children produce shorter utterances.
+        # Morpheme-based MLU is more sensitive than word-based MLU but requires
+        # the .cha morphology tier (%mor) to be present.
         mlu_features = self._calculate_mlu(child_utterances)
         features.update(mlu_features)
         
-        # Vocabulary diversity
+        # Vocabulary diversity: corrected TTR (CTTR) accounts for the effect of
+        # sample size on type-token ratio, giving a more stable richness estimate
         vocab_features = self._calculate_vocabulary(child_utterances)
         features.update(vocab_features)
         
-        # Echolalia patterns
+        # --- ASD-specific pragmatic markers ---
+        # Echolalia: child repeats what the adult (or themselves) just said rather
+        # than producing a novel response.  Immediate echolalia is same-turn
+        # repetition; delayed echolalia looks back up to 10 turns.
         echolalia_features = self._calculate_echolalia(
             child_utterances, adult_utterances, all_utterances
         )
         features.update(echolalia_features)
         
-        # Question usage
+        # Question formation: ASD children may ask fewer WH-questions (which require
+        # theory-of-mind) and more yes/no questions (less demanding)
         question_features = self._calculate_questions(child_utterances)
         features.update(question_features)
         
-        # Pronoun usage
+        # Pronoun usage: pronoun reversal (using "you" instead of "I") is a
+        # well-documented ASD marker — the child echoes pronouns from the adult
+        # without adapting the reference point
         pronoun_features = self._calculate_pronouns(child_utterances)
         features.update(pronoun_features)
         
-        # Social language
+        # Social language: greetings, politeness markers, and formulaic social
+        # phrases indicate how well the child follows social communication scripts
         social_features = self._calculate_social_language(child_utterances)
         features.update(social_features)
         
-        # Response quality
+        # Response quality: unintelligible utterances (&xxx in CHAT) and inappropriate
+        # responses (e.g. non-sequiturs detected via heuristics) are flagged
         response_features = self._calculate_response_quality(
             child_utterances, all_utterances
         )
         features.update(response_features)
         
-        # Discourse markers
+        # Discourse markers: connectives (and, so, well) and acknowledgments
+        # signal active participation in conversation structure
         discourse_features = self._calculate_discourse_markers(child_utterances)
         features.update(discourse_features)
         
-        # Non-verbal behavioral markers
+        # Non-verbal behavioral markers from CHAT (&=laughs, &=points, etc.) can
+        # signal emotional regulation or communicative intent beyond speech
         behavioral_features = self._calculate_behavioral_markers(child_utterances)
         features.update(behavioral_features)
         

@@ -1,14 +1,34 @@
 """
 Feature Selection Module
 
-This module provides feature selection methods for pragmatic and conversational
-features to identify the most relevant features for ASD detection.
+After feature extraction the pragmatic component produces 100+ raw features.
+Not all of them contribute useful signal — some are noisy, redundant, or nearly
+constant across the dataset.  This module reduces the feature set to a compact,
+high-quality subset before model training.
 
-Key functionalities:
-- Statistical feature selection
-- Model-based feature selection
-- Recursive feature elimination
-- Feature importance analysis
+Methods available:
+
+  select_from_model  (default in pipeline)
+      Trains a Random Forest and uses its feature importance scores.
+      Fast, handles non-linear interactions, and does not assume any
+      particular distribution.  Used as the primary method because it
+      naturally handles the mixed nature of pragmatic features (counts,
+      ratios, durations).
+
+  select_k_best
+      Statistical tests (ANOVA F-score or mutual information) against the
+      target.  Useful as a quick baseline or when the dataset is too small
+      to train a reliable Random Forest.
+
+  select_rfe
+      Recursive Feature Elimination — repeatedly fits and prunes.  More
+      thorough than the above two but significantly slower; used for
+      analysis rather than in the default training pipeline.
+
+  select_by_category
+      Picks the top-N features from each feature group (turn-taking, repair,
+      etc.) to ensure every aspect of pragmatic communication is represented
+      in the final model.
 
 Author: Bimidu Gunathilake
 """

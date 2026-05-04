@@ -1,16 +1,36 @@
 """
 Annotated Transcript Generator Module
 
-This module generates annotated transcripts that visually mark where
-features were extracted from the text. This provides:
-1. Transparency in feature extraction
-2. Debugging capability for algorithm verification
-3. User-facing explanations of predictions
+After the prediction pipeline runs, clinicians and researchers need to understand
+*where* in the transcript the model found its evidence.  This module takes a
+completed prediction (and the extracted features that drove it) and produces a
+human-readable annotated version of the transcript in three formats:
 
-Features are annotated with:
-- Color codes for different feature types
-- Markers/symbols indicating specific features
-- Span highlighting for regions of interest
+  Plain text — symbol markers ([ECH], [RI], [LAT] …) inserted inline, suitable
+               for logging or simple display
+
+  HTML       — colour-coded highlighted spans with hover tooltips, rendered in
+               the web UI alongside the prediction result
+
+  JSON       — structured annotation data for programmatic access or downstream
+               tools
+
+How it works:
+  1. TranscriptAnnotator.annotate() receives a TranscriptData and the feature
+     dict produced by feature extraction.
+  2. It runs two annotation passes:
+       a. _detect_patterns()       — regex-based detection on each utterance text
+          (immediate echolalia, filled pauses, discourse markers, etc.)
+       b. _annotations_from_features() — uses the *count* features returned by
+          the extractors to gate which annotation types are added.  This ensures
+          the visible annotations are consistent with what the model actually saw.
+  3. A third pass, _annotate_syntactic_semantic(), adds per-utterance structural
+     annotations (complex syntax, grammatical errors, low semantic density) using
+     spaCy.  It runs only when the en_core_web_sm model (or better) is available.
+
+Annotation patterns and thresholds are imported directly from the feature
+extractor classes so that this module never diverges from what was actually
+computed during feature extraction.
 
 Author: Bimidu Gunathilake
 """
@@ -434,13 +454,19 @@ class AnnotatedTranscript:
         text: str,
         annotations: List[FeatureAnnotation]
     ) -> str:
-        """Generate HTML with highlighted spans.
+        """
+        Wrap annotation spans in coloured HTML <span> elements.
 
-        Annotations are rendered in start-position order.  When two annotations
-        overlap (e.g. multiple utterance-level annotations that each span the
-        whole text), only the non-overlapping portion of the later annotation is
-        rendered.  This prevents the same text from appearing multiple times in
-        the output.
+        Annotations are processed in start-position order.  When two annotations
+        cover the same character range (e.g. an utterance-level LONG_PAUSE and a
+        FILLED_PAUSE both span the whole text), only the non-overlapping suffix of
+        the later annotation is rendered.  This prevents text duplication while
+        still showing every annotation type present in the utterance.
+
+        Each span carries:
+          - style: background tint + underline in the annotation's colour
+          - title: tooltip text shown on hover ("feature_name: description")
+          - data-type: machine-readable annotation category for JS filtering
         """
         if not annotations:
             return html.escape(text)
@@ -754,25 +780,28 @@ class TranscriptAnnotator:
         )
         
         if include_patterns:
-            # Detect patterns in each utterance
+            # Pass 1a: per-utterance regex patterns.  Each utterance is scanned
+            # independently so annotations can be position-linked to character offsets.
             for idx, utterance in enumerate(transcript.utterances):
                 annotations = self._detect_patterns(utterance, idx)
                 annotated.add_annotations(annotations)
             
-            # Detect delayed echolalia (requires looking across utterances)
+            # Pass 1b: delayed echolalia requires cross-utterance comparison,
+            # so it is handled in a separate loop over the whole transcript
             delayed_echolalia = self._detect_delayed_echolalia(transcript)
             annotated.add_annotations(delayed_echolalia)
         
-        # Add feature-based annotations if features provided
+        # Pass 2: feature-gated annotations.  Only add an annotation type when the
+        # corresponding count feature is > 0, preventing spurious highlights for
+        # features that the extractor did not actually detect in this transcript.
         if features:
             feature_annotations = self._annotations_from_features(
                 transcript, features
             )
             annotated.add_annotations(feature_annotations)
 
-        # Add per-utterance syntactic/semantic annotations via spaCy.
-        # Runs regardless of whether syntactic_features were passed — analysis
-        # is done directly from the transcript text.
+        # Pass 3: spaCy structural analysis.  Added as a separate pass so it can
+        # silently degrade if spaCy is unavailable without affecting passes 1 and 2.
         try:
             ss_annotations = self._annotate_syntactic_semantic(transcript)
             annotated.add_annotations(ss_annotations)
@@ -820,15 +849,29 @@ class TranscriptAnnotator:
         transcript: TranscriptData
     ) -> List[FeatureAnnotation]:
         """
-        Generate per-utterance syntactic & semantic annotations using spaCy.
+        Generate per-utterance syntactic and semantic annotations using spaCy.
 
-        Flags on each child utterance:
-        - COMPLEX_SYNTAX: deep dependency tree or high subordination
-        - GRAMMATICAL_ERROR: missing verb or subject in non-trivial utterances
-        - LOW_SEMANTIC_DENSITY: fewer than 2 content words for the utterance length
-        - SEMANTIC_MISMATCH: low semantic similarity to neighbouring utterances
+        Four checks are performed on each child utterance:
 
-        Returns [] if spaCy is unavailable.
+          COMPLEX_SYNTAX      — average dependency depth ≥ 3.5 or two or more
+                                subordinate clauses (advcl, acl, ccomp, …).
+                                Higher complexity can indicate both ability and
+                                difficulty depending on context.
+
+          GRAMMATICAL_ERROR   — utterance longer than 3 tokens but missing a verb
+                                or subject dependency.  A rough proxy for morphosyntactic
+                                errors that would be more precisely scored by CLAN.
+
+          LOW_SEMANTIC_DENSITY — utterance longer than 4 tokens but containing ≤ 1
+                                content word (noun, verb, adj, adv).  Indicates an
+                                utterance that is mostly function words (fillers,
+                                pronouns, etc.) with little semantic content.
+
+          SEMANTIC_MISMATCH    — cosine similarity between this utterance and its
+                                immediate neighbours is below 0.25, suggesting the
+                                child's utterance is topically disconnected.
+
+        Returns an empty list if spaCy is unavailable (en_core_web_sm not installed).
         """
         nlp = self._nlp
         if nlp is None:

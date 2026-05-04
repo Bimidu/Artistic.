@@ -198,44 +198,57 @@ class TopicCoherenceFeatures(BaseFeatureExtractor):
         
         logger.debug(f"Extracting topic coherence features from {len(all_utterances)} utterances")
         
-        # Get utterance texts
         all_texts = [self._clean_text(u.text) for u in all_utterances]
         child_texts = [self._clean_text(u.text) for u in child_utterances]
         adult_texts = [self._clean_text(u.text) for u in adult_utterances]
         
-        # Semantic coherence features (embedding-based)
+        # --- Embedding-based semantic coherence (primary method) ---
+        # Uses spaCy word vectors (en_core_web_lg/md preferred) to compute cosine
+        # similarity between consecutive utterances.  ASD children show lower
+        # mean similarity (less on-topic) and higher variance (more erratic topic
+        # changes) than TD peers (Ellis et al., 2021).
         semantic_features = self._calculate_semantic_coherence(
             all_utterances, child_utterances, all_texts, child_texts
         )
         features.update(semantic_features)
         
-        # Inter-speaker similarity
+        # Inter-speaker similarity measures how closely the child's utterances
+        # relate to what the adult said — low values indicate reduced responsiveness
         inter_speaker_features = self._calculate_inter_speaker_similarity(
             all_utterances
         )
         features.update(inter_speaker_features)
         
-        # Within-speaker consistency
+        # Within-speaker consistency tracks whether a speaker stays on their own
+        # topic across consecutive turns (child_topic_drift captures drift over time)
         within_features = self._calculate_within_speaker_consistency(
             child_utterances, adult_utterances, child_texts, adult_texts
         )
         features.update(within_features)
         
-        # Topic shift detection
+        # Topic shift detection uses a sliding window; when the similarity between
+        # a window and the preceding window drops below TOPIC_SHIFT_THRESHOLD,
+        # a topic change is recorded
         shift_features = self._calculate_topic_shifts(all_utterances, all_texts)
         features.update(shift_features)
         
-        # LDA topic features
+        # --- LDA topic modelling (complementary method) ---
+        # LDA assigns each utterance a topic distribution over N latent topics.
+        # Features like topic_entropy and dominant_topic_ratio describe how
+        # concentrated or spread the child's speech is across topics.
+        # Falls back gracefully if sklearn is unavailable.
         lda_features = self._calculate_lda_features(all_texts, child_texts)
         features.update(lda_features)
         
-        # Vocabulary-based coherence
+        # Lexical overlap: simple word-level measure of topic continuity that
+        # works even when word vectors are unavailable
         vocab_features = self._calculate_vocabulary_coherence(
             all_utterances, child_utterances
         )
         features.update(vocab_features)
         
-        # Contextual appropriateness
+        # Contextual appropriateness: heuristic check for whether each child
+        # response is thematically related to the preceding adult utterance
         context_features = self._calculate_contextual_appropriateness(all_utterances)
         features.update(context_features)
         

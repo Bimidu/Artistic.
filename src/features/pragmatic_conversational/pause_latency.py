@@ -63,7 +63,8 @@ class PauseLatencyFeatures(BaseFeatureExtractor):
         r'&-um', r'&-uh', r'&-er', r'&-ah',  # CHAT format
     ]
     
-    # CHAT pause markers
+    # CHAT pause markers map the annotation symbols used in .cha files to
+    # approximate durations.  These are used when timestamps are unavailable.
     PAUSE_MARKERS = {
         '(.)': 0.5,      # Short pause (~0.5 sec)
         '(..)': 1.0,     # Medium pause (~1 sec)
@@ -71,13 +72,18 @@ class PauseLatencyFeatures(BaseFeatureExtractor):
         '(pause)': 2.0,  # Extended pause
     }
     
-    # Thresholds
-    # Thresholds (Derived from Unsupervised ML Clustering (GMM) on ASDBank dataset)
-    # The GMM identified 3 latent clusters: 1. Rapid (mean ~0.2s), 2. Processing (mean ~1.25s), 3. Disengaged (mean ~4.3s).
-    # Boundaries were calculated at the intersection of these clusters.
-    NORMAL_RESPONSE_TIME = 0.45  # Upper bound of "Rapid" cluster
-    LONG_PAUSE_THRESHOLD = 2.00  # Boundary between "Processing" and "Disengaged"
-    VERY_LONG_PAUSE_THRESHOLD = 4.32 # Mean of "Disengaged" cluster (Center of the long pause distribution)
+    # Response-latency thresholds derived from GMM clustering on ASDBank data.
+    # See src/tools/ml_pause_clustering.py for the analysis that produced these values.
+    # The GMM found three latent clusters in child inter-turn gaps:
+    #   Cluster 1 — Rapid     : mean ~0.2 s   (fluent, fast reply)
+    #   Cluster 2 — Processing : mean ~1.25 s  (brief planning delay)
+    #   Cluster 3 — Disengaged : mean ~4.3 s   (very long pause or no response)
+    # NORMAL_RESPONSE_TIME is the upper boundary of Cluster 1 (spread-weighted midpoint).
+    # LONG_PAUSE_THRESHOLD is the Cluster 2 / Cluster 3 boundary.
+    # VERY_LONG_PAUSE_THRESHOLD is the centre of Cluster 3 (used to flag disengagement).
+    NORMAL_RESPONSE_TIME = 0.45
+    LONG_PAUSE_THRESHOLD = 2.00
+    VERY_LONG_PAUSE_THRESHOLD = 4.32
     
     @property
     def feature_names(self) -> List[str]:
@@ -164,39 +170,49 @@ class PauseLatencyFeatures(BaseFeatureExtractor):
         
         logger.debug(f"Extracting pause/latency features from {len(all_utterances)} utterances")
         
-        # Response latency features (between turns)
+        # --- Between-turn features (require timestamp data) ---
+        # These measure how long the child waits before responding to the adult.
+        # ASD children typically show higher and more variable response latency.
         latency_features = self._calculate_response_latency(
             all_utterances, child_utterances, adult_utterances
         )
         features.update(latency_features)
         
-        # Delayed response indicators
+        # Apply the GMM-derived thresholds to classify each gap as rapid / delayed / very delayed
         delay_features = self._calculate_delay_indicators(all_utterances)
         features.update(delay_features)
         
-        # Filled pause features (hesitation markers)
+        # --- Within-utterance features (text-based, always available) ---
+        # Filled pauses ("um", "uh", etc.) are detected by regex on the utterance text.
+        # CHAT also encodes them as "&-um" / "&-uh"; both forms are handled.
         filled_features = self._calculate_filled_pauses(
             all_utterances, child_utterances
         )
         features.update(filled_features)
         
-        # Unfilled pause features (from CHAT markers)
+        # Unfilled pauses are inferred from CHAT pause markers (.)(..)(...) when
+        # audio timestamps are absent; when timestamps are available the real gap
+        # durations are used instead.
         unfilled_features = self._calculate_unfilled_pauses(
             all_utterances, child_utterances
         )
         features.update(unfilled_features)
         
-        # Speaking vs silence ratio
+        # Estimate the fraction of the session that was speech vs silence — a proxy
+        # for overall communicative engagement
         speaking_features = self._calculate_speaking_silence_ratio(
             all_utterances
         )
         features.update(speaking_features)
         
-        # Pause distribution statistics
+        # Higher-order statistics of the pause distribution (skew, kurtosis, IQR)
+        # capture the shape of pausing behaviour beyond the mean — ASD children
+        # often show a more right-skewed latency distribution (many very long pauses)
         distribution_features = self._calculate_pause_distribution(all_utterances)
         features.update(distribution_features)
         
-        # Turn-internal hesitation features
+        # Hesitation features (false starts, word repetitions) capture disfluency
+        # within a single turn, independent of inter-turn timing
         hesitation_features = self._calculate_hesitation_features(
             all_utterances, child_utterances
         )

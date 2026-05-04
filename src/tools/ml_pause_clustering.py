@@ -1,4 +1,32 @@
 
+"""
+ML Pause Threshold Discovery Tool
+
+This script uses unsupervised learning to empirically determine the pause/latency
+thresholds used in the PauseLatencyFeatures extractor. Rather than picking thresholds
+by hand, it learns them from the distribution of actual inter-turn gaps observed in
+the ASDBank corpus.
+
+Approach — Gaussian Mixture Model (GMM):
+  A GMM with 3 components is fitted to child-turn inter-turn gaps. The three
+  components correspond to three naturally occurring pause types:
+    1. Rapid response     — child replies quickly (no processing delay)
+    2. Processing pause   — child pauses briefly before responding
+    3. Disengagement/long — child takes a very long time or does not respond
+
+  The cluster means and standard deviations inform the thresholds used in
+  PauseLatencyFeatures (NORMAL_RESPONSE_TIME, LONG_PAUSE_THRESHOLD, etc.).
+
+Fallback — 1-D K-Means:
+  If sklearn is unavailable, a hand-rolled 1-D K-Means is used as an approximation.
+
+Results from this script were used to set the data-driven thresholds in
+`src/features/pragmatic_conversational/pause_latency.py`.
+
+Usage:
+    python -m src.tools.ml_pause_clustering
+"""
+
 import sys
 import numpy as np
 from pathlib import Path
@@ -11,7 +39,18 @@ from src.parsers.chat_parser import CHATParser
 
 def run_clustering():
     """
-    Apply Unsupervised ML (GMM/K-Means) to find natural pause thresholds.
+    Fit a GMM to child response latencies and report discovered cluster boundaries.
+
+    The pipeline is:
+      1. Parse all ASDBank transcripts.
+      2. Extract every inter-turn gap where the current speaker is the child (CHI).
+      3. Filter to gaps in [0, 10s) — discards noise and session boundaries.
+      4. Fit a 3-component GMM and sort components by mean duration.
+      5. Compute decision boundaries as a spread-weighted midpoint between adjacent means.
+      6. Plot the distribution (requires matplotlib/scipy) and save as PNG.
+
+    The resulting boundary values feed directly into the thresholds in
+    PauseLatencyFeatures.
     """
     data_dir = project_root / "data/asdbank_aac"
     print(f"Collecting data from: {data_dir}")
@@ -29,7 +68,8 @@ def run_clustering():
     print("Extracting features...")
     for t in transcripts:
         utterances = t.utterances
-        if not utterances: continue
+        if not utterances:
+            continue
         
         for i in range(1, len(utterances)):
             curr = utterances[i]
@@ -53,10 +93,10 @@ def run_clustering():
     try:
         from sklearn.mixture import GaussianMixture
         
-        # We assume 3 components: 
-        # 1. Normal/Fast response 
-        # 2. Thinking/Processing pause
-        # 3. Disengagement/Long pause
+        # Three components reflect three psycholinguistically motivated pause types:
+        #   1. Rapid — child has no processing delay
+        #   2. Processing — brief planning or retrieval delay
+        #   3. Disengaged — very long gap, potential communicative breakdown
         gmm = GaussianMixture(n_components=3, random_state=42)
         gmm.fit(X)
         
@@ -64,7 +104,7 @@ def run_clustering():
         weights = gmm.weights_.flatten()
         covariances = gmm.covariances_.flatten()
         
-        # Sort clusters by mean duration
+        # Sort clusters by mean duration so labels stay interpretable
         sorted_indices = np.argsort(means)
         means = means[sorted_indices]
         weights = weights[sorted_indices]
@@ -76,20 +116,17 @@ def run_clustering():
             print(f"Cluster {i+1} [{labels[i]}]: Mean = {means[i]:.2f}s, Std = {stds[i]:.2f}s, Weight = {weights[i]:.2f}")
             
         print("\n--- Calculating Decision Boundaries ---")
-        # Boundary between 1 and 2 (Normal vs Long)
-        # Simple approximation: equidistant or weighted intersection.
-        # Let's use the midpoint between means for simplicity, or 2 sigma from mean 1.
-        
-        # Better: Solve for intersection of PDF, or just take (Mean1 + Mean2)/2
-        # Usually, "Threshold" is where you switch from Class 1 to Class 2.
-        
-        t1_normal_limit = means[0] + 1.5 * stds[0] # Aggressive limit of normal
+        # Boundaries are computed as a spread-weighted midpoint between adjacent cluster means.
+        # Weighting by the opposing cluster's std gives a boundary that leans toward
+        # the tighter (more certain) distribution, which is more stable than a simple midpoint.
+
+        t1_normal_limit = means[0] + 1.5 * stds[0]  # Aggressive limit of normal
         t2_long_start = means[1]
         
-        # A conservative boundary between Cluster 1 and 2
-        boundary_1_2 = (means[0] * stds[1] + means[1] * stds[0]) / (stds[0] + stds[1]) # Weighted by spread
+        # Boundary between Cluster 1 (Rapid) and Cluster 2 (Processing)
+        boundary_1_2 = (means[0] * stds[1] + means[1] * stds[0]) / (stds[0] + stds[1])
         
-        # Boundary between 2 and 3 (Long vs Very Long)
+        # Boundary between Cluster 2 (Processing) and Cluster 3 (Disengaged)
         boundary_2_3 = (means[1] * stds[2] + means[2] * stds[1]) / (stds[1] + stds[2])
         
         print(f"Proposed Boundary (Normal -> Processing): {boundary_1_2:.2f} s")
@@ -136,15 +173,14 @@ def run_clustering():
             print(f"Could not plot: {e}. Install matplotlib and scipy.")
             
     except ImportError:
+        # sklearn unavailable — fall back to a hand-rolled 1-D K-Means.
+        # Initial centroids are chosen to match the expected cluster centres so
+        # convergence is fast and stable even without a proper seeding strategy.
         print("sklearn not found. Using simple 1D K-Means implementation.")
-        # Simple 1D K-Means
-        # Init centroids
         centroids = np.array([0.5, 2.0, 5.0])
         for _ in range(20):
-            # Assign
             distances = np.abs(X - centroids)
             labels = np.argmin(distances, axis=1)
-            # Update
             new_centroids = np.array([X[labels == k].mean() for k in range(3)])
             if np.allclose(centroids, new_centroids):
                 break
@@ -153,6 +189,8 @@ def run_clustering():
         centroids.sort()
         print(f"Converged Centroids: {centroids}")
         
+        # Simple midpoint boundary — less precise than the GMM spread-weighted version
+        # but adequate when the cluster distributions are well-separated
         boundary_1_2 = (centroids[0] + centroids[1]) / 2
         boundary_2_3 = (centroids[1] + centroids[2]) / 2
         
