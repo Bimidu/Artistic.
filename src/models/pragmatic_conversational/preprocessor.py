@@ -10,7 +10,7 @@ Key features:
 - Social language scaling
 - Pragmatic feature selection
 
-Author: Current Implementation (Pragmatic/Conversational Specialist)
+Author: Bimidu Gunathilake
 """
 
 import pandas as pd

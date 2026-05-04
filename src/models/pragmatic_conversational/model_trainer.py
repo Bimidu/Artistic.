@@ -10,7 +10,7 @@ Key features:
 - Social language model training
 - Comprehensive evaluation metrics
 
-Author: Current Implementation (Pragmatic/Conversational Specialist)
+Author: Bimidu Gunathilake
 """
 
 import pandas as pd
