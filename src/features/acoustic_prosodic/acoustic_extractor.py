@@ -52,6 +52,11 @@ class AcousticFeatureExtractor:
         """
         Extract acoustic features from audio file.
         
+        Prioritizes:
+        1. Local .cha file with same name
+        2. AssemblyAI transcription
+        3. Dummy transcript fallback
+        
         Args:
             audio_path: Path to audio file
         
@@ -60,30 +65,85 @@ class AcousticFeatureExtractor:
         """
         logger.info(f"Extracting acoustic features from: {audio_path}")
         
-        # Create a dummy transcript for the extractor
-        from src.parsers.chat_parser import TranscriptData, Utterance
-        dummy_transcript = TranscriptData(
-            file_path=audio_path,
-            participant_id="CHI",
-            utterances=[],
-            metadata={}
-        )
-        
-        # Extract features using AcousticAudioFeatures
-        result = self.audio_feature_extractor.extract(
-            transcript=dummy_transcript,
-            audio_path=audio_path
-        )
-        
-        logger.info(f"Extracted {len(result.features)} acoustic features")
+        transcript = None
+        transcription_result = None
 
-        # PLASTER FIX: Ensure all expected features are present
+        # 1. Try to find a local .cha file (highest priority)
+        cha_file = Path(audio_path).with_suffix('.cha')
+        if cha_file.exists():
+            try:
+                transcript = self.parser.parse_file(cha_file)
+                logger.info(f"Using local CHAT transcript: {cha_file.name}")
+            except Exception as e:
+                logger.warning(f"Found .cha file but could not parse: {e}")
+
+        # 2. Try AssemblyAI if no local transcript (medium priority)
+        if transcript is None:
+            try:
+                from src.audio.transcriber import AudioTranscriber
+                transcriber = AudioTranscriber(backend='assemblyai')
+                logger.info(f"Attempting AssemblyAI transcription for: {audio_path.name}")
+                transcription_result = transcriber.transcribe(audio_path)
+                
+                # Convert transcription to TranscriptData object
+                transcript = TranscriptData(
+                    file_path=audio_path,
+                    participant_id="CHI",  # Target child
+                    utterances=[],  # ChildAudioExtractor can use transcription_result instead
+                    metadata={'transcribed_by': 'assemblyai'}
+                )
+                logger.info("Successfully obtained AssemblyAI transcription")
+            except Exception as e:
+                logger.warning(f"AssemblyAI transcription failed or not configured: {e}")
+
+        # 3. Last Resort: Create a dummy transcript (low priority)
+        if transcript is None:
+            logger.info("Using dummy transcript fallback (analyzing full audio)")
+            from src.parsers.chat_parser import TranscriptData
+            transcript = TranscriptData(
+                file_path=audio_path,
+                participant_id="CHI",
+                utterances=[],
+                metadata={'is_dummy': True}
+            )
+        
+        # 4. Smart Metadata Inference (Matches Pragmatic Model pattern)
+        # Infer diagnosis from path if not already present in transcript
+        if not transcript.diagnosis:
+            path_str = str(audio_path).upper()
+            # Check for explicit indicators in filename or parent folders
+            if any(ind in path_str for ind in ['/ASD/', '_ASD_', '\\ASD\\', 'ASD_']):
+                transcript.diagnosis = 'ASD'
+            elif any(ind in path_str for ind in ['/TD/', '/TYP/', '_TD_', '\\TD\\', 'NORMAL', 'CONTROL']):
+                transcript.diagnosis = 'TD'
+            elif 'ASDBANK' in path_str and not any(td in path_str for td in ['TD', 'CONTROL', 'TYP']):
+                transcript.diagnosis = 'ASD'
+        
+        # Ensure participant_id is meaningful
+        if not transcript.participant_id or transcript.participant_id == "CHI":
+            transcript.participant_id = audio_path.stem
+
+        # Extract features using AcousticAudioFeatures
+        # Passing transcription_result allows for speaker-specific clipping
+        result = self.audio_feature_extractor.extract(
+            transcript=transcript,
+            audio_path=audio_path,
+            transcription_result=transcription_result
+        )
+        
+        logger.info(f"Extracted {len(result.features)} acoustic features for {transcript.participant_id} ({transcript.diagnosis or 'Unknown'})")
+
+        # Ensure all expected features are present (Plaster Fix)
         expected_features = self.feature_names
         final_features = {}
         for feature_name in expected_features:
             final_features[feature_name] = result.features.get(feature_name, 0.0)
 
-        logger.debug(f"Final feature set has {len(final_features)} features")
+        # Add identifying metadata to the feature dictionary
+        final_features['diagnosis'] = transcript.diagnosis
+        final_features['file_path'] = str(audio_path)
+        final_features['participant_id'] = transcript.participant_id
+
         return final_features
 
     def extract_from_transcript(self, transcript_data: Any) -> Dict[str, float]:

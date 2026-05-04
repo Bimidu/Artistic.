@@ -757,10 +757,6 @@ class AcousticAudioFeatures(BaseFeatureExtractor):
             snd = parselmouth.Sound(y, sampling_frequency=float(sr))
 
             # Praat formant (Burg).
-            # Tuned for child speech:
-            # - maximum_formant: 5500 Hz is a common Praat setting for children
-            # - window_length: 25 ms
-            # - time_step: 10 ms
             formant = snd.to_formant_burg(
                 time_step=0.01,
                 max_number_of_formants=5,
