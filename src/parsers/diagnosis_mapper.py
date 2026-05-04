@@ -219,40 +219,6 @@ class DiagnosisMapper:
         
         return None
     
-    def get_dataset_info(self, dataset_name: str) -> Optional[Dict]:
-        """
-        Get information about a dataset.
-        
-        Args:
-            dataset_name: Name of dataset
-        
-        Returns:
-            Dataset rules and description or None
-        """
-        return self.DATASET_RULES.get(dataset_name)
-    
-    def print_dataset_rules(self):
-        """Print all dataset rules."""
-        print("\n" + "="*70)
-        print("DIAGNOSIS MAPPING RULES")
-        print("="*70)
-        
-        for dataset, rules in self.DATASET_RULES.items():
-            print(f"\n{dataset}:")
-            print(f"  Description: {rules.get('description', 'N/A')}")
-            
-            if 'default_diagnosis' in rules:
-                print(f"  Default: {rules['default_diagnosis']}")
-            
-            if 'directory_rules' in rules:
-                print("  Directory Rules:")
-                for pattern, diagnosis in rules['directory_rules'].items():
-                    print(f"    {pattern} → {diagnosis}")
-            
-            if 'diagnosis_map' in rules:
-                print("  Diagnosis Mapping:")
-                for orig, mapped in rules['diagnosis_map'].items():
-                    print(f"    {orig} → {mapped}")
-        
-        print("\n" + "="*70 + "\n")
+    # Removed unused helper methods (`get_dataset_info`, `print_dataset_rules`)
+    # after repository-wide call-site audit.
 

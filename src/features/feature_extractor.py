@@ -1,25 +1,14 @@
 """
 Main Feature Extraction Orchestrator
 
-This module coordinates all feature extractors organized according to
-the research methodology:
+This module orchestrates category-level feature extraction from transcripts and
+audio, then returns standardized tabular outputs for model training/inference.
 
-=== PRIMARY CATEGORIES (Methodology Sections 3.3.1 - 3.3.4) ===
-
-Section 3.3.1 - Turn-Taking Metrics
-Section 3.3.2 - Topic Maintenance and Semantic Coherence
-Section 3.3.3 - Pause and Latency Analysis
-Section 3.3.4 - Conversational Repair Detection
-
-=== SUPPORTING CATEGORY ===
-
-Pragmatic & Linguistic Features
-  - MLU, vocabulary diversity, echolalia, pronouns, questions, social language
-
-=== OTHER MODULES (Placeholders) ===
-
-Acoustic & Prosodic Features (Team Member A)
-Syntactic & Semantic Features (Team Member B)
+Core responsibilities:
+- Select and initialize the requested extractor categories
+- Route each input transcript through the active extractors
+- Merge extracted features and per-category metadata
+- Provide batch helpers for files/directories/audio-first pipelines
 
 Author: Bimidu Gunathilake
 """
@@ -37,10 +26,10 @@ from src.utils.helpers import timing_decorator
 
 # Pragmatic & Conversational Features
 from .pragmatic_conversational import (
-    TurnTakingFeatures,          # Section 3.3.1
-    TopicCoherenceFeatures,      # Section 3.3.2
-    PauseLatencyFeatures,        # Section 3.3.3
-    RepairDetectionFeatures,     # Section 3.3.4
+    TurnTakingFeatures,
+    TopicCoherenceFeatures,
+    PauseLatencyFeatures,
+    RepairDetectionFeatures,
     PragmaticLinguisticFeatures, # Supporting
     PragmaticAudioFeatures,      # Audio-derived features
 )
@@ -64,12 +53,8 @@ class FeatureSet:
     """
     Complete feature set extracted from a transcript.
     
-    Contains features from all methodology sections:
-    - 3.3.1 Turn-Taking Metrics
-    - 3.3.2 Topic Maintenance and Semantic Coherence
-    - 3.3.3 Pause and Latency Analysis
-    - 3.3.4 Conversational Repair Detection
-    - Supporting: Pragmatic & Linguistic Features
+    Contains merged outputs from one or more extractor categories
+    (turn-taking, topic coherence, pause latency, repair detection, etc.).
     
     Attributes:
         participant_id: Participant identifier
@@ -97,57 +82,46 @@ class FeatureSet:
             'age_months': self.age_months,
             **self.features,
         }
-    
-    def to_series(self) -> pd.Series:
-        """Convert to pandas Series."""
-        return pd.Series(self.to_dict())
 
 
 class FeatureExtractor:
     """
     Main feature extraction orchestrator.
     
-    Coordinates extraction from 5 categories:
-    
-    PRIMARY:
-    - Section 3.3.1: Turn-Taking Metrics
-    - Section 3.3.2: Topic Maintenance and Semantic Coherence
-    - Section 3.3.3: Pause and Latency Analysis
-    - Section 3.3.4: Conversational Repair Detection
-    
-    SUPPORTING:
-    - Pragmatic & Linguistic Features (MLU, echolalia, pronouns, etc.)
+    Coordinates extraction across configured categories.
+    It supports text-only extraction and audio-augmented extraction using
+    the same high-level API.
     
     Example:
         >>> # Extract all features (default)
         >>> extractor = FeatureExtractor()
         >>> feature_set = extractor.extract_from_transcript(transcript)
         
-        >>> # Extract only methodology sections
+        >>> # Extract only core pragmatic-conversational categories
         >>> extractor = FeatureExtractor(categories='methodology')
         >>> feature_set = extractor.extract_from_transcript(transcript)
     """
     
-    # Feature categories
+        # Feature category registry (metadata used for introspection/printing)
     FEATURE_CATEGORIES = {
-        # Primary methodology sections
+        # Core pragmatic-conversational categories
         'turn_taking': {
-            'section': '3.3.1',
+            'section': 'turn_taking',
             'description': 'Turn-Taking Metrics',
             'status': 'implemented',
         },
         'topic_coherence': {
-            'section': '3.3.2',
+            'section': 'topic_coherence',
             'description': 'Topic Maintenance and Semantic Coherence',
             'status': 'implemented',
         },
         'pause_latency': {
-            'section': '3.3.3',
+            'section': 'pause_latency',
             'description': 'Pause and Latency Analysis',
             'status': 'implemented',
         },
         'repair_detection': {
-            'section': '3.3.4',
+            'section': 'repair_detection',
             'description': 'Conversational Repair Detection',
             'status': 'implemented',
         },
@@ -181,7 +155,7 @@ class FeatureExtractor:
         },
     }
     
-    # Category groupings
+    # Category groupings used by the constructor shortcuts.
     METHODOLOGY_CATEGORIES = [
         'turn_taking', 'topic_coherence', 'pause_latency', 'repair_detection'
     ]
@@ -199,7 +173,7 @@ class FeatureExtractor:
         Args:
             categories: Which feature categories to extract:
                 - 'all': All 5 implemented categories (default)
-                - 'methodology': Only sections 3.3.1-3.3.4
+                - 'methodology': Only core pragmatic-conversational categories
                 - 'pragmatic_conversational': Alias for 'all' (backward compat)
                 - List of specific category names
             include_supporting: If True, include pragmatic_linguistic with methodology
@@ -208,7 +182,7 @@ class FeatureExtractor:
             >>> # All features (recommended)
             >>> extractor = FeatureExtractor()
             
-            >>> # Only methodology sections
+            >>> # Only core categories
             >>> extractor = FeatureExtractor(categories='methodology')
             
             >>> # Specific categories
@@ -218,7 +192,7 @@ class FeatureExtractor:
         """
         self.include_supporting = include_supporting
         
-        # Determine active categories
+        # Resolve category shorthand into explicit active category names.
         if categories == 'all' or categories == 'pragmatic_conversational':
             self.active_categories = list(self.ALL_IMPLEMENTED)
         elif categories == 'methodology':
@@ -230,7 +204,7 @@ class FeatureExtractor:
         else:
             self.active_categories = list(categories)
         
-        # Initialize extractors
+        # Build only extractors needed for the chosen categories.
         self._initialize_extractors()
         
         logger.info(
@@ -239,28 +213,35 @@ class FeatureExtractor:
         )
     
     def _initialize_extractors(self):
-        """Initialize all feature extractors based on active categories."""
+        """
+        Initialize extractor instances for active categories.
+
+        Notes:
+        - Categories not requested are not instantiated.
+        - Optional modules (acoustic/syntactic) are initialized only when
+          available in the environment.
+        """
         self.extractors = {}
         
-        # Section 3.3.1: Turn-Taking Metrics
+        # Core category: turn-taking
         if 'turn_taking' in self.active_categories:
             self.extractors['turn_taking'] = TurnTakingFeatures()
-            logger.debug("Initialized TurnTakingFeatures (Section 3.3.1)")
+            logger.debug("Initialized TurnTakingFeatures")
         
-        # Section 3.3.2: Topic Maintenance and Semantic Coherence
+        # Core category: topic coherence
         if 'topic_coherence' in self.active_categories:
             self.extractors['topic_coherence'] = TopicCoherenceFeatures()
-            logger.debug("Initialized TopicCoherenceFeatures (Section 3.3.2)")
+            logger.debug("Initialized TopicCoherenceFeatures")
         
-        # Section 3.3.3: Pause and Latency Analysis
+        # Core category: pause latency
         if 'pause_latency' in self.active_categories:
             self.extractors['pause_latency'] = PauseLatencyFeatures()
-            logger.debug("Initialized PauseLatencyFeatures (Section 3.3.3)")
+            logger.debug("Initialized PauseLatencyFeatures")
         
-        # Section 3.3.4: Conversational Repair Detection
+        # Core category: repair detection
         if 'repair_detection' in self.active_categories:
             self.extractors['repair_detection'] = RepairDetectionFeatures()
-            logger.debug("Initialized RepairDetectionFeatures (Section 3.3.4)")
+            logger.debug("Initialized RepairDetectionFeatures")
         
         # Supporting: Pragmatic & Linguistic Features
         if 'pragmatic_linguistic' in self.active_categories:
@@ -325,7 +306,7 @@ class FeatureExtractor:
         categories: Optional[List[str]] = None
     ) -> FeatureSet:
         """
-        Extract features from a single transcript.
+        Extract features from a single parsed transcript.
         
         Args:
             transcript: Parsed transcript data
@@ -338,6 +319,7 @@ class FeatureExtractor:
             >>> features = extractor.extract_from_transcript(transcript)
             >>> print(f"Extracted {len(features.features)} features")
         """
+        # Allow per-call category override while defaulting to initialized set.
         extract_categories = categories or list(self.extractors.keys())
         
         all_features = {}
@@ -346,7 +328,8 @@ class FeatureExtractor:
         
         logger.debug(f"Extracting features from {transcript.participant_id}")
         
-        # Extract from each category
+        # Each category is isolated: one category failing should not prevent
+        # other categories from contributing features for the same sample.
         for category in extract_categories:
             if category not in self.extractors:
                 logger.warning(f"Category '{category}' not initialized, skipping")
@@ -396,11 +379,11 @@ class FeatureExtractor:
         categories: Optional[List[str]] = None
     ) -> FeatureSet:
         """
-        Extract features with audio support.
+        Extract features with optional audio support.
         
-        This method extracts both text-based and audio-based features.
-        Audio features are extracted by the pragmatic_audio extractor
-        when audio_path or transcription_result is provided.
+        This path is used when audio-aware categories are active.
+        Text categories still run as usual; audio categories additionally
+        receive `audio_path` and optional transcription metadata.
         
         Args:
             transcript: Parsed transcript data
@@ -419,7 +402,8 @@ class FeatureExtractor:
         
         logger.debug(f"Extracting features with audio from {transcript.participant_id}")
         
-        # Extract from each category
+        # Category loop mirrors `extract_from_transcript` but passes audio args
+        # to categories that support them.
         for category in extract_categories:
             if category not in self.extractors:
                 logger.warning(f"Category '{category}' not initialized, skipping")
@@ -428,7 +412,7 @@ class FeatureExtractor:
             try:
                 extractor = self.extractors[category]
                 
-                # Special handling for audio extractors
+                # Audio categories accept extra arguments; text categories do not.
                 if category == 'pragmatic_audio':
                     result = extractor.extract(
                         transcript,
@@ -486,6 +470,11 @@ class FeatureExtractor:
     ) -> pd.DataFrame:
         """
         Extract features from multiple transcript files.
+
+        For each `.cha` file:
+        1) Parse transcript
+        2) Optionally pair sibling audio file by basename
+        3) Run text-only or audio-augmented extraction path
         
         Args:
             file_paths: List of paths to .cha files
@@ -509,9 +498,8 @@ class FeatureExtractor:
             try:
                 transcript = parser.parse_file(file_path)
 
-                # If a matching audio file exists alongside the .cha, use it for
-                # audio-only librosa features (speaking ratio, energy-based pauses).
-                # No transcription is run — the .cha text remains primary.
+                # If sibling audio exists, enrich extraction with audio-derived
+                # measures while keeping `.cha` as the authoritative transcript.
                 audio_extensions = ['.wav', '.mp3', '.flac', '.m4a', '.aac']
                 paired_audio = None
                 for ext in audio_extensions:
@@ -556,11 +544,11 @@ class FeatureExtractor:
         max_files: Optional[int] = None
     ) -> pd.DataFrame:
         """
-        Extract features from all transcripts in a directory.
+        Extract features from all supported files in a directory.
         
         Supports both:
-        - CHAT files (.cha) - parsed directly
-        - Audio files (.wav, .mp3, etc.) - transcribed with Whisper first
+        - CHAT files (`.cha`) parsed directly
+        - Audio files (`.wav`, `.mp3`, etc.) transcribed first
         
         Args:
             directory: Directory containing .cha files or audio files
@@ -572,7 +560,7 @@ class FeatureExtractor:
         """
         directory = Path(directory)
         
-        # First, try to find .cha files
+        # Prefer `.cha` if present; otherwise fall back to audio-first flow.
         cha_files = list(directory.glob("**/*.cha"))
         
         # If no .cha files, look for audio files
@@ -644,7 +632,7 @@ class FeatureExtractor:
         Extract features from audio files by transcribing them first.
         
         This method:
-        1. Transcribes each audio file using faster-whisper/Whisper/Google
+        1. Transcribes each audio file using the configured backend
         2. Converts transcription to TranscriptData format
         3. Optionally saves transcriptions as .cha files
         4. Extracts features using extract_with_audio (includes audio-based features)
@@ -683,8 +671,8 @@ class FeatureExtractor:
         
         for audio_path in iterator:
             try:
-                # Extract participant ID and diagnosis from path if possible
-                # Try to infer from directory structure (e.g., data/td/ASD/audio.wav)
+                # Infer participant metadata from path when explicit labels are
+                # unavailable so the output table remains usable downstream.
                 participant_id = "CHI"
                 diagnosis = None
                 
@@ -766,7 +754,7 @@ class FeatureExtractor:
                     except Exception as save_error:
                         logger.warning(f"Failed to save transcription for {audio_path.name}: {save_error}")
                 
-                # Step 3: Extract features with audio
+                # Step 3: Extract features with audio-aware extraction path
                 feature_set = self.extract_with_audio(
                     transcript=audio_result.transcript_data,
                     audio_path=audio_path,
@@ -799,95 +787,4 @@ class FeatureExtractor:
         
         return df
     
-    def get_feature_summary(self, df: pd.DataFrame) -> Dict[str, Any]:
-        """Get summary statistics for extracted features."""
-        summary = {
-            'total_samples': len(df),
-            'total_features': self.total_features,
-            'feature_count_by_category': self.feature_count_by_category,
-            'diagnosis_counts': {},
-            'categories_extracted': self.active_categories,
-        }
-        
-        if 'diagnosis' in df.columns:
-            summary['diagnosis_counts'] = df['diagnosis'].value_counts().to_dict()
-        
-        return summary
-    
-    def normalize_features(
-        self,
-        df: pd.DataFrame,
-        method: str = 'zscore'
-    ) -> pd.DataFrame:
-        """
-        Normalize features for machine learning.
-        
-        Args:
-            df: DataFrame with features
-            method: 'zscore', 'minmax', or 'robust'
-            
-        Returns:
-            DataFrame with normalized features
-        """
-        df_norm = df.copy()
-        feature_cols = [col for col in df.columns if col in self.all_feature_names]
-        
-        for col in feature_cols:
-            if not pd.api.types.is_numeric_dtype(df[col]):
-                continue
-            
-            if method == 'zscore':
-                mean, std = df[col].mean(), df[col].std()
-                if std > 0:
-                    df_norm[col] = (df[col] - mean) / std
-            elif method == 'minmax':
-                min_val, max_val = df[col].min(), df[col].max()
-                if max_val > min_val:
-                    df_norm[col] = (df[col] - min_val) / (max_val - min_val)
-            elif method == 'robust':
-                median = df[col].median()
-                iqr = df[col].quantile(0.75) - df[col].quantile(0.25)
-                if iqr > 0:
-                    df_norm[col] = (df[col] - median) / iqr
-        
-        logger.info(f"Normalized {len(feature_cols)} features using {method}")
-        return df_norm
-    
-    def print_category_info(self):
-        """Print information about all feature categories."""
-        print("\n" + "=" * 70)
-        print("FEATURE EXTRACTION CATEGORIES")
-        print("=" * 70)
-        
-        # Methodology sections
-        print("\n📋 METHODOLOGY SECTIONS (Primary)")
-        print("-" * 50)
-        
-        for category in self.METHODOLOGY_CATEGORIES:
-            info = self.FEATURE_CATEGORIES[category]
-            active = "●" if category in self.extractors else "○"
-            count = len(self.extractors[category].feature_names) if category in self.extractors else 0
-            
-            print(f"{active} Section {info['section']}: {info['description']}")
-            print(f"    Features: {count}")
-        
-        # Supporting
-        print("\n📚 SUPPORTING FEATURES")
-        print("-" * 50)
-        
-        for category in self.SUPPORTING_CATEGORIES:
-            info = self.FEATURE_CATEGORIES[category]
-            active = "●" if category in self.extractors else "○"
-            count = len(self.extractors[category].feature_names) if category in self.extractors else 0
-            
-            print(f"{active} {info['description']}")
-            print(f"    Features: {count}")
-        
-        # Summary
-        print("\n" + "=" * 70)
-        print(f"Total Active Categories: {len(self.extractors)}")
-        print(f"Total Features: {self.total_features}")
-        print("=" * 70 + "\n")
-
-
 __all__ = ["FeatureExtractor", "FeatureSet"]

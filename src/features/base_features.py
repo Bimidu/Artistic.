@@ -1,8 +1,13 @@
 """
 Base Feature Extractor Class
 
-This module provides the base class for all feature extractors,
-defining the common interface and utility methods.
+This module defines the shared contract and helper utilities used by all
+feature extractors in the project.
+
+Design goals:
+- Keep extractor implementations consistent (same `extract()` interface)
+- Centralize common transcript filtering logic
+- Reduce repeated utility code across feature modules
 
 Author: Bimidu Gunathilake
 """
@@ -32,6 +37,7 @@ class FeatureResult:
     metadata: Dict[str, Any] = None
     
     def __post_init__(self):
+        """Guarantee `metadata` is always a dictionary for downstream code."""
         if self.metadata is None:
             self.metadata = {}
 
@@ -40,8 +46,8 @@ class BaseFeatureExtractor(ABC):
     """
     Abstract base class for all feature extractors.
     
-    This class defines the interface that all feature extractors must implement
-    and provides common utility methods for feature extraction.
+    Subclasses implement domain-specific feature logic, while this base class
+    provides a stable API and reusable transcript utilities.
     """
     
     def __init__(self):
@@ -53,7 +59,8 @@ class BaseFeatureExtractor(ABC):
         """
         Extract features from a transcript.
         
-        This method must be implemented by all subclasses.
+        Subclasses must return a `FeatureResult` with deterministic keys for
+        the selected extractor.
         
         Args:
             transcript: Parsed transcript data
@@ -84,6 +91,8 @@ class BaseFeatureExtractor(ABC):
         Returns:
             List of valid child utterances
         """
+        # Child-side analyses should ignore invalid utterances to avoid
+        # propagating parser artifacts into feature values.
         return [
             u for u in transcript.child_utterances
             if u.is_valid
@@ -99,6 +108,8 @@ class BaseFeatureExtractor(ABC):
         Returns:
             List of adult utterances
         """
+        # Keep adult-role filtering centralized so category extractors use the
+        # same speaker definition.
         adult_codes = ['MOT', 'FAT', 'INV', 'INV1', 'INV2']
         
         return [
@@ -106,41 +117,13 @@ class BaseFeatureExtractor(ABC):
             if u.speaker in adult_codes and u.is_valid
         ]
     
-    def count_pattern(
-        self,
-        utterances: List[Utterance],
-        pattern: str,
-        case_sensitive: bool = False
-    ) -> int:
-        """
-        Count occurrences of a pattern in utterances.
-        
-        Args:
-            utterances: List of utterances to search
-            pattern: Pattern to search for
-            case_sensitive: Whether search is case-sensitive
-            
-        Returns:
-            Count of pattern occurrences
-        """
-        count = 0
-        
-        for utterance in utterances:
-            text = utterance.text if case_sensitive else utterance.text.lower()
-            search_pattern = pattern if case_sensitive else pattern.lower()
-            
-            if search_pattern in text:
-                count += 1
-        
-        return count
-    
     def get_utterance_lengths(
         self,
         utterances: List[Utterance],
         in_words: bool = True
     ) -> List[int]:
         """
-        Get lengths of all utterances.
+        Get lengths of utterances in a consistent numeric format.
         
         Args:
             utterances: List of utterances
@@ -149,6 +132,8 @@ class BaseFeatureExtractor(ABC):
         Returns:
             List of utterance lengths (including 0 for empty utterances)
         """
+        # Keep empty utterances represented as 0 so vector lengths remain
+        # aligned with the original utterance list.
         if in_words:
             return [u.word_count for u in utterances]
         else:
@@ -159,7 +144,7 @@ class BaseFeatureExtractor(ABC):
         utterances: List[Utterance]
     ) -> List[float]:
         """
-        Extract time gaps between consecutive utterances.
+        Extract non-negative temporal gaps between consecutive utterances.
         
         Args:
             utterances: List of utterances with timing information
@@ -175,7 +160,8 @@ class BaseFeatureExtractor(ABC):
             
             if prev_end_time is not None and curr_time is not None:
                 gap = curr_time - prev_end_time
-                if gap >= 0:  # Ignore negative gaps (timing errors)
+                # Ignore negative gaps produced by imperfect timestamps.
+                if gap >= 0:
                     gaps.append(gap)
         
         return gaps

@@ -469,36 +469,3 @@ class PragmaticConversationalTrainer:
         joblib.dump(model_data, save_path)
         self.logger.info(f"Pragmatic model {model_name} saved to {save_path}")
     
-    def print_implementation_status(self):
-        """Print implementation status for pragmatic/conversational trainer."""
-        print("\n" + "="*70)
-        print("PRAGMATIC & CONVERSATIONAL MODEL TRAINER - STATUS")
-        print("="*70)
-        
-        print("\n[CHECK] IMPLEMENTATION STATUS: FULLY IMPLEMENTED")
-        print("This module is production-ready with comprehensive training capabilities.")
-        
-        print("\n[WRENCH] Implemented Features:")
-        print("1. [CHECK] Pragmatic-specific model training")
-        print("2. [CHECK] SVM model support with pragmatic-optimized regularization")
-        print("3. [CHECK] Pragmatic feature validation")
-        print("4. [CHECK] Feature importance analysis")
-        print("5. [CHECK] Model evaluation and comparison")
-        print("6. [CHECK] Model saving/loading with metadata")
-        
-        print("\n[CHART] Component-Specific Models:")
-        print("SVM (RBF) - Primary model (non-linear patterns with strong regularization)")
-        
-        print("\n[TARGET] Pragmatic Features Supported:")
-        print("- Turn-taking patterns (15 features)")
-        print("- Linguistic complexity (14 features)")
-        print("- Pragmatic markers (16 features)")
-        print("- Conversational management (16 features)")
-        print("- Total: 61 pragmatic/conversational features")
-        
-        print("\n[BULB] Usage:")
-        print("from src.models.pragmatic_conversational import PragmaticConversationalTrainer")
-        print("trainer = PragmaticConversationalTrainer()")
-        print("result = trainer.train_multiple_models(X_train, y_train, X_test, y_test)")
-        
-        print("\n" + "="*70 + "\n")

@@ -468,41 +468,4 @@ class ModelRegistry:
         
         return results
     
-    def print_summary(self):
-        """Print registry summary."""
-        print("\n" + "="*70)
-        print("MODEL REGISTRY SUMMARY")
-        print("="*70)
-        
-        print(f"\nCloud Storage: {'Enabled' if self.use_cloud else 'Disabled'}")
-        
-        if not self.models_:
-            print("\nNo models registered")
-        else:
-            print(f"\nTotal Models: {len(self.models_)}")
-            print(f"\nRegistered Models:")
-            
-            df = self.get_registry_summary()
-            print(df.to_string(index=False))
-            
-            # Show best model
-            try:
-                best_name, best_meta = self.get_best_model()
-                print(f"\nBest Model (by F1-Score):")
-                print(f"  Name: {best_name}")
-                print(f"  Type: {best_meta.model_type}")
-                print(f"  Accuracy: {best_meta.accuracy:.4f}")
-                print(f"  F1-Score: {best_meta.f1_score:.4f}")
-            except:
-                pass
-        
-        # Show cloud status if enabled
-        if self.use_cloud and self.hf_manager:
-            try:
-                cloud_models = self.hf_manager.list_cloud_models()
-                print(f"\nCloud Models Available: {len(cloud_models)}")
-            except:
-                pass
-        
-        print("\n" + "="*70 + "\n")
 
