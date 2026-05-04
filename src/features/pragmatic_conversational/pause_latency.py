@@ -1,8 +1,8 @@
 """
-Pause and Latency Analysis Feature Extractor (Section 3.3.3)
+Pause and Latency Analysis Feature Extractor
 
 This module extracts features related to pauses and response latency,
-which are often different in children with ASD. Based on methodology section 3.3.3.
+which are often different in children with ASD. Based on pause-latency analysis.
 
 Features implemented:
 - Response latency (time from interviewer turn-end to child turn-start)
@@ -27,6 +27,7 @@ from src.parsers.chat_parser import TranscriptData, Utterance
 from src.utils.helpers import safe_divide, calculate_ratio
 from src.utils.logger import get_logger
 from ..base_features import BaseFeatureExtractor, FeatureResult
+from . import constants as _c
 
 logger = get_logger(__name__)
 
@@ -41,7 +42,7 @@ except ImportError:
 
 class PauseLatencyFeatures(BaseFeatureExtractor):
     """
-    Extract pause and latency features from transcripts (Section 3.3.3).
+    Extract pause and latency features from transcripts.
     
     Features capture:
     - Response latency between turns
@@ -56,34 +57,12 @@ class PauseLatencyFeatures(BaseFeatureExtractor):
         >>> print(features.features['filled_pause_ratio'])
     """
     
-    # Filled pause patterns (hesitation markers)
-    FILLED_PAUSE_PATTERNS = [
-        r'\bum\b', r'\buh\b', r'\ber\b', r'\bah\b', r'\behm\b',
-        r'\bhmm\b', r'\bmm\b', r'\buhm\b', r'\bumm\b',
-        r'&-um', r'&-uh', r'&-er', r'&-ah',  # CHAT format
-    ]
-    
-    # CHAT pause markers map the annotation symbols used in .cha files to
-    # approximate durations.  These are used when timestamps are unavailable.
-    PAUSE_MARKERS = {
-        '(.)': 0.5,      # Short pause (~0.5 sec)
-        '(..)': 1.0,     # Medium pause (~1 sec)
-        '(...)': 1.5,    # Long pause (~1.5 sec)
-        '(pause)': 2.0,  # Extended pause
-    }
-    
-    # Response-latency thresholds derived from GMM clustering on ASDBank data.
-    # See src/tools/ml_pause_clustering.py for the analysis that produced these values.
-    # The GMM found three latent clusters in child inter-turn gaps:
-    #   Cluster 1 — Rapid     : mean ~0.2 s   (fluent, fast reply)
-    #   Cluster 2 — Processing : mean ~1.25 s  (brief planning delay)
-    #   Cluster 3 — Disengaged : mean ~4.3 s   (very long pause or no response)
-    # NORMAL_RESPONSE_TIME is the upper boundary of Cluster 1 (spread-weighted midpoint).
-    # LONG_PAUSE_THRESHOLD is the Cluster 2 / Cluster 3 boundary.
-    # VERY_LONG_PAUSE_THRESHOLD is the centre of Cluster 3 (used to flag disengagement).
-    NORMAL_RESPONSE_TIME = 0.45
-    LONG_PAUSE_THRESHOLD = 2.00
-    VERY_LONG_PAUSE_THRESHOLD = 4.32
+    # Patterns and thresholds imported from constants.py (see that file for full documentation).
+    FILLED_PAUSE_PATTERNS    = _c.FILLED_PAUSE_PATTERNS
+    PAUSE_MARKERS            = _c.PAUSE_MARKERS
+    NORMAL_RESPONSE_TIME     = _c.NORMAL_RESPONSE_TIME
+    LONG_PAUSE_THRESHOLD     = _c.LONG_PAUSE_THRESHOLD
+    VERY_LONG_PAUSE_THRESHOLD = _c.VERY_LONG_PAUSE_THRESHOLD
     
     @property
     def feature_names(self) -> List[str]:

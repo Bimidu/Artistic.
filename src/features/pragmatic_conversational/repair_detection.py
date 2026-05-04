@@ -1,9 +1,9 @@
 """
-Conversational Repair Detection Feature Extractor (Section 3.3.4)
+Conversational Repair Detection Feature Extractor
 
 This module extracts features related to conversational repair strategies,
 which can indicate communication difficulties in children with ASD.
-Based on methodology section 3.3.4.
+Based on repair detection analysis.
 
 Features implemented:
 - Self-repair (speaker rephrases mid-utterance)
@@ -28,6 +28,7 @@ from src.parsers.chat_parser import TranscriptData, Utterance
 from src.utils.helpers import safe_divide, calculate_ratio
 from src.utils.logger import get_logger
 from ..base_features import BaseFeatureExtractor, FeatureResult
+from . import constants as _c
 
 logger = get_logger(__name__)
 
@@ -42,7 +43,7 @@ except ImportError:
 
 class RepairDetectionFeatures(BaseFeatureExtractor):
     """
-    Extract conversational repair features from transcripts (Section 3.3.4).
+    Extract conversational repair features from transcripts.
     
     Features capture:
     - Self-repair patterns (mid-utterance corrections)
@@ -63,66 +64,12 @@ class RepairDetectionFeatures(BaseFeatureExtractor):
         >>> print(features.features['repair_success_rate'])
     """
     
-    # Self-repair markers: lexical phrases a speaker uses to rephrase their own
-    # utterance mid-stream.  ASD children repair less frequently and less
-    # effectively than typical peers, so both the presence and quality of these
-    # markers are informative.
-    SELF_REPAIR_PATTERNS = [
-        r'\bi mean\b',
-        r'\bno wait\b',
-        r'\bsorry\b',
-        r'\bactually\b',
-        r'\bno\s+i\s+mean\b',
-        r'\bwell\s+not\b',
-        r'\bor\s+rather\b',
-        r'\blet me\s+rephrase\b',
-    ]
-    
-    # CHAT retrace markers: standard symbols inserted by CLAN transcribers to
-    # annotate retraces and reformulations in the .cha format
-    CHAT_RETRACE_MARKERS = [
-        r'\[/\]',      # Retrace without correction
-        r'\[//\]',     # Retrace with correction
-        r'\[///\]',    # Reformulation
-        r'\[\?\]',     # Best guess
-    ]
-    
-    # Clarification request markers
-    CLARIFICATION_PATTERNS = [
-        r'\bwhat\?',
-        r'\bhuh\?',
-        r'\bpardon\?',
-        r'\bexcuse me\?',
-        r'\bsay again\b',
-        r'\bwhat did you\b',
-        r'\bcan you repeat\b',
-        r'\bi don\'?t understand\b',
-        r'\bwhat do you mean\b',
-        r'\bsorry\?',
-    ]
-    
-    # Confirmation check patterns
-    CONFIRMATION_PATTERNS = [
-        r'\bdo you mean\b',
-        r'\bso you\b',
-        r'\blike\s+a\b',
-        r'\byou mean\b',
-        r'\bis that\b',
-        r'\bright\?',
-        r'\bokay\?',
-    ]
-    
-    # Acknowledgment patterns (repair uptake)
-    ACKNOWLEDGMENT_PATTERNS = [
-        r'\boh\b',
-        r'\bi see\b',
-        r'\bokay\b',
-        r'\byes\b',
-        r'\boh okay\b',
-        r'\bah\b',
-        r'\bgo on\b',
-        r'\bi got it\b',
-    ]
+    # Patterns imported from constants.py (see that file for full documentation).
+    SELF_REPAIR_PATTERNS    = _c.SELF_REPAIR_PATTERNS
+    CHAT_RETRACE_MARKERS    = _c.CHAT_RETRACE_MARKERS
+    CLARIFICATION_PATTERNS  = _c.CLARIFICATION_PATTERNS
+    CONFIRMATION_PATTERNS   = _c.CONFIRMATION_PATTERNS
+    ACKNOWLEDGMENT_PATTERNS = _c.ACKNOWLEDGMENT_PATTERNS
     
     def __init__(self):
         """Initialize repair detection extractor."""

@@ -1,8 +1,8 @@
 """
-Turn-Taking Feature Extractor (Section 3.3.1)
+Turn-Taking Feature Extractor
 
 This module extracts features related to turn-taking patterns in conversations,
-which are often impaired in children with ASD. Based on methodology section 3.3.1.
+which are often impaired in children with ASD. Based on turn-taking analysis.
 
 Features implemented:
 - Turn Lengths (duration and word count)
@@ -26,13 +26,14 @@ from src.parsers.chat_parser import TranscriptData, Utterance
 from src.utils.helpers import safe_divide, calculate_ratio
 from src.utils.logger import get_logger
 from ..base_features import BaseFeatureExtractor, FeatureResult
+from . import constants as _c
 
 logger = get_logger(__name__)
 
 
 class TurnTakingFeatures(BaseFeatureExtractor):
     """
-    Extract turn-taking pattern features from transcripts (Section 3.3.1).
+    Extract turn-taking pattern features from transcripts.
     
     Features capture:
     - Turn frequency and distribution
@@ -48,18 +49,10 @@ class TurnTakingFeatures(BaseFeatureExtractor):
         >>> print(features.features['inter_turn_gap_mean'])
     """
     
-    # Thresholds for detecting overlaps and interruptions.
-    # OVERLAP_THRESHOLD_MS: a gap of <100 ms between turn-end and next turn-start
-    #   is considered simultaneous speech.  Values smaller than ~100 ms are within
-    #   normal human reaction time and would produce excessive false positives.
-    # INTERRUPTION_THRESHOLD_MS: a speaker change happening within 500 ms of the
-    #   previous speaker still talking is treated as an interruption rather than a
-    #   normal smooth handoff.
-    # LONG_PAUSE_THRESHOLD_SEC: any inter-turn gap exceeding 1 s deviates from
-    #   typical conversational flow and is flagged as a notable pause.
-    OVERLAP_THRESHOLD_MS = 100
-    INTERRUPTION_THRESHOLD_MS = 500
-    LONG_PAUSE_THRESHOLD_SEC = 1.0
+    # Thresholds imported from constants.py (see that file for full documentation).
+    OVERLAP_THRESHOLD_MS      = _c.OVERLAP_THRESHOLD_MS
+    INTERRUPTION_THRESHOLD_MS = _c.INTERRUPTION_THRESHOLD_MS
+    LONG_PAUSE_THRESHOLD_SEC  = _c.LONG_PAUSE_THRESHOLD_SEC
     
     @property
     def feature_names(self) -> List[str]:
@@ -89,7 +82,7 @@ class TurnTakingFeatures(BaseFeatureExtractor):
             'child_turn_duration_mean',
             'child_turn_duration_std',
             
-            # Inter-turn gaps / Response latency (Section 3.3.1)
+            # Inter-turn gaps / Response latency
             'inter_turn_gap_mean',
             'inter_turn_gap_median',
             'inter_turn_gap_std',
@@ -100,14 +93,14 @@ class TurnTakingFeatures(BaseFeatureExtractor):
             'long_pause_count',
             'long_pause_ratio',
             
-            # Overlap features (Section 3.3.1)
+            # Overlap features
             'overlap_count',
             'overlap_duration_total',
             'overlap_ratio',
             'child_overlaps_adult_count',
             'adult_overlaps_child_count',
             
-            # Interruption features (Section 3.3.1)
+            # Interruption features
             'interruption_count',
             'child_interruption_count',
             'adult_interruption_count',
@@ -381,7 +374,7 @@ class TurnTakingFeatures(BaseFeatureExtractor):
         has_timing: bool
     ) -> Dict[str, float]:
         """
-        Calculate inter-turn gap features (Section 3.3.1).
+        Calculate inter-turn gap features.
         
         Key finding from Wehrle (2023): ASD speakers often have longer and
         more variable inter-turn gaps.
@@ -458,7 +451,7 @@ class TurnTakingFeatures(BaseFeatureExtractor):
         has_timing: bool
     ) -> Dict[str, float]:
         """
-        Calculate overlap features (Section 3.3.1).
+        Calculate overlap features.
         
         Overlap = moments where speakers interrupt each other.
         """
@@ -535,7 +528,7 @@ class TurnTakingFeatures(BaseFeatureExtractor):
         has_timing: bool
     ) -> Dict[str, float]:
         """
-        Calculate interruption features (Section 3.3.1).
+        Calculate interruption features.
         
         Interruption = speaker change with minimal or negative gap,
         often cutting off the previous speaker.

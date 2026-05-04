@@ -1,8 +1,8 @@
 """
-Topic Maintenance and Semantic Coherence Feature Extractor (Section 3.3.2)
+Topic Maintenance and Semantic Coherence Feature Extractor
 
 This module extracts features related to topic maintenance and semantic coherence,
-which are often impaired in children with ASD. Based on methodology section 3.3.2.
+which are often impaired in children with ASD. Based on topic coherence analysis.
 
 Features implemented:
 - LDA Topic Modeling for topic identification
@@ -27,6 +27,7 @@ from src.parsers.chat_parser import TranscriptData, Utterance
 from src.utils.helpers import safe_divide, calculate_ratio
 from src.utils.logger import get_logger
 from ..base_features import BaseFeatureExtractor, FeatureResult
+from . import constants as _c
 
 logger = get_logger(__name__)
 
@@ -49,7 +50,7 @@ except ImportError:
 
 class TopicCoherenceFeatures(BaseFeatureExtractor):
     """
-    Extract topic maintenance and semantic coherence features (Section 3.3.2).
+    Extract topic maintenance and semantic coherence features.
     
     Features capture:
     - Topic coherence using LDA
@@ -66,10 +67,10 @@ class TopicCoherenceFeatures(BaseFeatureExtractor):
         >>> print(features.features['semantic_coherence_score'])
     """
     
-    # Topic shift thresholds
-    TOPIC_SHIFT_THRESHOLD = 0.3  # Cosine similarity threshold
-    N_TOPICS_DEFAULT = 5  # Default number of LDA topics
-    WINDOW_SIZE = 3  # Window size for topic shift detection
+    # Thresholds imported from constants.py (see that file for full documentation).
+    TOPIC_SHIFT_THRESHOLD = _c.TOPIC_SHIFT_THRESHOLD
+    N_TOPICS_DEFAULT      = _c.N_TOPICS_DEFAULT
+    WINDOW_SIZE           = _c.WINDOW_SIZE
     
     def __init__(self, n_topics: int = 5):
         """

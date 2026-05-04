@@ -4,7 +4,7 @@ Pragmatic and Linguistic Feature Extractor (Supporting Module)
 This consolidated module extracts pragmatic language features and conversational
 linguistic features that support the main methodology-aligned extractors.
 
-Features NOT covered by Sections 3.3.1-3.3.4:
+Features not covered by turn_taking, topic_coherence, pause_latency, and repair_detection:
 - MLU and language development metrics
 - Vocabulary diversity (TTR)
 - Echolalia patterns
@@ -15,8 +15,8 @@ Features NOT covered by Sections 3.3.1-3.3.4:
 - Non-verbal behavioral markers
 
 Note: Syntactic features (POS ratios) are handled by syntactic_semantic module.
-Note: Topic coherence/shifts are handled by topic_coherence.py (Section 3.3.2).
-Note: Repair features are handled by repair_detection.py (Section 3.3.4).
+Note: Topic coherence/shifts are handled by topic_coherence.py.
+Note: Repair features are handled by repair_detection.py.
 
 Author: Bimidu Gunathilake
 """
@@ -30,6 +30,7 @@ from src.parsers.chat_parser import TranscriptData, Utterance
 from src.utils.helpers import safe_divide, calculate_ratio
 from src.utils.logger import get_logger
 from ..base_features import BaseFeatureExtractor, FeatureResult
+from . import constants as _c
 
 logger = get_logger(__name__)
 
@@ -39,7 +40,7 @@ class PragmaticLinguisticFeatures(BaseFeatureExtractor):
     Extract pragmatic and conversational linguistic features.
     
     This is a consolidated extractor for supporting features that complement
-    the main methodology-aligned extractors (Sections 3.3.1-3.3.4).
+    the main core extractors.
     
     Features include:
     - MLU (Mean Length of Utterance) - language development
@@ -57,34 +58,11 @@ class PragmaticLinguisticFeatures(BaseFeatureExtractor):
         >>> print(f"MLU: {features.features['mlu_words']}")
     """
     
-    # Social phrases for pragmatic analysis
-    SOCIAL_PHRASES = [
-        'please', 'thank you', 'sorry', 'excuse me',
-        'hello', 'hi', 'bye', 'goodbye',
-        'yes please', 'no thank you'
-    ]
-    
-    # Question words for question analysis
-    QUESTION_WORDS = [
-        'what', 'where', 'when', 'who', 'why', 'how',
-        'which', 'whose', 'whom'
-    ]
-    
-    # Discourse markers (excluding repair markers - handled by repair_detection.py)
-    DISCOURSE_MARKERS = {
-        'topic_intro': ['so', 'well', 'anyway', 'by the way'],
-        'topic_continuation': ['and', 'also', 'too', 'then'],
-        'acknowledgment': ['okay', 'yeah', 'yes', 'mhm', 'uh huh', 'right'],
-        'hesitation': ['um', 'uh', 'er'],  # Simple markers, detailed in pause_latency.py
-    }
-    
-    # Non-verbal behavioral markers from CHAT format
-    BEHAVIORAL_MARKERS = [
-        '&=laughs', '&=cries', '&=screams', '&=sighs',
-        '&=gasps', '&=whispers', '&=hums', '&=sings',
-        '&=squeals', '&=yells', '&=breathes', '&=groans',
-        '&=claps', '&=points', '&=nods'
-    ]
+    # Word lists and markers imported from constants.py (see that file for full documentation).
+    SOCIAL_PHRASES    = _c.SOCIAL_PHRASES
+    QUESTION_WORDS    = _c.QUESTION_WORDS
+    DISCOURSE_MARKERS = _c.DISCOURSE_MARKERS   # Excludes repair markers (repair_detection.py)
+    BEHAVIORAL_MARKERS = _c.BEHAVIORAL_MARKERS
     
     @property
     def feature_names(self) -> List[str]:
